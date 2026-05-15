@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A11y patterns - VelinStyle</title>
+  <link rel="stylesheet" href="../../dist/velinstyle.css">
+  <link rel="stylesheet" href="../docs.css">
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="../index.html" class="velin-nav__brand">VelinStyle</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="../forms.html" class="velin-nav__link">Forms</a></li>
+      <li><a href="../a11y.html" class="velin-nav__link">A11y</a></li>
+      <li><a href="index.html" class="velin-nav__link" aria-current="page">A11y patterns</a></li>
+    </ul>
+  </nav>
+  <div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+    <strong>Copy-first patterns</strong> — combine with <a href="../forms.html#validation-css">form validation CSS</a> and Velin components (<code>velin-dialog</code>, <code>velin-tabs</code>).
+  </div>
+  <main id="main" class="velin-container">
+    <h1 class="velin-doc-title">Accessibility patterns</h1>
+    <p class="velin-doc-lead">Minimal HTML snippets for WCAG-aligned structure. These are not a substitute for manual testing with assistive technologies.</p>
+
+    <section id="skip-focus" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Skip link and focus</h2>
+      <p>VelinStyle ships <code>.velin-skip-link</code> and focus-visible styles in the core bundle. Target your main landmark with <code>href="#main"</code>.</p>
+<pre class="velin-doc-code">&lt;a href="#main" class="velin-skip-link"&gt;Skip to main content&lt;/a&gt;
+…
+&lt;main id="main"&gt;…&lt;/main&gt;</pre>
+    </section>
+
+    <section id="live-region" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Live regions</h2>
+      <p>Use <code>role="status"</code> + <code>aria-live="polite"</code> for non-urgent updates; <code>role="alert"</code> (assertive) sparingly for errors that must interrupt.</p>
+<pre class="velin-doc-code">&lt;div id="save-status" role="status" aria-live="polite" class="velin-text-sm velin-text-muted"&gt;&lt;/div&gt;
+&lt;!-- optional: .velin-live-region for visually hidden SR-only updates --&gt;</pre>
+    </section>
+
+    <section id="dialog" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Dialog</h2>
+      <p>For behavior (focus trap, Esc), use <code>&lt;velin-dialog&gt;</code> or follow the WAI-ARIA dialog pattern. Markup should include <code>aria-modal="true"</code> and label/description references.</p>
+<pre class="velin-doc-code">&lt;div class="velin-modal-overlay" data-velin-open role="presentation"&gt;
+  &lt;div class="velin-modal" role="dialog" aria-modal="true"
+       aria-labelledby="dlg-title" aria-describedby="dlg-desc"&gt;
+    &lt;h2 id="dlg-title" class="velin-modal__title"&gt;Title&lt;/h2&gt;
+    &lt;div id="dlg-desc" class="velin-modal__body"&gt;…&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+    </section>
+
+    <section id="tabs" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Tabs</h2>
+      <p>Prefer <code>&lt;velin-tabs&gt;</code> for keyboard support. Static structure example:</p>
+<pre class="velin-doc-code">&lt;div role="tablist" aria-label="Settings"&gt;
+  &lt;button type="button" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1"&gt;General&lt;/button&gt;
+  &lt;button type="button" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2"&gt;Security&lt;/button&gt;
+&lt;/div&gt;
+&lt;div role="tabpanel" id="panel-1" aria-labelledby="tab-1"&gt;…&lt;/div&gt;
+&lt;div role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden&gt;…&lt;/div&gt;</pre>
+    </section>
+
+    <section id="landmarks" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Landmarks</h2>
+<pre class="velin-doc-code">&lt;body&gt;
+  &lt;header&gt;…&lt;/header&gt;
+  &lt;nav aria-label="Primary"&gt;…&lt;/nav&gt;
+  &lt;main id="main"&gt;…&lt;/main&gt;
+  &lt;aside aria-label="Related"&gt;…&lt;/aside&gt;
+  &lt;footer&gt;…&lt;/footer&gt;
+&lt;/body&gt;</pre>
+    </section>
+
+    <section id="forms-aria" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Forms and errors</h2>
+      <p>Associate errors with <code>aria-describedby</code>; set <code>aria-invalid="true"</code> when invalid. Visual styles: <code>.velin-field-error</code>, <code>.velin-form--validated</code>.</p>
+<pre class="velin-doc-code">&lt;label class="velin-label" for="email"&gt;Email&lt;/label&gt;
+&lt;input id="email" class="velin-input" aria-invalid="true" aria-describedby="email-err"&gt;
+&lt;p class="velin-field-error" id="email-err"&gt;Invalid address.&lt;/p&gt;</pre>
+    </section>
+  </main>
+</body>
+</html>

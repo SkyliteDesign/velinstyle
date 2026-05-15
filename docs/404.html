@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found - VelinStyle</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="docs.css">
+  <style>
+    .error-hero {
+      padding-block: var(--velin-space-20);
+      text-align: center;
+    }
+    .error-code {
+      font-size: var(--velin-text-6xl, 3.75rem);
+      font-weight: var(--velin-weight-extrabold);
+      letter-spacing: var(--velin-tracking-tight);
+      color: var(--velin-color-text-muted);
+      margin-block-end: var(--velin-space-2);
+    }
+    .error-title {
+      font-size: var(--velin-text-3xl);
+      font-weight: var(--velin-weight-bold);
+      margin-block-end: var(--velin-space-4);
+    }
+    .error-description {
+      font-size: var(--velin-text-lg);
+      color: var(--velin-color-text-muted);
+      max-inline-size: 32rem;
+      margin-inline: auto;
+      margin-block-end: var(--velin-space-8);
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="index.html" class="velin-nav__brand">VelinStyle</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="guides/index.html" class="velin-nav__link">Integration</a></li>
+      <li><a href="layout.html" class="velin-nav__link">Layout</a></li>
+      <li><a href="components.html" class="velin-nav__link">Components</a></li>
+      <li><a href="css-components.html" class="velin-nav__link">CSS Components</a></li>
+      <li><a href="forms.html" class="velin-nav__link">Forms</a></li>
+      <li><a href="utilities.html" class="velin-nav__link">Utilities</a></li>
+      <li><a href="tokens.html" class="velin-nav__link">Tokens</a></li>
+      <li><a href="themes.html" class="velin-nav__link">Themes</a></li>
+      <li><a href="icons.html" class="velin-nav__link">Icons</a></li>
+      <li><a href="a11y.html" class="velin-nav__link">A11y</a></li>
+      <li><a href="security.html" class="velin-nav__link">Security</a></li>
+      <li><a href="migration.html" class="velin-nav__link">Migration</a></li>
+    </ul>
+  </nav>
+
+  <main id="main" class="velin-container">
+    <section class="error-hero">
+      <p class="error-code">404</p>
+      <h1 class="error-title">Page not found</h1>
+      <p class="error-description">
+        Sorry, the page you're looking for doesn't exist or has been moved.
+        Let's get you back on track.
+      </p>
+      <div style="display:flex;gap:var(--velin-space-3);justify-content:center;flex-wrap:wrap;">
+        <a href="index.html" class="velin-btn velin-btn--primary velin-btn--lg">Back to Home</a>
+        <a href="getting-started.html" class="velin-btn velin-btn--outline velin-btn--lg">Getting Started</a>
+      </div>
+    </section>
+
+    <section style="padding-block-end:var(--velin-space-12);">
+      <h2 style="font-size:var(--velin-text-xl);font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-6);text-align:center;">
+        Or explore the docs
+      </h2>
+      <div class="velin-grid velin-grid--auto-fit">
+        <a href="tokens.html" class="velin-card" style="text-decoration:none;color:inherit;">
+          <div class="velin-card__body">
+            <h3 class="velin-card__title">Design Tokens</h3>
+            <p class="velin-card__text">Colors, spacing, typography, and all the CSS custom properties.</p>
+          </div>
+        </a>
+        <a href="components.html" class="velin-card" style="text-decoration:none;color:inherit;">
+          <div class="velin-card__body">
+            <h3 class="velin-card__title">Components</h3>
+            <p class="velin-card__text">Interactive web components — modals, tabs, accordions, and more.</p>
+          </div>
+        </a>
+        <a href="themes.html" class="velin-card" style="text-decoration:none;color:inherit;">
+          <div class="velin-card__body">
+            <h3 class="velin-card__title">Themes</h3>
+            <p class="velin-card__text">Built-in theme presets — Sharp, Soft, Brutalist, and Dark.</p>
+          </div>
+        </a>
+        <a href="a11y.html" class="velin-card" style="text-decoration:none;color:inherit;">
+          <div class="velin-card__body">
+            <h3 class="velin-card__title">Accessibility</h3>
+            <p class="velin-card__text">Accessibility features baked into every VelinStyle component.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="velin-doc-footer">
+    <div class="velin-doc-footer__inner">
+      <p>VelinStyle v0.6.1</p>
+      <div style="display:flex;gap:var(--velin-space-3);">
+        <a href="https://github.com/SkyliteDesign/velinstyle">GitHub</a>
+        <a href="https://github.com/SkyliteDesign/velinstyle/blob/main/LICENSE">MIT License</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" data-velin-theme="soft">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing - VelinStyle Sample</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="../dist/themes/soft.min.css">
+  <script type="module" src="../dist/velinstyle-components.js"></script>
+  <style>
+    body { background: var(--velin-color-surface); }
+
+    .pricing-hero {
+      padding-block: var(--velin-space-16) var(--velin-space-8);
+      text-align: center;
+      background: linear-gradient(170deg, var(--velin-color-primary-subtle) 0%, var(--velin-color-surface) 60%);
+    }
+    .pricing-hero__title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: var(--velin-weight-extrabold);
+      letter-spacing: var(--velin-tracking-tight);
+      line-height: var(--velin-leading-tight);
+      margin-block-end: var(--velin-space-4);
+    }
+    .pricing-hero__subtitle {
+      font-size: var(--velin-text-lg);
+      color: var(--velin-color-text-muted);
+      max-inline-size: 48ch;
+      margin-inline: auto;
+      margin-block-end: var(--velin-space-8);
+    }
+
+    .toggle-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--velin-space-3);
+      margin-block-end: var(--velin-space-12);
+    }
+    .toggle-group__label {
+      font-size: var(--velin-text-base);
+      font-weight: var(--velin-weight-medium);
+      color: var(--velin-color-text-muted);
+    }
+    .toggle-group__label--active {
+      color: var(--velin-color-text);
+      font-weight: var(--velin-weight-semibold);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--velin-space-6);
+      max-inline-size: 72rem;
+      margin-inline: auto;
+      align-items: start;
+    }
+    @media (max-width: 56rem) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-inline-size: 28rem;
+      }
+    }
+
+    .pricing-card {
+      text-align: center;
+      padding: var(--velin-space-8);
+      position: relative;
+    }
+    .pricing-card--featured {
+      border-color: var(--velin-color-primary);
+      border-width: 2px;
+      box-shadow: var(--velin-shadow-lg);
+      transform: scale(1.04);
+    }
+    @media (max-width: 56rem) {
+      .pricing-card--featured { transform: none; }
+    }
+    .pricing-card__name {
+      font-size: var(--velin-text-xl);
+      font-weight: var(--velin-weight-bold);
+      margin-block-end: var(--velin-space-2);
+    }
+    .pricing-card__desc {
+      font-size: var(--velin-text-sm);
+      color: var(--velin-color-text-muted);
+      margin-block-end: var(--velin-space-6);
+    }
+    .pricing-card__price {
+      font-size: var(--velin-text-4xl);
+      font-weight: var(--velin-weight-extrabold);
+      line-height: 1;
+      margin-block-end: var(--velin-space-1);
+    }
+    .pricing-card__period {
+      font-size: var(--velin-text-sm);
+      color: var(--velin-color-text-muted);
+      margin-block-end: var(--velin-space-6);
+    }
+    .pricing-card__features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 var(--velin-space-8);
+      text-align: start;
+    }
+    .pricing-card__features li {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-3);
+      padding-block: var(--velin-space-2);
+      font-size: var(--velin-text-sm);
+      border-block-end: 1px solid var(--velin-color-border);
+    }
+    .pricing-card__features li:last-child {
+      border-block-end: none;
+    }
+    .icon-check {
+      flex-shrink: 0;
+      color: var(--velin-color-success);
+    }
+    .icon-x {
+      flex-shrink: 0;
+      color: var(--velin-color-text-subtle);
+    }
+    .feature-disabled {
+      color: var(--velin-color-text-subtle);
+    }
+
+    .stats-section {
+      padding-block: var(--velin-space-16);
+      background: var(--velin-color-surface-dim);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--velin-space-6);
+      max-inline-size: 60rem;
+      margin-inline: auto;
+    }
+    @media (max-width: 48rem) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .faq-section {
+      padding-block: var(--velin-space-16);
+    }
+    .faq-section__header {
+      text-align: center;
+      margin-block-end: var(--velin-space-10);
+    }
+    .faq-section__title {
+      font-size: var(--velin-text-2xl);
+      font-weight: var(--velin-weight-bold);
+      margin-block-end: var(--velin-space-2);
+    }
+    .faq-section__desc {
+      color: var(--velin-color-text-muted);
+    }
+    .faq-accordion {
+      max-inline-size: 48rem;
+      margin-inline: auto;
+    }
+    .faq-accordion details > div {
+      padding: var(--velin-space-4);
+      color: var(--velin-color-text-muted);
+      font-size: var(--velin-text-sm);
+      line-height: var(--velin-leading-relaxed);
+    }
+
+    .cta-section {
+      padding-block: var(--velin-space-16);
+      text-align: center;
+      background: linear-gradient(170deg, var(--velin-color-primary-subtle), var(--velin-color-secondary-subtle));
+    }
+    .cta-section__title {
+      font-size: var(--velin-text-3xl);
+      font-weight: var(--velin-weight-bold);
+      margin-block-end: var(--velin-space-4);
+    }
+    .cta-section__desc {
+      color: var(--velin-color-text-muted);
+      font-size: var(--velin-text-lg);
+      max-inline-size: 48ch;
+      margin-inline: auto;
+      margin-block-end: var(--velin-space-8);
+    }
+
+    .pricing-footer {
+      padding-block: var(--velin-space-6);
+      border-block-start: 1px solid var(--velin-color-border);
+      color: var(--velin-color-text-muted);
+      font-size: var(--velin-text-sm);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="#" class="velin-nav__brand">CloudSync</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="#" class="velin-nav__link">Product</a></li>
+      <li><a href="#" class="velin-nav__link">Features</a></li>
+      <li><a href="#" class="velin-nav__link velin-nav__link--active">Pricing</a></li>
+      <li><a href="#" class="velin-nav__link">Docs</a></li>
+      <li><a href="#" class="velin-btn velin-btn--ghost velin-btn--sm">Sign In</a></li>
+      <li><a href="#" class="velin-btn velin-btn--primary velin-btn--sm">Start Free</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+
+    <section class="pricing-hero">
+      <div class="velin-container">
+        <h1 class="pricing-hero__title">Simple, transparent pricing</h1>
+        <p class="pricing-hero__subtitle">
+          No hidden fees, no surprise charges. Pick a plan that works for your team and scale as you grow.
+        </p>
+
+        <div class="toggle-group">
+          <span class="toggle-group__label toggle-group__label--active">Monthly</span>
+          <label class="velin-switch">
+            <input type="checkbox" class="velin-switch__input" aria-label="Toggle annual billing">
+            <span class="velin-switch__track"></span>
+          </label>
+          <span class="toggle-group__label">Annual</span>
+          <span class="velin-badge velin-badge--success">Save 20%</span>
+        </div>
+
+        <div class="pricing-grid">
+
+          <div class="velin-card pricing-card">
+            <div class="velin-card__body" style="padding: 0;">
+              <p class="pricing-card__name">Starter</p>
+              <p class="pricing-card__desc">For individuals and small projects</p>
+              <p class="pricing-card__price">$0</p>
+              <p class="pricing-card__period">Free forever</p>
+              <ul class="pricing-card__features">
+                <li>
+                  <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Up to 3 projects
+                </li>
+                <li>
+                  <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  1 GB storage
+                </li>
+                <li>
+                  <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Community support
+                </li>
+                <li>
+                  <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Basic analytics
+                </li>
+                <li class="feature-disabled">
+                  <svg class="icon-x" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  Custom domains
+                </li>
+                <li class="feature-disabled">
+                  <svg class="icon-x" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  Priority support
+                </li>
+              </ul>
+              <a href="#" class="velin-btn velin-btn--outline velin-btn--block">Get Started</a>
+            </div>
+          </div>
+
+          <div class="velin-card pricing-card pricing-card--featured">
+            <div class="velin-card__body" style="padding: 0;">
+              <span class="velin-badge velin-badge--primary" style="margin-block-end: var(--velin-space-4);">Most Popular</span>
+              <p class="pricing-card__name">Pro</p>
+              <p class="pricing-card__desc">For growing teams that need more power</p>
+              <p class="pricing-card__price">$29</p>
+              <p class="pricing-card__period">per user / month</p>
+              <ul class="pricing-card__features">
+                <li>
+                  <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Unlimited projects
+                </li>
+                <li>
+                  <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  100 GB storage
+                </li>
+                <li>
+                  <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Priority support
+                </li>
+                <li>
+                  <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Advanced analytics
+                </li>
+                <li>
+                  <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Custom domains
+                </li>
+                <li class="feature-disabled">
+                  <svg class="icon-x" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  SSO &amp; SAML
+                </li>
+              </ul>
+              <a href="#" class="velin-btn velin-btn--primary velin-btn--block">Start Free Trial</a>
+            </div>
+          </div>
+
+          <div class="velin-card pricing-card">
+            <div class="velin-card__body" style="padding: 0;">
+              <p class="pricing-card__name">Enterprise</p>
+              <p class="pricing-card__desc">For large organizations with custom needs</p>
+              <p class="pricing-card__price">$79</p>
+              <p class="pricing-card__period">per user / month</p>
+              <ul class="pricing-card__features">
+                <li>
+                  <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Unlimited everything
+                </li>
+                <li>
+                  <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  1 TB storage
+                </li>
+                <li>
+                  <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Dedicated support
+                </li>
+                <li>
+                  <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Custom analytics
+                </li>
+                <li>
+                  <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  SSO &amp; SAML
+                </li>
+                <li>
+                  <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  SLA guarantee
+                </li>
+              </ul>
+              <a href="#" class="velin-btn velin-btn--outline velin-btn--block">Contact Sales</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="velin-container">
+        <div class="stats-grid">
+          <div class="velin-stat">
+            <div class="velin-stat__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="velin-stat__label">Trusted By</div>
+            <div class="velin-stat__value">12,000+</div>
+            <div class="velin-stat__change velin-stat__change--up">companies worldwide</div>
+          </div>
+          <div class="velin-stat">
+            <div class="velin-stat__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="velin-stat__label">Uptime</div>
+            <div class="velin-stat__value">99.99%</div>
+            <div class="velin-stat__change velin-stat__change--up">since 2022</div>
+          </div>
+          <div class="velin-stat">
+            <div class="velin-stat__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="velin-stat__label">Setup Time</div>
+            <div class="velin-stat__value">&lt;5 min</div>
+            <div class="velin-stat__change">average onboarding</div>
+          </div>
+          <div class="velin-stat">
+            <div class="velin-stat__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+            </div>
+            <div class="velin-stat__label">Satisfaction</div>
+            <div class="velin-stat__value">4.9/5</div>
+            <div class="velin-stat__change velin-stat__change--up">from 3,200+ reviews</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="velin-container">
+        <div class="faq-section__header">
+          <h2 class="faq-section__title">Frequently asked questions</h2>
+          <p class="faq-section__desc">Everything you need to know about our plans and billing.</p>
+        </div>
+
+        <velin-accordion exclusive class="faq-accordion">
+          <details>
+            <summary>Can I try CloudSync for free before committing?</summary>
+            <div>
+              <p>Absolutely! Our Starter plan is free forever with no credit card required. You can also start a 14-day free trial of the Pro plan to explore all advanced features before deciding.</p>
+            </div>
+          </details>
+          <details>
+            <summary>How does the billing cycle work?</summary>
+            <div>
+              <p>You can choose between monthly and annual billing. Annual plans save you 20% compared to monthly pricing. Billing starts on the day you upgrade, and you can cancel anytime from your account settings.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Can I switch plans at any time?</summary>
+            <div>
+              <p>Yes, you can upgrade or downgrade your plan at any point. When upgrading, you'll be prorated for the remainder of your billing cycle. Downgrades take effect at the start of your next billing period.</p>
+            </div>
+          </details>
+          <details>
+            <summary>What payment methods do you accept?</summary>
+            <div>
+              <p>We accept all major credit and debit cards (Visa, Mastercard, American Express), PayPal, and bank transfers for Enterprise accounts. All payments are processed securely through Stripe.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Is there a discount for non-profit organizations?</summary>
+            <div>
+              <p>Yes! We offer a 50% discount for verified non-profit organizations, educational institutions, and open-source projects. Contact our sales team to apply for the discount.</p>
+            </div>
+          </details>
+          <details>
+            <summary>What happens to my data if I cancel?</summary>
+            <div>
+              <p>Your data remains accessible for 30 days after cancellation. During this period, you can export all your projects and files. After 30 days, data is permanently deleted in accordance with our privacy policy.</p>
+            </div>
+          </details>
+        </velin-accordion>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="velin-container">
+        <h2 class="cta-section__title">Ready to get started?</h2>
+        <p class="cta-section__desc">
+          Join thousands of teams already using CloudSync to ship faster and collaborate better.
+        </p>
+        <div class="velin-flex velin-flex--justify-center velin-flex--gap-3">
+          <a href="#" class="velin-btn velin-btn--primary velin-btn--lg">Start Free Trial</a>
+          <a href="#" class="velin-btn velin-btn--outline velin-btn--lg">Talk to Sales</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pricing-footer">
+    <div class="velin-container">
+      <p>&copy; 2026 CloudSync. Built with <a href="https://github.com/SkyliteDesign/velinstyle">VelinStyle</a> Soft Theme.</p>
+    </div>
+  </footer>
+</body>
+</html>

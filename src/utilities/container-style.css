@@ -1,0 +1,43 @@
+@layer utilities {
+  /* Adaptive @container Style Queries */
+
+  .velin-density-compact { --velin-density: compact; container-type: inline-size; }
+  .velin-density-normal { --velin-density: normal; container-type: inline-size; }
+  .velin-density-comfortable { --velin-density: comfortable; container-type: inline-size; }
+
+  @container style(--velin-density: compact) {
+    .velin-card { padding: var(--velin-space-2); }
+    .velin-card__body { padding: var(--velin-space-2); }
+    .velin-btn { padding: var(--velin-space-1) var(--velin-space-3); font-size: var(--velin-text-sm); min-block-size: 2rem; }
+    .velin-input { padding: var(--velin-space-1) var(--velin-space-2); font-size: var(--velin-text-sm); min-block-size: 2rem; }
+    .velin-table th, .velin-table td { padding: var(--velin-space-1) var(--velin-space-2); font-size: var(--velin-text-sm); }
+    .velin-badge { padding: 0.1em 0.4em; font-size: var(--velin-text-xs); }
+    .velin-alert { padding: var(--velin-space-2) var(--velin-space-3); }
+  }
+
+  @container style(--velin-density: comfortable) {
+    .velin-card { padding: var(--velin-space-8); }
+    .velin-card__body { padding: var(--velin-space-6); }
+    .velin-btn { padding: var(--velin-space-4) var(--velin-space-8); font-size: var(--velin-text-lg); min-block-size: 3.5rem; }
+    .velin-input { padding: var(--velin-space-4) var(--velin-space-5); font-size: var(--velin-text-lg); min-block-size: 3.5rem; }
+    .velin-table th, .velin-table td { padding: var(--velin-space-4) var(--velin-space-5); }
+    .velin-badge { padding: 0.35em 0.75em; font-size: var(--velin-text-base); }
+    .velin-alert { padding: var(--velin-space-5) var(--velin-space-6); }
+  }
+
+  /* Adaptive mode: components change personality */
+  .velin-style-professional { --velin-style: professional; container-type: inline-size; }
+  .velin-style-playful { --velin-style: playful; container-type: inline-size; }
+
+  @container style(--velin-style: professional) {
+    .velin-card { border-radius: var(--velin-radius-xs); }
+    .velin-btn { border-radius: var(--velin-radius-xs); text-transform: uppercase; letter-spacing: var(--velin-tracking-wide); }
+    .velin-badge { border-radius: var(--velin-radius-xs); }
+  }
+
+  @container style(--velin-style: playful) {
+    .velin-card { border-radius: var(--velin-radius-xl); }
+    .velin-btn { border-radius: var(--velin-radius-full); }
+    .velin-badge { border-radius: var(--velin-radius-full); }
+  }
+}

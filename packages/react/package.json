@@ -1,0 +1,21 @@
+{
+  "name": "@velinstyle/react",
+  "version": "0.1.0",
+  "description": "Thin React wrappers for VelinStyle web components",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "scripts": {
+    "build": "esbuild src/index.jsx --bundle --format=esm --packages=external --loader:.jsx=jsx --outfile=dist/index.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "react": "^18.3.0"
+  }
+}

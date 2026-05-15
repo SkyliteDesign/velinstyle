@@ -1,0 +1,85 @@
+@layer a11y {
+  /* Smart User-Preference Queries */
+
+  /* High Contrast -- thicker borders, stronger text */
+  @media (prefers-contrast: more) {
+    :root {
+      --velin-color-text: oklch(10% 0 0);
+      --velin-color-text-muted: oklch(30% 0 0);
+      --velin-color-border: oklch(30% 0 0);
+      --velin-color-border-strong: oklch(10% 0 0);
+      --velin-shadow-sm: none;
+      --velin-shadow-md: none;
+      --velin-shadow-lg: none;
+    }
+
+    .velin-btn {
+      border-width: 2px;
+    }
+
+    .velin-card {
+      border-width: 2px;
+    }
+
+    .velin-input,
+    .velin-select,
+    .velin-textarea {
+      border-width: 2px;
+    }
+
+    .velin-badge {
+      border: 1px solid currentColor;
+    }
+
+    .velin-divider {
+      border-width: 2px;
+    }
+  }
+
+  /* Low Contrast -- softer, less visual density */
+  @media (prefers-contrast: less) {
+    :root {
+      --velin-color-border: oklch(85% 0.01 250);
+      --velin-color-border-strong: oklch(70% 0.01 250);
+    }
+
+    .velin-card {
+      border-color: transparent;
+    }
+
+    .velin-divider {
+      opacity: 0.5;
+    }
+  }
+
+  /* Reduced Transparency -- opaque backgrounds everywhere */
+  @media (prefers-reduced-transparency) {
+    :root {
+      --velin-color-overlay: oklch(15% 0 0);
+      --velin-color-surface-dim: oklch(95% 0.005 250);
+    }
+
+    .velin-card {
+      backdrop-filter: none;
+      background: var(--velin-color-surface-bright);
+    }
+
+    .velin-nav {
+      backdrop-filter: none;
+      background: var(--velin-color-surface-bright);
+    }
+
+    .velin-alert {
+      backdrop-filter: none;
+    }
+
+    .velin-chip {
+      backdrop-filter: none;
+    }
+
+    [data-velin-theme="dark"] .velin-card,
+    [data-velin-theme="dark"] .velin-nav {
+      background: var(--velin-color-surface);
+    }
+  }
+}

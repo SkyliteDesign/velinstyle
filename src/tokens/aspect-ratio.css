@@ -1,0 +1,10 @@
+@layer tokens {
+  :root {
+    --velin-aspect-square: 1 / 1;
+    --velin-aspect-video: 16 / 9;
+    --velin-aspect-photo: 4 / 3;
+    --velin-aspect-portrait: 3 / 4;
+    --velin-aspect-wide: 21 / 9;
+    --velin-aspect-golden: 1.618 / 1;
+  }
+}

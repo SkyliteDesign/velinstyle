@@ -1,0 +1,60 @@
+@layer layout {
+  .velin-container {
+    inline-size: 100%;
+    margin-inline: auto;
+    padding-inline: var(--velin-space-4);
+    container-type: inline-size;
+    container-name: velin;
+  }
+
+  @media (min-width: 36rem) {
+    .velin-container {
+      max-inline-size: 33rem;
+      padding-inline: var(--velin-space-6);
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .velin-container {
+      max-inline-size: 45rem;
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .velin-container {
+      max-inline-size: 60rem;
+    }
+  }
+
+  @media (min-width: 80rem) {
+    .velin-container {
+      max-inline-size: 76rem;
+    }
+  }
+
+  @media (min-width: 96rem) {
+    .velin-container {
+      max-inline-size: 90rem;
+    }
+  }
+
+  .velin-container--fluid {
+    max-inline-size: none;
+    container-type: inline-size;
+    container-name: velin;
+  }
+
+  .velin-container--narrow {
+    max-inline-size: 40rem;
+  }
+
+  .velin-container--wide {
+    max-inline-size: 96rem;
+  }
+
+  /* Prevent horizontal scroll */
+  .velin-container,
+  .velin-container--fluid {
+    overflow-x: clip;
+  }
+}

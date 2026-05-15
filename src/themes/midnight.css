@@ -1,0 +1,59 @@
+@layer themes {
+  :root[data-velin-theme="midnight"],
+  [data-velin-theme="midnight"] {
+    /* Midnight: Ultra-dark with deep purple and violet undertones */
+    --velin-radius-none: 0;
+    --velin-radius-xs: 0.125rem;
+    --velin-radius-sm: 0.25rem;
+    --velin-radius-md: 0.375rem;
+    --velin-radius-lg: 0.5rem;
+    --velin-radius-xl: 0.75rem;
+    --velin-radius-2xl: 1rem;
+    --velin-radius-full: 9999px;
+    --velin-radius-pill: 9999px;
+
+    --velin-color-primary: oklch(65% 0.2 290);
+    --velin-color-primary-hover: oklch(70% 0.22 290);
+    --velin-color-primary-active: oklch(58% 0.18 290);
+    --velin-color-primary-subtle: oklch(20% 0.06 290);
+    --velin-color-on-primary: oklch(100% 0 0);
+
+    --velin-color-secondary: oklch(55% 0.15 260);
+    --velin-color-secondary-hover: oklch(60% 0.17 260);
+    --velin-color-secondary-subtle: oklch(18% 0.05 260);
+    --velin-color-on-secondary: oklch(100% 0 0);
+
+    --velin-color-surface: oklch(12% 0.02 280);
+    --velin-color-surface-dim: oklch(8% 0.02 280);
+    --velin-color-surface-bright: oklch(18% 0.025 280);
+    --velin-color-text: oklch(90% 0.01 250);
+    --velin-color-text-muted: oklch(60% 0.02 270);
+    --velin-color-border: oklch(25% 0.03 280);
+    --velin-color-border-strong: oklch(40% 0.05 280);
+
+    --velin-shadow-sm: 0 1px 4px oklch(10% 0.03 290 / 0.3);
+    --velin-shadow-md: 0 3px 10px oklch(10% 0.03 290 / 0.35), 0 0 6px oklch(65% 0.2 290 / 0.08);
+    --velin-shadow-lg: 0 6px 20px oklch(10% 0.03 290 / 0.4), 0 0 10px oklch(65% 0.2 290 / 0.1);
+    --velin-shadow-xl: 0 10px 30px oklch(10% 0.03 290 / 0.45), 0 0 15px oklch(65% 0.2 290 / 0.12);
+    --velin-shadow-2xl: 0 16px 44px oklch(10% 0.03 290 / 0.5), 0 0 20px oklch(65% 0.2 290 / 0.15);
+
+    --velin-font-heading: "Inter", system-ui, sans-serif;
+    --velin-font-body: "Inter", system-ui, sans-serif;
+
+    --velin-weight-normal: 400;
+    --velin-weight-medium: 500;
+    --velin-weight-semibold: 600;
+    --velin-weight-bold: 700;
+    --velin-weight-extrabold: 800;
+
+    --velin-tracking-normal: -0.01em;
+    --velin-tracking-wide: 0.02em;
+    --velin-tracking-wider: 0.05em;
+
+    --velin-leading-tight: 1.2;
+    --velin-leading-normal: 1.55;
+
+    --velin-duration-normal: 200ms;
+    --velin-duration-slow: 300ms;
+  }
+}

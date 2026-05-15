@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VelinStyle playground</title>
+  <link rel="stylesheet" href="../../dist/velinstyle.css">
+  <style>
+    .pg { display: grid; grid-template-rows: auto 1fr; height: 100vh; }
+    .pg__bar { display: flex; gap: 0.5rem; align-items: center; padding: 0.5rem 1rem; border-block-end: 1px solid var(--velin-color-border); flex-wrap: wrap; }
+    .pg__split { display: grid; grid-template-columns: 1fr 1fr; min-height: 0; }
+    textarea { font: 13px/1.4 ui-monospace, monospace; border: none; border-inline-end: 1px solid var(--velin-color-border); padding: 0.75rem; resize: none; min-height: 100%; }
+    iframe { border: none; width: 100%; height: 100%; background: white; }
+  </style>
+</head>
+<body class="pg">
+  <div class="pg__bar">
+    <strong>Playground</strong>
+    <button type="button" class="velin-btn velin-btn--sm velin-btn--primary" id="run">Run</button>
+    <button type="button" class="velin-btn velin-btn--sm velin-btn--outline" id="theme-dark">Dark</button>
+    <button type="button" class="velin-btn velin-btn--sm velin-btn--outline" id="theme-light">Light</button>
+    <span class="velin-text-sm velin-text-muted">HTML left · preview right</span>
+  </div>
+  <div class="pg__split">
+    <textarea id="src" spellcheck="false" aria-label="HTML source"><!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../dist/velinstyle.css">
+</head><body class="velin-container" style="padding:2rem">
+<button type="button" class="velin-btn velin-btn--primary">Primary</button>
+</body></html></textarea>
+    <iframe id="frame" title="Preview"></iframe>
+  </div>
+  <script>
+    const src = document.getElementById('src');
+    const frame = document.getElementById('frame');
+    function run() {
+      frame.srcdoc = src.value;
+    }
+    document.getElementById('run').addEventListener('click', run);
+    document.getElementById('theme-dark').addEventListener('click', () => {
+      try { frame.contentDocument.documentElement.setAttribute('data-velin-theme', 'dark'); } catch (e) {}
+    });
+    document.getElementById('theme-light').addEventListener('click', () => {
+      try { frame.contentDocument.documentElement.removeAttribute('data-velin-theme'); } catch (e) {}
+    });
+    run();
+  </script>
+</body>
+</html>

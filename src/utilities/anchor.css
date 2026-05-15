@@ -1,0 +1,75 @@
+@layer utilities {
+  /* Native CSS Anchor Positioning */
+
+  .velin-anchor {
+    anchor-name: --velin-anchor;
+  }
+
+  .velin-anchor-named {
+    anchor-name: var(--velin-anchor-name, --velin-anchor);
+  }
+
+  .velin-anchored {
+    position: absolute;
+    position-anchor: --velin-anchor;
+    inset: auto;
+  }
+
+  .velin-anchored-named {
+    position: absolute;
+    position-anchor: var(--velin-anchor-name, --velin-anchor);
+    inset: auto;
+  }
+
+  /* Placement utilities */
+  .velin-anchored--top {
+    bottom: anchor(top);
+    left: anchor(center);
+    translate: -50% 0;
+    margin-bottom: var(--velin-space-2, 0.5rem);
+  }
+
+  .velin-anchored--bottom {
+    top: anchor(bottom);
+    left: anchor(center);
+    translate: -50% 0;
+    margin-top: var(--velin-space-2, 0.5rem);
+  }
+
+  .velin-anchored--start {
+    right: anchor(left);
+    top: anchor(center);
+    translate: 0 -50%;
+    margin-right: var(--velin-space-2, 0.5rem);
+  }
+
+  .velin-anchored--end {
+    left: anchor(right);
+    top: anchor(center);
+    translate: 0 -50%;
+    margin-left: var(--velin-space-2, 0.5rem);
+  }
+
+  /* Auto-flip fallback */
+  .velin-anchored--auto {
+    position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+  }
+
+  /* Shared anchored element styling */
+  .velin-anchored,
+  .velin-anchored-named {
+    z-index: var(--velin-z-dropdown, 100);
+    background: var(--velin-color-surface-bright);
+    border: 1px solid var(--velin-color-border);
+    border-radius: var(--velin-radius-md);
+    box-shadow: var(--velin-shadow-lg);
+    padding: var(--velin-space-3);
+  }
+
+  @supports not (anchor-name: --x) {
+    .velin-anchored,
+    .velin-anchored-named {
+      position: absolute;
+    }
+  }
+}

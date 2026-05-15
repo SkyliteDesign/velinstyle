@@ -1,0 +1,112 @@
+@layer utilities {
+  /* State-driven Utilities */
+
+  .velin-is-loading {
+    position: relative;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .velin-is-loading > * {
+    opacity: 0.4;
+  }
+
+  .velin-is-loading::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in oklch, var(--velin-color-surface, #fff) 80%, transparent);
+  }
+
+  .velin-is-loading::before {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    translate: -50% -50%;
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    border: 3px solid var(--velin-color-border);
+    border-block-start-color: var(--velin-color-primary);
+    border-radius: 50%;
+    animation: velin-spin 0.75s linear infinite;
+  }
+
+  .velin-is-empty {
+    position: relative;
+    min-block-size: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: var(--velin-space-2);
+    color: var(--velin-color-text-muted);
+    font-size: var(--velin-text-sm);
+    border: 2px dashed var(--velin-color-border);
+    border-radius: var(--velin-radius-md);
+    padding: var(--velin-space-6);
+  }
+
+  .velin-is-empty::before {
+    content: "∅";
+    font-size: var(--velin-text-3xl);
+    opacity: 0.5;
+  }
+
+  .velin-is-error {
+    border: 2px solid var(--velin-color-danger) !important;
+    position: relative;
+  }
+
+  .velin-is-error::after {
+    content: "⚠";
+    position: absolute;
+    inset-block-start: var(--velin-space-2);
+    inset-inline-end: var(--velin-space-2);
+    color: var(--velin-color-danger);
+    font-size: var(--velin-text-lg);
+  }
+
+  .velin-is-success {
+    border: 2px solid var(--velin-color-success) !important;
+    position: relative;
+  }
+
+  .velin-is-success::after {
+    content: "✓";
+    position: absolute;
+    inset-block-start: var(--velin-space-2);
+    inset-inline-end: var(--velin-space-2);
+    color: var(--velin-color-success);
+    font-size: var(--velin-text-lg);
+    font-weight: var(--velin-weight-bold);
+  }
+
+  .velin-is-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    user-select: none;
+    cursor: not-allowed;
+    filter: grayscale(0.5);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .velin-is-loading::before {
+      animation-duration: 3s;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .velin-is-error { border-color: LinkText; }
+    .velin-is-success { border-color: LinkText; }
+    .velin-is-loading::before {
+      border-color: ButtonText;
+      border-block-start-color: Highlight;
+    }
+  }
+}

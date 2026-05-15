@@ -1,0 +1,13 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "custom-property-pattern": "^velin-.+",
+    "selector-class-pattern": "^velin-",
+    "keyframes-name-pattern": "^velin-",
+    "at-rule-no-unknown": [true, {
+      "ignoreAtRules": ["layer", "container", "scope"]
+    }],
+    "no-descending-specificity": null,
+    "import-notation": "string"
+  }
+}

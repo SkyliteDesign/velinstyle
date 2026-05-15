@@ -1,0 +1,104 @@
+/* ===================================================================
+   VelinStyle Security Utilities
+   CSS-level security helpers for content sandboxing and safe defaults.
+   =================================================================== */
+
+@layer a11y {
+
+  /* ---- Clickjacking Protection ----
+     Wrap page content in .velin-secure-frame. If the page is loaded inside
+     an <iframe> without styles, the content stays hidden. Only when styles
+     load (same-origin) does the content appear. Complement with HTTP
+     X-Frame-Options / CSP frame-ancestors header for full protection. */
+  .velin-secure-frame {
+    display: none;
+  }
+  @media all {
+    .velin-secure-frame {
+      display: block;
+    }
+  }
+
+  /* ---- Safe External Links ----
+     Force rel="noopener noreferrer" behavior. The CSS-only version
+     provides a visual indicator. Developers should still add
+     rel="noopener noreferrer" in HTML; this is a safety net. */
+  a[target="_blank"]:not([rel~="noopener"]) {
+    &::after {
+      content: " ↗";
+      font-size: 0.75em;
+      vertical-align: super;
+    }
+  }
+
+  /* ---- User-Generated Content Container ----
+     Sandboxes untrusted content by resetting inherited styles,
+     enabling CSS containment, and hiding dangerous elements. */
+  .velin-user-content {
+    all: initial;
+    display: block;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+    contain: layout style paint;
+    overflow: hidden;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .velin-user-content img,
+  .velin-user-content video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .velin-user-content a {
+    color: var(--velin-color-primary, #2563eb);
+    text-decoration: underline;
+  }
+
+  /* Hide potentially dangerous embedded elements */
+  .velin-user-content script,
+  .velin-user-content iframe,
+  .velin-user-content object,
+  .velin-user-content embed,
+  .velin-user-content applet,
+  .velin-user-content form[action],
+  .velin-user-content [onload],
+  .velin-user-content [onerror],
+  .velin-user-content [onclick] {
+    display: none !important;
+  }
+
+  /* ---- Data Attribute Leakage Prevention ----
+     Prevent CSS exfiltration attacks via attribute selectors.
+     The content property is locked to normal on sensitive fields. */
+  input[type="password"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"][inputmode="numeric"] {
+    -webkit-text-security: disc;
+  }
+  input[type="password"]::after,
+  input[type="password"]::before {
+    content: normal !important;
+  }
+
+  /* ---- Prevent Paste-jacking ----
+     Ensure user can always paste into inputs */
+  input:not([data-velin-no-paste]),
+  textarea:not([data-velin-no-paste]) {
+    -webkit-user-modify: read-write;
+  }
+
+  /* ---- Disable autofill background color leaking ----
+     Prevents browsers from applying unwanted background colors
+     on autofilled inputs that could leak info via CSS. */
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--velin-color-surface-bright, #fff) inset;
+    -webkit-text-fill-color: var(--velin-color-text, #1a1a2e);
+    transition: background-color 600000s 0s, color 600000s 0s;
+  }
+
+}

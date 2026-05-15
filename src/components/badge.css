@@ -1,0 +1,67 @@
+@layer components {
+  .velin-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--velin-space-1);
+    padding-block: var(--velin-space-0-5);
+    padding-inline: var(--velin-space-2);
+    font-size: var(--velin-text-xs);
+    font-weight: var(--velin-weight-semibold);
+    line-height: var(--velin-leading-normal);
+    border-radius: var(--velin-radius-full);
+    white-space: nowrap;
+    color: var(--velin-color-text);
+    background-color: var(--velin-color-surface-dim);
+  }
+
+  .velin-badge--primary {
+    color: var(--velin-color-on-primary);
+    background-color: var(--velin-color-primary);
+  }
+
+  .velin-badge--secondary {
+    color: var(--velin-color-on-secondary);
+    background-color: var(--velin-color-secondary);
+  }
+
+  .velin-badge--success {
+    color: var(--velin-color-on-success);
+    background-color: var(--velin-color-success);
+  }
+
+  .velin-badge--warning {
+    color: var(--velin-color-on-warning);
+    background-color: var(--velin-color-warning);
+  }
+
+  .velin-badge--danger {
+    color: var(--velin-color-on-danger);
+    background-color: var(--velin-color-danger);
+  }
+
+  .velin-badge--info {
+    color: var(--velin-color-on-info);
+    background-color: var(--velin-color-info);
+  }
+
+  .velin-badge--outline {
+    background-color: transparent;
+    border: 1px solid currentColor;
+  }
+
+  /* Dot badge */
+  .velin-badge--dot {
+    padding: 0;
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    border-radius: var(--velin-radius-full);
+    font-size: 0;
+  }
+
+  /* Large badge */
+  .velin-badge--lg {
+    padding-block: var(--velin-space-1);
+    padding-inline: var(--velin-space-3);
+    font-size: var(--velin-text-sm);
+  }
+}

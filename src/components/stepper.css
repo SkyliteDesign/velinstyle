@@ -1,0 +1,117 @@
+@layer components {
+  .velin-stepper {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    counter-reset: velin-step;
+  }
+
+  .velin-stepper__step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--velin-space-2);
+    position: relative;
+    counter-increment: velin-step;
+    text-align: center;
+  }
+
+  /* Connector line between steps */
+  .velin-stepper__step + .velin-stepper__step::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 1.125rem;
+    inset-inline-end: calc(50% + 1.25rem);
+    inline-size: calc(100% - 2.5rem);
+    block-size: 2px;
+    background: var(--velin-color-border);
+  }
+
+  .velin-stepper__indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 2.25rem;
+    block-size: 2.25rem;
+    border-radius: var(--velin-radius-full);
+    background: var(--velin-color-surface-dim);
+    border: 2px solid var(--velin-color-border);
+    color: var(--velin-color-text-muted);
+    font-size: var(--velin-text-sm);
+    font-weight: var(--velin-weight-semibold);
+    z-index: 1;
+    transition: var(--velin-transition-colors);
+  }
+
+  .velin-stepper__indicator::after {
+    content: counter(velin-step);
+  }
+
+  .velin-stepper__label {
+    font-size: var(--velin-text-sm);
+    color: var(--velin-color-text-muted);
+    font-weight: var(--velin-weight-medium);
+    max-inline-size: 8rem;
+  }
+
+  .velin-stepper__desc {
+    font-size: var(--velin-text-xs);
+    color: var(--velin-color-text-subtle);
+    max-inline-size: 10rem;
+  }
+
+  /* Active step */
+  .velin-stepper__step--active .velin-stepper__indicator {
+    background: var(--velin-color-primary);
+    border-color: var(--velin-color-primary);
+    color: var(--velin-color-on-primary);
+  }
+
+  .velin-stepper__step--active .velin-stepper__label {
+    color: var(--velin-color-primary);
+    font-weight: var(--velin-weight-semibold);
+  }
+
+  /* Completed step */
+  .velin-stepper__step--completed .velin-stepper__indicator {
+    background: var(--velin-color-success);
+    border-color: var(--velin-color-success);
+    color: var(--velin-color-on-success);
+  }
+
+  .velin-stepper__step--completed .velin-stepper__indicator::after {
+    content: "✓";
+  }
+
+  .velin-stepper__step--completed + .velin-stepper__step::before {
+    background: var(--velin-color-success);
+  }
+
+  .velin-stepper__step--completed .velin-stepper__label {
+    color: var(--velin-color-text);
+  }
+
+  /* Vertical */
+  .velin-stepper--vertical {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .velin-stepper--vertical .velin-stepper__step {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: start;
+    padding-block-end: var(--velin-space-6);
+  }
+
+  .velin-stepper--vertical .velin-stepper__step + .velin-stepper__step::before {
+    inset-inline-start: 1.125rem;
+    inset-inline-end: auto;
+    inset-block-start: auto;
+    inset-block-end: calc(100% - 0.5rem);
+    inline-size: 2px;
+    block-size: calc(100% - 2.5rem);
+  }
+}

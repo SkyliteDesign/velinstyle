@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout - VelinStyle</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="index.html" class="velin-nav__brand">VelinStyle</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="guides/index.html" class="velin-nav__link">Integration</a></li>
+      <li><a href="layout.html" class="velin-nav__link" aria-current="page">Layout</a></li>
+      <li><a href="components.html" class="velin-nav__link">Components</a></li>
+      <li><a href="css-components.html" class="velin-nav__link">CSS Components</a></li>
+      <li><a href="forms.html" class="velin-nav__link">Forms</a></li>
+      <li><a href="utilities.html" class="velin-nav__link">Utilities</a></li>
+      <li><a href="tokens.html" class="velin-nav__link">Tokens</a></li>
+      <li><a href="themes.html" class="velin-nav__link">Themes</a></li>
+      <li><a href="icons.html" class="velin-nav__link">Icons</a></li>
+      <li><a href="a11y.html" class="velin-nav__link">A11y</a></li>
+      <li><a href="security.html" class="velin-nav__link">Security</a></li>
+      <li><a href="migration.html" class="velin-nav__link">Migration</a></li>
+    </ul>
+  </nav>
+<div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+  <strong>Full documentation available at <a href="https://velinstyle.info/docs/getting-started/introduction.html">velinstyle.info</a></strong> — This is the quick reference. Visit the full docs for 80+ pages with live examples, API tables, and guides.
+</div>
+  <main id="main" class="velin-container">
+
+    <!-- Hero -->
+    <section class="velin-doc-section">
+      <h1 class="velin-doc-title">Layout System</h1>
+      <p class="velin-doc-lead">
+        VelinStyle provides a complete layout toolkit — containers, a responsive 12-column grid,
+        flex utilities, container queries, and ready-made page layout patterns. Everything uses
+        CSS custom properties and logical properties for full RTL support.
+      </p>
+      <nav aria-label="On this page">
+        <ul style="list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:var(--velin-space-2);">
+          <li><a href="#container" class="velin-btn velin-btn--outline velin-btn--sm">Container</a></li>
+          <li><a href="#grid" class="velin-btn velin-btn--outline velin-btn--sm">Grid</a></li>
+          <li><a href="#flex" class="velin-btn velin-btn--outline velin-btn--sm">Flex</a></li>
+          <li><a href="#container-queries" class="velin-btn velin-btn--outline velin-btn--sm">Container Queries</a></li>
+          <li><a href="#grid-templates" class="velin-btn velin-btn--outline velin-btn--sm">Grid templates</a></li>
+          <li><a href="#patterns" class="velin-btn velin-btn--outline velin-btn--sm">Layout Patterns</a></li>
+          <li><a href="#breakpoints" class="velin-btn velin-btn--outline velin-btn--sm">Breakpoints</a></li>
+        </ul>
+      </nav>
+    </section>
+
+    <!-- 1. Container -->
+    <section id="container" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Container</h2>
+      <p class="velin-doc-lead">The <code class="velin-doc-inline-code">.velin-container</code> centers content and constrains its width at each breakpoint. It also establishes a container query context named <code class="velin-doc-inline-code">velin</code>.</p>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-3);">Default Container</h3>
+      <div style="background:var(--velin-color-surface-dim);padding:var(--velin-space-4);border-radius:var(--velin-radius-md);border:1px solid var(--velin-color-border);margin-block-end:var(--velin-space-4);">
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-4);border-radius:var(--velin-radius-md);text-align:center;">.velin-container &mdash; centered, width capped per breakpoint</div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-container"&gt;
+  &lt;!-- Content centered with responsive max-width --&gt;
+&lt;/div&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Container Variants</h3>
+      <div style="display:flex;flex-direction:column;gap:var(--velin-space-3);margin-block-end:var(--velin-space-4);">
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);max-inline-size:40rem;margin-inline:auto;inline-size:100%;text-align:center;">.velin-container--narrow (max 40rem)</div>
+        <div style="background:var(--velin-color-secondary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">.velin-container (default)</div>
+        <div style="background:var(--velin-color-info-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">.velin-container--wide (max 96rem)</div>
+        <div style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">.velin-container--fluid (no max-width)</div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-container velin-container--narrow"&gt;...&lt;/div&gt;
+&lt;div class="velin-container"&gt;...&lt;/div&gt;
+&lt;div class="velin-container velin-container--wide"&gt;...&lt;/div&gt;
+&lt;div class="velin-container velin-container--fluid"&gt;...&lt;/div&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Responsive Width Table</h3>
+      <table class="velin-table velin-doc-api">
+        <thead>
+          <tr><th>Breakpoint</th><th>Min Width</th><th>Container Max Width</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Default</td><td>&mdash;</td><td><code>100%</code></td></tr>
+          <tr><td>sm</td><td><code>36rem</code> (576px)</td><td><code>33rem</code></td></tr>
+          <tr><td>md</td><td><code>48rem</code> (768px)</td><td><code>45rem</code></td></tr>
+          <tr><td>lg</td><td><code>62rem</code> (992px)</td><td><code>60rem</code></td></tr>
+          <tr><td>xl</td><td><code>80rem</code> (1280px)</td><td><code>76rem</code></td></tr>
+          <tr><td>2xl</td><td><code>96rem</code> (1536px)</td><td><code>90rem</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 2. Grid System -->
+    <section id="grid" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Grid System</h2>
+      <p class="velin-doc-lead">A responsive 12-column grid built on CSS Grid. Use <code class="velin-doc-inline-code">.velin-grid</code> for the container and <code class="velin-doc-inline-code">.velin-col-*</code> classes for column spans.</p>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-3);">Equal Columns</h3>
+      <div class="velin-grid velin-grid--cols-3" style="margin-block-end:var(--velin-space-4);">
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">1 / 3</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">2 / 3</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">3 / 3</div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-grid velin-grid--cols-3"&gt;
+  &lt;div&gt;1 / 3&lt;/div&gt;
+  &lt;div&gt;2 / 3&lt;/div&gt;
+  &lt;div&gt;3 / 3&lt;/div&gt;
+&lt;/div&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">12-Column Spans</h3>
+      <div class="velin-grid velin-grid--cols-12" style="margin-block-end:var(--velin-space-4);">
+        <div class="velin-col-4" style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">col-4</div>
+        <div class="velin-col-8" style="background:var(--velin-color-secondary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">col-8</div>
+      </div>
+      <div class="velin-grid velin-grid--cols-12" style="margin-block-end:var(--velin-space-4);">
+        <div class="velin-col-3" style="background:var(--velin-color-info-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">col-3</div>
+        <div class="velin-col-6" style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">col-6</div>
+        <div class="velin-col-3" style="background:var(--velin-color-info-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">col-3</div>
+      </div>
+      <div class="velin-grid velin-grid--cols-12" style="margin-block-end:var(--velin-space-4);">
+        <div class="velin-col-2" style="background:var(--velin-color-success-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">2</div>
+        <div class="velin-col-2" style="background:var(--velin-color-success-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">2</div>
+        <div class="velin-col-2" style="background:var(--velin-color-success-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">2</div>
+        <div class="velin-col-2" style="background:var(--velin-color-success-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">2</div>
+        <div class="velin-col-2" style="background:var(--velin-color-success-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">2</div>
+        <div class="velin-col-2" style="background:var(--velin-color-success-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">2</div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-grid velin-grid--cols-12"&gt;
+  &lt;div class="velin-col-4"&gt;col-4&lt;/div&gt;
+  &lt;div class="velin-col-8"&gt;col-8&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="velin-grid velin-grid--cols-12"&gt;
+  &lt;div class="velin-col-3"&gt;col-3&lt;/div&gt;
+  &lt;div class="velin-col-6"&gt;col-6&lt;/div&gt;
+  &lt;div class="velin-col-3"&gt;col-3&lt;/div&gt;
+&lt;/div&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Full-Width Column</h3>
+      <div class="velin-grid velin-grid--cols-12" style="margin-block-end:var(--velin-space-4);">
+        <div class="velin-col-full" style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">.velin-col-full (spans all 12 columns)</div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-grid velin-grid--cols-12"&gt;
+  &lt;div class="velin-col-full"&gt;Full width&lt;/div&gt;
+&lt;/div&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Auto-Fit Grid</h3>
+      <p>Cards automatically wrap and fill available space with <code class="velin-doc-inline-code">.velin-grid--auto-fit</code>.</p>
+      <div class="velin-grid velin-grid--auto-fit" style="margin-block-end:var(--velin-space-4);">
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-4);border-radius:var(--velin-radius-md);text-align:center;">Auto 1</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-4);border-radius:var(--velin-radius-md);text-align:center;">Auto 2</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-4);border-radius:var(--velin-radius-md);text-align:center;">Auto 3</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-4);border-radius:var(--velin-radius-md);text-align:center;">Auto 4</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-4);border-radius:var(--velin-radius-md);text-align:center;">Auto 5</div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-grid velin-grid--auto-fit"&gt;
+  &lt;div&gt;Auto 1&lt;/div&gt;
+  &lt;div&gt;Auto 2&lt;/div&gt;
+  &lt;div&gt;Auto 3&lt;/div&gt;
+  &lt;div&gt;Auto 4&lt;/div&gt;
+  &lt;div&gt;Auto 5&lt;/div&gt;
+&lt;/div&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Gap Modifiers</h3>
+      <div class="velin-grid velin-grid--cols-4 velin-grid--gap-2" style="margin-block-end:var(--velin-space-3);">
+        <div style="background:var(--velin-color-info-subtle);padding:var(--velin-space-2);border-radius:var(--velin-radius-md);text-align:center;font-size:var(--velin-text-sm);">gap-2</div>
+        <div style="background:var(--velin-color-info-subtle);padding:var(--velin-space-2);border-radius:var(--velin-radius-md);text-align:center;font-size:var(--velin-text-sm);">gap-2</div>
+        <div style="background:var(--velin-color-info-subtle);padding:var(--velin-space-2);border-radius:var(--velin-radius-md);text-align:center;font-size:var(--velin-text-sm);">gap-2</div>
+        <div style="background:var(--velin-color-info-subtle);padding:var(--velin-space-2);border-radius:var(--velin-radius-md);text-align:center;font-size:var(--velin-text-sm);">gap-2</div>
+      </div>
+      <div class="velin-grid velin-grid--cols-4 velin-grid--gap-8" style="margin-block-end:var(--velin-space-4);">
+        <div style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-2);border-radius:var(--velin-radius-md);text-align:center;font-size:var(--velin-text-sm);">gap-8</div>
+        <div style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-2);border-radius:var(--velin-radius-md);text-align:center;font-size:var(--velin-text-sm);">gap-8</div>
+        <div style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-2);border-radius:var(--velin-radius-md);text-align:center;font-size:var(--velin-text-sm);">gap-8</div>
+        <div style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-2);border-radius:var(--velin-radius-md);text-align:center;font-size:var(--velin-text-sm);">gap-8</div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-grid velin-grid--cols-4 velin-grid--gap-2"&gt;...&lt;/div&gt;
+&lt;div class="velin-grid velin-grid--cols-4 velin-grid--gap-8"&gt;...&lt;/div&gt;</pre>
+
+      <h3 id="grid-templates" style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Dense flow and app template</h3>
+      <p><code class="velin-doc-inline-code">.velin-grid--flow-dense</code> enables <code class="velin-doc-inline-code">grid-auto-flow: dense</code>. Combine <code class="velin-doc-inline-code">.velin-grid.velin-grid--areas-app</code> with <code class="velin-doc-inline-code">.velin-area-head</code>, <code class="velin-doc-inline-code">.velin-area-side</code>, <code class="velin-doc-inline-code">.velin-area-main</code> on children for a named dashboard grid.</p>
+      <pre class="velin-doc-code">&lt;div class="velin-grid velin-grid--gap-4 velin-grid--areas-app"&gt;
+  &lt;header class="velin-area-head"&gt;…&lt;/header&gt;
+  &lt;aside class="velin-area-side"&gt;…&lt;/aside&gt;
+  &lt;main class="velin-area-main" id="main"&gt;…&lt;/main&gt;
+&lt;/div&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Grid API Reference</h3>
+      <table class="velin-table velin-doc-api">
+        <thead>
+          <tr><th>Class</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>.velin-grid</code></td><td>Grid container with default gap</td></tr>
+          <tr><td><code>.velin-grid--cols-{1-4,6,12}</code></td><td>Set equal column count</td></tr>
+          <tr><td><code>.velin-grid--auto-fit</code></td><td>Auto-fit columns (min 16rem)</td></tr>
+          <tr><td><code>.velin-grid--auto-fill</code></td><td>Auto-fill columns (min 16rem)</td></tr>
+          <tr><td><code>.velin-col-{1-12}</code></td><td>Span N columns</td></tr>
+          <tr><td><code>.velin-col-full</code></td><td>Span all columns</td></tr>
+          <tr><td><code>.velin-grid--gap-{0,2,4,6,8}</code></td><td>Gap size modifier</td></tr>
+          <tr><td><code>.velin-grid--items-{start,center,end,stretch}</code></td><td>Cross-axis alignment</td></tr>
+          <tr><td><code>.velin-grid--flow-dense</code></td><td>Dense auto-placement</td></tr>
+          <tr><td><code>.velin-grid--areas-app</code> + <code>.velin-area-*</code></td><td>Named template for header / sidebar / main</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 3. Flex Utilities -->
+    <section id="flex" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Flex Utilities</h2>
+      <p class="velin-doc-lead">Compose one-dimensional layouts with <code class="velin-doc-inline-code">.velin-flex</code> and its modifiers for direction, alignment, wrapping, and gap.</p>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-3);">Row (default)</h3>
+      <div class="velin-flex" style="margin-block-end:var(--velin-space-4);">
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">Item A</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">Item B</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">Item C</div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-flex"&gt;
+  &lt;div&gt;Item A&lt;/div&gt;
+  &lt;div&gt;Item B&lt;/div&gt;
+  &lt;div&gt;Item C&lt;/div&gt;
+&lt;/div&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Column</h3>
+      <div class="velin-flex velin-flex--col" style="margin-block-end:var(--velin-space-4);max-inline-size:20rem;">
+        <div style="background:var(--velin-color-secondary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">Row 1</div>
+        <div style="background:var(--velin-color-secondary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">Row 2</div>
+        <div style="background:var(--velin-color-secondary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">Row 3</div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-flex velin-flex--col"&gt;
+  &lt;div&gt;Row 1&lt;/div&gt;
+  &lt;div&gt;Row 2&lt;/div&gt;
+  &lt;div&gt;Row 3&lt;/div&gt;
+&lt;/div&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Justify Content</h3>
+      <p style="margin-block-end:var(--velin-space-2);"><code class="velin-doc-inline-code">.velin-flex--justify-between</code></p>
+      <div class="velin-flex velin-flex--justify-between" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);margin-block-end:var(--velin-space-3);">
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">Start</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">Middle</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">End</div>
+      </div>
+      <p style="margin-block-end:var(--velin-space-2);"><code class="velin-doc-inline-code">.velin-flex--justify-center</code></p>
+      <div class="velin-flex velin-flex--justify-center" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);margin-block-end:var(--velin-space-3);">
+        <div style="background:var(--velin-color-info-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">Centered</div>
+        <div style="background:var(--velin-color-info-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">Items</div>
+      </div>
+      <p style="margin-block-end:var(--velin-space-2);"><code class="velin-doc-inline-code">.velin-flex--justify-evenly</code></p>
+      <div class="velin-flex velin-flex--justify-evenly" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);margin-block-end:var(--velin-space-4);">
+        <div style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">A</div>
+        <div style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">B</div>
+        <div style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">C</div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-flex velin-flex--justify-between"&gt;...&lt;/div&gt;
+&lt;div class="velin-flex velin-flex--justify-center"&gt;...&lt;/div&gt;
+&lt;div class="velin-flex velin-flex--justify-evenly"&gt;...&lt;/div&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Align Items</h3>
+      <div class="velin-flex velin-flex--items-center" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);margin-block-end:var(--velin-space-4);min-block-size:6rem;">
+        <div style="background:var(--velin-color-success-subtle);padding:var(--velin-space-2);border-radius:var(--velin-radius-md);">Short</div>
+        <div style="background:var(--velin-color-success-subtle);padding:var(--velin-space-6) var(--velin-space-3);border-radius:var(--velin-radius-md);">Tall item</div>
+        <div style="background:var(--velin-color-success-subtle);padding:var(--velin-space-2);border-radius:var(--velin-radius-md);">Short</div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-flex velin-flex--items-center"&gt;
+  &lt;div&gt;Short&lt;/div&gt;
+  &lt;div style="padding-block:1.5rem"&gt;Tall item&lt;/div&gt;
+  &lt;div&gt;Short&lt;/div&gt;
+&lt;/div&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Wrap &amp; Gap</h3>
+      <div class="velin-flex velin-flex--wrap velin-flex--gap-3" style="margin-block-end:var(--velin-space-4);">
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3) var(--velin-space-6);border-radius:var(--velin-radius-md);">Tag 1</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3) var(--velin-space-6);border-radius:var(--velin-radius-md);">Tag 2</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3) var(--velin-space-6);border-radius:var(--velin-radius-md);">Tag 3</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3) var(--velin-space-6);border-radius:var(--velin-radius-md);">Tag 4</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3) var(--velin-space-6);border-radius:var(--velin-radius-md);">Tag 5</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3) var(--velin-space-6);border-radius:var(--velin-radius-md);">Tag 6</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3) var(--velin-space-6);border-radius:var(--velin-radius-md);">Tag 7</div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-flex velin-flex--wrap velin-flex--gap-3"&gt;
+  &lt;div&gt;Tag 1&lt;/div&gt;
+  &lt;div&gt;Tag 2&lt;/div&gt;
+  &lt;!-- ... --&gt;
+&lt;/div&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Child Utilities</h3>
+      <div class="velin-flex" style="margin-block-end:var(--velin-space-4);">
+        <div style="background:var(--velin-color-info-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);flex-shrink:0;">Fixed</div>
+        <div class="velin-flex__grow" style="background:var(--velin-color-success-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">.velin-flex__grow &mdash; fills remaining space</div>
+        <div style="background:var(--velin-color-info-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);flex-shrink:0;">Fixed</div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-flex"&gt;
+  &lt;div&gt;Fixed&lt;/div&gt;
+  &lt;div class="velin-flex__grow"&gt;Fills remaining space&lt;/div&gt;
+  &lt;div&gt;Fixed&lt;/div&gt;
+&lt;/div&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Stack &amp; Cluster</h3>
+      <div class="velin-grid velin-grid--cols-2" style="margin-block-end:var(--velin-space-4);">
+        <div>
+          <p style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-2);font-size:var(--velin-text-sm);">.velin-stack</p>
+          <div class="velin-stack" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">
+            <div style="background:var(--velin-color-secondary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">Stacked 1</div>
+            <div style="background:var(--velin-color-secondary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">Stacked 2</div>
+            <div style="background:var(--velin-color-secondary-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">Stacked 3</div>
+          </div>
+        </div>
+        <div>
+          <p style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-2);font-size:var(--velin-text-sm);">.velin-cluster</p>
+          <div class="velin-cluster" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);">
+            <div style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-2) var(--velin-space-4);border-radius:var(--velin-radius-md);">Chip</div>
+            <div style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-2) var(--velin-space-4);border-radius:var(--velin-radius-md);">Chip</div>
+            <div style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-2) var(--velin-space-4);border-radius:var(--velin-radius-md);">Chip</div>
+            <div style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-2) var(--velin-space-4);border-radius:var(--velin-radius-md);">Chip</div>
+            <div style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-2) var(--velin-space-4);border-radius:var(--velin-radius-md);">Chip</div>
+          </div>
+        </div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-stack"&gt;...&lt;/div&gt;   &lt;!-- vertical flex, gap-4 --&gt;
+&lt;div class="velin-cluster"&gt;...&lt;/div&gt; &lt;!-- horizontal wrap, gap-4, items-center --&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Flex API Reference</h3>
+      <table class="velin-table velin-doc-api">
+        <thead>
+          <tr><th>Class</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>.velin-flex</code></td><td>Flex container (row, gap-4)</td></tr>
+          <tr><td><code>.velin-flex--inline</code></td><td>Inline flex</td></tr>
+          <tr><td><code>.velin-flex--col</code></td><td>Column direction</td></tr>
+          <tr><td><code>.velin-flex--row-reverse</code></td><td>Reversed row</td></tr>
+          <tr><td><code>.velin-flex--col-reverse</code></td><td>Reversed column</td></tr>
+          <tr><td><code>.velin-flex--wrap</code></td><td>Enable wrapping</td></tr>
+          <tr><td><code>.velin-flex--justify-{start,center,end,between,around,evenly}</code></td><td>Main axis alignment</td></tr>
+          <tr><td><code>.velin-flex--items-{start,center,end,baseline,stretch}</code></td><td>Cross axis alignment</td></tr>
+          <tr><td><code>.velin-flex--gap-{0-8}</code></td><td>Gap size modifier</td></tr>
+          <tr><td><code>.velin-flex__grow</code></td><td>Child: flex-grow: 1</td></tr>
+          <tr><td><code>.velin-flex__shrink</code></td><td>Child: flex-shrink: 1</td></tr>
+          <tr><td><code>.velin-flex__noshrink</code></td><td>Child: flex-shrink: 0</td></tr>
+          <tr><td><code>.velin-flex__auto</code></td><td>Child: flex 1 1 auto</td></tr>
+          <tr><td><code>.velin-flex__none</code></td><td>Child: flex none</td></tr>
+          <tr><td><code>.velin-stack</code></td><td>Vertical flex stack</td></tr>
+          <tr><td><code>.velin-cluster</code></td><td>Horizontal wrapping cluster</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 4. Container Queries -->
+    <section id="container-queries" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Container Queries</h2>
+      <p class="velin-doc-lead">VelinStyle uses container queries (not just media queries) so grid layouts adapt to their <em>container</em> width, not the viewport. The <code class="velin-doc-inline-code">.velin-container</code> class sets <code class="velin-doc-inline-code">container-type: inline-size</code> and <code class="velin-doc-inline-code">container-name: velin</code> automatically.</p>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-3);">Responsive Grid via Container</h3>
+      <p>These grids start at 1 column and increase column count based on the container width — resize your browser to see the effect.</p>
+      <div class="velin-grid velin-grid--cols-1 velin-grid--sm-cols-2 velin-grid--md-cols-3 velin-grid--lg-cols-4" style="margin-block-end:var(--velin-space-4);">
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-4);border-radius:var(--velin-radius-md);text-align:center;">Card 1</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-4);border-radius:var(--velin-radius-md);text-align:center;">Card 2</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-4);border-radius:var(--velin-radius-md);text-align:center;">Card 3</div>
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-4);border-radius:var(--velin-radius-md);text-align:center;">Card 4</div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-container"&gt;
+  &lt;!-- container-name: velin is set automatically --&gt;
+  &lt;div class="velin-grid velin-grid--cols-1 velin-grid--sm-cols-2 velin-grid--md-cols-3 velin-grid--lg-cols-4"&gt;
+    &lt;div&gt;Card 1&lt;/div&gt;
+    &lt;div&gt;Card 2&lt;/div&gt;
+    &lt;div&gt;Card 3&lt;/div&gt;
+    &lt;div&gt;Card 4&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Container Query Breakpoints</h3>
+      <table class="velin-table velin-doc-api">
+        <thead>
+          <tr><th>Container Query</th><th>Min Width</th><th>Available Grid Classes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>@container velin (min-width: 36rem)</code></td><td>576px</td><td><code>--sm-cols-{2,3,4}</code></td></tr>
+          <tr><td><code>@container velin (min-width: 48rem)</code></td><td>768px</td><td><code>--md-cols-{2,3,4,6}</code></td></tr>
+          <tr><td><code>@container velin (min-width: 62rem)</code></td><td>992px</td><td><code>--lg-cols-{3,4,6,12}</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Nested Container Demo</h3>
+      <p>Place content inside a narrower container to see how container queries respond independently from the viewport.</p>
+      <div style="max-inline-size:32rem;margin-inline:auto;border:2px dashed var(--velin-color-border);padding:var(--velin-space-4);border-radius:var(--velin-radius-lg);container-type:inline-size;container-name:velin;">
+        <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);margin-block-end:var(--velin-space-3);">This container is max 32rem wide</p>
+        <div class="velin-grid velin-grid--cols-1 velin-grid--sm-cols-2">
+          <div style="background:var(--velin-color-success-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">A</div>
+          <div style="background:var(--velin-color-success-subtle);padding:var(--velin-space-3);border-radius:var(--velin-radius-md);text-align:center;">B</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Layout Patterns -->
+    <section id="patterns" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle velin-doc-new">Layout Patterns</h2>
+      <p class="velin-doc-lead">Ready-made page-level layouts for common application shells. Apply a single class to your wrapper element and drop in your content.</p>
+
+      <!-- Sidebar -->
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">.velin-layout-sidebar</h3>
+      <p>Sidebar + main content. Collapses to a single column below 48rem.</p>
+      <div class="velin-layout-sidebar" style="min-block-size:auto;border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);overflow:hidden;margin-block-end:var(--velin-space-4);">
+        <aside style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-4);">
+          <p style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-2);">Sidebar</p>
+          <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);">Navigation, filters, etc.</p>
+        </aside>
+        <main style="background:var(--velin-color-surface-bright);padding:var(--velin-space-4);">
+          <p style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-2);">Main Content</p>
+          <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);">Your primary content area fills the remaining space.</p>
+        </main>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-layout-sidebar"&gt;
+  &lt;aside&gt;Sidebar&lt;/aside&gt;
+  &lt;main&gt;Main Content&lt;/main&gt;
+&lt;/div&gt;</pre>
+
+      <!-- Holy Grail -->
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">.velin-layout-holy-grail</h3>
+      <p>Classic layout with full-width header/footer and a sidebar beside the main content.</p>
+      <div class="velin-layout-holy-grail" style="min-block-size:20rem;border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);overflow:hidden;margin-block-end:var(--velin-space-4);">
+        <header style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3);text-align:center;font-weight:var(--velin-weight-semibold);">Header (full width)</header>
+        <aside style="background:var(--velin-color-info-subtle);padding:var(--velin-space-4);">
+          <p style="font-weight:var(--velin-weight-semibold);">Sidebar</p>
+        </aside>
+        <main style="background:var(--velin-color-surface-bright);padding:var(--velin-space-4);">
+          <p style="font-weight:var(--velin-weight-semibold);">Content</p>
+          <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);">Main area grows to fill available space.</p>
+        </main>
+        <footer style="background:var(--velin-color-secondary-subtle);padding:var(--velin-space-3);text-align:center;font-weight:var(--velin-weight-semibold);">Footer (full width)</footer>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-layout-holy-grail"&gt;
+  &lt;header&gt;Header&lt;/header&gt;
+  &lt;aside&gt;Sidebar&lt;/aside&gt;
+  &lt;main&gt;Content&lt;/main&gt;
+  &lt;footer&gt;Footer&lt;/footer&gt;
+&lt;/div&gt;</pre>
+
+      <!-- Sticky Footer -->
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">.velin-layout-sticky-footer</h3>
+      <p>Footer always sits at the bottom, even with minimal content. The <code class="velin-doc-inline-code">&lt;main&gt;</code> grows to fill available space.</p>
+      <div class="velin-layout-sticky-footer" style="min-block-size:16rem;border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);overflow:hidden;margin-block-end:var(--velin-space-4);">
+        <header style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-3);text-align:center;font-weight:var(--velin-weight-semibold);">Header</header>
+        <main style="background:var(--velin-color-surface-bright);padding:var(--velin-space-4);">
+          <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);">Minimal content &mdash; footer still sticks to the bottom.</p>
+        </main>
+        <footer style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-3);text-align:center;font-weight:var(--velin-weight-semibold);">Sticky Footer</footer>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-layout-sticky-footer"&gt;
+  &lt;header&gt;Header&lt;/header&gt;
+  &lt;main&gt;Content (grows)&lt;/main&gt;
+  &lt;footer&gt;Sticky Footer&lt;/footer&gt;
+&lt;/div&gt;</pre>
+
+      <!-- Center -->
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">.velin-layout-center</h3>
+      <p>Perfectly centers content both horizontally and vertically using <code class="velin-doc-inline-code">place-items: center</code>.</p>
+      <div class="velin-layout-center" style="min-block-size:14rem;border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);overflow:hidden;margin-block-end:var(--velin-space-4);">
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-6) var(--velin-space-8);border-radius:var(--velin-radius-md);text-align:center;">
+          <p style="font-weight:var(--velin-weight-semibold);">Centered Content</p>
+          <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);">Great for login pages, empty states, or loading screens.</p>
+        </div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-layout-center"&gt;
+  &lt;div&gt;Centered content&lt;/div&gt;
+&lt;/div&gt;</pre>
+
+      <!-- Pancake -->
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">.velin-layout-pancake</h3>
+      <p>Three-row stack where the middle row expands to fill all remaining space. Header and footer get <code class="velin-doc-inline-code">auto</code> height.</p>
+      <div class="velin-layout-pancake" style="min-block-size:16rem;border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);overflow:hidden;margin-block-end:var(--velin-space-4);">
+        <div style="background:var(--velin-color-success-subtle);padding:var(--velin-space-3);text-align:center;font-weight:var(--velin-weight-semibold);">Top (auto)</div>
+        <div style="background:var(--velin-color-surface-bright);padding:var(--velin-space-4);display:grid;place-items:center;">
+          <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);">Middle row &mdash; expands to fill (1fr)</p>
+        </div>
+        <div style="background:var(--velin-color-success-subtle);padding:var(--velin-space-3);text-align:center;font-weight:var(--velin-weight-semibold);">Bottom (auto)</div>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-layout-pancake"&gt;
+  &lt;header&gt;Top&lt;/header&gt;
+  &lt;main&gt;Middle (expands)&lt;/main&gt;
+  &lt;footer&gt;Bottom&lt;/footer&gt;
+&lt;/div&gt;</pre>
+
+      <!-- Aside Main -->
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">.velin-layout-aside-main</h3>
+      <p>Main content with a right sidebar (20rem). Collapses to single column below 56rem.</p>
+      <div class="velin-layout-aside-main" style="border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);overflow:hidden;margin-block-end:var(--velin-space-4);padding:0;">
+        <div style="background:var(--velin-color-surface-bright);padding:var(--velin-space-4);">
+          <p style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-2);">Main Content</p>
+          <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);">Primary content takes 1fr of available space. Great for article layouts with a table of contents or related links on the side.</p>
+        </div>
+        <aside style="background:var(--velin-color-secondary-subtle);padding:var(--velin-space-4);">
+          <p style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-2);">Right Sidebar</p>
+          <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);">Fixed 20rem width.</p>
+        </aside>
+      </div>
+      <pre class="velin-doc-code">&lt;div class="velin-layout-aside-main"&gt;
+  &lt;main&gt;Main Content&lt;/main&gt;
+  &lt;aside&gt;Right Sidebar&lt;/aside&gt;
+&lt;/div&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">.velin-layout-split</h3>
+      <p>Two equal columns with gap; stacks to one column below 48rem.</p>
+      <div class="velin-layout-split" style="min-block-size:8rem;border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);padding:var(--velin-space-4);margin-block-end:var(--velin-space-4);">
+        <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-4);border-radius:var(--velin-radius-md);">Column A</div>
+        <div style="background:var(--velin-color-secondary-subtle);padding:var(--velin-space-4);border-radius:var(--velin-radius-md);">Column B</div>
+      </div>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">.velin-layout-dashboard</h3>
+      <p>Expected direct children: <strong>header</strong>, <strong>aside</strong>, <strong>main</strong> (in that order).</p>
+      <div class="velin-layout-dashboard" style="min-block-size:14rem;border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);overflow:hidden;">
+        <header style="padding:var(--velin-space-2);background:var(--velin-color-surface-bright);border-block-end:1px solid var(--velin-color-border);font-weight:var(--velin-weight-semibold);">Header</header>
+        <aside style="padding:var(--velin-space-3);background:var(--velin-color-surface-dim);">Nav</aside>
+        <main style="padding:var(--velin-space-3);background:var(--velin-color-surface-bright);">Main</main>
+      </div>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">.velin-layout-auth</h3>
+      <p>Full-viewport centered shell. Place a card in <code class="velin-doc-inline-code">.velin-layout-auth__panel</code>.</p>
+      <div class="velin-layout-auth" style="min-block-size:12rem;border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);margin-block-end:var(--velin-space-4);">
+        <div class="velin-layout-auth__panel">
+          <p style="font-weight:var(--velin-weight-semibold);margin:0;">Auth panel</p>
+          <p class="velin-text-sm velin-text-muted" style="margin-block-start:var(--velin-space-2);">Login / register forms</p>
+        </div>
+      </div>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Layout Patterns API</h3>
+      <table class="velin-table velin-doc-api">
+        <thead>
+          <tr><th>Class</th><th>Layout</th><th>Collapse</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>.velin-layout-sidebar</code></td><td>Sidebar (12-16rem) + Main</td><td>&le; 48rem</td></tr>
+          <tr><td><code>.velin-layout-holy-grail</code></td><td>Header, Sidebar + Main, Footer</td><td>&le; 48rem</td></tr>
+          <tr><td><code>.velin-layout-sticky-footer</code></td><td>Flex column, main grows</td><td>N/A</td></tr>
+          <tr><td><code>.velin-layout-center</code></td><td>Grid place-items: center</td><td>N/A</td></tr>
+          <tr><td><code>.velin-layout-pancake</code></td><td>auto / 1fr / auto rows</td><td>N/A</td></tr>
+          <tr><td><code>.velin-layout-aside-main</code></td><td>Main + Right sidebar (20rem)</td><td>&le; 56rem</td></tr>
+          <tr><td><code>.velin-layout-split</code></td><td>Two equal columns</td><td>&le; 48rem</td></tr>
+          <tr><td><code>.velin-layout-dashboard</code></td><td>Header + sidebar + main (3 children)</td><td>&le; 48rem</td></tr>
+          <tr><td><code>.velin-layout-auth</code></td><td>Centered auth shell + <code>.velin-layout-auth__panel</code></td><td>N/A</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 6. Breakpoints -->
+    <section id="breakpoints" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Breakpoints</h2>
+      <p class="velin-doc-lead">VelinStyle defines five breakpoint tokens as CSS custom properties. The framework uses a mobile-first <code class="velin-doc-inline-code">min-width</code> media query strategy.</p>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-3);">Breakpoint Tokens</h3>
+      <table class="velin-table velin-doc-api">
+        <thead>
+          <tr><th>Token</th><th>Value</th><th>Pixels</th><th>Typical Use</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>--velin-bp-sm</code></td><td><code>36rem</code></td><td>576px</td><td>Large phones / landscape</td></tr>
+          <tr><td><code>--velin-bp-md</code></td><td><code>48rem</code></td><td>768px</td><td>Tablets</td></tr>
+          <tr><td><code>--velin-bp-lg</code></td><td><code>62rem</code></td><td>992px</td><td>Small desktops / laptops</td></tr>
+          <tr><td><code>--velin-bp-xl</code></td><td><code>80rem</code></td><td>1280px</td><td>Desktops</td></tr>
+          <tr><td><code>--velin-bp-2xl</code></td><td><code>96rem</code></td><td>1536px</td><td>Large desktops</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Visual Reference</h3>
+      <div style="display:flex;flex-direction:column;gap:var(--velin-space-3);margin-block-end:var(--velin-space-4);">
+        <div style="display:flex;align-items:center;gap:var(--velin-space-3);">
+          <span style="display:inline-block;inline-size:4rem;text-align:end;font-size:var(--velin-text-sm);font-weight:var(--velin-weight-semibold);flex-shrink:0;">sm</span>
+          <div style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-2);border-radius:var(--velin-radius-sm);inline-size:20%;min-inline-size:4rem;text-align:center;font-size:var(--velin-text-sm);">576px</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:var(--velin-space-3);">
+          <span style="display:inline-block;inline-size:4rem;text-align:end;font-size:var(--velin-text-sm);font-weight:var(--velin-weight-semibold);flex-shrink:0;">md</span>
+          <div style="background:var(--velin-color-info-subtle);padding:var(--velin-space-2);border-radius:var(--velin-radius-sm);inline-size:35%;min-inline-size:4rem;text-align:center;font-size:var(--velin-text-sm);">768px</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:var(--velin-space-3);">
+          <span style="display:inline-block;inline-size:4rem;text-align:end;font-size:var(--velin-text-sm);font-weight:var(--velin-weight-semibold);flex-shrink:0;">lg</span>
+          <div style="background:var(--velin-color-success-subtle);padding:var(--velin-space-2);border-radius:var(--velin-radius-sm);inline-size:50%;min-inline-size:4rem;text-align:center;font-size:var(--velin-text-sm);">992px</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:var(--velin-space-3);">
+          <span style="display:inline-block;inline-size:4rem;text-align:end;font-size:var(--velin-text-sm);font-weight:var(--velin-weight-semibold);flex-shrink:0;">xl</span>
+          <div style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-2);border-radius:var(--velin-radius-sm);inline-size:70%;min-inline-size:4rem;text-align:center;font-size:var(--velin-text-sm);">1280px</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:var(--velin-space-3);">
+          <span style="display:inline-block;inline-size:4rem;text-align:end;font-size:var(--velin-text-sm);font-weight:var(--velin-weight-semibold);flex-shrink:0;">2xl</span>
+          <div style="background:var(--velin-color-danger-subtle);padding:var(--velin-space-2);border-radius:var(--velin-radius-sm);inline-size:90%;min-inline-size:4rem;text-align:center;font-size:var(--velin-text-sm);">1536px</div>
+        </div>
+      </div>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Media Query Strategy</h3>
+      <p>VelinStyle is mobile-first. Base styles target the smallest screens, then progressive enhancements are added at each breakpoint using <code class="velin-doc-inline-code">min-width</code>:</p>
+      <pre class="velin-doc-code">/* Base: mobile-first (all widths) */
+.my-component { flex-direction: column; }
+
+/* sm: 36rem / 576px and up */
+@media (min-width: 36rem) {
+  .my-component { flex-direction: row; }
+}
+
+/* md: 48rem / 768px and up */
+@media (min-width: 48rem) {
+  .my-component { gap: var(--velin-space-6); }
+}
+
+/* lg: 62rem / 992px and up */
+@media (min-width: 62rem) {
+  .my-component { max-inline-size: 60rem; }
+}</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Container Queries vs Media Queries</h3>
+      <div class="velin-alert velin-alert--info" role="note" style="margin-block-end:var(--velin-space-4);">
+        <div class="velin-alert__content">
+          <p class="velin-alert__title">When to use which?</p>
+          <p>Use <strong>media queries</strong> for page-level layout decisions (sidebar collapse, navigation changes). Use <strong>container queries</strong> for component-level responsiveness (card grid columns, component density). VelinStyle's responsive grid classes (<code class="velin-doc-inline-code">--sm-cols-*</code>, <code class="velin-doc-inline-code">--md-cols-*</code>, <code class="velin-doc-inline-code">--lg-cols-*</code>) use container queries so components work correctly regardless of where they are placed.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="velin-doc-footer">
+    <div class="velin-doc-footer__inner">
+      <p>VelinStyle v0.6.1</p>
+      <div style="display:flex;gap:var(--velin-space-3);">
+        <a href="https://github.com/SkyliteDesign/velinstyle">GitHub</a>
+        <a href="https://github.com/SkyliteDesign/velinstyle/blob/main/LICENSE">MIT License</a>
+      </div>
+    </div>
+  </footer>
+<!-- Theme Picker Widget -->
+<div style="position:fixed;bottom:1rem;right:1rem;z-index:1050;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;" id="themePicker">
+  <div id="themePanel" style="display:none;background:var(--velin-color-surface-bright,#fff);border:1px solid var(--velin-color-border,#dee2e6);border-radius:.75rem;padding:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:20rem;">
+    <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
+  </div>
+  <button onclick="document.getElementById('themePanel').style.display=document.getElementById('themePanel').style.display==='none'?'block':'none'" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+</div>
+<script>
+(function(){
+  var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
+  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='../dist/themes/'+t+'.min.css';document.head.appendChild(l);});
+  var names=['Default'].concat(themes).concat(['dark']);
+  var vals=[''].concat(themes).concat(['dark']);
+  var grid=document.getElementById('themeGrid');
+  names.forEach(function(n,i){
+    var b=document.createElement('button');
+    b.textContent=n.charAt(0).toUpperCase()+n.slice(1);
+    b.style.cssText='padding:.3rem .65rem;border:1px solid var(--velin-color-border,#dee2e6);border-radius:1rem;background:var(--velin-color-surface-dim,#f5f6f8);color:var(--velin-color-text,#212529);font-size:.75rem;cursor:pointer;white-space:nowrap;';
+    b.addEventListener('click',function(){
+      if(vals[i]){document.documentElement.setAttribute('data-velin-theme',vals[i]);}
+      else{document.documentElement.removeAttribute('data-velin-theme');}
+      grid.querySelectorAll('button').forEach(function(x){x.style.background='var(--velin-color-surface-dim,#f5f6f8)';x.style.color='var(--velin-color-text,#212529)';});
+      b.style.background='var(--velin-color-primary,#2563eb)';b.style.color='#fff';
+    });
+    grid.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

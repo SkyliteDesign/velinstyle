@@ -1,0 +1,58 @@
+@layer utilities {
+  /* CSS @scope -- Component Style Isolation */
+
+  @scope (.velin-card) to (.velin-card .velin-card) {
+    :scope {
+      container-type: inline-size;
+    }
+
+    a { color: var(--velin-color-primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    img {
+      max-inline-size: 100%;
+      block-size: auto;
+      border-radius: var(--velin-radius-md) var(--velin-radius-md) 0 0;
+    }
+  }
+
+  @scope (.velin-modal) to (.velin-modal .velin-modal) {
+    :scope {
+      container-type: inline-size;
+    }
+
+    h2, h3 {
+      font-family: var(--velin-font-heading);
+      color: var(--velin-color-text);
+    }
+  }
+
+  @scope (.velin-drawer) to (.velin-drawer .velin-drawer) {
+    :scope {
+      container-type: inline-size;
+    }
+  }
+
+  @scope (.velin-nav) to (.velin-nav .velin-nav) {
+    :scope {
+      container-type: inline-size;
+    }
+  }
+
+  /* Scoped utility: apply scoping boundary to any container */
+  .velin-scope {
+    container-type: inline-size;
+  }
+
+  @scope (.velin-scope) {
+    :scope > * {
+      contain: layout style;
+    }
+  }
+
+  /* Scoped island: fully isolated section */
+  .velin-scope-island {
+    contain: layout style paint;
+    container-type: inline-size;
+  }
+}

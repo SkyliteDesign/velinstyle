@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Tokens - VelinStyle</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <style>
+    .token-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: var(--velin-space-4); }
+    .color-swatch {
+      border-radius: var(--velin-radius-md);
+      overflow: hidden;
+      border: 1px solid var(--velin-color-border);
+    }
+    .color-swatch__preview {
+      block-size: 5rem;
+    }
+    .color-swatch__label {
+      padding: var(--velin-space-2);
+      font-size: var(--velin-text-sm);
+      font-family: var(--velin-font-mono);
+    }
+    .spacing-demo {
+      display: flex;
+      align-items: flex-end;
+      gap: var(--velin-space-3);
+      flex-wrap: wrap;
+    }
+    .spacing-block {
+      background: var(--velin-color-primary);
+      border-radius: var(--velin-radius-xs);
+    }
+    .spacing-label {
+      font-size: var(--velin-text-xs);
+      font-family: var(--velin-font-mono);
+      color: var(--velin-color-text-muted);
+      text-align: center;
+      margin-block-start: var(--velin-space-1);
+    }
+    .type-scale > * {
+      margin-block-end: var(--velin-space-2);
+      color: var(--velin-color-text);
+    }
+    .radius-demo {
+      display: flex;
+      gap: var(--velin-space-4);
+      flex-wrap: wrap;
+    }
+    .radius-sample {
+      inline-size: 4rem;
+      block-size: 4rem;
+      background: var(--velin-color-primary-subtle);
+      border: 2px solid var(--velin-color-primary);
+    }
+    .shadow-demo {
+      display: flex;
+      gap: var(--velin-space-6);
+      flex-wrap: wrap;
+    }
+    .shadow-sample {
+      inline-size: 6rem;
+      block-size: 6rem;
+      background: var(--velin-color-surface-bright);
+      border-radius: var(--velin-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--velin-text-xs);
+      font-family: var(--velin-font-mono);
+    }
+    .section { padding: var(--velin-space-12) 0; }
+    .section + .section { border-block-start: 1px solid var(--velin-color-border); }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="index.html" class="velin-nav__brand">VelinStyle</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="guides/index.html" class="velin-nav__link">Integration</a></li>
+      <li><a href="layout.html" class="velin-nav__link">Layout</a></li>
+      <li><a href="components.html" class="velin-nav__link">Components</a></li>
+      <li><a href="css-components.html" class="velin-nav__link">CSS Components</a></li>
+      <li><a href="forms.html" class="velin-nav__link">Forms</a></li>
+      <li><a href="utilities.html" class="velin-nav__link">Utilities</a></li>
+      <li><a href="tokens.html" class="velin-nav__link" aria-current="page">Tokens</a></li>
+      <li><a href="themes.html" class="velin-nav__link">Themes</a></li>
+      <li><a href="icons.html" class="velin-nav__link">Icons</a></li>
+      <li><a href="a11y.html" class="velin-nav__link">A11y</a></li>
+      <li><a href="security.html" class="velin-nav__link">Security</a></li>
+      <li><a href="migration.html" class="velin-nav__link">Migration</a></li>
+    </ul>
+  </nav>
+<div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+  <strong>Full documentation available at <a href="https://velinstyle.info/docs/getting-started/introduction.html">velinstyle.info</a></strong> — This is the quick reference. Visit the full docs for 80+ pages with live examples, API tables, and guides.
+</div>
+
+  <main id="main" class="velin-container">
+    <h1 class="velin-text-4xl velin-font-bold" style="margin-block: var(--velin-space-8)">Design Tokens</h1>
+
+    <section class="section">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-6">Colors (OKLCH)</h2>
+      <div class="token-grid">
+        <div class="color-swatch">
+          <div class="color-swatch__preview" style="background: var(--velin-color-primary)"></div>
+          <div class="color-swatch__label">--velin-color-primary</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch__preview" style="background: var(--velin-color-secondary)"></div>
+          <div class="color-swatch__label">--velin-color-secondary</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch__preview" style="background: var(--velin-color-success)"></div>
+          <div class="color-swatch__label">--velin-color-success</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch__preview" style="background: var(--velin-color-warning)"></div>
+          <div class="color-swatch__label">--velin-color-warning</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch__preview" style="background: var(--velin-color-danger)"></div>
+          <div class="color-swatch__label">--velin-color-danger</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch__preview" style="background: var(--velin-color-info)"></div>
+          <div class="color-swatch__label">--velin-color-info</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch__preview" style="background: var(--velin-color-surface)"></div>
+          <div class="color-swatch__label">--velin-color-surface</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch__preview" style="background: var(--velin-color-surface-dim)"></div>
+          <div class="color-swatch__label">--velin-color-surface-dim</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch__preview" style="background: var(--velin-color-text); color: var(--velin-color-surface)"></div>
+          <div class="color-swatch__label">--velin-color-text</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch__preview" style="background: var(--velin-color-border)"></div>
+          <div class="color-swatch__label">--velin-color-border</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-6">Typography Scale (1.25x Major Third)</h2>
+      <div class="type-scale">
+        <p style="font-size: var(--velin-text-5xl)">text-5xl (3.815rem)</p>
+        <p style="font-size: var(--velin-text-4xl)">text-4xl (3.052rem)</p>
+        <p style="font-size: var(--velin-text-3xl)">text-3xl (2.441rem)</p>
+        <p style="font-size: var(--velin-text-2xl)">text-2xl (1.953rem)</p>
+        <p style="font-size: var(--velin-text-xl)">text-xl (1.563rem)</p>
+        <p style="font-size: var(--velin-text-lg)">text-lg (1.25rem)</p>
+        <p style="font-size: var(--velin-text-base)">text-base (1rem)</p>
+        <p style="font-size: var(--velin-text-sm)">text-sm (0.8rem)</p>
+        <p style="font-size: var(--velin-text-xs)">text-xs (0.64rem)</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-6">Spacing</h2>
+      <div class="spacing-demo">
+        <div><div class="spacing-block" style="width:0.25rem; height:2rem"></div><div class="spacing-label">1</div></div>
+        <div><div class="spacing-block" style="width:0.5rem; height:2rem"></div><div class="spacing-label">2</div></div>
+        <div><div class="spacing-block" style="width:0.75rem; height:2rem"></div><div class="spacing-label">3</div></div>
+        <div><div class="spacing-block" style="width:1rem; height:2rem"></div><div class="spacing-label">4</div></div>
+        <div><div class="spacing-block" style="width:1.25rem; height:2rem"></div><div class="spacing-label">5</div></div>
+        <div><div class="spacing-block" style="width:1.5rem; height:2rem"></div><div class="spacing-label">6</div></div>
+        <div><div class="spacing-block" style="width:2rem; height:2rem"></div><div class="spacing-label">8</div></div>
+        <div><div class="spacing-block" style="width:2.5rem; height:2rem"></div><div class="spacing-label">10</div></div>
+        <div><div class="spacing-block" style="width:3rem; height:2rem"></div><div class="spacing-label">12</div></div>
+        <div><div class="spacing-block" style="width:4rem; height:2rem"></div><div class="spacing-label">16</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-6">Border Radius</h2>
+      <div class="radius-demo">
+        <div><div class="radius-sample" style="border-radius: var(--velin-radius-none)"></div><div class="spacing-label">none</div></div>
+        <div><div class="radius-sample" style="border-radius: var(--velin-radius-xs)"></div><div class="spacing-label">xs</div></div>
+        <div><div class="radius-sample" style="border-radius: var(--velin-radius-sm)"></div><div class="spacing-label">sm</div></div>
+        <div><div class="radius-sample" style="border-radius: var(--velin-radius-md)"></div><div class="spacing-label">md</div></div>
+        <div><div class="radius-sample" style="border-radius: var(--velin-radius-lg)"></div><div class="spacing-label">lg</div></div>
+        <div><div class="radius-sample" style="border-radius: var(--velin-radius-xl)"></div><div class="spacing-label">xl</div></div>
+        <div><div class="radius-sample" style="border-radius: var(--velin-radius-full)"></div><div class="spacing-label">full</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-6">Shadows</h2>
+      <div class="shadow-demo">
+        <div class="shadow-sample" style="box-shadow: var(--velin-shadow-xs)">xs</div>
+        <div class="shadow-sample" style="box-shadow: var(--velin-shadow-sm)">sm</div>
+        <div class="shadow-sample" style="box-shadow: var(--velin-shadow-md)">md</div>
+        <div class="shadow-sample" style="box-shadow: var(--velin-shadow-lg)">lg</div>
+        <div class="shadow-sample" style="box-shadow: var(--velin-shadow-xl)">xl</div>
+        <div class="shadow-sample" style="box-shadow: var(--velin-shadow-2xl)">2xl</div>
+      </div>
+    </section>
+    <!-- Aspect Ratio Tokens -->
+    <h2 class="velin-text-2xl velin-font-bold velin-mbe-6" style="margin-top:var(--velin-space-12)">Aspect Ratio</h2>
+    <table class="velin-table" style="max-width:36rem">
+      <thead><tr><th>Token</th><th>Value</th><th>Preview</th></tr></thead>
+      <tbody>
+        <tr><td><code>--velin-aspect-square</code></td><td>1 / 1</td><td><div style="width:3rem;aspect-ratio:1/1;background:var(--velin-color-primary-subtle);border-radius:var(--velin-radius-sm)"></div></td></tr>
+        <tr><td><code>--velin-aspect-video</code></td><td>16 / 9</td><td><div style="width:4rem;aspect-ratio:16/9;background:var(--velin-color-primary-subtle);border-radius:var(--velin-radius-sm)"></div></td></tr>
+        <tr><td><code>--velin-aspect-photo</code></td><td>4 / 3</td><td><div style="width:4rem;aspect-ratio:4/3;background:var(--velin-color-primary-subtle);border-radius:var(--velin-radius-sm)"></div></td></tr>
+        <tr><td><code>--velin-aspect-portrait</code></td><td>3 / 4</td><td><div style="width:2.25rem;aspect-ratio:3/4;background:var(--velin-color-primary-subtle);border-radius:var(--velin-radius-sm)"></div></td></tr>
+        <tr><td><code>--velin-aspect-wide</code></td><td>21 / 9</td><td><div style="width:5rem;aspect-ratio:21/9;background:var(--velin-color-primary-subtle);border-radius:var(--velin-radius-sm)"></div></td></tr>
+        <tr><td><code>--velin-aspect-golden</code></td><td>1.618 / 1</td><td><div style="width:4rem;aspect-ratio:1.618/1;background:var(--velin-color-primary-subtle);border-radius:var(--velin-radius-sm)"></div></td></tr>
+      </tbody>
+    </table>
+
+    <!-- Z-Index Tokens -->
+    <h2 class="velin-text-2xl velin-font-bold velin-mbe-6" style="margin-top:var(--velin-space-12)">Z-Index Scale</h2>
+    <p class="velin-text-muted velin-mbe-4">Prevents z-index wars by providing a predefined layer hierarchy.</p>
+    <table class="velin-table" style="max-width:30rem">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code>--velin-z-hide</code></td><td>-1</td><td>Hidden elements</td></tr>
+        <tr><td><code>--velin-z-base</code></td><td>0</td><td>Default layer</td></tr>
+        <tr><td><code>--velin-z-raised</code></td><td>1</td><td>Slightly elevated</td></tr>
+        <tr><td><code>--velin-z-dropdown</code></td><td>100</td><td>Dropdown menus</td></tr>
+        <tr><td><code>--velin-z-sticky</code></td><td>200</td><td>Sticky headers</td></tr>
+        <tr><td><code>--velin-z-navbar</code></td><td>300</td><td>Navigation bars</td></tr>
+        <tr><td><code>--velin-z-overlay</code></td><td>400</td><td>Overlay backgrounds</td></tr>
+        <tr><td><code>--velin-z-modal</code></td><td>500</td><td>Modals, drawers</td></tr>
+        <tr><td><code>--velin-z-toast</code></td><td>600</td><td>Toast notifications</td></tr>
+        <tr><td><code>--velin-z-tooltip</code></td><td>700</td><td>Tooltips</td></tr>
+        <tr><td><code>--velin-z-max</code></td><td>9999</td><td>Topmost layer</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Motion Tokens -->
+    <h2 class="velin-text-2xl velin-font-bold velin-mbe-6" style="margin-top:var(--velin-space-12)">Motion / Transitions</h2>
+    <p class="velin-text-muted velin-mbe-4">Duration and easing tokens for consistent animation behavior.</p>
+    <h3 class="velin-text-lg velin-font-bold velin-mbe-2">Durations</h3>
+    <table class="velin-table" style="max-width:30rem">
+      <thead><tr><th>Token</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td><code>--velin-duration-instant</code></td><td>50ms</td></tr>
+        <tr><td><code>--velin-duration-fast</code></td><td>100ms</td></tr>
+        <tr><td><code>--velin-duration-normal</code></td><td>200ms</td></tr>
+        <tr><td><code>--velin-duration-slow</code></td><td>300ms</td></tr>
+        <tr><td><code>--velin-duration-slower</code></td><td>500ms</td></tr>
+      </tbody>
+    </table>
+    <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">Easing Curves</h3>
+    <table class="velin-table" style="max-width:36rem">
+      <thead><tr><th>Token</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td><code>--velin-ease-default</code></td><td>cubic-bezier(0.4, 0, 0.2, 1)</td></tr>
+        <tr><td><code>--velin-ease-in</code></td><td>cubic-bezier(0.4, 0, 1, 1)</td></tr>
+        <tr><td><code>--velin-ease-out</code></td><td>cubic-bezier(0, 0, 0.2, 1)</td></tr>
+        <tr><td><code>--velin-ease-in-out</code></td><td>cubic-bezier(0.4, 0, 0.2, 1)</td></tr>
+        <tr><td><code>--velin-ease-bounce</code></td><td>cubic-bezier(0.34, 1.56, 0.64, 1)</td></tr>
+      </tbody>
+    </table>
+    <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">Transition Presets</h3>
+    <table class="velin-table" style="max-width:36rem">
+      <thead><tr><th>Token</th><th>Properties</th></tr></thead>
+      <tbody>
+        <tr><td><code>--velin-transition-colors</code></td><td>color, background-color, border-color</td></tr>
+        <tr><td><code>--velin-transition-opacity</code></td><td>opacity</td></tr>
+        <tr><td><code>--velin-transition-transform</code></td><td>transform</td></tr>
+        <tr><td><code>--velin-transition-shadow</code></td><td>box-shadow</td></tr>
+        <tr><td><code>--velin-transition-all</code></td><td>all properties</td></tr>
+      </tbody>
+    </table>
+
+  </main>
+
+  <div style="position:fixed;inset-block-end:var(--velin-space-4);inset-inline-end:var(--velin-space-4);z-index:var(--velin-z-toast);display:flex;gap:var(--velin-space-2);">
+    <button class="velin-btn velin-btn--sm velin-btn--ghost" onclick="document.documentElement.removeAttribute('data-velin-theme')" title="Default theme">Default</button>
+    <button class="velin-btn velin-btn--sm velin-btn--ghost" onclick="document.documentElement.setAttribute('data-velin-theme','dark')" title="Dark mode">Dark</button>
+  </div>
+
+  <footer style="padding-block:var(--velin-space-6);border-block-start:1px solid var(--velin-color-border);color:var(--velin-color-text-muted);font-size:var(--velin-text-sm);">
+    <div class="velin-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--velin-space-4);">
+      <p>VelinStyle v0.6.1</p>
+      <div style="display:flex;gap:var(--velin-space-3);">
+        <a href="https://github.com/SkyliteDesign/velinstyle">GitHub</a>
+        <a href="https://github.com/SkyliteDesign/velinstyle/blob/main/LICENSE">MIT License</a>
+      </div>
+    </div>
+  </footer>
+<!-- Theme Picker Widget -->
+<div style="position:fixed;bottom:1rem;right:1rem;z-index:1050;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;" id="themePicker">
+  <div id="themePanel" style="display:none;background:var(--velin-color-surface-bright,#fff);border:1px solid var(--velin-color-border,#dee2e6);border-radius:.75rem;padding:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:20rem;">
+    <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
+  </div>
+  <button onclick="document.getElementById('themePanel').style.display=document.getElementById('themePanel').style.display==='none'?'block':'none'" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+</div>
+<script>
+(function(){
+  var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
+  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='../dist/themes/'+t+'.min.css';document.head.appendChild(l);});
+  var names=['Default'].concat(themes).concat(['dark']);
+  var vals=[''].concat(themes).concat(['dark']);
+  var grid=document.getElementById('themeGrid');
+  names.forEach(function(n,i){
+    var b=document.createElement('button');
+    b.textContent=n.charAt(0).toUpperCase()+n.slice(1);
+    b.style.cssText='padding:.3rem .65rem;border:1px solid var(--velin-color-border,#dee2e6);border-radius:1rem;background:var(--velin-color-surface-dim,#f5f6f8);color:var(--velin-color-text,#212529);font-size:.75rem;cursor:pointer;white-space:nowrap;';
+    b.addEventListener('click',function(){
+      if(vals[i]){document.documentElement.setAttribute('data-velin-theme',vals[i]);}
+      else{document.documentElement.removeAttribute('data-velin-theme');}
+      grid.querySelectorAll('button').forEach(function(x){x.style.background='var(--velin-color-surface-dim,#f5f6f8)';x.style.color='var(--velin-color-text,#212529)';});
+      b.style.background='var(--velin-color-primary,#2563eb)';b.style.color='#fff';
+    });
+    grid.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

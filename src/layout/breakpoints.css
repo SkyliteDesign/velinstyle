@@ -1,0 +1,9 @@
+@layer layout {
+  :root {
+    --velin-bp-sm: 36rem;   /* 576px */
+    --velin-bp-md: 48rem;   /* 768px */
+    --velin-bp-lg: 62rem;   /* 992px */
+    --velin-bp-xl: 80rem;   /* 1280px */
+    --velin-bp-2xl: 96rem;  /* 1536px */
+  }
+}

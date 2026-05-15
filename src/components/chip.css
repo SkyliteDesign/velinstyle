@@ -1,0 +1,92 @@
+@layer components {
+  .velin-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--velin-space-2);
+    padding-block: var(--velin-space-1);
+    padding-inline: var(--velin-space-3);
+    font-size: var(--velin-text-sm);
+    font-weight: var(--velin-weight-medium);
+    color: var(--velin-color-text);
+    background: var(--velin-color-surface-dim);
+    border: 1px solid var(--velin-color-border);
+    border-radius: var(--velin-radius-full);
+    min-block-size: 2rem;
+    transition: var(--velin-transition-colors);
+    user-select: none;
+  }
+
+  .velin-chip:hover {
+    background: var(--velin-color-surface);
+    border-color: var(--velin-color-border-strong);
+  }
+
+  .velin-chip__close {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    border-radius: var(--velin-radius-full);
+    border: none;
+    background: transparent;
+    color: var(--velin-color-text-muted);
+    cursor: pointer;
+    font-size: 0.875rem;
+    line-height: 1;
+    padding: 0;
+    transition: var(--velin-transition-colors);
+  }
+
+  .velin-chip__close::after {
+    content: "";
+    position: absolute;
+    inset: 50% auto auto 50%;
+    translate: -50% -50%;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+  }
+
+  .velin-chip__close:hover {
+    background: var(--velin-color-danger-subtle);
+    color: var(--velin-color-danger);
+  }
+
+  .velin-chip__avatar {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    border-radius: var(--velin-radius-full);
+    object-fit: cover;
+    margin-inline-start: calc(-1 * var(--velin-space-1));
+  }
+
+  /* Color variants */
+  .velin-chip--primary { background: var(--velin-color-primary-subtle); color: var(--velin-color-primary); border-color: transparent; }
+  .velin-chip--secondary { background: var(--velin-color-secondary-subtle); color: var(--velin-color-secondary); border-color: transparent; }
+  .velin-chip--success { background: var(--velin-color-success-subtle); color: var(--velin-color-success); border-color: transparent; }
+  .velin-chip--warning { background: var(--velin-color-warning-subtle); color: var(--velin-color-warning); border-color: transparent; }
+  .velin-chip--danger { background: var(--velin-color-danger-subtle); color: var(--velin-color-danger); border-color: transparent; }
+
+  /* Outline variant */
+  .velin-chip--outline {
+    background: transparent;
+    border-color: currentColor;
+  }
+
+  /* Clickable */
+  .velin-chip--clickable {
+    cursor: pointer;
+  }
+
+  .velin-chip--clickable:active {
+    transform: scale(0.97);
+  }
+
+  /* Chip group */
+  .velin-chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--velin-space-2);
+  }
+}

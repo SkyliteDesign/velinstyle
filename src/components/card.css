@@ -1,0 +1,81 @@
+@layer components {
+  .velin-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--velin-color-surface-bright);
+    border: 1px solid var(--velin-color-border);
+    border-radius: var(--velin-radius-lg);
+    box-shadow: var(--velin-shadow-sm);
+    overflow: hidden;
+    transition: var(--velin-transition-shadow);
+  }
+
+  .velin-card:hover {
+    box-shadow: var(--velin-shadow-md);
+  }
+
+  .velin-card__image {
+    inline-size: 100%;
+    object-fit: cover;
+    aspect-ratio: var(--velin-aspect-video);
+  }
+
+  .velin-card__header {
+    padding: var(--velin-space-4) var(--velin-space-4) 0;
+  }
+
+  .velin-card__body {
+    padding: var(--velin-space-4);
+    flex-grow: 1;
+  }
+
+  .velin-card__title {
+    font-size: var(--velin-text-lg);
+    font-weight: var(--velin-weight-semibold);
+    color: var(--velin-color-text);
+    margin-block-end: var(--velin-space-2);
+  }
+
+  .velin-card__text {
+    color: var(--velin-color-text-muted);
+    font-size: var(--velin-text-base);
+    line-height: var(--velin-leading-relaxed);
+  }
+
+  .velin-card__footer {
+    padding: var(--velin-space-4);
+    border-block-start: 1px solid var(--velin-color-border);
+  }
+
+  /* Clickable card */
+  .velin-card--clickable {
+    cursor: pointer;
+  }
+
+  .velin-card--clickable:hover {
+    box-shadow: var(--velin-shadow-lg);
+  }
+
+  /* Flat variant (no shadow) */
+  .velin-card--flat {
+    box-shadow: none;
+    border: 1px solid var(--velin-color-border);
+  }
+
+  .velin-card--flat:hover {
+    box-shadow: none;
+    border-color: var(--velin-color-border-strong);
+  }
+
+  /* Horizontal layout via container query */
+  @container velin (min-width: 30rem) {
+    .velin-card--horizontal {
+      flex-direction: row;
+    }
+
+    .velin-card--horizontal > .velin-card__image {
+      max-inline-size: 40%;
+      aspect-ratio: auto;
+    }
+  }
+}

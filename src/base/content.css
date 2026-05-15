@@ -1,0 +1,97 @@
+@layer base {
+  /* === Typography helpers === */
+  .velin-h1 { font-size: var(--velin-text-5xl); font-weight: var(--velin-weight-bold); line-height: var(--velin-leading-tight); margin-block-end: var(--velin-space-4); }
+  .velin-h2 { font-size: var(--velin-text-4xl); font-weight: var(--velin-weight-bold); line-height: var(--velin-leading-tight); margin-block-end: var(--velin-space-3); }
+  .velin-h3 { font-size: var(--velin-text-3xl); font-weight: var(--velin-weight-semibold); line-height: var(--velin-leading-snug); margin-block-end: var(--velin-space-3); }
+  .velin-h4 { font-size: var(--velin-text-2xl); font-weight: var(--velin-weight-semibold); line-height: var(--velin-leading-snug); margin-block-end: var(--velin-space-2); }
+  .velin-h5 { font-size: var(--velin-text-xl); font-weight: var(--velin-weight-semibold); line-height: var(--velin-leading-normal); margin-block-end: var(--velin-space-2); }
+  .velin-h6 { font-size: var(--velin-text-lg); font-weight: var(--velin-weight-semibold); line-height: var(--velin-leading-normal); margin-block-end: var(--velin-space-2); }
+
+  .velin-display-1 { font-size: clamp(2.5rem, 5vw + 1rem, 5rem); font-weight: var(--velin-weight-light); line-height: 1.1; }
+  .velin-display-2 { font-size: clamp(2.25rem, 4.5vw + 1rem, 4.5rem); font-weight: var(--velin-weight-light); line-height: 1.1; }
+  .velin-display-3 { font-size: clamp(2rem, 4vw + 1rem, 4rem); font-weight: var(--velin-weight-light); line-height: 1.15; }
+  .velin-display-4 { font-size: clamp(1.75rem, 3.5vw + 1rem, 3.5rem); font-weight: var(--velin-weight-light); line-height: 1.15; }
+  .velin-display-5 { font-size: clamp(1.5rem, 3vw + 1rem, 3rem); font-weight: var(--velin-weight-light); line-height: 1.2; }
+  .velin-display-6 { font-size: clamp(1.25rem, 2.5vw + 1rem, 2.5rem); font-weight: var(--velin-weight-light); line-height: 1.2; }
+
+  .velin-lead {
+    font-size: var(--velin-text-xl);
+    font-weight: var(--velin-weight-light);
+    line-height: var(--velin-leading-relaxed);
+  }
+
+  .velin-small { font-size: var(--velin-text-sm); }
+
+  .velin-mark {
+    padding-inline: 0.2em;
+    background-color: color-mix(in oklch, var(--velin-color-warning) 25%, transparent);
+    border-radius: var(--velin-radius-xs);
+  }
+
+  .velin-blockquote {
+    padding-inline-start: var(--velin-space-4);
+    border-inline-start: 4px solid var(--velin-color-primary);
+    font-size: var(--velin-text-lg);
+    font-style: italic;
+    color: var(--velin-color-text-muted);
+    margin-block: var(--velin-space-4);
+  }
+
+  .velin-blockquote-footer {
+    display: block;
+    font-size: var(--velin-text-sm);
+    color: var(--velin-color-text-subtle);
+    margin-block-start: var(--velin-space-2);
+  }
+
+  .velin-blockquote-footer::before {
+    content: "\2014\00A0";
+  }
+
+  .velin-list-unstyled {
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
+  .velin-list-inline {
+    list-style: none;
+    padding-inline-start: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--velin-space-3);
+  }
+
+  /* === Images === */
+  .velin-img-fluid {
+    max-inline-size: 100%;
+    block-size: auto;
+  }
+
+  .velin-img-thumbnail {
+    max-inline-size: 100%;
+    block-size: auto;
+    padding: var(--velin-space-1);
+    background: var(--velin-color-surface-bright);
+    border: 1px solid var(--velin-color-border);
+    border-radius: var(--velin-radius-sm);
+  }
+
+  .velin-img-rounded {
+    border-radius: var(--velin-radius-md);
+  }
+
+  /* === Figures === */
+  .velin-figure {
+    display: inline-block;
+  }
+
+  .velin-figure__img {
+    margin-block-end: var(--velin-space-2);
+    line-height: 1;
+  }
+
+  .velin-figure__caption {
+    font-size: var(--velin-text-sm);
+    color: var(--velin-color-text-muted);
+  }
+}

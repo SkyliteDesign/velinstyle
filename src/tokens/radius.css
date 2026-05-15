@@ -1,0 +1,13 @@
+@layer tokens {
+  :root {
+    --velin-radius-none: 0;
+    --velin-radius-xs: 0.125rem;   /* 2px */
+    --velin-radius-sm: 0.25rem;    /* 4px */
+    --velin-radius-md: 0.5rem;     /* 8px */
+    --velin-radius-lg: 0.75rem;    /* 12px */
+    --velin-radius-xl: 1rem;       /* 16px */
+    --velin-radius-2xl: 1.5rem;    /* 24px */
+    --velin-radius-full: 9999px;
+    --velin-radius-pill: 9999px;
+  }
+}

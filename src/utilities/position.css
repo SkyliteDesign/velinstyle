@@ -1,0 +1,141 @@
+@layer utilities {
+  .velin-static { position: static; }
+  .velin-relative { position: relative; }
+  .velin-absolute { position: absolute; }
+  .velin-fixed { position: fixed; }
+  .velin-sticky { position: sticky; inset-block-start: 0; }
+
+  /* Inset helpers */
+  .velin-inset-0 { inset: 0; }
+  .velin-top-0 { inset-block-start: 0; }
+  .velin-bottom-0 { inset-block-end: 0; }
+  .velin-start-0 { inset-inline-start: 0; }
+  .velin-end-0 { inset-inline-end: 0; }
+
+  /* Z-index */
+  .velin-z-base { z-index: var(--velin-z-base); }
+  .velin-z-raised { z-index: var(--velin-z-raised); }
+  .velin-z-dropdown { z-index: var(--velin-z-dropdown); }
+  .velin-z-sticky { z-index: var(--velin-z-sticky); }
+  .velin-z-overlay { z-index: var(--velin-z-overlay); }
+  .velin-z-modal { z-index: var(--velin-z-modal); }
+  .velin-z-toast { z-index: var(--velin-z-toast); }
+  .velin-z-tooltip { z-index: var(--velin-z-tooltip); }
+
+  /* Centering */
+  .velin-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Cursor */
+  .velin-cursor-pointer { cursor: pointer; }
+  .velin-cursor-default { cursor: default; }
+  .velin-cursor-not-allowed { cursor: not-allowed; }
+
+  /* Pointer events */
+  .velin-pointer-none { pointer-events: none; }
+  .velin-pointer-auto { pointer-events: auto; }
+
+  /* User select */
+  .velin-select-none { user-select: none; }
+  .velin-select-text { user-select: text; }
+  .velin-select-all { user-select: all; }
+
+  /* Transition utilities */
+  .velin-transition { transition: var(--velin-transition-all); }
+  .velin-transition-colors { transition: var(--velin-transition-colors); }
+  .velin-transition-opacity { transition: var(--velin-transition-opacity); }
+  .velin-transition-transform { transition: var(--velin-transition-transform); }
+  .velin-transition-shadow { transition: var(--velin-transition-shadow); }
+  .velin-transition-none { transition: none; }
+
+  /* Transform utilities */
+  .velin-rotate-45 { transform: rotate(45deg); }
+  .velin-rotate-90 { transform: rotate(90deg); }
+  .velin-rotate-180 { transform: rotate(180deg); }
+  .-velin-rotate-90 { transform: rotate(-90deg); }
+  .-velin-rotate-180 { transform: rotate(-180deg); }
+
+  .velin-scale-75 { transform: scale(0.75); }
+  .velin-scale-90 { transform: scale(0.9); }
+  .velin-scale-95 { transform: scale(0.95); }
+  .velin-scale-105 { transform: scale(1.05); }
+  .velin-scale-110 { transform: scale(1.1); }
+  .velin-scale-125 { transform: scale(1.25); }
+
+  .velin-translate-y-1 { transform: translateY(0.25rem); }
+  .velin-translate-y-2 { transform: translateY(0.5rem); }
+  .-velin-translate-y-1 { transform: translateY(-0.25rem); }
+  .-velin-translate-y-2 { transform: translateY(-0.5rem); }
+
+  .velin-origin-center { transform-origin: center; }
+  .velin-origin-top { transform-origin: top center; }
+  .velin-origin-bottom { transform-origin: bottom center; }
+
+  /* Filter/Backdrop utilities */
+  .velin-blur-sm { filter: blur(4px); }
+  .velin-blur-md { filter: blur(8px); }
+  .velin-blur-lg { filter: blur(16px); }
+  .velin-blur-none { filter: blur(0); }
+
+  .velin-backdrop-blur { backdrop-filter: blur(8px); }
+  .velin-backdrop-blur-sm { backdrop-filter: blur(4px); }
+  .velin-backdrop-blur-lg { backdrop-filter: blur(16px); }
+
+  .velin-brightness-50 { filter: brightness(0.5); }
+  .velin-brightness-75 { filter: brightness(0.75); }
+  .velin-brightness-125 { filter: brightness(1.25); }
+
+  .velin-grayscale { filter: grayscale(100%); }
+  .velin-grayscale-0 { filter: grayscale(0); }
+
+  /* Ring utilities (box-shadow based, composable) */
+  .velin-ring { box-shadow: 0 0 0 2px var(--velin-color-primary); }
+  .velin-ring-1 { box-shadow: 0 0 0 1px var(--velin-color-primary); }
+  .velin-ring-2 { box-shadow: 0 0 0 2px var(--velin-color-primary); }
+  .velin-ring-4 { box-shadow: 0 0 0 4px var(--velin-color-primary); }
+  .velin-ring-primary { --velin-ring-color: var(--velin-color-primary); box-shadow: 0 0 0 2px var(--velin-ring-color); }
+  .velin-ring-secondary { box-shadow: 0 0 0 2px var(--velin-color-secondary); }
+  .velin-ring-success { box-shadow: 0 0 0 2px var(--velin-color-success); }
+  .velin-ring-danger { box-shadow: 0 0 0 2px var(--velin-color-danger); }
+  .velin-ring-0 { box-shadow: 0 0 0 0 transparent; }
+  .velin-ring-inset { box-shadow: inset 0 0 0 2px var(--velin-color-primary); }
+
+  /* Isolation */
+  .velin-isolate { isolation: isolate; }
+  .velin-isolation-auto { isolation: auto; }
+
+  /* Mix-blend-mode */
+  .velin-blend-normal { mix-blend-mode: normal; }
+  .velin-blend-multiply { mix-blend-mode: multiply; }
+  .velin-blend-screen { mix-blend-mode: screen; }
+  .velin-blend-overlay { mix-blend-mode: overlay; }
+  .velin-blend-darken { mix-blend-mode: darken; }
+  .velin-blend-lighten { mix-blend-mode: lighten; }
+  .velin-blend-difference { mix-blend-mode: difference; }
+
+  /* Touch-action */
+  .velin-touch-auto { touch-action: auto; }
+  .velin-touch-none { touch-action: none; }
+  .velin-touch-pan-x { touch-action: pan-x; }
+  .velin-touch-pan-y { touch-action: pan-y; }
+  .velin-touch-manipulation { touch-action: manipulation; }
+
+  /* Will-change */
+  .velin-will-change-auto { will-change: auto; }
+  .velin-will-change-transform { will-change: transform; }
+  .velin-will-change-opacity { will-change: opacity; }
+  .velin-will-change-scroll { will-change: scroll-position; }
+
+  /* Float */
+  .velin-float-start { float: inline-start; }
+  .velin-float-end { float: inline-end; }
+  .velin-float-none { float: none; }
+  .velin-clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}

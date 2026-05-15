@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" data-velin-theme="soft">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Daily Read - VelinStyle Soft Theme Sample</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="../src/themes/soft.css">
+  <script type="module" src="../dist/velinstyle-components.js"></script>
+  <style>
+    .blog-header {
+      padding-block: var(--velin-space-8);
+      border-block-end: 1px solid var(--velin-color-border);
+      background: var(--velin-color-surface);
+    }
+    .blog-header__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--velin-space-4);
+    }
+    .blog-brand {
+      font-size: var(--velin-text-2xl);
+      font-weight: var(--velin-weight-extrabold);
+      text-decoration: none;
+      color: var(--velin-color-text);
+      font-style: italic;
+    }
+    .blog-nav {
+      display: flex;
+      gap: var(--velin-space-6);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .blog-nav a {
+      text-decoration: none;
+      color: var(--velin-color-text-muted);
+      font-weight: var(--velin-weight-medium);
+      transition: var(--velin-transition-colors);
+    }
+    .blog-nav a:hover { color: var(--velin-color-primary); }
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 1fr 20rem;
+      gap: var(--velin-space-10);
+      padding-block: var(--velin-space-10);
+    }
+    @media (max-width: 56rem) {
+      .blog-layout { grid-template-columns: 1fr; }
+    }
+    .blog-hero {
+      padding-block: var(--velin-space-16);
+      background: linear-gradient(170deg, var(--velin-color-primary-subtle) 0%, var(--velin-color-surface) 100%);
+      border-block-end: 1px solid var(--velin-color-border);
+    }
+    .blog-hero__tag {
+      display: inline-block;
+      margin-block-end: var(--velin-space-3);
+    }
+    .blog-hero__title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: var(--velin-weight-extrabold);
+      line-height: var(--velin-leading-tight);
+      margin-block-end: var(--velin-space-4);
+      max-inline-size: 36ch;
+    }
+    .blog-hero__meta {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-4);
+      color: var(--velin-color-text-muted);
+      font-size: var(--velin-text-sm);
+    }
+    .blog-hero__author {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-2);
+    }
+    .avatar {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: var(--velin-color-primary-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--velin-color-primary);
+      font-weight: var(--velin-weight-bold);
+      font-size: var(--velin-text-sm);
+    }
+    .avatar--sm { width: 2rem; height: 2rem; font-size: var(--velin-text-xs); }
+    .post-card {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--velin-space-4);
+      padding-block: var(--velin-space-6);
+      border-block-end: 1px solid var(--velin-color-border);
+    }
+    .post-card__content { display: flex; flex-direction: column; gap: var(--velin-space-2); }
+    .post-card__tag {
+      font-size: var(--velin-text-xs);
+      font-weight: var(--velin-weight-semibold);
+      color: var(--velin-color-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .post-card__title {
+      font-size: var(--velin-text-xl);
+      font-weight: var(--velin-weight-bold);
+      line-height: var(--velin-leading-snug);
+    }
+    .post-card__title a {
+      text-decoration: none;
+      color: var(--velin-color-text);
+    }
+    .post-card__title a:hover { color: var(--velin-color-primary); }
+    .post-card__excerpt {
+      color: var(--velin-color-text-muted);
+      font-size: var(--velin-text-base);
+      line-height: var(--velin-leading-relaxed);
+    }
+    .post-card__meta {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-3);
+      font-size: var(--velin-text-sm);
+      color: var(--velin-color-text-muted);
+    }
+    .sidebar-section {
+      margin-block-end: var(--velin-space-8);
+    }
+    .sidebar-section__title {
+      font-size: var(--velin-text-sm);
+      font-weight: var(--velin-weight-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--velin-color-text-muted);
+      margin-block-end: var(--velin-space-4);
+      padding-block-end: var(--velin-space-2);
+      border-block-end: 2px solid var(--velin-color-primary);
+    }
+    .trending-item {
+      display: flex;
+      gap: var(--velin-space-3);
+      padding-block: var(--velin-space-3);
+      border-block-end: 1px solid var(--velin-color-border);
+    }
+    .trending-item__number {
+      font-size: var(--velin-text-2xl);
+      font-weight: var(--velin-weight-extrabold);
+      color: var(--velin-color-primary-subtle);
+      line-height: 1;
+      min-width: 2rem;
+    }
+    .trending-item__title {
+      font-size: var(--velin-text-sm);
+      font-weight: var(--velin-weight-semibold);
+      line-height: var(--velin-leading-snug);
+    }
+    .trending-item__title a { text-decoration: none; color: var(--velin-color-text); }
+    .trending-item__title a:hover { color: var(--velin-color-primary); }
+    .trending-item__meta {
+      font-size: var(--velin-text-xs);
+      color: var(--velin-color-text-muted);
+    }
+    .newsletter-box {
+      background: var(--velin-color-primary-subtle);
+      padding: var(--velin-space-5);
+      border-radius: var(--velin-radius-lg);
+    }
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--velin-space-2);
+    }
+    .blog-footer {
+      padding-block: var(--velin-space-8);
+      border-block-start: 1px solid var(--velin-color-border);
+      color: var(--velin-color-text-muted);
+      font-size: var(--velin-text-sm);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+
+  <header class="blog-header">
+    <div class="velin-container blog-header__inner">
+      <a href="#" class="blog-brand">The Daily Read</a>
+      <nav aria-label="Main navigation">
+        <ul class="blog-nav">
+          <li><a href="#">Technology</a></li>
+          <li><a href="#">Design</a></li>
+          <li><a href="#">Culture</a></li>
+          <li><a href="#">Science</a></li>
+        </ul>
+      </nav>
+      <div class="velin-flex velin-flex--gap-2">
+        <button class="velin-btn velin-btn--ghost velin-btn--sm">
+          <velin-icon name="search" size="18" label="Search"></velin-icon>
+        </button>
+        <button class="velin-btn velin-btn--primary velin-btn--sm">Subscribe</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-hero">
+      <div class="velin-container">
+        <span class="velin-badge velin-badge--primary blog-hero__tag">Featured</span>
+        <h1 class="blog-hero__title">The Future of Accessible Web Design: Why Standards Matter More Than Ever</h1>
+        <p style="max-inline-size: 60ch; color: var(--velin-color-text-muted); margin-block-end: var(--velin-space-6); font-size: var(--velin-text-lg);">
+          As the European Accessibility Act takes effect in 2025, the web industry faces its biggest shift since responsive design. Here's what developers need to know.
+        </p>
+        <div class="blog-hero__meta">
+          <div class="blog-hero__author">
+            <div class="avatar">LK</div>
+            <span>Lisa Kruger</span>
+          </div>
+          <span>May 11, 2026</span>
+          <span>8 min read</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="velin-container">
+      <div class="blog-layout">
+        <section aria-label="Recent articles">
+          <div class="post-card">
+            <div class="post-card__content">
+              <span class="post-card__tag">Technology</span>
+              <h2 class="post-card__title"><a href="#">Container Queries Changed How I Think About Responsive Design</a></h2>
+              <p class="post-card__excerpt">After six months of building with container queries, I can't imagine going back. Components that truly adapt to their context, not just the screen -- this is the paradigm shift CSS needed.</p>
+              <div class="post-card__meta">
+                <div class="blog-hero__author">
+                  <div class="avatar avatar--sm">MR</div>
+                  <span>Marco Rossi</span>
+                </div>
+                <span>May 10, 2026</span>
+                <span>5 min read</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="post-card">
+            <div class="post-card__content">
+              <span class="post-card__tag">Design</span>
+              <h2 class="post-card__title"><a href="#">OKLCH: The Color Space That Makes Dark Mode Actually Work</a></h2>
+              <p class="post-card__excerpt">Traditional color systems break in dark mode because brightness isn't linear. OKLCH solves this with perceptually uniform lightness, making palette generation predictable and beautiful.</p>
+              <div class="post-card__meta">
+                <div class="blog-hero__author">
+                  <div class="avatar avatar--sm">AJ</div>
+                  <span>Aya Johansen</span>
+                </div>
+                <span>May 9, 2026</span>
+                <span>6 min read</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="post-card">
+            <div class="post-card__content">
+              <span class="post-card__tag">Culture</span>
+              <h2 class="post-card__title"><a href="#">Why Your Framework Choice Says More About Your Values Than Your Skills</a></h2>
+              <p class="post-card__excerpt">We spend weeks evaluating bundle sizes and DX, but how much time do we spend thinking about who gets excluded by our technical decisions?</p>
+              <div class="post-card__meta">
+                <div class="blog-hero__author">
+                  <div class="avatar avatar--sm">SC</div>
+                  <span>Sam Clarke</span>
+                </div>
+                <span>May 8, 2026</span>
+                <span>7 min read</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="post-card">
+            <div class="post-card__content">
+              <span class="post-card__tag">Science</span>
+              <h2 class="post-card__title"><a href="#">The Neuroscience Behind Good UI: What Eye-Tracking Studies Reveal</a></h2>
+              <p class="post-card__excerpt">New research from the HCI lab at ETH Zurich shows that visual hierarchy directly correlates with cognitive load reduction -- and it's measurable.</p>
+              <div class="post-card__meta">
+                <div class="blog-hero__author">
+                  <div class="avatar avatar--sm">PW</div>
+                  <span>Dr. Petra Weiss</span>
+                </div>
+                <span>May 7, 2026</span>
+                <span>10 min read</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="post-card">
+            <div class="post-card__content">
+              <span class="post-card__tag">Technology</span>
+              <h2 class="post-card__title"><a href="#">Web Components in 2026: The Quiet Revolution Nobody Talks About</a></h2>
+              <p class="post-card__excerpt">While React and Vue dominate headlines, Web Components have silently matured into a genuinely viable option. Here's what changed.</p>
+              <div class="post-card__meta">
+                <div class="blog-hero__author">
+                  <div class="avatar avatar--sm">TN</div>
+                  <span>Tomoko Nakamura</span>
+                </div>
+                <span>May 6, 2026</span>
+                <span>6 min read</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside aria-label="Sidebar">
+          <div class="sidebar-section">
+            <h3 class="sidebar-section__title">Trending</h3>
+            <div class="trending-item">
+              <span class="trending-item__number">01</span>
+              <div>
+                <p class="trending-item__title"><a href="#">CSS @layer Finally Killed Specificity Wars</a></p>
+                <p class="trending-item__meta">2.4K reads</p>
+              </div>
+            </div>
+            <div class="trending-item">
+              <span class="trending-item__number">02</span>
+              <div>
+                <p class="trending-item__title"><a href="#">Building a Design System From Scratch in 2026</a></p>
+                <p class="trending-item__meta">1.8K reads</p>
+              </div>
+            </div>
+            <div class="trending-item">
+              <span class="trending-item__number">03</span>
+              <div>
+                <p class="trending-item__title"><a href="#">The Accessibility Audit That Changed Our Company</a></p>
+                <p class="trending-item__meta">1.5K reads</p>
+              </div>
+            </div>
+            <div class="trending-item">
+              <span class="trending-item__number">04</span>
+              <div>
+                <p class="trending-item__title"><a href="#">SVG Sprites vs Icon Fonts: The 2026 Verdict</a></p>
+                <p class="trending-item__meta">1.2K reads</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <h3 class="sidebar-section__title">Newsletter</h3>
+            <div class="newsletter-box">
+              <p style="font-weight: var(--velin-weight-semibold); margin-block-end: var(--velin-space-2);">Stay in the loop</p>
+              <p style="font-size: var(--velin-text-sm); color: var(--velin-color-text-muted); margin-block-end: var(--velin-space-4);">
+                Weekly curated articles on design, code, and accessibility.
+              </p>
+              <form onsubmit="event.preventDefault()">
+                <div class="velin-field" style="margin-block-end: var(--velin-space-3);">
+                  <input type="email" class="velin-input" placeholder="your@email.com" required>
+                </div>
+                <button type="submit" class="velin-btn velin-btn--primary velin-btn--block velin-btn--sm">Subscribe</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <h3 class="sidebar-section__title">Topics</h3>
+            <div class="tag-cloud">
+              <a href="#" class="velin-badge velin-badge--outline">CSS</a>
+              <a href="#" class="velin-badge velin-badge--outline">JavaScript</a>
+              <a href="#" class="velin-badge velin-badge--outline">A11y</a>
+              <a href="#" class="velin-badge velin-badge--outline">Design</a>
+              <a href="#" class="velin-badge velin-badge--outline">UX</a>
+              <a href="#" class="velin-badge velin-badge--outline">Performance</a>
+              <a href="#" class="velin-badge velin-badge--outline">Web Components</a>
+              <a href="#" class="velin-badge velin-badge--outline">Typography</a>
+              <a href="#" class="velin-badge velin-badge--outline">Color Theory</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="blog-footer">
+    <div class="velin-container">
+      <p>&copy; 2026 The Daily Read. Built with <a href="https://github.com/SkyliteDesign/velinstyle">VelinStyle</a> Soft Theme.</p>
+    </div>
+  </footer>
+</body>
+</html>

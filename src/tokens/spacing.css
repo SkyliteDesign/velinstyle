@@ -1,0 +1,22 @@
+@layer tokens {
+  :root {
+    --velin-space-0: 0;
+    --velin-space-px: 1px;
+    --velin-space-0-5: 0.125rem;  /* 2px */
+    --velin-space-1: 0.25rem;     /* 4px */
+    --velin-space-1-5: 0.375rem;  /* 6px */
+    --velin-space-2: 0.5rem;      /* 8px */
+    --velin-space-2-5: 0.625rem;  /* 10px */
+    --velin-space-3: 0.75rem;     /* 12px */
+    --velin-space-4: 1rem;        /* 16px */
+    --velin-space-5: 1.25rem;     /* 20px */
+    --velin-space-6: 1.5rem;      /* 24px */
+    --velin-space-8: 2rem;        /* 32px */
+    --velin-space-10: 2.5rem;     /* 40px */
+    --velin-space-12: 3rem;       /* 48px */
+    --velin-space-16: 4rem;       /* 64px */
+    --velin-space-20: 5rem;       /* 80px */
+    --velin-space-24: 6rem;       /* 96px */
+    --velin-space-32: 8rem;       /* 128px */
+  }
+}

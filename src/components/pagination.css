@@ -1,0 +1,78 @@
+@layer components {
+  .velin-pagination {
+    display: flex;
+    align-items: center;
+    gap: var(--velin-space-1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .velin-pagination__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-block-size: 2.75rem;
+    min-inline-size: 2.75rem;
+    padding-inline: var(--velin-space-3);
+    font-size: var(--velin-text-sm);
+    font-weight: var(--velin-weight-medium);
+    color: var(--velin-color-text);
+    background: var(--velin-color-surface-bright);
+    border: 1px solid var(--velin-color-border);
+    border-radius: var(--velin-radius-md);
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--velin-transition-colors);
+    user-select: none;
+  }
+
+  .velin-pagination__link:hover {
+    background: var(--velin-color-surface-dim);
+    border-color: var(--velin-color-border-strong);
+  }
+
+  .velin-pagination__link--active,
+  .velin-pagination__link[aria-current="page"] {
+    color: var(--velin-color-on-primary);
+    background: var(--velin-color-primary);
+    border-color: var(--velin-color-primary);
+  }
+
+  .velin-pagination__link--disabled,
+  .velin-pagination__link[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .velin-pagination__ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-block-size: 2.75rem;
+    min-inline-size: 2rem;
+    color: var(--velin-color-text-muted);
+    font-size: var(--velin-text-sm);
+  }
+
+  /* Sizes */
+  .velin-pagination--sm .velin-pagination__link {
+    min-block-size: 2rem;
+    min-inline-size: 2rem;
+    padding-inline: var(--velin-space-2);
+    font-size: var(--velin-text-xs);
+  }
+
+  .velin-pagination--lg .velin-pagination__link {
+    min-block-size: 3.25rem;
+    min-inline-size: 3.25rem;
+    padding-inline: var(--velin-space-4);
+    font-size: var(--velin-text-base);
+  }
+
+  /* Simple: only prev/next */
+  .velin-pagination--simple {
+    justify-content: space-between;
+  }
+}

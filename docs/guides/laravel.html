@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VelinStyle in Laravel — VelinStyle</title>
+  <meta name="description" content="VelinStyle in Laravel mit Vite: npm, Blade-Layout, CSS/JS-Import, Themes.">
+  <link rel="stylesheet" href="../../dist/velinstyle.css">
+  <link rel="stylesheet" href="../docs.css">
+  <script src="../../dist/velinstyle-components.iife.js"></script>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="../index.html" class="velin-nav__brand">VelinStyle</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="../getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="index.html" class="velin-nav__link">Integration</a></li>
+      <li><a href="../layout.html" class="velin-nav__link">Layout</a></li>
+      <li><a href="../components.html" class="velin-nav__link">Components</a></li>
+      <li><a href="../css-components.html" class="velin-nav__link">CSS Components</a></li>
+      <li><a href="../forms.html" class="velin-nav__link">Forms</a></li>
+      <li><a href="../utilities.html" class="velin-nav__link">Utilities</a></li>
+      <li><a href="../tokens.html" class="velin-nav__link">Tokens</a></li>
+      <li><a href="../themes.html" class="velin-nav__link">Themes</a></li>
+      <li><a href="../icons.html" class="velin-nav__link">Icons</a></li>
+      <li><a href="../a11y.html" class="velin-nav__link">A11y</a></li>
+      <li><a href="../security.html" class="velin-nav__link">Security</a></li>
+      <li><a href="../migration.html" class="velin-nav__link">Migration</a></li>
+    </ul>
+  </nav>
+  <div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+    <a href="index.html">← Integration (Übersicht)</a>
+    &nbsp;·&nbsp;
+    <a href="existing-project.html">Bestehendes Projekt</a>
+    &nbsp;·&nbsp;
+    <a href="wordpress.html">WordPress</a>
+  </div>
+
+  <main id="main" class="velin-container">
+    <section class="velin-doc-section">
+      <h1 class="velin-doc-title">Laravel (Vite + Blade)</h1>
+      <p class="velin-doc-lead">
+        Typisches Setup ab Laravel mit Vite: Abhängigkeit installieren, <code class="velin-doc-inline-code">resources/css/app.css</code> und <code class="velin-doc-inline-code">resources/js/app.js</code> anbinden, im Blade-Layout <code class="velin-doc-inline-code">@vite</code> nutzen.
+      </p>
+      <p style="font-size:var(--velin-text-sm); color:var(--velin-color-text-muted);">Pfade und Dateinamen können je nach Laravel-Version leicht abweichen — das Prinzip bleibt gleich.</p>
+    </section>
+
+    <section id="install" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">1. Paket installieren</h2>
+      <p>Im Projektroot (dort, wo <code class="velin-doc-inline-code">package.json</code> liegt):</p>
+      <pre class="velin-doc-code">npm install velinstyle</pre>
+    </section>
+
+    <section id="css" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">2. CSS einbinden</h2>
+      <p>In <code class="velin-doc-inline-code">resources/css/app.css</code> (oder deiner Haupt-CSS-Datei, die Vite bündelt):</p>
+      <pre class="velin-doc-code">@import "velinstyle/dist/velinstyle.css";
+
+/* Optional: Theme-Preset */
+@import "velinstyle/dist/themes/sharp.css";</pre>
+      <p>Alternativ nur Standard-Theme: ersten Import reicht; Themes dann per <code class="velin-doc-inline-code">data-velin-theme</code> am <code class="velin-doc-inline-code">&lt;html&gt;</code> steuern (siehe <a href="../themes.html">Themes</a>).</p>
+    </section>
+
+    <section id="js" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">3. Web Components (Vite / ES-Module)</h2>
+      <p>In <code class="velin-doc-inline-code">resources/js/app.js</code> (wird von Vite als Modul gebündelt):</p>
+      <pre class="velin-doc-code">import "velinstyle/dist/velinstyle-components.js";</pre>
+      <p>Blade muss dafür nur das gebündelte Script ausgeben — üblicherweise über dieselbe <code class="velin-doc-inline-code">@vite</code>-Zeile wie für dein App-JS.</p>
+    </section>
+
+    <section id="blade" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">4. Blade-Layout</h2>
+      <p>Minimal im <code class="velin-doc-inline-code">&lt;head&gt;</code> (Vite lädt CSS und JS):</p>
+      <pre class="velin-doc-code">&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+@vite(['resources/css/app.css', 'resources/js/app.js'])</pre>
+      <p>Markup in Views nutzt dieselben VelinStyle-Klassen wie in statischen Beispielen, z.&nbsp;B. <code class="velin-doc-inline-code">velin-container</code>, <code class="velin-doc-inline-code">velin-btn</code>, <code class="velin-doc-inline-code">&lt;velin-modal&gt;</code> usw.</p>
+    </section>
+
+    <section id="pfade" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">5. Icons (Sprite-Pfad)</h2>
+      <p><code class="velin-doc-inline-code">&lt;velin-icon&gt;</code> braucht einen erreichbaren Pfad zum Sprite. Häufig kopierst du <code class="velin-doc-inline-code">node_modules/velinstyle/dist/velin-icons.svg</code> nach <code class="velin-doc-inline-code">public/</code> (z.&nbsp;B. <code class="velin-doc-inline-code">public/vendor/velin-icons.svg</code>) und setzt:</p>
+      <pre class="velin-doc-code">&lt;velin-icon name="check" sprite="/vendor/velin-icons.svg"&gt;&lt;/velin-icon&gt;</pre>
+      <p>Oder du nutzt den CLI-Sprite-Workflow aus der Hauptdoku, wenn du nur ausgewählte Icons shippen willst.</p>
+    </section>
+
+    <section id="livewire" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">6. Livewire / Inertia</h2>
+      <p>VelinStyle ist „nur“ CSS + Custom Elements. Livewire rendert HTML wie gewohnt — achte darauf, dass nach DOM-Updates von Livewire keine doppelten Event-Listener auf Velin-Komponenten nötig sind (Standard-Verhalten der meisten Velin-Web-Components). Bei Inertia bleibt die Einbindung über das Root-Layout mit Vite identisch.</p>
+    </section>
+
+    <section id="prod" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">7. Produktion</h2>
+      <p><code class="velin-doc-inline-code">npm run build</code> bündelt Imports wie jedes andere Paket auch. Prüfe die gebaute CSS-Reihenfolge, falls du zusätzlich Tailwind o.&nbsp;Ä. nutzt — besser ein klarer Layer-/Import-Plan als zwei vollständige Utility-Frameworks.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,247 @@
+/* Shared documentation styles for all VelinStyle doc pages */
+
+/* Section spacing */
+.velin-doc-section {
+  padding-block: var(--velin-space-12);
+}
+
+.velin-doc-section + .velin-doc-section {
+  border-block-start: 1px solid var(--velin-color-border);
+}
+
+/* Section titles */
+.velin-doc-title {
+  font-size: var(--velin-text-4xl);
+  font-weight: var(--velin-weight-bold);
+  margin-block: var(--velin-space-8);
+}
+
+.velin-doc-subtitle {
+  font-size: var(--velin-text-2xl);
+  font-weight: var(--velin-weight-bold);
+  margin-block-end: var(--velin-space-6);
+}
+
+.velin-doc-lead {
+  font-size: var(--velin-text-lg);
+  color: var(--velin-color-text-muted);
+  max-inline-size: 60ch;
+  margin-block-end: var(--velin-space-8);
+}
+
+/* Code blocks */
+.velin-doc-code {
+  position: relative;
+  background: var(--velin-color-surface-dim);
+  padding: var(--velin-space-4);
+  border-radius: var(--velin-radius-md);
+  font-family: var(--velin-font-mono);
+  font-size: var(--velin-text-sm);
+  line-height: var(--velin-leading-relaxed);
+  overflow-x: auto;
+  border: 1px solid var(--velin-color-border);
+  margin-block: var(--velin-space-4);
+  tab-size: 2;
+  white-space: pre;
+}
+
+.velin-doc-code velin-copy {
+  position: absolute;
+  inset-block-start: var(--velin-space-2);
+  inset-inline-end: var(--velin-space-2);
+}
+
+/* Demo rows */
+.velin-doc-demo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--velin-space-3);
+  align-items: center;
+  margin-block-end: var(--velin-space-4);
+}
+
+.velin-doc-demo--col {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Demo grid */
+.velin-doc-grid {
+  display: grid;
+  gap: var(--velin-space-6);
+}
+
+/* Feature cards (for a11y page etc.) */
+.velin-doc-feature {
+  padding: var(--velin-space-6);
+  border: 1px solid var(--velin-color-border);
+  border-radius: var(--velin-radius-lg);
+  background: var(--velin-color-surface-bright);
+}
+
+.velin-doc-feature h3 {
+  margin-block-end: var(--velin-space-3);
+}
+
+/* Prop/API tables */
+.velin-doc-api {
+  margin-block: var(--velin-space-6);
+}
+
+.velin-doc-api th {
+  text-align: start;
+  font-size: var(--velin-text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.velin-doc-api td {
+  font-size: var(--velin-text-sm);
+}
+
+.velin-doc-api code {
+  font-family: var(--velin-font-mono);
+  font-size: var(--velin-text-xs);
+  background: var(--velin-color-surface-dim);
+  padding: 0.125rem 0.375rem;
+  border-radius: var(--velin-radius-xs);
+}
+
+/* Sidebar layout for docs */
+.velin-doc-layout {
+  display: grid;
+  grid-template-columns: 14rem 1fr;
+  gap: var(--velin-space-8);
+  max-inline-size: 80rem;
+  margin-inline: auto;
+  padding-inline: var(--velin-space-4);
+}
+
+.velin-doc-sidebar {
+  position: sticky;
+  inset-block-start: var(--velin-space-4);
+  align-self: start;
+  max-block-size: calc(100vh - 2rem);
+  overflow-y: auto;
+  padding-block: var(--velin-space-8);
+}
+
+@media (max-width: 56rem) {
+  .velin-doc-layout {
+    grid-template-columns: 1fr;
+  }
+  .velin-doc-sidebar {
+    position: static;
+    max-block-size: min(40vh, 14rem);
+    margin-block-end: var(--velin-space-6);
+    padding-block: var(--velin-space-4);
+    border-block-end: 1px solid var(--velin-color-border);
+    scrollbar-width: thin;
+  }
+}
+
+.velin-doc-sidebar__title {
+  font-size: var(--velin-text-xs);
+  font-weight: var(--velin-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--velin-color-text-muted);
+  margin-block-end: var(--velin-space-2);
+}
+
+.velin-doc-sidebar__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--velin-space-4) 0;
+}
+
+.velin-doc-sidebar__link {
+  display: block;
+  padding: var(--velin-space-1) var(--velin-space-3);
+  font-size: var(--velin-text-sm);
+  color: var(--velin-color-text-muted);
+  text-decoration: none;
+  border-inline-start: 2px solid transparent;
+  transition: var(--velin-transition-colors);
+}
+
+.velin-doc-sidebar__link:hover {
+  color: var(--velin-color-text);
+  border-color: var(--velin-color-border);
+}
+
+.velin-doc-sidebar__link--active {
+  color: var(--velin-color-primary);
+  border-color: var(--velin-color-primary);
+  font-weight: var(--velin-weight-medium);
+}
+
+/* Doc footer */
+.velin-doc-footer {
+  padding-block: var(--velin-space-6);
+  border-block-start: 1px solid var(--velin-color-border);
+  color: var(--velin-color-text-muted);
+  font-size: var(--velin-text-sm);
+}
+
+.velin-doc-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--velin-space-4);
+  max-inline-size: 80rem;
+  margin-inline: auto;
+  padding-inline: var(--velin-space-4);
+}
+
+/* Theme switcher bar */
+.velin-doc-theme-bar {
+  position: fixed;
+  inset-block-end: var(--velin-space-4);
+  inset-inline-end: var(--velin-space-4);
+  z-index: var(--velin-z-toast);
+  display: flex;
+  gap: var(--velin-space-2);
+}
+
+/* Inline code */
+.velin-doc-inline-code {
+  font-family: var(--velin-font-mono);
+  font-size: 0.875em;
+  background: var(--velin-color-surface-dim);
+  padding: 0.125rem 0.375rem;
+  border-radius: var(--velin-radius-xs);
+  border: 1px solid var(--velin-color-border);
+}
+
+/* Color swatch */
+.velin-doc-swatch {
+  border-radius: var(--velin-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--velin-color-border);
+}
+
+.velin-doc-swatch__preview {
+  block-size: 5rem;
+}
+
+.velin-doc-swatch__label {
+  padding: var(--velin-space-2);
+  font-size: var(--velin-text-sm);
+  font-family: var(--velin-font-mono);
+}
+
+/* Badge "new" for new components */
+.velin-doc-new::after {
+  content: "NEW";
+  display: inline-block;
+  margin-inline-start: var(--velin-space-2);
+  font-size: var(--velin-text-xs);
+  font-weight: var(--velin-weight-bold);
+  color: var(--velin-color-on-primary);
+  background: var(--velin-color-primary);
+  padding: 0.125rem 0.375rem;
+  border-radius: var(--velin-radius-sm);
+  vertical-align: middle;
+}

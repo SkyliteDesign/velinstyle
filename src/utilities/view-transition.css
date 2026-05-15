@@ -1,0 +1,126 @@
+@layer utilities {
+  /* View Transitions API -- VelinStyle exclusive */
+
+  .velin-vt-hero { view-transition-name: hero; }
+  .velin-vt-header { view-transition-name: header; }
+  .velin-vt-card { view-transition-name: card; }
+  .velin-vt-title { view-transition-name: title; }
+  .velin-vt-image { view-transition-name: image; }
+  .velin-vt-nav { view-transition-name: nav; }
+  .velin-vt-sidebar { view-transition-name: sidebar; }
+  .velin-vt-content { view-transition-name: content; }
+
+  .velin-vt-morph {
+    view-transition-name: var(--velin-vt-name, morph);
+  }
+
+  /* Default cross-fade transitions */
+  ::view-transition-old(root) {
+    animation: velin-vt-fade-out 200ms ease-out;
+  }
+
+  ::view-transition-new(root) {
+    animation: velin-vt-fade-in 200ms ease-in;
+  }
+
+  /* Slide transition */
+  ::view-transition-old(hero),
+  ::view-transition-old(card),
+  ::view-transition-old(image) {
+    animation: velin-vt-slide-out 250ms ease-in;
+  }
+
+  ::view-transition-new(hero),
+  ::view-transition-new(card),
+  ::view-transition-new(image) {
+    animation: velin-vt-slide-in 250ms ease-out;
+  }
+
+  @keyframes velin-vt-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes velin-vt-fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes velin-vt-slide-in {
+    from { opacity: 0; transform: translateY(0.5rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes velin-vt-slide-out {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-0.5rem); }
+  }
+
+  /* State-Preserving Morph Transitions */
+  .velin-morph-source {
+    view-transition-name: var(--velin-morph-id, morph);
+  }
+
+  .velin-morph-target {
+    view-transition-name: var(--velin-morph-id, morph);
+  }
+
+  .velin-morph-card { view-transition-name: morph-card; }
+  .velin-morph-image { view-transition-name: morph-image; }
+  .velin-morph-avatar { view-transition-name: morph-avatar; }
+  .velin-morph-badge { view-transition-name: morph-badge; }
+
+  ::view-transition-group(morph-card),
+  ::view-transition-group(morph-image),
+  ::view-transition-group(morph-avatar) {
+    animation-duration: 350ms;
+    animation-timing-function: var(--velin-ease-out);
+  }
+
+  ::view-transition-old(morph-card),
+  ::view-transition-old(morph-image),
+  ::view-transition-old(morph-avatar) {
+    animation: velin-vt-morph-out 350ms ease-in forwards;
+  }
+
+  ::view-transition-new(morph-card),
+  ::view-transition-new(morph-image),
+  ::view-transition-new(morph-avatar) {
+    animation: velin-vt-morph-in 350ms ease-out forwards;
+  }
+
+  @keyframes velin-vt-morph-in {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes velin-vt-morph-out {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(1.1); }
+  }
+
+  /* List-to-Grid morph */
+  .velin-morph-list-item { view-transition-name: var(--velin-morph-item-id); }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root),
+    ::view-transition-old(hero),
+    ::view-transition-new(hero),
+    ::view-transition-old(card),
+    ::view-transition-new(card),
+    ::view-transition-old(image),
+    ::view-transition-new(image),
+    ::view-transition-group(morph-card),
+    ::view-transition-group(morph-image),
+    ::view-transition-group(morph-avatar),
+    ::view-transition-old(morph-card),
+    ::view-transition-new(morph-card),
+    ::view-transition-old(morph-image),
+    ::view-transition-new(morph-image),
+    ::view-transition-old(morph-avatar),
+    ::view-transition-new(morph-avatar) {
+      animation-duration: 0s;
+    }
+  }
+}

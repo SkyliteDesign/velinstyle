@@ -1,0 +1,80 @@
+@layer utilities {
+  .velin-block { display: block; }
+  .velin-inline { display: inline; }
+  .velin-inline-block { display: inline-block; }
+  .velin-flex { display: flex; }
+  .velin-inline-flex { display: inline-flex; }
+  .velin-grid { display: grid; }
+  .velin-inline-grid { display: inline-grid; }
+  .velin-contents { display: contents; }
+  .velin-hidden { display: none; }
+
+  /* Overflow */
+  .velin-overflow-hidden { overflow: hidden; }
+  .velin-overflow-auto { overflow: auto; }
+  .velin-overflow-clip { overflow: clip; }
+  .velin-overflow-x-auto { overflow-x: auto; }
+  .velin-overflow-y-auto { overflow-y: auto; }
+
+  /* Visibility */
+  .velin-visible { visibility: visible; }
+  .velin-invisible { visibility: hidden; }
+
+  /* Opacity */
+  .velin-opacity-0 { opacity: 0; }
+  .velin-opacity-25 { opacity: 0.25; }
+  .velin-opacity-50 { opacity: 0.5; }
+  .velin-opacity-75 { opacity: 0.75; }
+  .velin-opacity-100 { opacity: 1; }
+
+  /* Responsive display via min-width */
+  @media (min-width: 36rem) {
+    .velin-sm-block { display: block; }
+    .velin-sm-flex { display: flex; }
+    .velin-sm-grid { display: grid; }
+    .velin-sm-hidden { display: none; }
+    .velin-sm-inline { display: inline; }
+  }
+
+  @media (min-width: 48rem) {
+    .velin-md-block { display: block; }
+    .velin-md-flex { display: flex; }
+    .velin-md-grid { display: grid; }
+    .velin-md-hidden { display: none; }
+    .velin-md-inline { display: inline; }
+  }
+
+  @media (min-width: 62rem) {
+    .velin-lg-block { display: block; }
+    .velin-lg-flex { display: flex; }
+    .velin-lg-grid { display: grid; }
+    .velin-lg-hidden { display: none; }
+    .velin-lg-inline { display: inline; }
+  }
+
+  /* Columns (multi-column layout) */
+  .velin-columns-1 { columns: 1; }
+  .velin-columns-2 { columns: 2; }
+  .velin-columns-3 { columns: 3; }
+  .velin-columns-4 { columns: 4; }
+  .velin-columns-auto { columns: auto; }
+  .velin-col-break-avoid { break-inside: avoid; }
+  .velin-col-break-before { break-before: column; }
+
+  /* Order */
+  .velin-order-first { order: -9999; }
+  .velin-order-last { order: 9999; }
+  .velin-order-none { order: 0; }
+  .velin-order-1 { order: 1; }
+  .velin-order-2 { order: 2; }
+  .velin-order-3 { order: 3; }
+  .velin-order-4 { order: 4; }
+  .velin-order-5 { order: 5; }
+  .velin-order-6 { order: 6; }
+  .velin-order-7 { order: 7; }
+  .velin-order-8 { order: 8; }
+  .velin-order-9 { order: 9; }
+  .velin-order-10 { order: 10; }
+  .velin-order-11 { order: 11; }
+  .velin-order-12 { order: 12; }
+}

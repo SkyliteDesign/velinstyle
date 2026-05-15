@@ -1,0 +1,26 @@
+@layer a11y {
+  .velin-skip-link {
+    position: absolute;
+    inset-block-start: -100%;
+    inset-inline-start: var(--velin-space-4);
+    z-index: var(--velin-z-max);
+    padding: var(--velin-space-3) var(--velin-space-6);
+    font-size: var(--velin-text-base);
+    font-weight: var(--velin-weight-semibold);
+    color: var(--velin-color-on-primary);
+    background-color: var(--velin-color-primary);
+    border-radius: var(--velin-radius-md);
+    text-decoration: none;
+    transition: var(--velin-transition-transform);
+  }
+
+  .velin-skip-link:focus {
+    inset-block-start: var(--velin-space-4);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .velin-skip-link {
+      transition: none;
+    }
+  }
+}

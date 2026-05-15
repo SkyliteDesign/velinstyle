@@ -1,0 +1,53 @@
+@layer utilities {
+  /* Width */
+  .velin-w-full { inline-size: 100%; }
+  .velin-w-auto { inline-size: auto; }
+  .velin-w-screen { inline-size: 100vw; }
+  .velin-w-min { inline-size: min-content; }
+  .velin-w-max { inline-size: max-content; }
+  .velin-w-fit { inline-size: fit-content; }
+
+  /* Max width */
+  .velin-max-w-xs { max-inline-size: 20rem; }
+  .velin-max-w-sm { max-inline-size: 24rem; }
+  .velin-max-w-md { max-inline-size: 28rem; }
+  .velin-max-w-lg { max-inline-size: 32rem; }
+  .velin-max-w-xl { max-inline-size: 36rem; }
+  .velin-max-w-2xl { max-inline-size: 42rem; }
+  .velin-max-w-prose { max-inline-size: 65ch; }
+  .velin-max-w-full { max-inline-size: 100%; }
+  .velin-max-w-none { max-inline-size: none; }
+
+  /* Height */
+  .velin-h-full { block-size: 100%; }
+  .velin-h-auto { block-size: auto; }
+  .velin-h-screen { block-size: 100dvh; }
+  .velin-h-min { block-size: min-content; }
+  .velin-h-fit { block-size: fit-content; }
+  .velin-min-h-screen { min-block-size: 100dvh; }
+  .velin-min-h-0 { min-block-size: 0; }
+
+  /* Aspect ratio */
+  .velin-aspect-auto { aspect-ratio: auto; }
+  .velin-aspect-square { aspect-ratio: var(--velin-aspect-square); }
+  .velin-aspect-video { aspect-ratio: var(--velin-aspect-video); }
+  .velin-aspect-photo { aspect-ratio: var(--velin-aspect-photo); }
+  .velin-aspect-portrait { aspect-ratio: var(--velin-aspect-portrait); }
+  .velin-aspect-wide { aspect-ratio: var(--velin-aspect-wide); }
+  .velin-aspect-golden { aspect-ratio: var(--velin-aspect-golden); }
+
+  /* Object fit */
+  .velin-object-cover { object-fit: cover; }
+  .velin-object-contain { object-fit: contain; }
+  .velin-object-fill { object-fit: fill; }
+  .velin-object-none { object-fit: none; }
+
+  /* Object-position */
+  .velin-object-center { object-position: center; }
+  .velin-object-top { object-position: top; }
+  .velin-object-bottom { object-position: bottom; }
+  .velin-object-left { object-position: left; }
+  .velin-object-right { object-position: right; }
+  .velin-object-top-left { object-position: top left; }
+  .velin-object-top-right { object-position: top right; }
+}

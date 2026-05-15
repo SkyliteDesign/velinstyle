@@ -1,0 +1,79 @@
+@layer utilities {
+  /* Margin - all sides */
+  .velin-m-0 { margin: var(--velin-space-0); }
+  .velin-m-1 { margin: var(--velin-space-1); }
+  .velin-m-2 { margin: var(--velin-space-2); }
+  .velin-m-3 { margin: var(--velin-space-3); }
+  .velin-m-4 { margin: var(--velin-space-4); }
+  .velin-m-6 { margin: var(--velin-space-6); }
+  .velin-m-8 { margin: var(--velin-space-8); }
+  .velin-m-auto { margin: auto; }
+
+  /* Margin - block (top/bottom via logical props) */
+  .velin-mb-0 { margin-block: var(--velin-space-0); }
+  .velin-mb-1 { margin-block: var(--velin-space-1); }
+  .velin-mb-2 { margin-block: var(--velin-space-2); }
+  .velin-mb-3 { margin-block: var(--velin-space-3); }
+  .velin-mb-4 { margin-block: var(--velin-space-4); }
+  .velin-mb-6 { margin-block: var(--velin-space-6); }
+  .velin-mb-8 { margin-block: var(--velin-space-8); }
+
+  /* Margin - inline (left/right via logical props) */
+  .velin-mi-0 { margin-inline: var(--velin-space-0); }
+  .velin-mi-1 { margin-inline: var(--velin-space-1); }
+  .velin-mi-2 { margin-inline: var(--velin-space-2); }
+  .velin-mi-3 { margin-inline: var(--velin-space-3); }
+  .velin-mi-4 { margin-inline: var(--velin-space-4); }
+  .velin-mi-auto { margin-inline: auto; }
+
+  /* Margin - block-start */
+  .velin-mbs-0 { margin-block-start: var(--velin-space-0); }
+  .velin-mbs-2 { margin-block-start: var(--velin-space-2); }
+  .velin-mbs-4 { margin-block-start: var(--velin-space-4); }
+  .velin-mbs-6 { margin-block-start: var(--velin-space-6); }
+  .velin-mbs-8 { margin-block-start: var(--velin-space-8); }
+
+  /* Margin - block-end */
+  .velin-mbe-0 { margin-block-end: var(--velin-space-0); }
+  .velin-mbe-2 { margin-block-end: var(--velin-space-2); }
+  .velin-mbe-4 { margin-block-end: var(--velin-space-4); }
+  .velin-mbe-6 { margin-block-end: var(--velin-space-6); }
+  .velin-mbe-8 { margin-block-end: var(--velin-space-8); }
+
+  /* Padding - all sides */
+  .velin-p-0 { padding: var(--velin-space-0); }
+  .velin-p-1 { padding: var(--velin-space-1); }
+  .velin-p-2 { padding: var(--velin-space-2); }
+  .velin-p-3 { padding: var(--velin-space-3); }
+  .velin-p-4 { padding: var(--velin-space-4); }
+  .velin-p-5 { padding: var(--velin-space-5); }
+  .velin-p-6 { padding: var(--velin-space-6); }
+  .velin-p-8 { padding: var(--velin-space-8); }
+  .velin-p-10 { padding: var(--velin-space-10); }
+  .velin-p-12 { padding: var(--velin-space-12); }
+
+  /* Padding - block */
+  .velin-pb-0 { padding-block: var(--velin-space-0); }
+  .velin-pb-2 { padding-block: var(--velin-space-2); }
+  .velin-pb-3 { padding-block: var(--velin-space-3); }
+  .velin-pb-4 { padding-block: var(--velin-space-4); }
+  .velin-pb-6 { padding-block: var(--velin-space-6); }
+  .velin-pb-8 { padding-block: var(--velin-space-8); }
+
+  /* Padding - inline */
+  .velin-pi-0 { padding-inline: var(--velin-space-0); }
+  .velin-pi-2 { padding-inline: var(--velin-space-2); }
+  .velin-pi-3 { padding-inline: var(--velin-space-3); }
+  .velin-pi-4 { padding-inline: var(--velin-space-4); }
+  .velin-pi-6 { padding-inline: var(--velin-space-6); }
+  .velin-pi-8 { padding-inline: var(--velin-space-8); }
+
+  /* Gap utilities */
+  .velin-gap-0 { gap: 0; }
+  .velin-gap-1 { gap: var(--velin-space-1); }
+  .velin-gap-2 { gap: var(--velin-space-2); }
+  .velin-gap-3 { gap: var(--velin-space-3); }
+  .velin-gap-4 { gap: var(--velin-space-4); }
+  .velin-gap-6 { gap: var(--velin-space-6); }
+  .velin-gap-8 { gap: var(--velin-space-8); }
+}

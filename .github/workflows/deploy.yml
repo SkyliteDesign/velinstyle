@@ -1,0 +1,66 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build CSS (minified)
+        run: npm run build:css:min
+
+      - name: Build CSS (dev)
+        run: npm run build:css:dev
+
+      - name: Build JS (minified)
+        run: npm run build:js:min
+
+      - name: Build JS (dev)
+        run: npm run build:js:dev
+
+      - name: Build Themes
+        run: npm run build:themes
+
+      - name: Build Icons
+        run: npm run build:icons
+
+      - name: Copy dist into docs
+        run: cp -r dist docs/dist
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

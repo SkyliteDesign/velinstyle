@@ -1,0 +1,59 @@
+@layer themes {
+  :root[data-velin-theme="forest"],
+  [data-velin-theme="forest"] {
+    /* Forest: Deep green, natural, and earthy with woodland character */
+    --velin-radius-none: 0;
+    --velin-radius-xs: 0.125rem;
+    --velin-radius-sm: 0.25rem;
+    --velin-radius-md: 0.375rem;
+    --velin-radius-lg: 0.5rem;
+    --velin-radius-xl: 0.75rem;
+    --velin-radius-2xl: 1rem;
+    --velin-radius-full: 9999px;
+    --velin-radius-pill: 9999px;
+
+    --velin-color-primary: oklch(45% 0.12 150);
+    --velin-color-primary-hover: oklch(38% 0.12 150);
+    --velin-color-primary-active: oklch(32% 0.12 150);
+    --velin-color-primary-subtle: oklch(93% 0.03 150);
+    --velin-color-on-primary: oklch(100% 0 0);
+
+    --velin-color-secondary: oklch(55% 0.08 130);
+    --velin-color-secondary-hover: oklch(48% 0.08 130);
+    --velin-color-secondary-subtle: oklch(93% 0.02 130);
+    --velin-color-on-secondary: oklch(100% 0 0);
+
+    --velin-color-surface: oklch(96% 0.01 140);
+    --velin-color-surface-dim: oklch(92% 0.015 140);
+    --velin-color-surface-bright: oklch(99% 0.005 140);
+    --velin-color-text: oklch(18% 0.02 150);
+    --velin-color-text-muted: oklch(40% 0.03 140);
+    --velin-color-border: oklch(80% 0.03 140);
+    --velin-color-border-strong: oklch(55% 0.06 145);
+
+    --velin-shadow-sm: 0 1px 3px oklch(25% 0.03 140 / 0.1);
+    --velin-shadow-md: 0 3px 8px oklch(25% 0.03 140 / 0.14);
+    --velin-shadow-lg: 0 6px 16px oklch(25% 0.03 140 / 0.16);
+    --velin-shadow-xl: 0 10px 24px oklch(25% 0.03 140 / 0.18);
+    --velin-shadow-2xl: 0 16px 40px oklch(25% 0.03 140 / 0.22);
+
+    --velin-font-heading: "Merriweather", Georgia, serif;
+    --velin-font-body: "Lato", sans-serif;
+
+    --velin-weight-normal: 400;
+    --velin-weight-medium: 500;
+    --velin-weight-semibold: 600;
+    --velin-weight-bold: 700;
+    --velin-weight-extrabold: 800;
+
+    --velin-tracking-normal: 0;
+    --velin-tracking-wide: 0.025em;
+    --velin-tracking-wider: 0.05em;
+
+    --velin-leading-tight: 1.25;
+    --velin-leading-normal: 1.6;
+
+    --velin-duration-normal: 200ms;
+    --velin-duration-slow: 350ms;
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "name": "@birdapi/velinstyle",
+  "version": "0.6.1",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "types": "dist/velinstyle-components.d.ts",
+  "description": "WCAG-first CSS + Web Components: OKLCH themes, container queries, 35+ components—lean bundles, optional CLI. Ship inclusive UI faster.",
+  "type": "module",
+  "main": "dist/velinstyle.css",
+  "module": "dist/velinstyle-components.js",
+  "bin": {
+    "velinstyle": "./cli/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SkyliteDesign/velinstyle.git"
+  },
+  "homepage": "https://velinstyle.info",
+  "bugs": {
+    "url": "https://github.com/SkyliteDesign/velinstyle/issues"
+  },
+  "files": [
+    "dist/",
+    "src/",
+    "components/",
+    "cli/",
+    "icons/velin-icons.svg"
+  ],
+  "scripts": {
+    "build": "npm run build:css:min && npm run build:css:dev && npm run build:js:min && npm run build:js:dev && npm run build:js:iife && npm run build:themes && npm run build:icons",
+    "build:css:min": "lightningcss --bundle --minify src/velinstyle.css -o dist/velinstyle.min.css",
+    "build:css:dev": "lightningcss --bundle src/velinstyle.css -o dist/velinstyle.css",
+    "build:js:min": "esbuild components/index.js --bundle --minify --format=esm --outfile=dist/velinstyle-components.min.js",
+    "build:js:dev": "esbuild components/index.js --bundle --format=esm --outfile=dist/velinstyle-components.js",
+    "build:js:iife": "esbuild components/index.js --bundle --format=iife --outfile=dist/velinstyle-components.iife.js",
+    "build:themes": "node scripts/build-themes.js",
+    "build:icons": "node icons/build-sprite.js",
+    "dev": "npx serve . --cors -l 3000",
+    "watch": "lightningcss --bundle src/velinstyle.css -o dist/velinstyle.css --watch",
+    "lint": "stylelint \"src/**/*.css\"",
+    "test": "vitest run",
+    "test:a11y": "node tests/a11y/run.js"
+  },
+  "keywords": [
+    "css",
+    "framework",
+    "accessibility",
+    "a11y",
+    "wcag",
+    "mobile-first",
+    "container-queries",
+    "oklch",
+    "web-components",
+    "design-tokens",
+    "dark-mode",
+    "rtl"
+  ],
+  "author": "SkyliteDesign",
+  "license": "MIT",
+  "devDependencies": {
+    "lightningcss-cli": "^1.28.0",
+    "esbuild": "^0.24.0",
+    "serve": "^14.0.0",
+    "stylelint": "^16.0.0",
+    "stylelint-config-standard": "^36.0.0",
+    "vitest": "^3.2.0",
+    "jsdom": "^26.1.0",
+    "axe-core": "^4.10.0"
+  }
+}

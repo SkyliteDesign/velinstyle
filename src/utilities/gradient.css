@@ -1,0 +1,81 @@
+@layer utilities {
+  .velin-gradient-primary {
+    background: linear-gradient(135deg, var(--velin-color-primary), var(--velin-color-primary-hover));
+  }
+
+  .velin-gradient-secondary {
+    background: linear-gradient(135deg, var(--velin-color-secondary), var(--velin-color-secondary-hover));
+  }
+
+  .velin-gradient-surface {
+    background: linear-gradient(135deg, var(--velin-color-surface), var(--velin-color-surface-dim));
+  }
+
+  .velin-gradient-hero {
+    background: linear-gradient(160deg, var(--velin-color-primary-subtle) 0%, var(--velin-color-surface) 40%, var(--velin-color-secondary-subtle) 100%);
+  }
+
+  .velin-gradient-sunset {
+    background: linear-gradient(135deg, oklch(65% 0.2 30), oklch(55% 0.2 330));
+  }
+
+  .velin-gradient-ocean {
+    background: linear-gradient(135deg, oklch(55% 0.15 220), oklch(45% 0.15 260));
+  }
+
+  /* Direction modifiers */
+  .velin-gradient--to-right { background: linear-gradient(to right, var(--velin-gradient-from, var(--velin-color-primary)), var(--velin-gradient-to, var(--velin-color-secondary))); }
+  .velin-gradient--to-bottom { background: linear-gradient(to bottom, var(--velin-gradient-from, var(--velin-color-primary)), var(--velin-gradient-to, var(--velin-color-secondary))); }
+  .velin-gradient--to-br { background: linear-gradient(to bottom right, var(--velin-gradient-from, var(--velin-color-primary)), var(--velin-gradient-to, var(--velin-color-secondary))); }
+
+  /* Gradient text */
+  .velin-gradient-text {
+    background: linear-gradient(135deg, var(--velin-color-primary), var(--velin-color-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Luminance-Aware Gradients -- P3 Wide Gamut */
+  .velin-gradient-p3-vivid {
+    background: linear-gradient(135deg, oklch(65% 0.3 280), oklch(60% 0.3 340));
+  }
+
+  .velin-gradient-p3-neon {
+    background: linear-gradient(135deg, oklch(75% 0.35 150), oklch(70% 0.3 200));
+  }
+
+  .velin-gradient-p3-aurora {
+    background: linear-gradient(135deg, oklch(70% 0.25 160), oklch(65% 0.3 280), oklch(60% 0.25 340));
+  }
+
+  .velin-gradient-p3-ember {
+    background: linear-gradient(135deg, oklch(70% 0.3 30), oklch(60% 0.35 0));
+  }
+
+  .velin-gradient-p3-electric {
+    background: linear-gradient(135deg, oklch(60% 0.35 260), oklch(70% 0.3 180));
+  }
+
+  @media (color-gamut: p3) {
+    .velin-gradient-p3-vivid {
+      background: linear-gradient(135deg, color(display-p3 0.45 0.2 0.95), color(display-p3 0.9 0.15 0.6));
+    }
+
+    .velin-gradient-p3-neon {
+      background: linear-gradient(135deg, color(display-p3 0 0.95 0.3), color(display-p3 0 0.7 0.95));
+    }
+
+    .velin-gradient-p3-aurora {
+      background: linear-gradient(135deg, color(display-p3 0 0.9 0.5), color(display-p3 0.45 0.2 0.95), color(display-p3 0.9 0.15 0.6));
+    }
+
+    .velin-gradient-p3-ember {
+      background: linear-gradient(135deg, color(display-p3 1 0.45 0), color(display-p3 1 0 0.2));
+    }
+
+    .velin-gradient-p3-electric {
+      background: linear-gradient(135deg, color(display-p3 0.2 0.1 1), color(display-p3 0 0.9 0.8));
+    }
+  }
+}

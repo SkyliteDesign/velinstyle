@@ -1,0 +1,102 @@
+@layer components {
+  .velin-progress {
+    position: relative;
+    inline-size: 100%;
+    block-size: 0.5rem;
+    background: var(--velin-color-surface-dim);
+    border-radius: var(--velin-radius-full);
+    overflow: hidden;
+  }
+
+  .velin-progress__bar {
+    block-size: 100%;
+    background: var(--velin-color-primary);
+    border-radius: var(--velin-radius-full);
+    transition: inline-size var(--velin-duration-normal) var(--velin-ease-out);
+  }
+
+  .velin-progress__label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--velin-text-xs);
+    font-weight: var(--velin-weight-semibold);
+    color: var(--velin-color-text);
+  }
+
+  /* Sizes */
+  .velin-progress--sm { block-size: 0.25rem; }
+
+  .velin-progress--lg {
+    block-size: 1rem;
+  }
+
+  .velin-progress--xl {
+    block-size: 1.5rem;
+  }
+
+  /* Color variants */
+  .velin-progress--success .velin-progress__bar { background: var(--velin-color-success); }
+  .velin-progress--warning .velin-progress__bar { background: var(--velin-color-warning); }
+  .velin-progress--danger .velin-progress__bar { background: var(--velin-color-danger); }
+  .velin-progress--info .velin-progress__bar { background: var(--velin-color-info); }
+
+  /* Striped */
+  .velin-progress--striped .velin-progress__bar {
+    background-image: linear-gradient(
+      45deg,
+      rgba(255,255,255,0.15) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255,255,255,0.15) 50%,
+      rgba(255,255,255,0.15) 75%,
+      transparent 75%,
+      transparent
+    );
+    background-size: 1rem 1rem;
+  }
+
+  /* Animated stripes */
+  .velin-progress--animated .velin-progress__bar {
+    animation: velin-progress-stripes 1s linear infinite;
+  }
+
+  /* Indeterminate */
+  .velin-progress--indeterminate .velin-progress__bar {
+    inline-size: 30% !important;
+    animation: velin-progress-indeterminate 1.5s var(--velin-ease-in-out) infinite;
+  }
+
+  @keyframes velin-progress-stripes {
+    from { background-position: 1rem 0; }
+    to { background-position: 0 0; }
+  }
+
+  @keyframes velin-progress-indeterminate {
+    0% { margin-inline-start: -30%; }
+    100% { margin-inline-start: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .velin-progress--animated .velin-progress__bar,
+    .velin-progress--indeterminate .velin-progress__bar {
+      animation: none;
+    }
+    .velin-progress--indeterminate .velin-progress__bar {
+      margin-inline-start: 0;
+      inline-size: 100% !important;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .velin-progress {
+      border: 1px solid ButtonText;
+    }
+
+    .velin-progress__bar {
+      background: Highlight;
+    }
+  }
+}

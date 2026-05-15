@@ -1,0 +1,134 @@
+@layer components {
+  .velin-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--velin-space-3);
+    cursor: pointer;
+    min-block-size: 2.75rem;
+    padding-block: var(--velin-space-1);
+    user-select: none;
+  }
+
+  .velin-switch__input {
+    position: absolute;
+    opacity: 0;
+    inline-size: 0;
+    block-size: 0;
+    pointer-events: none;
+  }
+
+  .velin-switch__track {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    inline-size: 2.75rem;
+    block-size: 1.5rem;
+    border-radius: var(--velin-radius-full);
+    background: var(--velin-color-border-strong);
+    transition: background var(--velin-duration-fast) var(--velin-ease-default);
+    flex-shrink: 0;
+  }
+
+  .velin-switch__track::after {
+    content: "";
+    position: absolute;
+    inset-block-start: 2px;
+    inset-inline-start: 2px;
+    inline-size: calc(1.5rem - 4px);
+    block-size: calc(1.5rem - 4px);
+    border-radius: var(--velin-radius-full);
+    background: var(--velin-color-surface-bright);
+    box-shadow: var(--velin-shadow-sm);
+    transition: transform var(--velin-duration-fast) var(--velin-ease-default);
+  }
+
+  /* Checked state */
+  .velin-switch__input:checked + .velin-switch__track {
+    background: var(--velin-color-primary);
+  }
+
+  .velin-switch__input:checked + .velin-switch__track::after {
+    transform: translateX(1.25rem);
+  }
+
+  /* Focus */
+  .velin-switch__input:focus-visible + .velin-switch__track {
+    outline: 3px solid var(--velin-color-focus);
+    outline-offset: 2px;
+  }
+
+  /* Disabled */
+  .velin-switch__input:disabled + .velin-switch__track {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .velin-switch:has(.velin-switch__input:disabled) {
+    cursor: not-allowed;
+  }
+
+  .velin-switch__label {
+    font-size: var(--velin-text-base);
+    color: var(--velin-color-text);
+  }
+
+  /* Sizes */
+  .velin-switch--sm .velin-switch__track {
+    inline-size: 2rem;
+    block-size: 1.125rem;
+  }
+
+  .velin-switch--sm .velin-switch__track::after {
+    inline-size: calc(1.125rem - 4px);
+    block-size: calc(1.125rem - 4px);
+  }
+
+  .velin-switch--sm .velin-switch__input:checked + .velin-switch__track::after {
+    transform: translateX(0.875rem);
+  }
+
+  .velin-switch--lg .velin-switch__track {
+    inline-size: 3.5rem;
+    block-size: 2rem;
+  }
+
+  .velin-switch--lg .velin-switch__track::after {
+    inline-size: calc(2rem - 4px);
+    block-size: calc(2rem - 4px);
+  }
+
+  .velin-switch--lg .velin-switch__input:checked + .velin-switch__track::after {
+    transform: translateX(1.5rem);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .velin-switch__track,
+    .velin-switch__track::after {
+      transition: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .velin-switch__track {
+      border: 2px solid ButtonText;
+      background: Canvas;
+    }
+
+    .velin-switch__track::after {
+      background: ButtonText;
+    }
+
+    .velin-switch__input:checked + .velin-switch__track {
+      background: Highlight;
+      border-color: Highlight;
+    }
+
+    .velin-switch__input:checked + .velin-switch__track::after {
+      background: HighlightText;
+    }
+
+    .velin-switch__input:focus-visible + .velin-switch__track {
+      outline-color: Highlight;
+    }
+  }
+}

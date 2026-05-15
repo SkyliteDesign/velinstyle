@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - VelinStyle Sample</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <script type="module" src="../dist/velinstyle-components.js"></script>
+  <style>
+    body { background: var(--velin-color-surface-dim); margin: 0; }
+
+    .settings-sidebar {
+      background: var(--velin-color-surface);
+      padding: var(--velin-space-6);
+      border-inline-end: 1px solid var(--velin-color-border);
+    }
+
+    .settings-sidebar .velin-nav__brand {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-2);
+    }
+
+    .settings-main {
+      padding: var(--velin-space-8);
+      max-inline-size: 52rem;
+    }
+
+    .settings-header {
+      margin-block-end: var(--velin-space-6);
+    }
+
+    .settings-header h1 {
+      font-size: var(--velin-text-2xl);
+      font-weight: var(--velin-weight-bold);
+      margin: 0 0 var(--velin-space-1) 0;
+    }
+
+    .settings-header p {
+      color: var(--velin-color-text-muted);
+      margin: 0;
+    }
+
+    .profile-section {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--velin-space-6);
+    }
+
+    .profile-avatar-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--velin-space-3);
+      flex-shrink: 0;
+    }
+
+    .profile-fields {
+      flex: 1;
+      min-inline-size: 0;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--velin-space-4);
+    }
+
+    .notification-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--velin-space-4) 0;
+      border-block-end: 1px solid var(--velin-color-border);
+    }
+
+    .notification-item:last-child {
+      border-block-end: none;
+    }
+
+    .notification-info h3 {
+      font-size: var(--velin-text-base);
+      font-weight: var(--velin-weight-medium);
+      margin: 0 0 var(--velin-space-1) 0;
+    }
+
+    .notification-info p {
+      font-size: var(--velin-text-sm);
+      color: var(--velin-color-text-muted);
+      margin: 0;
+    }
+
+    .security-card {
+      background: var(--velin-color-surface);
+      border: 1px solid var(--velin-color-border);
+      border-radius: var(--velin-radius-md);
+      padding: var(--velin-space-5);
+    }
+
+    .security-card + .security-card {
+      margin-block-start: var(--velin-space-4);
+    }
+
+    .security-card h3 {
+      font-size: var(--velin-text-lg);
+      font-weight: var(--velin-weight-semibold);
+      margin: 0 0 var(--velin-space-1) 0;
+    }
+
+    .security-card > p {
+      font-size: var(--velin-text-sm);
+      color: var(--velin-color-text-muted);
+      margin: 0 0 var(--velin-space-4) 0;
+    }
+
+    .session-device {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-3);
+    }
+
+    .session-device svg {
+      flex-shrink: 0;
+      color: var(--velin-color-text-muted);
+    }
+
+    .session-meta {
+      flex: 1;
+      min-inline-size: 0;
+    }
+
+    .session-meta strong {
+      display: block;
+      font-weight: var(--velin-weight-medium);
+    }
+
+    .session-meta span {
+      font-size: var(--velin-text-sm);
+      color: var(--velin-color-text-muted);
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--velin-space-3);
+      padding-block-start: var(--velin-space-4);
+    }
+
+    @media (max-width: 48rem) {
+      .settings-sidebar { display: none; }
+      .settings-main { padding: var(--velin-space-4); }
+      .profile-section { flex-direction: column; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+
+  <div class="velin-layout-sidebar">
+    <aside class="settings-sidebar" aria-label="Settings navigation">
+      <nav class="velin-nav velin-nav--vertical" aria-label="Settings">
+        <a href="#" class="velin-nav__brand">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Settings
+        </a>
+        <ul class="velin-nav__list">
+          <li>
+            <a href="#" class="velin-nav__link" aria-current="page">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Profile
+            </a>
+          </li>
+          <li>
+            <a href="#" class="velin-nav__link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              Notifications
+            </a>
+          </li>
+          <li>
+            <a href="#" class="velin-nav__link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Security
+            </a>
+          </li>
+          <li>
+            <a href="#" class="velin-nav__link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              Billing
+            </a>
+          </li>
+          <li>
+            <a href="#" class="velin-nav__link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              API
+            </a>
+          </li>
+        </ul>
+        <div style="margin-block-start: auto; padding-block-start: var(--velin-space-4); border-block-start: 1px solid var(--velin-color-border);">
+          <a href="#" class="velin-nav__link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Sign Out
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <main id="main" class="settings-main">
+      <div class="settings-header">
+        <h1>Account Settings</h1>
+        <p>Manage your account preferences and personal information.</p>
+      </div>
+
+      <velin-tabs>
+        <!-- Tabs -->
+        <button slot="tab" aria-selected="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Profile
+        </button>
+        <button slot="tab">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          Notifications
+        </button>
+        <button slot="tab">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Security
+        </button>
+
+        <!-- Profile Panel -->
+        <div slot="panel">
+          <div class="profile-section">
+            <div class="profile-avatar-area">
+              <div class="velin-avatar velin-avatar--xl" data-velin-initials="AK">
+                <img src="https://i.pravatar.cc/160?img=12" alt="Alex Kim">
+              </div>
+              <button class="velin-btn velin-btn--outline velin-btn--sm">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                Upload
+              </button>
+            </div>
+
+            <div class="profile-fields">
+              <div class="form-row">
+                <div class="velin-field">
+                  <label class="velin-label" for="first-name">First name</label>
+                  <input type="text" id="first-name" class="velin-input" value="Alex">
+                </div>
+                <div class="velin-field">
+                  <label class="velin-label" for="last-name">Last name</label>
+                  <input type="text" id="last-name" class="velin-input" value="Kim">
+                </div>
+              </div>
+
+              <div class="velin-field">
+                <label class="velin-label" for="email">Email address</label>
+                <input type="email" id="email" class="velin-input" value="alex.kim@example.com">
+                <span class="velin-field-help">We'll never share your email with third parties.</span>
+              </div>
+
+              <div class="velin-field">
+                <label class="velin-label" for="username">Username</label>
+                <input type="text" id="username" class="velin-input" value="alexkim">
+              </div>
+
+              <hr class="velin-divider">
+
+              <div class="velin-field">
+                <label class="velin-label" for="bio">Bio</label>
+                <textarea id="bio" class="velin-textarea" rows="4" placeholder="Tell us a little about yourself...">Full-stack developer passionate about design systems and accessible web interfaces. Currently building tools that help teams ship faster.</textarea>
+              </div>
+
+              <div class="velin-field">
+                <label class="velin-label" for="website">Website</label>
+                <input type="url" id="website" class="velin-input" value="https://alexkim.dev" placeholder="https://example.com">
+              </div>
+
+              <div class="form-actions">
+                <button class="velin-btn velin-btn--ghost">Cancel</button>
+                <button class="velin-btn velin-btn--primary">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  Save Changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notifications Panel -->
+        <div slot="panel">
+          <div style="background: var(--velin-color-surface); border: 1px solid var(--velin-color-border); border-radius: var(--velin-radius-md); padding: var(--velin-space-5);">
+            <h2 style="font-size: var(--velin-text-lg); font-weight: var(--velin-weight-semibold); margin: 0 0 var(--velin-space-1) 0;">Email Notifications</h2>
+            <p style="font-size: var(--velin-text-sm); color: var(--velin-color-text-muted); margin: 0 0 var(--velin-space-4) 0;">Choose which emails you'd like to receive.</p>
+
+            <div class="notification-item">
+              <div class="notification-info">
+                <h3>Email notifications</h3>
+                <p>Receive email alerts for important account activity.</p>
+              </div>
+              <label class="velin-switch">
+                <input type="checkbox" class="velin-switch__input" checked>
+                <span class="velin-switch__track"></span>
+              </label>
+            </div>
+
+            <div class="notification-item">
+              <div class="notification-info">
+                <h3>Push notifications</h3>
+                <p>Get browser push notifications for real-time updates.</p>
+              </div>
+              <label class="velin-switch">
+                <input type="checkbox" class="velin-switch__input" checked>
+                <span class="velin-switch__track"></span>
+              </label>
+            </div>
+
+            <div class="notification-item">
+              <div class="notification-info">
+                <h3>Marketing emails</h3>
+                <p>Hear about new features, tips, and product updates.</p>
+              </div>
+              <label class="velin-switch">
+                <input type="checkbox" class="velin-switch__input">
+                <span class="velin-switch__track"></span>
+              </label>
+            </div>
+
+            <div class="notification-item">
+              <div class="notification-info">
+                <h3>Weekly digest</h3>
+                <p>A summary of your activity and any missed notifications.</p>
+              </div>
+              <label class="velin-switch">
+                <input type="checkbox" class="velin-switch__input" checked>
+                <span class="velin-switch__track"></span>
+              </label>
+            </div>
+          </div>
+
+          <hr class="velin-divider">
+
+          <div style="background: var(--velin-color-surface); border: 1px solid var(--velin-color-border); border-radius: var(--velin-radius-md); padding: var(--velin-space-5);">
+            <h2 style="font-size: var(--velin-text-lg); font-weight: var(--velin-weight-semibold); margin: 0 0 var(--velin-space-1) 0;">Notification Channels</h2>
+            <p style="font-size: var(--velin-text-sm); color: var(--velin-color-text-muted); margin: 0 0 var(--velin-space-4) 0;">Where should we send notifications?</p>
+
+            <div class="notification-item">
+              <div class="notification-info">
+                <h3>SMS alerts</h3>
+                <p>Critical security alerts via text message.</p>
+              </div>
+              <label class="velin-switch">
+                <input type="checkbox" class="velin-switch__input">
+                <span class="velin-switch__track"></span>
+              </label>
+            </div>
+
+            <div class="notification-item">
+              <div class="notification-info">
+                <h3>Slack integration</h3>
+                <p>Forward notifications to your Slack workspace.</p>
+              </div>
+              <label class="velin-switch">
+                <input type="checkbox" class="velin-switch__input" checked>
+                <span class="velin-switch__track"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="velin-btn velin-btn--primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save Preferences
+            </button>
+          </div>
+        </div>
+
+        <!-- Security Panel -->
+        <div slot="panel">
+          <div class="security-card">
+            <h3>Change Password</h3>
+            <p>Update your password to keep your account secure.</p>
+
+            <div class="velin-field">
+              <label class="velin-label" for="current-password">Current password</label>
+              <input type="password" id="current-password" class="velin-input" placeholder="Enter current password">
+            </div>
+
+            <div class="form-row">
+              <div class="velin-field">
+                <label class="velin-label" for="new-password">New password</label>
+                <input type="password" id="new-password" class="velin-input" placeholder="Enter new password">
+                <span class="velin-field-help">Minimum 8 characters with at least one number.</span>
+              </div>
+              <div class="velin-field">
+                <label class="velin-label" for="confirm-password">Confirm password</label>
+                <input type="password" id="confirm-password" class="velin-input" placeholder="Repeat new password">
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="velin-btn velin-btn--primary">Update Password</button>
+            </div>
+          </div>
+
+          <hr class="velin-divider">
+
+          <div class="security-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div>
+                <h3>Two-Factor Authentication</h3>
+                <p>Add an extra layer of security with 2FA via authenticator app.</p>
+              </div>
+              <label class="velin-switch">
+                <input type="checkbox" class="velin-switch__input">
+                <span class="velin-switch__track"></span>
+                <span class="velin-switch__label">Disabled</span>
+              </label>
+            </div>
+          </div>
+
+          <hr class="velin-divider">
+
+          <div class="security-card">
+            <h3>Active Sessions</h3>
+            <p>Devices currently signed into your account.</p>
+
+            <ul class="velin-list-group velin-list-group--flush">
+              <li class="velin-list-group__item">
+                <div class="session-device">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  <div class="session-meta">
+                    <strong>Windows PC — Chrome</strong>
+                    <span>Berlin, Germany · Current session</span>
+                  </div>
+                  <span class="velin-badge velin-badge--success">Active</span>
+                </div>
+              </li>
+              <li class="velin-list-group__item">
+                <div class="session-device">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  <div class="session-meta">
+                    <strong>iPhone 15 — Safari</strong>
+                    <span>Berlin, Germany · 2 hours ago</span>
+                  </div>
+                  <button class="velin-btn velin-btn--ghost velin-btn--sm" style="color: var(--velin-color-danger);">Revoke</button>
+                </div>
+              </li>
+              <li class="velin-list-group__item">
+                <div class="session-device">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  <div class="session-meta">
+                    <strong>MacBook Pro — Firefox</strong>
+                    <span>Munich, Germany · 3 days ago</span>
+                  </div>
+                  <button class="velin-btn velin-btn--ghost velin-btn--sm" style="color: var(--velin-color-danger);">Revoke</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <hr class="velin-divider">
+
+          <div class="security-card" style="border-color: var(--velin-color-danger);">
+            <h3 style="color: var(--velin-color-danger);">Danger Zone</h3>
+            <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
+            <button class="velin-btn velin-btn--danger">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+              Delete Account
+            </button>
+          </div>
+        </div>
+      </velin-tabs>
+    </main>
+  </div>
+</body>
+</html>

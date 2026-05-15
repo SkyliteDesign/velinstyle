@@ -1,0 +1,60 @@
+@layer a11y {
+  .velin-skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--velin-color-surface-dim) 25%,
+      var(--velin-color-surface) 50%,
+      var(--velin-color-surface-dim) 75%
+    );
+    background-size: 200% 100%;
+    animation: velin-shimmer 1.5s ease-in-out infinite;
+    border-radius: var(--velin-radius-sm);
+    color: transparent;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .velin-skeleton--text {
+    height: 1em;
+    margin-block: 0.25em;
+    max-inline-size: 100%;
+  }
+
+  .velin-skeleton--heading {
+    height: 1.5em;
+    inline-size: 60%;
+    margin-block: 0.25em;
+  }
+
+  .velin-skeleton--avatar {
+    border-radius: var(--velin-radius-full);
+    aspect-ratio: var(--velin-aspect-square);
+  }
+
+  .velin-skeleton--image {
+    aspect-ratio: var(--velin-aspect-video);
+    inline-size: 100%;
+  }
+
+  .velin-skeleton--button {
+    height: 2.75rem;
+    inline-size: 8rem;
+    border-radius: var(--velin-radius-md);
+  }
+
+  .velin-skeleton--circle {
+    border-radius: var(--velin-radius-full);
+    aspect-ratio: var(--velin-aspect-square);
+  }
+
+  @keyframes velin-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .velin-skeleton {
+      animation: none;
+    }
+  }
+}

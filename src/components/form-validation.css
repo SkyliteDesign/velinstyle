@@ -1,0 +1,112 @@
+@layer components {
+  /**
+   * Form validation — progressive enhancement
+   * Use .velin-form--validated on <form> to show success/error borders after interaction.
+   * Browsers with :user-invalid avoid "all red on load" for empty required fields.
+   */
+
+  .velin-input[aria-invalid="true"],
+  .velin-select[aria-invalid="true"],
+  .velin-textarea[aria-invalid="true"] {
+    border-color: var(--velin-color-danger);
+  }
+
+  .velin-input[aria-invalid="true"]:focus,
+  .velin-select[aria-invalid="true"]:focus,
+  .velin-textarea[aria-invalid="true"]:focus {
+    outline-color: var(--velin-color-danger);
+  }
+
+  /* Alias for docs / roadmap naming */
+  .velin-field-hint {
+    font-size: var(--velin-text-sm);
+    color: var(--velin-color-text-muted);
+    margin-block-start: var(--velin-space-1);
+  }
+
+  .velin-field-error--icon {
+    padding-inline-start: var(--velin-space-3);
+    border-inline-start: 3px solid var(--velin-color-danger);
+  }
+
+  .velin-field-valid {
+    font-size: var(--velin-text-sm);
+    color: var(--velin-color-success);
+    margin-block-start: var(--velin-space-1);
+  }
+
+  /* Live region helper (visual only; semantics via role/aria-live in HTML) */
+  .velin-live-region {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .velin-live-region--visible {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  @supports selector(:user-invalid) {
+    .velin-form--validated .velin-input:user-valid,
+    .velin-form--validated .velin-select:user-valid,
+    .velin-form--validated .velin-textarea:user-valid {
+      border-color: var(--velin-color-success);
+    }
+
+    .velin-form--validated .velin-input:user-invalid,
+    .velin-form--validated .velin-select:user-invalid,
+    .velin-form--validated .velin-textarea:user-invalid {
+      border-color: var(--velin-color-danger);
+    }
+
+    .velin-form--validated .velin-input:user-valid:focus,
+    .velin-form--validated .velin-select:user-valid:focus,
+    .velin-form--validated .velin-textarea:user-valid:focus {
+      outline-color: var(--velin-color-success);
+    }
+
+    .velin-form--validated .velin-input:user-invalid:focus,
+    .velin-form--validated .velin-select:user-invalid:focus,
+    .velin-form--validated .velin-textarea:user-invalid:focus {
+      outline-color: var(--velin-color-danger);
+    }
+  }
+
+  @supports not selector(:user-invalid) {
+    .velin-form--validated .velin-input:valid,
+    .velin-form--validated .velin-select:valid,
+    .velin-form--validated .velin-textarea:valid {
+      border-color: var(--velin-color-success);
+    }
+
+    .velin-form--validated .velin-input:invalid,
+    .velin-form--validated .velin-select:invalid,
+    .velin-form--validated .velin-textarea:invalid {
+      border-color: var(--velin-color-danger);
+    }
+
+    .velin-form--validated .velin-input:valid:focus,
+    .velin-form--validated .velin-select:valid:focus,
+    .velin-form--validated .velin-textarea:valid:focus {
+      outline-color: var(--velin-color-success);
+    }
+
+    .velin-form--validated .velin-input:invalid:focus,
+    .velin-form--validated .velin-select:invalid:focus,
+    .velin-form--validated .velin-textarea:invalid:focus {
+      outline-color: var(--velin-color-danger);
+    }
+  }
+}

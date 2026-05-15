@@ -1,0 +1,10 @@
+{
+  "_comment": "With a top-level \"classMap\" object, ONLY classMap entries are used (other top-level keys are ignored). Without classMap, use a flat object. Keys = tokens in class strings; values = full Velin classes. Place as velinstyle-prefix-map.json next to the tree you migrate, or pass --map. Explicit entries override catalog velin-{token} and --bootstrap-display.",
+  "classMap": {
+    "btn-primary": "velin-btn--primary",
+    "btn-secondary": "velin-btn--secondary",
+    "btn": "velin-btn",
+    "alert-danger": "velin-alert--danger",
+    "form-control": "velin-input"
+  }
+}

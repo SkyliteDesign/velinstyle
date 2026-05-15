@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" data-velin-theme="sharp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - VelinStyle Sharp Theme Sample</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="../src/themes/sharp.css">
+  <script type="module" src="../dist/velinstyle-components.js"></script>
+  <style>
+    body { background: var(--velin-color-surface-dim); }
+    .dash-layout {
+      display: grid;
+      grid-template-columns: 16rem 1fr;
+      min-block-size: 100vh;
+    }
+    @media (max-width: 48rem) {
+      .dash-layout { grid-template-columns: 1fr; }
+      .dash-sidebar { display: none; }
+      .dash-sidebar[data-open] { display: flex; position: fixed; inset: 0; z-index: var(--velin-z-overlay); }
+    }
+    .dash-sidebar {
+      background: var(--velin-color-surface);
+      border-inline-end: 1px solid var(--velin-color-border);
+      padding: var(--velin-space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--velin-space-2);
+    }
+    .dash-sidebar__brand {
+      font-size: var(--velin-text-xl);
+      font-weight: var(--velin-weight-extrabold);
+      letter-spacing: var(--velin-tracking-tight);
+      margin-block-end: var(--velin-space-6);
+      text-decoration: none;
+      color: var(--velin-color-text);
+    }
+    .dash-sidebar__link {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-3);
+      padding: var(--velin-space-2) var(--velin-space-3);
+      border-radius: var(--velin-radius-sm);
+      text-decoration: none;
+      color: var(--velin-color-text-muted);
+      font-size: var(--velin-text-sm);
+      font-weight: var(--velin-weight-medium);
+      transition: var(--velin-transition-colors);
+    }
+    .dash-sidebar__link:hover,
+    .dash-sidebar__link[aria-current="page"] {
+      background: var(--velin-color-primary-subtle);
+      color: var(--velin-color-primary);
+    }
+    .dash-main {
+      padding: var(--velin-space-6);
+      overflow-x: hidden;
+    }
+    .dash-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-block-end: var(--velin-space-8);
+    }
+    .dash-topbar__title {
+      font-size: var(--velin-text-2xl);
+      font-weight: var(--velin-weight-bold);
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+      gap: var(--velin-space-4);
+      margin-block-end: var(--velin-space-8);
+    }
+    .kpi-card {
+      background: var(--velin-color-surface);
+      padding: var(--velin-space-5);
+      border: 1px solid var(--velin-color-border);
+      border-radius: var(--velin-radius-sm);
+    }
+    .kpi-card__label {
+      font-size: var(--velin-text-xs);
+      color: var(--velin-color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: var(--velin-weight-semibold);
+    }
+    .kpi-card__value {
+      font-size: var(--velin-text-3xl);
+      font-weight: var(--velin-weight-extrabold);
+      margin-block: var(--velin-space-1);
+    }
+    .kpi-card__change {
+      font-size: var(--velin-text-sm);
+      font-weight: var(--velin-weight-medium);
+    }
+    .kpi-card__change--up { color: var(--velin-color-success); }
+    .kpi-card__change--down { color: var(--velin-color-danger); }
+    .chart-placeholder {
+      background: var(--velin-color-surface);
+      border: 1px solid var(--velin-color-border);
+      border-radius: var(--velin-radius-sm);
+      padding: var(--velin-space-6);
+      margin-block-end: var(--velin-space-6);
+    }
+    .chart-placeholder__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-block-end: var(--velin-space-6);
+    }
+    .chart-bar-container {
+      display: flex;
+      align-items: flex-end;
+      gap: var(--velin-space-2);
+      height: 10rem;
+    }
+    .chart-bar {
+      flex: 1;
+      background: var(--velin-color-primary);
+      border-radius: var(--velin-radius-xs) var(--velin-radius-xs) 0 0;
+      min-width: 1rem;
+      transition: var(--velin-transition-transform);
+    }
+    .chart-bar:hover { opacity: 0.8; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+
+  <div class="dash-layout">
+    <aside class="dash-sidebar" aria-label="Dashboard navigation">
+      <a href="#" class="dash-sidebar__brand">AdminPanel</a>
+      <a href="#" class="dash-sidebar__link" aria-current="page">
+        <velin-icon name="home" size="18"></velin-icon>
+        Dashboard
+      </a>
+      <a href="#" class="dash-sidebar__link">
+        <velin-icon name="users" size="18"></velin-icon>
+        Users
+      </a>
+      <a href="#" class="dash-sidebar__link">
+        <velin-icon name="filter" size="18"></velin-icon>
+        Analytics
+      </a>
+      <a href="#" class="dash-sidebar__link">
+        <velin-icon name="mail" size="18"></velin-icon>
+        Messages
+      </a>
+      <a href="#" class="dash-sidebar__link">
+        <velin-icon name="calendar" size="18"></velin-icon>
+        Schedule
+      </a>
+      <a href="#" class="dash-sidebar__link">
+        <velin-icon name="settings" size="18"></velin-icon>
+        Settings
+      </a>
+      <div style="margin-block-start: auto; padding-block-start: var(--velin-space-4); border-block-start: 1px solid var(--velin-color-border);">
+        <a href="#" class="dash-sidebar__link">
+          <velin-icon name="user" size="18"></velin-icon>
+          Profile
+        </a>
+      </div>
+    </aside>
+
+    <main id="main" class="dash-main">
+      <div class="dash-topbar">
+        <h1 class="dash-topbar__title">Dashboard</h1>
+        <div class="velin-flex velin-flex--gap-2">
+          <button class="velin-btn velin-btn--outline velin-btn--sm">
+            <velin-icon name="download" size="16"></velin-icon>
+            Export
+          </button>
+          <button class="velin-btn velin-btn--primary velin-btn--sm">
+            <velin-icon name="plus" size="16"></velin-icon>
+            New Entry
+          </button>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-card__label">Total Revenue</div>
+          <div class="kpi-card__value">$84,254</div>
+          <div class="kpi-card__change kpi-card__change--up">+12.5% vs last month</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__label">Active Users</div>
+          <div class="kpi-card__value">2,847</div>
+          <div class="kpi-card__change kpi-card__change--up">+8.1% vs last month</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__label">Conversion Rate</div>
+          <div class="kpi-card__value">3.24%</div>
+          <div class="kpi-card__change kpi-card__change--down">-0.8% vs last month</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__label">Avg. Order Value</div>
+          <div class="kpi-card__value">$127</div>
+          <div class="kpi-card__change kpi-card__change--up">+4.3% vs last month</div>
+        </div>
+      </div>
+
+      <div class="chart-placeholder">
+        <div class="chart-placeholder__header">
+          <h2 style="font-size: var(--velin-text-lg); font-weight: var(--velin-weight-semibold);">Revenue Overview</h2>
+          <div class="velin-btn-group">
+            <button class="velin-btn velin-btn--outline velin-btn--sm">Week</button>
+            <button class="velin-btn velin-btn--primary velin-btn--sm">Month</button>
+            <button class="velin-btn velin-btn--outline velin-btn--sm">Year</button>
+          </div>
+        </div>
+        <div class="chart-bar-container">
+          <div class="chart-bar" style="height: 40%;"></div>
+          <div class="chart-bar" style="height: 65%;"></div>
+          <div class="chart-bar" style="height: 55%;"></div>
+          <div class="chart-bar" style="height: 80%;"></div>
+          <div class="chart-bar" style="height: 70%;"></div>
+          <div class="chart-bar" style="height: 90%;"></div>
+          <div class="chart-bar" style="height: 75%;"></div>
+          <div class="chart-bar" style="height: 85%;"></div>
+          <div class="chart-bar" style="height: 60%;"></div>
+          <div class="chart-bar" style="height: 95%;"></div>
+          <div class="chart-bar" style="height: 78%;"></div>
+          <div class="chart-bar" style="height: 88%;"></div>
+        </div>
+        <div class="velin-flex velin-flex--between" style="margin-block-start: var(--velin-space-2); font-size: var(--velin-text-xs); color: var(--velin-color-text-muted);">
+          <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+          <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+        </div>
+      </div>
+
+      <div class="velin-grid" style="grid-template-columns: 1fr 1fr; gap: var(--velin-space-6);">
+        <div class="chart-placeholder">
+          <h2 style="font-size: var(--velin-text-lg); font-weight: var(--velin-weight-semibold); margin-block-end: var(--velin-space-4);">Recent Activity</h2>
+          <div class="velin-stack--3">
+            <div class="velin-flex velin-flex--gap-3" style="align-items: start;">
+              <span class="velin-badge velin-badge--success">New</span>
+              <div>
+                <p style="font-weight: var(--velin-weight-medium);">New user registration</p>
+                <p style="font-size: var(--velin-text-sm); color: var(--velin-color-text-muted);">2 minutes ago</p>
+              </div>
+            </div>
+            <div class="velin-flex velin-flex--gap-3" style="align-items: start;">
+              <span class="velin-badge velin-badge--info">Order</span>
+              <div>
+                <p style="font-weight: var(--velin-weight-medium);">Order #4521 completed</p>
+                <p style="font-size: var(--velin-text-sm); color: var(--velin-color-text-muted);">15 minutes ago</p>
+              </div>
+            </div>
+            <div class="velin-flex velin-flex--gap-3" style="align-items: start;">
+              <span class="velin-badge velin-badge--warning">Alert</span>
+              <div>
+                <p style="font-weight: var(--velin-weight-medium);">Server load at 85%</p>
+                <p style="font-size: var(--velin-text-sm); color: var(--velin-color-text-muted);">1 hour ago</p>
+              </div>
+            </div>
+            <div class="velin-flex velin-flex--gap-3" style="align-items: start;">
+              <span class="velin-badge velin-badge--primary">Deploy</span>
+              <div>
+                <p style="font-weight: var(--velin-weight-medium);">v2.3.1 deployed to production</p>
+                <p style="font-size: var(--velin-text-sm); color: var(--velin-color-text-muted);">3 hours ago</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-placeholder">
+          <h2 style="font-size: var(--velin-text-lg); font-weight: var(--velin-weight-semibold); margin-block-end: var(--velin-space-4);">Quick Actions</h2>
+          <div class="velin-stack--3">
+            <button class="velin-btn velin-btn--outline velin-btn--block" style="justify-content: start; gap: var(--velin-space-3);">
+              <velin-icon name="users" size="18"></velin-icon> Manage Users
+            </button>
+            <button class="velin-btn velin-btn--outline velin-btn--block" style="justify-content: start; gap: var(--velin-space-3);">
+              <velin-icon name="filter" size="18"></velin-icon> View Reports
+            </button>
+            <button class="velin-btn velin-btn--outline velin-btn--block" style="justify-content: start; gap: var(--velin-space-3);">
+              <velin-icon name="settings" size="18"></velin-icon> System Settings
+            </button>
+            <button class="velin-btn velin-btn--outline velin-btn--block" style="justify-content: start; gap: var(--velin-space-3);">
+              <velin-icon name="download" size="18"></velin-icon> Download Backup
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-placeholder" style="margin-block-start: var(--velin-space-6);">
+        <div class="chart-placeholder__header">
+          <h2 style="font-size: var(--velin-text-lg); font-weight: var(--velin-weight-semibold);">Recent Orders</h2>
+          <button class="velin-btn velin-btn--ghost velin-btn--sm">View All</button>
+        </div>
+        <div class="velin-table-wrapper">
+          <table class="velin-table velin-table--striped velin-table--hover">
+            <thead>
+              <tr>
+                <th scope="col">Order ID</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Status</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#4521</td>
+                <td>Anna Mueller</td>
+                <td>$234.00</td>
+                <td><span class="velin-badge velin-badge--success">Completed</span></td>
+                <td>May 11, 2026</td>
+              </tr>
+              <tr>
+                <td>#4520</td>
+                <td>Lars Schmidt</td>
+                <td>$89.50</td>
+                <td><span class="velin-badge velin-badge--warning">Processing</span></td>
+                <td>May 11, 2026</td>
+              </tr>
+              <tr>
+                <td>#4519</td>
+                <td>Sophie Weber</td>
+                <td>$412.00</td>
+                <td><span class="velin-badge velin-badge--success">Completed</span></td>
+                <td>May 10, 2026</td>
+              </tr>
+              <tr>
+                <td>#4518</td>
+                <td>Max Fischer</td>
+                <td>$67.25</td>
+                <td><span class="velin-badge velin-badge--danger">Cancelled</span></td>
+                <td>May 10, 2026</td>
+              </tr>
+              <tr>
+                <td>#4517</td>
+                <td>Elena Braun</td>
+                <td>$189.00</td>
+                <td><span class="velin-badge velin-badge--info">Shipped</span></td>
+                <td>May 9, 2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <velin-toast id="toaster"></velin-toast>
+</body>
+</html>

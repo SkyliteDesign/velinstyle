@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Board - VelinStyle Sample</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <script type="module" src="../dist/velinstyle-components.js"></script>
+  <style>
+    body { background: var(--velin-color-surface-dim); }
+
+    .board-header {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-4);
+      padding: var(--velin-space-4) var(--velin-space-6);
+      background: var(--velin-color-surface);
+      border-block-end: 1px solid var(--velin-color-border);
+      flex-wrap: wrap;
+    }
+    .board-header__title {
+      font-size: var(--velin-text-xl);
+      font-weight: var(--velin-weight-extrabold);
+      letter-spacing: var(--velin-tracking-tight);
+    }
+    .board-header__meta {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-3);
+      margin-inline-start: auto;
+    }
+
+    .board-columns {
+      display: flex;
+      gap: var(--velin-space-4);
+      padding: var(--velin-space-5) var(--velin-space-6);
+      min-block-size: calc(100vh - 5rem);
+      align-items: flex-start;
+      overflow-x: auto;
+    }
+    @media (max-width: 48rem) {
+      .board-columns {
+        scroll-snap-type: x mandatory;
+        padding: var(--velin-space-4);
+      }
+    }
+
+    .board-col {
+      flex: 0 0 18rem;
+      min-inline-size: 18rem;
+      display: flex;
+      flex-direction: column;
+      gap: var(--velin-space-3);
+      scroll-snap-align: start;
+    }
+    .board-col__header {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-2);
+      padding: var(--velin-space-3) var(--velin-space-4);
+      background: var(--velin-color-surface);
+      border: 1px solid var(--velin-color-border);
+      border-radius: var(--velin-radius-lg);
+    }
+    .board-col__title {
+      font-size: var(--velin-text-sm);
+      font-weight: var(--velin-weight-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .board-col__indicator {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: var(--velin-radius-full);
+      flex-shrink: 0;
+    }
+    .board-col__indicator--todo { background: var(--velin-color-text-muted); }
+    .board-col__indicator--progress { background: var(--velin-color-primary); }
+    .board-col__indicator--review { background: var(--velin-color-warning); }
+    .board-col__indicator--done { background: var(--velin-color-success); }
+    .board-col__actions {
+      margin-inline-start: auto;
+      display: flex;
+      gap: var(--velin-space-1);
+    }
+
+    .board-cards {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .board-card {
+      background: var(--velin-color-surface-bright);
+      padding: var(--velin-space-4);
+      cursor: grab;
+      transition: var(--velin-transition-shadow);
+    }
+    .board-card:hover { box-shadow: var(--velin-shadow-md); }
+    .board-card__title {
+      font-size: var(--velin-text-sm);
+      font-weight: var(--velin-weight-semibold);
+      margin-block-end: var(--velin-space-2);
+      line-height: var(--velin-leading-snug);
+    }
+    .board-card__labels {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--velin-space-1);
+      margin-block-end: var(--velin-space-3);
+    }
+    .board-card__footer {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-2);
+      margin-block-start: var(--velin-space-3);
+    }
+    .board-card__due {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-1);
+      margin-inline-start: auto;
+    }
+
+    .board-add-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--velin-space-2);
+      padding: var(--velin-space-2-5) var(--velin-space-4);
+      font-size: var(--velin-text-sm);
+      color: var(--velin-color-text-muted);
+      background: none;
+      border: 1px dashed var(--velin-color-border);
+      border-radius: var(--velin-radius-lg);
+      cursor: pointer;
+      transition: var(--velin-transition-colors);
+      width: 100%;
+    }
+    .board-add-btn:hover {
+      color: var(--velin-color-primary);
+      border-color: var(--velin-color-primary);
+      background: var(--velin-color-primary-subtle);
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+
+  <header class="board-header">
+    <h1 class="board-header__title">VelinStyle Roadmap</h1>
+    <span class="velin-badge velin-badge--primary">Sprint 14</span>
+    <div class="board-header__meta">
+      <div class="velin-avatar-group">
+        <span class="velin-avatar velin-avatar--sm" title="Anna Kowalski">AK</span>
+        <span class="velin-avatar velin-avatar--sm" title="Marcus Richter">MR</span>
+        <span class="velin-avatar velin-avatar--sm" title="Sophie Bauer">SB</span>
+        <span class="velin-avatar velin-avatar--sm" title="Thomas Hoffmann">TH</span>
+        <span class="velin-avatar velin-avatar--sm" title="Elena Martinez">EM</span>
+      </div>
+      <button class="velin-btn velin-btn--primary velin-btn--sm">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Task
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="board-columns velin-snap-x">
+
+      <!-- TO DO -->
+      <section class="board-col" aria-label="To Do">
+        <div class="board-col__header">
+          <span class="board-col__indicator board-col__indicator--todo"></span>
+          <h2 class="board-col__title">To Do</h2>
+          <span class="velin-badge">5</span>
+          <div class="board-col__actions">
+            <button class="velin-btn velin-btn--ghost velin-btn--sm" aria-label="More options" style="min-inline-size: auto; min-block-size: auto; padding: var(--velin-space-1);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="board-cards velin-divide-y">
+          <article class="velin-card board-card">
+            <div class="board-card__title">Implement CSS anchor positioning fallbacks</div>
+            <div class="board-card__labels">
+              <span class="velin-chip velin-chip--primary" style="font-size: var(--velin-text-xs);">Feature</span>
+            </div>
+            <p class="velin-text-xs velin-text-muted">Add progressive enhancement for browsers without anchor() support</p>
+            <div class="board-card__footer">
+              <span class="velin-avatar velin-avatar--xs">MR</span>
+              <span class="velin-badge velin-badge--danger">High</span>
+              <span class="board-card__due velin-text-xs velin-text-muted">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                May 16
+              </span>
+            </div>
+          </article>
+
+          <article class="velin-card board-card">
+            <div class="board-card__title">Fix checkbox alignment in RTL mode</div>
+            <div class="board-card__labels">
+              <span class="velin-chip velin-chip--danger" style="font-size: var(--velin-text-xs);">Bug</span>
+            </div>
+            <p class="velin-text-xs velin-text-muted">Checkboxes misalign inside list-group items when dir="rtl"</p>
+            <div class="board-card__footer">
+              <span class="velin-avatar velin-avatar--xs">SB</span>
+              <span class="velin-badge velin-badge--warning">Medium</span>
+              <span class="board-card__due velin-text-xs velin-text-muted">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                May 18
+              </span>
+            </div>
+          </article>
+
+          <article class="velin-card board-card">
+            <div class="board-card__title">Design token export for Figma plugin</div>
+            <div class="board-card__labels">
+              <span class="velin-chip velin-chip--secondary" style="font-size: var(--velin-text-xs);">Design</span>
+            </div>
+            <p class="velin-text-xs velin-text-muted">Create JSON export of all design tokens compatible with Figma Variables API</p>
+            <div class="board-card__footer">
+              <span class="velin-avatar velin-avatar--xs">EM</span>
+              <span class="velin-badge velin-badge--warning">Medium</span>
+              <span class="board-card__due velin-text-xs velin-text-muted">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                May 20
+              </span>
+            </div>
+          </article>
+
+          <article class="velin-card board-card">
+            <div class="board-card__title">Add scroll-driven animation utilities</div>
+            <div class="board-card__labels">
+              <span class="velin-chip velin-chip--primary" style="font-size: var(--velin-text-xs);">Feature</span>
+            </div>
+            <p class="velin-text-xs velin-text-muted">Utility classes for scroll-timeline and view-timeline properties</p>
+            <div class="board-card__footer">
+              <span class="velin-avatar velin-avatar--xs">TH</span>
+              <span class="board-card__due velin-text-xs velin-text-muted">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                May 22
+              </span>
+            </div>
+          </article>
+
+          <article class="velin-card board-card">
+            <div class="board-card__title">Write migration guide for v2 → v3</div>
+            <div class="board-card__labels">
+              <span class="velin-chip velin-chip--secondary" style="font-size: var(--velin-text-xs);">Design</span>
+            </div>
+            <p class="velin-text-xs velin-text-muted">Document all breaking changes and provide codemods where possible</p>
+            <div class="board-card__footer">
+              <span class="velin-avatar velin-avatar--xs">AK</span>
+              <span class="board-card__due velin-text-xs velin-text-muted">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                May 25
+              </span>
+            </div>
+          </article>
+        </div>
+
+        <button class="board-add-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add card
+        </button>
+      </section>
+
+      <!-- IN PROGRESS -->
+      <section class="board-col" aria-label="In Progress">
+        <div class="board-col__header">
+          <span class="board-col__indicator board-col__indicator--progress"></span>
+          <h2 class="board-col__title">In Progress</h2>
+          <span class="velin-badge">3</span>
+          <div class="board-col__actions">
+            <button class="velin-btn velin-btn--ghost velin-btn--sm" aria-label="More options" style="min-inline-size: auto; min-block-size: auto; padding: var(--velin-space-1);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="board-cards velin-divide-y">
+          <article class="velin-card board-card">
+            <div class="board-card__title">Refactor drawer component for SSR</div>
+            <div class="board-card__labels">
+              <span class="velin-chip velin-chip--primary" style="font-size: var(--velin-text-xs);">Feature</span>
+              <span class="velin-chip velin-chip--danger" style="font-size: var(--velin-text-xs);">Bug</span>
+            </div>
+            <p class="velin-text-xs velin-text-muted">Drawer fails to hydrate when server-rendered with open attribute</p>
+            <div class="board-card__footer">
+              <span class="velin-avatar velin-avatar--xs">SB</span>
+              <span class="velin-badge velin-badge--danger">High</span>
+              <span class="board-card__due velin-text-xs velin-text-muted">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                May 14
+              </span>
+            </div>
+          </article>
+
+          <article class="velin-card board-card">
+            <div class="board-card__title">OKLCH palette generator tool</div>
+            <div class="board-card__labels">
+              <span class="velin-chip velin-chip--primary" style="font-size: var(--velin-text-xs);">Feature</span>
+              <span class="velin-chip velin-chip--secondary" style="font-size: var(--velin-text-xs);">Design</span>
+            </div>
+            <p class="velin-text-xs velin-text-muted">Interactive tool to generate custom theme palettes from a seed color</p>
+            <div class="board-card__footer">
+              <span class="velin-avatar velin-avatar--xs">MR</span>
+              <span class="velin-badge velin-badge--warning">Medium</span>
+              <span class="board-card__due velin-text-xs velin-text-muted">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                May 17
+              </span>
+            </div>
+          </article>
+
+          <article class="velin-card board-card">
+            <div class="board-card__title">Container query grid component</div>
+            <div class="board-card__labels">
+              <span class="velin-chip velin-chip--primary" style="font-size: var(--velin-text-xs);">Feature</span>
+            </div>
+            <p class="velin-text-xs velin-text-muted">Grid that adapts columns based on container width, not viewport</p>
+            <div class="board-card__footer">
+              <span class="velin-avatar velin-avatar--xs">TH</span>
+              <span class="board-card__due velin-text-xs velin-text-muted">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                May 19
+              </span>
+            </div>
+          </article>
+        </div>
+
+        <button class="board-add-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add card
+        </button>
+      </section>
+
+      <!-- REVIEW -->
+      <section class="board-col" aria-label="Review">
+        <div class="board-col__header">
+          <span class="board-col__indicator board-col__indicator--review"></span>
+          <h2 class="board-col__title">Review</h2>
+          <span class="velin-badge">2</span>
+          <div class="board-col__actions">
+            <button class="velin-btn velin-btn--ghost velin-btn--sm" aria-label="More options" style="min-inline-size: auto; min-block-size: auto; padding: var(--velin-space-1);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="board-cards velin-divide-y">
+          <article class="velin-card board-card">
+            <div class="board-card__title">Keyboard navigation for carousel</div>
+            <div class="board-card__labels">
+              <span class="velin-chip velin-chip--primary" style="font-size: var(--velin-text-xs);">Feature</span>
+            </div>
+            <p class="velin-text-xs velin-text-muted">Arrow keys, Home/End, and roving tabindex for slide navigation</p>
+            <div class="board-card__footer">
+              <span class="velin-avatar velin-avatar--xs">AK</span>
+              <span class="velin-badge velin-badge--danger">High</span>
+              <span class="board-card__due velin-text-xs velin-text-muted">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                May 13
+              </span>
+            </div>
+          </article>
+
+          <article class="velin-card board-card">
+            <div class="board-card__title">Update Sharp theme border tokens</div>
+            <div class="board-card__labels">
+              <span class="velin-chip velin-chip--secondary" style="font-size: var(--velin-text-xs);">Design</span>
+            </div>
+            <p class="velin-text-xs velin-text-muted">Increase border contrast for improved visibility in low-light conditions</p>
+            <div class="board-card__footer">
+              <span class="velin-avatar velin-avatar--xs">EM</span>
+              <span class="board-card__due velin-text-xs velin-text-muted">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                May 14
+              </span>
+            </div>
+          </article>
+        </div>
+
+        <button class="board-add-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add card
+        </button>
+      </section>
+
+      <!-- DONE -->
+      <section class="board-col" aria-label="Done">
+        <div class="board-col__header">
+          <span class="board-col__indicator board-col__indicator--done"></span>
+          <h2 class="board-col__title">Done</h2>
+          <span class="velin-badge">4</span>
+          <div class="board-col__actions">
+            <button class="velin-btn velin-btn--ghost velin-btn--sm" aria-label="More options" style="min-inline-size: auto; min-block-size: auto; padding: var(--velin-space-1);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="board-cards velin-divide-y">
+          <article class="velin-card board-card" style="opacity: 0.75;">
+            <div class="board-card__title" style="text-decoration: line-through;">Toast component auto-dismiss timer</div>
+            <div class="board-card__labels">
+              <span class="velin-chip velin-chip--danger" style="font-size: var(--velin-text-xs);">Bug</span>
+            </div>
+            <p class="velin-text-xs velin-text-muted">Timer was not pausing on hover, causing premature dismissal</p>
+            <div class="board-card__footer">
+              <span class="velin-avatar velin-avatar--xs">MR</span>
+              <span class="board-card__due velin-text-xs velin-text-success">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                May 10
+              </span>
+            </div>
+          </article>
+
+          <article class="velin-card board-card" style="opacity: 0.75;">
+            <div class="board-card__title" style="text-decoration: line-through;">Add Brutalist theme variant</div>
+            <div class="board-card__labels">
+              <span class="velin-chip velin-chip--secondary" style="font-size: var(--velin-text-xs);">Design</span>
+              <span class="velin-chip velin-chip--primary" style="font-size: var(--velin-text-xs);">Feature</span>
+            </div>
+            <p class="velin-text-xs velin-text-muted">Heavy borders, monospace type, raw aesthetic theme</p>
+            <div class="board-card__footer">
+              <span class="velin-avatar velin-avatar--xs">EM</span>
+              <span class="board-card__due velin-text-xs velin-text-success">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                May 9
+              </span>
+            </div>
+          </article>
+
+          <article class="velin-card board-card" style="opacity: 0.75;">
+            <div class="board-card__title" style="text-decoration: line-through;">Collapse animation jitter on Firefox</div>
+            <div class="board-card__labels">
+              <span class="velin-chip velin-chip--danger" style="font-size: var(--velin-text-xs);">Bug</span>
+            </div>
+            <p class="velin-text-xs velin-text-muted">Height transition caused layout thrashing in Firefox 127+</p>
+            <div class="board-card__footer">
+              <span class="velin-avatar velin-avatar--xs">SB</span>
+              <span class="board-card__due velin-text-xs velin-text-success">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                May 8
+              </span>
+            </div>
+          </article>
+
+          <article class="velin-card board-card" style="opacity: 0.75;">
+            <div class="board-card__title" style="text-decoration: line-through;">Set up Vitest for component testing</div>
+            <div class="board-card__labels">
+              <span class="velin-chip velin-chip--primary" style="font-size: var(--velin-text-xs);">Feature</span>
+            </div>
+            <p class="velin-text-xs velin-text-muted">Configure jsdom environment and write initial test suite for Web Components</p>
+            <div class="board-card__footer">
+              <span class="velin-avatar velin-avatar--xs">TH</span>
+              <span class="board-card__due velin-text-xs velin-text-success">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                May 7
+              </span>
+            </div>
+          </article>
+        </div>
+
+        <button class="board-add-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add card
+        </button>
+      </section>
+
+    </div>
+  </main>
+</body>
+</html>
