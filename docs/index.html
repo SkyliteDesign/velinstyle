@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VelinStyle – The CSS Framework That Makes Bootstrap Sweat</title>
   <meta name="description" content="Accessibility-first CSS framework with OKLCH colors, Container Queries, Web Components, View Transitions, and zero-JS components.">
-  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="dist/velinstyle.css">
   <link rel="stylesheet" href="docs.css">
-  <script src="../dist/velinstyle-components.iife.js"></script>
+  <script src="dist/velinstyle-components.iife.js"></script>
   <style>
     .landing-hero {
       padding-block: var(--velin-space-20) var(--velin-space-16);
@@ -309,8 +309,8 @@
           <div class="landing-code-tabs">
             <span class="landing-code-tab">CDN Install</span>
           </div>
-          <pre class="velin-doc-code">&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/velinstyle@0.4.0/dist/velinstyle.css"&gt;
-&lt;script type="module" src="https://cdn.jsdelivr.net/npm/velinstyle@0.4.0/dist/velinstyle-components.js"&gt;&lt;/script&gt;</pre>
+          <pre class="velin-doc-code">&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@birdapi/velinstyle@0.4.0/dist/velinstyle.css"&gt;
+&lt;script type="module" src="https://cdn.jsdelivr.net/npm/@birdapi/velinstyle@0.4.0/dist/velinstyle-components.js"&gt;&lt;/script&gt;</pre>
 
           <div class="landing-code-tabs" style="margin-block-start:var(--velin-space-6);">
             <span class="landing-code-tab">Starter Template</span>
@@ -320,8 +320,8 @@
 &lt;head&gt;
   &lt;meta charset="UTF-8"&gt;
   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/velinstyle@0.4.0/dist/velinstyle.css"&gt;
-  &lt;script type="module" src="https://cdn.jsdelivr.net/npm/velinstyle@0.4.0/dist/velinstyle-components.js"&gt;&lt;/script&gt;
+  &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@birdapi/velinstyle@0.4.0/dist/velinstyle.css"&gt;
+  &lt;script type="module" src="https://cdn.jsdelivr.net/npm/@birdapi/velinstyle@0.4.0/dist/velinstyle-components.js"&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
   &lt;div class="velin-container"&gt;
@@ -624,7 +624,7 @@
 <script>
 (function(){
   var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
-  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='../dist/themes/'+t+'.min.css';document.head.appendChild(l);});
+  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='dist/themes/'+t+'.min.css';document.head.appendChild(l);});
   var names=['Default'].concat(themes).concat(['dark']);
   var vals=[''].concat(themes).concat(['dark']);
   var grid=document.getElementById('themeGrid');

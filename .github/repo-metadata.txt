@@ -1,0 +1,27 @@
+# GitHub repository settings (paste in Settings → General → About)
+
+Description:
+WCAG-first CSS framework & Web Components — OKLCH themes, container queries, 21 interactive components, optional CLI. Published on npm as @birdapi/velinstyle.
+
+Website:
+https://skylitedesign.github.io/velinstyle/
+
+Topics (comma-separated):
+css
+accessibility
+a11y
+wcag
+web-components
+design-system
+design-tokens
+oklch
+container-queries
+css-framework
+mit
+
+# Make repository public
+Settings → General → Danger zone → Change repository visibility → Public
+
+# Enable GitHub Pages
+Settings → Pages → Build and deployment → Source: GitHub Actions
+(Workflow "Deploy Documentation" runs on push to main)

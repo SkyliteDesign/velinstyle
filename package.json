@@ -17,7 +17,7 @@
     "type": "git",
     "url": "https://github.com/SkyliteDesign/velinstyle.git"
   },
-  "homepage": "https://velinstyle.info",
+  "homepage": "https://skylitedesign.github.io/velinstyle/",
   "bugs": {
     "url": "https://github.com/SkyliteDesign/velinstyle/issues"
   },
@@ -41,7 +41,8 @@
     "watch": "lightningcss --bundle src/velinstyle.css -o dist/velinstyle.css --watch",
     "lint": "stylelint \"src/**/*.css\"",
     "test": "vitest run",
-    "test:a11y": "node tests/a11y/run.js"
+    "test:a11y": "node tests/a11y/run.js",
+    "docs:prepare": "npm run build && node scripts/prepare-docs-pages.js"
   },
   "keywords": [
     "css",

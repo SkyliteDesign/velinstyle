@@ -3,6 +3,7 @@ name: Deploy Documentation
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -40,14 +41,19 @@ jobs:
       - name: Build JS (dev)
         run: npm run build:js:dev
 
+      - name: Build JS (IIFE)
+        run: npm run build:js:iife
+
       - name: Build Themes
         run: npm run build:themes
 
       - name: Build Icons
         run: npm run build:icons
 
-      - name: Copy dist into docs
-        run: cp -r dist docs/dist
+      - name: Prepare docs for Pages
+        run: |
+          node scripts/prepare-docs-pages.js
+          cp -r dist docs/dist
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

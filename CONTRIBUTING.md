@@ -27,7 +27,9 @@ Thank you for your interest in contributing! VelinStyle is built by the communit
 
 ### Why `npm run build` matters
 
-The `dist/` directory is listed in `.gitignore` and is **not** in the repository. After `git clone`, you must run `npm run build` (or individual `npm run build:*` scripts) before opening `docs/*.html`, `samples/*.html`, or running tests that expect built assets. Published npm packages include `dist/` from the release tarball.
+The `dist/` directory is listed in `.gitignore` and is **not** in the repository. After `git clone`, you must run `npm run build` (or individual `npm run build:*` scripts) before opening `samples/*.html`, or running tests that expect built assets. Published npm packages include `dist/` from the release tarball.
+
+For **local docs** or to mirror the GitHub Pages layout, run `npm run docs:prepare` (builds, patches doc asset paths, copies `dist/` to `docs/dist/`). Live docs: https://skylitedesign.github.io/velinstyle/
 
 ## Project structure
 

@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Getting Started - VelinStyle</title>
-  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="dist/velinstyle.css">
   <link rel="stylesheet" href="docs.css">
-  <script src="../dist/velinstyle-components.iife.js"></script>
+  <script src="dist/velinstyle-components.iife.js"></script>
 </head>
 <body>
   <a href="#main" class="velin-skip-link">Skip to main content</a>
@@ -71,11 +71,11 @@
       <p>Add these two lines inside your <code class="velin-doc-inline-code">&lt;head&gt;</code> and you're done — no build step required.</p>
       <pre class="velin-doc-code">&lt;!-- VelinStyle CSS --&gt;
 &lt;link rel="stylesheet"
-      href="https://unpkg.com/velinstyle@latest/dist/velinstyle.min.css"&gt;
+      href="https://unpkg.com/@birdapi/velinstyle@latest/dist/velinstyle.min.css"&gt;
 
 &lt;!-- VelinStyle Web Components (optional) --&gt;
 &lt;script type="module"
-        src="https://unpkg.com/velinstyle@latest/dist/velinstyle-components.min.js"&gt;
+        src="https://unpkg.com/@birdapi/velinstyle@latest/dist/velinstyle-components.min.js"&gt;
 &lt;/script&gt;</pre>
 
       <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">npm</h3>
@@ -116,9 +116,9 @@ import "velinstyle/dist/velinstyle-components.js";</pre>
   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
   &lt;title&gt;My VelinStyle App&lt;/title&gt;
   &lt;link rel="stylesheet"
-        href="https://unpkg.com/velinstyle@latest/dist/velinstyle.min.css"&gt;
+        href="https://unpkg.com/@birdapi/velinstyle@latest/dist/velinstyle.min.css"&gt;
   &lt;script type="module"
-          src="https://unpkg.com/velinstyle@latest/dist/velinstyle-components.min.js"&gt;
+          src="https://unpkg.com/@birdapi/velinstyle@latest/dist/velinstyle-components.min.js"&gt;
   &lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -269,7 +269,7 @@ import "velinstyle/dist/velinstyle-components.js";</pre>
         themes.forEach(t => {
           const link = document.createElement('link');
           link.rel = 'stylesheet';
-          link.href = `../dist/themes/${t}.min.css`;
+          link.href = `dist/themes/${t}.min.css`;
           document.head.appendChild(link);
           themeLinks[t] = link;
         });
@@ -307,11 +307,11 @@ import "velinstyle/dist/velinstyle-components.js";</pre>
 
       <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Loading Theme CSS</h3>
       <p>Theme presets are separate CSS files (~1.7 KB each). Include only the ones you need after the main stylesheet:</p>
-      <pre class="velin-doc-code">&lt;link rel="stylesheet" href="https://unpkg.com/velinstyle@latest/dist/velinstyle.min.css"&gt;
+      <pre class="velin-doc-code">&lt;link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@latest/dist/velinstyle.min.css"&gt;
 
 &lt;!-- Pick your theme(s) --&gt;
-&lt;link rel="stylesheet" href="https://unpkg.com/velinstyle@latest/dist/themes/ocean.min.css"&gt;
-&lt;link rel="stylesheet" href="https://unpkg.com/velinstyle@latest/dist/themes/neon.min.css"&gt;</pre>
+&lt;link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@latest/dist/themes/ocean.min.css"&gt;
+&lt;link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@latest/dist/themes/neon.min.css"&gt;</pre>
 
       <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Switching Themes with JavaScript</h3>
       <pre class="velin-doc-code">// Switch to the ocean theme
@@ -337,7 +337,7 @@ document.documentElement.removeAttribute("data-velin-theme");</pre>
       <h3 style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-3);">Setup</h3>
       <p>Load the components script (if you haven't already):</p>
       <pre class="velin-doc-code">&lt;script type="module"
-        src="https://unpkg.com/velinstyle@latest/dist/velinstyle-components.min.js"&gt;
+        src="https://unpkg.com/@birdapi/velinstyle@latest/dist/velinstyle-components.min.js"&gt;
 &lt;/script&gt;</pre>
 
       <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Modal</h3>
@@ -537,7 +537,7 @@ document.documentElement.removeAttribute("data-velin-theme");</pre>
 <script>
 (function(){
   var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
-  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='../dist/themes/'+t+'.min.css';document.head.appendChild(l);});
+  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='dist/themes/'+t+'.min.css';document.head.appendChild(l);});
   var names=['Default'].concat(themes).concat(['dark']);
   var vals=[''].concat(themes).concat(['dark']);
   var grid=document.getElementById('themeGrid');

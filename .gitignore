@@ -5,6 +5,7 @@ VelinScript/
 SandBox/
 node_modules/
 dist/
+docs/dist/
 .cache/
 *.log
 .DS_Store
@@ -15,4 +16,6 @@ gen_funcs.py
 gen-common.ps1
 generate-all.py
 generate-docs.ps1
+test-write.py
+test.txt
 

@@ -12,11 +12,10 @@
 [![WCAG AA](https://img.shields.io/badge/WCAG-AA-16a34a?style=flat-square)](docs/a11y.html)
 [![CSS min](https://img.shields.io/badge/CSS_min-~46KB-15803d?style=flat-square)]()
 [![JS min](https://img.shields.io/badge/JS_min-~66KB-15803d?style=flat-square)]()
-[![npm](https://img.shields.io/badge/npm-publish_pending-64748b?style=flat-square)](https://www.npmjs.com/package/@birdapi/velinstyle)
+[![npm version](https://img.shields.io/npm/v/@birdapi/velinstyle?style=flat-square)](https://www.npmjs.com/package/@birdapi/velinstyle)
+[![GitHub Pages](https://img.shields.io/badge/Docs-GitHub_Pages-2563eb?style=flat-square)](https://skylitedesign.github.io/velinstyle/)
 
-<!-- Nach npm-Publish: https://img.shields.io/npm/v/velinstyle?style=flat-square -->
-
-[Website](https://velinstyle.info) · [Dokumentation](docs/index.html) · [Beispiele](samples/) · [Playground](tools/playground/index.html) · [Theme Builder](tools/theme-builder/index.html) · [Issues](https://github.com/SkyliteDesign/velinstyle/issues)
+[Dokumentation](https://skylitedesign.github.io/velinstyle/) · [npm](https://www.npmjs.com/package/@birdapi/velinstyle) · [Beispiele](samples/) · [Playground](tools/playground/index.html) · [Theme Builder](tools/theme-builder/index.html) · [Issues](https://github.com/SkyliteDesign/velinstyle/issues)
 
 **[English](README.md)** · **Deutsch**
 
@@ -114,16 +113,16 @@ npm install @birdapi/velinstyle
 ### <span>②</span> CSS + Komponenten einbinden (ES-Module)
 
 ```html
-<link rel="stylesheet" href="node_modules/velinstyle/dist/velinstyle.min.css">
-<script type="module" src="node_modules/velinstyle/dist/velinstyle-components.min.js"></script>
+<link rel="stylesheet" href="node_modules/@birdapi/velinstyle/dist/velinstyle.min.css">
+<script type="module" src="node_modules/@birdapi/velinstyle/dist/velinstyle-components.min.js"></script>
 ```
 
 <details>
 <summary><strong>CDN-Alternative</strong> (ohne npm install)</summary>
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/velinstyle@latest/dist/velinstyle.min.css">
-<script type="module" src="https://unpkg.com/velinstyle@latest/dist/velinstyle-components.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@latest/dist/velinstyle.min.css">
+<script type="module" src="https://unpkg.com/@birdapi/velinstyle@latest/dist/velinstyle-components.min.js"></script>
 ```
 
 </details>

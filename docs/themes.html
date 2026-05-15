@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Themes - VelinStyle</title>
-  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="dist/velinstyle.css">
   <style>
     @import "../src/themes/sharp.css";
     @import "../src/themes/soft.css";
@@ -302,7 +302,7 @@
 <script>
 (function(){
   var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
-  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='../dist/themes/'+t+'.min.css';document.head.appendChild(l);});
+  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='dist/themes/'+t+'.min.css';document.head.appendChild(l);});
   var names=['Default'].concat(themes).concat(['dark']);
   var vals=[''].concat(themes).concat(['dark']);
   var grid=document.getElementById('themeGrid');

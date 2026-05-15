@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://skylitedesign.github.io/velinstyle/
+    about: Guides, components, and getting started on GitHub Pages
+  - name: npm package
+    url: https://www.npmjs.com/package/@birdapi/velinstyle
+    about: Install @birdapi/velinstyle from the birdapi org on npm
