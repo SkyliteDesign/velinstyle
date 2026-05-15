@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عرض RTL - VelinStyle</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="../docs/docs.css">
+  <script type="module" src="../dist/velinstyle-components.js"></script>
+  <style>
+    .rtl-note {
+      background: var(--velin-color-info-subtle);
+      border: 1px solid var(--velin-color-info);
+      border-radius: var(--velin-radius-md);
+      padding: var(--velin-space-4);
+      font-size: var(--velin-text-sm);
+      color: var(--velin-color-info);
+      margin-block-end: var(--velin-space-8);
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">تخطي إلى المحتوى الرئيسي</a>
+
+  <!-- Navigation -->
+  <nav class="velin-nav" aria-label="التنقل الرئيسي">
+    <a href="#" class="velin-nav__brand">فيلين ستايل</a>
+    <button class="velin-nav__toggle" aria-label="تبديل القائمة" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="#" class="velin-nav__link" aria-current="page">الرئيسية</a></li>
+      <li><a href="#" class="velin-nav__link">المكوّنات</a></li>
+      <li><a href="#" class="velin-nav__link">التوثيق</a></li>
+      <li><a href="#" class="velin-nav__link">اتصل بنا</a></li>
+    </ul>
+  </nav>
+
+  <main id="main" class="velin-container">
+
+    <h1 class="velin-doc-title">عرض اتجاه من اليمين إلى اليسار (RTL)</h1>
+    <p class="velin-doc-lead">تستخدم VelinStyle خصائص CSS المنطقية في جميع القواعد. أضف <code class="velin-doc-inline-code" dir="ltr">dir="rtl"</code> وسينعكس التخطيط بالكامل تلقائيًا بدون أي تعديلات إضافية.</p>
+
+    <div class="rtl-note" role="note">
+      <strong>ملاحظة:</strong> هذه الصفحة تعمل بالكامل مع <code dir="ltr">dir="rtl"</code> و <code dir="ltr">lang="ar"</code>. جميع الهوامش والمسافات والتخطيطات تنعكس تلقائيًا بفضل الخصائص المنطقية.
+    </div>
+
+    <!-- ─── Breadcrumb ──────────────────────────────────────────────── -->
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">مسار التنقل</h2>
+
+      <nav class="velin-breadcrumb" aria-label="مسار التنقل">
+        <ol class="velin-breadcrumb__list">
+          <li class="velin-breadcrumb__item"><a href="#" class="velin-breadcrumb__link">الرئيسية</a></li>
+          <li class="velin-breadcrumb__item"><a href="#" class="velin-breadcrumb__link">المنتجات</a></li>
+          <li class="velin-breadcrumb__item"><a href="#" class="velin-breadcrumb__link">الإلكترونيات</a></li>
+          <li class="velin-breadcrumb__item" aria-current="page">الهواتف الذكية</li>
+        </ol>
+      </nav>
+
+      <nav class="velin-breadcrumb velin-breadcrumb--arrow" aria-label="مسار تنقل بديل" style="margin-block-start:var(--velin-space-4)">
+        <ol class="velin-breadcrumb__list">
+          <li class="velin-breadcrumb__item"><a href="#" class="velin-breadcrumb__link">لوحة التحكم</a></li>
+          <li class="velin-breadcrumb__item"><a href="#" class="velin-breadcrumb__link">الإعدادات</a></li>
+          <li class="velin-breadcrumb__item" aria-current="page">الملف الشخصي</li>
+        </ol>
+      </nav>
+    </section>
+
+    <!-- ─── Cards ───────────────────────────────────────────────────── -->
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">البطاقات</h2>
+      <p style="margin-block-end:var(--velin-space-6)">لاحظ كيف ينعكس ترتيب المحتوى والأزرار والهوامش تلقائيًا.</p>
+
+      <div class="velin-grid velin-grid--auto-fit">
+        <div class="velin-card">
+          <div class="velin-card__body">
+            <h3 class="velin-card__title">التصميم المتجاوب</h3>
+            <p class="velin-text-muted">يعتمد فيلين ستايل على خصائص CSS المنطقية التي تجعل التصميم يتكيف تلقائيًا مع اتجاه الكتابة. لا حاجة لملفات CSS منفصلة للغات التي تُكتب من اليمين إلى اليسار.</p>
+            <button class="velin-btn velin-btn--primary" style="margin-block-start:var(--velin-space-4)">اقرأ المزيد</button>
+          </div>
+        </div>
+
+        <div class="velin-card">
+          <div class="velin-card__body">
+            <h3 class="velin-card__title">إمكانية الوصول</h3>
+            <p class="velin-text-muted">جميع المكوّنات مبنية مع مراعاة معايير الوصول WCAG AA. حلقات التركيز وسمات ARIA والتنقل بلوحة المفاتيح مضمنة بشكل افتراضي في كل مكوّن.</p>
+            <button class="velin-btn velin-btn--secondary" style="margin-block-start:var(--velin-space-4)">تعرف أكثر</button>
+          </div>
+        </div>
+
+        <div class="velin-card">
+          <div class="velin-card__body">
+            <h3 class="velin-card__title">نظام الألوان</h3>
+            <p class="velin-text-muted">يستخدم فيلين ستايل نظام ألوان OKLCH الذي يضمن تناسقًا إدراكيًا عبر جميع الألوان. تبديل السمات يتم بتغيير سمة بيانات واحدة فقط.</p>
+            <button class="velin-btn velin-btn--ghost" style="margin-block-start:var(--velin-space-4)">استكشف</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Alerts ──────────────────────────────────────────────────── -->
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">التنبيهات</h2>
+
+      <div class="velin-alert velin-alert--success" role="alert" style="margin-block-end:var(--velin-space-3)">
+        <strong>تم بنجاح!</strong> تم حفظ التغييرات الخاصة بك بنجاح.
+      </div>
+      <div class="velin-alert velin-alert--warning" role="alert" style="margin-block-end:var(--velin-space-3)">
+        <strong>تحذير:</strong> صلاحية كلمة المرور ستنتهي خلال ٣ أيام.
+      </div>
+      <div class="velin-alert velin-alert--danger" role="alert" style="margin-block-end:var(--velin-space-3)">
+        <strong>خطأ:</strong> فشل الاتصال بالخادم. يرجى المحاولة مرة أخرى.
+      </div>
+      <div class="velin-alert velin-alert--info" role="alert">
+        <strong>معلومة:</strong> سيتم تحديث النظام يوم الجمعة القادم الساعة ٢ صباحًا.
+      </div>
+    </section>
+
+    <!-- ─── Form ────────────────────────────────────────────────────── -->
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">نموذج الاتصال</h2>
+      <p style="margin-block-end:var(--velin-space-6)">التسميات والحقول والنص المساعد تنعكس جميعها مع اتجاه الكتابة.</p>
+
+      <form style="max-inline-size:36rem" onsubmit="event.preventDefault()">
+        <div class="velin-field" style="margin-block-end:var(--velin-space-4)">
+          <label class="velin-label" for="name">الاسم الكامل</label>
+          <input type="text" id="name" class="velin-input" placeholder="أدخل اسمك الكامل">
+        </div>
+
+        <div class="velin-field" style="margin-block-end:var(--velin-space-4)">
+          <label class="velin-label" for="email">البريد الإلكتروني</label>
+          <input type="email" id="email" class="velin-input" placeholder="example@domain.com" dir="ltr">
+          <p class="velin-help-text">لن نشارك بريدك الإلكتروني مع أي طرف ثالث.</p>
+        </div>
+
+        <div class="velin-field" style="margin-block-end:var(--velin-space-4)">
+          <label class="velin-label" for="subject">الموضوع</label>
+          <select id="subject" class="velin-select">
+            <option value="">اختر الموضوع</option>
+            <option>استفسار عام</option>
+            <option>دعم فني</option>
+            <option>اقتراحات</option>
+            <option>شكاوى</option>
+          </select>
+        </div>
+
+        <div class="velin-field" style="margin-block-end:var(--velin-space-4)">
+          <label class="velin-label" for="message">الرسالة</label>
+          <textarea id="message" class="velin-textarea" rows="4" placeholder="اكتب رسالتك هنا..."></textarea>
+        </div>
+
+        <div class="velin-field" style="margin-block-end:var(--velin-space-6)">
+          <label class="velin-checkbox">
+            <input type="checkbox">
+            <span>أوافق على <a href="#">شروط الاستخدام</a> و<a href="#">سياسة الخصوصية</a></span>
+          </label>
+        </div>
+
+        <div style="display:flex;gap:var(--velin-space-3)">
+          <button type="submit" class="velin-btn velin-btn--primary">إرسال</button>
+          <button type="reset" class="velin-btn velin-btn--ghost">مسح</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ─── Badges ──────────────────────────────────────────────────── -->
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">الشارات</h2>
+      <div class="velin-doc-demo">
+        <span class="velin-badge">افتراضي</span>
+        <span class="velin-badge velin-badge--primary">أساسي</span>
+        <span class="velin-badge velin-badge--success">ناجح</span>
+        <span class="velin-badge velin-badge--warning">تحذير</span>
+        <span class="velin-badge velin-badge--danger">خطر</span>
+        <span class="velin-badge velin-badge--info">معلومة</span>
+      </div>
+    </section>
+
+    <!-- ─── Timeline ────────────────────────────────────────────────── -->
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">الجدول الزمني</h2>
+      <p style="margin-block-end:var(--velin-space-6)">لاحظ كيف ينعكس خط الجدول الزمني والعلامات إلى الجانب الأيمن تلقائيًا.</p>
+
+      <div class="velin-timeline">
+        <div class="velin-timeline__item">
+          <div class="velin-timeline__marker velin-timeline__marker--success"></div>
+          <div class="velin-timeline__content">
+            <p class="velin-timeline__title">تم إطلاق المشروع</p>
+            <p class="velin-timeline__date">١ يناير ٢٠٢٦</p>
+            <p class="velin-timeline__text">بدأ فريق التطوير العمل على المشروع الجديد مع وضع خطة شاملة تغطي جميع المراحل من التصميم إلى الإطلاق النهائي.</p>
+          </div>
+        </div>
+
+        <div class="velin-timeline__item">
+          <div class="velin-timeline__marker velin-timeline__marker--info"></div>
+          <div class="velin-timeline__content">
+            <p class="velin-timeline__title">اكتمال مرحلة التصميم</p>
+            <p class="velin-timeline__date">١٥ فبراير ٢٠٢٦</p>
+            <p class="velin-timeline__text">تم الانتهاء من تصميم واجهة المستخدم وتجربة المستخدم. تمت مراجعة التصاميم والموافقة عليها من قبل أصحاب المصلحة.</p>
+          </div>
+        </div>
+
+        <div class="velin-timeline__item">
+          <div class="velin-timeline__marker velin-timeline__marker--warning"></div>
+          <div class="velin-timeline__content">
+            <p class="velin-timeline__title">مرحلة التطوير</p>
+            <p class="velin-timeline__date">١ مارس ٢٠٢٦</p>
+            <p class="velin-timeline__text">بدأ فريق البرمجة في تنفيذ الواجهة الأمامية والخلفية. تم اعتماد منهجية أجايل مع دورات سبرنت مدتها أسبوعان.</p>
+          </div>
+        </div>
+
+        <div class="velin-timeline__item">
+          <div class="velin-timeline__marker"></div>
+          <div class="velin-timeline__content">
+            <p class="velin-timeline__title">الإطلاق التجريبي</p>
+            <p class="velin-timeline__date">١ مايو ٢٠٢٦</p>
+            <p class="velin-timeline__text">تم إطلاق النسخة التجريبية لمجموعة محدودة من المستخدمين لجمع الملاحظات وإجراء التحسينات اللازمة قبل الإطلاق الرسمي.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Table ───────────────────────────────────────────────────── -->
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">الجدول</h2>
+
+      <table class="velin-table velin-table--striped">
+        <thead>
+          <tr>
+            <th>الخاصية</th>
+            <th>الوصف</th>
+            <th>الحالة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>الخصائص المنطقية</td>
+            <td>استخدام <code dir="ltr">margin-inline-start</code> بدلاً من <code dir="ltr">margin-left</code></td>
+            <td><span class="velin-badge velin-badge--success">مفعّل</span></td>
+          </tr>
+          <tr>
+            <td>اتجاه الكتابة</td>
+            <td>دعم تلقائي لـ RTL و LTR بدون ملفات إضافية</td>
+            <td><span class="velin-badge velin-badge--success">مفعّل</span></td>
+          </tr>
+          <tr>
+            <td>نظام الشبكة</td>
+            <td>CSS Grid مع انعكاس تلقائي للأعمدة</td>
+            <td><span class="velin-badge velin-badge--success">مفعّل</span></td>
+          </tr>
+          <tr>
+            <td>المكوّنات التفاعلية</td>
+            <td>Web Components مع دعم كامل للوحة المفاتيح</td>
+            <td><span class="velin-badge velin-badge--info">تجريبي</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ─── Buttons ─────────────────────────────────────────────────── -->
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">الأزرار</h2>
+      <div class="velin-doc-demo">
+        <button class="velin-btn velin-btn--primary">زر أساسي</button>
+        <button class="velin-btn velin-btn--secondary">زر ثانوي</button>
+        <button class="velin-btn velin-btn--ghost">زر شبحي</button>
+        <button class="velin-btn velin-btn--danger">حذف</button>
+      </div>
+
+      <h3 class="velin-text-lg velin-font-semibold" style="margin-block:var(--velin-space-6) var(--velin-space-3)">أزرار مع أيقونات</h3>
+      <div class="velin-doc-demo">
+        <button class="velin-btn velin-btn--primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          حفظ
+        </button>
+        <button class="velin-btn velin-btn--danger">
+          حذف
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="velin-doc-footer">
+    <div class="velin-doc-footer__inner">
+      <p>VelinStyle v0.2.0 &mdash; عرض RTL</p>
+      <div style="display:flex;gap:var(--velin-space-3);">
+        <a href="https://github.com/SkyliteDesign/velinstyle">GitHub</a>
+        <a href="https://github.com/SkyliteDesign/velinstyle/blob/main/LICENSE" dir="ltr">MIT License</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

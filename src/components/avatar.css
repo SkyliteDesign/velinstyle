@@ -1,0 +1,78 @@
+@layer components {
+  .velin-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    border-radius: var(--velin-radius-full);
+    background: var(--velin-color-primary-subtle);
+    color: var(--velin-color-primary);
+    font-weight: var(--velin-weight-semibold);
+    font-size: var(--velin-text-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+    border: 2px solid var(--velin-color-surface-bright);
+  }
+
+  .velin-avatar img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  /* Initials fallback */
+  .velin-avatar:empty::after {
+    content: attr(data-velin-initials);
+  }
+
+  /* Sizes */
+  .velin-avatar--xs { inline-size: 1.5rem; block-size: 1.5rem; font-size: var(--velin-text-xs); border-width: 1px; }
+  .velin-avatar--sm { inline-size: 2rem; block-size: 2rem; font-size: var(--velin-text-xs); }
+  .velin-avatar--lg { inline-size: 3.5rem; block-size: 3.5rem; font-size: var(--velin-text-lg); }
+  .velin-avatar--xl { inline-size: 5rem; block-size: 5rem; font-size: var(--velin-text-xl); border-width: 3px; }
+  .velin-avatar--2xl { inline-size: 7rem; block-size: 7rem; font-size: var(--velin-text-2xl); border-width: 3px; }
+
+  /* Square variant */
+  .velin-avatar--square { border-radius: var(--velin-radius-md); }
+
+  /* Status indicator */
+  .velin-avatar__status {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+    inline-size: 0.625rem;
+    block-size: 0.625rem;
+    border-radius: var(--velin-radius-full);
+    border: 2px solid var(--velin-color-surface-bright);
+    background: var(--velin-color-text-muted);
+  }
+
+  .velin-avatar__status--online { background: var(--velin-color-success); }
+  .velin-avatar__status--offline { background: var(--velin-color-text-subtle); }
+  .velin-avatar__status--busy { background: var(--velin-color-danger); }
+  .velin-avatar__status--away { background: var(--velin-color-warning); }
+
+  /* Avatar group */
+  .velin-avatar-group {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  .velin-avatar-group .velin-avatar {
+    margin-inline-start: -0.5rem;
+    transition: var(--velin-transition-transform);
+    box-shadow: 0 0 0 2px var(--velin-color-surface-bright);
+  }
+
+  .velin-avatar-group .velin-avatar:last-child {
+    margin-inline-start: 0;
+  }
+
+  .velin-avatar-group .velin-avatar:hover {
+    transform: translateY(-2px);
+    z-index: 1;
+  }
+}

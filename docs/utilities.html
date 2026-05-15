@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utilities - VelinStyle</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="index.html" class="velin-nav__brand">VelinStyle</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="guides/index.html" class="velin-nav__link">Integration</a></li>
+      <li><a href="layout.html" class="velin-nav__link">Layout</a></li>
+      <li><a href="components.html" class="velin-nav__link">Components</a></li>
+      <li><a href="css-components.html" class="velin-nav__link">CSS Components</a></li>
+      <li><a href="forms.html" class="velin-nav__link">Forms</a></li>
+      <li><a href="utilities.html" class="velin-nav__link" aria-current="page">Utilities</a></li>
+      <li><a href="tokens.html" class="velin-nav__link">Tokens</a></li>
+      <li><a href="themes.html" class="velin-nav__link">Themes</a></li>
+      <li><a href="icons.html" class="velin-nav__link">Icons</a></li>
+      <li><a href="a11y.html" class="velin-nav__link">A11y</a></li>
+      <li><a href="security.html" class="velin-nav__link">Security</a></li>
+      <li><a href="migration.html" class="velin-nav__link">Migration</a></li>
+    </ul>
+  </nav>
+<div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+  <strong>Full documentation available at <a href="https://velinstyle.info/docs/getting-started/introduction.html">velinstyle.info</a></strong> — This is the quick reference. Visit the full docs for 80+ pages with live examples, API tables, and guides.
+</div>
+  <main id="main" class="velin-container">
+    <div class="velin-doc-layout">
+
+      <!-- Sidebar -->
+      <aside class="velin-doc-sidebar" aria-label="Page sections">
+        <p class="velin-doc-sidebar__title">On this page</p>
+        <ul class="velin-doc-sidebar__list">
+          <li><a href="#display" class="velin-doc-sidebar__link">Display</a></li>
+          <li><a href="#spacing" class="velin-doc-sidebar__link">Spacing</a></li>
+          <li><a href="#text" class="velin-doc-sidebar__link">Text</a></li>
+          <li><a href="#color" class="velin-doc-sidebar__link">Color</a></li>
+          <li><a href="#sizing" class="velin-doc-sidebar__link">Sizing</a></li>
+          <li><a href="#border" class="velin-doc-sidebar__link">Border</a></li>
+          <li><a href="#position" class="velin-doc-sidebar__link">Position</a></li>
+          <li><a href="#transform" class="velin-doc-sidebar__link">Transform</a></li>
+          <li><a href="#filter" class="velin-doc-sidebar__link">Filter / Backdrop</a></li>
+          <li><a href="#animation" class="velin-doc-sidebar__link">Animation</a></li>
+          <li><a href="#gradient" class="velin-doc-sidebar__link">Gradient</a></li>
+          <li><a href="#print" class="velin-doc-sidebar__link">Print</a></li>
+          <li><a href="#transition" class="velin-doc-sidebar__link">Transition</a></li>
+          <li><a href="#cursor" class="velin-doc-sidebar__link">Cursor</a></li>
+          <li><a href="#anchor" class="velin-doc-sidebar__link">Anchor Positioning</a></li>
+          <li><a href="#color-mix" class="velin-doc-sidebar__link">Color Mix</a></li>
+          <li><a href="#container-style" class="velin-doc-sidebar__link">Container Style</a></li>
+          <li><a href="#divide" class="velin-doc-sidebar__link">Divide</a></li>
+          <li><a href="#responsive" class="velin-doc-sidebar__link">Responsive</a></li>
+          <li><a href="#scope" class="velin-doc-sidebar__link">@scope</a></li>
+          <li><a href="#scroll" class="velin-doc-sidebar__link">Scroll</a></li>
+          <li><a href="#scroll-animation" class="velin-doc-sidebar__link">Scroll Animation</a></li>
+          <li><a href="#state" class="velin-doc-sidebar__link">State</a></li>
+          <li><a href="#view-transition" class="velin-doc-sidebar__link">View Transitions</a></li>
+        </ul>
+      </aside>
+
+      <!-- Content -->
+      <div>
+        <h1 class="velin-doc-title">Utilities</h1>
+        <p class="velin-doc-lead">Single-purpose utility classes for rapid prototyping and fine-tuning. Every class follows the <code class="velin-doc-inline-code">.velin-*</code> namespace to avoid collisions.</p>
+
+        <!-- ================================================================
+             1. DISPLAY
+             ================================================================ -->
+        <section id="display" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Display</h2>
+          <p>Control the display type of any element.</p>
+
+          <table class="velin-table velin-doc-api">
+            <thead>
+              <tr><th>Class</th><th>CSS</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>.velin-block</code></td><td><code>display: block</code></td></tr>
+              <tr><td><code>.velin-inline</code></td><td><code>display: inline</code></td></tr>
+              <tr><td><code>.velin-inline-block</code></td><td><code>display: inline-block</code></td></tr>
+              <tr><td><code>.velin-flex</code></td><td><code>display: flex</code></td></tr>
+              <tr><td><code>.velin-grid</code></td><td><code>display: grid</code></td></tr>
+              <tr><td><code>.velin-hidden</code></td><td><code>display: none</code></td></tr>
+              <tr><td><code>.velin-sr-only</code></td><td>Visually hidden, accessible to screen readers</td></tr>
+            </tbody>
+          </table>
+
+          <div class="velin-doc-demo">
+            <span class="velin-block" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-2);border-radius:var(--velin-radius-sm);">.velin-block</span>
+            <span class="velin-inline" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-2);border-radius:var(--velin-radius-sm);">.velin-inline</span>
+            <span class="velin-inline-block" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-2);border-radius:var(--velin-radius-sm);">.velin-inline-block</span>
+          </div>
+
+          <div class="velin-doc-demo">
+            <div class="velin-flex" style="gap:var(--velin-space-2);">
+              <span style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);">Flex child 1</span>
+              <span style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);">Flex child 2</span>
+              <span style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);">Flex child 3</span>
+            </div>
+          </div>
+
+<pre class="velin-doc-code">&lt;span class="velin-block"&gt;Block element&lt;/span&gt;
+&lt;span class="velin-inline"&gt;Inline element&lt;/span&gt;
+&lt;span class="velin-inline-block"&gt;Inline-block element&lt;/span&gt;
+
+&lt;div class="velin-flex" style="gap:var(--velin-space-2);"&gt;
+  &lt;span&gt;Flex child 1&lt;/span&gt;
+  &lt;span&gt;Flex child 2&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class="velin-hidden"&gt;This is hidden&lt;/div&gt;
+
+&lt;!-- Visually hidden but accessible to screen readers --&gt;
+&lt;span class="velin-sr-only"&gt;Skip to content&lt;/span&gt;</pre>
+        </section>
+
+        <!-- ================================================================
+             2. SPACING
+             ================================================================ -->
+        <section id="spacing" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Spacing</h2>
+          <p>Margin and padding utilities using the spacing scale (0&ndash;12). Use shorthand or logical property variants.</p>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Margin</h3>
+          <table class="velin-table velin-doc-api">
+            <thead>
+              <tr><th>Class</th><th>Property</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>.velin-m-{0-12}</code></td><td>margin (all sides)</td></tr>
+              <tr><td><code>.velin-mbs-{0-12}</code></td><td>margin-block-start</td></tr>
+              <tr><td><code>.velin-mbe-{0-12}</code></td><td>margin-block-end</td></tr>
+              <tr><td><code>.velin-mis-{0-12}</code></td><td>margin-inline-start</td></tr>
+              <tr><td><code>.velin-mie-{0-12}</code></td><td>margin-inline-end</td></tr>
+            </tbody>
+          </table>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Padding</h3>
+          <table class="velin-table velin-doc-api">
+            <thead>
+              <tr><th>Class</th><th>Property</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>.velin-p-{0-12}</code></td><td>padding (all sides)</td></tr>
+              <tr><td><code>.velin-pbs-{0-12}</code></td><td>padding-block-start</td></tr>
+              <tr><td><code>.velin-pbe-{0-12}</code></td><td>padding-block-end</td></tr>
+              <tr><td><code>.velin-pis-{0-12}</code></td><td>padding-inline-start</td></tr>
+              <tr><td><code>.velin-pie-{0-12}</code></td><td>padding-inline-end</td></tr>
+            </tbody>
+          </table>
+
+          <div class="velin-doc-demo velin-doc-demo--col">
+            <div style="display:flex;gap:var(--velin-space-3);flex-wrap:wrap;align-items:start">
+              <div class="velin-p-0" style="background:var(--velin-color-surface-dim);border:1px dashed var(--velin-color-border);border-radius:var(--velin-radius-sm);">
+                <span style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);display:block;padding:var(--velin-space-1);font-size:var(--velin-text-xs);">.velin-p-0</span>
+              </div>
+              <div class="velin-p-2" style="background:var(--velin-color-surface-dim);border:1px dashed var(--velin-color-border);border-radius:var(--velin-radius-sm);">
+                <span style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);display:block;padding:var(--velin-space-1);font-size:var(--velin-text-xs);">.velin-p-2</span>
+              </div>
+              <div class="velin-p-4" style="background:var(--velin-color-surface-dim);border:1px dashed var(--velin-color-border);border-radius:var(--velin-radius-sm);">
+                <span style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);display:block;padding:var(--velin-space-1);font-size:var(--velin-text-xs);">.velin-p-4</span>
+              </div>
+              <div class="velin-p-6" style="background:var(--velin-color-surface-dim);border:1px dashed var(--velin-color-border);border-radius:var(--velin-radius-sm);">
+                <span style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);display:block;padding:var(--velin-space-1);font-size:var(--velin-text-xs);">.velin-p-6</span>
+              </div>
+              <div class="velin-p-8" style="background:var(--velin-color-surface-dim);border:1px dashed var(--velin-color-border);border-radius:var(--velin-radius-sm);">
+                <span style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);display:block;padding:var(--velin-space-1);font-size:var(--velin-text-xs);">.velin-p-8</span>
+              </div>
+            </div>
+          </div>
+
+<pre class="velin-doc-code">&lt;!-- All-sides margin &amp; padding --&gt;
+&lt;div class="velin-m-4"&gt;margin: var(--velin-space-4)&lt;/div&gt;
+&lt;div class="velin-p-6"&gt;padding: var(--velin-space-6)&lt;/div&gt;
+
+&lt;!-- Logical property variants --&gt;
+&lt;div class="velin-mbs-2 velin-mbe-4"&gt;Block margins&lt;/div&gt;
+&lt;div class="velin-pis-3 velin-pie-3"&gt;Inline padding&lt;/div&gt;</pre>
+        </section>
+
+        <!-- ================================================================
+             3. TEXT
+             ================================================================ -->
+        <section id="text" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Text</h2>
+          <p>Font size, weight, and alignment utilities.</p>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Font Size</h3>
+          <div class="velin-doc-demo velin-doc-demo--col">
+            <span class="velin-text-xs">.velin-text-xs</span>
+            <span class="velin-text-sm">.velin-text-sm</span>
+            <span class="velin-text-base">.velin-text-base</span>
+            <span class="velin-text-lg">.velin-text-lg</span>
+            <span class="velin-text-xl">.velin-text-xl</span>
+            <span class="velin-text-2xl">.velin-text-2xl</span>
+            <span class="velin-text-3xl">.velin-text-3xl</span>
+            <span class="velin-text-4xl">.velin-text-4xl</span>
+          </div>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Font Weight</h3>
+          <div class="velin-doc-demo velin-doc-demo--col">
+            <span class="velin-font-normal velin-text-lg">.velin-font-normal</span>
+            <span class="velin-font-medium velin-text-lg">.velin-font-medium</span>
+            <span class="velin-font-semibold velin-text-lg">.velin-font-semibold</span>
+            <span class="velin-font-bold velin-text-lg">.velin-font-bold</span>
+          </div>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Text Alignment</h3>
+          <div class="velin-doc-demo velin-doc-demo--col" style="max-inline-size:32rem">
+            <div class="velin-text-start" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-2);border-radius:var(--velin-radius-sm);inline-size:100%">.velin-text-start</div>
+            <div class="velin-text-center" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-2);border-radius:var(--velin-radius-sm);inline-size:100%">.velin-text-center</div>
+            <div class="velin-text-end" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-2);border-radius:var(--velin-radius-sm);inline-size:100%">.velin-text-end</div>
+          </div>
+
+<pre class="velin-doc-code">&lt;!-- Font sizes --&gt;
+&lt;p class="velin-text-xs"&gt;Extra small text&lt;/p&gt;
+&lt;p class="velin-text-sm"&gt;Small text&lt;/p&gt;
+&lt;p class="velin-text-base"&gt;Base text&lt;/p&gt;
+&lt;p class="velin-text-lg"&gt;Large text&lt;/p&gt;
+&lt;p class="velin-text-xl"&gt;Extra large text&lt;/p&gt;
+&lt;p class="velin-text-2xl"&gt;2XL text&lt;/p&gt;
+&lt;p class="velin-text-3xl"&gt;3XL text&lt;/p&gt;
+&lt;p class="velin-text-4xl"&gt;4XL text&lt;/p&gt;
+
+&lt;!-- Font weights --&gt;
+&lt;span class="velin-font-normal"&gt;Normal&lt;/span&gt;
+&lt;span class="velin-font-medium"&gt;Medium&lt;/span&gt;
+&lt;span class="velin-font-semibold"&gt;Semibold&lt;/span&gt;
+&lt;span class="velin-font-bold"&gt;Bold&lt;/span&gt;
+
+&lt;!-- Alignment --&gt;
+&lt;p class="velin-text-start"&gt;Start-aligned&lt;/p&gt;
+&lt;p class="velin-text-center"&gt;Centered&lt;/p&gt;
+&lt;p class="velin-text-end"&gt;End-aligned&lt;/p&gt;</pre>
+        </section>
+
+        <!-- ================================================================
+             4. COLOR
+             ================================================================ -->
+        <section id="color" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Color</h2>
+          <p>Semantic text and background color utilities.</p>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Text Color</h3>
+          <div class="velin-doc-demo velin-doc-demo--col" style="font-size:var(--velin-text-lg);font-weight:var(--velin-weight-medium)">
+            <span class="velin-text-primary">.velin-text-primary</span>
+            <span class="velin-text-secondary">.velin-text-secondary</span>
+            <span class="velin-text-success">.velin-text-success</span>
+            <span class="velin-text-danger">.velin-text-danger</span>
+            <span class="velin-text-warning">.velin-text-warning</span>
+            <span class="velin-text-muted">.velin-text-muted</span>
+          </div>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Background Color</h3>
+          <div class="velin-doc-demo" style="flex-wrap:wrap">
+            <span class="velin-bg-primary" style="color:var(--velin-color-on-primary);padding:var(--velin-space-2) var(--velin-space-4);border-radius:var(--velin-radius-sm);">.velin-bg-primary</span>
+            <span class="velin-bg-surface" style="padding:var(--velin-space-2) var(--velin-space-4);border-radius:var(--velin-radius-sm);border:1px solid var(--velin-color-border);">.velin-bg-surface</span>
+            <span class="velin-bg-success" style="color:#fff;padding:var(--velin-space-2) var(--velin-space-4);border-radius:var(--velin-radius-sm);">.velin-bg-success</span>
+            <span class="velin-bg-danger" style="color:#fff;padding:var(--velin-space-2) var(--velin-space-4);border-radius:var(--velin-radius-sm);">.velin-bg-danger</span>
+            <span class="velin-bg-warning" style="padding:var(--velin-space-2) var(--velin-space-4);border-radius:var(--velin-radius-sm);">.velin-bg-warning</span>
+          </div>
+
+<pre class="velin-doc-code">&lt;!-- Text colors --&gt;
+&lt;span class="velin-text-primary"&gt;Primary&lt;/span&gt;
+&lt;span class="velin-text-secondary"&gt;Secondary&lt;/span&gt;
+&lt;span class="velin-text-success"&gt;Success&lt;/span&gt;
+&lt;span class="velin-text-danger"&gt;Danger&lt;/span&gt;
+&lt;span class="velin-text-warning"&gt;Warning&lt;/span&gt;
+&lt;span class="velin-text-muted"&gt;Muted&lt;/span&gt;
+
+&lt;!-- Background colors --&gt;
+&lt;div class="velin-bg-primary"&gt;Primary background&lt;/div&gt;
+&lt;div class="velin-bg-surface"&gt;Surface background&lt;/div&gt;
+&lt;div class="velin-bg-success"&gt;Success background&lt;/div&gt;
+&lt;div class="velin-bg-danger"&gt;Danger background&lt;/div&gt;
+&lt;div class="velin-bg-warning"&gt;Warning background&lt;/div&gt;</pre>
+        </section>
+
+        <!-- ================================================================
+             5. SIZING
+             ================================================================ -->
+        <section id="sizing" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Sizing</h2>
+          <p>Width and height utility classes.</p>
+
+          <table class="velin-table velin-doc-api">
+            <thead>
+              <tr><th>Class</th><th>CSS</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>.velin-w-full</code></td><td><code>width: 100%</code></td></tr>
+              <tr><td><code>.velin-w-auto</code></td><td><code>width: auto</code></td></tr>
+              <tr><td><code>.velin-w-screen</code></td><td><code>width: 100vw</code></td></tr>
+              <tr><td><code>.velin-h-full</code></td><td><code>height: 100%</code></td></tr>
+              <tr><td><code>.velin-h-auto</code></td><td><code>height: auto</code></td></tr>
+              <tr><td><code>.velin-h-screen</code></td><td><code>height: 100vh</code></td></tr>
+            </tbody>
+          </table>
+
+          <div class="velin-doc-demo velin-doc-demo--col">
+            <div class="velin-w-full" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-2);border-radius:var(--velin-radius-sm);text-align:center">.velin-w-full</div>
+            <div class="velin-w-auto" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-2);border-radius:var(--velin-radius-sm);border:1px solid var(--velin-color-border)">.velin-w-auto</div>
+          </div>
+
+<pre class="velin-doc-code">&lt;div class="velin-w-full"&gt;Full width&lt;/div&gt;
+&lt;div class="velin-w-auto"&gt;Auto width&lt;/div&gt;
+&lt;div class="velin-h-screen"&gt;Full viewport height&lt;/div&gt;</pre>
+        </section>
+
+        <!-- ================================================================
+             6. BORDER
+             ================================================================ -->
+        <section id="border" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Border</h2>
+          <p>Border width and border-radius utilities.</p>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Border Width</h3>
+          <div class="velin-doc-demo">
+            <div class="velin-border-0" style="padding:var(--velin-space-3);background:var(--velin-color-surface-dim);border-radius:var(--velin-radius-sm);min-inline-size:6rem;text-align:center;font-size:var(--velin-text-sm)">.velin-border-0</div>
+            <div class="velin-border" style="padding:var(--velin-space-3);border-color:var(--velin-color-border);border-style:solid;border-radius:var(--velin-radius-sm);min-inline-size:6rem;text-align:center;font-size:var(--velin-text-sm)">.velin-border</div>
+            <div class="velin-border-2" style="padding:var(--velin-space-3);border-color:var(--velin-color-border);border-style:solid;border-radius:var(--velin-radius-sm);min-inline-size:6rem;text-align:center;font-size:var(--velin-text-sm)">.velin-border-2</div>
+          </div>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Border Radius</h3>
+          <div class="velin-doc-demo">
+            <div class="velin-rounded-none" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-3);min-inline-size:5rem;text-align:center;font-size:var(--velin-text-xs)">none</div>
+            <div class="velin-rounded-sm" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-3);min-inline-size:5rem;text-align:center;font-size:var(--velin-text-xs)">sm</div>
+            <div class="velin-rounded-md" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-3);min-inline-size:5rem;text-align:center;font-size:var(--velin-text-xs)">md</div>
+            <div class="velin-rounded-lg" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-3);min-inline-size:5rem;text-align:center;font-size:var(--velin-text-xs)">lg</div>
+            <div class="velin-rounded-xl" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-3);min-inline-size:5rem;text-align:center;font-size:var(--velin-text-xs)">xl</div>
+            <div class="velin-rounded-full" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-3);min-inline-size:5rem;text-align:center;font-size:var(--velin-text-xs)">full</div>
+          </div>
+
+<pre class="velin-doc-code">&lt;!-- Border width --&gt;
+&lt;div class="velin-border-0"&gt;No border&lt;/div&gt;
+&lt;div class="velin-border"&gt;1px border&lt;/div&gt;
+&lt;div class="velin-border-2"&gt;2px border&lt;/div&gt;
+
+&lt;!-- Border radius --&gt;
+&lt;div class="velin-rounded-none"&gt;Sharp corners&lt;/div&gt;
+&lt;div class="velin-rounded-sm"&gt;Small radius&lt;/div&gt;
+&lt;div class="velin-rounded-md"&gt;Medium radius&lt;/div&gt;
+&lt;div class="velin-rounded-lg"&gt;Large radius&lt;/div&gt;
+&lt;div class="velin-rounded-xl"&gt;Extra large radius&lt;/div&gt;
+&lt;div class="velin-rounded-full"&gt;Fully rounded&lt;/div&gt;</pre>
+        </section>
+
+        <!-- ================================================================
+             7. POSITION
+             ================================================================ -->
+        <section id="position" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Position</h2>
+          <p>Positioning and z-index utilities.</p>
+
+          <table class="velin-table velin-doc-api">
+            <thead>
+              <tr><th>Class</th><th>CSS</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>.velin-relative</code></td><td><code>position: relative</code></td></tr>
+              <tr><td><code>.velin-absolute</code></td><td><code>position: absolute</code></td></tr>
+              <tr><td><code>.velin-fixed</code></td><td><code>position: fixed</code></td></tr>
+              <tr><td><code>.velin-sticky</code></td><td><code>position: sticky</code></td></tr>
+              <tr><td><code>.velin-z-0</code></td><td><code>z-index: 0</code></td></tr>
+              <tr><td><code>.velin-z-10</code></td><td><code>z-index: 10</code></td></tr>
+              <tr><td><code>.velin-z-20</code></td><td><code>z-index: 20</code></td></tr>
+              <tr><td><code>.velin-z-30</code></td><td><code>z-index: 30</code></td></tr>
+              <tr><td><code>.velin-z-40</code></td><td><code>z-index: 40</code></td></tr>
+              <tr><td><code>.velin-z-50</code></td><td><code>z-index: 50</code></td></tr>
+            </tbody>
+          </table>
+
+          <div class="velin-doc-demo">
+            <div class="velin-relative" style="inline-size:16rem;block-size:8rem;background:var(--velin-color-surface-dim);border-radius:var(--velin-radius-md);border:1px solid var(--velin-color-border)">
+              <span style="position:absolute;inset-block-start:var(--velin-space-2);inset-inline-start:var(--velin-space-2);font-size:var(--velin-text-xs);color:var(--velin-color-text-muted)">.velin-relative (parent)</span>
+              <div class="velin-absolute" style="inset-block-end:var(--velin-space-2);inset-inline-end:var(--velin-space-2);background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-1) var(--velin-space-3);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm)">.velin-absolute</div>
+            </div>
+          </div>
+
+<pre class="velin-doc-code">&lt;div class="velin-relative"&gt;
+  &lt;div class="velin-absolute" style="inset-block-end:0;inset-inline-end:0"&gt;
+    Positioned element
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;nav class="velin-sticky" style="inset-block-start:0"&gt;
+  Sticky navigation
+&lt;/nav&gt;
+
+&lt;div class="velin-z-10"&gt;z-index: 10&lt;/div&gt;
+&lt;div class="velin-z-50"&gt;z-index: 50&lt;/div&gt;</pre>
+        </section>
+
+        <!-- ================================================================
+             8. TRANSFORM (NEW)
+             ================================================================ -->
+        <section id="transform" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle velin-doc-new">Transform</h2>
+          <p>CSS transform utilities for rotation, scaling, and translation.</p>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Rotate</h3>
+          <div class="velin-doc-demo">
+            <div style="padding:var(--velin-space-4)">
+              <div class="velin-rotate-45" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);inline-size:4rem;block-size:4rem;display:grid;place-items:center;border-radius:var(--velin-radius-sm);font-size:var(--velin-text-xs)">45&deg;</div>
+            </div>
+            <div style="padding:var(--velin-space-4)">
+              <div class="velin-rotate-90" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);inline-size:4rem;block-size:4rem;display:grid;place-items:center;border-radius:var(--velin-radius-sm);font-size:var(--velin-text-xs)">90&deg;</div>
+            </div>
+            <div style="padding:var(--velin-space-4)">
+              <div class="velin-rotate-180" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);inline-size:4rem;block-size:4rem;display:grid;place-items:center;border-radius:var(--velin-radius-sm);font-size:var(--velin-text-xs)">180&deg;</div>
+            </div>
+          </div>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Scale</h3>
+          <div class="velin-doc-demo">
+            <div class="velin-scale-75" style="background:var(--velin-color-surface-dim);border:1px solid var(--velin-color-border);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm)">75%</div>
+            <div class="velin-scale-90" style="background:var(--velin-color-surface-dim);border:1px solid var(--velin-color-border);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm)">90%</div>
+            <div class="velin-scale-95" style="background:var(--velin-color-surface-dim);border:1px solid var(--velin-color-border);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm)">95%</div>
+            <div style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm)">100%</div>
+            <div class="velin-scale-105" style="background:var(--velin-color-surface-dim);border:1px solid var(--velin-color-border);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm)">105%</div>
+            <div class="velin-scale-110" style="background:var(--velin-color-surface-dim);border:1px solid var(--velin-color-border);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm)">110%</div>
+            <div class="velin-scale-125" style="background:var(--velin-color-surface-dim);border:1px solid var(--velin-color-border);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm)">125%</div>
+          </div>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Translate Y</h3>
+          <div class="velin-doc-demo" style="align-items:end;padding-block-end:var(--velin-space-4)">
+            <div style="background:var(--velin-color-surface-dim);border:1px solid var(--velin-color-border);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm)">baseline</div>
+            <div class="velin-translate-y-1" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm)">translate-y-1</div>
+            <div class="velin-translate-y-2" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm)">translate-y-2</div>
+          </div>
+
+<pre class="velin-doc-code">&lt;!-- Rotate --&gt;
+&lt;div class="velin-rotate-45"&gt;Rotated 45&deg;&lt;/div&gt;
+&lt;div class="velin-rotate-90"&gt;Rotated 90&deg;&lt;/div&gt;
+&lt;div class="velin-rotate-180"&gt;Rotated 180&deg;&lt;/div&gt;
+
+&lt;!-- Scale --&gt;
+&lt;div class="velin-scale-75"&gt;75%&lt;/div&gt;
+&lt;div class="velin-scale-90"&gt;90%&lt;/div&gt;
+&lt;div class="velin-scale-105"&gt;105%&lt;/div&gt;
+&lt;div class="velin-scale-110"&gt;110%&lt;/div&gt;
+&lt;div class="velin-scale-125"&gt;125%&lt;/div&gt;
+
+&lt;!-- Translate --&gt;
+&lt;div class="velin-translate-y-1"&gt;Shifted down 0.25rem&lt;/div&gt;
+&lt;div class="velin-translate-y-2"&gt;Shifted down 0.5rem&lt;/div&gt;</pre>
+        </section>
+
+        <!-- ================================================================
+             9. FILTER / BACKDROP (NEW)
+             ================================================================ -->
+        <section id="filter" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle velin-doc-new">Filter / Backdrop</h2>
+          <p>CSS filter and backdrop-filter utilities for blur, brightness, and grayscale effects.</p>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Blur</h3>
+          <div class="velin-doc-demo">
+            <div style="position:relative;overflow:hidden;border-radius:var(--velin-radius-md);border:1px solid var(--velin-color-border)">
+              <div style="padding:var(--velin-space-6);background:linear-gradient(135deg,var(--velin-color-primary),var(--velin-color-secondary,#6366f1));color:#fff;font-weight:var(--velin-weight-bold)">No blur</div>
+            </div>
+            <div style="position:relative;overflow:hidden;border-radius:var(--velin-radius-md);border:1px solid var(--velin-color-border)">
+              <div class="velin-blur-sm" style="padding:var(--velin-space-6);background:linear-gradient(135deg,var(--velin-color-primary),var(--velin-color-secondary,#6366f1));color:#fff;font-weight:var(--velin-weight-bold)">blur-sm</div>
+            </div>
+            <div style="position:relative;overflow:hidden;border-radius:var(--velin-radius-md);border:1px solid var(--velin-color-border)">
+              <div class="velin-blur-md" style="padding:var(--velin-space-6);background:linear-gradient(135deg,var(--velin-color-primary),var(--velin-color-secondary,#6366f1));color:#fff;font-weight:var(--velin-weight-bold)">blur-md</div>
+            </div>
+            <div style="position:relative;overflow:hidden;border-radius:var(--velin-radius-md);border:1px solid var(--velin-color-border)">
+              <div class="velin-blur-lg" style="padding:var(--velin-space-6);background:linear-gradient(135deg,var(--velin-color-primary),var(--velin-color-secondary,#6366f1));color:#fff;font-weight:var(--velin-weight-bold)">blur-lg</div>
+            </div>
+          </div>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Brightness</h3>
+          <div class="velin-doc-demo">
+            <div class="velin-brightness-50" style="padding:var(--velin-space-3) var(--velin-space-4);background:var(--velin-color-primary);color:var(--velin-color-on-primary);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm)">50%</div>
+            <div class="velin-brightness-75" style="padding:var(--velin-space-3) var(--velin-space-4);background:var(--velin-color-primary);color:var(--velin-color-on-primary);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm)">75%</div>
+            <div style="padding:var(--velin-space-3) var(--velin-space-4);background:var(--velin-color-primary);color:var(--velin-color-on-primary);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm)">100%</div>
+            <div class="velin-brightness-125" style="padding:var(--velin-space-3) var(--velin-space-4);background:var(--velin-color-primary);color:var(--velin-color-on-primary);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm)">125%</div>
+          </div>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Grayscale &amp; Backdrop Blur</h3>
+          <div class="velin-doc-demo">
+            <div style="position:relative;overflow:hidden;border-radius:var(--velin-radius-md);border:1px solid var(--velin-color-border)">
+              <div class="velin-grayscale" style="padding:var(--velin-space-4);background:linear-gradient(135deg,#f97316,#ec4899,#8b5cf6);color:#fff;font-weight:var(--velin-weight-bold);font-size:var(--velin-text-sm)">.velin-grayscale</div>
+            </div>
+            <div style="position:relative;overflow:hidden;border-radius:var(--velin-radius-md);border:1px solid var(--velin-color-border)">
+              <div style="padding:var(--velin-space-4);background:linear-gradient(135deg,#f97316,#ec4899,#8b5cf6);color:#fff;font-weight:var(--velin-weight-bold);font-size:var(--velin-text-sm)">Original</div>
+            </div>
+          </div>
+
+<pre class="velin-doc-code">&lt;!-- Blur --&gt;
+&lt;div class="velin-blur-sm"&gt;Slight blur&lt;/div&gt;
+&lt;div class="velin-blur-md"&gt;Medium blur&lt;/div&gt;
+&lt;div class="velin-blur-lg"&gt;Heavy blur&lt;/div&gt;
+
+&lt;!-- Backdrop blur (on overlays, modals, etc.) --&gt;
+&lt;div class="velin-backdrop-blur"&gt;Frosted glass effect&lt;/div&gt;
+
+&lt;!-- Brightness --&gt;
+&lt;img class="velin-brightness-50" src="…" alt="Dimmed"&gt;
+&lt;img class="velin-brightness-75" src="…" alt="Slightly dim"&gt;
+&lt;img class="velin-brightness-125" src="…" alt="Brightened"&gt;
+
+&lt;!-- Grayscale --&gt;
+&lt;img class="velin-grayscale" src="…" alt="Grayscale image"&gt;</pre>
+        </section>
+
+        <!-- ================================================================
+             10. ANIMATION (NEW)
+             ================================================================ -->
+        <section id="animation" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle velin-doc-new">Animation</h2>
+          <p>Pre-built animation utilities that trigger on page load. Combine with speed and delay modifiers for fine control.</p>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Base Animations</h3>
+          <div class="velin-doc-demo velin-doc-demo--col" id="anim-demos">
+            <div class="velin-animate-fade-in" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-3) var(--velin-space-6);border-radius:var(--velin-radius-md);font-size:var(--velin-text-sm)">
+              .velin-animate-fade-in
+            </div>
+            <div class="velin-animate-slide-up" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-3) var(--velin-space-6);border-radius:var(--velin-radius-md);font-size:var(--velin-text-sm)">
+              .velin-animate-slide-up
+            </div>
+            <div class="velin-animate-slide-down" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-3) var(--velin-space-6);border-radius:var(--velin-radius-md);font-size:var(--velin-text-sm)">
+              .velin-animate-slide-down
+            </div>
+            <div class="velin-animate-scale-in" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);padding:var(--velin-space-3) var(--velin-space-6);border-radius:var(--velin-radius-md);font-size:var(--velin-text-sm)">
+              .velin-animate-scale-in
+            </div>
+            <div class="velin-animate-spin" style="display:inline-grid;place-items:center;background:var(--velin-color-primary);color:var(--velin-color-on-primary);inline-size:3rem;block-size:3rem;border-radius:var(--velin-radius-md);font-size:var(--velin-text-lg);font-weight:var(--velin-weight-bold)">
+              &#x21bb;
+            </div>
+            <button type="button" class="velin-btn velin-btn--outline velin-btn--sm" style="margin-block-start:var(--velin-space-2)" onclick="replayAnimations()">Replay animations</button>
+          </div>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Speed Modifiers</h3>
+          <table class="velin-table velin-doc-api">
+            <thead>
+              <tr><th>Modifier</th><th>Duration</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>--fast</code></td><td>150ms</td></tr>
+              <tr><td>(default)</td><td>300ms</td></tr>
+              <tr><td><code>--slow</code></td><td>600ms</td></tr>
+            </tbody>
+          </table>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Delay Modifiers</h3>
+          <div class="velin-doc-demo" style="flex-wrap:wrap">
+            <span class="velin-animate-fade-in --delay-100" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);border:1px solid var(--velin-color-border);font-size:var(--velin-text-sm)">delay-100</span>
+            <span class="velin-animate-fade-in --delay-200" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);border:1px solid var(--velin-color-border);font-size:var(--velin-text-sm)">delay-200</span>
+            <span class="velin-animate-fade-in --delay-300" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);border:1px solid var(--velin-color-border);font-size:var(--velin-text-sm)">delay-300</span>
+            <span class="velin-animate-fade-in --delay-500" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);border:1px solid var(--velin-color-border);font-size:var(--velin-text-sm)">delay-500</span>
+          </div>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Infinite Loop</h3>
+          <div class="velin-doc-demo">
+            <div class="velin-animate-spin --infinite" style="display:inline-grid;place-items:center;background:var(--velin-color-primary);color:var(--velin-color-on-primary);inline-size:3rem;block-size:3rem;border-radius:var(--velin-radius-full);font-size:var(--velin-text-lg)">&#x21bb;</div>
+            <span style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted)">.velin-animate-spin.--infinite</span>
+          </div>
+
+<pre class="velin-doc-code">&lt;!-- Base animations --&gt;
+&lt;div class="velin-animate-fade-in"&gt;Fade in&lt;/div&gt;
+&lt;div class="velin-animate-slide-up"&gt;Slide up&lt;/div&gt;
+&lt;div class="velin-animate-slide-down"&gt;Slide down&lt;/div&gt;
+&lt;div class="velin-animate-scale-in"&gt;Scale in&lt;/div&gt;
+&lt;div class="velin-animate-spin"&gt;Spinning&lt;/div&gt;
+
+&lt;!-- Speed modifiers --&gt;
+&lt;div class="velin-animate-fade-in --fast"&gt;Fast fade&lt;/div&gt;
+&lt;div class="velin-animate-slide-up --slow"&gt;Slow slide&lt;/div&gt;
+
+&lt;!-- Delay modifiers --&gt;
+&lt;div class="velin-animate-fade-in --delay-100"&gt;100ms delay&lt;/div&gt;
+&lt;div class="velin-animate-fade-in --delay-200"&gt;200ms delay&lt;/div&gt;
+&lt;div class="velin-animate-fade-in --delay-300"&gt;300ms delay&lt;/div&gt;
+&lt;div class="velin-animate-fade-in --delay-500"&gt;500ms delay&lt;/div&gt;
+
+&lt;!-- Infinite loop --&gt;
+&lt;div class="velin-animate-spin --infinite"&gt;Loading…&lt;/div&gt;</pre>
+        </section>
+
+        <!-- ================================================================
+             11. GRADIENT (NEW)
+             ================================================================ -->
+        <section id="gradient" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle velin-doc-new">Gradient</h2>
+          <p>Pre-built gradient backgrounds and gradient text effects. Use direction modifiers to control gradient flow.</p>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Background Gradients</h3>
+          <div class="velin-doc-demo velin-doc-demo--col" style="gap:var(--velin-space-4)">
+            <div class="velin-gradient-primary" style="padding:var(--velin-space-4) var(--velin-space-6);border-radius:var(--velin-radius-md);color:#fff;font-weight:var(--velin-weight-medium)">.velin-gradient-primary</div>
+            <div class="velin-gradient-secondary" style="padding:var(--velin-space-4) var(--velin-space-6);border-radius:var(--velin-radius-md);color:#fff;font-weight:var(--velin-weight-medium)">.velin-gradient-secondary</div>
+            <div class="velin-gradient-surface" style="padding:var(--velin-space-4) var(--velin-space-6);border-radius:var(--velin-radius-md);font-weight:var(--velin-weight-medium);border:1px solid var(--velin-color-border)">.velin-gradient-surface</div>
+            <div class="velin-gradient-hero" style="padding:var(--velin-space-4) var(--velin-space-6);border-radius:var(--velin-radius-md);color:#fff;font-weight:var(--velin-weight-medium)">.velin-gradient-hero</div>
+            <div class="velin-gradient-sunset" style="padding:var(--velin-space-4) var(--velin-space-6);border-radius:var(--velin-radius-md);color:#fff;font-weight:var(--velin-weight-medium)">.velin-gradient-sunset</div>
+            <div class="velin-gradient-ocean" style="padding:var(--velin-space-4) var(--velin-space-6);border-radius:var(--velin-radius-md);color:#fff;font-weight:var(--velin-weight-medium)">.velin-gradient-ocean</div>
+          </div>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Gradient Text</h3>
+          <div class="velin-doc-demo">
+            <span class="velin-gradient-text velin-text-4xl velin-font-bold">.velin-gradient-text</span>
+          </div>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Direction Modifiers</h3>
+          <table class="velin-table velin-doc-api">
+            <thead>
+              <tr><th>Modifier</th><th>Direction</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>(default)</td><td>135deg (top-left to bottom-right)</td></tr>
+              <tr><td><code>--to-r</code></td><td>to right (90deg)</td></tr>
+              <tr><td><code>--to-b</code></td><td>to bottom (180deg)</td></tr>
+              <tr><td><code>--to-br</code></td><td>to bottom-right (135deg)</td></tr>
+            </tbody>
+          </table>
+
+<pre class="velin-doc-code">&lt;!-- Background gradients --&gt;
+&lt;div class="velin-gradient-primary"&gt;Primary gradient&lt;/div&gt;
+&lt;div class="velin-gradient-secondary"&gt;Secondary gradient&lt;/div&gt;
+&lt;div class="velin-gradient-surface"&gt;Surface gradient&lt;/div&gt;
+&lt;div class="velin-gradient-hero"&gt;Hero gradient&lt;/div&gt;
+&lt;div class="velin-gradient-sunset"&gt;Sunset gradient&lt;/div&gt;
+&lt;div class="velin-gradient-ocean"&gt;Ocean gradient&lt;/div&gt;
+
+&lt;!-- Gradient text --&gt;
+&lt;h1 class="velin-gradient-text"&gt;Gradient heading&lt;/h1&gt;
+
+&lt;!-- Direction modifiers --&gt;
+&lt;div class="velin-gradient-primary --to-r"&gt;Left to right&lt;/div&gt;
+&lt;div class="velin-gradient-sunset --to-b"&gt;Top to bottom&lt;/div&gt;</pre>
+        </section>
+
+        <!-- ================================================================
+             12. PRINT (NEW)
+             ================================================================ -->
+        <section id="print" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle velin-doc-new">Print</h2>
+          <p>Control element visibility and page breaks when printing. These classes only take effect inside <code class="velin-doc-inline-code">@media print</code>.</p>
+
+          <table class="velin-table velin-doc-api">
+            <thead>
+              <tr><th>Class</th><th>Behavior</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>.velin-print-only</code></td><td>Hidden on screen, visible in print</td></tr>
+              <tr><td><code>.velin-no-print</code></td><td>Visible on screen, hidden in print</td></tr>
+              <tr><td><code>.velin-print-break-before</code></td><td>Forces a page break before the element</td></tr>
+              <tr><td><code>.velin-print-break-after</code></td><td>Forces a page break after the element</td></tr>
+              <tr><td><code>.velin-print-break-avoid</code></td><td>Prevents a page break inside the element</td></tr>
+            </tbody>
+          </table>
+
+          <div class="velin-doc-demo velin-doc-demo--col">
+            <div style="display:flex;gap:var(--velin-space-3);flex-wrap:wrap">
+              <span class="velin-no-print" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);border:1px solid var(--velin-color-border);font-size:var(--velin-text-sm)">.velin-no-print &mdash; hidden when printing</span>
+              <span class="velin-print-only" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);border:1px solid var(--velin-color-border);font-size:var(--velin-text-sm)">.velin-print-only &mdash; this is hidden on screen</span>
+            </div>
+            <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted)">Try <kbd>Ctrl+P</kbd> / <kbd>Cmd+P</kbd> to preview print behavior.</p>
+          </div>
+
+<pre class="velin-doc-code">&lt;!-- Only visible when printing --&gt;
+&lt;p class="velin-print-only"&gt;Printed on: 2026-01-01&lt;/p&gt;
+
+&lt;!-- Hidden from print --&gt;
+&lt;nav class="velin-no-print"&gt;Site navigation&lt;/nav&gt;
+
+&lt;!-- Page break control --&gt;
+&lt;section class="velin-print-break-before"&gt;New page starts here&lt;/section&gt;
+&lt;section class="velin-print-break-after"&gt;Page break follows this&lt;/section&gt;
+&lt;table class="velin-print-break-avoid"&gt;Keep table intact&lt;/table&gt;</pre>
+        </section>
+
+        <!-- ================================================================
+             13. TRANSITION
+             ================================================================ -->
+        <section id="transition" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Transition</h2>
+          <p>Apply smooth CSS transitions to elements. Hover over the demos to see them in action.</p>
+
+          <table class="velin-table velin-doc-api">
+            <thead>
+              <tr><th>Class</th><th>Properties</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>.velin-transition</code></td><td>all properties</td></tr>
+              <tr><td><code>.velin-transition-colors</code></td><td>color, background-color, border-color</td></tr>
+              <tr><td><code>.velin-transition-opacity</code></td><td>opacity</td></tr>
+              <tr><td><code>.velin-transition-transform</code></td><td>transform</td></tr>
+              <tr><td><code>.velin-transition-shadow</code></td><td>box-shadow</td></tr>
+              <tr><td><code>.velin-transition-none</code></td><td>transition: none</td></tr>
+            </tbody>
+          </table>
+
+          <style>
+            .util-hover-bg:hover { background-color: var(--velin-color-primary) !important; color: var(--velin-color-on-primary) !important; }
+            .util-hover-opacity:hover { opacity: 0.5; }
+            .util-hover-scale:hover { transform: scale(1.15); }
+            .util-hover-shadow:hover { box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+          </style>
+
+          <div class="velin-doc-demo">
+            <div class="velin-transition-colors util-hover-bg" style="padding:var(--velin-space-3) var(--velin-space-4);border-radius:var(--velin-radius-md);border:1px solid var(--velin-color-border);cursor:pointer;font-size:var(--velin-text-sm)">Hover: colors</div>
+            <div class="velin-transition-opacity util-hover-opacity" style="padding:var(--velin-space-3) var(--velin-space-4);border-radius:var(--velin-radius-md);background:var(--velin-color-primary);color:var(--velin-color-on-primary);cursor:pointer;font-size:var(--velin-text-sm)">Hover: opacity</div>
+            <div class="velin-transition-transform util-hover-scale" style="padding:var(--velin-space-3) var(--velin-space-4);border-radius:var(--velin-radius-md);background:var(--velin-color-primary);color:var(--velin-color-on-primary);cursor:pointer;font-size:var(--velin-text-sm)">Hover: transform</div>
+            <div class="velin-transition-shadow util-hover-shadow" style="padding:var(--velin-space-3) var(--velin-space-4);border-radius:var(--velin-radius-md);border:1px solid var(--velin-color-border);cursor:pointer;font-size:var(--velin-text-sm)">Hover: shadow</div>
+          </div>
+
+<pre class="velin-doc-code">&lt;!-- Smooth transition on all properties --&gt;
+&lt;div class="velin-transition"&gt;All transitions&lt;/div&gt;
+
+&lt;!-- Scoped transitions --&gt;
+&lt;div class="velin-transition-colors"&gt;Color changes only&lt;/div&gt;
+&lt;div class="velin-transition-opacity"&gt;Opacity changes only&lt;/div&gt;
+&lt;div class="velin-transition-transform"&gt;Transform changes only&lt;/div&gt;
+&lt;div class="velin-transition-shadow"&gt;Shadow changes only&lt;/div&gt;
+
+&lt;!-- Disable transitions --&gt;
+&lt;div class="velin-transition-none"&gt;No transition&lt;/div&gt;</pre>
+        </section>
+
+        <!-- ================================================================
+             14. CURSOR
+             ================================================================ -->
+        <section id="cursor" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Cursor</h2>
+          <p>Override the mouse cursor style on any element.</p>
+
+          <table class="velin-table velin-doc-api">
+            <thead>
+              <tr><th>Class</th><th>CSS</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>.velin-cursor-pointer</code></td><td><code>cursor: pointer</code></td></tr>
+              <tr><td><code>.velin-cursor-default</code></td><td><code>cursor: default</code></td></tr>
+              <tr><td><code>.velin-cursor-not-allowed</code></td><td><code>cursor: not-allowed</code></td></tr>
+            </tbody>
+          </table>
+
+          <div class="velin-doc-demo">
+            <div class="velin-cursor-pointer" style="padding:var(--velin-space-3) var(--velin-space-4);border-radius:var(--velin-radius-md);background:var(--velin-color-primary);color:var(--velin-color-on-primary);font-size:var(--velin-text-sm)">cursor-pointer</div>
+            <div class="velin-cursor-default" style="padding:var(--velin-space-3) var(--velin-space-4);border-radius:var(--velin-radius-md);background:var(--velin-color-surface-dim);border:1px solid var(--velin-color-border);font-size:var(--velin-text-sm)">cursor-default</div>
+            <div class="velin-cursor-not-allowed" style="padding:var(--velin-space-3) var(--velin-space-4);border-radius:var(--velin-radius-md);background:var(--velin-color-surface-dim);border:1px solid var(--velin-color-border);opacity:0.6;font-size:var(--velin-text-sm)">cursor-not-allowed</div>
+          </div>
+
+<pre class="velin-doc-code">&lt;button class="velin-cursor-pointer"&gt;Clickable&lt;/button&gt;
+&lt;div class="velin-cursor-default"&gt;Default cursor&lt;/div&gt;
+&lt;button class="velin-cursor-not-allowed" disabled&gt;Disabled&lt;/button&gt;</pre>
+        </section>
+
+        <!-- ============ Anchor Positioning ============ -->
+        <section id="anchor" class="velin-doc-section">
+          <h2>Anchor Positioning</h2>
+          <p>Native CSS Anchor Positioning utilities for tooltips and dropdowns without JavaScript calculations.</p>
+          <table class="velin-table"><tr><th>Class</th><th>Description</th></tr>
+            <tr><td><code>.velin-anchor</code></td><td>Set as anchor element (<code>anchor-name</code>)</td></tr>
+            <tr><td><code>.velin-anchored</code></td><td>Position relative to anchor</td></tr>
+            <tr><td><code>.velin-anchor-top</code></td><td>Place above anchor</td></tr>
+            <tr><td><code>.velin-anchor-bottom</code></td><td>Place below anchor</td></tr>
+            <tr><td><code>.velin-anchor-start</code></td><td>Place at start</td></tr>
+            <tr><td><code>.velin-anchor-end</code></td><td>Place at end</td></tr>
+            <tr><td><code>.velin-anchor-flip</code></td><td>Auto-flip fallback when out of viewport</td></tr>
+          </table>
+          <pre class="velin-doc-code">&lt;button class="velin-anchor"&gt;Anchor&lt;/button&gt;
+&lt;div class="velin-anchored velin-anchor-bottom"&gt;Positioned content&lt;/div&gt;</pre>
+        </section>
+
+        <!-- ============ Color Mix ============ -->
+        <section id="color-mix" class="velin-doc-section">
+          <h2>Color Mix / Auto-Text</h2>
+          <p>Utilities based on <code>color-mix()</code> and automatic text color selection.</p>
+          <table class="velin-table"><tr><th>Class</th><th>Description</th></tr>
+            <tr><td><code>.velin-opacity-10</code> to <code>.velin-opacity-90</code></td><td>Color opacity via <code>color-mix(in oklch)</code></td></tr>
+            <tr><td><code>.velin-tint-10</code> to <code>.velin-tint-90</code></td><td>Lighten color by mixing with white</td></tr>
+            <tr><td><code>.velin-shade-10</code> to <code>.velin-shade-90</code></td><td>Darken color by mixing with black</td></tr>
+            <tr><td><code>.velin-auto-text</code></td><td>Automatic white/black text based on background luminance</td></tr>
+          </table>
+          <div style="display:flex;gap:var(--velin-space-2);flex-wrap:wrap;margin-block:var(--velin-space-4)">
+            <span class="velin-badge velin-badge--primary velin-auto-text" style="padding:var(--velin-space-2) var(--velin-space-3)">Auto Text</span>
+          </div>
+        </section>
+
+        <!-- ============ Container Style Queries ============ -->
+        <section id="container-style" class="velin-doc-section">
+          <h2>Container Style Queries</h2>
+          <p>Adaptive component styling based on container CSS variables, not just width.</p>
+          <table class="velin-table"><tr><th>Variable / Class</th><th>Description</th></tr>
+            <tr><td><code>--velin-density: compact</code></td><td>Reduces spacing in children</td></tr>
+            <tr><td><code>--velin-density: comfortable</code></td><td>Increases spacing in children</td></tr>
+            <tr><td><code>--velin-style: professional</code></td><td>Sharper radii, subdued colors</td></tr>
+            <tr><td><code>--velin-style: playful</code></td><td>Larger radii, vibrant colors</td></tr>
+          </table>
+          <pre class="velin-doc-code">&lt;div style="--velin-density: compact; container-type: inline-size;"&gt;
+  &lt;!-- Children auto-adapt spacing --&gt;
+&lt;/div&gt;</pre>
+        </section>
+
+        <!-- ============ Divide ============ -->
+        <section id="divide" class="velin-doc-section">
+          <h2>Divide</h2>
+          <p>Add borders between children automatically (like Tailwind <code>divide-y</code>).</p>
+          <table class="velin-table"><tr><th>Class</th><th>Description</th></tr>
+            <tr><td><code>.velin-divide-y</code></td><td>Horizontal dividers between vertical children</td></tr>
+            <tr><td><code>.velin-divide-x</code></td><td>Vertical dividers between horizontal children</td></tr>
+          </table>
+          <div class="velin-divide-y" style="max-width:20rem;margin-block:var(--velin-space-4)">
+            <div style="padding:var(--velin-space-2)">Item 1</div>
+            <div style="padding:var(--velin-space-2)">Item 2</div>
+            <div style="padding:var(--velin-space-2)">Item 3</div>
+          </div>
+        </section>
+
+        <!-- ============ Responsive ============ -->
+        <section id="responsive" class="velin-doc-section">
+          <h2>Responsive Utilities</h2>
+          <p>Show/hide elements at specific breakpoints.</p>
+          <table class="velin-table"><tr><th>Class</th><th>Description</th></tr>
+            <tr><td><code>.velin-hidden-sm</code></td><td>Hidden on small screens (&lt;36rem)</td></tr>
+            <tr><td><code>.velin-hidden-md</code></td><td>Hidden on medium screens</td></tr>
+            <tr><td><code>.velin-hidden-lg</code></td><td>Hidden on large screens</td></tr>
+            <tr><td><code>.velin-visible-sm</code></td><td>Visible only on small screens</td></tr>
+            <tr><td><code>.velin-visible-md</code></td><td>Visible only on medium screens</td></tr>
+            <tr><td><code>.velin-visible-lg</code></td><td>Visible only on large screens</td></tr>
+          </table>
+        </section>
+
+        <!-- ============ Scope ============ -->
+        <section id="scope" class="velin-doc-section">
+          <h2>CSS @scope</h2>
+          <p>Scoped styling to isolate component styles without Shadow DOM.</p>
+          <table class="velin-table"><tr><th>Class</th><th>Description</th></tr>
+            <tr><td><code>.velin-scope</code></td><td>Scoped container -- inner styles won't leak out</td></tr>
+            <tr><td><code>.velin-scope-island</code></td><td>Island scope -- completely isolated subtree</td></tr>
+          </table>
+          <pre class="velin-doc-code">&lt;div class="velin-scope"&gt;
+  &lt;!-- Styles scoped here only affect descendants --&gt;
+&lt;/div&gt;</pre>
+        </section>
+
+        <!-- ============ Scroll ============ -->
+        <section id="scroll" class="velin-doc-section">
+          <h2>Scroll Utilities</h2>
+          <table class="velin-table"><tr><th>Class</th><th>Description</th></tr>
+            <tr><td><code>.velin-scroll-smooth</code></td><td><code>scroll-behavior: smooth</code></td></tr>
+            <tr><td><code>.velin-scroll-snap-x</code></td><td>Horizontal scroll snapping container</td></tr>
+            <tr><td><code>.velin-scroll-snap-y</code></td><td>Vertical scroll snapping container</td></tr>
+            <tr><td><code>.velin-scroll-snap-start</code></td><td>Snap to start of child</td></tr>
+            <tr><td><code>.velin-scroll-snap-center</code></td><td>Snap to center of child</td></tr>
+            <tr><td><code>.velin-overscroll-none</code></td><td>Prevent scroll chaining</td></tr>
+          </table>
+        </section>
+
+        <!-- ============ Scroll Animation ============ -->
+        <section id="scroll-animation" class="velin-doc-section">
+          <h2>Scroll-Driven Animations</h2>
+          <p>Animate elements as they scroll into view using <code>animation-timeline</code>.</p>
+          <table class="velin-table"><tr><th>Class</th><th>Description</th></tr>
+            <tr><td><code>.velin-scroll-reveal</code></td><td>Fade + slide in on scroll</td></tr>
+            <tr><td><code>.velin-scroll-progress</code></td><td>Horizontal progress bar tied to scroll position</td></tr>
+            <tr><td><code>.velin-scroll-parallax</code></td><td>Parallax scroll effect</td></tr>
+          </table>
+        </section>
+
+        <!-- ============ State ============ -->
+        <section id="state" class="velin-doc-section">
+          <h2>State Utilities</h2>
+          <p>Visual state indicators with auto-generated pseudo-element icons.</p>
+          <table class="velin-table"><tr><th>Class</th><th>Description</th></tr>
+            <tr><td><code>.velin-is-loading</code></td><td>Loading overlay with spinner</td></tr>
+            <tr><td><code>.velin-is-empty</code></td><td>Empty state with placeholder icon</td></tr>
+            <tr><td><code>.velin-is-error</code></td><td>Error state with red indicator</td></tr>
+            <tr><td><code>.velin-is-success</code></td><td>Success state with check indicator</td></tr>
+            <tr><td><code>.velin-is-disabled</code></td><td>Disabled state with reduced opacity and no interaction</td></tr>
+          </table>
+          <div style="display:flex;gap:var(--velin-space-4);flex-wrap:wrap;margin-block:var(--velin-space-4)">
+            <div class="velin-card velin-is-loading" style="width:8rem;height:5rem;position:relative"></div>
+            <div class="velin-card velin-is-empty" style="width:8rem;height:5rem;position:relative"></div>
+            <div class="velin-card velin-is-error" style="width:8rem;height:5rem;position:relative"></div>
+            <div class="velin-card velin-is-success" style="width:8rem;height:5rem;position:relative"></div>
+          </div>
+        </section>
+
+        <!-- ============ View Transitions ============ -->
+        <section id="view-transition" class="velin-doc-section">
+          <h2>View Transitions</h2>
+          <p>CSS View Transitions API utilities for smooth page/component morphing.</p>
+          <table class="velin-table"><tr><th>Class</th><th>Description</th></tr>
+            <tr><td><code>.velin-vt-fade</code></td><td>Fade transition</td></tr>
+            <tr><td><code>.velin-vt-slide</code></td><td>Slide transition</td></tr>
+            <tr><td><code>.velin-morph-source</code></td><td>Element that "morphs" into another</td></tr>
+            <tr><td><code>.velin-morph-target</code></td><td>Target element of the morph</td></tr>
+          </table>
+          <pre class="velin-doc-code">&lt;img class="velin-morph-source" style="view-transition-name: hero"&gt;
+&lt;!-- On navigation, target element with same name morphs smoothly --&gt;</pre>
+        </section>
+
+      </div><!-- /content -->
+    </div><!-- /layout -->
+  </main>
+
+  <footer class="velin-doc-footer">
+    <div class="velin-doc-footer__inner">
+      <p>VelinStyle v0.6.1</p>
+      <div style="display:flex;gap:var(--velin-space-3);">
+        <a href="https://github.com/SkyliteDesign/velinstyle">GitHub</a>
+        <a href="https://github.com/SkyliteDesign/velinstyle/blob/main/LICENSE">MIT License</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function replayAnimations() {
+      const container = document.getElementById('anim-demos');
+      const items = container.querySelectorAll('[class*="velin-animate-"]');
+      items.forEach(el => {
+        const classes = [...el.classList].filter(c => c.startsWith('velin-animate-'));
+        classes.forEach(c => el.classList.remove(c));
+        void el.offsetWidth;
+        classes.forEach(c => el.classList.add(c));
+      });
+    }
+  </script>
+<!-- Theme Picker Widget -->
+<div style="position:fixed;bottom:1rem;right:1rem;z-index:1050;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;" id="themePicker">
+  <div id="themePanel" style="display:none;background:var(--velin-color-surface-bright,#fff);border:1px solid var(--velin-color-border,#dee2e6);border-radius:.75rem;padding:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:20rem;">
+    <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
+  </div>
+  <button onclick="document.getElementById('themePanel').style.display=document.getElementById('themePanel').style.display==='none'?'block':'none'" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+</div>
+<script>
+(function(){
+  var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
+  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='../dist/themes/'+t+'.min.css';document.head.appendChild(l);});
+  var names=['Default'].concat(themes).concat(['dark']);
+  var vals=[''].concat(themes).concat(['dark']);
+  var grid=document.getElementById('themeGrid');
+  names.forEach(function(n,i){
+    var b=document.createElement('button');
+    b.textContent=n.charAt(0).toUpperCase()+n.slice(1);
+    b.style.cssText='padding:.3rem .65rem;border:1px solid var(--velin-color-border,#dee2e6);border-radius:1rem;background:var(--velin-color-surface-dim,#f5f6f8);color:var(--velin-color-text,#212529);font-size:.75rem;cursor:pointer;white-space:nowrap;';
+    b.addEventListener('click',function(){
+      if(vals[i]){document.documentElement.setAttribute('data-velin-theme',vals[i]);}
+      else{document.documentElement.removeAttribute('data-velin-theme');}
+      grid.querySelectorAll('button').forEach(function(x){x.style.background='var(--velin-color-surface-dim,#f5f6f8)';x.style.color='var(--velin-color-text,#212529)';});
+      b.style.background='var(--velin-color-primary,#2563eb)';b.style.color='#fff';
+    });
+    grid.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

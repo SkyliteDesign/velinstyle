@@ -1,0 +1,158 @@
+@layer utilities {
+  /* === Ratio containers === */
+  .velin-ratio {
+    position: relative;
+    inline-size: 100%;
+  }
+
+  .velin-ratio::before {
+    content: "";
+    display: block;
+    padding-block-start: var(--velin-ratio-y, 56.25%);
+  }
+
+  .velin-ratio > * {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  .velin-ratio-1x1 { --velin-ratio-y: 100%; }
+  .velin-ratio-4x3 { --velin-ratio-y: 75%; }
+  .velin-ratio-16x9 { --velin-ratio-y: 56.25%; }
+  .velin-ratio-21x9 { --velin-ratio-y: 42.857%; }
+
+  /* === Stacks === */
+  .velin-stack-v {
+    display: flex;
+    flex-direction: column;
+    gap: var(--velin-stack-gap, var(--velin-space-3));
+  }
+
+  .velin-stack-h {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--velin-stack-gap, var(--velin-space-3));
+  }
+
+  .velin-stack-v > .velin-vr,
+  .velin-stack-h > .velin-vr {
+    align-self: stretch;
+  }
+
+  /* === Stretched link === */
+  .velin-stretched-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  /* === Vertical rule === */
+  .velin-vr {
+    display: inline-block;
+    align-self: stretch;
+    inline-size: 1px;
+    min-block-size: 1rem;
+    background-color: var(--velin-color-border);
+    opacity: 0.75;
+  }
+
+  /* === Colored links === */
+  .velin-link-primary {
+    color: var(--velin-color-primary);
+    text-decoration-color: color-mix(in oklch, var(--velin-color-primary) 30%, transparent);
+    transition: color var(--velin-duration-fast) var(--velin-ease-default),
+                text-decoration-color var(--velin-duration-fast) var(--velin-ease-default);
+  }
+  .velin-link-primary:hover { color: var(--velin-color-primary-hover); text-decoration-color: var(--velin-color-primary-hover); }
+
+  .velin-link-secondary {
+    color: var(--velin-color-secondary);
+    text-decoration-color: color-mix(in oklch, var(--velin-color-secondary) 30%, transparent);
+    transition: color var(--velin-duration-fast) var(--velin-ease-default),
+                text-decoration-color var(--velin-duration-fast) var(--velin-ease-default);
+  }
+  .velin-link-secondary:hover { color: var(--velin-color-secondary-hover); text-decoration-color: var(--velin-color-secondary-hover); }
+
+  .velin-link-success {
+    color: var(--velin-color-success);
+    text-decoration-color: color-mix(in oklch, var(--velin-color-success) 30%, transparent);
+    transition: color var(--velin-duration-fast) var(--velin-ease-default),
+                text-decoration-color var(--velin-duration-fast) var(--velin-ease-default);
+  }
+  .velin-link-success:hover { text-decoration-color: var(--velin-color-success); }
+
+  .velin-link-danger {
+    color: var(--velin-color-danger);
+    text-decoration-color: color-mix(in oklch, var(--velin-color-danger) 30%, transparent);
+    transition: color var(--velin-duration-fast) var(--velin-ease-default),
+                text-decoration-color var(--velin-duration-fast) var(--velin-ease-default);
+  }
+  .velin-link-danger:hover { text-decoration-color: var(--velin-color-danger); }
+
+  .velin-link-warning {
+    color: var(--velin-color-warning);
+    text-decoration-color: color-mix(in oklch, var(--velin-color-warning) 30%, transparent);
+    transition: color var(--velin-duration-fast) var(--velin-ease-default),
+                text-decoration-color var(--velin-duration-fast) var(--velin-ease-default);
+  }
+  .velin-link-warning:hover { text-decoration-color: var(--velin-color-warning); }
+
+  .velin-link-info {
+    color: var(--velin-color-info);
+    text-decoration-color: color-mix(in oklch, var(--velin-color-info) 30%, transparent);
+    transition: color var(--velin-duration-fast) var(--velin-ease-default),
+                text-decoration-color var(--velin-duration-fast) var(--velin-ease-default);
+  }
+  .velin-link-info:hover { text-decoration-color: var(--velin-color-info); }
+
+  /* === Focus ring === */
+  .velin-focus-ring:focus-visible {
+    outline: var(--velin-focus-ring-width, 3px) solid var(--velin-focus-ring-color, var(--velin-color-focus));
+    outline-offset: var(--velin-focus-ring-offset, 2px);
+  }
+
+  /* === Icon link === */
+  .velin-icon-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--velin-space-1);
+    text-decoration-color: color-mix(in oklch, currentColor 30%, transparent);
+    transition: text-decoration-color var(--velin-duration-fast) var(--velin-ease-default);
+  }
+
+  .velin-icon-link > svg,
+  .velin-icon-link > velin-icon {
+    flex-shrink: 0;
+    inline-size: 1em;
+    block-size: 1em;
+    transition: transform var(--velin-duration-fast) var(--velin-ease-out);
+  }
+
+  .velin-icon-link:hover > svg,
+  .velin-icon-link:hover > velin-icon {
+    transform: translateX(0.15em);
+  }
+
+  .velin-icon-link:hover {
+    text-decoration-color: currentColor;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .velin-link-primary,
+    .velin-link-secondary,
+    .velin-link-success,
+    .velin-link-danger,
+    .velin-link-warning,
+    .velin-link-info,
+    .velin-icon-link,
+    .velin-icon-link > svg,
+    .velin-icon-link > velin-icon {
+      transition: none;
+    }
+  }
+}

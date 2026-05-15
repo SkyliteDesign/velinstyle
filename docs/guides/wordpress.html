@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VelinStyle in WordPress — VelinStyle</title>
+  <meta name="description" content="VelinStyle in WordPress: Theme functions.php, wp_enqueue_style/script, Block-Editor, Performance.">
+  <link rel="stylesheet" href="../../dist/velinstyle.css">
+  <link rel="stylesheet" href="../docs.css">
+  <script src="../../dist/velinstyle-components.iife.js"></script>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="../index.html" class="velin-nav__brand">VelinStyle</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="../getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="index.html" class="velin-nav__link">Integration</a></li>
+      <li><a href="../layout.html" class="velin-nav__link">Layout</a></li>
+      <li><a href="../components.html" class="velin-nav__link">Components</a></li>
+      <li><a href="../css-components.html" class="velin-nav__link">CSS Components</a></li>
+      <li><a href="../forms.html" class="velin-nav__link">Forms</a></li>
+      <li><a href="../utilities.html" class="velin-nav__link">Utilities</a></li>
+      <li><a href="../tokens.html" class="velin-nav__link">Tokens</a></li>
+      <li><a href="../themes.html" class="velin-nav__link">Themes</a></li>
+      <li><a href="../icons.html" class="velin-nav__link">Icons</a></li>
+      <li><a href="../a11y.html" class="velin-nav__link">A11y</a></li>
+      <li><a href="../security.html" class="velin-nav__link">Security</a></li>
+      <li><a href="../migration.html" class="velin-nav__link">Migration</a></li>
+    </ul>
+  </nav>
+  <div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+    <a href="index.html">← Integration (Übersicht)</a>
+    &nbsp;·&nbsp;
+    <a href="existing-project.html">Bestehendes Projekt</a>
+    &nbsp;·&nbsp;
+    <a href="laravel.html">Laravel</a>
+  </div>
+
+  <main id="main" class="velin-container">
+    <section class="velin-doc-section">
+      <h1 class="velin-doc-title">WordPress</h1>
+      <p class="velin-doc-lead">
+        WordPress erwartet Styles und Skripte über <code class="velin-doc-inline-code">wp_enqueue_style</code> / <code class="velin-doc-inline-code">wp_enqueue_script</code>. VelinStyle kannst du als Dateien im Theme oder Plugin ablegen — oder für schnelle Tests per CDN.
+      </p>
+    </section>
+
+    <section id="varianten" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">1. Zwei übliche Wege</h2>
+      <ul style="line-height:1.8;">
+        <li><strong>CDN</strong> (prototyping): <code class="velin-doc-inline-code">unpkg</code>-Links wie in <a href="../getting-started.html">Getting Started</a> — kein npm auf dem Server nötig.</li>
+        <li><strong>Lokal</strong> (empfohlen für Live): gebaute <code class="velin-doc-inline-code">velinstyle.min.css</code> und <code class="velin-doc-inline-code">velinstyle-components.iife.js</code> (oder ESM nur, wenn du ein Build-Setup fürs Theme hast) ins Theme-Verzeichnis legen, z.&nbsp;B. unter <code class="velin-doc-inline-code">assets/velinstyle/</code>.</li>
+      </ul>
+    </section>
+
+    <section id="enqueue" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">2. Child-Theme: Enqueue in functions.php</h2>
+      <pre class="velin-doc-code">add_action('wp_enqueue_scripts', function () {
+  $ver = '0.6.1'; // oder filemtime() für Cache-Busting
+
+  wp_enqueue_style(
+    'velinstyle',
+    get_stylesheet_directory_uri() . '/assets/velinstyle/velinstyle.min.css',
+    [],
+    $ver
+  );
+
+  // IIFE: kein type="module" nötig
+  wp_enqueue_script(
+    'velinstyle-components',
+    get_stylesheet_directory_uri() . '/assets/velinstyle/velinstyle-components.iife.js',
+    [],
+    $ver,
+    true // in footer
+  );
+});</pre>
+      <p>Optional zweites Stylesheet für ein Theme-Preset (siehe <a href="../themes.html">Themes</a>), ebenfalls mit <code class="velin-doc-inline-code">wp_enqueue_style</code> nach dem Haupt-CSS.</p>
+    </section>
+
+    <section id="block-editor" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">3. Block-Editor (Gutenberg)</h2>
+      <p>Der Editor lädt nicht automatisch dein Frontend-CSS. Wenn Blöcke im Editor wie auf der Website aussehen sollen, musst du VelinStyle zusätzlich für den Editor enqueuen (z.&nbsp;B. <code class="velin-doc-inline-code">enqueue_block_editor_assets</code>) oder gezielt Block-Styles bauen. Viele Teams stylen nur das Frontend und akzeptieren Editor-Abweichungen.</p>
+    </section>
+
+    <section id="icons" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">4. Icons (Sprite-URL)</h2>
+      <p>Verwende eine absolute URL zum Sprite, damit sie auf allen Permalinks funktioniert:</p>
+      <pre class="velin-doc-code">&lt;?php
+$url = get_stylesheet_directory_uri() . '/assets/velinstyle/velin-icons.svg';
+?&gt;
+&lt;velin-icon name="check" sprite="&lt;?php echo esc_url( $url ); ?&gt;"&gt;&lt;/velin-icon&gt;</pre>
+    </section>
+
+    <section id="konflikte" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">5. Konflikte mit Theme/Page-Builder</h2>
+      <p>Page-Builder und alte Themes bringen oft eigenes CSS. VelinStyle nutzt den Präfix <code class="velin-doc-inline-code">velin-</code> — trotzdem können globale Resets oder <code class="velin-doc-inline-code">!important</code>-Regeln vom Theme Einfluss nehmen. Lade VelinStyle <strong>spät</strong> in der Kaskade (hoher Priority-Wert bei <code class="velin-doc-inline-code">wp_enqueue_style</code> oder Reihenfolge im <code class="velin-doc-inline-code">functions.php</code>), wenn nötig.</p>
+    </section>
+
+    <section id="arbeiten" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">6. Mit VelinStyle arbeiten</h2>
+      <p>Templates (PHP, Block-Templates, FSE-HTML) enthalten dasselbe Markup wie in der Doku: Container, Buttons, Alerts, optional Web Components. Für Formulare und A11y gelten die gleichen Regeln wie außerhalb von WordPress — siehe <a href="../forms.html">Forms</a> und <a href="../a11y.html">A11y</a>.</p>
+    </section>
+  </main>
+</body>
+</html>

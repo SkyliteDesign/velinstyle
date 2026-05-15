@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integration — VelinStyle</title>
+  <meta name="description" content="VelinStyle in Laravel, WordPress oder bestehende Projekte einbinden: Pfade, Build und Arbeitsablauf.">
+  <link rel="stylesheet" href="../../dist/velinstyle.css">
+  <link rel="stylesheet" href="../docs.css">
+  <script src="../../dist/velinstyle-components.iife.js"></script>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="../index.html" class="velin-nav__brand">VelinStyle</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="../getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="index.html" class="velin-nav__link" aria-current="page">Integration</a></li>
+      <li><a href="../layout.html" class="velin-nav__link">Layout</a></li>
+      <li><a href="../components.html" class="velin-nav__link">Components</a></li>
+      <li><a href="../css-components.html" class="velin-nav__link">CSS Components</a></li>
+      <li><a href="../forms.html" class="velin-nav__link">Forms</a></li>
+      <li><a href="../utilities.html" class="velin-nav__link">Utilities</a></li>
+      <li><a href="../tokens.html" class="velin-nav__link">Tokens</a></li>
+      <li><a href="../themes.html" class="velin-nav__link">Themes</a></li>
+      <li><a href="../icons.html" class="velin-nav__link">Icons</a></li>
+      <li><a href="../a11y.html" class="velin-nav__link">A11y</a></li>
+      <li><a href="../security.html" class="velin-nav__link">Security</a></li>
+      <li><a href="../migration.html" class="velin-nav__link">Migration</a></li>
+    </ul>
+  </nav>
+  <div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+    <strong>Vollständige Doku:</strong> <a href="https://velinstyle.info/docs/">velinstyle.info</a> — diese Seiten sind die Kurz-Integration für das Repo unter <code class="velin-doc-inline-code">docs/guides/</code>.
+  </div>
+
+  <main id="main" class="velin-container">
+    <section class="velin-doc-section">
+      <h1 class="velin-doc-title">Integration</h1>
+      <p class="velin-doc-lead">
+        So bindest du VelinStyle in typische Stacks ein und arbeitest danach mit denselben Klassen, Tokens und optionalen Web Components wie in einer reinen HTML-Seite.
+      </p>
+    </section>
+
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Leitfäden</h2>
+      <ul style="line-height:1.8; padding-inline-start:1.25rem;">
+        <li><a href="existing-project.html"><strong>Bestehendes Projekt</strong></a> — Vite, Webpack, statische Seiten, Konflikte mit anderen CSS-Frameworks.</li>
+        <li><a href="laravel.html"><strong>Laravel (Blade + Vite)</strong></a> — <code class="velin-doc-inline-code">npm</code>, Layout, <code class="velin-doc-inline-code">@vite</code>, Theme-CSS.</li>
+        <li><a href="wordpress.html"><strong>WordPress</strong></a> — Child-Theme oder Plugin, Enqueue, Block-Editor, Performance.</li>
+      </ul>
+      <p style="margin-block-start:var(--velin-space-4); color:var(--velin-color-text-muted); font-size:var(--velin-text-sm);">
+        Gemeinsam für alle: zuerst <a href="../getting-started.html">Getting Started</a> lesen, dann hier den passenden Stack wählen.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

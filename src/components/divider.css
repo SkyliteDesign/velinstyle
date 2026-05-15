@@ -1,0 +1,56 @@
+@layer components {
+  .velin-divider {
+    display: flex;
+    align-items: center;
+    border: none;
+    block-size: 0;
+    border-block-start: 1px solid var(--velin-color-border);
+    margin-block: var(--velin-space-6);
+  }
+
+  /* With text */
+  .velin-divider--text {
+    border: none;
+    gap: var(--velin-space-4);
+    font-size: var(--velin-text-sm);
+    color: var(--velin-color-text-muted);
+    font-weight: var(--velin-weight-medium);
+  }
+
+  .velin-divider--text::before,
+  .velin-divider--text::after {
+    content: "";
+    flex: 1;
+    block-size: 1px;
+    background: var(--velin-color-border);
+  }
+
+  /* Vertical */
+  .velin-divider--vertical {
+    display: inline-block;
+    border: none;
+    border-inline-start: 1px solid var(--velin-color-border);
+    block-size: 1.25rem;
+    inline-size: 0;
+    margin-block: 0;
+    margin-inline: var(--velin-space-3);
+    vertical-align: middle;
+  }
+
+  /* Spacing */
+  .velin-divider--sm { margin-block: var(--velin-space-3); }
+  .velin-divider--lg { margin-block: var(--velin-space-10); }
+
+  /* Color variants */
+  .velin-divider--strong { border-color: var(--velin-color-border-strong); }
+  .velin-divider--primary { border-color: var(--velin-color-primary); }
+  .velin-divider--strong.velin-divider--text::before,
+  .velin-divider--strong.velin-divider--text::after { background: var(--velin-color-border-strong); }
+  .velin-divider--primary.velin-divider--text::before,
+  .velin-divider--primary.velin-divider--text::after { background: var(--velin-color-primary); }
+
+  /* Thick */
+  .velin-divider--thick {
+    border-width: 2px;
+  }
+}

@@ -1,0 +1,144 @@
+@layer tokens {
+  :root {
+    /* Primary palette */
+    --velin-color-primary: oklch(55% 0.15 250);
+    --velin-color-primary-hover: oklch(48% 0.15 250);
+    --velin-color-primary-active: oklch(42% 0.15 250);
+    --velin-color-primary-subtle: oklch(92% 0.04 250);
+    --velin-color-on-primary: oklch(100% 0 0);
+
+    /* Secondary palette */
+    --velin-color-secondary: oklch(55% 0.12 320);
+    --velin-color-secondary-hover: oklch(48% 0.12 320);
+    --velin-color-secondary-active: oklch(42% 0.12 320);
+    --velin-color-secondary-subtle: oklch(92% 0.03 320);
+    --velin-color-on-secondary: oklch(100% 0 0);
+
+    /* Neutral surface & text */
+    --velin-color-surface: oklch(98% 0.005 250);
+    --velin-color-surface-dim: oklch(93% 0.005 250);
+    --velin-color-surface-bright: oklch(100% 0 0);
+    --velin-color-text: oklch(15% 0.01 250);
+    --velin-color-text-muted: oklch(45% 0.01 250);
+    --velin-color-text-subtle: oklch(60% 0.005 250);
+    --velin-color-border: oklch(82% 0.01 250);
+    --velin-color-border-strong: oklch(65% 0.01 250);
+
+    /* Semantic: success */
+    --velin-color-success: oklch(55% 0.16 145);
+    --velin-color-success-subtle: oklch(92% 0.04 145);
+    --velin-color-on-success: oklch(100% 0 0);
+
+    /* Semantic: warning */
+    --velin-color-warning: oklch(75% 0.15 85);
+    --velin-color-warning-subtle: oklch(95% 0.04 85);
+    --velin-color-on-warning: oklch(20% 0.02 85);
+
+    /* Semantic: danger */
+    --velin-color-danger: oklch(55% 0.2 25);
+    --velin-color-danger-hover: oklch(48% 0.2 25);
+    --velin-color-danger-subtle: oklch(92% 0.04 25);
+    --velin-color-on-danger: oklch(100% 0 0);
+
+    /* Semantic: info */
+    --velin-color-info: oklch(60% 0.12 240);
+    --velin-color-info-subtle: oklch(92% 0.04 240);
+    --velin-color-on-info: oklch(100% 0 0);
+
+    /* Overlay */
+    --velin-color-overlay: oklch(0% 0 0 / 0.4);
+
+    /* Focus ring */
+    --velin-color-focus: oklch(60% 0.2 250);
+  }
+
+  /* Dark mode: automatic via system preference */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-velin-theme="light"]) {
+      --velin-color-primary: oklch(72% 0.12 250);
+      --velin-color-primary-hover: oklch(78% 0.12 250);
+      --velin-color-primary-active: oklch(65% 0.12 250);
+      --velin-color-primary-subtle: oklch(25% 0.06 250);
+      --velin-color-on-primary: oklch(10% 0.01 250);
+
+      --velin-color-secondary: oklch(72% 0.1 320);
+      --velin-color-secondary-hover: oklch(78% 0.1 320);
+      --velin-color-secondary-active: oklch(65% 0.1 320);
+      --velin-color-secondary-subtle: oklch(25% 0.04 320);
+      --velin-color-on-secondary: oklch(10% 0.01 320);
+
+      --velin-color-surface: oklch(15% 0.01 250);
+      --velin-color-surface-dim: oklch(10% 0.01 250);
+      --velin-color-surface-bright: oklch(22% 0.01 250);
+      --velin-color-text: oklch(92% 0.005 250);
+      --velin-color-text-muted: oklch(70% 0.005 250);
+      --velin-color-text-subtle: oklch(55% 0.005 250);
+      --velin-color-border: oklch(30% 0.01 250);
+      --velin-color-border-strong: oklch(45% 0.01 250);
+
+      --velin-color-success: oklch(72% 0.14 145);
+      --velin-color-success-subtle: oklch(25% 0.06 145);
+      --velin-color-on-success: oklch(10% 0.01 145);
+
+      --velin-color-warning: oklch(80% 0.12 85);
+      --velin-color-warning-subtle: oklch(25% 0.06 85);
+      --velin-color-on-warning: oklch(10% 0.02 85);
+
+      --velin-color-danger: oklch(70% 0.16 25);
+      --velin-color-danger-hover: oklch(76% 0.16 25);
+      --velin-color-danger-subtle: oklch(25% 0.06 25);
+      --velin-color-on-danger: oklch(10% 0.01 25);
+
+      --velin-color-info: oklch(72% 0.1 240);
+      --velin-color-info-subtle: oklch(25% 0.04 240);
+      --velin-color-on-info: oklch(10% 0.01 240);
+
+      --velin-color-overlay: oklch(0% 0 0 / 0.6);
+      --velin-color-focus: oklch(72% 0.18 250);
+    }
+  }
+
+  /* Dark mode: explicit attribute */
+  [data-velin-theme="dark"] {
+    --velin-color-primary: oklch(72% 0.12 250);
+    --velin-color-primary-hover: oklch(78% 0.12 250);
+    --velin-color-primary-active: oklch(65% 0.12 250);
+    --velin-color-primary-subtle: oklch(25% 0.06 250);
+    --velin-color-on-primary: oklch(10% 0.01 250);
+
+    --velin-color-secondary: oklch(72% 0.1 320);
+    --velin-color-secondary-hover: oklch(78% 0.1 320);
+    --velin-color-secondary-active: oklch(65% 0.1 320);
+    --velin-color-secondary-subtle: oklch(25% 0.04 320);
+    --velin-color-on-secondary: oklch(10% 0.01 320);
+
+    --velin-color-surface: oklch(15% 0.01 250);
+    --velin-color-surface-dim: oklch(10% 0.01 250);
+    --velin-color-surface-bright: oklch(22% 0.01 250);
+    --velin-color-text: oklch(92% 0.005 250);
+    --velin-color-text-muted: oklch(70% 0.005 250);
+    --velin-color-text-subtle: oklch(55% 0.005 250);
+    --velin-color-border: oklch(30% 0.01 250);
+    --velin-color-border-strong: oklch(45% 0.01 250);
+
+    --velin-color-success: oklch(72% 0.14 145);
+    --velin-color-success-subtle: oklch(25% 0.06 145);
+    --velin-color-on-success: oklch(10% 0.01 145);
+
+    --velin-color-warning: oklch(80% 0.12 85);
+    --velin-color-warning-subtle: oklch(25% 0.06 85);
+    --velin-color-on-warning: oklch(10% 0.02 85);
+
+    --velin-color-danger: oklch(70% 0.16 25);
+    --velin-color-danger-hover: oklch(76% 0.16 25);
+    --velin-color-danger-subtle: oklch(25% 0.06 25);
+    --velin-color-on-danger: oklch(10% 0.01 25);
+
+    --velin-color-info: oklch(72% 0.1 240);
+    --velin-color-info-subtle: oklch(25% 0.04 240);
+    --velin-color-on-info: oklch(10% 0.01 240);
+
+    --velin-color-overlay: oklch(0% 0 0 / 0.6);
+    --velin-color-focus: oklch(72% 0.18 250);
+  }
+}

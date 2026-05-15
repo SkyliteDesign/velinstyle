@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security - VelinStyle</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <style>
+    .section { padding: var(--velin-space-12) 0; }
+    .section + .section { border-block-start: 1px solid var(--velin-color-border); }
+    .demo-code { background: var(--velin-color-surface-dim); padding: var(--velin-space-4); border-radius: var(--velin-radius-md); font-family: var(--velin-font-mono); font-size: var(--velin-text-sm); overflow-x: auto; border: 1px solid var(--velin-color-border); margin-block: var(--velin-space-4); }
+    .sec-table { width: 100%; border-collapse: collapse; margin-block: var(--velin-space-4); font-size: var(--velin-text-sm); }
+    .sec-table th, .sec-table td { padding: var(--velin-space-2) var(--velin-space-3); border: 1px solid var(--velin-color-border); text-align: left; }
+    .sec-table th { background: var(--velin-color-surface-dim); font-weight: 600; }
+    .sec-table code { background: var(--velin-color-surface-dim); padding: 0.1em 0.3em; border-radius: 3px; }
+    .security-badge { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.75rem; border-radius: 2rem; font-size: var(--velin-text-sm); font-weight: 600; }
+    .security-badge--safe { background: var(--velin-color-success-subtle, #dcfce7); color: var(--velin-color-success, #16a34a); }
+    .security-badge--warn { background: var(--velin-color-warning-subtle, #fef3c7); color: var(--velin-color-warning, #ca8a04); }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="index.html" class="velin-nav__brand">VelinStyle</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="guides/index.html" class="velin-nav__link">Integration</a></li>
+      <li><a href="layout.html" class="velin-nav__link">Layout</a></li>
+      <li><a href="components.html" class="velin-nav__link">Components</a></li>
+      <li><a href="css-components.html" class="velin-nav__link">CSS Components</a></li>
+      <li><a href="forms.html" class="velin-nav__link">Forms</a></li>
+      <li><a href="utilities.html" class="velin-nav__link">Utilities</a></li>
+      <li><a href="tokens.html" class="velin-nav__link">Tokens</a></li>
+      <li><a href="themes.html" class="velin-nav__link">Themes</a></li>
+      <li><a href="icons.html" class="velin-nav__link">Icons</a></li>
+      <li><a href="a11y.html" class="velin-nav__link">A11y</a></li>
+      <li><a href="security.html" class="velin-nav__link" aria-current="page">Security</a></li>
+    </ul>
+  </nav>
+
+  <main id="main" class="velin-container">
+    <h1 class="velin-text-4xl velin-font-bold" style="margin-block: var(--velin-space-8)">Security</h1>
+    <p class="velin-text-lg velin-text-muted" style="max-inline-size:60ch;margin-block-end:var(--velin-space-4)">
+      VelinStyle is designed with security in mind. This page covers built-in protections, CSP compatibility, and best practices for safe usage.
+    </p>
+
+    <!-- ============ XSS Protection ============ -->
+    <section class="section">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">XSS Protection in Web Components</h2>
+      <p>All VelinStyle Web Components that render dynamic content use <code>escapeHTML()</code> internally to prevent Cross-Site Scripting (XSS) attacks.</p>
+
+      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">Protected Components</h3>
+      <table class="sec-table">
+        <thead><tr><th>Component</th><th>Sanitized Values</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><code>&lt;velin-toast&gt;</code></td><td><code>message</code> in <code>.show()</code></td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
+          <tr><td><code>&lt;velin-dialog&gt;</code></td><td><code>message</code>, <code>title</code>, <code>confirmText</code>, <code>cancelText</code>, <code>placeholder</code>, <code>defaultValue</code></td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
+          <tr><td><code>&lt;velin-lightbox&gt;</code></td><td><code>src</code> (URL validated), <code>alt</code></td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
+          <tr><td><code>&lt;velin-countdown&gt;</code></td><td><code>label-*</code> attributes</td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
+          <tr><td><code>&lt;velin-stepper-wc&gt;</code></td><td><code>labels</code> attribute</td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
+          <tr><td><code>&lt;velin-tooltip-wc&gt;</code></td><td><code>content</code>, <code>placement</code></td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
+          <tr><td><code>&lt;velin-popover&gt;</code></td><td><code>title</code></td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
+          <tr><td><code>&lt;velin-drawer&gt;</code></td><td><code>title</code></td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
+          <tr><td><code>&lt;velin-modal&gt;</code></td><td><code>title</code></td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">How It Works</h3>
+      <p>VelinStyle uses a lightweight <code>escapeHTML()</code> function that converts <code>&lt;</code>, <code>&gt;</code>, <code>&amp;</code>, <code>"</code> and <code>'</code> into their HTML entity equivalents before inserting into the DOM:</p>
+      <pre class="demo-code">import { escapeHTML } from 'velinstyle/components/sanitize.js';
+
+const safe = escapeHTML(userInput);
+// "&lt;script&gt;alert('xss')&lt;/script&gt;" becomes harmless text</pre>
+
+      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">URL Validation</h3>
+      <p>The <code>sanitizeURL()</code> function validates URLs before use in <code>src</code> attributes, allowing only <code>http:</code>, <code>https:</code>, and <code>data:</code> protocols. JavaScript URLs are blocked.</p>
+    </section>
+
+    <!-- ============ CSP ============ -->
+    <section class="section">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Content Security Policy (CSP)</h2>
+      <p>VelinStyle Web Components inject <code>&lt;style&gt;</code> elements into their Shadow DOM. This requires appropriate CSP headers.</p>
+
+      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">Recommended CSP Headers</h3>
+      <pre class="demo-code">Content-Security-Policy:
+  default-src 'self';
+  style-src 'self' 'unsafe-inline';
+  script-src 'self';
+  img-src 'self' data:;</pre>
+
+      <div class="velin-alert velin-alert--warning" style="margin-block:var(--velin-space-4)">
+        <strong>Note:</strong> <code>style-src 'unsafe-inline'</code> is required because Shadow DOM components inject inline styles. This is standard practice for Web Component libraries.
+      </div>
+
+      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">Trusted Types</h3>
+      <p>VelinStyle includes optional Trusted Types support. If your page enforces <code>require-trusted-types-for 'script'</code>, the framework provides a <code>velinstyle</code> policy:</p>
+      <pre class="demo-code">import { getTrustedPolicy } from 'velinstyle/components/sanitize.js';
+
+const policy = getTrustedPolicy();
+// Returns the TrustedTypePolicy if supported, null otherwise</pre>
+    </section>
+
+    <!-- ============ CSS Security Utilities ============ -->
+    <section class="section">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">CSS Security Utilities</h2>
+      <p>Built-in CSS classes for common security patterns.</p>
+
+      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">.velin-user-content</h3>
+      <p>A container that sandboxes user-generated content. It resets inherited styles, enables CSS containment, and hides dangerous elements like <code>&lt;script&gt;</code>, <code>&lt;iframe&gt;</code>, <code>&lt;object&gt;</code>, and elements with inline event handlers.</p>
+      <pre class="demo-code">&lt;div class="velin-user-content"&gt;
+  &lt;!-- Untrusted HTML goes here --&gt;
+  &lt;p&gt;User comment with &lt;script&gt;alert('xss')&lt;/script&gt;&lt;/p&gt;
+  &lt;!-- The script tag is hidden via display: none !important --&gt;
+&lt;/div&gt;</pre>
+      <table class="sec-table">
+        <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Style Reset</td><td><code>all: initial</code> prevents style inheritance from parent</td></tr>
+          <tr><td>CSS Containment</td><td><code>contain: layout style paint</code> isolates rendering</td></tr>
+          <tr><td>Dangerous Elements</td><td><code>script</code>, <code>iframe</code>, <code>object</code>, <code>embed</code>, <code>applet</code> hidden</td></tr>
+          <tr><td>Event Handlers</td><td>Elements with <code>[onclick]</code>, <code>[onload]</code>, <code>[onerror]</code> hidden</td></tr>
+          <tr><td>Images</td><td>Constrained to <code>max-width: 100%</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">.velin-secure-frame</h3>
+      <p>CSS-level clickjacking protection. Content is hidden by default and only shown when stylesheets load (same-origin). Complement with HTTP <code>X-Frame-Options: DENY</code> or <code>Content-Security-Policy: frame-ancestors 'none'</code>.</p>
+      <pre class="demo-code">&lt;body class="velin-secure-frame"&gt;
+  &lt;!-- Content only visible when CSS loads --&gt;
+&lt;/body&gt;</pre>
+
+      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">Autofill Protection</h3>
+      <p>VelinStyle prevents browser autofill from leaking background colors that could expose data through CSS timing attacks.</p>
+
+      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">External Link Indicator</h3>
+      <p>Links with <code>target="_blank"</code> that lack <code>rel="noopener"</code> automatically receive a visual indicator (arrow icon) to warn users they're leaving the site.</p>
+    </section>
+
+    <!-- ============ Form Persistence Security ============ -->
+    <section class="section">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Form Persistence Security</h2>
+      <p>The <code>&lt;velin-persist&gt;</code> component includes multiple security measures:</p>
+      <table class="sec-table">
+        <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Password exclusion</td><td><code>type="password"</code> and <code>type="file"</code> fields are never saved</td></tr>
+          <tr><td>Key validation</td><td>Storage keys must be alphanumeric, 1-64 chars (regex validated)</td></tr>
+          <tr><td>Size limit</td><td>Maximum 64KB per entry prevents quota abuse</td></tr>
+          <tr><td>Quota handling</td><td>Graceful <code>QuotaExceededError</code> handling with event</td></tr>
+          <tr><td>Type validation</td><td>Restored data must be a valid object (not string/null)</td></tr>
+          <tr><td>Session option</td><td><code>storage="session"</code> for data that shouldn't persist across sessions</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============ Best Practices ============ -->
+    <section class="section">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Best Practices</h2>
+      <ol style="display:flex;flex-direction:column;gap:var(--velin-space-3);padding-inline-start:1.5rem;">
+        <li><strong>Never pass unsanitized user input</strong> to component methods or attributes. While VelinStyle escapes internally, defense-in-depth is critical.</li>
+        <li><strong>Use <code>rel="noopener noreferrer"</code></strong> on all <code>target="_blank"</code> links to prevent tab-napping.</li>
+        <li><strong>Set CSP headers</strong> on your server. At minimum: <code>default-src 'self'; style-src 'self' 'unsafe-inline'</code>.</li>
+        <li><strong>Wrap user-generated content</strong> in <code>.velin-user-content</code> to sandbox rendering.</li>
+        <li><strong>Use <code>storage="session"</code></strong> for <code>&lt;velin-persist&gt;</code> when handling sensitive form data that should not persist across browser sessions.</li>
+        <li><strong>Keep VelinStyle updated</strong>. Security patches are released as minor versions.</li>
+        <li><strong>For frameworks (React, Vue, Angular)</strong>: These frameworks already escape by default. VelinStyle's escaping is an additional layer for vanilla JS usage.</li>
+      </ol>
+    </section>
+
+    <!-- ============ Shadow DOM ============ -->
+    <section class="section">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Shadow DOM Encapsulation</h2>
+      <p>All interactive Web Components use Shadow DOM (<code>mode: "open"</code>) to encapsulate their internal styles and markup. This means:</p>
+      <ul style="padding-inline-start:1.5rem;display:flex;flex-direction:column;gap:var(--velin-space-2);">
+        <li>Component styles do not leak into your page</li>
+        <li>Your page styles do not accidentally break components</li>
+        <li>Internal DOM structure is protected from accidental manipulation</li>
+        <li>Components with <code>delegatesFocus: true</code> (Modal, Drawer, Tabs, Dropdown) properly forward focus for accessibility</li>
+      </ul>
+      <div class="velin-alert velin-alert--info" style="margin-top:var(--velin-space-4)">
+        <strong>Note:</strong> <code>mode: "open"</code> means JavaScript can still access <code>element.shadowRoot</code> if needed (for testing or customization). This is intentional and matches standard Web Component library practice.
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="padding-block:var(--velin-space-6);border-block-start:1px solid var(--velin-color-border);color:var(--velin-color-text-muted);font-size:var(--velin-text-sm);">
+    <div class="velin-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--velin-space-4);">
+      <p>VelinStyle v0.6.1</p>
+      <div style="display:flex;gap:var(--velin-space-3);"><a href="https://github.com/SkyliteDesign/velinstyle">GitHub</a><a href="https://github.com/SkyliteDesign/velinstyle/blob/main/LICENSE">MIT License</a></div>
+    </div>
+  </footer>
+
+<!-- Theme Picker Widget -->
+<div style="position:fixed;bottom:1rem;right:1rem;z-index:1050;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;" id="themePicker">
+  <div id="themePanel" style="display:none;background:var(--velin-color-surface-bright,#fff);border:1px solid var(--velin-color-border,#dee2e6);border-radius:.75rem;padding:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:20rem;">
+    <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
+  </div>
+  <button onclick="document.getElementById('themePanel').style.display=document.getElementById('themePanel').style.display==='none'?'block':'none'" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+</div>
+<script>
+(function(){
+  var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
+  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='../dist/themes/'+t+'.min.css';document.head.appendChild(l);});
+  var names=['Default'].concat(themes).concat(['dark']);
+  var vals=[''].concat(themes).concat(['dark']);
+  var grid=document.getElementById('themeGrid');
+  names.forEach(function(n,i){
+    var b=document.createElement('button');b.textContent=n.charAt(0).toUpperCase()+n.slice(1);
+    b.style.cssText='padding:.3rem .65rem;border:1px solid var(--velin-color-border,#dee2e6);border-radius:1rem;background:var(--velin-color-surface-dim,#f5f6f8);color:var(--velin-color-text,#212529);font-size:.75rem;cursor:pointer;white-space:nowrap;';
+    b.addEventListener('click',function(){if(vals[i]){document.documentElement.setAttribute('data-velin-theme',vals[i]);}else{document.documentElement.removeAttribute('data-velin-theme');}grid.querySelectorAll('button').forEach(function(x){x.style.background='var(--velin-color-surface-dim,#f5f6f8)';x.style.color='var(--velin-color-text,#212529)';});b.style.background='var(--velin-color-primary,#2563eb)';b.style.color='#fff';});
+    grid.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

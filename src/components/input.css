@@ -1,0 +1,247 @@
+@layer components {
+  /* Shared field styles */
+  .velin-input,
+  .velin-select,
+  .velin-textarea {
+    display: block;
+    inline-size: 100%;
+    min-block-size: 2.75rem; /* 44px touch target */
+    padding-block: var(--velin-space-2);
+    padding-inline: var(--velin-space-3);
+    font-family: var(--velin-font-body);
+    font-size: max(var(--velin-text-base), 16px); /* Prevent mobile zoom */
+    line-height: var(--velin-leading-normal);
+    color: var(--velin-color-text);
+    background-color: var(--velin-color-surface-bright);
+    border: 2px solid var(--velin-color-border);
+    border-radius: var(--velin-radius-md);
+    transition: var(--velin-transition-colors);
+    appearance: none;
+  }
+
+  .velin-input:hover,
+  .velin-select:hover,
+  .velin-textarea:hover {
+    border-color: var(--velin-color-border-strong);
+  }
+
+  .velin-input:focus,
+  .velin-select:focus,
+  .velin-textarea:focus {
+    border-color: var(--velin-color-primary);
+    outline: 3px solid var(--velin-color-focus);
+    outline-offset: -1px;
+  }
+
+  .velin-input::placeholder,
+  .velin-textarea::placeholder {
+    color: var(--velin-color-text-subtle);
+  }
+
+  .velin-input:disabled,
+  .velin-select:disabled,
+  .velin-textarea:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--velin-color-surface-dim);
+  }
+
+  /* Validation states */
+  .velin-input--error,
+  .velin-select--error,
+  .velin-textarea--error {
+    border-color: var(--velin-color-danger);
+  }
+
+  .velin-input--error:focus,
+  .velin-select--error:focus,
+  .velin-textarea--error:focus {
+    outline-color: var(--velin-color-danger);
+  }
+
+  .velin-input--success,
+  .velin-select--success,
+  .velin-textarea--success {
+    border-color: var(--velin-color-success);
+  }
+
+  /* Textarea */
+  .velin-textarea {
+    min-block-size: 6rem;
+    resize: vertical;
+  }
+
+  /* Select dropdown arrow */
+  .velin-select {
+    padding-inline-end: var(--velin-space-10);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--velin-space-3) center;
+    background-size: 1rem;
+  }
+
+  /* Label */
+  .velin-label {
+    display: block;
+    font-size: var(--velin-text-sm);
+    font-weight: var(--velin-weight-medium);
+    color: var(--velin-color-text);
+    margin-block-end: var(--velin-space-1);
+  }
+
+  .velin-label--required::after {
+    content: " *";
+    color: var(--velin-color-danger);
+  }
+
+  /* Help text & error message */
+  .velin-field-help {
+    font-size: var(--velin-text-sm);
+    color: var(--velin-color-text-muted);
+    margin-block-start: var(--velin-space-1);
+  }
+
+  .velin-field-error {
+    font-size: var(--velin-text-sm);
+    color: var(--velin-color-danger);
+    margin-block-start: var(--velin-space-1);
+  }
+
+  /* Field group wrapper */
+  .velin-field {
+    margin-block-end: var(--velin-space-4);
+  }
+
+  /* Checkbox & Radio */
+  .velin-check,
+  .velin-radio {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--velin-space-2);
+    cursor: pointer;
+    min-block-size: 2.75rem;
+    padding-block: var(--velin-space-1);
+  }
+
+  .velin-check__input,
+  .velin-radio__input {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    accent-color: var(--velin-color-primary);
+    cursor: pointer;
+  }
+
+  .velin-check__label,
+  .velin-radio__label {
+    font-size: var(--velin-text-base);
+    color: var(--velin-color-text);
+    user-select: none;
+  }
+
+  /* Range input */
+  .velin-range {
+    -webkit-appearance: none;
+    appearance: none;
+    inline-size: 100%;
+    block-size: 0.5rem;
+    background: var(--velin-color-surface-dim);
+    border-radius: var(--velin-radius-full);
+    outline: none;
+    cursor: pointer;
+    min-block-size: 2.75rem;
+  }
+
+  .velin-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    border-radius: var(--velin-radius-full);
+    background: var(--velin-color-primary);
+    border: 2px solid var(--velin-color-surface-bright);
+    box-shadow: var(--velin-shadow-sm);
+    cursor: pointer;
+    transition: var(--velin-transition-transform);
+  }
+
+  .velin-range::-moz-range-thumb {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    border-radius: var(--velin-radius-full);
+    background: var(--velin-color-primary);
+    border: 2px solid var(--velin-color-surface-bright);
+    box-shadow: var(--velin-shadow-sm);
+    cursor: pointer;
+  }
+
+  .velin-range::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+
+  .velin-range:focus-visible::-webkit-slider-thumb {
+    outline: 3px solid var(--velin-color-focus);
+    outline-offset: 2px;
+  }
+
+  .velin-range:focus-visible::-moz-range-thumb {
+    outline: 3px solid var(--velin-color-focus);
+    outline-offset: 2px;
+  }
+
+  .velin-range:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* File upload dropzone */
+  .velin-file {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--velin-space-3);
+    padding: var(--velin-space-8);
+    border: 2px dashed var(--velin-color-border);
+    border-radius: var(--velin-radius-lg);
+    background: var(--velin-color-surface-bright);
+    cursor: pointer;
+    text-align: center;
+    transition: var(--velin-transition-colors);
+    min-block-size: 8rem;
+  }
+
+  .velin-file:hover,
+  .velin-file--dragover {
+    border-color: var(--velin-color-primary);
+    background: var(--velin-color-primary-subtle);
+  }
+
+  .velin-file__input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .velin-file__icon {
+    color: var(--velin-color-text-muted);
+  }
+
+  .velin-file__label {
+    font-size: var(--velin-text-base);
+    font-weight: var(--velin-weight-medium);
+    color: var(--velin-color-text);
+  }
+
+  .velin-file__hint {
+    font-size: var(--velin-text-sm);
+    color: var(--velin-color-text-muted);
+  }
+
+  .velin-file--compact {
+    flex-direction: row;
+    padding: var(--velin-space-3) var(--velin-space-4);
+    min-block-size: 2.75rem;
+  }
+}

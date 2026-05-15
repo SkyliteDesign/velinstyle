@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VelinStyle Landing Page - Sample</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <script type="module" src="../dist/velinstyle-components.js"></script>
+  <style>
+    .landing-hero {
+      padding-block: var(--velin-space-20);
+      text-align: center;
+      background: linear-gradient(160deg, var(--velin-color-primary-subtle) 0%, var(--velin-color-surface) 40%, var(--velin-color-secondary-subtle) 100%);
+      border-block-end: 1px solid var(--velin-color-border);
+    }
+    .landing-hero__title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: var(--velin-weight-extrabold);
+      letter-spacing: var(--velin-tracking-tight);
+      line-height: var(--velin-leading-tight);
+      margin-block-end: var(--velin-space-4);
+    }
+    .landing-hero__title span { color: var(--velin-color-primary); }
+    .landing-hero__subtitle {
+      font-size: var(--velin-text-xl);
+      color: var(--velin-color-text-muted);
+      max-inline-size: 48ch;
+      margin-inline: auto;
+      margin-block-end: var(--velin-space-8);
+    }
+    .landing-section {
+      padding-block: var(--velin-space-16);
+    }
+    .landing-section:nth-child(even) {
+      background: var(--velin-color-surface-dim);
+    }
+    .landing-section__header {
+      text-align: center;
+      margin-block-end: var(--velin-space-12);
+    }
+    .landing-section__title {
+      font-size: var(--velin-text-3xl);
+      font-weight: var(--velin-weight-bold);
+      margin-block-end: var(--velin-space-3);
+    }
+    .landing-section__desc {
+      color: var(--velin-color-text-muted);
+      font-size: var(--velin-text-lg);
+      max-inline-size: 50ch;
+      margin-inline: auto;
+    }
+    .feature-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      border-radius: var(--velin-radius-lg);
+      background: var(--velin-color-primary-subtle);
+      color: var(--velin-color-primary);
+      margin-block-end: var(--velin-space-4);
+    }
+    .stat-card {
+      text-align: center;
+      padding: var(--velin-space-8);
+    }
+    .stat-card__number {
+      font-size: var(--velin-text-4xl);
+      font-weight: var(--velin-weight-extrabold);
+      color: var(--velin-color-primary);
+      line-height: 1;
+    }
+    .stat-card__label {
+      font-size: var(--velin-text-sm);
+      color: var(--velin-color-text-muted);
+      margin-block-start: var(--velin-space-2);
+    }
+    .testimonial {
+      padding: var(--velin-space-6);
+      border-inline-start: 3px solid var(--velin-color-primary);
+    }
+    .testimonial__text {
+      font-style: italic;
+      font-size: var(--velin-text-lg);
+      margin-block-end: var(--velin-space-4);
+    }
+    .testimonial__author {
+      font-weight: var(--velin-weight-semibold);
+    }
+    .testimonial__role {
+      color: var(--velin-color-text-muted);
+      font-size: var(--velin-text-sm);
+    }
+    .pricing-highlight { border-color: var(--velin-color-primary); border-width: 2px; }
+    .cta-section {
+      padding-block: var(--velin-space-20);
+      text-align: center;
+      background: linear-gradient(160deg, var(--velin-color-primary-subtle), var(--velin-color-secondary-subtle));
+    }
+    .landing-footer {
+      padding-block: var(--velin-space-8);
+      border-block-start: 1px solid var(--velin-color-border);
+      color: var(--velin-color-text-muted);
+      font-size: var(--velin-text-sm);
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="#" class="velin-nav__brand">Streamline</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <velin-icon name="menu" size="24"></velin-icon>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="#features" class="velin-nav__link">Features</a></li>
+      <li><a href="#pricing" class="velin-nav__link">Pricing</a></li>
+      <li><a href="#testimonials" class="velin-nav__link">Testimonials</a></li>
+      <li><a href="#" class="velin-btn velin-btn--primary velin-btn--sm">Get Started</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+    <section class="landing-hero">
+      <div class="velin-container">
+        <h1 class="landing-hero__title">Build <span>faster</span>,<br>ship with confidence</h1>
+        <p class="landing-hero__subtitle">
+          The all-in-one platform that streamlines your workflow, from idea to deployment.
+        </p>
+        <div class="velin-flex velin-flex--center velin-flex--gap-3">
+          <a href="#pricing" class="velin-btn velin-btn--primary velin-btn--lg">Start Free Trial</a>
+          <a href="#features" class="velin-btn velin-btn--outline velin-btn--lg">Learn More</a>
+        </div>
+        <div class="velin-grid velin-grid--auto-fit" style="margin-block-start: var(--velin-space-16); max-inline-size: 48rem; margin-inline: auto;">
+          <div class="stat-card">
+            <div class="stat-card__number">10K+</div>
+            <div class="stat-card__label">Active Users</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__number">99.9%</div>
+            <div class="stat-card__label">Uptime</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__number">4.9</div>
+            <div class="stat-card__label">User Rating</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="landing-section">
+      <div class="velin-container">
+        <div class="landing-section__header">
+          <h2 class="landing-section__title">Everything you need</h2>
+          <p class="landing-section__desc">Powerful features designed for modern teams, without the complexity.</p>
+        </div>
+        <div class="velin-grid velin-grid--auto-fit">
+          <article class="velin-card">
+            <div class="velin-card__body">
+              <div class="feature-icon">
+                <velin-icon name="globe" size="24"></velin-icon>
+              </div>
+              <h3 class="velin-card__title">Global CDN</h3>
+              <p class="velin-card__text">Lightning-fast delivery to users worldwide with edge caching on 200+ nodes.</p>
+            </div>
+          </article>
+          <article class="velin-card">
+            <div class="velin-card__body">
+              <div class="feature-icon">
+                <velin-icon name="lock" size="24"></velin-icon>
+              </div>
+              <h3 class="velin-card__title">Enterprise Security</h3>
+              <p class="velin-card__text">SOC 2 compliant with end-to-end encryption and role-based access control.</p>
+            </div>
+          </article>
+          <article class="velin-card">
+            <div class="velin-card__body">
+              <div class="feature-icon">
+                <velin-icon name="settings" size="24"></velin-icon>
+              </div>
+              <h3 class="velin-card__title">Full Customization</h3>
+              <p class="velin-card__text">Design tokens and API hooks let you tailor every aspect to your brand.</p>
+            </div>
+          </article>
+          <article class="velin-card">
+            <div class="velin-card__body">
+              <div class="feature-icon">
+                <velin-icon name="users" size="24"></velin-icon>
+              </div>
+              <h3 class="velin-card__title">Team Collaboration</h3>
+              <p class="velin-card__text">Real-time editing, commenting, and review workflows built right in.</p>
+            </div>
+          </article>
+          <article class="velin-card">
+            <div class="velin-card__body">
+              <div class="feature-icon">
+                <velin-icon name="eye" size="24"></velin-icon>
+              </div>
+              <h3 class="velin-card__title">Analytics Dashboard</h3>
+              <p class="velin-card__text">Track performance metrics, user behavior, and conversion rates in real time.</p>
+            </div>
+          </article>
+          <article class="velin-card">
+            <div class="velin-card__body">
+              <div class="feature-icon">
+                <velin-icon name="play" size="24"></velin-icon>
+              </div>
+              <h3 class="velin-card__title">One-Click Deploy</h3>
+              <p class="velin-card__text">Push to production with confidence. Automatic rollbacks if anything goes wrong.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="landing-section">
+      <div class="velin-container">
+        <div class="landing-section__header">
+          <h2 class="landing-section__title">Loved by teams everywhere</h2>
+          <p class="landing-section__desc">See what our users have to say about their experience.</p>
+        </div>
+        <div class="velin-grid velin-grid--auto-fit">
+          <div class="velin-card testimonial">
+            <div class="velin-card__body">
+              <p class="testimonial__text">"Streamline cut our deployment time by 70%. The team collaboration features are exactly what we needed."</p>
+              <p class="testimonial__author">Maria Rodriguez</p>
+              <p class="testimonial__role">CTO, TechFlow Inc.</p>
+            </div>
+          </div>
+          <div class="velin-card testimonial">
+            <div class="velin-card__body">
+              <p class="testimonial__text">"The analytics dashboard gives us insights we never had before. Best investment we've made this year."</p>
+              <p class="testimonial__author">James Chen</p>
+              <p class="testimonial__role">Head of Product, DataVault</p>
+            </div>
+          </div>
+          <div class="velin-card testimonial">
+            <div class="velin-card__body">
+              <p class="testimonial__text">"Security and compliance were our top priorities. Streamline checked every box and then some."</p>
+              <p class="testimonial__author">Sarah Kim</p>
+              <p class="testimonial__role">CISO, FinSecure</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="landing-section">
+      <div class="velin-container">
+        <div class="landing-section__header">
+          <h2 class="landing-section__title">Simple, transparent pricing</h2>
+          <p class="landing-section__desc">No hidden fees. No surprises. Start free and scale as you grow.</p>
+        </div>
+        <div class="velin-grid velin-grid--auto-fit" style="max-inline-size: 56rem; margin-inline: auto;">
+          <div class="velin-card">
+            <div class="velin-card__body" style="text-align: center; padding-block: var(--velin-space-8);">
+              <h3 class="velin-card__title">Starter</h3>
+              <div class="stat-card__number" style="margin-block: var(--velin-space-4);">$0</div>
+              <p class="velin-card__text">For individuals and side projects</p>
+              <ul style="list-style: none; padding: 0; margin-block: var(--velin-space-6); text-align: start;">
+                <li style="padding-block: var(--velin-space-2);">&#10003; 3 projects</li>
+                <li style="padding-block: var(--velin-space-2);">&#10003; 1 GB storage</li>
+                <li style="padding-block: var(--velin-space-2);">&#10003; Community support</li>
+              </ul>
+              <a href="#" class="velin-btn velin-btn--outline velin-btn--block">Get Started</a>
+            </div>
+          </div>
+          <div class="velin-card pricing-highlight">
+            <div class="velin-card__body" style="text-align: center; padding-block: var(--velin-space-8);">
+              <span class="velin-badge velin-badge--primary" style="margin-block-end: var(--velin-space-3);">Most Popular</span>
+              <h3 class="velin-card__title">Pro</h3>
+              <div class="stat-card__number" style="margin-block: var(--velin-space-4);">$29</div>
+              <p class="velin-card__text">For growing teams</p>
+              <ul style="list-style: none; padding: 0; margin-block: var(--velin-space-6); text-align: start;">
+                <li style="padding-block: var(--velin-space-2);">&#10003; Unlimited projects</li>
+                <li style="padding-block: var(--velin-space-2);">&#10003; 100 GB storage</li>
+                <li style="padding-block: var(--velin-space-2);">&#10003; Priority support</li>
+                <li style="padding-block: var(--velin-space-2);">&#10003; Analytics dashboard</li>
+              </ul>
+              <a href="#" class="velin-btn velin-btn--primary velin-btn--block">Start Free Trial</a>
+            </div>
+          </div>
+          <div class="velin-card">
+            <div class="velin-card__body" style="text-align: center; padding-block: var(--velin-space-8);">
+              <h3 class="velin-card__title">Enterprise</h3>
+              <div class="stat-card__number" style="margin-block: var(--velin-space-4);">Custom</div>
+              <p class="velin-card__text">For large organizations</p>
+              <ul style="list-style: none; padding: 0; margin-block: var(--velin-space-6); text-align: start;">
+                <li style="padding-block: var(--velin-space-2);">&#10003; Everything in Pro</li>
+                <li style="padding-block: var(--velin-space-2);">&#10003; SSO &amp; SAML</li>
+                <li style="padding-block: var(--velin-space-2);">&#10003; Dedicated support</li>
+                <li style="padding-block: var(--velin-space-2);">&#10003; SLA guarantee</li>
+              </ul>
+              <a href="#" class="velin-btn velin-btn--outline velin-btn--block">Contact Sales</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="velin-container">
+        <h2 class="landing-section__title">Ready to streamline your workflow?</h2>
+        <p class="landing-section__desc" style="margin-inline: auto; margin-block-end: var(--velin-space-8);">
+          Join 10,000+ teams already building better products.
+        </p>
+        <a href="#" class="velin-btn velin-btn--primary velin-btn--lg">Start Your Free Trial</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="landing-footer">
+    <div class="velin-container velin-flex velin-flex--between velin-flex--center" style="flex-wrap: wrap; gap: var(--velin-space-4);">
+      <p>&copy; 2026 Streamline. Built with <a href="https://github.com/SkyliteDesign/velinstyle">VelinStyle</a>.</p>
+      <div class="velin-flex velin-flex--gap-3">
+        <a href="#" class="velin-nav__link">Privacy</a>
+        <a href="#" class="velin-nav__link">Terms</a>
+        <a href="#" class="velin-nav__link">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

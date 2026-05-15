@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Components - VelinStyle</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <style>
+    .section { padding: var(--velin-space-12) 0; }
+    .section + .section { border-block-start: 1px solid var(--velin-color-border); }
+    .demo-box { padding: var(--velin-space-4); border: 1px solid var(--velin-color-border); border-radius: var(--velin-radius-md); margin-block: var(--velin-space-4); }
+    .demo-code { background: var(--velin-color-surface-dim); padding: var(--velin-space-4); border-radius: var(--velin-radius-md); font-family: var(--velin-font-mono); font-size: var(--velin-text-sm); overflow-x: auto; border: 1px solid var(--velin-color-border); margin-block: var(--velin-space-4); }
+    .class-table { width: 100%; border-collapse: collapse; margin-block: var(--velin-space-4); font-size: var(--velin-text-sm); }
+    .class-table th, .class-table td { padding: var(--velin-space-2) var(--velin-space-3); border: 1px solid var(--velin-color-border); text-align: left; }
+    .class-table th { background: var(--velin-color-surface-dim); font-weight: 600; }
+    .class-table code { background: var(--velin-color-surface-dim); padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="index.html" class="velin-nav__brand">VelinStyle</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="guides/index.html" class="velin-nav__link">Integration</a></li>
+      <li><a href="layout.html" class="velin-nav__link">Layout</a></li>
+      <li><a href="components.html" class="velin-nav__link">Web Components</a></li>
+      <li><a href="css-components.html" class="velin-nav__link" aria-current="page">CSS Components</a></li>
+      <li><a href="forms.html" class="velin-nav__link">Forms</a></li>
+      <li><a href="utilities.html" class="velin-nav__link">Utilities</a></li>
+      <li><a href="tokens.html" class="velin-nav__link">Tokens</a></li>
+      <li><a href="themes.html" class="velin-nav__link">Themes</a></li>
+      <li><a href="icons.html" class="velin-nav__link">Icons</a></li>
+      <li><a href="security.html" class="velin-nav__link">Security</a></li>
+    </ul>
+  </nav>
+
+  <main id="main" class="velin-container">
+    <h1 class="velin-text-4xl velin-font-bold" style="margin-block: var(--velin-space-8)">CSS Components</h1>
+    <p class="velin-text-muted velin-mbe-8">Pure CSS components -- no JavaScript required. All classes use the <code>velin-</code> prefix.</p>
+
+    <!-- ============ Breadcrumb ============ -->
+    <section class="section" id="breadcrumb">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Breadcrumb</h2>
+      <div class="demo-box">
+        <nav class="velin-breadcrumb" aria-label="Breadcrumb">
+          <ol class="velin-breadcrumb__list">
+            <li class="velin-breadcrumb__item"><a href="#" class="velin-breadcrumb__link">Home</a></li>
+            <li class="velin-breadcrumb__item"><a href="#" class="velin-breadcrumb__link">Products</a></li>
+            <li class="velin-breadcrumb__item" aria-current="page">VelinStyle</li>
+          </ol>
+        </nav>
+        <p style="margin-top:var(--velin-space-4)">Arrow variant:</p>
+        <nav class="velin-breadcrumb velin-breadcrumb--arrow" aria-label="Breadcrumb arrow">
+          <ol class="velin-breadcrumb__list">
+            <li class="velin-breadcrumb__item"><a href="#" class="velin-breadcrumb__link">Home</a></li>
+            <li class="velin-breadcrumb__item"><a href="#" class="velin-breadcrumb__link">Docs</a></li>
+            <li class="velin-breadcrumb__item" aria-current="page">Components</li>
+          </ol>
+        </nav>
+      </div>
+      <table class="class-table"><tr><th>Class</th><th>Description</th></tr>
+        <tr><td><code>.velin-breadcrumb</code></td><td>Breadcrumb container on <code>&lt;nav&gt;</code></td></tr>
+        <tr><td><code>.velin-breadcrumb__list</code></td><td>The <code>&lt;ol&gt;</code> element</td></tr>
+        <tr><td><code>.velin-breadcrumb__item</code></td><td>Each <code>&lt;li&gt;</code> element</td></tr>
+        <tr><td><code>.velin-breadcrumb__link</code></td><td>Link inside item</td></tr>
+        <tr><td><code>.velin-breadcrumb--arrow</code></td><td>Arrow separator variant</td></tr>
+        <tr><td><code>.velin-breadcrumb--dot</code></td><td>Dot separator variant</td></tr>
+        <tr><td><code>aria-current="page"</code></td><td>Mark the active/current item</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ Chip ============ -->
+    <section class="section" id="chip">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Chip</h2>
+      <div class="demo-box">
+        <div class="velin-flex velin-flex--gap-2" style="flex-wrap:wrap">
+          <span class="velin-chip">Default</span>
+          <span class="velin-chip velin-chip--primary">Primary</span>
+          <span class="velin-chip velin-chip--success">Success</span>
+          <span class="velin-chip velin-chip--warning">Warning</span>
+          <span class="velin-chip velin-chip--danger">Danger</span>
+          <span class="velin-chip" id="demo-chip-removable">Removable <button class="velin-chip__close" aria-label="Remove" onclick="this.parentElement.remove()">&times;</button></span>
+        </div>
+      </div>
+      <table class="class-table"><tr><th>Class</th><th>Description</th></tr>
+        <tr><td><code>.velin-chip</code></td><td>Base chip element</td></tr>
+        <tr><td><code>.velin-chip--primary</code></td><td>Primary color variant</td></tr>
+        <tr><td><code>.velin-chip--success</code></td><td>Success color variant</td></tr>
+        <tr><td><code>.velin-chip--warning</code></td><td>Warning color variant</td></tr>
+        <tr><td><code>.velin-chip--danger</code></td><td>Danger color variant</td></tr>
+        <tr><td><code>.velin-chip__close</code></td><td>Close/remove button inside chip (44x44 touch target)</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ Divider ============ -->
+    <section class="section" id="divider">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Divider</h2>
+      <div class="demo-box">
+        <p>Content above</p>
+        <hr class="velin-divider">
+        <p>Content below</p>
+        <div style="display:flex;gap:var(--velin-space-4);align-items:stretch;height:3rem;margin-top:var(--velin-space-4)">
+          <span>Left</span>
+          <div class="velin-divider velin-divider--vertical"></div>
+          <span>Right</span>
+        </div>
+      </div>
+      <table class="class-table"><tr><th>Class</th><th>Description</th></tr>
+        <tr><td><code>.velin-divider</code></td><td>Horizontal divider line</td></tr>
+        <tr><td><code>.velin-divider--vertical</code></td><td>Vertical divider</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ Input Group ============ -->
+    <section class="section" id="input-group">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Input Group</h2>
+      <div class="demo-box">
+        <div class="velin-input-group" style="max-width:24rem;margin-bottom:var(--velin-space-3)">
+          <span class="velin-input-group__text">@</span>
+          <input type="text" class="velin-input" placeholder="Username">
+        </div>
+        <div class="velin-input-group" style="max-width:24rem;margin-bottom:var(--velin-space-3)">
+          <input type="text" class="velin-input" placeholder="Search...">
+          <button class="velin-btn velin-btn--primary">Go</button>
+        </div>
+        <div class="velin-input-group" style="max-width:24rem">
+          <span class="velin-input-group__text">$</span>
+          <input type="number" class="velin-input" placeholder="0.00">
+          <span class="velin-input-group__text">.00</span>
+        </div>
+      </div>
+      <table class="class-table"><tr><th>Class</th><th>Description</th></tr>
+        <tr><td><code>.velin-input-group</code></td><td>Flex container grouping inputs with addons</td></tr>
+        <tr><td><code>.velin-input-group__text</code></td><td>Text addon (prefix/suffix)</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ List Group ============ -->
+    <section class="section" id="list-group">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">List Group</h2>
+      <div class="demo-box">
+        <ul class="velin-list-group" style="max-width:24rem">
+          <li class="velin-list-group__item velin-list-group__item--active">Active Item</li>
+          <li class="velin-list-group__item">Second Item</li>
+          <li class="velin-list-group__item">Third Item</li>
+          <li class="velin-list-group__item" aria-disabled="true" style="opacity:.5">Disabled Item</li>
+        </ul>
+      </div>
+      <table class="class-table"><tr><th>Class</th><th>Description</th></tr>
+        <tr><td><code>.velin-list-group</code></td><td>List container</td></tr>
+        <tr><td><code>.velin-list-group__item</code></td><td>Individual list item</td></tr>
+        <tr><td><code>.velin-list-group__item--active</code></td><td>Highlighted/active item</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ Pagination ============ -->
+    <section class="section" id="pagination">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Pagination</h2>
+      <div class="demo-box">
+        <nav class="velin-pagination" aria-label="Pagination">
+          <a href="#" class="velin-pagination__link" aria-label="Previous">&laquo;</a>
+          <a href="#" class="velin-pagination__link">1</a>
+          <a href="#" class="velin-pagination__link velin-pagination__link--active" aria-current="page">2</a>
+          <a href="#" class="velin-pagination__link">3</a>
+          <a href="#" class="velin-pagination__link">4</a>
+          <a href="#" class="velin-pagination__link" aria-label="Next">&raquo;</a>
+        </nav>
+      </div>
+      <table class="class-table"><tr><th>Class</th><th>Description</th></tr>
+        <tr><td><code>.velin-pagination</code></td><td>Pagination container</td></tr>
+        <tr><td><code>.velin-pagination__link</code></td><td>Individual page link</td></tr>
+        <tr><td><code>.velin-pagination__link--active</code></td><td>Current active page</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ Spinner ============ -->
+    <section class="section" id="spinner">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Spinner</h2>
+      <div class="demo-box">
+        <div class="velin-flex velin-flex--gap-4" style="align-items:center">
+          <div class="velin-spinner" role="status"><span class="velin-sr-only">Loading...</span></div>
+          <div class="velin-spinner velin-spinner--sm" role="status"><span class="velin-sr-only">Loading...</span></div>
+          <div class="velin-spinner velin-spinner--lg" role="status"><span class="velin-sr-only">Loading...</span></div>
+          <div class="velin-spinner velin-spinner--dots" role="status"><span class="velin-sr-only">Loading...</span></div>
+        </div>
+      </div>
+      <table class="class-table"><tr><th>Class</th><th>Description</th></tr>
+        <tr><td><code>.velin-spinner</code></td><td>Base spinning border indicator</td></tr>
+        <tr><td><code>.velin-spinner--sm</code></td><td>Small size</td></tr>
+        <tr><td><code>.velin-spinner--lg</code></td><td>Large size</td></tr>
+        <tr><td><code>.velin-spinner--dots</code></td><td>Dot-style loading indicator</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ Stat ============ -->
+    <section class="section" id="stat">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Stat</h2>
+      <div class="demo-box">
+        <div class="velin-flex velin-flex--gap-4" style="flex-wrap:wrap">
+          <div class="velin-stat">
+            <span class="velin-stat__value">12,345</span>
+            <span class="velin-stat__label">Total Users</span>
+          </div>
+          <div class="velin-stat">
+            <span class="velin-stat__value">98.7%</span>
+            <span class="velin-stat__label">Uptime</span>
+          </div>
+          <div class="velin-stat">
+            <span class="velin-stat__value">3.2s</span>
+            <span class="velin-stat__label">Avg. Load</span>
+          </div>
+        </div>
+      </div>
+      <table class="class-table"><tr><th>Class</th><th>Description</th></tr>
+        <tr><td><code>.velin-stat</code></td><td>Stat card container</td></tr>
+        <tr><td><code>.velin-stat__value</code></td><td>Large numeric value</td></tr>
+        <tr><td><code>.velin-stat__label</code></td><td>Descriptive label below</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ Stepper (CSS) ============ -->
+    <section class="section" id="stepper-css">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Stepper (CSS)</h2>
+      <div class="demo-box">
+        <div class="velin-stepper">
+          <div class="velin-stepper__step velin-stepper__step--completed"><span class="velin-stepper__marker">&#10003;</span><span class="velin-stepper__label">Order</span></div>
+          <div class="velin-stepper__step velin-stepper__step--active"><span class="velin-stepper__marker">2</span><span class="velin-stepper__label">Payment</span></div>
+          <div class="velin-stepper__step"><span class="velin-stepper__marker">3</span><span class="velin-stepper__label">Confirm</span></div>
+        </div>
+      </div>
+      <table class="class-table"><tr><th>Class</th><th>Description</th></tr>
+        <tr><td><code>.velin-stepper</code></td><td>Stepper container</td></tr>
+        <tr><td><code>.velin-stepper__step</code></td><td>Individual step</td></tr>
+        <tr><td><code>.velin-stepper__step--active</code></td><td>Current active step</td></tr>
+        <tr><td><code>.velin-stepper__step--completed</code></td><td>Completed step</td></tr>
+        <tr><td><code>.velin-stepper__marker</code></td><td>Step number/icon</td></tr>
+        <tr><td><code>.velin-stepper__label</code></td><td>Step label text</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ Timeline ============ -->
+    <section class="section" id="timeline">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Timeline</h2>
+      <div class="demo-box">
+        <div class="velin-timeline">
+          <div class="velin-timeline__item">
+            <div class="velin-timeline__marker"></div>
+            <div class="velin-timeline__content">
+              <h4 class="velin-font-bold">v0.6.1 - Security Hardening</h4>
+              <p class="velin-text-muted velin-text-sm">XSS protection, CSP docs, security utilities.</p>
+            </div>
+          </div>
+          <div class="velin-timeline__item">
+            <div class="velin-timeline__marker"></div>
+            <div class="velin-timeline__content">
+              <h4 class="velin-font-bold">v0.5.0 - The Next Level</h4>
+              <p class="velin-text-muted velin-text-sm">14 new CSS/JS features, A11y fixes, CLI, 13 themes.</p>
+            </div>
+          </div>
+          <div class="velin-timeline__item">
+            <div class="velin-timeline__marker"></div>
+            <div class="velin-timeline__content">
+              <h4 class="velin-font-bold">v0.4.0 - Bootstrap Level</h4>
+              <p class="velin-text-muted velin-text-sm">Full component library, documentation site.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <table class="class-table"><tr><th>Class</th><th>Description</th></tr>
+        <tr><td><code>.velin-timeline</code></td><td>Timeline container</td></tr>
+        <tr><td><code>.velin-timeline__item</code></td><td>Single timeline entry</td></tr>
+        <tr><td><code>.velin-timeline__marker</code></td><td>Circle dot on the timeline line</td></tr>
+        <tr><td><code>.velin-timeline__content</code></td><td>Content area for text/cards</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ Tooltip (CSS) ============ -->
+    <section class="section" id="tooltip-css">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Tooltip (CSS-only)</h2>
+      <div class="demo-box">
+        <div class="velin-flex velin-flex--gap-4" style="flex-wrap:wrap">
+          <span class="velin-tooltip" data-velin-tooltip="Tooltip text on top">Hover me (top)</span>
+          <span class="velin-tooltip velin-tooltip--bottom" data-velin-tooltip="Tooltip bottom">Hover me (bottom)</span>
+        </div>
+      </div>
+      <table class="class-table"><tr><th>Class / Attribute</th><th>Description</th></tr>
+        <tr><td><code>.velin-tooltip</code></td><td>Tooltip container (on any inline element)</td></tr>
+        <tr><td><code>data-velin-tooltip="text"</code></td><td>Tooltip content text</td></tr>
+        <tr><td><code>.velin-tooltip--bottom</code></td><td>Position below the element</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ Drawer (CSS) ============ -->
+    <section class="section" id="drawer-css">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Drawer (CSS)</h2>
+      <p class="velin-text-muted velin-mbe-4">For the full interactive drawer with focus trapping, see <a href="components.html#drawer">&lt;velin-drawer&gt; Web Component</a>.</p>
+      <table class="class-table"><tr><th>Class</th><th>Description</th></tr>
+        <tr><td><code>.velin-drawer</code></td><td>Drawer panel container</td></tr>
+        <tr><td><code>.velin-drawer--start</code></td><td>Left-side (start) positioning</td></tr>
+        <tr><td><code>.velin-drawer--end</code></td><td>Right-side (end) positioning</td></tr>
+        <tr><td><code>.velin-drawer--open</code></td><td>Visible state</td></tr>
+      </table>
+    </section>
+
+  </main>
+
+  <footer style="padding-block:var(--velin-space-6);border-block-start:1px solid var(--velin-color-border);color:var(--velin-color-text-muted);font-size:var(--velin-text-sm);">
+    <div class="velin-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--velin-space-4);">
+      <p>VelinStyle v0.6.1</p>
+      <div style="display:flex;gap:var(--velin-space-3);"><a href="https://github.com/SkyliteDesign/velinstyle">GitHub</a><a href="https://github.com/SkyliteDesign/velinstyle/blob/main/LICENSE">MIT License</a></div>
+    </div>
+  </footer>
+
+<!-- Theme Picker Widget -->
+<div style="position:fixed;bottom:1rem;right:1rem;z-index:1050;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;" id="themePicker">
+  <div id="themePanel" style="display:none;background:var(--velin-color-surface-bright,#fff);border:1px solid var(--velin-color-border,#dee2e6);border-radius:.75rem;padding:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:20rem;">
+    <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
+  </div>
+  <button onclick="document.getElementById('themePanel').style.display=document.getElementById('themePanel').style.display==='none'?'block':'none'" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+</div>
+<script>
+(function(){
+  var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
+  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='../dist/themes/'+t+'.min.css';document.head.appendChild(l);});
+  var names=['Default'].concat(themes).concat(['dark']);
+  var vals=[''].concat(themes).concat(['dark']);
+  var grid=document.getElementById('themeGrid');
+  names.forEach(function(n,i){
+    var b=document.createElement('button');b.textContent=n.charAt(0).toUpperCase()+n.slice(1);
+    b.style.cssText='padding:.3rem .65rem;border:1px solid var(--velin-color-border,#dee2e6);border-radius:1rem;background:var(--velin-color-surface-dim,#f5f6f8);color:var(--velin-color-text,#212529);font-size:.75rem;cursor:pointer;white-space:nowrap;';
+    b.addEventListener('click',function(){if(vals[i]){document.documentElement.setAttribute('data-velin-theme',vals[i]);}else{document.documentElement.removeAttribute('data-velin-theme');}grid.querySelectorAll('button').forEach(function(x){x.style.background='var(--velin-color-surface-dim,#f5f6f8)';x.style.color='var(--velin-color-text,#212529)';});b.style.background='var(--velin-color-primary,#2563eb)';b.style.color='#fff';});
+    grid.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

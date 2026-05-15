@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" data-velin-theme="brutalist">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio Kante - VelinStyle Brutalist Theme Sample</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="../src/themes/brutalist.css">
+  <script type="module" src="../dist/velinstyle-components.js"></script>
+  <style>
+    body {
+      background: var(--velin-color-surface);
+    }
+    .port-header {
+      padding-block: var(--velin-space-4);
+      border-block-end: 3px solid var(--velin-color-text);
+    }
+    .port-header__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .port-brand {
+      font-size: var(--velin-text-xl);
+      font-weight: var(--velin-weight-extrabold);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      color: var(--velin-color-text);
+    }
+    .port-nav {
+      display: flex;
+      gap: var(--velin-space-6);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .port-nav a {
+      text-decoration: none;
+      color: var(--velin-color-text);
+      font-weight: var(--velin-weight-bold);
+      text-transform: uppercase;
+      font-size: var(--velin-text-sm);
+      letter-spacing: 0.1em;
+    }
+    .port-nav a:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.3em;
+      text-decoration-thickness: 3px;
+    }
+    .port-hero {
+      padding-block: var(--velin-space-20);
+      border-block-end: 3px solid var(--velin-color-text);
+    }
+    .port-hero__title {
+      font-size: clamp(3rem, 10vw, 8rem);
+      font-weight: var(--velin-weight-extrabold);
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      margin-block-end: var(--velin-space-8);
+    }
+    .port-hero__subtitle {
+      font-size: var(--velin-text-xl);
+      max-inline-size: 40ch;
+      line-height: var(--velin-leading-relaxed);
+    }
+    .port-section {
+      padding-block: var(--velin-space-16);
+      border-block-end: 3px solid var(--velin-color-text);
+    }
+    .port-section__title {
+      font-size: var(--velin-text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: var(--velin-weight-bold);
+      margin-block-end: var(--velin-space-8);
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-3);
+    }
+    .port-section__title::after {
+      content: '';
+      flex: 1;
+      height: 3px;
+      background: var(--velin-color-text);
+    }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+      gap: 3px;
+    }
+    .project-card {
+      border: 3px solid var(--velin-color-text);
+      padding: 0;
+      overflow: hidden;
+      transition: var(--velin-transition-transform);
+    }
+    .project-card:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 4px 4px 0 var(--velin-color-text);
+    }
+    .project-card__image {
+      aspect-ratio: 4/3;
+      background: var(--velin-color-surface-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--velin-text-4xl);
+      font-weight: var(--velin-weight-extrabold);
+      color: var(--velin-color-text-muted);
+      border-block-end: 3px solid var(--velin-color-text);
+    }
+    .project-card__body {
+      padding: var(--velin-space-4);
+    }
+    .project-card__number {
+      font-size: var(--velin-text-xs);
+      font-weight: var(--velin-weight-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--velin-color-text-muted);
+    }
+    .project-card__title {
+      font-size: var(--velin-text-lg);
+      font-weight: var(--velin-weight-extrabold);
+      text-transform: uppercase;
+      margin-block: var(--velin-space-1);
+    }
+    .project-card__desc {
+      font-size: var(--velin-text-sm);
+      color: var(--velin-color-text-muted);
+    }
+    .project-card__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--velin-space-1);
+      margin-block-start: var(--velin-space-3);
+    }
+    .project-card__tags .velin-badge {
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+      gap: 3px;
+    }
+    .skill-item {
+      border: 3px solid var(--velin-color-text);
+      padding: var(--velin-space-5);
+      text-align: center;
+      transition: var(--velin-transition-colors);
+    }
+    .skill-item:hover {
+      background: var(--velin-color-text);
+      color: var(--velin-color-surface);
+    }
+    .skill-item__icon {
+      margin-block-end: var(--velin-space-2);
+    }
+    .skill-item__name {
+      font-weight: var(--velin-weight-bold);
+      text-transform: uppercase;
+      font-size: var(--velin-text-sm);
+      letter-spacing: 0.05em;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--velin-space-10);
+    }
+    @media (max-width: 48rem) {
+      .about-grid { grid-template-columns: 1fr; }
+      .port-nav { display: none; }
+    }
+    .about-stat {
+      display: flex;
+      gap: var(--velin-space-4);
+      align-items: baseline;
+      padding-block: var(--velin-space-3);
+      border-block-end: 1px solid var(--velin-color-border);
+    }
+    .about-stat__number {
+      font-size: var(--velin-text-3xl);
+      font-weight: var(--velin-weight-extrabold);
+      min-width: 4ch;
+    }
+    .about-stat__label {
+      font-size: var(--velin-text-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .contact-section {
+      padding-block: var(--velin-space-20);
+      text-align: center;
+    }
+    .contact-title {
+      font-size: clamp(2rem, 6vw, 5rem);
+      font-weight: var(--velin-weight-extrabold);
+      text-transform: uppercase;
+      line-height: 0.95;
+      margin-block-end: var(--velin-space-6);
+    }
+    .port-footer {
+      padding-block: var(--velin-space-6);
+      border-block-start: 3px solid var(--velin-color-text);
+      font-size: var(--velin-text-sm);
+    }
+    .port-footer__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--velin-space-4);
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+
+  <header class="port-header">
+    <div class="velin-container port-header__inner">
+      <a href="#" class="port-brand">Studio Kante</a>
+      <nav aria-label="Main navigation">
+        <ul class="port-nav">
+          <li><a href="#work">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="port-hero">
+      <div class="velin-container">
+        <h1 class="port-hero__title">We build digital<br>experiences<br>that matter.</h1>
+        <p class="port-hero__subtitle">
+          A design studio specializing in brand identity, web experiences, and accessible interfaces.
+          Berlin-based, globally active.
+        </p>
+      </div>
+    </section>
+
+    <section id="work" class="port-section">
+      <div class="velin-container">
+        <h2 class="port-section__title">Selected Work</h2>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-card__image">01</div>
+            <div class="project-card__body">
+              <span class="project-card__number">Project 01</span>
+              <h3 class="project-card__title">Neon Health</h3>
+              <p class="project-card__desc">Complete brand identity and accessible web platform for a health-tech startup.</p>
+              <div class="project-card__tags">
+                <span class="velin-badge">Branding</span>
+                <span class="velin-badge">Web</span>
+                <span class="velin-badge">A11y</span>
+              </div>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-card__image">02</div>
+            <div class="project-card__body">
+              <span class="project-card__number">Project 02</span>
+              <h3 class="project-card__title">Volta Motors</h3>
+              <p class="project-card__desc">E-commerce platform with 3D configurator for electric vehicle accessories.</p>
+              <div class="project-card__tags">
+                <span class="velin-badge">E-Commerce</span>
+                <span class="velin-badge">3D</span>
+                <span class="velin-badge">UX</span>
+              </div>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-card__image">03</div>
+            <div class="project-card__body">
+              <span class="project-card__number">Project 03</span>
+              <h3 class="project-card__title">Museum Quartier</h3>
+              <p class="project-card__desc">Digital experience and wayfinding system for Berlin's contemporary art museum.</p>
+              <div class="project-card__tags">
+                <span class="velin-badge">Culture</span>
+                <span class="velin-badge">Wayfinding</span>
+                <span class="velin-badge">Motion</span>
+              </div>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-card__image">04</div>
+            <div class="project-card__body">
+              <span class="project-card__number">Project 04</span>
+              <h3 class="project-card__title">Klang Collective</h3>
+              <p class="project-card__desc">Visual identity and streaming platform for an independent music label.</p>
+              <div class="project-card__tags">
+                <span class="velin-badge">Music</span>
+                <span class="velin-badge">Identity</span>
+                <span class="velin-badge">Platform</span>
+              </div>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-card__image">05</div>
+            <div class="project-card__body">
+              <span class="project-card__number">Project 05</span>
+              <h3 class="project-card__title">Green Grid</h3>
+              <p class="project-card__desc">Dashboard and data visualization for a renewable energy management company.</p>
+              <div class="project-card__tags">
+                <span class="velin-badge">Data Viz</span>
+                <span class="velin-badge">Dashboard</span>
+                <span class="velin-badge">Energy</span>
+              </div>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-card__image">06</div>
+            <div class="project-card__body">
+              <span class="project-card__number">Project 06</span>
+              <h3 class="project-card__title">Arch Studio</h3>
+              <p class="project-card__desc">Minimalist portfolio and project management tool for an architecture firm.</p>
+              <div class="project-card__tags">
+                <span class="velin-badge">Architecture</span>
+                <span class="velin-badge">Minimal</span>
+                <span class="velin-badge">SaaS</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="port-section">
+      <div class="velin-container">
+        <h2 class="port-section__title">About</h2>
+        <div class="about-grid">
+          <div>
+            <p style="font-size: var(--velin-text-xl); line-height: var(--velin-leading-relaxed); margin-block-end: var(--velin-space-6);">
+              We're a team of designers, developers, and strategists who believe that great design
+              should be accessible to everyone. No exceptions. No excuses.
+            </p>
+            <p style="color: var(--velin-color-text-muted); line-height: var(--velin-leading-relaxed);">
+              Founded in 2019 in Berlin, Studio Kante has worked with startups, cultural institutions,
+              and enterprise clients across Europe and North America. Our work sits at the intersection of
+              brutalist aesthetics and thoughtful user experience.
+            </p>
+          </div>
+          <div>
+            <div class="about-stat">
+              <span class="about-stat__number">48+</span>
+              <span class="about-stat__label">Projects delivered</span>
+            </div>
+            <div class="about-stat">
+              <span class="about-stat__number">12</span>
+              <span class="about-stat__label">Team members</span>
+            </div>
+            <div class="about-stat">
+              <span class="about-stat__number">7</span>
+              <span class="about-stat__label">Years of experience</span>
+            </div>
+            <div class="about-stat">
+              <span class="about-stat__number">100%</span>
+              <span class="about-stat__label">WCAG AA compliant</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="port-section">
+      <div class="velin-container">
+        <h2 class="port-section__title">Capabilities</h2>
+        <div class="skills-grid">
+          <div class="skill-item">
+            <div class="skill-item__icon"><velin-icon name="globe" size="28"></velin-icon></div>
+            <div class="skill-item__name">Web Design</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__icon"><velin-icon name="edit" size="28"></velin-icon></div>
+            <div class="skill-item__name">Branding</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__icon"><velin-icon name="eye" size="28"></velin-icon></div>
+            <div class="skill-item__name">UX Research</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__icon"><velin-icon name="settings" size="28"></velin-icon></div>
+            <div class="skill-item__name">Development</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__icon"><velin-icon name="play" size="28"></velin-icon></div>
+            <div class="skill-item__name">Motion</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__icon"><velin-icon name="image" size="28"></velin-icon></div>
+            <div class="skill-item__name">Photography</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section" style="border-block-end: 3px solid var(--velin-color-text);">
+      <div class="velin-container">
+        <h2 class="contact-title">Let's work<br>together.</h2>
+        <p style="font-size: var(--velin-text-lg); color: var(--velin-color-text-muted); margin-block-end: var(--velin-space-8); max-inline-size: 40ch; margin-inline: auto;">
+          Have a project in mind? We'd love to hear about it. Drop us a line.
+        </p>
+        <div class="velin-flex velin-flex--center velin-flex--gap-4">
+          <a href="mailto:hello@studiokante.de" class="velin-btn velin-btn--primary velin-btn--lg">
+            <velin-icon name="mail" size="20"></velin-icon>
+            Get in Touch
+          </a>
+          <a href="#" class="velin-btn velin-btn--outline velin-btn--lg">
+            <velin-icon name="github" size="20"></velin-icon>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="port-footer">
+    <div class="velin-container port-footer__inner">
+      <p>&copy; 2026 Studio Kante. All rights reserved.</p>
+      <p>Built with <a href="https://github.com/SkyliteDesign/velinstyle" style="text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 2px;">VelinStyle</a> Brutalist Theme.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,24 @@
+@layer components {
+  velin-collapse {
+    display: block;
+  }
+
+  .velin-collapse-trigger {
+    cursor: pointer;
+  }
+
+  .velin-collapse-trigger[aria-expanded="true"] .velin-collapse-trigger__icon {
+    transform: rotate(180deg);
+  }
+
+  .velin-collapse-trigger__icon {
+    transition: transform var(--velin-duration-fast) var(--velin-ease-default);
+    display: inline-block;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .velin-collapse-trigger__icon {
+      transition: none;
+    }
+  }
+}

@@ -1,0 +1,47 @@
+@layer tokens {
+  :root {
+    /* Font families */
+    --velin-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --velin-font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+    --velin-font-mono: "Cascadia Code", "Fira Code", Consolas, "Courier New", monospace;
+    --velin-font-heading: var(--velin-font-sans);
+    --velin-font-body: var(--velin-font-sans);
+
+    /* Fluid Type Scale -- clamp(min, preferred, max) */
+    --velin-fluid-min-vw: 20;  /* 320px */
+    --velin-fluid-max-vw: 90;  /* 1440px */
+
+    --velin-text-xs: clamp(0.625rem, 0.6rem + 0.1vw, 0.75rem);
+    --velin-text-sm: clamp(0.8rem, 0.76rem + 0.15vw, 0.875rem);
+    --velin-text-base: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+    --velin-text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.375rem);
+    --velin-text-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+    --velin-text-2xl: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+    --velin-text-3xl: clamp(1.875rem, 1.5rem + 1.5vw, 2.5rem);
+    --velin-text-4xl: clamp(2.25rem, 1.75rem + 2vw, 3.125rem);
+    --velin-text-5xl: clamp(2.75rem, 2rem + 3vw, 4rem);
+
+    /* Line heights */
+    --velin-leading-none: 1;
+    --velin-leading-tight: 1.2;
+    --velin-leading-snug: 1.375;
+    --velin-leading-normal: 1.5;
+    --velin-leading-relaxed: 1.625;
+    --velin-leading-loose: 2;
+
+    /* Font weights */
+    --velin-weight-light: 300;
+    --velin-weight-normal: 400;
+    --velin-weight-medium: 500;
+    --velin-weight-semibold: 600;
+    --velin-weight-bold: 700;
+    --velin-weight-extrabold: 800;
+
+    /* Letter spacing */
+    --velin-tracking-tight: -0.025em;
+    --velin-tracking-normal: 0;
+    --velin-tracking-wide: 0.025em;
+    --velin-tracking-wider: 0.05em;
+    --velin-tracking-widest: 0.1em;
+  }
+}

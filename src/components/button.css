@@ -1,0 +1,229 @@
+@layer components {
+  .velin-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--velin-space-2);
+    min-block-size: 2.75rem; /* 44px touch target */
+    min-inline-size: 2.75rem;
+    padding-block: var(--velin-space-2);
+    padding-inline: var(--velin-space-5);
+    font-family: var(--velin-font-body);
+    font-size: var(--velin-text-base);
+    font-weight: var(--velin-weight-medium);
+    line-height: var(--velin-leading-tight);
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-radius: var(--velin-radius-md);
+    cursor: pointer;
+    user-select: none;
+    transition: var(--velin-transition-colors), var(--velin-transition-shadow);
+    color: var(--velin-color-text);
+    background-color: transparent;
+  }
+
+  .velin-btn:hover {
+    background-color: var(--velin-color-surface-dim);
+  }
+
+  .velin-btn:active {
+    transform: scale(0.98);
+  }
+
+  .velin-btn:disabled,
+  .velin-btn[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Primary */
+  .velin-btn--primary {
+    color: var(--velin-color-on-primary);
+    background-color: var(--velin-color-primary);
+    border-color: var(--velin-color-primary);
+  }
+
+  .velin-btn--primary:hover {
+    background-color: var(--velin-color-primary-hover);
+    border-color: var(--velin-color-primary-hover);
+  }
+
+  .velin-btn--primary:active {
+    background-color: var(--velin-color-primary-active);
+  }
+
+  /* Secondary */
+  .velin-btn--secondary {
+    color: var(--velin-color-on-secondary);
+    background-color: var(--velin-color-secondary);
+    border-color: var(--velin-color-secondary);
+  }
+
+  .velin-btn--secondary:hover {
+    background-color: var(--velin-color-secondary-hover);
+    border-color: var(--velin-color-secondary-hover);
+  }
+
+  /* Outline */
+  .velin-btn--outline {
+    color: var(--velin-color-primary);
+    background-color: transparent;
+    border-color: var(--velin-color-primary);
+  }
+
+  .velin-btn--outline:hover {
+    color: var(--velin-color-on-primary);
+    background-color: var(--velin-color-primary);
+  }
+
+  /* Ghost */
+  .velin-btn--ghost {
+    color: var(--velin-color-text);
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  .velin-btn--ghost:hover {
+    background-color: var(--velin-color-surface-dim);
+  }
+
+  /* Danger */
+  .velin-btn--danger {
+    color: var(--velin-color-on-danger);
+    background-color: var(--velin-color-danger);
+    border-color: var(--velin-color-danger);
+  }
+
+  .velin-btn--danger:hover {
+    background-color: var(--velin-color-danger-hover);
+    border-color: var(--velin-color-danger-hover);
+  }
+
+  /* Sizes */
+  .velin-btn--sm {
+    min-block-size: 2rem;
+    padding-block: var(--velin-space-1);
+    padding-inline: var(--velin-space-3);
+    font-size: var(--velin-text-sm);
+  }
+
+  .velin-btn--lg {
+    min-block-size: 3.25rem;
+    padding-block: var(--velin-space-3);
+    padding-inline: var(--velin-space-8);
+    font-size: var(--velin-text-lg);
+  }
+
+  /* Full width */
+  .velin-btn--block {
+    inline-size: 100%;
+  }
+
+  /* Icon-only button */
+  .velin-btn--icon {
+    padding: var(--velin-space-2);
+    min-inline-size: 2.75rem;
+  }
+
+  .velin-btn__icon {
+    flex-shrink: 0;
+    inline-size: 1.25em;
+    block-size: 1.25em;
+  }
+
+  /* Button group */
+  .velin-btn-group {
+    display: inline-flex;
+  }
+
+  .velin-btn-group > .velin-btn {
+    border-radius: 0;
+  }
+
+  .velin-btn-group > .velin-btn:first-child {
+    border-start-start-radius: var(--velin-radius-md);
+    border-end-start-radius: var(--velin-radius-md);
+  }
+
+  .velin-btn-group > .velin-btn:last-child {
+    border-start-end-radius: var(--velin-radius-md);
+    border-end-end-radius: var(--velin-radius-md);
+  }
+
+  .velin-btn-group > .velin-btn + .velin-btn {
+    margin-inline-start: -2px;
+  }
+
+  /* Success variant */
+  .velin-btn--success {
+    color: var(--velin-color-on-success);
+    background-color: var(--velin-color-success);
+    border-color: var(--velin-color-success);
+  }
+
+  .velin-btn--success:hover {
+    opacity: 0.9;
+  }
+
+  /* Close button */
+  .velin-btn--close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-block-size: 2.75rem;
+    min-inline-size: 2.75rem;
+    padding: var(--velin-space-2);
+    background: transparent;
+    border: none;
+    border-radius: var(--velin-radius-md);
+    color: var(--velin-color-text-muted);
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: var(--velin-transition-colors);
+  }
+
+  .velin-btn--close:hover {
+    background: var(--velin-color-surface-dim);
+    color: var(--velin-color-text);
+  }
+
+  .velin-btn--close::after {
+    content: "×";
+  }
+
+  /* Loading state */
+  .velin-btn--loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+  }
+
+  .velin-btn--loading::after {
+    content: "";
+    position: absolute;
+    inline-size: 1.25em;
+    block-size: 1.25em;
+    border: 2px solid currentColor;
+    border-block-start-color: transparent;
+    border-radius: var(--velin-radius-full);
+    animation: velin-spin 0.75s linear infinite;
+    color: var(--velin-color-text-muted);
+  }
+
+  .velin-btn--primary.velin-btn--loading::after,
+  .velin-btn--secondary.velin-btn--loading::after,
+  .velin-btn--danger.velin-btn--loading::after,
+  .velin-btn--success.velin-btn--loading::after {
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* Button toolbar */
+  .velin-btn-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--velin-space-2);
+    align-items: center;
+  }
+}

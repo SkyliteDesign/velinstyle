@@ -1,0 +1,85 @@
+@layer utilities {
+  /* CSS-only Search & Filter -- Zero JS */
+
+  .velin-filter-group {
+    display: contents;
+  }
+
+  .velin-filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--velin-space-2);
+    margin-block-end: var(--velin-space-4);
+  }
+
+  .velin-filter-check {
+    display: none;
+  }
+
+  .velin-filter-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--velin-space-2);
+    padding: var(--velin-space-2) var(--velin-space-4);
+    border: 1px solid var(--velin-color-border);
+    border-radius: var(--velin-radius-full);
+    cursor: pointer;
+    font-size: var(--velin-text-sm);
+    transition: var(--velin-transition-colors);
+    user-select: none;
+    min-block-size: 2.75rem;
+  }
+
+  .velin-filter-label:hover {
+    border-color: var(--velin-color-primary);
+    color: var(--velin-color-primary);
+  }
+
+  .velin-filter-check:checked + .velin-filter-label {
+    background: var(--velin-color-primary);
+    color: var(--velin-color-on-primary, #fff);
+    border-color: var(--velin-color-primary);
+  }
+
+  .velin-filter-check:focus-visible + .velin-filter-label {
+    outline: 3px solid var(--velin-color-focus);
+    outline-offset: 2px;
+  }
+
+  .velin-filter-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: var(--velin-space-4);
+  }
+
+  .velin-filter-target {
+    transition: opacity 200ms ease;
+  }
+
+  /* Filter logic via :has() */
+  .velin-filter-group:has(.velin-filter-check[data-velin-filter="a"]:checked) .velin-filter-target:not([data-velin-tags~="a"]),
+  .velin-filter-group:has(.velin-filter-check[data-velin-filter="b"]:checked) .velin-filter-target:not([data-velin-tags~="b"]),
+  .velin-filter-group:has(.velin-filter-check[data-velin-filter="c"]:checked) .velin-filter-target:not([data-velin-tags~="c"]),
+  .velin-filter-group:has(.velin-filter-check[data-velin-filter="d"]:checked) .velin-filter-target:not([data-velin-tags~="d"]),
+  .velin-filter-group:has(.velin-filter-check[data-velin-filter="e"]:checked) .velin-filter-target:not([data-velin-tags~="e"]),
+  .velin-filter-group:has(.velin-filter-check[data-velin-filter="f"]:checked) .velin-filter-target:not([data-velin-tags~="f"]) {
+    display: none;
+  }
+
+  /* Generic "any active filter hides non-matching" approach */
+  .velin-filter-group:has(.velin-filter-check:checked) .velin-filter-empty {
+    display: block;
+  }
+
+  .velin-filter-empty {
+    display: none;
+    text-align: center;
+    padding: var(--velin-space-8);
+    color: var(--velin-color-text-muted);
+    grid-column: 1 / -1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .velin-filter-target { transition: none; }
+  }
+}

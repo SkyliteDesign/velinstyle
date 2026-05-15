@@ -1,0 +1,39 @@
+@layer utilities {
+  /* Border width */
+  .velin-border { border: 1px solid var(--velin-color-border); }
+  .velin-border-0 { border: none; }
+  .velin-border-2 { border: 2px solid var(--velin-color-border); }
+  .velin-border-block { border-block: 1px solid var(--velin-color-border); }
+  .velin-border-inline { border-inline: 1px solid var(--velin-color-border); }
+  .velin-border-block-start { border-block-start: 1px solid var(--velin-color-border); }
+  .velin-border-block-end { border-block-end: 1px solid var(--velin-color-border); }
+
+  /* Border color */
+  .velin-border-primary { border-color: var(--velin-color-primary); }
+  .velin-border-secondary { border-color: var(--velin-color-secondary); }
+  .velin-border-success { border-color: var(--velin-color-success); }
+  .velin-border-warning { border-color: var(--velin-color-warning); }
+  .velin-border-danger { border-color: var(--velin-color-danger); }
+  .velin-border-transparent { border-color: transparent; }
+  .velin-border-strong { border-color: var(--velin-color-border-strong); }
+
+  /* Border radius */
+  .velin-rounded-none { border-radius: var(--velin-radius-none); }
+  .velin-rounded-xs { border-radius: var(--velin-radius-xs); }
+  .velin-rounded-sm { border-radius: var(--velin-radius-sm); }
+  .velin-rounded { border-radius: var(--velin-radius-md); }
+  .velin-rounded-lg { border-radius: var(--velin-radius-lg); }
+  .velin-rounded-xl { border-radius: var(--velin-radius-xl); }
+  .velin-rounded-2xl { border-radius: var(--velin-radius-2xl); }
+  .velin-rounded-full { border-radius: var(--velin-radius-full); }
+
+  /* Shadow */
+  .velin-shadow-none { box-shadow: var(--velin-shadow-none); }
+  .velin-shadow-xs { box-shadow: var(--velin-shadow-xs); }
+  .velin-shadow-sm { box-shadow: var(--velin-shadow-sm); }
+  .velin-shadow { box-shadow: var(--velin-shadow-md); }
+  .velin-shadow-lg { box-shadow: var(--velin-shadow-lg); }
+  .velin-shadow-xl { box-shadow: var(--velin-shadow-xl); }
+  .velin-shadow-2xl { box-shadow: var(--velin-shadow-2xl); }
+  .velin-shadow-inner { box-shadow: var(--velin-shadow-inner); }
+}

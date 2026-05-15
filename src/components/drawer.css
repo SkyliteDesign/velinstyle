@@ -1,0 +1,5 @@
+@layer components {
+  velin-drawer {
+    display: contents;
+  }
+}

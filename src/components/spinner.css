@@ -1,0 +1,106 @@
+@layer components {
+  .velin-spinner {
+    display: inline-block;
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    border: 3px solid var(--velin-color-border);
+    border-block-start-color: var(--velin-color-primary);
+    border-radius: var(--velin-radius-full);
+    animation: velin-spin 0.75s linear infinite;
+    vertical-align: middle;
+  }
+
+  /* Sizes */
+  .velin-spinner--xs {
+    inline-size: 1rem;
+    block-size: 1rem;
+    border-width: 2px;
+  }
+
+  .velin-spinner--sm {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    border-width: 2px;
+  }
+
+  .velin-spinner--lg {
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    border-width: 4px;
+  }
+
+  .velin-spinner--xl {
+    inline-size: 3.5rem;
+    block-size: 3.5rem;
+    border-width: 4px;
+  }
+
+  /* Color variants */
+  .velin-spinner--primary { border-block-start-color: var(--velin-color-primary); }
+  .velin-spinner--secondary { border-block-start-color: var(--velin-color-secondary); }
+  .velin-spinner--success { border-block-start-color: var(--velin-color-success); }
+  .velin-spinner--danger { border-block-start-color: var(--velin-color-danger); }
+  .velin-spinner--white { border-color: rgba(255,255,255,0.3); border-block-start-color: #fff; }
+
+  /* Dots variant */
+  .velin-spinner--dots {
+    border: none;
+    background: none;
+    animation: none;
+    display: inline-flex;
+    gap: var(--velin-space-1);
+    align-items: center;
+    inline-size: auto;
+    block-size: auto;
+  }
+
+  .velin-spinner--dots::before,
+  .velin-spinner--dots::after,
+  .velin-spinner--dots span {
+    content: "";
+    display: block;
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    border-radius: var(--velin-radius-full);
+    background: var(--velin-color-primary);
+    animation: velin-dots 1.4s ease-in-out infinite;
+  }
+
+  .velin-spinner--dots::before { animation-delay: 0s; }
+  .velin-spinner--dots span { animation-delay: 0.16s; }
+  .velin-spinner--dots::after { animation-delay: 0.32s; }
+
+  @keyframes velin-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes velin-dots {
+    0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+    40% { opacity: 1; transform: scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .velin-spinner {
+      animation-duration: 3s;
+    }
+    .velin-spinner--dots::before,
+    .velin-spinner--dots::after,
+    .velin-spinner--dots span {
+      animation: none;
+      opacity: 0.6;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .velin-spinner {
+      border-color: ButtonText;
+      border-block-start-color: Highlight;
+    }
+
+    .velin-spinner--dots::before,
+    .velin-spinner--dots::after,
+    .velin-spinner--dots span {
+      background: Highlight;
+    }
+  }
+}

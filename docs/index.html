@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VelinStyle – The CSS Framework That Makes Bootstrap Sweat</title>
+  <meta name="description" content="Accessibility-first CSS framework with OKLCH colors, Container Queries, Web Components, View Transitions, and zero-JS components.">
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="docs.css">
+  <script src="../dist/velinstyle-components.iife.js"></script>
+  <style>
+    .landing-hero {
+      padding-block: var(--velin-space-20) var(--velin-space-16);
+      text-align: center;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, oklch(55% .15 250 / .18), transparent),
+        radial-gradient(ellipse 60% 50% at 80% 80%, oklch(55% .12 320 / .12), transparent),
+        var(--velin-color-surface);
+      position: relative;
+      overflow: hidden;
+    }
+    .landing-hero__headline {
+      font-size: clamp(2.25rem, 5vw + 1rem, 4rem);
+      font-weight: var(--velin-weight-extrabold);
+      letter-spacing: var(--velin-tracking-tight);
+      line-height: 1.1;
+      margin-block-end: var(--velin-space-6);
+      background: linear-gradient(135deg, var(--velin-color-primary), var(--velin-color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .landing-hero__sub {
+      font-size: var(--velin-text-lg);
+      color: var(--velin-color-text-muted);
+      max-inline-size: 52ch;
+      margin-inline: auto;
+      line-height: var(--velin-leading-relaxed);
+      margin-block-end: var(--velin-space-8);
+    }
+    .landing-hero__stat {
+      display: inline-block;
+      margin-block-start: var(--velin-space-6);
+      font-size: var(--velin-text-sm);
+      font-family: var(--velin-font-mono);
+      color: var(--velin-color-text-muted);
+      background: var(--velin-color-surface-dim);
+      padding: var(--velin-space-2) var(--velin-space-4);
+      border-radius: var(--velin-radius-full);
+      border: 1px solid var(--velin-color-border);
+    }
+
+    .landing-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+      gap: var(--velin-space-6);
+    }
+    .landing-feature-card {
+      padding: var(--velin-space-6);
+      border: 1px solid var(--velin-color-border);
+      border-radius: var(--velin-radius-lg);
+      background: var(--velin-color-surface-bright);
+      transition: var(--velin-transition-shadow);
+    }
+    .landing-feature-card:hover {
+      box-shadow: var(--velin-shadow-lg);
+    }
+    .landing-feature-card__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      border-radius: var(--velin-radius-md);
+      margin-block-end: var(--velin-space-4);
+      font-size: 1.5rem;
+    }
+    .landing-feature-card__icon--a11y { background: var(--velin-color-primary-subtle); color: var(--velin-color-primary); }
+    .landing-feature-card__icon--color { background: var(--velin-color-secondary-subtle); color: var(--velin-color-secondary); }
+    .landing-feature-card__icon--cq { background: var(--velin-color-success-subtle); color: var(--velin-color-success); }
+    .landing-feature-card__icon--css { background: var(--velin-color-info-subtle); color: var(--velin-color-info); }
+    .landing-feature-card__icon--wc { background: var(--velin-color-warning-subtle); color: var(--velin-color-warning); }
+    .landing-feature-card__icon--theme { background: var(--velin-color-danger-subtle); color: var(--velin-color-danger); }
+    .landing-feature-card h3 {
+      font-size: var(--velin-text-lg);
+      font-weight: var(--velin-weight-semibold);
+      margin-block-end: var(--velin-space-2);
+    }
+    .landing-feature-card p {
+      font-size: var(--velin-text-sm);
+      color: var(--velin-color-text-muted);
+      line-height: var(--velin-leading-relaxed);
+    }
+
+    .landing-compare th,
+    .landing-compare td {
+      text-align: center;
+      font-size: var(--velin-text-sm);
+      padding: var(--velin-space-3) var(--velin-space-4);
+    }
+    .landing-compare th:first-child,
+    .landing-compare td:first-child {
+      text-align: start;
+      font-weight: var(--velin-weight-medium);
+    }
+    .landing-compare thead th {
+      font-weight: var(--velin-weight-bold);
+    }
+    .landing-compare .check { color: var(--velin-color-success); }
+    .landing-compare .cross { color: var(--velin-color-danger); opacity: .6; }
+    .landing-compare .partial { color: var(--velin-color-warning); }
+    .landing-compare .highlight-col {
+      background: var(--velin-color-primary-subtle);
+    }
+
+    .landing-testimonial {
+      padding: var(--velin-space-6);
+      border: 1px solid var(--velin-color-border);
+      border-radius: var(--velin-radius-lg);
+      background: var(--velin-color-surface-bright);
+    }
+    .landing-testimonial__quote {
+      font-size: var(--velin-text-base);
+      font-style: italic;
+      line-height: var(--velin-leading-relaxed);
+      margin-block-end: var(--velin-space-4);
+      color: var(--velin-color-text);
+    }
+    .landing-testimonial__quote::before { content: "\201C"; }
+    .landing-testimonial__quote::after { content: "\201D"; }
+    .landing-testimonial__author {
+      font-size: var(--velin-text-sm);
+      font-weight: var(--velin-weight-semibold);
+    }
+    .landing-testimonial__role {
+      font-size: var(--velin-text-xs);
+      color: var(--velin-color-text-muted);
+    }
+
+    .landing-cta {
+      text-align: center;
+      padding-block: var(--velin-space-16);
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 100%, oklch(55% .15 250 / .1), transparent),
+        var(--velin-color-surface);
+    }
+    .landing-cta__headline {
+      font-size: var(--velin-text-3xl);
+      font-weight: var(--velin-weight-bold);
+      margin-block-end: var(--velin-space-4);
+    }
+    .landing-cta__sub {
+      font-size: var(--velin-text-lg);
+      color: var(--velin-color-text-muted);
+      margin-block-end: var(--velin-space-8);
+    }
+
+    .landing-showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+      gap: var(--velin-space-8);
+      align-items: start;
+    }
+    .landing-showcase-item h3 {
+      font-size: var(--velin-text-sm);
+      font-weight: var(--velin-weight-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--velin-color-text-muted);
+      margin-block-end: var(--velin-space-4);
+    }
+
+    .landing-code-tabs {
+      display: flex;
+      gap: var(--velin-space-1);
+      margin-block-end: calc(-1 * var(--velin-space-1));
+    }
+    .landing-code-tab {
+      font-size: var(--velin-text-xs);
+      font-family: var(--velin-font-mono);
+      padding: var(--velin-space-2) var(--velin-space-3);
+      background: var(--velin-color-surface-dim);
+      border: 1px solid var(--velin-color-border);
+      border-block-end: none;
+      border-radius: var(--velin-radius-sm) var(--velin-radius-sm) 0 0;
+      color: var(--velin-color-text-muted);
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="index.html" class="velin-nav__brand">VelinStyle</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="guides/index.html" class="velin-nav__link">Integration</a></li>
+      <li><a href="layout.html" class="velin-nav__link">Layout</a></li>
+      <li><a href="components.html" class="velin-nav__link">Components</a></li>
+      <li><a href="css-components.html" class="velin-nav__link">CSS Components</a></li>
+      <li><a href="forms.html" class="velin-nav__link">Forms</a></li>
+      <li><a href="utilities.html" class="velin-nav__link">Utilities</a></li>
+      <li><a href="tokens.html" class="velin-nav__link">Tokens</a></li>
+      <li><a href="themes.html" class="velin-nav__link">Themes</a></li>
+      <li><a href="icons.html" class="velin-nav__link">Icons</a></li>
+      <li><a href="a11y.html" class="velin-nav__link">A11y</a></li>
+      <li><a href="security.html" class="velin-nav__link">Security</a></li>
+      <li><a href="migration.html" class="velin-nav__link">Migration</a></li>
+    </ul>
+  </nav>
+<div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+  <strong>Full documentation available at <a href="https://velinstyle.info/docs/getting-started/introduction.html">velinstyle.info</a></strong> — This is the quick reference. Visit the full docs for 80+ pages with live examples, API tables, and guides.
+</div>
+
+  <main id="main">
+
+    <!-- ============================================
+         1. HERO
+         ============================================ -->
+    <section class="landing-hero">
+      <div class="velin-container">
+        <h1 class="landing-hero__headline">The CSS Framework That<br>Makes Bootstrap Sweat</h1>
+        <p class="landing-hero__sub">
+          Accessibility-first, zero-JS components, OKLCH colors, Container Queries,
+          View Transitions &mdash; everything modern CSS can do, in one framework.
+        </p>
+        <div class="velin-flex velin-flex--justify-center velin-flex--wrap velin-flex--gap-4">
+          <a href="getting-started.html" class="velin-btn velin-btn--primary velin-btn--lg">Get Started</a>
+          <a href="https://github.com/SkyliteDesign/velinstyle" class="velin-btn velin-btn--outline velin-btn--lg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="margin-inline-end:.4em;vertical-align:-.15em"><path d="M12 .3a12 12 0 00-3.8 23.38c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61a3.18 3.18 0 00-1.33-1.76c-1.09-.74.08-.73.08-.73a2.52 2.52 0 011.84 1.24 2.56 2.56 0 003.5 1 2.56 2.56 0 01.76-1.61c-2.67-.3-5.47-1.33-5.47-5.93a4.64 4.64 0 011.24-3.22 4.3 4.3 0 01.12-3.18s1-.32 3.3 1.23a11.38 11.38 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23a4.3 4.3 0 01.12 3.18 4.64 4.64 0 011.24 3.22c0 4.61-2.8 5.63-5.48 5.92a2.87 2.87 0 01.82 2.23v3.29c0 .32.21.7.82.58A12 12 0 0012 .3"/></svg>
+            View on GitHub
+          </a>
+        </div>
+        <p class="landing-hero__stat">~95 KB minified CSS, 31 KB JS &mdash; lighter than Bootstrap's CSS alone</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+         2. FEATURE GRID
+         ============================================ -->
+    <section class="velin-doc-section" aria-labelledby="features-heading">
+      <div class="velin-container">
+        <h2 id="features-heading" class="velin-doc-title velin-text-center">Built for the Modern Web</h2>
+        <p class="velin-doc-lead" style="margin-inline:auto;text-align:center;max-inline-size:50ch;">
+          Every feature designed around what CSS can do today &mdash; not five years ago.
+        </p>
+        <div class="landing-features">
+          <div class="landing-feature-card">
+            <div class="landing-feature-card__icon landing-feature-card__icon--a11y" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="4" r="2"/><path d="M4 8h16M12 8v14M8 22l4-6 4 6"/></svg>
+            </div>
+            <h3>Accessibility First</h3>
+            <p>WCAG AA contrast, focus management, screen-reader support, and forced-colors mode baked into every component.</p>
+          </div>
+          <div class="landing-feature-card">
+            <div class="landing-feature-card__icon landing-feature-card__icon--color" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10"/><path d="M2 12h20"/></svg>
+            </div>
+            <h3>OKLCH Color System</h3>
+            <p>Perceptually uniform colors, automatic dark-mode palette, and <code class="velin-doc-inline-code">color-mix()</code> utilities out of the box.</p>
+          </div>
+          <div class="landing-feature-card">
+            <div class="landing-feature-card__icon landing-feature-card__icon--cq" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h3>Container Queries</h3>
+            <p>Components adapt to their container, not the viewport. True component-level responsive design.</p>
+          </div>
+          <div class="landing-feature-card">
+            <div class="landing-feature-card__icon landing-feature-card__icon--css" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17l6-6-6-6M12 19h8"/></svg>
+            </div>
+            <h3>Zero-JS Components</h3>
+            <p>24+ CSS-only components that work without a single line of JavaScript. Progressive enhancement at its finest.</p>
+          </div>
+          <div class="landing-feature-card">
+            <div class="landing-feature-card__icon landing-feature-card__icon--wc" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+            </div>
+            <h3>Web Components</h3>
+            <p>14 interactive elements with Shadow DOM encapsulation, focus trapping, and keyboard navigation built in.</p>
+          </div>
+          <div class="landing-feature-card">
+            <div class="landing-feature-card__icon landing-feature-card__icon--theme" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            </div>
+            <h3>Theme Presets</h3>
+            <p>Sharp, Soft, Brutalist &mdash; or create your own with CSS custom properties. Dark mode is automatic.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         3. QUICK START CODE BLOCK
+         ============================================ -->
+    <section class="velin-doc-section" aria-labelledby="quickstart-heading">
+      <div class="velin-container">
+        <h2 id="quickstart-heading" class="velin-doc-title velin-text-center">Up and Running in Seconds</h2>
+        <p class="velin-doc-lead" style="margin-inline:auto;text-align:center;max-inline-size:50ch;">
+          Drop two lines into your HTML and start building.
+        </p>
+
+        <div style="max-inline-size:56rem;margin-inline:auto;">
+          <div class="landing-code-tabs">
+            <span class="landing-code-tab">CDN Install</span>
+          </div>
+          <pre class="velin-doc-code">&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/velinstyle@0.4.0/dist/velinstyle.css"&gt;
+&lt;script type="module" src="https://cdn.jsdelivr.net/npm/velinstyle@0.4.0/dist/velinstyle-components.js"&gt;&lt;/script&gt;</pre>
+
+          <div class="landing-code-tabs" style="margin-block-start:var(--velin-space-6);">
+            <span class="landing-code-tab">Starter Template</span>
+          </div>
+          <pre class="velin-doc-code">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/velinstyle@0.4.0/dist/velinstyle.css"&gt;
+  &lt;script type="module" src="https://cdn.jsdelivr.net/npm/velinstyle@0.4.0/dist/velinstyle-components.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="velin-container"&gt;
+    &lt;article class="velin-card"&gt;
+      &lt;div class="velin-card__body"&gt;
+        &lt;h2 class="velin-card__title"&gt;Hello VelinStyle&lt;/h2&gt;
+        &lt;p class="velin-card__text"&gt;You're ready to build accessible, beautiful UIs.&lt;/p&gt;
+        &lt;button class="velin-btn velin-btn--primary"&gt;Let's Go&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/article&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         4. COMPARISON TABLE
+         ============================================ -->
+    <section class="velin-doc-section" aria-labelledby="compare-heading">
+      <div class="velin-container">
+        <h2 id="compare-heading" class="velin-doc-title velin-text-center">How VelinStyle Compares</h2>
+        <p class="velin-doc-lead" style="margin-inline:auto;text-align:center;max-inline-size:50ch;">
+          Modern features shouldn't require plugins, workarounds, or extra dependencies.
+        </p>
+
+        <div class="velin-table-wrapper" style="max-inline-size:56rem;margin-inline:auto;">
+          <table class="velin-table velin-table--striped landing-compare">
+            <thead>
+              <tr>
+                <th scope="col">Feature</th>
+                <th scope="col" class="highlight-col">VelinStyle</th>
+                <th scope="col">Bootstrap</th>
+                <th scope="col">Tailwind</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CSS Components</td>
+                <td class="highlight-col"><span class="check" aria-label="Yes">24+</span></td>
+                <td><span class="check" aria-label="Yes">25+</span></td>
+                <td><span class="cross" aria-label="No">&mdash;</span></td>
+              </tr>
+              <tr>
+                <td>Web Components</td>
+                <td class="highlight-col"><span class="check" aria-label="Yes">14</span></td>
+                <td><span class="cross" aria-label="No">&mdash;</span></td>
+                <td><span class="cross" aria-label="No">&mdash;</span></td>
+              </tr>
+              <tr>
+                <td>Color System</td>
+                <td class="highlight-col"><span class="check">OKLCH</span></td>
+                <td><span class="partial">HSL</span></td>
+                <td><span class="partial">HSL</span></td>
+              </tr>
+              <tr>
+                <td>Responsive Utilities</td>
+                <td class="highlight-col"><span class="check" aria-label="Yes">&#10003;</span></td>
+                <td><span class="check" aria-label="Yes">&#10003;</span></td>
+                <td><span class="check" aria-label="Yes">&#10003;</span></td>
+              </tr>
+              <tr>
+                <td>Animation Library</td>
+                <td class="highlight-col"><span class="check" aria-label="Yes">&#10003;</span></td>
+                <td><span class="partial">Limited</span></td>
+                <td><span class="partial">Basic</span></td>
+              </tr>
+              <tr>
+                <td>Container Queries</td>
+                <td class="highlight-col"><span class="check" aria-label="Yes">&#10003;</span></td>
+                <td><span class="cross" aria-label="No">&#10007;</span></td>
+                <td><span class="partial">v3.4+</span></td>
+              </tr>
+              <tr>
+                <td>View Transitions</td>
+                <td class="highlight-col"><span class="check" aria-label="Yes">&#10003;</span></td>
+                <td><span class="cross" aria-label="No">&#10007;</span></td>
+                <td><span class="cross" aria-label="No">&#10007;</span></td>
+              </tr>
+              <tr>
+                <td>Scroll Animations</td>
+                <td class="highlight-col"><span class="check" aria-label="Yes">&#10003;</span></td>
+                <td><span class="cross" aria-label="No">&#10007;</span></td>
+                <td><span class="cross" aria-label="No">&#10007;</span></td>
+              </tr>
+              <tr>
+                <td>A11y Built-in</td>
+                <td class="highlight-col"><span class="check" aria-label="Yes">WCAG AA</span></td>
+                <td><span class="partial">Partial</span></td>
+                <td><span class="cross" aria-label="No">DIY</span></td>
+              </tr>
+              <tr>
+                <td>Dark Mode</td>
+                <td class="highlight-col"><span class="check" aria-label="Yes">Auto</span></td>
+                <td><span class="check" aria-label="Yes">&#10003;</span></td>
+                <td><span class="check" aria-label="Yes">&#10003;</span></td>
+              </tr>
+              <tr>
+                <td>RTL Support</td>
+                <td class="highlight-col"><span class="check" aria-label="Yes">&#10003;</span></td>
+                <td><span class="check" aria-label="Yes">&#10003;</span></td>
+                <td><span class="check" aria-label="Yes">&#10003;</span></td>
+              </tr>
+              <tr>
+                <td>Bundle Size</td>
+                <td class="highlight-col"><span class="check">~95 KB</span></td>
+                <td><span class="partial">~230 KB</span></td>
+                <td><span class="check">Varies</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         5. COMPONENT SHOWCASE
+         ============================================ -->
+    <section class="velin-doc-section" aria-labelledby="showcase-heading">
+      <div class="velin-container">
+        <h2 id="showcase-heading" class="velin-doc-title velin-text-center">See It in Action</h2>
+        <p class="velin-doc-lead" style="margin-inline:auto;text-align:center;max-inline-size:50ch;">
+          Real components, live on this page. No screenshots, no tricks.
+        </p>
+
+        <div class="landing-showcase-grid">
+
+          <!-- Buttons -->
+          <div class="landing-showcase-item">
+            <h3>Buttons</h3>
+            <div class="velin-flex velin-flex--wrap velin-flex--gap-3">
+              <button class="velin-btn velin-btn--primary">Primary</button>
+              <button class="velin-btn velin-btn--outline">Outline</button>
+              <button class="velin-btn velin-btn--primary velin-btn--loading" aria-label="Loading">Loading</button>
+            </div>
+          </div>
+
+          <!-- Card -->
+          <div class="landing-showcase-item">
+            <h3>Card</h3>
+            <article class="velin-card">
+              <div class="velin-card__body">
+                <h4 class="velin-card__title">Project Update</h4>
+                <p class="velin-card__text">Container-query-aware cards adapt their layout to the space they're given.</p>
+              </div>
+              <div class="velin-card__footer">
+                <button class="velin-btn velin-btn--primary velin-btn--sm">View Details</button>
+              </div>
+            </article>
+          </div>
+
+          <!-- Switch -->
+          <div class="landing-showcase-item">
+            <h3>Switch Toggle</h3>
+            <div class="velin-flex velin-flex--col velin-flex--gap-3">
+              <label class="velin-switch">
+                <input type="checkbox" class="velin-switch__input" checked>
+                <span class="velin-switch__track"></span>
+                <span class="velin-switch__label">Dark Mode</span>
+              </label>
+              <label class="velin-switch">
+                <input type="checkbox" class="velin-switch__input">
+                <span class="velin-switch__track"></span>
+                <span class="velin-switch__label">Notifications</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="landing-showcase-item">
+            <h3>Progress</h3>
+            <div class="velin-flex velin-flex--col velin-flex--gap-4" style="width:100%;">
+              <div class="velin-progress velin-progress--success" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100">
+                <div class="velin-progress__bar" style="width:72%"></div>
+                <span class="velin-progress__label">72%</span>
+              </div>
+              <div class="velin-progress velin-progress--striped velin-progress--animated" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">
+                <div class="velin-progress__bar" style="width:45%"></div>
+                <span class="velin-progress__label">45%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Avatar Group -->
+          <div class="landing-showcase-item">
+            <h3>Avatar Group</h3>
+            <div class="velin-avatar-group">
+              <div class="velin-avatar" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);display:flex;align-items:center;justify-content:center;font-weight:var(--velin-weight-bold);">A</div>
+              <div class="velin-avatar" style="background:var(--velin-color-secondary);color:var(--velin-color-on-secondary);display:flex;align-items:center;justify-content:center;font-weight:var(--velin-weight-bold);">B</div>
+              <div class="velin-avatar" style="background:var(--velin-color-success);color:var(--velin-color-on-success);display:flex;align-items:center;justify-content:center;font-weight:var(--velin-weight-bold);">C</div>
+              <div class="velin-avatar" style="background:var(--velin-color-warning);color:var(--velin-color-on-warning);display:flex;align-items:center;justify-content:center;font-weight:var(--velin-weight-bold);">D</div>
+              <div class="velin-avatar" style="background:var(--velin-color-info);color:var(--velin-color-on-info);display:flex;align-items:center;justify-content:center;font-weight:var(--velin-weight-bold);">+3</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         6. TESTIMONIALS
+         ============================================ -->
+    <section class="velin-doc-section" aria-labelledby="testimonials-heading">
+      <div class="velin-container">
+        <h2 id="testimonials-heading" class="velin-doc-title velin-text-center">What Developers Say</h2>
+        <div class="velin-grid velin-grid--auto-fit" style="--velin-grid-min:18rem;">
+          <div class="landing-testimonial">
+            <p class="landing-testimonial__quote">
+              I dropped Bootstrap and had our design system rebuilt with VelinStyle in a weekend. The accessibility wins alone were worth it.
+            </p>
+            <div class="velin-flex velin-flex--items-center velin-flex--gap-3">
+              <div class="velin-avatar" style="background:var(--velin-color-primary);color:var(--velin-color-on-primary);display:flex;align-items:center;justify-content:center;font-weight:var(--velin-weight-bold);">SR</div>
+              <div>
+                <p class="landing-testimonial__author">Sarah R.</p>
+                <p class="landing-testimonial__role">Frontend Lead, Acme Corp</p>
+              </div>
+            </div>
+          </div>
+          <div class="landing-testimonial">
+            <p class="landing-testimonial__quote">
+              Container Queries and View Transitions built right in? This is the framework I've been waiting for since 2020.
+            </p>
+            <div class="velin-flex velin-flex--items-center velin-flex--gap-3">
+              <div class="velin-avatar" style="background:var(--velin-color-success);color:var(--velin-color-on-success);display:flex;align-items:center;justify-content:center;font-weight:var(--velin-weight-bold);">MK</div>
+              <div>
+                <p class="landing-testimonial__author">Marcus K.</p>
+                <p class="landing-testimonial__role">Staff Engineer, Startupify</p>
+              </div>
+            </div>
+          </div>
+          <div class="landing-testimonial">
+            <p class="landing-testimonial__quote">
+              95 KB for all of this? I've seen hero images bigger than VelinStyle's entire CSS bundle. Absolutely ridiculous value.
+            </p>
+            <div class="velin-flex velin-flex--items-center velin-flex--gap-3">
+              <div class="velin-avatar" style="background:var(--velin-color-secondary);color:var(--velin-color-on-secondary);display:flex;align-items:center;justify-content:center;font-weight:var(--velin-weight-bold);">JL</div>
+              <div>
+                <p class="landing-testimonial__author">Jamie L.</p>
+                <p class="landing-testimonial__role">Indie Developer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         7. CTA
+         ============================================ -->
+    <section class="landing-cta" aria-labelledby="cta-heading">
+      <div class="velin-container">
+        <h2 id="cta-heading" class="landing-cta__headline">Ready to build accessible, beautiful UIs?</h2>
+        <p class="landing-cta__sub">Get started in under a minute. No build step required.</p>
+        <div class="velin-flex velin-flex--justify-center velin-flex--wrap velin-flex--gap-4">
+          <a href="getting-started.html" class="velin-btn velin-btn--primary velin-btn--lg">Get Started</a>
+          <a href="components.html" class="velin-btn velin-btn--outline velin-btn--lg">Browse Components</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       8. FOOTER
+       ============================================ -->
+  <footer class="velin-doc-footer">
+    <div class="velin-doc-footer__inner">
+      <p>VelinStyle v0.6.1</p>
+      <nav aria-label="Footer links">
+        <div class="velin-flex velin-flex--gap-4">
+          <a href="getting-started.html">Docs</a>
+          <a href="https://github.com/SkyliteDesign/velinstyle">GitHub</a>
+          <a href="https://github.com/SkyliteDesign/velinstyle/blob/main/LICENSE">MIT License</a>
+        </div>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Theme Switcher -->
+  <div class="velin-doc-theme-bar">
+    <button class="velin-btn velin-btn--sm velin-btn--ghost" onclick="document.documentElement.removeAttribute('data-velin-theme')" title="Default theme">Default</button>
+    <button class="velin-btn velin-btn--sm velin-btn--ghost" onclick="document.documentElement.setAttribute('data-velin-theme','dark')" title="Dark mode">Dark</button>
+    <button class="velin-btn velin-btn--sm velin-btn--ghost" onclick="document.documentElement.setAttribute('data-velin-theme','sharp')" title="Sharp theme">Sharp</button>
+    <button class="velin-btn velin-btn--sm velin-btn--ghost" onclick="document.documentElement.setAttribute('data-velin-theme','soft')" title="Soft theme">Soft</button>
+    <button class="velin-btn velin-btn--sm velin-btn--ghost" onclick="document.documentElement.setAttribute('data-velin-theme','brutalist')" title="Brutalist theme">Brutal</button>
+  </div>
+
+  <link rel="stylesheet" href="../src/themes/sharp.css">
+  <link rel="stylesheet" href="../src/themes/soft.css">
+  <link rel="stylesheet" href="../src/themes/brutalist.css">
+<!-- Theme Picker Widget -->
+<div style="position:fixed;bottom:1rem;right:1rem;z-index:1050;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;" id="themePicker">
+  <div id="themePanel" style="display:none;background:var(--velin-color-surface-bright,#fff);border:1px solid var(--velin-color-border,#dee2e6);border-radius:.75rem;padding:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:20rem;">
+    <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
+  </div>
+  <button onclick="document.getElementById('themePanel').style.display=document.getElementById('themePanel').style.display==='none'?'block':'none'" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+</div>
+<script>
+(function(){
+  var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
+  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='../dist/themes/'+t+'.min.css';document.head.appendChild(l);});
+  var names=['Default'].concat(themes).concat(['dark']);
+  var vals=[''].concat(themes).concat(['dark']);
+  var grid=document.getElementById('themeGrid');
+  names.forEach(function(n,i){
+    var b=document.createElement('button');
+    b.textContent=n.charAt(0).toUpperCase()+n.slice(1);
+    b.style.cssText='padding:.3rem .65rem;border:1px solid var(--velin-color-border,#dee2e6);border-radius:1rem;background:var(--velin-color-surface-dim,#f5f6f8);color:var(--velin-color-text,#212529);font-size:.75rem;cursor:pointer;white-space:nowrap;';
+    b.addEventListener('click',function(){
+      if(vals[i]){document.documentElement.setAttribute('data-velin-theme',vals[i]);}
+      else{document.documentElement.removeAttribute('data-velin-theme');}
+      grid.querySelectorAll('button').forEach(function(x){x.style.background='var(--velin-color-surface-dim,#f5f6f8)';x.style.color='var(--velin-color-text,#212529)';});
+      b.style.background='var(--velin-color-primary,#2563eb)';b.style.color='#fff';
+    });
+    grid.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

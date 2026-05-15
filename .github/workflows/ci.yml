@@ -1,0 +1,68 @@
+name: VelinStyle CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build CSS (minified)
+        run: npm run build:css:min
+
+      - name: Build CSS (dev)
+        run: npm run build:css:dev
+
+      - name: Build JS (minified)
+        run: npm run build:js:min
+
+      - name: Build JS (dev)
+        run: npm run build:js:dev
+
+      - name: Build JS (IIFE)
+        run: npm run build:js:iife
+
+      - name: Build Themes
+        run: npm run build:themes
+
+      - name: Build Icons
+        run: npm run build:icons
+
+      - name: Run unit tests
+        run: npm test
+
+      - name: Run A11y tests
+        run: npm run test:a11y
+
+      - name: Check dist output exists
+        run: |
+          test -f dist/velinstyle.css
+          test -f dist/velinstyle.min.css
+          test -f dist/velinstyle-components.js
+          test -f dist/velinstyle-components.min.js
+          test -f dist/velinstyle-components.iife.js
+          test -f dist/velin-icons.svg
+
+      - name: Report CSS size
+        run: |
+          echo "Uncompressed: $(wc -c < dist/velinstyle.css) bytes"
+          echo "Minified: $(wc -c < dist/velinstyle.min.css) bytes"
+          echo "Gzipped: $(gzip -c dist/velinstyle.min.css | wc -c) bytes"

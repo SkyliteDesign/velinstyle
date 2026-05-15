@@ -1,0 +1,114 @@
+@layer components {
+  .velin-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .velin-table {
+    inline-size: 100%;
+    text-align: start;
+    border-collapse: collapse;
+    font-size: var(--velin-text-base);
+  }
+
+  .velin-table th {
+    font-weight: var(--velin-weight-semibold);
+    color: var(--velin-color-text);
+    text-align: inherit;
+  }
+
+  .velin-table th,
+  .velin-table td {
+    padding: var(--velin-space-3) var(--velin-space-4);
+    border-block-end: 1px solid var(--velin-color-border);
+    vertical-align: top;
+  }
+
+  .velin-table thead th {
+    border-block-end-width: 2px;
+    white-space: nowrap;
+  }
+
+  /* Striped rows */
+  .velin-table--striped tbody tr:nth-child(even) {
+    background-color: var(--velin-color-surface-dim);
+  }
+
+  /* Hoverable rows */
+  .velin-table--hover tbody tr:hover {
+    background-color: var(--velin-color-surface-dim);
+  }
+
+  /* Bordered */
+  .velin-table--bordered th,
+  .velin-table--bordered td {
+    border: 1px solid var(--velin-color-border);
+  }
+
+  /* Compact / Small */
+  .velin-table--compact th,
+  .velin-table--compact td,
+  .velin-table--sm th,
+  .velin-table--sm td {
+    padding: var(--velin-space-2) var(--velin-space-3);
+    font-size: var(--velin-text-sm);
+  }
+
+  /* Row color variants */
+  .velin-table-primary { background-color: color-mix(in oklch, var(--velin-color-primary) 10%, transparent); }
+  .velin-table-secondary { background-color: color-mix(in oklch, var(--velin-color-secondary) 10%, transparent); }
+  .velin-table-success { background-color: color-mix(in oklch, var(--velin-color-success) 10%, transparent); }
+  .velin-table-warning { background-color: color-mix(in oklch, var(--velin-color-warning) 10%, transparent); }
+  .velin-table-danger { background-color: color-mix(in oklch, var(--velin-color-danger) 10%, transparent); }
+  .velin-table-info { background-color: color-mix(in oklch, var(--velin-color-info) 10%, transparent); }
+
+  /* Caption top */
+  .velin-table .velin-caption-top {
+    caption-side: top;
+    padding-block: var(--velin-space-2);
+    color: var(--velin-color-text-muted);
+    font-size: var(--velin-text-sm);
+  }
+
+  /* Borderless */
+  .velin-table--borderless th,
+  .velin-table--borderless td {
+    border: none;
+  }
+
+  /* Responsive: stack on small containers */
+  @container velin (max-width: 30rem) {
+    .velin-table--responsive thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+    }
+
+    .velin-table--responsive tr {
+      display: block;
+      margin-block-end: var(--velin-space-4);
+      border: 1px solid var(--velin-color-border);
+      border-radius: var(--velin-radius-md);
+    }
+
+    .velin-table--responsive td {
+      display: flex;
+      justify-content: space-between;
+      text-align: end;
+      border-block-end: 1px solid var(--velin-color-border);
+    }
+
+    .velin-table--responsive td::before {
+      content: attr(data-velin-label);
+      font-weight: var(--velin-weight-semibold);
+      text-align: start;
+      margin-inline-end: var(--velin-space-4);
+    }
+
+    .velin-table--responsive td:last-child {
+      border-block-end: none;
+    }
+  }
+}

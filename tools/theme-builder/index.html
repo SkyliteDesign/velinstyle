@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VelinStyle theme builder</title>
+  <link rel="stylesheet" href="../../dist/velinstyle.css">
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; }
+    .tb { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; min-height: 100vh; }
+    .tb__panel { padding: 1.5rem; border-inline-end: 1px solid var(--velin-color-border); }
+    .tb__preview { padding: 1.5rem; background: var(--velin-color-surface-dim); }
+    label { display: block; font-size: var(--velin-text-sm); margin-block-end: 0.25rem; }
+    input[type="range"] { width: 100%; }
+    pre { background: var(--velin-color-surface-bright); padding: 1rem; border-radius: var(--velin-radius-md); overflow: auto; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="tb">
+    <div class="tb__panel velin-container">
+      <h1 class="velin-text-2xl" style="font-weight:600;margin-block-end:1rem">OKLCH preview</h1>
+      <p class="velin-text-muted velin-text-sm" style="margin-block-end:1.5rem">Adjust sliders; copy generated <code>:root</code> variables into your project.</p>
+      <label for="l">Lightness</label>
+      <input id="l" type="range" min="0" max="100" value="60">
+      <label for="c" style="margin-block-start:1rem">Chroma</label>
+      <input id="c" type="range" min="0" max="35" value="18">
+      <label for="h" style="margin-block-start:1rem">Hue (deg)</label>
+      <input id="h" type="range" min="0" max="360" value="252">
+      <button type="button" class="velin-btn velin-btn--primary" style="margin-block-start:1.5rem" id="copy">Copy CSS</button>
+    </div>
+    <div class="tb__preview" id="swatch" aria-live="polite">
+      <div style="padding:3rem;border-radius:var(--velin-radius-lg);background:var(--demo, #ccc);color:var(--demo-fg,#111);font-weight:600" id="card">
+        Preview swatch
+      </div>
+      <pre id="out" style="margin-block-start:1rem"></pre>
+    </div>
+  </div>
+  <script>
+    const l = document.getElementById('l');
+    const c = document.getElementById('c');
+    const h = document.getElementById('h');
+    const card = document.getElementById('card');
+    const out = document.getElementById('out');
+    function relL() { return (l.value / 100).toFixed(2); }
+    function tick() {
+      const okl = `oklch(${relL()} ${(c.value / 100).toFixed(2)} ${h.value})`;
+      card.style.setProperty('--demo', okl);
+      const fg = parseFloat(relL()) > 0.55 ? 'oklch(0.2 0.02 252)' : 'oklch(0.98 0.01 252)';
+      card.style.setProperty('--demo-fg', fg);
+      out.textContent = `:root {\n  --velin-color-primary: ${okl};\n}`;
+    }
+    [l,c,h].forEach(el => el.addEventListener('input', tick));
+    document.getElementById('copy').addEventListener('click', async () => {
+      await navigator.clipboard.writeText(out.textContent);
+    });
+    tick();
+  </script>
+</body>
+</html>

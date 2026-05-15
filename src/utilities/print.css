@@ -1,0 +1,43 @@
+@layer utilities {
+  .velin-print-only {
+    display: none !important;
+  }
+
+  @media print {
+    .velin-no-print {
+      display: none !important;
+    }
+
+    .velin-print-only {
+      display: block !important;
+    }
+
+    .velin-print-break-before {
+      break-before: page;
+    }
+
+    .velin-print-break-after {
+      break-after: page;
+    }
+
+    .velin-print-break-avoid {
+      break-inside: avoid;
+    }
+
+    body {
+      color: #000 !important;
+      background: #fff !important;
+    }
+
+    a[href]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: #666;
+    }
+
+    nav, .velin-nav, .velin-skip-link,
+    velin-toast, velin-scroll-top, velin-theme-toggle {
+      display: none !important;
+    }
+  }
+}

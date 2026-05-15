@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started - VelinStyle</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="docs.css">
+  <script src="../dist/velinstyle-components.iife.js"></script>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="index.html" class="velin-nav__brand">VelinStyle</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="getting-started.html" class="velin-nav__link" aria-current="page">Get Started</a></li>
+      <li><a href="guides/index.html" class="velin-nav__link">Integration</a></li>
+      <li><a href="layout.html" class="velin-nav__link">Layout</a></li>
+      <li><a href="components.html" class="velin-nav__link">Components</a></li>
+      <li><a href="css-components.html" class="velin-nav__link">CSS Components</a></li>
+      <li><a href="forms.html" class="velin-nav__link">Forms</a></li>
+      <li><a href="utilities.html" class="velin-nav__link">Utilities</a></li>
+      <li><a href="tokens.html" class="velin-nav__link">Tokens</a></li>
+      <li><a href="themes.html" class="velin-nav__link">Themes</a></li>
+      <li><a href="icons.html" class="velin-nav__link">Icons</a></li>
+      <li><a href="a11y.html" class="velin-nav__link">A11y</a></li>
+      <li><a href="security.html" class="velin-nav__link">Security</a></li>
+      <li><a href="migration.html" class="velin-nav__link">Migration</a></li>
+    </ul>
+  </nav>
+<div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+  <strong>Full documentation available at <a href="https://velinstyle.info/docs/getting-started/introduction.html">velinstyle.info</a></strong> — This is the quick reference. Visit the full docs for 80+ pages with live examples, API tables, and guides.
+</div>
+
+  <main id="main" class="velin-container">
+
+    <!-- Hero -->
+    <section class="velin-doc-section">
+      <h1 class="velin-doc-title">Getting Started</h1>
+      <p class="velin-doc-lead">
+        Get up and running with VelinStyle in under five minutes. This guide covers installation, your first page, components, theming, web components, and dark mode.
+      </p>
+
+      <div class="velin-alert velin-alert--info" role="note">
+        <strong>Mobile and browsers.</strong> VelinStyle is mobile-first CSS in one bundle — use a current phone browser and a proper <code class="velin-doc-inline-code">viewport</code> meta tag. After cloning this repo, run <code class="velin-doc-inline-code">npm run build</code> before opening these HTML files locally.
+      </div>
+
+      <nav aria-label="On this page">
+        <ul style="list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:var(--velin-space-2);">
+          <li><a href="#installation" class="velin-btn velin-btn--outline velin-btn--sm">Installation</a></li>
+          <li><a href="#quick-start" class="velin-btn velin-btn--outline velin-btn--sm">Quick Start</a></li>
+          <li><a href="#integration-guides" class="velin-btn velin-btn--outline velin-btn--sm">Stack guides</a></li>
+          <li><a href="#first-component" class="velin-btn velin-btn--outline velin-btn--sm">First Component</a></li>
+          <li><a href="#adding-a-theme" class="velin-btn velin-btn--outline velin-btn--sm">Adding a Theme</a></li>
+          <li><a href="#web-components" class="velin-btn velin-btn--outline velin-btn--sm">Web Components</a></li>
+          <li><a href="#dark-mode" class="velin-btn velin-btn--outline velin-btn--sm">Dark Mode</a></li>
+        </ul>
+      </nav>
+    </section>
+
+    <!-- 1. Installation -->
+    <section id="installation" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">1. Installation</h2>
+      <p class="velin-doc-lead">Choose the method that fits your workflow — CDN for quick prototypes, npm for production projects.</p>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-3);">CDN (fastest)</h3>
+      <p>Add these two lines inside your <code class="velin-doc-inline-code">&lt;head&gt;</code> and you're done — no build step required.</p>
+      <pre class="velin-doc-code">&lt;!-- VelinStyle CSS --&gt;
+&lt;link rel="stylesheet"
+      href="https://unpkg.com/velinstyle@latest/dist/velinstyle.min.css"&gt;
+
+&lt;!-- VelinStyle Web Components (optional) --&gt;
+&lt;script type="module"
+        src="https://unpkg.com/velinstyle@latest/dist/velinstyle-components.min.js"&gt;
+&lt;/script&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">npm</h3>
+      <p>For bundler-based projects (Vite, Webpack, Parcel, etc.):</p>
+      <pre class="velin-doc-code">npm install velinstyle</pre>
+
+      <p style="margin-block-start:var(--velin-space-4);">Then import in your entry file:</p>
+      <pre class="velin-doc-code">/* CSS — import in your main stylesheet or JS entry */
+@import "velinstyle/dist/velinstyle.css";
+
+/* Web Components — import in your JS entry */
+import "velinstyle/dist/velinstyle-components.js";</pre>
+
+      <div class="velin-alert velin-alert--info" role="alert" style="margin-block-start:var(--velin-space-4);">
+        <div class="velin-alert__content">
+          <p class="velin-alert__title">Tip</p>
+          <p>The web-components script is optional. You only need it if you plan to use <code class="velin-doc-inline-code">&lt;velin-modal&gt;</code>, <code class="velin-doc-inline-code">&lt;velin-tabs&gt;</code>, <code class="velin-doc-inline-code">&lt;velin-accordion&gt;</code>, or other interactive elements.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1b. Integration in real stacks -->
+    <section id="integration-guides" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Stack integration guides</h2>
+      <p class="velin-doc-lead">Short recipes (German) for Laravel, WordPress, and generic bundler projects — same CSS and components, different glue code.</p>
+      <p><a class="velin-btn velin-btn--primary" href="guides/index.html">Open integration guides</a></p>
+    </section>
+
+    <!-- 2. Quick Start -->
+    <section id="quick-start" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">2. Quick Start</h2>
+      <p class="velin-doc-lead">Copy this starter template into a new HTML file and open it in your browser.</p>
+
+      <pre class="velin-doc-code">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;My VelinStyle App&lt;/title&gt;
+  &lt;link rel="stylesheet"
+        href="https://unpkg.com/velinstyle@latest/dist/velinstyle.min.css"&gt;
+  &lt;script type="module"
+          src="https://unpkg.com/velinstyle@latest/dist/velinstyle-components.min.js"&gt;
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;a href="#main" class="velin-skip-link"&gt;Skip to main content&lt;/a&gt;
+
+  &lt;nav class="velin-nav" aria-label="Main navigation"&gt;
+    &lt;a href="/" class="velin-nav__brand"&gt;My App&lt;/a&gt;
+    &lt;ul class="velin-nav__list"&gt;
+      &lt;li&gt;&lt;a href="/" class="velin-nav__link"&gt;Home&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/about" class="velin-nav__link"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+
+  &lt;main id="main" class="velin-container"&gt;
+    &lt;h1&gt;Hello, VelinStyle!&lt;/h1&gt;
+    &lt;p&gt;Your accessibility-first app is ready.&lt;/p&gt;
+    &lt;button class="velin-btn velin-btn--primary"&gt;Get Started&lt;/button&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+      <p>This gives you a fully responsive page with a skip link, semantic navigation, a container layout, and accessible defaults — all with zero configuration.</p>
+    </section>
+
+    <!-- 3. First Component -->
+    <section id="first-component" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">3. Your First Component — Buttons</h2>
+      <p class="velin-doc-lead">VelinStyle components use a BEM-like naming convention: <code class="velin-doc-inline-code">velin-block--modifier</code>. Here's how buttons work.</p>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-3);">Variants</h3>
+      <div class="velin-doc-demo">
+        <button class="velin-btn velin-btn--primary">Primary</button>
+        <button class="velin-btn velin-btn--secondary">Secondary</button>
+        <button class="velin-btn velin-btn--outline">Outline</button>
+        <button class="velin-btn velin-btn--ghost">Ghost</button>
+        <button class="velin-btn velin-btn--danger">Danger</button>
+      </div>
+      <pre class="velin-doc-code">&lt;button class="velin-btn velin-btn--primary"&gt;Primary&lt;/button&gt;
+&lt;button class="velin-btn velin-btn--secondary"&gt;Secondary&lt;/button&gt;
+&lt;button class="velin-btn velin-btn--outline"&gt;Outline&lt;/button&gt;
+&lt;button class="velin-btn velin-btn--ghost"&gt;Ghost&lt;/button&gt;
+&lt;button class="velin-btn velin-btn--danger"&gt;Danger&lt;/button&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Sizes</h3>
+      <div class="velin-doc-demo">
+        <button class="velin-btn velin-btn--primary velin-btn--sm">Small</button>
+        <button class="velin-btn velin-btn--primary">Default</button>
+        <button class="velin-btn velin-btn--primary velin-btn--lg">Large</button>
+      </div>
+      <pre class="velin-doc-code">&lt;button class="velin-btn velin-btn--primary velin-btn--sm"&gt;Small&lt;/button&gt;
+&lt;button class="velin-btn velin-btn--primary"&gt;Default&lt;/button&gt;
+&lt;button class="velin-btn velin-btn--primary velin-btn--lg"&gt;Large&lt;/button&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Combining with Cards</h3>
+      <p>Buttons work seamlessly inside other components like cards and forms.</p>
+      <div style="max-inline-size:24rem;margin-block:var(--velin-space-4);">
+        <article class="velin-card">
+          <div class="velin-card__body">
+            <h3 class="velin-card__title">Welcome</h3>
+            <p class="velin-card__text">VelinStyle components compose together naturally.</p>
+          </div>
+          <div class="velin-card__footer">
+            <button class="velin-btn velin-btn--ghost velin-btn--sm">Cancel</button>
+            <button class="velin-btn velin-btn--primary velin-btn--sm">Continue</button>
+          </div>
+        </article>
+      </div>
+      <pre class="velin-doc-code">&lt;article class="velin-card"&gt;
+  &lt;div class="velin-card__body"&gt;
+    &lt;h3 class="velin-card__title"&gt;Welcome&lt;/h3&gt;
+    &lt;p class="velin-card__text"&gt;VelinStyle components compose together naturally.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="velin-card__footer"&gt;
+    &lt;button class="velin-btn velin-btn--ghost velin-btn--sm"&gt;Cancel&lt;/button&gt;
+    &lt;button class="velin-btn velin-btn--primary velin-btn--sm"&gt;Continue&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</pre>
+    </section>
+
+    <!-- 4. Adding a Theme -->
+    <section id="adding-a-theme" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">4. Adding a Theme</h2>
+      <p class="velin-doc-lead">VelinStyle ships with built-in theme presets you can activate with a single <code class="velin-doc-inline-code">data-velin-theme</code> attribute.</p>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-3);">Available Themes (13)</h3>
+      <p>Click any theme below to apply it live to this page. All 13 themes are loaded and ready to test.</p>
+
+      <div id="theme-picker" style="display:flex;flex-wrap:wrap;gap:var(--velin-space-2);margin-block:var(--velin-space-4);">
+        <button class="velin-btn velin-btn--sm velin-btn--primary" onclick="switchTheme(null)">Default</button>
+        <button class="velin-btn velin-btn--sm velin-btn--outline" onclick="switchTheme('sharp')">Sharp</button>
+        <button class="velin-btn velin-btn--sm velin-btn--outline" onclick="switchTheme('soft')">Soft</button>
+        <button class="velin-btn velin-btn--sm velin-btn--outline" onclick="switchTheme('brutalist')">Brutalist</button>
+        <button class="velin-btn velin-btn--sm velin-btn--outline" onclick="switchTheme('neon')">Neon</button>
+        <button class="velin-btn velin-btn--sm velin-btn--outline" onclick="switchTheme('earth')">Earth</button>
+        <button class="velin-btn velin-btn--sm velin-btn--outline" onclick="switchTheme('ocean')">Ocean</button>
+        <button class="velin-btn velin-btn--sm velin-btn--outline" onclick="switchTheme('sunset')">Sunset</button>
+        <button class="velin-btn velin-btn--sm velin-btn--outline" onclick="switchTheme('nordic')">Nordic</button>
+        <button class="velin-btn velin-btn--sm velin-btn--outline" onclick="switchTheme('retro')">Retro</button>
+        <button class="velin-btn velin-btn--sm velin-btn--outline" onclick="switchTheme('corporate')">Corporate</button>
+        <button class="velin-btn velin-btn--sm velin-btn--outline" onclick="switchTheme('pastel')">Pastel</button>
+        <button class="velin-btn velin-btn--sm velin-btn--outline" onclick="switchTheme('midnight')">Midnight</button>
+        <button class="velin-btn velin-btn--sm velin-btn--outline" onclick="switchTheme('forest')">Forest</button>
+        <button class="velin-btn velin-btn--sm velin-btn--outline" onclick="switchTheme('dark')">Dark Mode</button>
+      </div>
+
+      <div id="theme-preview" style="padding:var(--velin-space-6);border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);margin-block:var(--velin-space-4);transition:all 300ms ease;">
+        <p id="theme-name" style="font-weight:var(--velin-weight-bold);margin-block-end:var(--velin-space-3);font-size:var(--velin-text-lg);">Active: Default</p>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--velin-space-2);margin-block-end:var(--velin-space-4);">
+          <button class="velin-btn velin-btn--primary">Primary</button>
+          <button class="velin-btn velin-btn--secondary">Secondary</button>
+          <button class="velin-btn velin-btn--outline">Outline</button>
+          <button class="velin-btn velin-btn--ghost">Ghost</button>
+          <button class="velin-btn velin-btn--danger">Danger</button>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--velin-space-2);margin-block-end:var(--velin-space-4);">
+          <span class="velin-badge velin-badge--primary">Badge</span>
+          <span class="velin-badge velin-badge--secondary">Badge</span>
+          <span class="velin-badge velin-badge--success">Success</span>
+          <span class="velin-badge velin-badge--warning">Warning</span>
+          <span class="velin-badge velin-badge--danger">Danger</span>
+        </div>
+        <article class="velin-card" style="max-inline-size:20rem;">
+          <div class="velin-card__body">
+            <h3 class="velin-card__title">Preview Card</h3>
+            <p class="velin-card__text">See how this card looks with each theme applied.</p>
+          </div>
+          <div class="velin-card__footer">
+            <button class="velin-btn velin-btn--ghost velin-btn--sm">Cancel</button>
+            <button class="velin-btn velin-btn--primary velin-btn--sm">Save</button>
+          </div>
+        </article>
+        <div style="margin-block-start:var(--velin-space-4);">
+          <label style="display:block;margin-block-end:var(--velin-space-2);">Sample Input</label>
+          <input type="text" class="velin-input" placeholder="Type something..." style="max-inline-size:20rem;">
+        </div>
+        <div class="velin-alert velin-alert--info" role="alert" style="margin-block-start:var(--velin-space-4);">
+          <div class="velin-alert__content">
+            <p class="velin-alert__title">Info Alert</p>
+            <p>Themes affect all components -- buttons, cards, inputs, badges, alerts, and more.</p>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const themeLinks = {};
+        const themes = ['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
+
+        themes.forEach(t => {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = `../dist/themes/${t}.min.css`;
+          document.head.appendChild(link);
+          themeLinks[t] = link;
+        });
+
+        function switchTheme(name) {
+          const html = document.documentElement;
+          if (!name) {
+            html.removeAttribute('data-velin-theme');
+            document.getElementById('theme-name').textContent = 'Active: Default';
+          } else {
+            html.setAttribute('data-velin-theme', name);
+            document.getElementById('theme-name').textContent = 'Active: ' + name.charAt(0).toUpperCase() + name.slice(1);
+          }
+          document.querySelectorAll('#theme-picker .velin-btn').forEach(btn => {
+            btn.classList.remove('velin-btn--primary');
+            btn.classList.add('velin-btn--outline');
+          });
+          const clicked = event?.target;
+          if (clicked) {
+            clicked.classList.add('velin-btn--primary');
+            clicked.classList.remove('velin-btn--outline');
+          }
+        }
+      </script>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Applying a Theme</h3>
+      <p>Set the <code class="velin-doc-inline-code">data-velin-theme</code> attribute on <code class="velin-doc-inline-code">&lt;html&gt;</code> or any container element:</p>
+      <pre class="velin-doc-code">&lt;!-- Apply globally --&gt;
+&lt;html lang="en" data-velin-theme="ocean"&gt;
+
+&lt;!-- Or scope to a section --&gt;
+&lt;section data-velin-theme="neon"&gt;
+  &lt;button class="velin-btn velin-btn--primary"&gt;Neon Button&lt;/button&gt;
+&lt;/section&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Loading Theme CSS</h3>
+      <p>Theme presets are separate CSS files (~1.7 KB each). Include only the ones you need after the main stylesheet:</p>
+      <pre class="velin-doc-code">&lt;link rel="stylesheet" href="https://unpkg.com/velinstyle@latest/dist/velinstyle.min.css"&gt;
+
+&lt;!-- Pick your theme(s) --&gt;
+&lt;link rel="stylesheet" href="https://unpkg.com/velinstyle@latest/dist/themes/ocean.min.css"&gt;
+&lt;link rel="stylesheet" href="https://unpkg.com/velinstyle@latest/dist/themes/neon.min.css"&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Switching Themes with JavaScript</h3>
+      <pre class="velin-doc-code">// Switch to the ocean theme
+document.documentElement.setAttribute("data-velin-theme", "ocean");
+
+// Reset to default
+document.documentElement.removeAttribute("data-velin-theme");</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Custom Tokens</h3>
+      <p>You can also override design tokens directly without a preset:</p>
+      <pre class="velin-doc-code">:root {
+  --velin-color-primary: oklch(55% 0.25 270);
+  --velin-radius-md: 0.75rem;
+  --velin-font-sans: "Inter", system-ui, sans-serif;
+}</pre>
+    </section>
+
+    <!-- 5. Using Web Components -->
+    <section id="web-components" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">5. Using Web Components</h2>
+      <p class="velin-doc-lead">VelinStyle includes accessible, interactive web components for common UI patterns — modals, tabs, accordions, toasts, and dropdowns.</p>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-3);">Setup</h3>
+      <p>Load the components script (if you haven't already):</p>
+      <pre class="velin-doc-code">&lt;script type="module"
+        src="https://unpkg.com/velinstyle@latest/dist/velinstyle-components.min.js"&gt;
+&lt;/script&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Modal</h3>
+      <p>Focus-trapping dialog with Escape-to-close.</p>
+      <div class="velin-doc-demo">
+        <button class="velin-btn velin-btn--primary" onclick="document.getElementById('gs-modal').open()">Open Modal</button>
+      </div>
+      <velin-modal id="gs-modal" title="Welcome!">
+        <p>This modal traps focus automatically. Press <kbd>Escape</kbd> or click outside to close.</p>
+        <div slot="footer">
+          <button class="velin-btn velin-btn--ghost" onclick="document.getElementById('gs-modal').close()">Close</button>
+          <button class="velin-btn velin-btn--primary" onclick="document.getElementById('gs-modal').close()">Got it</button>
+        </div>
+      </velin-modal>
+      <pre class="velin-doc-code">&lt;button class="velin-btn velin-btn--primary"
+        onclick="document.getElementById('my-modal').open()"&gt;
+  Open Modal
+&lt;/button&gt;
+
+&lt;velin-modal id="my-modal" title="Dialog Title"&gt;
+  &lt;p&gt;Your content here.&lt;/p&gt;
+  &lt;div slot="footer"&gt;
+    &lt;button class="velin-btn velin-btn--ghost"
+            onclick="document.getElementById('my-modal').close()"&gt;Cancel&lt;/button&gt;
+    &lt;button class="velin-btn velin-btn--primary"
+            onclick="document.getElementById('my-modal').close()"&gt;Confirm&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/velin-modal&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Tabs</h3>
+      <p>Keyboard-navigable tabbed interface with roving tabindex.</p>
+      <velin-tabs>
+        <button slot="tab" aria-selected="true">HTML</button>
+        <button slot="tab">CSS</button>
+        <button slot="tab">JS</button>
+        <div slot="panel"><p>Structure your content with semantic HTML and VelinStyle utility classes.</p></div>
+        <div slot="panel"><p>Style with design tokens and component classes — no utility-class overload.</p></div>
+        <div slot="panel"><p>Enhance with web components for modals, dropdowns, and more.</p></div>
+      </velin-tabs>
+      <pre class="velin-doc-code">&lt;velin-tabs&gt;
+  &lt;button slot="tab" aria-selected="true"&gt;Tab 1&lt;/button&gt;
+  &lt;button slot="tab"&gt;Tab 2&lt;/button&gt;
+
+  &lt;div slot="panel"&gt;&lt;p&gt;Panel 1 content.&lt;/p&gt;&lt;/div&gt;
+  &lt;div slot="panel"&gt;&lt;p&gt;Panel 2 content.&lt;/p&gt;&lt;/div&gt;
+&lt;/velin-tabs&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Accordion</h3>
+      <p>Collapsible sections with optional exclusive (one-at-a-time) mode.</p>
+      <pre class="velin-doc-code">&lt;velin-accordion exclusive&gt;
+  &lt;details&gt;
+    &lt;summary&gt;Section 1&lt;/summary&gt;
+    &lt;div&gt;&lt;p&gt;Content for section 1.&lt;/p&gt;&lt;/div&gt;
+  &lt;/details&gt;
+  &lt;details&gt;
+    &lt;summary&gt;Section 2&lt;/summary&gt;
+    &lt;div&gt;&lt;p&gt;Content for section 2.&lt;/p&gt;&lt;/div&gt;
+  &lt;/details&gt;
+&lt;/velin-accordion&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Toast Notifications</h3>
+      <div class="velin-doc-demo">
+        <button class="velin-btn velin-btn--primary velin-btn--sm" onclick="document.getElementById('gs-toaster').show({message:'Saved successfully!',type:'success'})">Success</button>
+        <button class="velin-btn velin-btn--outline velin-btn--sm" onclick="document.getElementById('gs-toaster').show({message:'Check your input.',type:'warning'})">Warning</button>
+        <button class="velin-btn velin-btn--danger velin-btn--sm" onclick="document.getElementById('gs-toaster').show({message:'Something went wrong.',type:'danger'})">Error</button>
+      </div>
+      <velin-toast id="gs-toaster"></velin-toast>
+      <pre class="velin-doc-code">&lt;velin-toast id="toaster"&gt;&lt;/velin-toast&gt;
+
+&lt;script&gt;
+  document.getElementById("toaster").show({
+    message: "Saved successfully!",
+    type: "success"   // "success" | "warning" | "danger" | "info"
+  });
+&lt;/script&gt;</pre>
+    </section>
+
+    <!-- 6. Dark Mode -->
+    <section id="dark-mode" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">6. Dark Mode Setup</h2>
+      <p class="velin-doc-lead">VelinStyle has full dark mode support built in. Activate it with a single attribute — all tokens adapt automatically.</p>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-3);">Manual Toggle</h3>
+      <p>Set <code class="velin-doc-inline-code">data-velin-theme="dark"</code> on the <code class="velin-doc-inline-code">&lt;html&gt;</code> element:</p>
+      <pre class="velin-doc-code">&lt;html lang="en" data-velin-theme="dark"&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">JavaScript Toggle</h3>
+      <p>Build a toggle button that switches between light and dark:</p>
+      <pre class="velin-doc-code">&lt;button class="velin-btn velin-btn--ghost" id="theme-toggle"&gt;
+  Toggle Dark Mode
+&lt;/button&gt;
+
+&lt;script&gt;
+  const toggle = document.getElementById("theme-toggle");
+  toggle.addEventListener("click", () =&gt; {
+    const html = document.documentElement;
+    const isDark = html.getAttribute("data-velin-theme") === "dark";
+    if (isDark) {
+      html.removeAttribute("data-velin-theme");
+    } else {
+      html.setAttribute("data-velin-theme", "dark");
+    }
+  });
+&lt;/script&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Respecting System Preference</h3>
+      <p>Auto-detect the user's OS preference and persist their choice:</p>
+      <pre class="velin-doc-code">&lt;script&gt;
+  (function () {
+    const stored = localStorage.getItem("velin-theme");
+    const prefersDark = matchMedia("(prefers-color-scheme: dark)").matches;
+
+    if (stored) {
+      document.documentElement.setAttribute("data-velin-theme", stored);
+    } else if (prefersDark) {
+      document.documentElement.setAttribute("data-velin-theme", "dark");
+    }
+  })();
+
+  function setTheme(theme) {
+    if (theme) {
+      document.documentElement.setAttribute("data-velin-theme", theme);
+      localStorage.setItem("velin-theme", theme);
+    } else {
+      document.documentElement.removeAttribute("data-velin-theme");
+      localStorage.removeItem("velin-theme");
+    }
+  }
+&lt;/script&gt;</pre>
+
+      <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">Live Preview</h3>
+      <p>Click the buttons below to test dark mode on this page:</p>
+      <div class="velin-doc-demo">
+        <button class="velin-btn velin-btn--outline" onclick="document.documentElement.removeAttribute('data-velin-theme')">Light Mode</button>
+        <button class="velin-btn velin-btn--primary" onclick="document.documentElement.setAttribute('data-velin-theme','dark')">Dark Mode</button>
+      </div>
+
+      <div class="velin-alert velin-alert--info" role="alert" style="margin-block-start:var(--velin-space-4);">
+        <div class="velin-alert__content">
+          <p class="velin-alert__title">How it works</p>
+          <p>VelinStyle uses OKLCH color tokens that automatically remap in dark mode. You don't need to write separate dark styles — every component adapts through CSS custom properties.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next Steps -->
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Next Steps</h2>
+      <p class="velin-doc-lead">You're all set. Explore the rest of the documentation to go deeper.</p>
+      <div class="velin-grid velin-grid--auto-fit" style="margin-block-start:var(--velin-space-4);">
+        <a href="tokens.html" class="velin-card" style="text-decoration:none;color:inherit;">
+          <div class="velin-card__body">
+            <h3 class="velin-card__title">Design Tokens</h3>
+            <p class="velin-card__text">Explore colors, spacing, typography, and all the CSS custom properties you can override.</p>
+          </div>
+        </a>
+        <a href="components.html" class="velin-card" style="text-decoration:none;color:inherit;">
+          <div class="velin-card__body">
+            <h3 class="velin-card__title">Web Components</h3>
+            <p class="velin-card__text">Interactive components like modals, tabs, accordions, toasts, and dropdowns.</p>
+          </div>
+        </a>
+        <a href="themes.html" class="velin-card" style="text-decoration:none;color:inherit;">
+          <div class="velin-card__body">
+            <h3 class="velin-card__title">Themes</h3>
+            <p class="velin-card__text">Preview and apply 13 built-in theme presets — from Neon to Nordic, Corporate to Forest.</p>
+          </div>
+        </a>
+        <a href="a11y.html" class="velin-card" style="text-decoration:none;color:inherit;">
+          <div class="velin-card__body">
+            <h3 class="velin-card__title">Accessibility</h3>
+            <p class="velin-card__text">Learn about the accessibility features baked into every VelinStyle component.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="velin-doc-footer">
+    <div class="velin-doc-footer__inner">
+      <p>VelinStyle v0.6.1</p>
+      <div style="display:flex;gap:var(--velin-space-3);">
+        <a href="https://github.com/SkyliteDesign/velinstyle">GitHub</a>
+        <a href="https://github.com/SkyliteDesign/velinstyle/blob/main/LICENSE">MIT License</a>
+      </div>
+    </div>
+  </footer>
+<!-- Theme Picker Widget -->
+<div style="position:fixed;bottom:1rem;right:1rem;z-index:1050;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;" id="themePicker">
+  <div id="themePanel" style="display:none;background:var(--velin-color-surface-bright,#fff);border:1px solid var(--velin-color-border,#dee2e6);border-radius:.75rem;padding:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:20rem;">
+    <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
+  </div>
+  <button onclick="document.getElementById('themePanel').style.display=document.getElementById('themePanel').style.display==='none'?'block':'none'" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+</div>
+<script>
+(function(){
+  var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
+  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='../dist/themes/'+t+'.min.css';document.head.appendChild(l);});
+  var names=['Default'].concat(themes).concat(['dark']);
+  var vals=[''].concat(themes).concat(['dark']);
+  var grid=document.getElementById('themeGrid');
+  names.forEach(function(n,i){
+    var b=document.createElement('button');
+    b.textContent=n.charAt(0).toUpperCase()+n.slice(1);
+    b.style.cssText='padding:.3rem .65rem;border:1px solid var(--velin-color-border,#dee2e6);border-radius:1rem;background:var(--velin-color-surface-dim,#f5f6f8);color:var(--velin-color-text,#212529);font-size:.75rem;cursor:pointer;white-space:nowrap;';
+    b.addEventListener('click',function(){
+      if(vals[i]){document.documentElement.setAttribute('data-velin-theme',vals[i]);}
+      else{document.documentElement.removeAttribute('data-velin-theme');}
+      grid.querySelectorAll('button').forEach(function(x){x.style.background='var(--velin-color-surface-dim,#f5f6f8)';x.style.color='var(--velin-color-text,#212529)';});
+      b.style.background='var(--velin-color-primary,#2563eb)';b.style.color='#fff';
+    });
+    grid.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Components - VelinStyle</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <script src="../dist/velinstyle-components.iife.js"></script>
+  <style>
+    .section { padding: var(--velin-space-12) 0; }
+    .section + .section { border-block-start: 1px solid var(--velin-color-border); }
+    .demo-code {
+      background: var(--velin-color-surface-dim);
+      padding: var(--velin-space-4);
+      border-radius: var(--velin-radius-md);
+      font-family: var(--velin-font-mono);
+      font-size: var(--velin-text-sm);
+      overflow-x: auto;
+      border: 1px solid var(--velin-color-border);
+      margin-block: var(--velin-space-4);
+    }
+    .api-table { width: 100%; border-collapse: collapse; margin-block: var(--velin-space-4); font-size: var(--velin-text-sm); }
+    .api-table th, .api-table td { padding: var(--velin-space-2) var(--velin-space-3); border: 1px solid var(--velin-color-border); text-align: left; }
+    .api-table th { background: var(--velin-color-surface-dim); font-weight: 600; }
+    .api-table code { background: var(--velin-color-surface-dim); padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.9em; }
+    .demo-box { padding: var(--velin-space-4); border: 1px solid var(--velin-color-border); border-radius: var(--velin-radius-md); margin-block: var(--velin-space-4); }
+    h3.api-heading { font-size: var(--velin-text-base); margin-block: var(--velin-space-4) var(--velin-space-2); color: var(--velin-color-text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .placeholder-img { width: 300px; height: 200px; background: var(--velin-color-primary-subtle, #dbeafe); display: flex; align-items: center; justify-content: center; border-radius: var(--velin-radius-md); color: var(--velin-color-primary); font-weight: 600; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="index.html" class="velin-nav__brand">VelinStyle</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="guides/index.html" class="velin-nav__link">Integration</a></li>
+      <li><a href="layout.html" class="velin-nav__link">Layout</a></li>
+      <li><a href="components.html" class="velin-nav__link" aria-current="page">Components</a></li>
+      <li><a href="css-components.html" class="velin-nav__link">CSS Components</a></li>
+      <li><a href="forms.html" class="velin-nav__link">Forms</a></li>
+      <li><a href="utilities.html" class="velin-nav__link">Utilities</a></li>
+      <li><a href="tokens.html" class="velin-nav__link">Tokens</a></li>
+      <li><a href="themes.html" class="velin-nav__link">Themes</a></li>
+      <li><a href="icons.html" class="velin-nav__link">Icons</a></li>
+      <li><a href="a11y.html" class="velin-nav__link">A11y</a></li>
+      <li><a href="security.html" class="velin-nav__link">Security</a></li>
+    </ul>
+  </nav>
+<div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+  <strong>Full documentation at <a href="https://velinstyle.info/docs/getting-started/introduction.html">velinstyle.info</a></strong>
+</div>
+
+  <main id="main" class="velin-container">
+    <h1 class="velin-text-4xl velin-font-bold" style="margin-block: var(--velin-space-8)">Web Components</h1>
+    <p class="velin-text-muted velin-mbe-8">22 interactive Web Components with full keyboard support, ARIA attributes, and XSS-safe rendering.</p>
+
+    <!-- ============ 1. Modal ============ -->
+    <section class="section" id="modal">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-modal</h2>
+      <p class="velin-text-muted velin-mbe-4">Accessible modal dialog with focus trapping and Escape to close.</p>
+      <div class="demo-box">
+        <button class="velin-btn velin-btn--primary" onclick="document.getElementById('demo-modal').open()">Open Modal</button>
+        <velin-modal id="demo-modal" title="Example Modal">
+          <p>This modal traps focus. Press Tab to cycle, Escape to close.</p>
+          <div slot="footer">
+            <button class="velin-btn velin-btn--ghost" onclick="document.getElementById('demo-modal').close()">Cancel</button>
+            <button class="velin-btn velin-btn--primary" onclick="document.getElementById('demo-modal').close()">Confirm</button>
+          </div>
+        </velin-modal>
+      </div>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td><code>title</code></td><td>string</td><td><code>""</code></td><td>Modal heading text</td></tr>
+        <tr><td><code>open</code></td><td>boolean</td><td><code>false</code></td><td>Show/hide the modal (reflected)</td></tr>
+      </table>
+      <h3 class="api-heading">Methods</h3>
+      <table class="api-table"><tr><th>Name</th><th>Description</th></tr>
+        <tr><td><code>open()</code></td><td>Opens the modal, traps focus</td></tr>
+        <tr><td><code>close()</code></td><td>Closes the modal, restores focus</td></tr>
+      </table>
+      <h3 class="api-heading">Events</h3>
+      <table class="api-table"><tr><th>Name</th><th>Detail</th></tr>
+        <tr><td><code>velin-close</code></td><td>Fired when modal is closed</td></tr>
+      </table>
+      <h3 class="api-heading">Slots</h3>
+      <table class="api-table"><tr><th>Name</th><th>Description</th></tr>
+        <tr><td>(default)</td><td>Modal body content</td></tr>
+        <tr><td><code>footer</code></td><td>Footer area (action buttons)</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 2. Tabs ============ -->
+    <section class="section" id="tabs">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-tabs</h2>
+      <p class="velin-text-muted velin-mbe-4">Tabbed interface with roving tabindex and arrow key navigation.</p>
+      <div class="demo-box">
+        <velin-tabs>
+          <button slot="tab" aria-selected="true">Overview</button>
+          <button slot="tab">Features</button>
+          <button slot="tab">API</button>
+          <div slot="panel"><p>VelinStyle tabs use native roving tabindex. Arrow keys navigate between tabs.</p></div>
+          <div slot="panel"><ul style="list-style:disc;padding-inline-start:1.5rem"><li>Keyboard navigation</li><li>Automatic ARIA</li><li>Panel show/hide</li></ul></div>
+          <div slot="panel"><p>Listen to <code>velin-tab-change</code> for tab switch events.</p></div>
+        </velin-tabs>
+      </div>
+      <h3 class="api-heading">Events</h3>
+      <table class="api-table"><tr><th>Name</th><th>Detail</th></tr>
+        <tr><td><code>velin-tab-change</code></td><td><code>{ tab, index }</code></td></tr>
+      </table>
+      <h3 class="api-heading">Slots</h3>
+      <table class="api-table"><tr><th>Name</th><th>Description</th></tr>
+        <tr><td><code>tab</code></td><td>Tab buttons (set <code>aria-selected="true"</code> for default)</td></tr>
+        <tr><td><code>panel</code></td><td>Tab panel content (matched by order)</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 3. Accordion ============ -->
+    <section class="section" id="accordion">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-accordion</h2>
+      <p class="velin-text-muted velin-mbe-4">Native <code>&lt;details&gt;</code> with optional exclusive mode. Arrow keys navigate between items.</p>
+      <div class="demo-box">
+        <velin-accordion exclusive>
+          <details><summary>What is VelinStyle?</summary><div style="padding:var(--velin-space-4)"><p>An accessibility-first CSS framework.</p></div></details>
+          <details><summary>How do I install it?</summary><div style="padding:var(--velin-space-4)"><pre class="demo-code">npm install velinstyle</pre></div></details>
+          <details><summary>Can I customize it?</summary><div style="padding:var(--velin-space-4)"><p>Yes! Override CSS custom properties or use theme presets.</p></div></details>
+        </velin-accordion>
+      </div>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td><code>exclusive</code></td><td>boolean</td><td><code>false</code></td><td>Only one item open at a time</td></tr>
+      </table>
+      <h3 class="api-heading">Keyboard</h3>
+      <table class="api-table"><tr><th>Key</th><th>Action</th></tr>
+        <tr><td>ArrowUp/Down</td><td>Navigate between summaries</td></tr>
+        <tr><td>Home / End</td><td>Jump to first/last item</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 4. Toast ============ -->
+    <section class="section" id="toast">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-toast</h2>
+      <p class="velin-text-muted velin-mbe-4">Notification toasts with <code>aria-live</code> region.</p>
+      <div class="demo-box">
+        <div class="velin-flex velin-flex--gap-3">
+          <button class="velin-btn velin-btn--primary" onclick="document.getElementById('toaster').show({message:'Operation successful!',type:'success'})">Success</button>
+          <button class="velin-btn velin-btn--outline" onclick="document.getElementById('toaster').show({message:'Please check your input.',type:'warning'})">Warning</button>
+          <button class="velin-btn velin-btn--danger" onclick="document.getElementById('toaster').show({message:'Something went wrong.',type:'danger'})">Error</button>
+          <button class="velin-btn" onclick="document.getElementById('toaster').show({message:'New update available.',type:'info',duration:0})">Info (sticky)</button>
+        </div>
+      </div>
+      <velin-toast id="toaster"></velin-toast>
+      <h3 class="api-heading">Methods</h3>
+      <table class="api-table"><tr><th>Name</th><th>Parameters</th><th>Description</th></tr>
+        <tr><td><code>show(options)</code></td><td><code>{ message, type, duration }</code></td><td>Show a toast. Types: <code>success</code>, <code>warning</code>, <code>danger</code>, <code>info</code>. Duration in ms (0 = sticky).</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 5. Dropdown ============ -->
+    <section class="section" id="dropdown">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-dropdown</h2>
+      <p class="velin-text-muted velin-mbe-4">Dropdown menu with keyboard navigation and outside-click closing.</p>
+      <div class="demo-box">
+        <velin-dropdown>
+          <button slot="trigger" class="velin-btn velin-btn--outline">Options</button>
+          <button role="menuitem" onclick="alert('Edit clicked')">Edit</button>
+          <button role="menuitem" onclick="alert('Duplicate clicked')">Duplicate</button>
+          <button role="menuitem" onclick="alert('Delete clicked')">Delete</button>
+        </velin-dropdown>
+      </div>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td><code>open</code></td><td>boolean</td><td><code>false</code></td><td>Toggle menu visibility</td></tr>
+        <tr><td><code>align</code></td><td>string</td><td><code>"start"</code></td><td>Menu alignment: <code>start</code> or <code>end</code></td></tr>
+      </table>
+      <h3 class="api-heading">Methods</h3>
+      <table class="api-table"><tr><th>Name</th><th>Description</th></tr>
+        <tr><td><code>open()</code></td><td>Open the dropdown</td></tr>
+        <tr><td><code>close()</code></td><td>Close the dropdown</td></tr>
+        <tr><td><code>toggle()</code></td><td>Toggle open/close</td></tr>
+      </table>
+      <h3 class="api-heading">Slots</h3>
+      <table class="api-table"><tr><th>Name</th><th>Description</th></tr>
+        <tr><td><code>trigger</code></td><td>Button that opens the menu</td></tr>
+        <tr><td>(default)</td><td>Menu items (use <code>role="menuitem"</code>)</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 6. Drawer ============ -->
+    <section class="section" id="drawer">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-drawer</h2>
+      <p class="velin-text-muted velin-mbe-4">Slide-in panel with focus trapping. Supports all 4 sides.</p>
+      <div class="demo-box">
+        <div class="velin-flex velin-flex--gap-3">
+          <button class="velin-btn velin-btn--primary" onclick="document.getElementById('demo-drawer-start').open()">Open Left</button>
+          <button class="velin-btn velin-btn--outline" onclick="document.getElementById('demo-drawer-end').open()">Open Right</button>
+        </div>
+        <velin-drawer id="demo-drawer-start" title="Navigation" side="start">
+          <ul style="list-style:none;padding:0"><li style="padding:var(--velin-space-2) 0"><a href="#">Home</a></li><li style="padding:var(--velin-space-2) 0"><a href="#">About</a></li><li style="padding:var(--velin-space-2) 0"><a href="#">Contact</a></li></ul>
+        </velin-drawer>
+        <velin-drawer id="demo-drawer-end" title="Settings" side="end">
+          <p>Settings panel content goes here.</p>
+        </velin-drawer>
+      </div>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td><code>title</code></td><td>string</td><td><code>""</code></td><td>Drawer heading</td></tr>
+        <tr><td><code>side</code></td><td>string</td><td><code>"start"</code></td><td>Position: <code>start</code>, <code>end</code>, <code>top</code>, <code>bottom</code></td></tr>
+        <tr><td><code>open</code></td><td>boolean</td><td><code>false</code></td><td>Show/hide (reflected)</td></tr>
+      </table>
+      <h3 class="api-heading">Methods</h3>
+      <table class="api-table"><tr><th>Name</th><th>Description</th></tr>
+        <tr><td><code>open()</code></td><td>Open the drawer</td></tr>
+        <tr><td><code>close()</code></td><td>Close the drawer</td></tr>
+      </table>
+      <h3 class="api-heading">Events</h3>
+      <table class="api-table"><tr><th>Name</th><th>Detail</th></tr>
+        <tr><td><code>velin-close</code></td><td>Fired on close</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 7. Popover ============ -->
+    <section class="section" id="popover">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-popover</h2>
+      <p class="velin-text-muted velin-mbe-4">Popover with click, hover, or focus trigger. Auto role (tooltip/dialog).</p>
+      <div class="demo-box">
+        <div class="velin-flex velin-flex--gap-3" style="flex-wrap:wrap">
+          <velin-popover placement="bottom" title="Click Popover">
+            <button slot="trigger" class="velin-btn velin-btn--primary">Click me</button>
+            <p>This popover opens on click. Press Escape to close.</p>
+          </velin-popover>
+          <velin-popover placement="top" trigger="hover" title="Hover Popover">
+            <button slot="trigger" class="velin-btn velin-btn--outline">Hover me</button>
+            <p>This popover opens on hover/focus.</p>
+          </velin-popover>
+        </div>
+      </div>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td><code>placement</code></td><td>string</td><td><code>"bottom"</code></td><td><code>top</code>, <code>bottom</code>, <code>start</code>, <code>end</code></td></tr>
+        <tr><td><code>trigger</code></td><td>string</td><td><code>"click"</code></td><td><code>click</code>, <code>hover</code>, <code>focus</code></td></tr>
+        <tr><td><code>title</code></td><td>string</td><td><code>""</code></td><td>Popover heading (optional)</td></tr>
+      </table>
+      <h3 class="api-heading">Methods</h3>
+      <table class="api-table"><tr><th>Name</th><th>Description</th></tr>
+        <tr><td><code>open()</code> / <code>close()</code> / <code>toggle()</code></td><td>Programmatic control</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 8. Tooltip ============ -->
+    <section class="section" id="tooltip">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-tooltip-wc</h2>
+      <p class="velin-text-muted velin-mbe-4">Pure-CSS tooltip with auto-flip and keyboard support.</p>
+      <div class="demo-box">
+        <div class="velin-flex velin-flex--gap-3">
+          <velin-tooltip-wc content="Tooltip on top" placement="top"><button class="velin-btn">Top</button></velin-tooltip-wc>
+          <velin-tooltip-wc content="Tooltip on bottom" placement="bottom"><button class="velin-btn">Bottom</button></velin-tooltip-wc>
+          <velin-tooltip-wc content="Tooltip on left" placement="start"><button class="velin-btn">Start</button></velin-tooltip-wc>
+          <velin-tooltip-wc content="Tooltip on right" placement="end"><button class="velin-btn">End</button></velin-tooltip-wc>
+        </div>
+      </div>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td><code>content</code></td><td>string</td><td><code>""</code></td><td>Tooltip text (XSS-safe)</td></tr>
+        <tr><td><code>placement</code></td><td>string</td><td><code>"top"</code></td><td><code>top</code>, <code>bottom</code>, <code>start</code>, <code>end</code></td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 9. Collapse ============ -->
+    <section class="section" id="collapse">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-collapse</h2>
+      <p class="velin-text-muted velin-mbe-4">Expandable/collapsible content section.</p>
+      <div class="demo-box">
+        <velin-collapse id="demo-collapse">
+          <button slot="trigger" class="velin-btn velin-btn--outline">Toggle Content</button>
+          <div style="padding:var(--velin-space-4);background:var(--velin-color-surface-dim);border-radius:var(--velin-radius-md);margin-top:var(--velin-space-2)">
+            <p>This content can be expanded and collapsed. Supports <code>open()</code>, <code>close()</code>, and <code>toggle()</code> methods.</p>
+          </div>
+        </velin-collapse>
+      </div>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td><code>open</code></td><td>boolean</td><td><code>false</code></td><td>Expanded state (reflected)</td></tr>
+      </table>
+      <h3 class="api-heading">Methods</h3>
+      <table class="api-table"><tr><th>Name</th><th>Description</th></tr>
+        <tr><td><code>open()</code> / <code>close()</code> / <code>toggle()</code></td><td>Programmatic expand/collapse</td></tr>
+      </table>
+      <h3 class="api-heading">Events</h3>
+      <table class="api-table"><tr><th>Name</th><th>Detail</th></tr>
+        <tr><td><code>velin-open</code></td><td>Fired when expanded</td></tr>
+        <tr><td><code>velin-close</code></td><td>Fired when collapsed</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 10. Carousel ============ -->
+    <section class="section" id="carousel">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-carousel</h2>
+      <p class="velin-text-muted velin-mbe-4">Image/content carousel with keyboard navigation and autoplay.</p>
+      <div class="demo-box">
+        <velin-carousel autoplay interval="4000" style="max-width:500px">
+          <div class="placeholder-img" style="background:#dbeafe">Slide 1</div>
+          <div class="placeholder-img" style="background:#dcfce7">Slide 2</div>
+          <div class="placeholder-img" style="background:#fef3c7">Slide 3</div>
+        </velin-carousel>
+      </div>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td><code>autoplay</code></td><td>boolean</td><td><code>false</code></td><td>Auto-advance slides</td></tr>
+        <tr><td><code>interval</code></td><td>number</td><td><code>5000</code></td><td>Autoplay interval in ms</td></tr>
+      </table>
+      <h3 class="api-heading">Keyboard</h3>
+      <table class="api-table"><tr><th>Key</th><th>Action</th></tr>
+        <tr><td>ArrowLeft / ArrowRight</td><td>Previous / Next slide</td></tr>
+        <tr><td>Home / End</td><td>First / Last slide</td></tr>
+      </table>
+      <h3 class="api-heading">Events</h3>
+      <table class="api-table"><tr><th>Name</th><th>Detail</th></tr>
+        <tr><td><code>velin-slide-change</code></td><td><code>{ index }</code></td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 11. Lightbox ============ -->
+    <section class="section" id="lightbox">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-lightbox</h2>
+      <p class="velin-text-muted velin-mbe-4">Fullscreen image/video gallery with focus trapping and keyboard navigation.</p>
+      <div class="demo-box">
+        <velin-lightbox>
+          <div class="placeholder-img" data-velin-lightbox="" style="width:150px;height:100px;font-size:.8rem">Image 1</div>
+          <div class="placeholder-img" data-velin-lightbox="" style="width:150px;height:100px;font-size:.8rem;background:#dcfce7">Image 2</div>
+          <div class="placeholder-img" data-velin-lightbox="" style="width:150px;height:100px;font-size:.8rem;background:#fef3c7">Image 3</div>
+        </velin-lightbox>
+        <p class="velin-text-muted" style="margin-top:var(--velin-space-2);font-size:var(--velin-text-sm)">Click any image to open lightbox. Arrow keys to navigate.</p>
+      </div>
+      <h3 class="api-heading">Methods</h3>
+      <table class="api-table"><tr><th>Name</th><th>Description</th></tr>
+        <tr><td><code>open(index)</code></td><td>Open lightbox at slide index</td></tr>
+        <tr><td><code>close()</code></td><td>Close lightbox</td></tr>
+      </table>
+      <h3 class="api-heading">Events</h3>
+      <table class="api-table"><tr><th>Name</th><th>Detail</th></tr>
+        <tr><td><code>velin-close</code></td><td>Fired on close</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 12. Dialog ============ -->
+    <section class="section" id="dialog">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-dialog</h2>
+      <p class="velin-text-muted velin-mbe-4">Native <code>&lt;dialog&gt;</code> wrapper for alert, confirm, and prompt. Returns a Promise.</p>
+      <div class="demo-box">
+        <div class="velin-flex velin-flex--gap-3">
+          <button class="velin-btn velin-btn--primary" onclick="document.getElementById('demo-dialog').alert('File saved successfully!',{title:'Saved'})">Alert</button>
+          <button class="velin-btn velin-btn--outline" onclick="document.getElementById('demo-dialog').confirm('Delete this item?',{title:'Confirm',danger:true}).then(r=>r&amp;&amp;document.getElementById('toaster').show({message:'Item deleted',type:'success'}))">Confirm</button>
+          <button class="velin-btn" onclick="document.getElementById('demo-dialog').prompt('Enter your name:',{title:'Input',placeholder:'Name'}).then(r=>r!==null&amp;&amp;document.getElementById('toaster').show({message:'Hello '+r,type:'info'}))">Prompt</button>
+        </div>
+      </div>
+      <velin-dialog id="demo-dialog"></velin-dialog>
+      <h3 class="api-heading">Methods</h3>
+      <table class="api-table"><tr><th>Name</th><th>Parameters</th><th>Returns</th></tr>
+        <tr><td><code>alert(message, opts)</code></td><td><code>{ title, confirmText }</code></td><td><code>Promise&lt;true&gt;</code></td></tr>
+        <tr><td><code>confirm(message, opts)</code></td><td><code>{ title, confirmText, cancelText, danger }</code></td><td><code>Promise&lt;boolean&gt;</code></td></tr>
+        <tr><td><code>prompt(message, opts)</code></td><td><code>{ title, confirmText, cancelText, placeholder, defaultValue }</code></td><td><code>Promise&lt;string|null&gt;</code></td></tr>
+      </table>
+      <h3 class="api-heading">Events</h3>
+      <table class="api-table"><tr><th>Name</th><th>Detail</th></tr>
+        <tr><td><code>velin-dialog-close</code></td><td><code>{ value }</code></td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 13. Stepper ============ -->
+    <section class="section" id="stepper">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-stepper-wc</h2>
+      <p class="velin-text-muted velin-mbe-4">Multi-step progress indicator with panel management.</p>
+      <div class="demo-box">
+        <velin-stepper-wc id="demo-stepper" labels="Account, Profile, Review" active="0">
+          <div><p>Step 1: Create your account.</p></div>
+          <div><p>Step 2: Fill in your profile details.</p></div>
+          <div><p>Step 3: Review and confirm everything.</p></div>
+        </velin-stepper-wc>
+        <div class="velin-flex velin-flex--gap-3" style="margin-top:var(--velin-space-4)">
+          <button class="velin-btn velin-btn--ghost" onclick="document.getElementById('demo-stepper').prev()">Previous</button>
+          <button class="velin-btn velin-btn--primary" onclick="document.getElementById('demo-stepper').next()">Next</button>
+        </div>
+      </div>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td><code>labels</code></td><td>string</td><td><code>""</code></td><td>Comma-separated step labels</td></tr>
+        <tr><td><code>active</code></td><td>number</td><td><code>0</code></td><td>Current active step (0-based)</td></tr>
+      </table>
+      <h3 class="api-heading">Methods</h3>
+      <table class="api-table"><tr><th>Name</th><th>Description</th></tr>
+        <tr><td><code>next()</code></td><td>Go to next step</td></tr>
+        <tr><td><code>prev()</code></td><td>Go to previous step</td></tr>
+        <tr><td><code>goTo(index)</code></td><td>Jump to specific step</td></tr>
+      </table>
+      <h3 class="api-heading">Events</h3>
+      <table class="api-table"><tr><th>Name</th><th>Detail</th></tr>
+        <tr><td><code>velin-step-change</code></td><td><code>{ step }</code></td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 14. Countdown ============ -->
+    <section class="section" id="countdown">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-countdown</h2>
+      <p class="velin-text-muted velin-mbe-4">Live countdown timer with <code>role="timer"</code> and <code>aria-live</code>.</p>
+      <div class="demo-box" id="countdown-box"></div>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Description</th></tr>
+        <tr><td><code>datetime</code></td><td>string</td><td>ISO date string target (e.g. <code>2027-01-01T00:00:00</code>)</td></tr>
+        <tr><td><code>show-days</code></td><td>string</td><td>Set <code>"false"</code> to hide days segment</td></tr>
+        <tr><td><code>label-days</code></td><td>string</td><td>Custom label for days (default: "Days")</td></tr>
+        <tr><td><code>label-hours</code></td><td>string</td><td>Custom label for hours</td></tr>
+        <tr><td><code>label-minutes</code></td><td>string</td><td>Custom label for minutes</td></tr>
+        <tr><td><code>label-seconds</code></td><td>string</td><td>Custom label for seconds</td></tr>
+        <tr><td><code>size</code></td><td>string</td><td><code>sm</code> or <code>lg</code> for size variants</td></tr>
+      </table>
+      <h3 class="api-heading">Events</h3>
+      <table class="api-table"><tr><th>Name</th><th>Detail</th></tr>
+        <tr><td><code>velin-countdown-end</code></td><td>Fired when countdown reaches zero</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 15. Progress Ring ============ -->
+    <section class="section" id="progress-ring">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-progress-ring</h2>
+      <p class="velin-text-muted velin-mbe-4">Circular progress indicator with <code>role="progressbar"</code>.</p>
+      <div class="demo-box">
+        <div class="velin-flex velin-flex--gap-3" style="align-items:center">
+          <velin-progress-ring id="demo-ring" value="65" size="80" stroke="6" color="var(--velin-color-primary)"></velin-progress-ring>
+          <div>
+            <label for="ring-slider">Value: <span id="ring-val">65</span>%</label><br>
+            <input type="range" id="ring-slider" min="0" max="100" value="65" oninput="document.getElementById('demo-ring').setAttribute('value',this.value);document.getElementById('ring-val').textContent=this.value">
+          </div>
+        </div>
+      </div>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td><code>value</code></td><td>number</td><td><code>0</code></td><td>Progress value (0-100)</td></tr>
+        <tr><td><code>size</code></td><td>number</td><td><code>60</code></td><td>Diameter in pixels</td></tr>
+        <tr><td><code>stroke</code></td><td>number</td><td><code>4</code></td><td>Stroke width</td></tr>
+        <tr><td><code>color</code></td><td>string</td><td>primary</td><td>CSS color for the progress arc</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 16. Copy ============ -->
+    <section class="section" id="copy">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-copy</h2>
+      <p class="velin-text-muted velin-mbe-4">One-click copy-to-clipboard button.</p>
+      <div class="demo-box">
+        <velin-copy value="npm install velinstyle"></velin-copy>
+        <p class="velin-text-muted" style="margin-top:var(--velin-space-2);font-size:var(--velin-text-sm)">Click to copy <code>npm install velinstyle</code> to clipboard.</p>
+      </div>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Description</th></tr>
+        <tr><td><code>value</code></td><td>string</td><td>Text to copy to clipboard</td></tr>
+      </table>
+      <h3 class="api-heading">Events</h3>
+      <table class="api-table"><tr><th>Name</th><th>Detail</th></tr>
+        <tr><td><code>velin-copied</code></td><td>Fired after successful copy</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 17. Theme Toggle ============ -->
+    <section class="section" id="theme-toggle">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-theme-toggle</h2>
+      <p class="velin-text-muted velin-mbe-4">Light/dark mode toggle with <code>localStorage</code> persistence. Click the button to switch between light and dark mode.</p>
+      <div class="demo-box">
+        <div class="velin-flex velin-flex--gap-3" style="align-items:center">
+          <velin-theme-toggle id="demo-theme-toggle"></velin-theme-toggle>
+          <span id="theme-status" class="velin-text-muted" style="font-size:var(--velin-text-sm)">Current: light</span>
+        </div>
+      </div>
+      <script>
+        document.getElementById('demo-theme-toggle').addEventListener('velin-theme-change', function(e) {
+          document.getElementById('theme-status').textContent = 'Current: ' + e.detail.theme;
+        });
+      </script>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td><code>target</code></td><td>string</td><td><code>"html"</code></td><td>CSS selector for element to toggle <code>data-velin-theme</code> on</td></tr>
+      </table>
+      <h3 class="api-heading">Events</h3>
+      <table class="api-table"><tr><th>Name</th><th>Detail</th></tr>
+        <tr><td><code>velin-theme-change</code></td><td><code>{ theme, dark }</code></td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 18. Scroll Top ============ -->
+    <section class="section" id="scroll-top">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-scroll-top</h2>
+      <p class="velin-text-muted velin-mbe-4">Floating back-to-top button that appears on scroll.</p>
+      <div class="demo-box">
+        <p>Scroll down the page to see the button appear in the bottom-right corner.</p>
+        <velin-scroll-top style="--velin-scroll-top-bottom: 5rem"></velin-scroll-top>
+      </div>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td><code>threshold</code></td><td>number</td><td><code>300</code></td><td>Scroll distance (px) before button appears</td></tr>
+      </table>
+      <h3 class="api-heading">Custom Properties</h3>
+      <table class="api-table"><tr><th>Property</th><th>Default</th><th>Description</th></tr>
+        <tr><td><code>--velin-scroll-top-bottom</code></td><td><code>1rem</code></td><td>Bottom offset</td></tr>
+        <tr><td><code>--velin-scroll-top-end</code></td><td><code>1rem</code></td><td>Inline-end offset</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 19. Scrollspy ============ -->
+    <section class="section" id="scrollspy">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-scrollspy</h2>
+      <p class="velin-text-muted velin-mbe-4">Highlights navigation links based on scroll position.</p>
+      <div class="demo-box">
+        <p>Wrap a <code>&lt;nav&gt;</code> with links that match section IDs. As user scrolls, active link gets highlighted.</p>
+        <pre class="demo-code">&lt;velin-scrollspy&gt;
+  &lt;nav&gt;
+    &lt;a href="#section-1"&gt;Section 1&lt;/a&gt;
+    &lt;a href="#section-2"&gt;Section 2&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/velin-scrollspy&gt;</pre>
+      </div>
+      <h3 class="api-heading">Events</h3>
+      <table class="api-table"><tr><th>Name</th><th>Detail</th></tr>
+        <tr><td><code>velin-spy-change</code></td><td><code>{ id, link }</code> of the currently active section</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 20. Persist ============ -->
+    <section class="section" id="persist">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-persist</h2>
+      <p class="velin-text-muted velin-mbe-4">Auto-saves form data to localStorage. Survives page reload. Password/file fields excluded for security.</p>
+      <div class="demo-box">
+        <velin-persist key="demo-form">
+          <form onsubmit="event.preventDefault();document.getElementById('toaster').show({message:'Form submitted! Data cleared.',type:'success'})">
+            <div style="display:flex;flex-direction:column;gap:var(--velin-space-3);max-width:20rem">
+              <input type="text" name="username" class="velin-input" placeholder="Username">
+              <input type="email" name="email" class="velin-input" placeholder="Email">
+              <textarea name="notes" class="velin-input" placeholder="Notes" rows="2"></textarea>
+              <div class="velin-flex velin-flex--gap-3">
+                <button type="submit" class="velin-btn velin-btn--primary">Submit</button>
+                <button type="reset" class="velin-btn velin-btn--ghost">Reset</button>
+              </div>
+            </div>
+          </form>
+        </velin-persist>
+        <p class="velin-text-muted" style="margin-top:var(--velin-space-2);font-size:var(--velin-text-sm)">Type something, reload the page -- your input persists!</p>
+      </div>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td><code>key</code></td><td>string</td><td><code>"default"</code></td><td>Storage key identifier (alphanumeric, max 64 chars)</td></tr>
+        <tr><td><code>storage</code></td><td>string</td><td><code>"local"</code></td><td><code>"local"</code> or <code>"session"</code> for sessionStorage</td></tr>
+      </table>
+      <h3 class="api-heading">Methods</h3>
+      <table class="api-table"><tr><th>Name</th><th>Description</th></tr>
+        <tr><td><code>clear()</code></td><td>Remove saved data from storage</td></tr>
+      </table>
+      <h3 class="api-heading">Events</h3>
+      <table class="api-table"><tr><th>Name</th><th>Detail</th></tr>
+        <tr><td><code>velin-persist-restore</code></td><td><code>{ data }</code> -- Fired after data is restored from storage</td></tr>
+        <tr><td><code>velin-persist-clear</code></td><td>Fired after data is cleared</td></tr>
+        <tr><td><code>velin-persist-error</code></td><td><code>{ error: "quota" }</code> -- Storage quota exceeded</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 21. Haptic ============ -->
+    <section class="section" id="haptic">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-haptic (Utility)</h2>
+      <p class="velin-text-muted velin-mbe-4">Device vibration feedback for buttons and interactions. Works on supported mobile devices.</p>
+      <div class="demo-box">
+        <div class="velin-flex velin-flex--gap-3">
+          <button class="velin-btn velin-btn--primary" haptic="tap">Tap</button>
+          <button class="velin-btn velin-btn--outline" haptic="double-tap">Double Tap</button>
+          <button class="velin-btn velin-btn--danger" haptic="error">Error</button>
+          <button class="velin-btn" haptic="success">Success</button>
+        </div>
+        <p class="velin-text-muted" style="margin-top:var(--velin-space-2);font-size:var(--velin-text-sm)">Add <code>haptic="pattern"</code> to any element. Patterns: tap, double-tap, error, success, warning.</p>
+      </div>
+      <h3 class="api-heading">HTML API</h3>
+      <table class="api-table"><tr><th>Attribute</th><th>Values</th><th>Description</th></tr>
+        <tr><td><code>haptic</code></td><td><code>tap</code>, <code>double-tap</code>, <code>error</code>, <code>success</code>, <code>warning</code></td><td>Vibration pattern triggered on click</td></tr>
+      </table>
+      <h3 class="api-heading">JS API</h3>
+      <table class="api-table"><tr><th>Export</th><th>Description</th></tr>
+        <tr><td><code>vibrate(pattern)</code></td><td>Trigger vibration with a duration array</td></tr>
+        <tr><td><code>applyHaptic(el, pattern)</code></td><td>Bind haptic click handler to element</td></tr>
+        <tr><td><code>VelinHapticObserver</code></td><td>MutationObserver that auto-applies <code>[haptic]</code> attribute</td></tr>
+      </table>
+    </section>
+
+    <!-- ============ 22. Icon ============ -->
+    <section class="section" id="icon">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-icon</h2>
+      <p class="velin-text-muted velin-mbe-4">SVG icon component with multi-provider support. See <a href="icons.html">Icons page</a> for the full icon gallery.</p>
+      <div class="demo-box">
+        <pre class="demo-code">&lt;!-- Local sprite (default) --&gt;
+&lt;velin-icon name="check" size="24"&gt;&lt;/velin-icon&gt;
+
+&lt;!-- External provider (CDN) --&gt;
+&lt;velin-icon name="heart" provider="lucide"&gt;&lt;/velin-icon&gt;
+&lt;velin-icon name="academic-cap" provider="heroicons"&gt;&lt;/velin-icon&gt;
+
+&lt;!-- Custom sprite --&gt;
+&lt;velin-icon name="custom" sprite="my-icons.svg"&gt;&lt;/velin-icon&gt;</pre>
+      </div>
+      <h3 class="api-heading">Attributes</h3>
+      <table class="api-table"><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td><code>name</code></td><td>string</td><td>required</td><td>Icon name</td></tr>
+        <tr><td><code>size</code></td><td>number</td><td><code>24</code></td><td>Width and height in pixels</td></tr>
+        <tr><td><code>label</code></td><td>string</td><td><code>""</code></td><td>Accessible label (sets <code>role="img"</code> + <code>aria-label</code>)</td></tr>
+        <tr><td><code>sprite</code></td><td>string</td><td><code>"velin-icons.svg"</code></td><td>Custom sprite path</td></tr>
+        <tr><td><code>provider</code></td><td>string</td><td><code>""</code></td><td>External icon provider: <code>lucide</code>, <code>heroicons</code>, <code>bootstrap</code>, <code>material</code>, <code>fontawesome</code>, <code>tabler</code></td></tr>
+      </table>
+      <h3 class="api-heading">Providers</h3>
+      <table class="api-table"><tr><th>Provider</th><th>Icons</th><th>License</th></tr>
+        <tr><td><code>lucide</code></td><td>Lucide (Feather fork)</td><td>ISC</td></tr>
+        <tr><td><code>heroicons</code></td><td>Heroicons (Tailwind Labs)</td><td>MIT</td></tr>
+        <tr><td><code>bootstrap</code></td><td>Bootstrap Icons</td><td>MIT</td></tr>
+        <tr><td><code>material</code></td><td>Material Symbols (Google)</td><td>Apache 2.0</td></tr>
+        <tr><td><code>fontawesome</code></td><td>Font Awesome (Free)</td><td>CC BY 4.0</td></tr>
+        <tr><td><code>tabler</code></td><td>Tabler Icons</td><td>MIT</td></tr>
+      </table>
+      <h3 class="api-heading">JS API</h3>
+      <table class="api-table"><tr><th>Method</th><th>Description</th></tr>
+        <tr><td><code>VelinIcon.registerProvider(name, urlTemplate)</code></td><td>Register a custom icon provider at runtime. Use <code>{name}</code> as placeholder.</td></tr>
+        <tr><td><code>VelinIcon.providers</code></td><td>Returns array of registered provider keys</td></tr>
+      </table>
+      <h3 class="api-heading">CLI</h3>
+      <table class="api-table"><tr><th>Command</th><th>Description</th></tr>
+        <tr><td><code>velinstyle icons list</code></td><td>Show available providers and installed icons</td></tr>
+        <tr><td><code>velinstyle icons add &lt;provider&gt; --icons name1,name2</code></td><td>Download icons from a provider into the local sprite</td></tr>
+        <tr><td><code>velinstyle icons remove &lt;provider&gt;</code></td><td>Remove all icons from a provider</td></tr>
+        <tr><td><code>velinstyle icons build</code></td><td>Rebuild the SVG sprite</td></tr>
+      </table>
+    </section>
+
+  </main>
+
+  <footer style="padding-block:var(--velin-space-6);border-block-start:1px solid var(--velin-color-border);color:var(--velin-color-text-muted);font-size:var(--velin-text-sm);">
+    <div class="velin-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--velin-space-4);">
+      <p>VelinStyle v0.6.1</p>
+      <div style="display:flex;gap:var(--velin-space-3);">
+        <a href="https://github.com/SkyliteDesign/velinstyle">GitHub</a>
+        <a href="https://github.com/SkyliteDesign/velinstyle/blob/main/LICENSE">MIT License</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var futureDate = new Date(Date.now() + 86400000 * 3 + 3600000 * 5 + 60000 * 30);
+    document.getElementById('countdown-box').innerHTML = '<velin-countdown datetime="' + futureDate.toISOString() + '" label-days="Tage" label-hours="Std" label-minutes="Min" label-seconds="Sek"></velin-countdown>';
+  </script>
+
+<!-- Theme Picker Widget -->
+<div style="position:fixed;bottom:1rem;right:1rem;z-index:1050;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;" id="themePicker">
+  <div id="themePanel" style="display:none;background:var(--velin-color-surface-bright,#fff);border:1px solid var(--velin-color-border,#dee2e6);border-radius:.75rem;padding:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:20rem;">
+    <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
+  </div>
+  <button onclick="document.getElementById('themePanel').style.display=document.getElementById('themePanel').style.display==='none'?'block':'none'" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+</div>
+<script>
+(function(){
+  var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
+  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='../dist/themes/'+t+'.min.css';document.head.appendChild(l);});
+  var names=['Default'].concat(themes).concat(['dark']);
+  var vals=[''].concat(themes).concat(['dark']);
+  var grid=document.getElementById('themeGrid');
+  names.forEach(function(n,i){
+    var b=document.createElement('button');
+    b.textContent=n.charAt(0).toUpperCase()+n.slice(1);
+    b.style.cssText='padding:.3rem .65rem;border:1px solid var(--velin-color-border,#dee2e6);border-radius:1rem;background:var(--velin-color-surface-dim,#f5f6f8);color:var(--velin-color-text,#212529);font-size:.75rem;cursor:pointer;white-space:nowrap;';
+    b.addEventListener('click',function(){
+      if(vals[i]){document.documentElement.setAttribute('data-velin-theme',vals[i]);}
+      else{document.documentElement.removeAttribute('data-velin-theme');}
+      grid.querySelectorAll('button').forEach(function(x){x.style.background='var(--velin-color-surface-dim,#f5f6f8)';x.style.color='var(--velin-color-text,#212529)';});
+      b.style.background='var(--velin-color-primary,#2563eb)';b.style.color='#fff';
+    });
+    grid.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

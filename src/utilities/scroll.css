@@ -1,0 +1,33 @@
+@layer utilities {
+  /* Scroll behavior */
+  .velin-scroll-smooth { scroll-behavior: smooth; }
+  .velin-scroll-auto { scroll-behavior: auto; }
+
+  /* Scroll snap container */
+  .velin-snap-x { scroll-snap-type: x mandatory; overflow-x: auto; }
+  .velin-snap-y { scroll-snap-type: y mandatory; overflow-y: auto; }
+  .velin-snap-x-proximity { scroll-snap-type: x proximity; overflow-x: auto; }
+
+  /* Scroll snap alignment */
+  .velin-snap-start { scroll-snap-align: start; }
+  .velin-snap-center { scroll-snap-align: center; }
+  .velin-snap-end { scroll-snap-align: end; }
+  .velin-snap-none { scroll-snap-align: none; }
+
+  /* Scroll snap stop */
+  .velin-snap-always { scroll-snap-stop: always; }
+
+  /* Scroll padding (for fixed headers) */
+  .velin-scroll-pt-4 { scroll-padding-block-start: var(--velin-space-4); }
+  .velin-scroll-pt-8 { scroll-padding-block-start: var(--velin-space-8); }
+  .velin-scroll-pt-16 { scroll-padding-block-start: 4rem; }
+
+  /* Overscroll behavior */
+  .velin-overscroll-contain { overscroll-behavior: contain; }
+  .velin-overscroll-none { overscroll-behavior: none; }
+  .velin-overscroll-auto { overscroll-behavior: auto; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .velin-scroll-smooth { scroll-behavior: auto; }
+  }
+}

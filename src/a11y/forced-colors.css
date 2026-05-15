@@ -1,0 +1,38 @@
+@layer a11y {
+  @media (forced-colors: active) {
+    .velin-btn,
+    .velin-badge,
+    .velin-alert {
+      border: 1px solid ButtonText;
+    }
+
+    .velin-btn--primary,
+    .velin-btn--secondary {
+      forced-color-adjust: none;
+      background-color: ButtonFace;
+      color: ButtonText;
+      border: 2px solid ButtonText;
+    }
+
+    .velin-btn--primary:hover,
+    .velin-btn--secondary:hover {
+      background-color: Highlight;
+      color: HighlightText;
+      border-color: Highlight;
+    }
+
+    .velin-input,
+    .velin-select,
+    .velin-textarea {
+      border: 1px solid ButtonText;
+    }
+
+    .velin-card {
+      border: 1px solid CanvasText;
+    }
+
+    .velin-nav__link[aria-current="page"] {
+      border-block-end: 2px solid Highlight;
+    }
+  }
+}

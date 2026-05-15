@@ -1,0 +1,102 @@
+@layer components {
+  .velin-list-group {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--velin-color-border);
+    border-radius: var(--velin-radius-lg);
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .velin-list-group__item {
+    display: flex;
+    align-items: center;
+    gap: var(--velin-space-3);
+    padding: var(--velin-space-3) var(--velin-space-4);
+    color: var(--velin-color-text);
+    background: var(--velin-color-surface-bright);
+    border-block-end: 1px solid var(--velin-color-border);
+    font-size: var(--velin-text-base);
+    min-block-size: 2.75rem;
+    text-decoration: none;
+  }
+
+  .velin-list-group__item:last-child {
+    border-block-end: none;
+  }
+
+  .velin-list-group__item--active {
+    color: var(--velin-color-on-primary);
+    background: var(--velin-color-primary);
+    border-color: var(--velin-color-primary);
+  }
+
+  .velin-list-group__item--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* Action items (clickable) */
+  .velin-list-group--action .velin-list-group__item {
+    cursor: pointer;
+    transition: var(--velin-transition-colors);
+  }
+
+  .velin-list-group--action .velin-list-group__item:hover {
+    background: var(--velin-color-surface-dim);
+  }
+
+  .velin-list-group--action .velin-list-group__item:active {
+    background: var(--velin-color-primary-subtle);
+  }
+
+  /* Flush (no outer border/radius) */
+  .velin-list-group--flush {
+    border: none;
+    border-radius: 0;
+  }
+
+  /* Color variants */
+  .velin-list-group__item--primary {
+    color: var(--velin-color-primary);
+    background: var(--velin-color-primary-subtle);
+  }
+
+  .velin-list-group__item--success {
+    color: var(--velin-color-success);
+    background: var(--velin-color-success-subtle);
+  }
+
+  .velin-list-group__item--warning {
+    color: var(--velin-color-warning);
+    background: var(--velin-color-warning-subtle);
+  }
+
+  .velin-list-group__item--danger {
+    color: var(--velin-color-danger);
+    background: var(--velin-color-danger-subtle);
+  }
+
+  /* Sub-elements */
+  .velin-list-group__icon {
+    flex-shrink: 0;
+    color: var(--velin-color-text-muted);
+  }
+
+  .velin-list-group__badge {
+    margin-inline-start: auto;
+  }
+
+  .velin-list-group__text {
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  .velin-list-group__desc {
+    font-size: var(--velin-text-sm);
+    color: var(--velin-color-text-muted);
+    margin-block-start: var(--velin-space-1);
+  }
+}

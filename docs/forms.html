@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forms - VelinStyle</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="docs.css">
+  <script src="../dist/velinstyle-components.iife.js"></script>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="index.html" class="velin-nav__brand">VelinStyle</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="guides/index.html" class="velin-nav__link">Integration</a></li>
+      <li><a href="layout.html" class="velin-nav__link">Layout</a></li>
+      <li><a href="components.html" class="velin-nav__link">Components</a></li>
+      <li><a href="css-components.html" class="velin-nav__link">CSS Components</a></li>
+      <li><a href="forms.html" class="velin-nav__link" aria-current="page">Forms</a></li>
+      <li><a href="utilities.html" class="velin-nav__link">Utilities</a></li>
+      <li><a href="tokens.html" class="velin-nav__link">Tokens</a></li>
+      <li><a href="themes.html" class="velin-nav__link">Themes</a></li>
+      <li><a href="icons.html" class="velin-nav__link">Icons</a></li>
+      <li><a href="a11y.html" class="velin-nav__link">A11y</a></li>
+      <li><a href="security.html" class="velin-nav__link">Security</a></li>
+      <li><a href="migration.html" class="velin-nav__link">Migration</a></li>
+    </ul>
+  </nav>
+<div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+  <strong>Full documentation available at <a href="https://velinstyle.info/docs/getting-started/introduction.html">velinstyle.info</a></strong> — This is the quick reference. Visit the full docs for 80+ pages with live examples, API tables, and guides.
+</div>
+
+  <main id="main" class="velin-container">
+    <div class="velin-doc-layout">
+
+      <!-- Sidebar -->
+      <aside class="velin-doc-sidebar" aria-label="Page sections">
+        <p class="velin-doc-sidebar__title">On this page</p>
+        <ul class="velin-doc-sidebar__list">
+          <li><a href="#text-input" class="velin-doc-sidebar__link">Text Input</a></li>
+          <li><a href="#select" class="velin-doc-sidebar__link">Select</a></li>
+          <li><a href="#textarea" class="velin-doc-sidebar__link">Textarea</a></li>
+          <li><a href="#checkbox" class="velin-doc-sidebar__link">Checkbox</a></li>
+          <li><a href="#radio" class="velin-doc-sidebar__link">Radio</a></li>
+          <li><a href="#switch" class="velin-doc-sidebar__link">Switch / Toggle</a></li>
+          <li><a href="#range" class="velin-doc-sidebar__link">Range</a></li>
+          <li><a href="#file-upload" class="velin-doc-sidebar__link">File Upload</a></li>
+          <li><a href="#labels" class="velin-doc-sidebar__link">Labels</a></li>
+          <li><a href="#help-text" class="velin-doc-sidebar__link">Help Text</a></li>
+          <li><a href="#error-states" class="velin-doc-sidebar__link">Error States</a></li>
+          <li><a href="#validation-css" class="velin-doc-sidebar__link">Validation CSS</a></li>
+          <li><a href="#field-wrapper" class="velin-doc-sidebar__link">Field Wrapper</a></li>
+          <li><a href="#contact-form" class="velin-doc-sidebar__link">Contact Form</a></li>
+        </ul>
+      </aside>
+
+      <!-- Content -->
+      <div>
+        <h1 class="velin-doc-title">Forms</h1>
+        <p class="velin-doc-lead">Accessible, consistent form controls built with modern CSS. Every control meets WCAG 2.2 touch targets (44&times;44px minimum) and works across all themes.</p>
+
+        <!-- 1. Text Input -->
+        <section id="text-input" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Text Input</h2>
+          <p>Use <code class="velin-doc-inline-code">.velin-input</code> on any <code class="velin-doc-inline-code">&lt;input&gt;</code> element. Supports all HTML5 types including <code class="velin-doc-inline-code">text</code>, <code class="velin-doc-inline-code">email</code>, <code class="velin-doc-inline-code">password</code>, <code class="velin-doc-inline-code">number</code>, <code class="velin-doc-inline-code">search</code>, and <code class="velin-doc-inline-code">url</code>.</p>
+
+          <div class="velin-doc-demo velin-doc-demo--col">
+            <input type="text" class="velin-input" placeholder="Default text input" style="max-inline-size:24rem">
+            <input type="email" class="velin-input" placeholder="Email input" style="max-inline-size:24rem">
+            <input type="password" class="velin-input" placeholder="Password input" style="max-inline-size:24rem">
+            <input type="text" class="velin-input" placeholder="Disabled input" disabled style="max-inline-size:24rem">
+          </div>
+
+<pre class="velin-doc-code">&lt;input type="text" class="velin-input" placeholder="Default text input"&gt;
+&lt;input type="email" class="velin-input" placeholder="Email input"&gt;
+&lt;input type="password" class="velin-input" placeholder="Password input"&gt;
+&lt;input type="text" class="velin-input" placeholder="Disabled input" disabled&gt;</pre>
+        </section>
+
+        <!-- 2. Select -->
+        <section id="select" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Select</h2>
+          <p>Apply <code class="velin-doc-inline-code">.velin-select</code> for a styled native dropdown with a custom chevron indicator.</p>
+
+          <div class="velin-doc-demo velin-doc-demo--col">
+            <select class="velin-select" style="max-inline-size:24rem">
+              <option value="" disabled selected>Choose an option&hellip;</option>
+              <option value="1">Option One</option>
+              <option value="2">Option Two</option>
+              <option value="3">Option Three</option>
+            </select>
+            <select class="velin-select" disabled style="max-inline-size:24rem">
+              <option>Disabled select</option>
+            </select>
+          </div>
+
+<pre class="velin-doc-code">&lt;select class="velin-select"&gt;
+  &lt;option value="" disabled selected&gt;Choose an option&amp;hellip;&lt;/option&gt;
+  &lt;option value="1"&gt;Option One&lt;/option&gt;
+  &lt;option value="2"&gt;Option Two&lt;/option&gt;
+  &lt;option value="3"&gt;Option Three&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;select class="velin-select" disabled&gt;
+  &lt;option&gt;Disabled select&lt;/option&gt;
+&lt;/select&gt;</pre>
+        </section>
+
+        <!-- 3. Textarea -->
+        <section id="textarea" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Textarea</h2>
+          <p>Use <code class="velin-doc-inline-code">.velin-textarea</code> for multi-line text fields. The textarea is vertically resizable by default with a minimum height of 6rem.</p>
+
+          <div class="velin-doc-demo velin-doc-demo--col">
+            <textarea class="velin-textarea" placeholder="Write something…" style="max-inline-size:32rem"></textarea>
+            <textarea class="velin-textarea" placeholder="Disabled textarea" disabled style="max-inline-size:32rem"></textarea>
+          </div>
+
+<pre class="velin-doc-code">&lt;textarea class="velin-textarea" placeholder="Write something…"&gt;&lt;/textarea&gt;
+
+&lt;textarea class="velin-textarea" placeholder="Disabled textarea" disabled&gt;&lt;/textarea&gt;</pre>
+        </section>
+
+        <!-- 4. Checkbox -->
+        <section id="checkbox" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Checkbox</h2>
+          <p>Wrap a checkbox in <code class="velin-doc-inline-code">.velin-check</code> with <code class="velin-doc-inline-code">__input</code> and <code class="velin-doc-inline-code">__label</code> elements. The label is the clickable wrapper via the <code class="velin-doc-inline-code">&lt;label&gt;</code> element.</p>
+
+          <div class="velin-doc-demo velin-doc-demo--col">
+            <label class="velin-check">
+              <input type="checkbox" class="velin-check__input">
+              <span class="velin-check__label">Accept terms and conditions</span>
+            </label>
+            <label class="velin-check">
+              <input type="checkbox" class="velin-check__input" checked>
+              <span class="velin-check__label">Checked by default</span>
+            </label>
+            <label class="velin-check">
+              <input type="checkbox" class="velin-check__input" disabled>
+              <span class="velin-check__label">Disabled checkbox</span>
+            </label>
+          </div>
+
+<pre class="velin-doc-code">&lt;label class="velin-check"&gt;
+  &lt;input type="checkbox" class="velin-check__input"&gt;
+  &lt;span class="velin-check__label"&gt;Accept terms and conditions&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;label class="velin-check"&gt;
+  &lt;input type="checkbox" class="velin-check__input" checked&gt;
+  &lt;span class="velin-check__label"&gt;Checked by default&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;label class="velin-check"&gt;
+  &lt;input type="checkbox" class="velin-check__input" disabled&gt;
+  &lt;span class="velin-check__label"&gt;Disabled checkbox&lt;/span&gt;
+&lt;/label&gt;</pre>
+        </section>
+
+        <!-- 5. Radio -->
+        <section id="radio" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Radio</h2>
+          <p>Radio groups use <code class="velin-doc-inline-code">.velin-radio</code> with the same BEM structure as checkboxes. Group them with a shared <code class="velin-doc-inline-code">name</code> attribute.</p>
+
+          <div class="velin-doc-demo velin-doc-demo--col">
+            <fieldset style="border:none;padding:0;margin:0">
+              <legend class="velin-label" style="margin-block-end:var(--velin-space-2)">Select a plan</legend>
+              <label class="velin-radio">
+                <input type="radio" name="plan-demo" class="velin-radio__input" value="free" checked>
+                <span class="velin-radio__label">Free</span>
+              </label>
+              <label class="velin-radio">
+                <input type="radio" name="plan-demo" class="velin-radio__input" value="pro">
+                <span class="velin-radio__label">Pro</span>
+              </label>
+              <label class="velin-radio">
+                <input type="radio" name="plan-demo" class="velin-radio__input" value="enterprise" disabled>
+                <span class="velin-radio__label">Enterprise (disabled)</span>
+              </label>
+            </fieldset>
+          </div>
+
+<pre class="velin-doc-code">&lt;fieldset style="border:none;padding:0;margin:0"&gt;
+  &lt;legend class="velin-label"&gt;Select a plan&lt;/legend&gt;
+
+  &lt;label class="velin-radio"&gt;
+    &lt;input type="radio" name="plan" class="velin-radio__input" value="free" checked&gt;
+    &lt;span class="velin-radio__label"&gt;Free&lt;/span&gt;
+  &lt;/label&gt;
+
+  &lt;label class="velin-radio"&gt;
+    &lt;input type="radio" name="plan" class="velin-radio__input" value="pro"&gt;
+    &lt;span class="velin-radio__label"&gt;Pro&lt;/span&gt;
+  &lt;/label&gt;
+
+  &lt;label class="velin-radio"&gt;
+    &lt;input type="radio" name="plan" class="velin-radio__input" value="enterprise" disabled&gt;
+    &lt;span class="velin-radio__label"&gt;Enterprise (disabled)&lt;/span&gt;
+  &lt;/label&gt;
+&lt;/fieldset&gt;</pre>
+        </section>
+
+        <!-- 6. Switch / Toggle -->
+        <section id="switch" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle velin-doc-new">Switch / Toggle</h2>
+          <p>The <code class="velin-doc-inline-code">.velin-switch</code> uses a hidden checkbox with a custom track and thumb. Available in three sizes: <code class="velin-doc-inline-code">--sm</code>, default, and <code class="velin-doc-inline-code">--lg</code>.</p>
+
+          <div class="velin-doc-demo velin-doc-demo--col">
+            <label class="velin-switch">
+              <input type="checkbox" class="velin-switch__input" role="switch">
+              <span class="velin-switch__track"></span>
+              <span class="velin-switch__label">Notifications</span>
+            </label>
+            <label class="velin-switch">
+              <input type="checkbox" class="velin-switch__input" role="switch" checked>
+              <span class="velin-switch__track"></span>
+              <span class="velin-switch__label">Dark mode (on)</span>
+            </label>
+            <label class="velin-switch">
+              <input type="checkbox" class="velin-switch__input" role="switch" disabled>
+              <span class="velin-switch__track"></span>
+              <span class="velin-switch__label">Disabled</span>
+            </label>
+          </div>
+
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Sizes</h3>
+          <div class="velin-doc-demo">
+            <label class="velin-switch velin-switch--sm">
+              <input type="checkbox" class="velin-switch__input" role="switch" checked>
+              <span class="velin-switch__track"></span>
+              <span class="velin-switch__label">Small</span>
+            </label>
+            <label class="velin-switch">
+              <input type="checkbox" class="velin-switch__input" role="switch" checked>
+              <span class="velin-switch__track"></span>
+              <span class="velin-switch__label">Default</span>
+            </label>
+            <label class="velin-switch velin-switch--lg">
+              <input type="checkbox" class="velin-switch__input" role="switch" checked>
+              <span class="velin-switch__track"></span>
+              <span class="velin-switch__label">Large</span>
+            </label>
+          </div>
+
+<pre class="velin-doc-code">&lt;!-- Default switch --&gt;
+&lt;label class="velin-switch"&gt;
+  &lt;input type="checkbox" class="velin-switch__input" role="switch"&gt;
+  &lt;span class="velin-switch__track"&gt;&lt;/span&gt;
+  &lt;span class="velin-switch__label"&gt;Notifications&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;!-- Checked --&gt;
+&lt;label class="velin-switch"&gt;
+  &lt;input type="checkbox" class="velin-switch__input" role="switch" checked&gt;
+  &lt;span class="velin-switch__track"&gt;&lt;/span&gt;
+  &lt;span class="velin-switch__label"&gt;Dark mode (on)&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;label class="velin-switch"&gt;
+  &lt;input type="checkbox" class="velin-switch__input" role="switch" disabled&gt;
+  &lt;span class="velin-switch__track"&gt;&lt;/span&gt;
+  &lt;span class="velin-switch__label"&gt;Disabled&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;!-- Sizes --&gt;
+&lt;label class="velin-switch velin-switch--sm"&gt;…&lt;/label&gt;
+&lt;label class="velin-switch"&gt;…&lt;/label&gt;
+&lt;label class="velin-switch velin-switch--lg"&gt;…&lt;/label&gt;</pre>
+        </section>
+
+        <!-- 7. Range -->
+        <section id="range" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle velin-doc-new">Range</h2>
+          <p>Apply <code class="velin-doc-inline-code">.velin-range</code> to a range input for a custom-styled slider with accessible focus indicators.</p>
+
+          <div class="velin-doc-demo velin-doc-demo--col">
+            <div class="velin-field" style="max-inline-size:24rem">
+              <label class="velin-label" for="range-demo">Volume</label>
+              <input type="range" id="range-demo" class="velin-range" min="0" max="100" value="60">
+            </div>
+            <div class="velin-field" style="max-inline-size:24rem">
+              <label class="velin-label" for="range-disabled">Brightness (disabled)</label>
+              <input type="range" id="range-disabled" class="velin-range" min="0" max="100" value="40" disabled>
+            </div>
+          </div>
+
+<pre class="velin-doc-code">&lt;div class="velin-field"&gt;
+  &lt;label class="velin-label" for="volume"&gt;Volume&lt;/label&gt;
+  &lt;input type="range" id="volume" class="velin-range" min="0" max="100" value="60"&gt;
+&lt;/div&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;input type="range" class="velin-range" min="0" max="100" value="40" disabled&gt;</pre>
+        </section>
+
+        <!-- 8. File Upload -->
+        <section id="file-upload" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle velin-doc-new">File Upload</h2>
+          <p>The <code class="velin-doc-inline-code">.velin-file</code> creates a drag-and-drop styled upload zone. Use <code class="velin-doc-inline-code">__input</code>, <code class="velin-doc-inline-code">__icon</code>, <code class="velin-doc-inline-code">__label</code>, and <code class="velin-doc-inline-code">__hint</code> for the inner elements. A compact variant is also available.</p>
+
+          <div class="velin-doc-demo velin-doc-demo--col" style="max-inline-size:32rem">
+            <div class="velin-file">
+              <input type="file" class="velin-file__input" aria-label="Upload file">
+              <svg class="velin-file__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="velin-file__label">Drop files here or click to upload</span>
+              <span class="velin-file__hint">PNG, JPG, or PDF up to 10MB</span>
+            </div>
+          </div>
+
+          <h3 style="margin-block:var(--velin-space-6) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Compact variant</h3>
+          <div class="velin-doc-demo" style="max-inline-size:32rem">
+            <div class="velin-file velin-file--compact">
+              <input type="file" class="velin-file__input" aria-label="Upload file">
+              <svg class="velin-file__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="velin-file__label">Choose file</span>
+              <span class="velin-file__hint">Max 10MB</span>
+            </div>
+          </div>
+
+<pre class="velin-doc-code">&lt;!-- Full dropzone --&gt;
+&lt;div class="velin-file"&gt;
+  &lt;input type="file" class="velin-file__input" aria-label="Upload file"&gt;
+  &lt;svg class="velin-file__icon" width="32" height="32" viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" stroke-width="1.5"&gt;
+    &lt;path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/&gt;
+    &lt;polyline points="17 8 12 3 7 8"/&gt;
+    &lt;line x1="12" y1="3" x2="12" y2="15"/&gt;
+  &lt;/svg&gt;
+  &lt;span class="velin-file__label"&gt;Drop files here or click to upload&lt;/span&gt;
+  &lt;span class="velin-file__hint"&gt;PNG, JPG, or PDF up to 10MB&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Compact variant --&gt;
+&lt;div class="velin-file velin-file--compact"&gt;
+  &lt;input type="file" class="velin-file__input" aria-label="Upload file"&gt;
+  &lt;svg class="velin-file__icon" …&gt;…&lt;/svg&gt;
+  &lt;span class="velin-file__label"&gt;Choose file&lt;/span&gt;
+  &lt;span class="velin-file__hint"&gt;Max 10MB&lt;/span&gt;
+&lt;/div&gt;</pre>
+        </section>
+
+        <!-- 9. Labels -->
+        <section id="labels" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Labels</h2>
+          <p>Use <code class="velin-doc-inline-code">.velin-label</code> on <code class="velin-doc-inline-code">&lt;label&gt;</code> elements. Add <code class="velin-doc-inline-code">.velin-label--required</code> to automatically append a red asterisk.</p>
+
+          <div class="velin-doc-demo velin-doc-demo--col" style="max-inline-size:24rem">
+            <div>
+              <label class="velin-label" for="label-demo">Username</label>
+              <input type="text" id="label-demo" class="velin-input" placeholder="johndoe">
+            </div>
+            <div>
+              <label class="velin-label velin-label--required" for="label-req">Email</label>
+              <input type="email" id="label-req" class="velin-input" placeholder="john@example.com" required>
+            </div>
+          </div>
+
+<pre class="velin-doc-code">&lt;label class="velin-label" for="username"&gt;Username&lt;/label&gt;
+&lt;input type="text" id="username" class="velin-input"&gt;
+
+&lt;label class="velin-label velin-label--required" for="email"&gt;Email&lt;/label&gt;
+&lt;input type="email" id="email" class="velin-input" required&gt;</pre>
+        </section>
+
+        <!-- 10. Help Text -->
+        <section id="help-text" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Help Text</h2>
+          <p>Add <code class="velin-doc-inline-code">.velin-field-help</code> below an input to provide contextual guidance. Link it with <code class="velin-doc-inline-code">aria-describedby</code> for accessibility.</p>
+
+          <div class="velin-doc-demo velin-doc-demo--col" style="max-inline-size:24rem">
+            <div class="velin-field">
+              <label class="velin-label" for="help-demo">Password</label>
+              <input type="password" id="help-demo" class="velin-input" aria-describedby="help-demo-hint">
+              <p class="velin-field-help" id="help-demo-hint">Must be at least 8 characters with one number.</p>
+            </div>
+          </div>
+
+<pre class="velin-doc-code">&lt;div class="velin-field"&gt;
+  &lt;label class="velin-label" for="password"&gt;Password&lt;/label&gt;
+  &lt;input type="password" id="password" class="velin-input"
+    aria-describedby="password-hint"&gt;
+  &lt;p class="velin-field-help" id="password-hint"&gt;
+    Must be at least 8 characters with one number.
+  &lt;/p&gt;
+&lt;/div&gt;</pre>
+        </section>
+
+        <!-- 11. Error States -->
+        <section id="error-states" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Error States</h2>
+          <p>Add <code class="velin-doc-inline-code">.velin-input--error</code> (or <code class="velin-doc-inline-code">.velin-select--error</code>, <code class="velin-doc-inline-code">.velin-textarea--error</code>) to mark invalid fields. Pair with <code class="velin-doc-inline-code">.velin-field-error</code> for the error message and <code class="velin-doc-inline-code">aria-invalid="true"</code> for screen readers.</p>
+
+          <div class="velin-doc-demo velin-doc-demo--col" style="max-inline-size:24rem">
+            <div class="velin-field">
+              <label class="velin-label velin-label--required" for="err-input">Email</label>
+              <input type="email" id="err-input" class="velin-input velin-input--error" value="not-an-email" aria-invalid="true" aria-describedby="err-input-msg">
+              <p class="velin-field-error" id="err-input-msg">Please enter a valid email address.</p>
+            </div>
+            <div class="velin-field">
+              <label class="velin-label velin-label--required" for="err-select">Country</label>
+              <select id="err-select" class="velin-select velin-select--error" aria-invalid="true" aria-describedby="err-select-msg">
+                <option value="">Select a country&hellip;</option>
+              </select>
+              <p class="velin-field-error" id="err-select-msg">Please select a country.</p>
+            </div>
+            <div class="velin-field">
+              <label class="velin-label velin-label--required" for="err-ta">Bio</label>
+              <textarea id="err-ta" class="velin-textarea velin-textarea--error" aria-invalid="true" aria-describedby="err-ta-msg"></textarea>
+              <p class="velin-field-error" id="err-ta-msg">Bio is required.</p>
+            </div>
+          </div>
+
+          <h3 style="margin-block:var(--velin-space-6) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Success state</h3>
+          <div class="velin-doc-demo velin-doc-demo--col" style="max-inline-size:24rem">
+            <div class="velin-field">
+              <label class="velin-label" for="ok-input">Username</label>
+              <input type="text" id="ok-input" class="velin-input velin-input--success" value="johndoe">
+            </div>
+          </div>
+
+<pre class="velin-doc-code">&lt;!-- Error state --&gt;
+&lt;div class="velin-field"&gt;
+  &lt;label class="velin-label velin-label--required" for="email"&gt;Email&lt;/label&gt;
+  &lt;input type="email" id="email"
+    class="velin-input velin-input--error"
+    aria-invalid="true"
+    aria-describedby="email-error"&gt;
+  &lt;p class="velin-field-error" id="email-error"&gt;
+    Please enter a valid email address.
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Success state --&gt;
+&lt;input class="velin-input velin-input--success" value="johndoe"&gt;
+
+&lt;!-- Also available for select &amp; textarea --&gt;
+&lt;select class="velin-select velin-select--error"&gt;…&lt;/select&gt;
+&lt;textarea class="velin-textarea velin-textarea--error"&gt;…&lt;/textarea&gt;</pre>
+        </section>
+
+        <section id="validation-css" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Validation CSS (<code class="velin-doc-inline-code">:user-invalid</code>)</h2>
+          <p>Add <code class="velin-doc-inline-code">.velin-form--validated</code> on the <code class="velin-doc-inline-code">&lt;form&gt;</code>. Browsers that support <code class="velin-doc-inline-code">:user-invalid</code> only show error borders after the user has interacted, avoiding an all-red form on first paint. Pair with <code class="velin-doc-inline-code">aria-invalid</code> and <code class="velin-doc-inline-code">aria-describedby</code> for screen readers.</p>
+          <p>Use <code class="velin-doc-inline-code">.velin-field-hint</code> (alias of help styling) or <code class="velin-doc-inline-code">.velin-field-help</code>, <code class="velin-doc-inline-code">.velin-field-error</code>, and optionally <code class="velin-doc-inline-code">.velin-field-error--icon</code> for a leading accent. Dynamic messages: <code class="velin-doc-inline-code">role="status"</code> + <code class="velin-doc-inline-code">aria-live="polite"</code> or <code class="velin-doc-inline-code">role="alert"</code> for urgent errors.</p>
+          <form class="velin-form--validated velin-doc-demo velin-doc-demo--col" style="max-inline-size:24rem" novalidate>
+            <div class="velin-field">
+              <label class="velin-label velin-label--required" for="vc-email">Email</label>
+              <input type="email" id="vc-email" class="velin-input" required placeholder="you@example.com" aria-describedby="vc-email-hint">
+              <p class="velin-field-hint" id="vc-email-hint">We never share your email.</p>
+            </div>
+            <div class="velin-field">
+              <label class="velin-label" for="vc-nick">Nickname</label>
+              <input type="text" id="vc-nick" class="velin-input" minlength="3" placeholder="abc" aria-describedby="vc-live">
+              <div id="vc-live" role="status" aria-live="polite" class="velin-text-sm velin-text-muted" style="min-block-size:1.25rem;"></div>
+            </div>
+            <button type="submit" class="velin-btn velin-btn--primary">Submit (demo)</button>
+          </form>
+<pre class="velin-doc-code">&lt;form class="velin-form--validated" novalidate&gt;
+  &lt;input class="velin-input" required aria-describedby="hint-id"&gt;
+  &lt;p class="velin-field-hint" id="hint-id"&gt;…&lt;/p&gt;
+  &lt;div role="status" aria-live="polite" id="live"&gt;&lt;/div&gt;
+&lt;/form&gt;</pre>
+        </section>
+
+        <!-- 12. Field Wrapper -->
+        <section id="field-wrapper" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Field Wrapper</h2>
+          <p>Use <code class="velin-doc-inline-code">.velin-field</code> to group a label, input, and help/error text. It provides consistent vertical spacing between form rows.</p>
+
+          <div class="velin-doc-demo velin-doc-demo--col" style="max-inline-size:24rem">
+            <div class="velin-field">
+              <label class="velin-label velin-label--required" for="fw-name">Full name</label>
+              <input type="text" id="fw-name" class="velin-input" required>
+              <p class="velin-field-help">As it appears on your ID.</p>
+            </div>
+            <div class="velin-field">
+              <label class="velin-label velin-label--required" for="fw-email">Email</label>
+              <input type="email" id="fw-email" class="velin-input velin-input--error" aria-invalid="true" aria-describedby="fw-email-err" required>
+              <p class="velin-field-error" id="fw-email-err">This email is already in use.</p>
+            </div>
+            <div class="velin-field">
+              <label class="velin-label" for="fw-bio">Bio</label>
+              <textarea id="fw-bio" class="velin-textarea" aria-describedby="fw-bio-hint"></textarea>
+              <p class="velin-field-help" id="fw-bio-hint">Brief description (max 200 characters).</p>
+            </div>
+          </div>
+
+<pre class="velin-doc-code">&lt;div class="velin-field"&gt;
+  &lt;label class="velin-label velin-label--required" for="name"&gt;Full name&lt;/label&gt;
+  &lt;input type="text" id="name" class="velin-input" required&gt;
+  &lt;p class="velin-field-help"&gt;As it appears on your ID.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="velin-field"&gt;
+  &lt;label class="velin-label velin-label--required" for="email"&gt;Email&lt;/label&gt;
+  &lt;input type="email" id="email"
+    class="velin-input velin-input--error"
+    aria-invalid="true"
+    aria-describedby="email-err"
+    required&gt;
+  &lt;p class="velin-field-error" id="email-err"&gt;
+    This email is already in use.
+  &lt;/p&gt;
+&lt;/div&gt;</pre>
+        </section>
+
+        <!-- 13. Contact Form Example -->
+        <section id="contact-form" class="velin-doc-section">
+          <h2 class="velin-doc-subtitle">Complete Contact Form</h2>
+          <p>A full example combining all form controls with proper labels, accessibility attributes, and validation styling.</p>
+
+          <form style="max-inline-size:36rem" novalidate onsubmit="event.preventDefault()">
+            <div class="velin-field">
+              <label class="velin-label velin-label--required" for="cf-name">Full Name</label>
+              <input type="text" id="cf-name" class="velin-input" placeholder="Jane Doe" required aria-describedby="cf-name-help">
+              <p class="velin-field-help" id="cf-name-help">First and last name.</p>
+            </div>
+
+            <div class="velin-field">
+              <label class="velin-label velin-label--required" for="cf-email">Email Address</label>
+              <input type="email" id="cf-email" class="velin-input velin-input--error" value="jane@" aria-invalid="true" aria-describedby="cf-email-err" required>
+              <p class="velin-field-error" id="cf-email-err">Please enter a valid email address.</p>
+            </div>
+
+            <div class="velin-field">
+              <label class="velin-label" for="cf-phone">Phone</label>
+              <input type="tel" id="cf-phone" class="velin-input" placeholder="+1 (555) 000-0000">
+            </div>
+
+            <div class="velin-field">
+              <label class="velin-label velin-label--required" for="cf-subject">Subject</label>
+              <select id="cf-subject" class="velin-select" required>
+                <option value="" disabled selected>Choose a topic&hellip;</option>
+                <option value="general">General Inquiry</option>
+                <option value="support">Technical Support</option>
+                <option value="billing">Billing</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="velin-field">
+              <label class="velin-label velin-label--required" for="cf-message">Message</label>
+              <textarea id="cf-message" class="velin-textarea" placeholder="Tell us how we can help…" required aria-describedby="cf-msg-help"></textarea>
+              <p class="velin-field-help" id="cf-msg-help">Minimum 20 characters.</p>
+            </div>
+
+            <div class="velin-field">
+              <label class="velin-label" for="cf-budget">Budget Range</label>
+              <input type="range" id="cf-budget" class="velin-range" min="0" max="10000" step="500" value="2500">
+              <p class="velin-field-help">Approximate budget in USD.</p>
+            </div>
+
+            <div class="velin-field">
+              <label class="velin-label">Attachment</label>
+              <div class="velin-file velin-file--compact">
+                <input type="file" class="velin-file__input" aria-label="Upload attachment">
+                <svg class="velin-file__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span class="velin-file__label">Attach a file</span>
+                <span class="velin-file__hint">Max 10MB</span>
+              </div>
+            </div>
+
+            <fieldset style="border:none;padding:0;margin:0" class="velin-field">
+              <legend class="velin-label">Preferred contact method</legend>
+              <label class="velin-radio">
+                <input type="radio" name="cf-contact" class="velin-radio__input" value="email" checked>
+                <span class="velin-radio__label">Email</span>
+              </label>
+              <label class="velin-radio">
+                <input type="radio" name="cf-contact" class="velin-radio__input" value="phone">
+                <span class="velin-radio__label">Phone</span>
+              </label>
+            </fieldset>
+
+            <div class="velin-field">
+              <label class="velin-switch">
+                <input type="checkbox" class="velin-switch__input" role="switch">
+                <span class="velin-switch__track"></span>
+                <span class="velin-switch__label">Subscribe to newsletter</span>
+              </label>
+            </div>
+
+            <div class="velin-field">
+              <label class="velin-check">
+                <input type="checkbox" class="velin-check__input" required>
+                <span class="velin-check__label">I agree to the terms and privacy policy</span>
+              </label>
+            </div>
+
+            <button type="submit" class="velin-btn velin-btn--primary" style="margin-block-start:var(--velin-space-4)">Send Message</button>
+          </form>
+
+<pre class="velin-doc-code">&lt;form novalidate&gt;
+  &lt;div class="velin-field"&gt;
+    &lt;label class="velin-label velin-label--required" for="name"&gt;Full Name&lt;/label&gt;
+    &lt;input type="text" id="name" class="velin-input" required
+      aria-describedby="name-help"&gt;
+    &lt;p class="velin-field-help" id="name-help"&gt;First and last name.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class="velin-field"&gt;
+    &lt;label class="velin-label velin-label--required" for="email"&gt;Email&lt;/label&gt;
+    &lt;input type="email" id="email"
+      class="velin-input velin-input--error"
+      aria-invalid="true"
+      aria-describedby="email-err" required&gt;
+    &lt;p class="velin-field-error" id="email-err"&gt;
+      Please enter a valid email address.
+    &lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class="velin-field"&gt;
+    &lt;label class="velin-label" for="phone"&gt;Phone&lt;/label&gt;
+    &lt;input type="tel" id="phone" class="velin-input"&gt;
+  &lt;/div&gt;
+
+  &lt;div class="velin-field"&gt;
+    &lt;label class="velin-label velin-label--required" for="subject"&gt;Subject&lt;/label&gt;
+    &lt;select id="subject" class="velin-select" required&gt;
+      &lt;option value="" disabled selected&gt;Choose a topic…&lt;/option&gt;
+      &lt;option value="general"&gt;General Inquiry&lt;/option&gt;
+      &lt;option value="support"&gt;Technical Support&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+
+  &lt;div class="velin-field"&gt;
+    &lt;label class="velin-label velin-label--required" for="message"&gt;Message&lt;/label&gt;
+    &lt;textarea id="message" class="velin-textarea" required
+      aria-describedby="msg-help"&gt;&lt;/textarea&gt;
+    &lt;p class="velin-field-help" id="msg-help"&gt;Minimum 20 characters.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class="velin-field"&gt;
+    &lt;label class="velin-label" for="budget"&gt;Budget Range&lt;/label&gt;
+    &lt;input type="range" id="budget" class="velin-range"
+      min="0" max="10000" step="500" value="2500"&gt;
+  &lt;/div&gt;
+
+  &lt;div class="velin-field"&gt;
+    &lt;label class="velin-label"&gt;Attachment&lt;/label&gt;
+    &lt;div class="velin-file velin-file--compact"&gt;
+      &lt;input type="file" class="velin-file__input" aria-label="Upload"&gt;
+      &lt;svg class="velin-file__icon" …&gt;…&lt;/svg&gt;
+      &lt;span class="velin-file__label"&gt;Attach a file&lt;/span&gt;
+      &lt;span class="velin-file__hint"&gt;Max 10MB&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;fieldset class="velin-field"&gt;
+    &lt;legend class="velin-label"&gt;Preferred contact method&lt;/legend&gt;
+    &lt;label class="velin-radio"&gt;
+      &lt;input type="radio" name="contact" class="velin-radio__input"
+        value="email" checked&gt;
+      &lt;span class="velin-radio__label"&gt;Email&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label class="velin-radio"&gt;
+      &lt;input type="radio" name="contact" class="velin-radio__input"
+        value="phone"&gt;
+      &lt;span class="velin-radio__label"&gt;Phone&lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/fieldset&gt;
+
+  &lt;div class="velin-field"&gt;
+    &lt;label class="velin-switch"&gt;
+      &lt;input type="checkbox" class="velin-switch__input" role="switch"&gt;
+      &lt;span class="velin-switch__track"&gt;&lt;/span&gt;
+      &lt;span class="velin-switch__label"&gt;Subscribe to newsletter&lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;div class="velin-field"&gt;
+    &lt;label class="velin-check"&gt;
+      &lt;input type="checkbox" class="velin-check__input" required&gt;
+      &lt;span class="velin-check__label"&gt;I agree to the terms&lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;button type="submit" class="velin-btn velin-btn--primary"&gt;
+    Send Message
+  &lt;/button&gt;
+&lt;/form&gt;</pre>
+        </section>
+
+      </div><!-- /content -->
+    </div><!-- /layout -->
+  </main>
+
+  <footer class="velin-doc-footer">
+    <div class="velin-doc-footer__inner">
+      <p>VelinStyle v0.6.1</p>
+      <div style="display:flex;gap:var(--velin-space-3);">
+        <a href="https://github.com/SkyliteDesign/velinstyle">GitHub</a>
+        <a href="https://github.com/SkyliteDesign/velinstyle/blob/main/LICENSE">MIT License</a>
+      </div>
+    </div>
+  </footer>
+<!-- Theme Picker Widget -->
+<div style="position:fixed;bottom:1rem;right:1rem;z-index:1050;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;" id="themePicker">
+  <div id="themePanel" style="display:none;background:var(--velin-color-surface-bright,#fff);border:1px solid var(--velin-color-border,#dee2e6);border-radius:.75rem;padding:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:20rem;">
+    <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
+  </div>
+  <button onclick="document.getElementById('themePanel').style.display=document.getElementById('themePanel').style.display==='none'?'block':'none'" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+</div>
+<script>
+(function(){
+  var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
+  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='../dist/themes/'+t+'.min.css';document.head.appendChild(l);});
+  var names=['Default'].concat(themes).concat(['dark']);
+  var vals=[''].concat(themes).concat(['dark']);
+  var grid=document.getElementById('themeGrid');
+  names.forEach(function(n,i){
+    var b=document.createElement('button');
+    b.textContent=n.charAt(0).toUpperCase()+n.slice(1);
+    b.style.cssText='padding:.3rem .65rem;border:1px solid var(--velin-color-border,#dee2e6);border-radius:1rem;background:var(--velin-color-surface-dim,#f5f6f8);color:var(--velin-color-text,#212529);font-size:.75rem;cursor:pointer;white-space:nowrap;';
+    b.addEventListener('click',function(){
+      if(vals[i]){document.documentElement.setAttribute('data-velin-theme',vals[i]);}
+      else{document.documentElement.removeAttribute('data-velin-theme');}
+      grid.querySelectorAll('button').forEach(function(x){x.style.background='var(--velin-color-surface-dim,#f5f6f8)';x.style.color='var(--velin-color-text,#212529)';});
+      b.style.background='var(--velin-color-primary,#2563eb)';b.style.color='#fff';
+    });
+    grid.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

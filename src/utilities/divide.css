@@ -1,0 +1,25 @@
+@layer utilities {
+  .velin-divide-y > * + * {
+    border-block-start: 1px solid var(--velin-color-border);
+  }
+
+  .velin-divide-x > * + * {
+    border-inline-start: 1px solid var(--velin-color-border);
+  }
+
+  .velin-divide-y-2 > * + * {
+    border-block-start-width: 2px;
+    border-block-start-style: solid;
+    border-block-start-color: var(--velin-color-border);
+  }
+
+  .velin-divide-x-2 > * + * {
+    border-inline-start-width: 2px;
+    border-inline-start-style: solid;
+    border-inline-start-color: var(--velin-color-border);
+  }
+
+  .velin-divide-primary > * + * { border-color: var(--velin-color-primary); }
+  .velin-divide-strong > * + * { border-color: var(--velin-color-border-strong); }
+  .velin-divide-none > * + * { border: none; }
+}

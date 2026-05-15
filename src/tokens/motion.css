@@ -1,0 +1,26 @@
+@layer tokens {
+  :root {
+    /* Durations */
+    --velin-duration-instant: 50ms;
+    --velin-duration-fast: 100ms;
+    --velin-duration-normal: 200ms;
+    --velin-duration-slow: 300ms;
+    --velin-duration-slower: 500ms;
+
+    /* Easing curves */
+    --velin-ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --velin-ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --velin-ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --velin-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --velin-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Common transitions */
+    --velin-transition-colors: color var(--velin-duration-normal) var(--velin-ease-default),
+      background-color var(--velin-duration-normal) var(--velin-ease-default),
+      border-color var(--velin-duration-normal) var(--velin-ease-default);
+    --velin-transition-opacity: opacity var(--velin-duration-normal) var(--velin-ease-default);
+    --velin-transition-transform: transform var(--velin-duration-normal) var(--velin-ease-default);
+    --velin-transition-shadow: box-shadow var(--velin-duration-normal) var(--velin-ease-default);
+    --velin-transition-all: all var(--velin-duration-normal) var(--velin-ease-default);
+  }
+}

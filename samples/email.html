@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en" data-velin-theme="sharp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inbox - VelinStyle Sample</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="../dist/themes/sharp.min.css">
+  <script type="module" src="../dist/velinstyle-components.js"></script>
+  <style>
+    body { background: var(--velin-color-surface-dim); }
+
+    .mail-header {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-4);
+      padding: var(--velin-space-3) var(--velin-space-5);
+      background: var(--velin-color-surface);
+      border-block-end: 1px solid var(--velin-color-border);
+    }
+    .mail-header__brand {
+      font-size: var(--velin-text-xl);
+      font-weight: var(--velin-weight-extrabold);
+      letter-spacing: var(--velin-tracking-tight);
+      color: var(--velin-color-text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .mail-header__search { flex: 1; max-inline-size: 32rem; }
+    .mail-header__actions { margin-inline-start: auto; display: flex; gap: var(--velin-space-2); align-items: center; }
+
+    .mail-sidebar {
+      background: var(--velin-color-surface);
+      border-inline-end: 1px solid var(--velin-color-border);
+      padding: var(--velin-space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--velin-space-1);
+      overflow-y: auto;
+    }
+    .mail-sidebar__link {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-3);
+      padding: var(--velin-space-2) var(--velin-space-3);
+      font-size: var(--velin-text-sm);
+      font-weight: var(--velin-weight-medium);
+      color: var(--velin-color-text-muted);
+      text-decoration: none;
+      transition: var(--velin-transition-colors);
+    }
+    .mail-sidebar__link:hover,
+    .mail-sidebar__link[aria-current="page"] {
+      background: var(--velin-color-primary-subtle);
+      color: var(--velin-color-primary);
+    }
+    .mail-sidebar__link[aria-current="page"] {
+      font-weight: var(--velin-weight-semibold);
+    }
+    .mail-sidebar__count {
+      margin-inline-start: auto;
+    }
+    .mail-sidebar__section {
+      font-size: var(--velin-text-xs);
+      font-weight: var(--velin-weight-semibold);
+      color: var(--velin-color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: var(--velin-space-4) var(--velin-space-3) var(--velin-space-1);
+    }
+
+    .mail-body {
+      display: grid;
+      grid-template-columns: minmax(20rem, 26rem) 1fr;
+      min-block-size: 0;
+      overflow: hidden;
+    }
+    @media (max-width: 62rem) {
+      .mail-body { grid-template-columns: 1fr; }
+      .mail-detail { display: none; }
+      .mail-detail--visible { display: flex; }
+    }
+    @media (max-width: 48rem) {
+      .mail-sidebar-desktop { display: none; }
+    }
+
+    .mail-list-pane {
+      display: flex;
+      flex-direction: column;
+      border-inline-end: 1px solid var(--velin-color-border);
+      overflow: hidden;
+    }
+    .mail-list-toolbar {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-2);
+      padding: var(--velin-space-2) var(--velin-space-4);
+      border-block-end: 1px solid var(--velin-color-border);
+      background: var(--velin-color-surface);
+      font-size: var(--velin-text-sm);
+    }
+    .mail-list-toolbar__info {
+      margin-inline-start: auto;
+      color: var(--velin-color-text-muted);
+      font-size: var(--velin-text-xs);
+    }
+
+    .mail-list-scroll {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .mail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--velin-space-3);
+      padding: var(--velin-space-3) var(--velin-space-4);
+      border-block-end: 1px solid var(--velin-color-border);
+      cursor: pointer;
+      transition: var(--velin-transition-colors);
+      background: var(--velin-color-surface-bright);
+      text-decoration: none;
+      color: var(--velin-color-text);
+    }
+    .mail-item:hover { background: var(--velin-color-surface-dim); }
+    .mail-item--active {
+      background: var(--velin-color-primary-subtle);
+      border-inline-start: 3px solid var(--velin-color-primary);
+    }
+    .mail-item--unread .mail-item__subject { font-weight: var(--velin-weight-semibold); }
+    .mail-item__check { flex-shrink: 0; margin-block-start: var(--velin-space-1); accent-color: var(--velin-color-primary); }
+    .mail-item__body { flex: 1; min-inline-size: 0; }
+    .mail-item__row {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-2);
+    }
+    .mail-item__sender {
+      font-size: var(--velin-text-sm);
+      font-weight: var(--velin-weight-medium);
+    }
+    .mail-item__date {
+      margin-inline-start: auto;
+      font-size: var(--velin-text-xs);
+      color: var(--velin-color-text-muted);
+      white-space: nowrap;
+    }
+    .mail-item__subject {
+      font-size: var(--velin-text-sm);
+      margin-block-start: var(--velin-space-0-5);
+    }
+    .mail-item__preview {
+      font-size: var(--velin-text-xs);
+      color: var(--velin-color-text-muted);
+      margin-block-start: var(--velin-space-0-5);
+    }
+    .mail-item__star {
+      flex-shrink: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--velin-color-text-muted);
+      padding: var(--velin-space-1);
+      transition: var(--velin-transition-colors);
+    }
+    .mail-item__star:hover,
+    .mail-item__star--active { color: var(--velin-color-warning); }
+
+    .mail-detail {
+      display: flex;
+      flex-direction: column;
+      background: var(--velin-color-surface-bright);
+      overflow-y: auto;
+    }
+    .mail-detail__header {
+      padding: var(--velin-space-5) var(--velin-space-6);
+      border-block-end: 1px solid var(--velin-color-border);
+    }
+    .mail-detail__subject {
+      font-size: var(--velin-text-xl);
+      font-weight: var(--velin-weight-bold);
+      margin-block-end: var(--velin-space-4);
+    }
+    .mail-detail__meta {
+      display: flex;
+      align-items: center;
+      gap: var(--velin-space-3);
+    }
+    .mail-detail__sender-info { flex: 1; }
+    .mail-detail__sender-name {
+      font-weight: var(--velin-weight-semibold);
+      font-size: var(--velin-text-sm);
+    }
+    .mail-detail__sender-email {
+      font-size: var(--velin-text-xs);
+      color: var(--velin-color-text-muted);
+    }
+    .mail-detail__date {
+      font-size: var(--velin-text-xs);
+      color: var(--velin-color-text-muted);
+      white-space: nowrap;
+    }
+    .mail-detail__body {
+      padding: var(--velin-space-6);
+      flex: 1;
+      line-height: var(--velin-leading-relaxed);
+      font-size: var(--velin-text-sm);
+      color: var(--velin-color-text);
+    }
+    .mail-detail__body p + p { margin-block-start: var(--velin-space-4); }
+    .mail-detail__actions {
+      padding: var(--velin-space-4) var(--velin-space-6);
+      border-block-start: 1px solid var(--velin-color-border);
+      display: flex;
+      gap: var(--velin-space-2);
+    }
+
+    .mail-pagination {
+      padding: var(--velin-space-3) var(--velin-space-4);
+      border-block-start: 1px solid var(--velin-color-border);
+      background: var(--velin-color-surface);
+    }
+
+    .mobile-menu-btn { display: none; }
+    @media (max-width: 48rem) {
+      .mobile-menu-btn { display: inline-flex; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+
+  <div class="velin-layout-holy-grail">
+    <header class="mail-header">
+      <button class="velin-btn velin-btn--ghost velin-btn--sm mobile-menu-btn" aria-label="Open menu"
+        onclick="document.getElementById('sidebar-drawer').open()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <a href="#" class="mail-header__brand">VelinMail</a>
+      <div class="mail-header__search">
+        <div class="velin-input-group">
+          <span class="velin-input-group__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input type="search" class="velin-input" placeholder="Search emails...">
+        </div>
+      </div>
+      <div class="mail-header__actions">
+        <button class="velin-btn velin-btn--primary velin-btn--sm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Compose
+        </button>
+      </div>
+    </header>
+
+    <aside class="mail-sidebar mail-sidebar-desktop" aria-label="Mail folders">
+      <a href="#" class="mail-sidebar__link" aria-current="page">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/></svg>
+        Inbox
+        <span class="velin-badge velin-badge--primary mail-sidebar__count">24</span>
+      </a>
+      <a href="#" class="mail-sidebar__link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Sent
+      </a>
+      <a href="#" class="mail-sidebar__link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Drafts
+        <span class="velin-badge velin-badge--outline mail-sidebar__count">3</span>
+      </a>
+      <a href="#" class="mail-sidebar__link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        Trash
+      </a>
+
+      <div class="mail-sidebar__section">Labels</div>
+      <a href="#" class="mail-sidebar__link">
+        <span class="velin-chip velin-chip--primary" style="--velin-chip-size: 0.5rem; padding: 0; width: 0.75rem; height: 0.75rem; min-height: 0; border-radius: 2px;"></span>
+        Work
+      </a>
+      <a href="#" class="mail-sidebar__link">
+        <span class="velin-chip velin-chip--success" style="--velin-chip-size: 0.5rem; padding: 0; width: 0.75rem; height: 0.75rem; min-height: 0; border-radius: 2px;"></span>
+        Personal
+      </a>
+      <a href="#" class="mail-sidebar__link">
+        <span class="velin-chip velin-chip--warning" style="--velin-chip-size: 0.5rem; padding: 0; width: 0.75rem; height: 0.75rem; min-height: 0; border-radius: 2px;"></span>
+        Finance
+      </a>
+      <a href="#" class="mail-sidebar__link">
+        <span class="velin-chip velin-chip--danger" style="--velin-chip-size: 0.5rem; padding: 0; width: 0.75rem; height: 0.75rem; min-height: 0; border-radius: 2px;"></span>
+        Urgent
+      </a>
+    </aside>
+
+    <main id="main" style="overflow: hidden;">
+      <div class="mail-body">
+        <div class="mail-list-pane">
+          <div class="mail-list-toolbar">
+            <input type="checkbox" aria-label="Select all" style="accent-color: var(--velin-color-primary);">
+            <button class="velin-btn velin-btn--ghost velin-btn--sm" aria-label="Archive">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+            </button>
+            <button class="velin-btn velin-btn--ghost velin-btn--sm" aria-label="Delete">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+            </button>
+            <button class="velin-btn velin-btn--ghost velin-btn--sm" aria-label="Mark as read">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </button>
+            <span class="mail-list-toolbar__info">1-15 of 24</span>
+          </div>
+
+          <div class="mail-list-scroll" role="list">
+            <div class="mail-item mail-item--active mail-item--unread" role="listitem">
+              <input type="checkbox" class="mail-item__check" checked aria-label="Select email">
+              <span class="velin-avatar velin-avatar--xs">AK</span>
+              <div class="mail-item__body">
+                <div class="mail-item__row">
+                  <span class="mail-item__sender">Anna Kowalski</span>
+                  <span class="mail-item__date">10:32 AM</span>
+                </div>
+                <div class="mail-item__subject velin-font-semibold">Q3 Strategy Review — Action Items</div>
+                <div class="mail-item__preview velin-truncate">Hi team, following up on yesterday's strategy session. I've compiled the key action items we discussed and assigned owners for each...</div>
+              </div>
+              <button class="mail-item__star mail-item__star--active" aria-label="Starred">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </button>
+            </div>
+
+            <div class="mail-item mail-item--unread" role="listitem">
+              <input type="checkbox" class="mail-item__check" aria-label="Select email">
+              <span class="velin-avatar velin-avatar--xs">MR</span>
+              <div class="mail-item__body">
+                <div class="mail-item__row">
+                  <span class="mail-item__sender">Marcus Richter</span>
+                  <span class="mail-item__date">9:15 AM</span>
+                </div>
+                <div class="mail-item__subject velin-font-semibold">Design system token updates</div>
+                <div class="mail-item__preview velin-truncate">I've pushed the updated color tokens to the staging branch. The OKLCH values are looking much better in dark mode now. Can you review...</div>
+              </div>
+              <button class="mail-item__star" aria-label="Not starred">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </button>
+            </div>
+
+            <div class="mail-item" role="listitem">
+              <input type="checkbox" class="mail-item__check" aria-label="Select email">
+              <span class="velin-avatar velin-avatar--xs">SB</span>
+              <div class="mail-item__body">
+                <div class="mail-item__row">
+                  <span class="mail-item__sender">Sophie Bauer</span>
+                  <span class="mail-item__date">Yesterday</span>
+                </div>
+                <div class="mail-item__subject">Re: Sprint planning notes</div>
+                <div class="mail-item__preview velin-truncate">Sounds good, I'll move the accessibility audit to next sprint. We should prioritize the container query migration first since it's blocking...</div>
+              </div>
+              <button class="mail-item__star" aria-label="Not starred">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </button>
+            </div>
+
+            <div class="mail-item mail-item--unread" role="listitem">
+              <input type="checkbox" class="mail-item__check" aria-label="Select email">
+              <span class="velin-avatar velin-avatar--xs">JL</span>
+              <div class="mail-item__body">
+                <div class="mail-item__row">
+                  <span class="mail-item__sender">Julia Lang</span>
+                  <span class="mail-item__date">Yesterday</span>
+                </div>
+                <div class="mail-item__subject velin-font-semibold">Invoice #2847 — May 2026</div>
+                <div class="mail-item__preview velin-truncate">Please find attached the invoice for consulting services rendered in May 2026. Payment is due within 30 days. Let me know if...</div>
+              </div>
+              <button class="mail-item__star mail-item__star--active" aria-label="Starred">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </button>
+            </div>
+
+            <div class="mail-item" role="listitem">
+              <input type="checkbox" class="mail-item__check" aria-label="Select email">
+              <span class="velin-avatar velin-avatar--xs">TH</span>
+              <div class="mail-item__body">
+                <div class="mail-item__row">
+                  <span class="mail-item__sender">Thomas Hoffmann</span>
+                  <span class="mail-item__date">May 9</span>
+                </div>
+                <div class="mail-item__subject">Weekly standup recap</div>
+                <div class="mail-item__preview velin-truncate">Here's a quick summary from today's standup: Frontend team is wrapping up the navigation overhaul, backend is finishing the API migration...</div>
+              </div>
+              <button class="mail-item__star" aria-label="Not starred">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </button>
+            </div>
+
+            <div class="mail-item" role="listitem">
+              <input type="checkbox" class="mail-item__check" aria-label="Select email">
+              <span class="velin-avatar velin-avatar--xs">EM</span>
+              <div class="mail-item__body">
+                <div class="mail-item__row">
+                  <span class="mail-item__sender">Elena Martinez</span>
+                  <span class="mail-item__date">May 9</span>
+                </div>
+                <div class="mail-item__subject">Component library v2.4 release</div>
+                <div class="mail-item__preview velin-truncate">The new release includes updated drawer animations, improved keyboard navigation for dropdowns, and three new utility classes. Full changelog...</div>
+              </div>
+              <button class="mail-item__star" aria-label="Not starred">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </button>
+            </div>
+
+            <div class="mail-item" role="listitem">
+              <input type="checkbox" class="mail-item__check" aria-label="Select email">
+              <span class="velin-avatar velin-avatar--xs">PW</span>
+              <div class="mail-item__body">
+                <div class="mail-item__row">
+                  <span class="mail-item__sender">Peter Wagner</span>
+                  <span class="mail-item__date">May 8</span>
+                </div>
+                <div class="mail-item__subject">Re: Conference talk proposal</div>
+                <div class="mail-item__preview velin-truncate">Great news — the organizers accepted our talk on modern CSS architecture! The slot is June 14 at 2pm. I'll start working on slides...</div>
+              </div>
+              <button class="mail-item__star" aria-label="Not starred">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </button>
+            </div>
+
+            <div class="mail-item" role="listitem">
+              <input type="checkbox" class="mail-item__check" aria-label="Select email">
+              <span class="velin-avatar velin-avatar--xs">LK</span>
+              <div class="mail-item__body">
+                <div class="mail-item__row">
+                  <span class="mail-item__sender">Lisa Kruger</span>
+                  <span class="mail-item__date">May 7</span>
+                </div>
+                <div class="mail-item__subject">Accessibility audit results</div>
+                <div class="mail-item__preview velin-truncate">The automated scan found 12 issues across 4 pages — mostly missing aria-labels on icon buttons and insufficient color contrast in the footer...</div>
+              </div>
+              <button class="mail-item__star" aria-label="Not starred">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="mail-pagination">
+            <nav class="velin-pagination velin-pagination--simple" aria-label="Email list pagination">
+              <a href="#" class="velin-pagination__link" aria-disabled="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+                Newer
+              </a>
+              <span class="velin-text-sm velin-text-muted">Page 1 of 2</span>
+              <a href="#" class="velin-pagination__link">
+                Older
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
+            </nav>
+          </div>
+        </div>
+
+        <div class="mail-detail">
+          <div class="mail-detail__header">
+            <h1 class="mail-detail__subject">Q3 Strategy Review — Action Items</h1>
+            <div class="mail-detail__meta">
+              <span class="velin-avatar">AK</span>
+              <div class="mail-detail__sender-info">
+                <div class="mail-detail__sender-name">Anna Kowalski</div>
+                <div class="mail-detail__sender-email">anna.kowalski@company.com</div>
+              </div>
+              <div class="mail-detail__date">May 11, 2026 · 10:32 AM</div>
+            </div>
+          </div>
+
+          <div class="mail-detail__body">
+            <p>Hi team,</p>
+            <p>Following up on yesterday's strategy session, I've compiled the key action items we discussed and assigned owners for each workstream. Please review and let me know if anything needs adjusting.</p>
+            <p><strong>1. Design System Migration (Owner: Marcus)</strong><br>
+            Complete the OKLCH color token migration by end of May. Ensure all existing themes pass WCAG 2.2 AA contrast ratios. Update documentation with new token naming conventions.</p>
+            <p><strong>2. Component Library v3 (Owner: Sophie)</strong><br>
+            Finalize the API for the new data table component. Ship the drawer and modal refactors with improved keyboard navigation. Target: June 15 beta release.</p>
+            <p><strong>3. Performance Audit (Owner: Thomas)</strong><br>
+            Run Lighthouse CI on all sample pages. Identify and resolve any render-blocking CSS issues. Goal: all pages scoring 95+ on performance.</p>
+            <p><strong>4. Developer Documentation (Owner: Elena)</strong><br>
+            Create getting-started guides for each theme variant. Add interactive code examples using live editors. Complete by end of Q3.</p>
+            <p>Let's sync again next Tuesday to check progress. If you have any questions or need to adjust timelines, reach out before then.</p>
+            <p>Best,<br>Anna</p>
+          </div>
+
+          <div class="mail-detail__actions">
+            <button class="velin-btn velin-btn--outline velin-btn--sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 00-4-4H4"/></svg>
+              Reply
+            </button>
+            <button class="velin-btn velin-btn--outline velin-btn--sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 17 20 12 15 7"/><path d="M4 18v-2a4 4 0 014-4h12"/></svg>
+              Forward
+            </button>
+            <button class="velin-btn velin-btn--ghost velin-btn--sm" style="margin-inline-start: auto;" aria-label="More actions">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer style="grid-column: 1 / -1; padding: var(--velin-space-2) var(--velin-space-5); border-block-start: 1px solid var(--velin-color-border); background: var(--velin-color-surface); font-size: var(--velin-text-xs); color: var(--velin-color-text-muted); text-align: center;">
+      &copy; 2026 VelinMail. Built with <a href="https://github.com/SkyliteDesign/velinstyle" style="color: var(--velin-color-primary);">VelinStyle</a> Sharp Theme.
+    </footer>
+  </div>
+
+  <velin-drawer id="sidebar-drawer" title="Mail" side="start">
+    <nav style="display: flex; flex-direction: column; gap: var(--velin-space-1);">
+      <a href="#" class="mail-sidebar__link" aria-current="page">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/></svg>
+        Inbox
+        <span class="velin-badge velin-badge--primary mail-sidebar__count">24</span>
+      </a>
+      <a href="#" class="mail-sidebar__link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Sent
+      </a>
+      <a href="#" class="mail-sidebar__link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Drafts
+        <span class="velin-badge velin-badge--outline mail-sidebar__count">3</span>
+      </a>
+      <a href="#" class="mail-sidebar__link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        Trash
+      </a>
+      <div class="mail-sidebar__section">Labels</div>
+      <a href="#" class="mail-sidebar__link">
+        <span class="velin-chip velin-chip--primary" style="padding: 0; width: 0.75rem; height: 0.75rem; min-height: 0; border-radius: 2px;"></span>
+        Work
+      </a>
+      <a href="#" class="mail-sidebar__link">
+        <span class="velin-chip velin-chip--success" style="padding: 0; width: 0.75rem; height: 0.75rem; min-height: 0; border-radius: 2px;"></span>
+        Personal
+      </a>
+      <a href="#" class="mail-sidebar__link">
+        <span class="velin-chip velin-chip--warning" style="padding: 0; width: 0.75rem; height: 0.75rem; min-height: 0; border-radius: 2px;"></span>
+        Finance
+      </a>
+      <a href="#" class="mail-sidebar__link">
+        <span class="velin-chip velin-chip--danger" style="padding: 0; width: 0.75rem; height: 0.75rem; min-height: 0; border-radius: 2px;"></span>
+        Urgent
+      </a>
+    </nav>
+  </velin-drawer>
+</body>
+</html>

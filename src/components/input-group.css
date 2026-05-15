@@ -1,0 +1,124 @@
+@layer components {
+  .velin-input-group {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .velin-input-group > .velin-input,
+  .velin-input-group > .velin-select {
+    flex: 1;
+    min-inline-size: 0;
+    border-radius: 0;
+  }
+
+  .velin-input-group > :first-child,
+  .velin-input-group > :first-child .velin-input {
+    border-start-start-radius: var(--velin-radius-md);
+    border-end-start-radius: var(--velin-radius-md);
+  }
+
+  .velin-input-group > :last-child,
+  .velin-input-group > :last-child .velin-input {
+    border-start-end-radius: var(--velin-radius-md);
+    border-end-end-radius: var(--velin-radius-md);
+  }
+
+  .velin-input-group > :not(:first-child) {
+    margin-inline-start: -2px;
+  }
+
+  .velin-input-group__text {
+    display: inline-flex;
+    align-items: center;
+    padding-inline: var(--velin-space-3);
+    font-size: var(--velin-text-base);
+    color: var(--velin-color-text-muted);
+    background: var(--velin-color-surface-dim);
+    border: 2px solid var(--velin-color-border);
+    white-space: nowrap;
+  }
+
+  .velin-input-group__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: var(--velin-space-3);
+    color: var(--velin-color-text-muted);
+    background: var(--velin-color-surface-dim);
+    border: 2px solid var(--velin-color-border);
+  }
+
+  .velin-input-group > .velin-btn {
+    border-radius: 0;
+    flex-shrink: 0;
+  }
+
+  .velin-input-group > .velin-input:focus,
+  .velin-input-group > .velin-select:focus {
+    z-index: 1;
+  }
+
+  /* Sizes */
+  .velin-input-group--sm .velin-input-group__text,
+  .velin-input-group--sm .velin-input-group__icon {
+    padding-inline: var(--velin-space-2);
+    font-size: var(--velin-text-sm);
+  }
+
+  .velin-input-group--lg .velin-input-group__text,
+  .velin-input-group--lg .velin-input-group__icon {
+    padding-inline: var(--velin-space-4);
+    font-size: var(--velin-text-lg);
+  }
+
+  /* Floating label */
+  .velin-float-label {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .velin-float-label > .velin-input,
+  .velin-float-label > .velin-select,
+  .velin-float-label > .velin-textarea {
+    padding-block-start: var(--velin-space-5);
+    padding-block-end: var(--velin-space-1);
+  }
+
+  .velin-float-label > .velin-label {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: var(--velin-space-3);
+    transform: translateY(-50%);
+    font-size: var(--velin-text-base);
+    color: var(--velin-color-text-subtle);
+    pointer-events: none;
+    transition: transform var(--velin-duration-fast) var(--velin-ease-out),
+                font-size var(--velin-duration-fast) var(--velin-ease-out),
+                color var(--velin-duration-fast) var(--velin-ease-out);
+    margin: 0;
+  }
+
+  .velin-float-label > .velin-textarea ~ .velin-label {
+    inset-block-start: var(--velin-space-3);
+    transform: none;
+  }
+
+  .velin-float-label > .velin-input:focus ~ .velin-label,
+  .velin-float-label > .velin-input:not(:placeholder-shown) ~ .velin-label,
+  .velin-float-label > .velin-select:focus ~ .velin-label,
+  .velin-float-label > .velin-select:not([value=""]) ~ .velin-label,
+  .velin-float-label > .velin-textarea:focus ~ .velin-label,
+  .velin-float-label > .velin-textarea:not(:placeholder-shown) ~ .velin-label {
+    transform: translateY(-1.5rem);
+    font-size: var(--velin-text-xs);
+    color: var(--velin-color-primary);
+    font-weight: var(--velin-weight-medium);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .velin-float-label > .velin-label {
+      transition: none;
+    }
+  }
+}

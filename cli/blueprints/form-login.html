@@ -1,0 +1,16 @@
+<!-- VelinStyle blueprint: login form (Velin tokens + validation classes) -->
+<form class="velin-form--validated velin-layout-auth__panel" novalidate>
+  <h1 class="velin-text-2xl" style="margin-block-end:var(--velin-space-6);font-weight:var(--velin-weight-semibold)">Sign in</h1>
+  <div class="velin-field">
+    <label class="velin-label velin-label--required" for="bp-login-email">Email</label>
+    <input type="email" id="bp-login-email" class="velin-input" required autocomplete="email" aria-describedby="bp-login-email-hint">
+    <p class="velin-field-hint" id="bp-login-email-hint">Work email.</p>
+  </div>
+  <div class="velin-field">
+    <label class="velin-label velin-label--required" for="bp-login-pass">Password</label>
+    <input type="password" id="bp-login-pass" class="velin-input" required autocomplete="current-password" aria-describedby="bp-login-pass-hint">
+    <p class="velin-field-hint" id="bp-login-pass-hint">Min. 8 characters.</p>
+  </div>
+  <div role="status" aria-live="polite" id="bp-login-live" class="velin-live-region"></div>
+  <button type="submit" class="velin-btn velin-btn--primary velin-btn--block">Continue</button>
+</form>

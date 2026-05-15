@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VelinStyle in einem bestehenden Projekt — VelinStyle</title>
+  <meta name="description" content="VelinStyle per npm oder CDN in Vite, Webpack oder statische Sites einbinden: Reihenfolge, Konflikte, Web Components.">
+  <link rel="stylesheet" href="../../dist/velinstyle.css">
+  <link rel="stylesheet" href="../docs.css">
+  <script src="../../dist/velinstyle-components.iife.js"></script>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="../index.html" class="velin-nav__brand">VelinStyle</a>
+    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
+      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="../getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="index.html" class="velin-nav__link">Integration</a></li>
+      <li><a href="../layout.html" class="velin-nav__link">Layout</a></li>
+      <li><a href="../components.html" class="velin-nav__link">Components</a></li>
+      <li><a href="../css-components.html" class="velin-nav__link">CSS Components</a></li>
+      <li><a href="../forms.html" class="velin-nav__link">Forms</a></li>
+      <li><a href="../utilities.html" class="velin-nav__link">Utilities</a></li>
+      <li><a href="../tokens.html" class="velin-nav__link">Tokens</a></li>
+      <li><a href="../themes.html" class="velin-nav__link">Themes</a></li>
+      <li><a href="../icons.html" class="velin-nav__link">Icons</a></li>
+      <li><a href="../a11y.html" class="velin-nav__link">A11y</a></li>
+      <li><a href="../security.html" class="velin-nav__link">Security</a></li>
+      <li><a href="../migration.html" class="velin-nav__link">Migration</a></li>
+    </ul>
+  </nav>
+  <div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+    <a href="index.html">← Integration (Übersicht)</a>
+    &nbsp;·&nbsp;
+    <a href="laravel.html">Laravel</a>
+    &nbsp;·&nbsp;
+    <a href="wordpress.html">WordPress</a>
+  </div>
+
+  <main id="main" class="velin-container">
+    <section class="velin-doc-section">
+      <h1 class="velin-doc-title">Bestehendes Projekt</h1>
+      <p class="velin-doc-lead">
+        VelinStyle ist ein CSS-Bundle plus optionales JS für Web Components. Du integrierst es wie jede andere Design-Bibliothek: einmal global laden, dann Markup mit <code class="velin-doc-inline-code">velin-*</code>-Klassen und Komponenten ergänzen.
+      </p>
+    </section>
+
+    <section id="voraussetzungen" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">1. Voraussetzungen</h2>
+      <ul style="line-height:1.7;">
+        <li><strong>Build-Tool</strong> (empfohlen): Vite, Webpack, Parcel, Rspack — oder ohne Build per CDN (siehe <a href="../getting-started.html">Getting Started</a>).</li>
+        <li><strong>Browser</strong>: aktuelle Evergreens; für OKLCH und Container Queries keine veralteten WebViews auf Kundenpflicht machen.</li>
+        <li><strong>Viewport</strong>: <code class="velin-doc-inline-code">&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code> in jeder HTML-Ausgabe.</li>
+      </ul>
+    </section>
+
+    <section id="npm" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">2. Installation mit npm</h2>
+      <pre class="velin-doc-code">npm install velinstyle</pre>
+      <p>CSS zentral in deiner Einstiegstylesheet-Datei importieren (einmal, so früh wie möglich nach einem evtl. eigenen Reset):</p>
+      <pre class="velin-doc-code">@import "velinstyle/dist/velinstyle.css";
+/* oder nur Produktion/minimiert über deinen Bundler-Pipeline-Schritt */</pre>
+      <p>Web Components (optional) im JS-Einstieg:</p>
+      <pre class="velin-doc-code">import "velinstyle/dist/velinstyle-components.js";</pre>
+      <div class="velin-alert velin-alert--warning" role="note">
+        <strong>Ohne ES-Module</strong> (z.&nbsp;B. ältere Templates): <code class="velin-doc-inline-code">velinstyle-components.iife.js</code> per normalem <code class="velin-doc-inline-code">&lt;script src="…"&gt;</code> einbinden — siehe Getting Started.
+      </div>
+    </section>
+
+    <section id="reihenfolge" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">3. Reihenfolge und Konflikte</h2>
+      <p>VelinStyle nutzt <code class="velin-doc-inline-code">@layer</code>. Am stabilsten lädt du VelinStyle <strong>nach</strong> globalem Reset und <strong>vor</strong> sehr spezifischem Projekt-CSS, das gezielt in eigene Layer gehört oder nur Layout betrifft.</p>
+      <p>Der Präfix <code class="velin-doc-inline-code">velin-</code> minimiert Kollisionen mit Bootstrap/Tailwind-Klassennamen. Trotzdem: zwei „Komplett-Frameworks“ parallel vermeiden; lieber VelinStyle als Basis und Rest als schmales Custom-CSS.</p>
+    </section>
+
+    <section id="themen" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">4. Themes</h2>
+      <p>Zusätzliche Presets liegen unter <code class="velin-doc-inline-code">velinstyle/dist/themes/*.css</code>. Import wie normales CSS oder per zweitem <code class="velin-doc-inline-code">&lt;link&gt;</code>. Steuerung per <code class="velin-doc-inline-code">data-velin-theme</code> am <code class="velin-doc-inline-code">&lt;html&gt;</code> oder an Sektionen — siehe <a href="../themes.html">Themes</a>.</p>
+    </section>
+
+    <section id="cli" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">5. CLI (optional)</h2>
+      <pre class="velin-doc-code">npx velinstyle init
+npx velinstyle build
+npx velinstyle scan
+npx velinstyle prefix ./src
+npx velinstyle prefix ./src --bootstrap-display --map ./velinstyle-prefix-map.json --write</pre>
+      <p><strong>prefix</strong> (Dry-Run ohne <code class="velin-doc-inline-code">--write</code>): Ersetzt in <code class="velin-doc-inline-code">class</code>/<code class="velin-doc-inline-code">className</code>-Strings Klassen nach dem VelinStyle-Katalog; optional <code class="velin-doc-inline-code">--bootstrap-display</code> für Bootstrap-<code class="velin-doc-inline-code">d-*</code>. Zusätzlich lädt die CLI automatisch <code class="velin-doc-inline-code">velinstyle-prefix-map.json</code> aus dem angegebenen Ordner (oder überschreibt mit <code class="velin-doc-inline-code">--map</code>) — JSON mit beliebigen Quelltoken → Zielklassen (z.&nbsp;B. <code class="velin-doc-inline-code">btn-primary</code> → <code class="velin-doc-inline-code">velin-btn--primary</code>). Beispiel: <code class="velin-doc-inline-code">examples/velinstyle-prefix-map.sample.json</code>. Details: <a href="../migration.html#cli-prefix">Migration → CLI prefix</a>.</p>
+      <p>Scanner, Blueprints und Tokens: siehe <a href="../security.html">Security</a>, README und die vollständige Doku auf velinstyle.info.</p>
+    </section>
+
+    <section id="arbeiten" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">6. Danach mit VelinStyle arbeiten</h2>
+      <ol style="line-height:1.8;">
+        <li>Layout mit <code class="velin-doc-inline-code">velin-container</code>, Grid-Utilities und ggf. Container Queries (Doku: <a href="../layout.html">Layout</a>).</li>
+        <li>Komponenten aus der Referenz übernehmen (<a href="../css-components.html">CSS Components</a>, <a href="../components.html">Web Components</a>).</li>
+        <li>Farben über Tokens anpassen statt harter Hex-Werte (<a href="../tokens.html">Tokens</a>).</li>
+        <li>Icons: <code class="velin-doc-inline-code">&lt;velin-icon&gt;</code> mit <code class="velin-doc-inline-code">sprite</code>-Pfad auf dein gebautes <code class="velin-doc-inline-code">velin-icons.svg</code> (<a href="../icons.html">Icons</a>).</li>
+      </ol>
+    </section>
+  </main>
+</body>
+</html>

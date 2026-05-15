@@ -1,0 +1,59 @@
+@layer themes {
+  :root[data-velin-theme="brutalist"],
+  [data-velin-theme="brutalist"] {
+    /* Brutalist: Raw, bold, asymmetric, deliberately rough */
+    --velin-radius-none: 0;
+    --velin-radius-xs: 0;
+    --velin-radius-sm: 0;
+    --velin-radius-md: 0;
+    --velin-radius-lg: 0;
+    --velin-radius-xl: 0;
+    --velin-radius-2xl: 0;
+    --velin-radius-full: 0;
+    --velin-radius-pill: 0;
+
+    --velin-color-primary: oklch(65% 0.25 30);
+    --velin-color-primary-hover: oklch(58% 0.25 30);
+    --velin-color-primary-active: oklch(50% 0.25 30);
+    --velin-color-primary-subtle: oklch(92% 0.05 30);
+    --velin-color-on-primary: oklch(0% 0 0);
+
+    --velin-color-secondary: oklch(85% 0.2 90);
+    --velin-color-secondary-hover: oklch(78% 0.2 90);
+    --velin-color-secondary-subtle: oklch(95% 0.05 90);
+    --velin-color-on-secondary: oklch(0% 0 0);
+
+    --velin-color-surface: oklch(97% 0.005 90);
+    --velin-color-surface-dim: oklch(92% 0.01 90);
+    --velin-color-surface-bright: oklch(100% 0 0);
+    --velin-color-text: oklch(5% 0 0);
+    --velin-color-text-muted: oklch(30% 0 0);
+    --velin-color-border: oklch(10% 0 0);
+    --velin-color-border-strong: oklch(0% 0 0);
+
+    --velin-shadow-sm: 3px 3px 0 oklch(0% 0 0);
+    --velin-shadow-md: 4px 4px 0 oklch(0% 0 0);
+    --velin-shadow-lg: 6px 6px 0 oklch(0% 0 0);
+    --velin-shadow-xl: 8px 8px 0 oklch(0% 0 0);
+    --velin-shadow-2xl: 12px 12px 0 oklch(0% 0 0);
+
+    --velin-font-heading: "Space Mono", "Courier New", monospace;
+    --velin-font-body: "Space Grotesk", "IBM Plex Sans", var(--velin-font-sans);
+
+    --velin-weight-normal: 400;
+    --velin-weight-medium: 500;
+    --velin-weight-semibold: 700;
+    --velin-weight-bold: 700;
+    --velin-weight-extrabold: 700;
+
+    --velin-tracking-normal: 0;
+    --velin-tracking-wide: 0.05em;
+    --velin-tracking-wider: 0.1em;
+
+    --velin-leading-tight: 1.15;
+    --velin-leading-normal: 1.4;
+
+    --velin-duration-normal: 100ms;
+    --velin-duration-slow: 150ms;
+  }
+}
