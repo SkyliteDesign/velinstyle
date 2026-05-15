@@ -11,7 +11,7 @@
   "main": "dist/velinstyle.css",
   "module": "dist/velinstyle-components.js",
   "bin": {
-    "velinstyle": "./cli/index.js"
+    "velinstyle": "cli/index.js"
   },
   "repository": {
     "type": "git",
