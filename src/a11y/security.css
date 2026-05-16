@@ -3,7 +3,7 @@
    CSS-level security helpers for content sandboxing and safe defaults.
    =================================================================== */
 
-@layer a11y {
+@layer security {
 
   /* ---- Clickjacking Protection ----
      Wrap page content in .velin-secure-frame. If the page is loaded inside
@@ -74,10 +74,7 @@
   /* ---- Data Attribute Leakage Prevention ----
      Prevent CSS exfiltration attacks via attribute selectors.
      The content property is locked to normal on sensitive fields. */
-  input[type="password"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="number"][inputmode="numeric"] {
+  input[type="password"] {
     -webkit-text-security: disc;
   }
   input[type="password"]::after,

@@ -12,8 +12,8 @@
   <a href="#main" class="velin-skip-link">Skip to main content</a>
   <nav class="velin-nav" aria-label="Main navigation">
     <a href="index.html" class="velin-nav__brand">VelinStyle</a>
-    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
-      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+    <button type="button" class="velin-nav__toggle" data-velin-nav-toggle aria-label="Toggle menu" aria-expanded="false"
+     >
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
     <ul class="velin-nav__list">
@@ -89,13 +89,15 @@
           <p>Apply <code class="velin-doc-inline-code">.velin-select</code> for a styled native dropdown with a custom chevron indicator.</p>
 
           <div class="velin-doc-demo velin-doc-demo--col">
-            <select class="velin-select" style="max-inline-size:24rem">
+            <label class="velin-label" for="demo-select">Example select</label>
+            <select id="demo-select" class="velin-select" style="max-inline-size:24rem">
               <option value="" disabled selected>Choose an option&hellip;</option>
               <option value="1">Option One</option>
               <option value="2">Option Two</option>
               <option value="3">Option Three</option>
             </select>
-            <select class="velin-select" disabled style="max-inline-size:24rem">
+            <label class="velin-label" for="demo-select-disabled">Disabled select</label>
+            <select id="demo-select-disabled" class="velin-select" disabled style="max-inline-size:24rem">
               <option>Disabled select</option>
             </select>
           </div>
@@ -707,7 +709,7 @@
     <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
     <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
   </div>
-  <button onclick="document.getElementById('themePanel').style.display=document.getElementById('themePanel').style.display==='none'?'block':'none'" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+  <button type="button" data-velin-theme-toggle  style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
 </div>
 <script>
 (function(){
@@ -730,5 +732,6 @@
   });
 })();
 </script>
+<script src="assets/docs-a11y.js" defer></script>
 </body>
 </html>

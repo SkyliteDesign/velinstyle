@@ -1,0 +1,37 @@
+/* WCAG 1.4.6 Contrast (Enhanced) — optional AAA via data-velin-contrast="aaa" */
+@layer a11y {
+  :root[data-velin-contrast="aaa"] {
+    --velin-color-text: oklch(8% 0.01 250);
+    --velin-color-text-muted: oklch(28% 0.01 250);
+    --velin-color-text-subtle: oklch(38% 0.01 250);
+    --velin-color-border: oklch(35% 0.01 250);
+    --velin-color-border-strong: oklch(20% 0.01 250);
+    --velin-color-primary: oklch(38% 0.18 250);
+    --velin-color-primary-hover: oklch(32% 0.18 250);
+    --velin-color-on-primary: oklch(100% 0 0);
+    --velin-color-focus: oklch(35% 0.22 250);
+  }
+
+  :root[data-velin-contrast="aaa"][data-velin-theme="dark"],
+  :root[data-velin-contrast="aaa"]:not([data-velin-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --velin-color-text: oklch(98% 0.005 250);
+      --velin-color-text-muted: oklch(82% 0.005 250);
+      --velin-color-text-subtle: oklch(72% 0.005 250);
+      --velin-color-border: oklch(55% 0.01 250);
+      --velin-color-border-strong: oklch(70% 0.01 250);
+      --velin-color-primary: oklch(78% 0.14 250);
+      --velin-color-on-primary: oklch(8% 0.01 250);
+    }
+  }
+
+  :root[data-velin-contrast="aaa"] .velin-btn {
+    border-width: 2px;
+  }
+
+  :root[data-velin-contrast="aaa"] .velin-input,
+  :root[data-velin-contrast="aaa"] .velin-select,
+  :root[data-velin-contrast="aaa"] .velin-textarea {
+    border-width: 2px;
+  }
+}

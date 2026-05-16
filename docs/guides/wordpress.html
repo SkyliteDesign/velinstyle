@@ -13,8 +13,8 @@
   <a href="#main" class="velin-skip-link">Skip to main content</a>
   <nav class="velin-nav" aria-label="Main navigation">
     <a href="../index.html" class="velin-nav__brand">VelinStyle</a>
-    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
-      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+    <button type="button" class="velin-nav__toggle" data-velin-nav-toggle aria-label="Toggle menu" aria-expanded="false"
+     >
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
     <ul class="velin-nav__list">
@@ -105,5 +105,6 @@ $url = get_stylesheet_directory_uri() . '/assets/velinstyle/velin-icons.svg';
       <p>Templates (PHP, Block-Templates, FSE-HTML) enthalten dasselbe Markup wie in der Doku: Container, Buttons, Alerts, optional Web Components. Für Formulare und A11y gelten die gleichen Regeln wie außerhalb von WordPress — siehe <a href="../forms.html">Forms</a> und <a href="../a11y.html">A11y</a>.</p>
     </section>
   </main>
+<script src="../assets/docs-a11y.js" defer></script>
 </body>
 </html>

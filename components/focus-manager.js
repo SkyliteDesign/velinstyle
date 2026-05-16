@@ -9,10 +9,16 @@ const FOCUSABLE_SELECTOR = [
   'details',
 ].join(', ');
 
+function isFocusable(el) {
+  if (el.hasAttribute('disabled') || el.getAttribute('aria-hidden') === 'true') return false;
+  if (el.closest('[inert]')) return false;
+  const style = el.ownerDocument.defaultView?.getComputedStyle(el);
+  if (style && (style.visibility === 'hidden' || style.display === 'none')) return false;
+  return el.getClientRects().length > 0;
+}
+
 export function getFocusableElements(root) {
-  return [...root.querySelectorAll(FOCUSABLE_SELECTOR)].filter(
-    (el) => !el.hasAttribute('disabled') && el.offsetParent !== null
-  );
+  return [...root.querySelectorAll(FOCUSABLE_SELECTOR)].filter(isFocusable);
 }
 
 export function trapFocus(root, event) {
@@ -77,4 +83,24 @@ export function restoreFocus(element) {
   if (element && typeof element.focus === 'function') {
     element.focus();
   }
+}
+
+let _inertSiblings = [];
+
+export function setBackgroundInert(except) {
+  _inertSiblings = [];
+  for (const child of document.body.children) {
+    if (child === except || child.contains(except)) continue;
+    if (!child.hasAttribute('inert')) {
+      child.setAttribute('inert', '');
+      _inertSiblings.push(child);
+    }
+  }
+}
+
+export function clearBackgroundInert() {
+  for (const el of _inertSiblings) {
+    el.removeAttribute('inert');
+  }
+  _inertSiblings = [];
 }

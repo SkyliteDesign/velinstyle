@@ -43,6 +43,13 @@ jobs:
       - name: Full build (dist/ for npm pack contents)
         run: npm run build
 
+      - name: Require NPM_TOKEN secret
+        run: |
+          if [ -z "${{ secrets.NPM_TOKEN }}" ]; then
+            echo "::error::Repository secret NPM_TOKEN is not set. Add an npm automation token with publish access for @birdapi (Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

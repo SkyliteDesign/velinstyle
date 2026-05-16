@@ -32,8 +32,8 @@
   <a href="#main" class="velin-skip-link">Skip to main content</a>
   <nav class="velin-nav" aria-label="Main navigation">
     <a href="index.html" class="velin-nav__brand">VelinStyle</a>
-    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
-      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+    <button type="button" class="velin-nav__toggle" data-velin-nav-toggle aria-label="Toggle menu" aria-expanded="false"
+     >
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
     <ul class="velin-nav__list">
@@ -100,9 +100,9 @@
       <p class="velin-text-muted velin-mbe-4">Tabbed interface with roving tabindex and arrow key navigation.</p>
       <div class="demo-box">
         <velin-tabs>
-          <button slot="tab" aria-selected="true">Overview</button>
-          <button slot="tab">Features</button>
-          <button slot="tab">API</button>
+          <button type="button" slot="tab">Overview</button>
+          <button type="button" slot="tab">Features</button>
+          <button type="button" slot="tab">API</button>
           <div slot="panel"><p>VelinStyle tabs use native roving tabindex. Arrow keys navigate between tabs.</p></div>
           <div slot="panel"><ul style="list-style:disc;padding-inline-start:1.5rem"><li>Keyboard navigation</li><li>Automatic ARIA</li><li>Panel show/hide</li></ul></div>
           <div slot="panel"><p>Listen to <code>velin-tab-change</code> for tab switch events.</p></div>
@@ -114,7 +114,7 @@
       </table>
       <h3 class="api-heading">Slots</h3>
       <table class="api-table"><tr><th>Name</th><th>Description</th></tr>
-        <tr><td><code>tab</code></td><td>Tab buttons (set <code>aria-selected="true"</code> for default)</td></tr>
+        <tr><td><code>tab</code></td><td>Tab buttons with <code>role="tab"</code> (set <code>aria-selected="true"</code> for default)</td></tr>
         <tr><td><code>panel</code></td><td>Tab panel content (matched by order)</td></tr>
       </table>
     </section>
@@ -167,9 +167,9 @@
       <div class="demo-box">
         <velin-dropdown>
           <button slot="trigger" class="velin-btn velin-btn--outline">Options</button>
-          <button role="menuitem" onclick="alert('Edit clicked')">Edit</button>
-          <button role="menuitem" onclick="alert('Duplicate clicked')">Duplicate</button>
-          <button role="menuitem" onclick="alert('Delete clicked')">Delete</button>
+          <button type="button" onclick="alert('Edit clicked')">Edit</button>
+          <button type="button" onclick="alert('Duplicate clicked')">Duplicate</button>
+          <button type="button" onclick="alert('Delete clicked')">Delete</button>
         </velin-dropdown>
       </div>
       <h3 class="api-heading">Attributes</h3>
@@ -186,7 +186,7 @@
       <h3 class="api-heading">Slots</h3>
       <table class="api-table"><tr><th>Name</th><th>Description</th></tr>
         <tr><td><code>trigger</code></td><td>Button that opens the menu</td></tr>
-        <tr><td>(default)</td><td>Menu items (use <code>role="menuitem"</code>)</td></tr>
+        <tr><td>(default)</td><td>Menu items (<code>&lt;button&gt;</code> or links; slotted into <code>role="menu"</code>)</td></tr>
       </table>
     </section>
 
@@ -658,7 +658,7 @@
     <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
     <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
   </div>
-  <button onclick="document.getElementById('themePanel').style.display=document.getElementById('themePanel').style.display==='none'?'block':'none'" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+  <button type="button" data-velin-theme-toggle  style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
 </div>
 <script>
 (function(){
@@ -681,5 +681,6 @@
   });
 })();
 </script>
+<script src="assets/docs-a11y.js" defer></script>
 </body>
 </html>

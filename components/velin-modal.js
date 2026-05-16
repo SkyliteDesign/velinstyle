@@ -1,4 +1,4 @@
-import { trapFocus, saveFocus, restoreFocus, getFocusableElements } from './focus-manager.js';
+import { trapFocus, saveFocus, restoreFocus, getFocusableElements, setBackgroundInert, clearBackgroundInert } from './focus-manager.js';
 import { escapeHTML } from './sanitize.js';
 
 const styles = `
@@ -141,6 +141,7 @@ class VelinModal extends HTMLElement {
 
   _open() {
     this._previouslyFocused = saveFocus();
+    setBackgroundInert(this);
     document.addEventListener('keydown', this._onKeydown);
     document.body.style.overflow = 'hidden';
 
@@ -153,6 +154,7 @@ class VelinModal extends HTMLElement {
   _close() {
     document.removeEventListener('keydown', this._onKeydown);
     document.body.style.overflow = '';
+    clearBackgroundInert();
     restoreFocus(this._previouslyFocused);
   }
 

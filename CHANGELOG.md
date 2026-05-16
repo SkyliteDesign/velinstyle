@@ -6,6 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.7.0](https://github.com/SkyliteDesign/velinstyle/releases/tag/v0.7.0) - 2026-05-16
+
+### Added
+- **WCAG 2.2 CSS:** `focus-not-obscured.css`, `target-size.css`, optional AAA contrast via `data-velin-contrast="aaa"`.
+- **Expanded `forced-colors` and `preferences.css`** for switch, pagination, tables, stepper, nav.
+- **Security layer:** `security.css` moved to dedicated `@layer security` (no longer in `a11y`).
+- **CLI scanner:** rules `a11y/heading-order`, `a11y/landmark-main`, `a11y/interactive-aria-hidden`, `a11y/iframe-title`.
+- **`npm run test:contrast`:** OKLCH token pair verification script.
+- **`docs/assets/docs-a11y.js`:** nav toggle and theme panel without inline handlers.
+- **A11y patterns:** menu button, disclosure, data table, loading/busy sections.
+
+### Changed
+- **Web Components:** keyboard/ARIA improvements for collapse, popover, tooltip, carousel (pause control), dropdown (type-ahead), drawer (`aria-labelledby`), accordion, modal/drawer (`inert` background).
+- **`focus-manager.js`:** visibility-aware focusables, `setBackgroundInert` / `clearBackgroundInert`.
+- **`tests/a11y/run.js`:** recursive `docs/**` and `samples/**`, WCAG 2.2 axe tags, IIFE hydration, `matchMedia` polyfill.
+
+### Fixed
+- **Target size:** alert/toast close, btn `--sm`, pagination ellipsis meet 44px minimum via `target-size.css`.
+
+## [Unreleased]
+
 ### Added
 - **`velinstyle prefix` JSON maps:** optional `velinstyle-prefix-map.json` next to the migrated tree (or `--map <file>`) supplies explicit `token` → `velin-class` replacements; merged after auto map, overrides catalog and `--bootstrap-display`. Keys `_*` / `$*` ignored. Sample: `examples/velinstyle-prefix-map.sample.json`. Documented in README, README.de, `docs/migration.html`, `docs/guides/existing-project.html`.
 

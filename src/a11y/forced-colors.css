@@ -34,5 +34,53 @@
     .velin-nav__link[aria-current="page"] {
       border-block-end: 2px solid Highlight;
     }
+
+    .velin-switch__track {
+      border: 1px solid ButtonText;
+    }
+
+    .velin-switch__input:checked + .velin-switch__track {
+      background-color: Highlight;
+      border-color: Highlight;
+    }
+
+    .velin-pagination__link {
+      border: 1px solid ButtonText;
+    }
+
+    .velin-pagination__link--active,
+    .velin-pagination__link[aria-current="page"] {
+      background-color: Highlight;
+      color: HighlightText;
+      border-color: Highlight;
+    }
+
+    .velin-chip {
+      border: 1px solid ButtonText;
+    }
+
+    .velin-stepper .step__marker {
+      border: 2px solid ButtonText;
+    }
+
+    .velin-stepper .step--active .step__marker,
+    .velin-stepper .step[aria-current="step"] .step__marker {
+      background-color: Highlight;
+      color: HighlightText;
+    }
+
+    .velin-modal__backdrop,
+    .velin-drawer__backdrop {
+      background-color: Canvas;
+      opacity: 1;
+    }
+
+    .velin-progress__bar {
+      border: 1px solid ButtonText;
+    }
+
+    .velin-progress__fill {
+      background-color: Highlight;
+    }
   }
 }

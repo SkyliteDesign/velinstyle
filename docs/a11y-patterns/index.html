@@ -11,8 +11,8 @@
   <a href="#main" class="velin-skip-link">Skip to main content</a>
   <nav class="velin-nav" aria-label="Main navigation">
     <a href="../index.html" class="velin-nav__brand">VelinStyle</a>
-    <button class="velin-nav__toggle" aria-label="Toggle menu" aria-expanded="false"
-      onclick="this.nextElementSibling.toggleAttribute('data-velin-open'); this.setAttribute('aria-expanded', this.nextElementSibling.hasAttribute('data-velin-open'))">
+    <button type="button" class="velin-nav__toggle" data-velin-nav-toggle aria-label="Toggle menu" aria-expanded="false"
+     >
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
     <ul class="velin-nav__list">
@@ -84,6 +84,47 @@
 &lt;input id="email" class="velin-input" aria-invalid="true" aria-describedby="email-err"&gt;
 &lt;p class="velin-field-error" id="email-err"&gt;Invalid address.&lt;/p&gt;</pre>
     </section>
+
+    <section id="menu-button" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Menu button</h2>
+      <p>Use <code>&lt;velin-dropdown&gt;</code> or a button with <code>aria-haspopup="menu"</code>, <code>aria-expanded</code>, and <code>role="menuitem"</code> children.</p>
+<pre class="velin-doc-code">&lt;velin-dropdown&gt;
+  &lt;button slot="trigger" aria-haspopup="menu"&gt;Actions&lt;/button&gt;
+  &lt;button role="menuitem"&gt;Edit&lt;/button&gt;
+  &lt;button role="menuitem"&gt;Delete&lt;/button&gt;
+&lt;/velin-dropdown&gt;</pre>
+    </section>
+
+    <section id="disclosure" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Disclosure (collapse)</h2>
+      <p>Prefer <code>&lt;velin-collapse&gt;</code> with a <code>&lt;button slot="trigger"&gt;</code> so <code>aria-expanded</code> and <code>aria-controls</code> stay in sync.</p>
+<pre class="velin-doc-code">&lt;velin-collapse&gt;
+  &lt;button slot="trigger" type="button"&gt;Show details&lt;/button&gt;
+  &lt;p&gt;Expandable content…&lt;/p&gt;
+&lt;/velin-collapse&gt;</pre>
+    </section>
+
+    <section id="data-table" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Data table</h2>
+      <p>Use <code>&lt;th scope="col|row"&gt;</code> and <code>&lt;caption&gt;</code> for data tables. Wrap wide tables in <code>.velin-table-wrapper</code>.</p>
+<pre class="velin-doc-code">&lt;div class="velin-table-wrapper"&gt;
+  &lt;table class="velin-table"&gt;
+    &lt;caption&gt;Sales by region&lt;/caption&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;Region&lt;/th&gt;&lt;th scope="col"&gt;Total&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;…&lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</pre>
+    </section>
+
+    <section id="loading" class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Loading / busy</h2>
+      <p>Mark loading regions with <code>aria-busy="true"</code> until content is ready. Pair with <code>.velin-skeleton</code> to avoid layout shift.</p>
+<pre class="velin-doc-code">&lt;section aria-busy="true" aria-live="polite"&gt;
+  &lt;div class="velin-skeleton velin-skeleton--heading"&gt;&lt;/div&gt;
+  &lt;div class="velin-skeleton velin-skeleton--text"&gt;&lt;/div&gt;
+&lt;/section&gt;</pre>
+    </section>
   </main>
+<script src="../assets/docs-a11y.js" defer></script>
 </body>
 </html>

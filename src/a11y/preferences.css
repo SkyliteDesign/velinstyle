@@ -34,6 +34,27 @@
     .velin-divider {
       border-width: 2px;
     }
+
+    .velin-nav__link {
+      font-weight: var(--velin-weight-semibold);
+    }
+
+    .velin-pagination__link {
+      border-width: 2px;
+    }
+
+    .velin-table th,
+    .velin-table td {
+      border-width: 2px;
+    }
+
+    .velin-stepper .step__connector {
+      block-size: 3px;
+    }
+
+    .velin-stepper .step__label {
+      font-weight: var(--velin-weight-semibold);
+    }
   }
 
   /* Low Contrast -- softer, less visual density */

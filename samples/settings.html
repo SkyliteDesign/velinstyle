@@ -213,16 +213,16 @@
 
       <velin-tabs>
         <!-- Tabs -->
-        <button slot="tab" aria-selected="true">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <button type="button" slot="tab">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           Profile
         </button>
-        <button slot="tab">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <button type="button" slot="tab">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           Notifications
         </button>
-        <button slot="tab">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <button type="button" slot="tab">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           Security
         </button>
 
@@ -297,7 +297,7 @@
                 <p>Receive email alerts for important account activity.</p>
               </div>
               <label class="velin-switch">
-                <input type="checkbox" class="velin-switch__input" checked>
+                <input type="checkbox" class="velin-switch__input" role="switch" aria-label="Email notifications" checked>
                 <span class="velin-switch__track"></span>
               </label>
             </div>
@@ -308,7 +308,7 @@
                 <p>Get browser push notifications for real-time updates.</p>
               </div>
               <label class="velin-switch">
-                <input type="checkbox" class="velin-switch__input" checked>
+                <input type="checkbox" class="velin-switch__input" role="switch" aria-label="Push notifications" checked>
                 <span class="velin-switch__track"></span>
               </label>
             </div>
@@ -319,7 +319,7 @@
                 <p>Hear about new features, tips, and product updates.</p>
               </div>
               <label class="velin-switch">
-                <input type="checkbox" class="velin-switch__input">
+                <input type="checkbox" class="velin-switch__input" role="switch" aria-label="Marketing emails">
                 <span class="velin-switch__track"></span>
               </label>
             </div>
@@ -330,7 +330,7 @@
                 <p>A summary of your activity and any missed notifications.</p>
               </div>
               <label class="velin-switch">
-                <input type="checkbox" class="velin-switch__input" checked>
+                <input type="checkbox" class="velin-switch__input" role="switch" aria-label="Weekly digest" checked>
                 <span class="velin-switch__track"></span>
               </label>
             </div>
@@ -348,7 +348,7 @@
                 <p>Critical security alerts via text message.</p>
               </div>
               <label class="velin-switch">
-                <input type="checkbox" class="velin-switch__input">
+                <input type="checkbox" class="velin-switch__input" role="switch" aria-label="SMS alerts">
                 <span class="velin-switch__track"></span>
               </label>
             </div>
@@ -359,7 +359,7 @@
                 <p>Forward notifications to your Slack workspace.</p>
               </div>
               <label class="velin-switch">
-                <input type="checkbox" class="velin-switch__input" checked>
+                <input type="checkbox" class="velin-switch__input" role="switch" aria-label="Slack integration" checked>
                 <span class="velin-switch__track"></span>
               </label>
             </div>
@@ -410,7 +410,7 @@
                 <p>Add an extra layer of security with 2FA via authenticator app.</p>
               </div>
               <label class="velin-switch">
-                <input type="checkbox" class="velin-switch__input">
+                <input type="checkbox" class="velin-switch__input" role="switch" aria-label="Two-factor authentication">
                 <span class="velin-switch__track"></span>
                 <span class="velin-switch__label">Disabled</span>
               </label>

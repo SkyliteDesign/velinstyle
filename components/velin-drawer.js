@@ -1,4 +1,4 @@
-import { trapFocus, saveFocus, restoreFocus, getFocusableElements } from './focus-manager.js';
+import { trapFocus, saveFocus, restoreFocus, getFocusableElements, setBackgroundInert, clearBackgroundInert } from './focus-manager.js';
 import { escapeHTML } from './sanitize.js';
 
 const styles = `
@@ -61,12 +61,13 @@ class VelinDrawer extends HTMLElement {
   connectedCallback() {
     const title = this.getAttribute('title') || '';
     const safeTitle = escapeHTML(title);
+    const titleId = 'velin-drawer-title';
     this.shadowRoot.innerHTML = `
       <style>${styles}</style>
       <div class="overlay" part="overlay"></div>
-      <div class="drawer" role="dialog" aria-modal="true" aria-label="${safeTitle}" part="drawer">
+      <div class="drawer" role="dialog" aria-modal="true" aria-labelledby="${titleId}" part="drawer">
         <div class="header" part="header">
-          <h2 class="title">${safeTitle}</h2>
+          <h2 class="title" id="${titleId}">${safeTitle}</h2>
           <button class="close-btn" aria-label="Close" part="close">&#215;</button>
         </div>
         <div class="body" part="body"><slot></slot></div>
@@ -85,6 +86,7 @@ class VelinDrawer extends HTMLElement {
 
   _open() {
     this._prev = saveFocus();
+    setBackgroundInert(this);
     document.addEventListener('keydown', this._onKey);
     document.body.style.overflow = 'hidden';
     requestAnimationFrame(() => {
@@ -96,6 +98,7 @@ class VelinDrawer extends HTMLElement {
   _close() {
     document.removeEventListener('keydown', this._onKey);
     document.body.style.overflow = '';
+    clearBackgroundInert();
     restoreFocus(this._prev);
   }
 

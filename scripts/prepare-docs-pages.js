@@ -34,6 +34,24 @@ function patchContent(relFromDocs, content) {
     /https:\/\/cdn\.jsdelivr\.net\/npm\/velinstyle@/g,
     'https://cdn.jsdelivr.net/npm/@birdapi/velinstyle@',
   );
+  c = c.replaceAll('VelinStyle v0.6.1', 'VelinStyle v0.7.0');
+
+  c = c.replace(
+    /<button class="velin-nav__toggle"([^>]*)\s+onclick="[^"]*"/gi,
+    '<button type="button" class="velin-nav__toggle" data-velin-nav-toggle$1',
+  );
+  c = c.replace(
+    /<button onclick="document\.getElementById\('themePanel'\)[^"]*"([^>]*aria-label="Theme[^"]*"[^>]*)>/gi,
+    '<button type="button" data-velin-theme-toggle $1>',
+  );
+
+  const assetPrefix = depth === 0 ? 'assets/' : `${'../'.repeat(depth)}assets/`;
+  if (c.includes('id="themePicker"') && !c.includes('docs-a11y.js')) {
+    c = c.replace('</body>', `<script src="${assetPrefix}docs-a11y.js" defer></script>\n</body>`);
+  } else if (c.includes('velin-nav__toggle') && !c.includes('docs-a11y.js')) {
+    c = c.replace('</body>', `<script src="${assetPrefix}docs-a11y.js" defer></script>\n</body>`);
+  }
+
   return c;
 }
 

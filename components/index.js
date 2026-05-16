@@ -20,7 +20,7 @@ export { default as VelinCountdown } from './velin-countdown.js';
 export { default as VelinProgressRing } from './velin-progress-ring.js';
 export { default as VelinPersist } from './velin-persist.js';
 export { VelinHapticObserver, vibrate, applyHaptic, PATTERNS as HapticPatterns } from './velin-haptic.js';
-export { trapFocus, rovingTabindex, saveFocus, restoreFocus, getFocusableElements } from './focus-manager.js';
+export { trapFocus, rovingTabindex, saveFocus, restoreFocus, getFocusableElements, setBackgroundInert, clearBackgroundInert } from './focus-manager.js';
 
 import { VelinHapticObserver } from './velin-haptic.js';
 if (typeof document !== 'undefined') {

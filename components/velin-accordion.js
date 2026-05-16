@@ -38,13 +38,27 @@ class VelinAccordion extends HTMLElement {
   connectedCallback() {
     this.shadowRoot.innerHTML = `
       <style>${styles}</style>
-      <div role="region" part="region"><slot></slot></div>
+      <slot></slot>
     `;
 
     this._exclusive = this.hasAttribute('exclusive');
+    this._wireDetails();
 
     this.addEventListener('toggle', this._onToggle, true);
     this.addEventListener('keydown', this._onKeydown.bind(this));
+  }
+
+  _wireDetails() {
+    let panelIndex = 0;
+    for (const details of this.querySelectorAll('details')) {
+      const summary = details.querySelector('summary');
+      const panel = details.querySelector(':scope > :not(summary)');
+      const panelId = panel?.id || `velin-accordion-panel-${++panelIndex}`;
+      if (panel && !panel.id) panel.id = panelId;
+      if (summary && panel) {
+        summary.setAttribute('aria-controls', panelId);
+      }
+    }
   }
 
   _onToggle(event) {

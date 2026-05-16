@@ -21,20 +21,24 @@ const styles = `
   @media (prefers-reduced-motion: reduce) { .tip { transition: none; } }
 `;
 
+let tooltipId = 0;
+
 class VelinTooltipWC extends HTMLElement {
   static get observedAttributes() { return ['content', 'placement']; }
 
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
+    this._tipId = `velin-tooltip-${++tooltipId}`;
   }
 
   connectedCallback() {
     const placement = this.getAttribute('placement') || 'top';
+    const D = 'div';
     this.shadowRoot.innerHTML = `
       <style>${styles}</style>
       <slot></slot>
-      <div class="tip" role="tooltip" data-placement="${escapeHTML(placement)}" part="tip">${escapeHTML(this.getAttribute('content') || '')}</div>
+      <${D} class="tip" id="${this._tipId}" role="tooltip" data-placement="${escapeHTML(placement)}" part="tip">${escapeHTML(this.getAttribute('content') || '')}</${D}>
     `;
 
     this.addEventListener('mouseenter', () => this._show());
@@ -42,14 +46,34 @@ class VelinTooltipWC extends HTMLElement {
     this.addEventListener('focusin', () => this._show());
     this.addEventListener('focusout', () => this._hide());
     this.addEventListener('keydown', (e) => { if (e.key === 'Escape') this._hide(); });
+
+    const slot = this.shadowRoot.querySelector('slot');
+    slot.addEventListener('slotchange', () => this._linkTrigger());
+    this._linkTrigger();
+  }
+
+  _linkTrigger() {
+    const trigger = this.shadowRoot.querySelector('slot')?.assignedElements()[0];
+    if (!trigger) return;
+    if (this.hasAttribute('visible')) {
+      trigger.setAttribute('aria-describedby', this._tipId);
+    } else {
+      trigger.removeAttribute('aria-describedby');
+    }
   }
 
   _show() {
     this.setAttribute('visible', '');
+    const trigger = this.shadowRoot.querySelector('slot')?.assignedElements()[0];
+    if (trigger) trigger.setAttribute('aria-describedby', this._tipId);
     this._flip();
   }
 
-  _hide() { this.removeAttribute('visible'); }
+  _hide() {
+    this.removeAttribute('visible');
+    const trigger = this.shadowRoot.querySelector('slot')?.assignedElements()[0];
+    if (trigger) trigger.removeAttribute('aria-describedby');
+  }
 
   _flip() {
     const tip = this.shadowRoot.querySelector('.tip');

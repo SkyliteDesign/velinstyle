@@ -1,4 +1,5 @@
 import { escapeHTML } from './sanitize.js';
+import { trapFocus, saveFocus, restoreFocus, getFocusableElements } from './focus-manager.js';
 
 const styles = `
   :host { position: relative; display: inline-block; }
@@ -14,7 +15,6 @@ const styles = `
     transition: opacity 150ms ease, visibility 150ms ease;
   }
   :host([open]) .popover { opacity: 1; visibility: visible; }
-  /* Placement */
   .popover--top { inset-block-end: calc(100% + 0.5rem); inset-inline-start: 50%; transform: translateX(-50%); }
   .popover--bottom { inset-block-start: calc(100% + 0.5rem); inset-inline-start: 50%; transform: translateX(-50%); }
   .popover--start { inset-inline-end: calc(100% + 0.5rem); inset-block-start: 50%; transform: translateY(-50%); }
@@ -28,14 +28,19 @@ const styles = `
   @media (prefers-reduced-motion: reduce) { .popover { transition: none; } }
 `;
 
+let popoverId = 0;
+
 class VelinPopover extends HTMLElement {
   static get observedAttributes() { return ['open']; }
 
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
+    this._popoverId = `velin-popover-${++popoverId}`;
     this._onOutside = this._onOutside.bind(this);
     this._onKey = this._onKey.bind(this);
+    this._prevFocus = null;
+    this._isDialog = false;
   }
 
   connectedCallback() {
@@ -43,35 +48,44 @@ class VelinPopover extends HTMLElement {
     const triggerType = this.getAttribute('trigger') || 'click';
     const title = this.getAttribute('title') || '';
     const role = triggerType === 'hover' ? 'tooltip' : 'dialog';
+    this._isDialog = role === 'dialog';
 
     this.shadowRoot.innerHTML = `
       <style>${styles}</style>
       <slot name="trigger"></slot>
-      <div class="popover popover--${placement}" role="${role}" part="popover">
+      <div class="popover popover--${placement}" id="${this._popoverId}" role="${role}" part="popover">
         ${title ? `<div class="popover__title" part="title">${escapeHTML(title)}</div>` : ''}
         <slot></slot>
       </div>
     `;
 
     const triggerSlot = this.shadowRoot.querySelector('slot[name="trigger"]');
-    triggerSlot.addEventListener('slotchange', () => {
-      const trigger = triggerSlot.assignedElements()[0];
-      if (!trigger) return;
-      trigger.setAttribute('aria-haspopup', role === 'tooltip' ? 'true' : 'dialog');
-      trigger.setAttribute('aria-expanded', 'false');
+    triggerSlot.addEventListener('slotchange', () => this._wireTrigger(triggerType));
+    this._wireTrigger(triggerType);
+  }
 
-      if (triggerType === 'click') {
-        trigger.addEventListener('click', () => this.toggle());
-      } else if (triggerType === 'hover') {
-        this.addEventListener('mouseenter', () => this.open());
-        this.addEventListener('mouseleave', () => this.close());
-        this.addEventListener('focusin', () => this.open());
-        this.addEventListener('focusout', (e) => { if (!this.contains(e.relatedTarget)) this.close(); });
-      } else if (triggerType === 'focus') {
-        trigger.addEventListener('focusin', () => this.open());
-        trigger.addEventListener('focusout', () => this.close());
-      }
-    });
+  _wireTrigger(triggerType) {
+    const trigger = this.shadowRoot.querySelector('slot[name="trigger"]')?.assignedElements()[0];
+    if (!trigger) return;
+
+    const isHover = triggerType === 'hover';
+    trigger.setAttribute('aria-haspopup', isHover ? 'true' : 'dialog');
+    trigger.setAttribute('aria-expanded', this.hasAttribute('open') ? 'true' : 'false');
+    if (this._isDialog) {
+      trigger.setAttribute('aria-controls', this._popoverId);
+    }
+
+    if (triggerType === 'click') {
+      trigger.onclick = () => this.toggle();
+    } else if (triggerType === 'hover') {
+      this.onmouseenter = () => this.open();
+      this.onmouseleave = () => this.close();
+      this.onfocusin = () => this.open();
+      this.onfocusout = (e) => { if (!this.contains(e.relatedTarget)) this.close(); };
+    } else if (triggerType === 'focus') {
+      trigger.onfocusin = () => this.open();
+      trigger.onfocusout = () => this.close();
+    }
   }
 
   open() {
@@ -80,18 +94,44 @@ class VelinPopover extends HTMLElement {
     if (trigger) trigger.setAttribute('aria-expanded', 'true');
     document.addEventListener('click', this._onOutside, true);
     document.addEventListener('keydown', this._onKey);
+
+    if (this._isDialog) {
+      this._prevFocus = saveFocus();
+      requestAnimationFrame(() => {
+        const focusable = getFocusableElements(this.shadowRoot.querySelector('.popover'));
+        if (focusable.length) focusable[0].focus();
+        else this.shadowRoot.querySelector('.popover')?.focus();
+      });
+    }
   }
+
   close() {
     this.removeAttribute('open');
     const trigger = this.querySelector('[slot="trigger"]');
     if (trigger) trigger.setAttribute('aria-expanded', 'false');
     document.removeEventListener('click', this._onOutside, true);
     document.removeEventListener('keydown', this._onKey);
+    if (this._isDialog && this._prevFocus) {
+      restoreFocus(this._prevFocus);
+      this._prevFocus = null;
+    }
   }
+
   toggle() { this.hasAttribute('open') ? this.close() : this.open(); }
 
   _onOutside(e) { if (!this.contains(e.target)) this.close(); }
-  _onKey(e) { if (e.key === 'Escape') this.close(); }
+
+  _onKey(e) {
+    if (e.key === 'Escape') {
+      this.close();
+      const trigger = this.querySelector('[slot="trigger"]');
+      if (trigger) trigger.focus();
+      return;
+    }
+    if (this._isDialog && this.hasAttribute('open')) {
+      trapFocus(this.shadowRoot.querySelector('.popover'), e);
+    }
+  }
 
   disconnectedCallback() {
     document.removeEventListener('click', this._onOutside, true);

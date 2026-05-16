@@ -26,7 +26,9 @@
 @import "a11y/forced-colors.css";
 @import "a11y/skeleton.css";
 @import "a11y/preferences.css";
-@import "a11y/security.css";
+@import "a11y/focus-not-obscured.css";
+@import "a11y/target-size.css";
+@import "a11y/high-contrast-aaa.css";
 
 /* Layout */
 @import "layout/breakpoints.css";
@@ -87,3 +89,6 @@
 
 /* Helpers */
 @import "helpers/helpers.css";
+
+/* Security (separate layer from a11y) */
+@import "a11y/security.css";

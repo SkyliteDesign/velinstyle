@@ -207,6 +207,52 @@ function scanA11yHTML(content, file) {
     });
   }
 
+  if (/<body/i.test(content) && !/<main\b/i.test(content) && !/id\s*=\s*["']main["']/i.test(content)) {
+    issues.push({
+      file, line: 1, severity: 1,
+      rule: 'a11y/landmark-main',
+      message: 'No <main> landmark or id="main" found. Add a main landmark for screen readers.',
+      fixable: false,
+    });
+  }
+
+  const headings = [...content.matchAll(/<h([1-6])\b/gi)].map((m) => parseInt(m[1], 10));
+  for (let i = 1; i < headings.length; i++) {
+    if (headings[i] - headings[i - 1] > 1) {
+      issues.push({
+        file, line: 1, severity: 1,
+        rule: 'a11y/heading-order',
+        message: `Heading level skips from h${headings[i - 1]} to h${headings[i]}. Use sequential heading levels.`,
+        fixable: false,
+      });
+      break;
+    }
+  }
+
+  lines.forEach((line, idx) => {
+    const ln = idx + 1;
+    if (/aria-hidden\s*=\s*["']true["']/i.test(line) && /<(button|a|input|select|textarea)\b/i.test(line)) {
+      issues.push({
+        file, line: ln, severity: 0,
+        rule: 'a11y/interactive-aria-hidden',
+        message: 'Interactive element with aria-hidden="true" is not exposed to assistive tech.',
+        fixable: false,
+      });
+    }
+
+    const iframeMatches = line.matchAll(/<iframe\b[^>]*>/gi);
+    for (const m of iframeMatches) {
+      if (!/\btitle\s*=/i.test(m[0])) {
+        issues.push({
+          file, line: ln, severity: 0,
+          rule: 'a11y/iframe-title',
+          message: '<iframe> without title attribute.',
+          fixable: false,
+        });
+      }
+    }
+  });
+
   return issues;
 }
 

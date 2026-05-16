@@ -8,7 +8,7 @@
 <br>
 
 [![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-2563eb?style=flat-square)](LICENSE)
-[![Release](https://img.shields.io/badge/Release-v0.6.1-2563eb?style=flat-square)](CHANGELOG.md)
+[![Release](https://img.shields.io/badge/Release-v0.7.0-2563eb?style=flat-square)](CHANGELOG.md)
 [![WCAG AA](https://img.shields.io/badge/WCAG-AA-16a34a?style=flat-square)](docs/a11y.html)
 [![CSS min](https://img.shields.io/badge/CSS_min-~46KB-15803d?style=flat-square)]()
 [![JS min](https://img.shields.io/badge/JS_min-~66KB-15803d?style=flat-square)]()

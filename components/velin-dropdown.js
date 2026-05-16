@@ -62,6 +62,8 @@ class VelinDropdown extends HTMLElement {
     this.attachShadow({ mode: 'open', delegatesFocus: true });
     this._onDocClick = this._onDocClick.bind(this);
     this._onKeydown = this._onKeydown.bind(this);
+    this._typeahead = '';
+    this._typeaheadTimer = null;
   }
 
   connectedCallback() {
@@ -75,15 +77,29 @@ class VelinDropdown extends HTMLElement {
     `;
 
     const triggerSlot = this.shadowRoot.querySelector('slot[name="trigger"]');
+    const menuSlot = this.shadowRoot.querySelector('slot:not([name])');
     triggerSlot.addEventListener('click', () => this.toggle());
     triggerSlot.addEventListener('slotchange', () => {
       const trigger = triggerSlot.assignedElements()[0];
       if (trigger) {
         trigger.setAttribute('aria-haspopup', 'menu');
         trigger.setAttribute('aria-expanded', this.hasAttribute('open') ? 'true' : 'false');
+        const menuId = this._menuId || (this._menuId = `velin-dropdown-menu-${Math.random().toString(36).slice(2, 9)}`);
+        trigger.setAttribute('aria-controls', menuId);
+        this.shadowRoot.querySelector('.menu')?.setAttribute('id', menuId);
       }
     });
+    menuSlot?.addEventListener('slotchange', () => this._normalizeMenuItems());
+    this._normalizeMenuItems();
     this.addEventListener('keydown', this._onKeydown);
+  }
+
+  _normalizeMenuItems() {
+    const items = this._getMenuItems();
+    items.forEach((el, i) => {
+      if (!el.hasAttribute('role')) el.setAttribute('role', 'menuitem');
+      el.setAttribute('tabindex', i === 0 ? '0' : '-1');
+    });
   }
 
   toggle() {
@@ -138,9 +154,24 @@ class VelinDropdown extends HTMLElement {
     }
 
     const items = this._getMenuItems();
-    if (items.length > 0) {
-      rovingTabindex(this, items, event);
+    if (items.length === 0) return;
+
+    if (event.key.length === 1 && /[a-z0-9]/i.test(event.key)) {
+      clearTimeout(this._typeaheadTimer);
+      this._typeahead += event.key.toLowerCase();
+      this._typeaheadTimer = setTimeout(() => { this._typeahead = ''; }, 500);
+      const match = items.find((el) =>
+        (el.textContent?.trim().toLowerCase() || '').startsWith(this._typeahead)
+      );
+      if (match) {
+        event.preventDefault();
+        items.forEach((item) => item.setAttribute('tabindex', item === match ? '0' : '-1'));
+        match.focus();
+      }
+      return;
     }
+
+    rovingTabindex(this, items, event);
   }
 
   disconnectedCallback() {

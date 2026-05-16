@@ -11,7 +11,7 @@ const PKG_ROOT = join(__dirname, '..');
 const args = process.argv.slice(2);
 const command = args[0];
 
-const LAYERS = ['tokens', 'reset', 'base', 'a11y', 'layout', 'components', 'utilities', 'helpers'];
+const LAYERS = ['tokens', 'reset', 'base', 'a11y', 'layout', 'components', 'utilities', 'security', 'helpers'];
 
 const LAYER_FILES = {
   tokens: [
@@ -24,8 +24,9 @@ const LAYER_FILES = {
   a11y: [
     'a11y/sr-only.css', 'a11y/skip-link.css', 'a11y/reduced-motion.css',
     'a11y/forced-colors.css', 'a11y/skeleton.css', 'a11y/preferences.css',
-    'a11y/security.css',
+    'a11y/focus-not-obscured.css', 'a11y/target-size.css', 'a11y/high-contrast-aaa.css',
   ],
+  security: ['a11y/security.css'],
   layout: [
     'layout/breakpoints.css', 'layout/container.css', 'layout/grid.css',
     'layout/flex.css', 'layout/patterns.css',
@@ -78,7 +79,7 @@ function hasFlag(flag, alias) {
 
 function help() {
   console.log(`
-  ${C.bold('VelinStyle CLI')} v0.6.1
+  ${C.bold('VelinStyle CLI')} v0.7.0
 
   ${C.bold('Usage:')}
     velinstyle init                 Create velinstyle.config.js

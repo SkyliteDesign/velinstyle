@@ -1,0 +1,21 @@
+/* WCAG 2.4.11 Focus Not Obscured — scroll padding for fixed headers/nav */
+@layer a11y {
+  :root {
+    --velin-nav-height: 4rem;
+    scroll-padding-block-start: var(--velin-nav-height);
+  }
+
+  .velin-scroll-pt-nav {
+    scroll-padding-block-start: var(--velin-nav-height);
+  }
+
+  .velin-scroll-pt-none {
+    scroll-padding-block-start: 0;
+  }
+
+  /* Highlight skip target briefly when focused via skip link */
+  main:target,
+  [id="main"]:target {
+    scroll-margin-block-start: var(--velin-nav-height);
+  }
+}

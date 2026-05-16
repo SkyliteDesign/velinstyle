@@ -12,6 +12,16 @@ const COMPONENTS = [
   { tag: 'velin-popover', module: '../../components/velin-popover.js', observedAttrs: ['open'] },
   { tag: 'velin-copy', module: '../../components/velin-copy.js', observedAttrs: [] },
   { tag: 'velin-scroll-top', module: '../../components/velin-scroll-top.js', observedAttrs: [] },
+  { tag: 'velin-carousel', module: '../../components/velin-carousel.js', observedAttrs: ['autoplay', 'interval'] },
+  { tag: 'velin-collapse', module: '../../components/velin-collapse.js', observedAttrs: ['open'] },
+  { tag: 'velin-scrollspy', module: '../../components/velin-scrollspy.js', observedAttrs: [] },
+  { tag: 'velin-tooltip-wc', module: '../../components/velin-tooltip-wc.js', observedAttrs: ['content', 'placement'] },
+  { tag: 'velin-lightbox', module: '../../components/velin-lightbox.js', observedAttrs: [] },
+  { tag: 'velin-stepper-wc', module: '../../components/velin-stepper-wc.js', observedAttrs: [] },
+  { tag: 'velin-dialog', module: '../../components/velin-dialog.js', observedAttrs: [] },
+  { tag: 'velin-countdown', module: '../../components/velin-countdown.js', observedAttrs: [] },
+  { tag: 'velin-progress-ring', module: '../../components/velin-progress-ring.js', observedAttrs: [] },
+  { tag: 'velin-persist', module: '../../components/velin-persist.js', observedAttrs: [] },
 ];
 
 beforeAll(async () => {
@@ -37,7 +47,7 @@ describe('Web Component instantiation', () => {
 });
 
 describe('Web Component shadow DOM', () => {
-  const withShadow = COMPONENTS.filter((c) => c.tag !== 'velin-icon');
+  const withShadow = COMPONENTS.filter((c) => !['velin-icon', 'velin-scrollspy', 'velin-persist'].includes(c.tag));
 
   for (const { tag } of withShadow) {
     it(`${tag} attaches a shadow root on connect`, () => {
@@ -91,13 +101,14 @@ describe('velin-modal', () => {
 });
 
 describe('velin-drawer', () => {
-  it('has a dialog with role="dialog" and aria-modal', () => {
+  it('has a dialog with role="dialog" and aria-labelledby', () => {
     const el = document.createElement('velin-drawer');
     el.setAttribute('title', 'Test Drawer');
     document.body.appendChild(el);
     const dialog = el.shadowRoot.querySelector('[role="dialog"]');
     expect(dialog).not.toBeNull();
     expect(dialog.getAttribute('aria-modal')).toBe('true');
+    expect(dialog.getAttribute('aria-labelledby')).toBe('velin-drawer-title');
     el.remove();
   });
 
@@ -132,11 +143,40 @@ describe('velin-dropdown', () => {
 });
 
 describe('velin-accordion', () => {
-  it('renders a region role', () => {
+  it('wires aria-controls on summary elements', () => {
     const el = document.createElement('velin-accordion');
+    el.innerHTML = '<details><summary>One</summary><p id="p1">Content</p></details>';
     document.body.appendChild(el);
-    const region = el.shadowRoot.querySelector('[role="region"]');
-    expect(region).not.toBeNull();
+    const summary = el.querySelector('summary');
+    expect(summary.getAttribute('aria-controls')).toBe('p1');
+    el.remove();
+  });
+});
+
+describe('velin-modal keyboard', () => {
+  it('closes on Escape', () => {
+    const el = document.createElement('velin-modal');
+    el.setAttribute('title', 'Kbd');
+    document.body.appendChild(el);
+    el.open();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    expect(el.hasAttribute('open')).toBe(false);
+    el.remove();
+  });
+});
+
+describe('velin-collapse', () => {
+  it('sets aria-expanded on trigger', () => {
+    const el = document.createElement('velin-collapse');
+    const btn = document.createElement('button');
+    btn.slot = 'trigger';
+    btn.textContent = 'Toggle';
+    el.appendChild(btn);
+    document.body.appendChild(el);
+    expect(btn.getAttribute('aria-expanded')).toBe('false');
+    expect(btn.getAttribute('aria-controls')).toBeTruthy();
+    el.open();
+    expect(btn.getAttribute('aria-expanded')).toBe('true');
     el.remove();
   });
 });

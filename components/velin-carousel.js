@@ -25,8 +25,14 @@ const styles = `
   button:disabled { opacity: 0.3; cursor: not-allowed; }
   svg { width: 1.25rem; height: 1.25rem; }
   .indicators {
-    display: flex; justify-content: center; gap: var(--velin-space-2, 0.5rem);
+    display: flex; justify-content: center; align-items: center; gap: var(--velin-space-2, 0.5rem);
     padding-block: var(--velin-space-3, 0.75rem);
+  }
+  .pause-btn {
+    font-size: var(--velin-text-xs, 0.75rem);
+    padding-inline: var(--velin-space-3, 0.75rem);
+    min-inline-size: auto;
+    border-radius: var(--velin-radius-md, 0.375rem);
   }
   .dot {
     display: inline-flex; align-items: center; justify-content: center;
@@ -54,6 +60,7 @@ class VelinCarousel extends HTMLElement {
     this._index = 0;
     this._timer = null;
     this._startX = 0;
+    this._autoplayPaused = false;
   }
 
   connectedCallback() {
@@ -68,7 +75,7 @@ class VelinCarousel extends HTMLElement {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
         </button>
       </div>
-      <div class="indicators" role="tablist" aria-label="Slide indicators" part="indicators"></div>
+      <div class="indicators" role="group" aria-label="Slide indicators" part="indicators"></div>
     `;
 
     this.shadowRoot.querySelector('.prev').addEventListener('click', () => this.prev());
@@ -128,18 +135,46 @@ class VelinCarousel extends HTMLElement {
     c.innerHTML = '';
     this._slides.forEach((_, i) => {
       const d = document.createElement('button');
+      d.type = 'button';
       d.className = 'dot';
-      d.setAttribute('role', 'tab');
-      d.setAttribute('aria-label', `Slide ${i + 1}`);
+      d.setAttribute('aria-label', `Go to slide ${i + 1}`);
       d.addEventListener('click', () => this.goTo(i));
       c.appendChild(d);
     });
+    if (this.hasAttribute('autoplay')) {
+      const pause = document.createElement('button');
+      pause.type = 'button';
+      pause.className = 'pause-btn';
+      pause.setAttribute('aria-pressed', 'false');
+      pause.setAttribute('aria-label', 'Pause automatic slide show');
+      pause.textContent = 'Pause';
+      pause.addEventListener('click', () => this._toggleAutoplayPause(pause));
+      c.appendChild(pause);
+    }
+    this._update();
+  }
+
+  _toggleAutoplayPause(btn) {
+    this._autoplayPaused = !this._autoplayPaused;
+    if (this._autoplayPaused) {
+      this._pause();
+      btn.setAttribute('aria-pressed', 'true');
+      btn.setAttribute('aria-label', 'Resume automatic slide show');
+      btn.textContent = 'Play';
+    } else {
+      this._resume();
+      btn.setAttribute('aria-pressed', 'false');
+      btn.setAttribute('aria-label', 'Pause automatic slide show');
+      btn.textContent = 'Pause';
+    }
   }
 
   _emit() { this.dispatchEvent(new CustomEvent('velin-slide-change', { bubbles: true, detail: { index: this._index } })); }
   _startAutoplay() { const ms = parseInt(this.getAttribute('interval') || '5000', 10); this._timer = setInterval(() => this.next(), ms); }
   _pause() { if (this._timer) { clearInterval(this._timer); this._timer = null; } }
-  _resume() { if (this.hasAttribute('autoplay') && !this._timer) this._startAutoplay(); }
+  _resume() {
+    if (this.hasAttribute('autoplay') && !this._timer && !this._autoplayPaused) this._startAutoplay();
+  }
 
   disconnectedCallback() { this._pause(); }
 }
