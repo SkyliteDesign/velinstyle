@@ -46,6 +46,8 @@ velinstyle/
 
 Die Marketing-Site und erweiterte Doku unter [velinstyle.info](https://velinstyle.info) liegen in einem **eigenen Repository** (`velinstyle-site`). Issues und PRs dafuer gehoeren dorthin, nicht hierher.
 
+Forkbare Full-Page-Demos: **[velinstyle-demos](https://github.com/SkyliteDesign/velinstyle-demos)**. Nach Aenderungen unter `velinstyle-site/demos/`: `npm run demos:sync` ausfuehren und das Demos-Repo pushen. README-Screenshots: `npm run readme:capture` und optional `npm run readme:assets:webp`.
+
 ## Entwicklungs-Workflow
 
 ### CSS-Aenderungen

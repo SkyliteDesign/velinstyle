@@ -48,6 +48,20 @@ velinstyle/
 
 The marketing site and extended docs at [velinstyle.info](https://velinstyle.info) live in a **separate repository** (`velinstyle-site`). Issues and PRs for that site belong there, not in this repo.
 
+Fork-friendly full-page showcases live in **[velinstyle-demos](https://github.com/SkyliteDesign/velinstyle-demos)**. After changing demos under `velinstyle-site/demos/`, sync them:
+
+```bash
+npm run demos:sync          # writes ../velinstyle-demos
+# commit & push velinstyle-demos
+```
+
+README marketing screenshots (`.github/assets/readme/*.webp`) are generated from production:
+
+```bash
+npm run readme:capture      # Playwright → velinstyle.info
+npm run readme:assets:webp  # optional PNG → WebP
+```
+
 ## Development Workflow
 
 ### CSS Changes

@@ -17,7 +17,7 @@
     "type": "git",
     "url": "https://github.com/SkyliteDesign/velinstyle.git"
   },
-  "homepage": "https://skylitedesign.github.io/velinstyle/",
+  "homepage": "https://velinstyle.info",
   "bugs": {
     "url": "https://github.com/SkyliteDesign/velinstyle/issues"
   },
@@ -45,7 +45,10 @@
     "test:contrast": "node scripts/check-contrast.js",
     "test:security": "vitest run tests/sanitize.test.js tests/cli-security-scanner.test.js",
     "docs:prepare": "npm run build && node scripts/prepare-docs-pages.js",
-    "docs:sync-site": "npm run build && python ../velinstyle-site/tools/sync-0.7.0.py"
+    "docs:sync-site": "npm run build && python ../velinstyle-site/tools/sync-0.7.0.py",
+    "readme:capture": "node tools/capture-readme-demos.mjs",
+    "readme:assets:webp": "node tools/readme-png-to-webp.mjs",
+    "demos:sync": "node tools/sync-demos-to-repo.mjs"
   },
   "keywords": [
     "css",
@@ -64,13 +67,15 @@
   "author": "SkyliteDesign",
   "license": "MIT",
   "devDependencies": {
-    "lightningcss-cli": "^1.28.0",
+    "axe-core": "^4.10.0",
     "esbuild": "^0.24.0",
+    "jsdom": "^26.1.0",
+    "lightningcss-cli": "^1.28.0",
+    "playwright": "^1.60.0",
     "serve": "^14.0.0",
+    "sharp": "^0.34.5",
     "stylelint": "^16.0.0",
     "stylelint-config-standard": "^36.0.0",
-    "vitest": "^3.2.0",
-    "jsdom": "^26.1.0",
-    "axe-core": "^4.10.0"
+    "vitest": "^3.2.0"
   }
 }

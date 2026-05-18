@@ -20,4 +20,5 @@ test-write.py
 test.txt
 strip-coauthor-history.py
 strip-coauthor.py
+.github/assets/readme/*.png
 
