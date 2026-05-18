@@ -18,6 +18,14 @@ const BLUEPRINTS = {
   'search-field': 'search-field.html',
   'sidebar-layout': 'sidebar-layout.html',
   'table-responsive': 'table-responsive.html',
+  'bottom-nav-mobile': 'bottom-nav-mobile.html',
+  'empty-state': 'empty-state.html',
+  'cookie-consent': 'cookie-consent.html',
+  'filter-bar': 'filter-bar.html',
+  'notification-center': 'notification-center.html',
+  'settings-panel': 'settings-panel.html',
+  onboarding: 'onboarding.html',
+  'pricing-table': 'pricing-table.html',
 };
 
 export function listBlueprints() {

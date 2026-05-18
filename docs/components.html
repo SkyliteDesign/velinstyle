@@ -57,7 +57,7 @@
 
   <main id="main" class="velin-container">
     <h1 class="velin-text-4xl velin-font-bold" style="margin-block: var(--velin-space-8)">Web Components</h1>
-    <p class="velin-text-muted velin-mbe-8">22 interactive Web Components with full keyboard support, ARIA attributes, and XSS-safe rendering.</p>
+    <p class="velin-text-muted velin-mbe-8">29 interactive Web Components with full keyboard support, ARIA attributes, and XSS-safe rendering.</p>
 
     <!-- ============ 1. Modal ============ -->
     <section class="section" id="modal">
@@ -635,11 +635,99 @@
       </table>
     </section>
 
+    <section class="section" id="combobox">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-combobox</h2>
+      <p class="velin-text-muted velin-mbe-4">Autocomplete listbox with a trigger in the <code>trigger</code> slot.</p>
+      <div class="demo-box">
+        <velin-combobox aria-label="Fruit picker">
+          <input type="text" slot="trigger" class="velin-input" placeholder="Pick a fruit" aria-label="Fruit" />
+          <button type="button" role="option">Apple</button>
+          <button type="button" role="option">Banana</button>
+          <button type="button" role="option">Cherry</button>
+        </velin-combobox>
+      </div>
+      <table class="api-table"><tr><th>Events</th><th>Detail</th></tr>
+        <tr><td><code>velin-select</code></td><td><code>{ option }</code></td></tr>
+      </table>
+    </section>
+
+    <section class="section" id="bottom-nav">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-bottom-nav</h2>
+      <p class="velin-text-muted velin-mbe-4">Mobile bottom navigation; set <code>current</code> to match <code>data-nav</code> on links.</p>
+      <div class="demo-box">
+        <velin-bottom-nav current="home">
+          <a href="#home" data-nav="home" current>Home</a>
+          <a href="#search" data-nav="search">Search</a>
+          <a href="#profile" data-nav="profile">Profile</a>
+        </velin-bottom-nav>
+      </div>
+    </section>
+
+    <section class="section" id="sheet">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-sheet</h2>
+      <p class="velin-text-muted velin-mbe-4">Bottom sheet with focus trap. Methods: <code>open()</code>, <code>close()</code>.</p>
+      <div class="demo-box">
+        <button type="button" class="velin-btn velin-btn--primary" id="demo-sheet-open">Open sheet</button>
+        <velin-sheet id="demo-sheet" title="Sheet demo"><p class="velin-p-4">Sheet body.</p></velin-sheet>
+      </div>
+    </section>
+
+    <section class="section" id="segmented-control">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-segmented-control</h2>
+      <div class="demo-box">
+        <velin-segmented-control aria-label="View mode">
+          <button type="button" selected>List</button>
+          <button type="button">Grid</button>
+        </velin-segmented-control>
+      </div>
+    </section>
+
+    <section class="section" id="rating">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-rating</h2>
+      <div class="demo-box"><velin-rating value="3" aria-label="Rating"></velin-rating></div>
+    </section>
+
+    <section class="section" id="menubar">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-menubar</h2>
+      <div class="demo-box">
+        <velin-menubar aria-label="Actions">
+          <button type="button" role="menuitem">New</button>
+          <button type="button" role="menuitem">Open</button>
+        </velin-menubar>
+      </div>
+    </section>
+
+    <section class="section" id="command">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-command</h2>
+      <div class="demo-box">
+        <button type="button" class="velin-btn velin-btn--outline" id="demo-command-open">Open palette</button>
+        <velin-command id="demo-command">
+          <button type="button">Dashboard</button>
+          <button type="button">Settings</button>
+        </velin-command>
+      </div>
+    </section>
+
+    <section class="section" id="announcer">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-announcer</h2>
+      <p class="velin-text-muted velin-mbe-4">Live region for screen readers. Static helper: <code>VelinAnnouncer.announceGlobal()</code>.</p>
+      <velin-announcer></velin-announcer>
+    </section>
+
   </main>
+
+  <script>
+    document.getElementById('demo-sheet-open')?.addEventListener('click', function () {
+      document.getElementById('demo-sheet')?.open();
+    });
+    document.getElementById('demo-command-open')?.addEventListener('click', function () {
+      document.getElementById('demo-command')?.open();
+    });
+  </script>
 
   <footer style="padding-block:var(--velin-space-6);border-block-start:1px solid var(--velin-color-border);color:var(--velin-color-text-muted);font-size:var(--velin-text-sm);">
     <div class="velin-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--velin-space-4);">
-      <p>VelinStyle v0.6.1</p>
+      <p>VelinStyle v0.8.0</p>
       <div style="display:flex;gap:var(--velin-space-3);">
         <a href="https://github.com/SkyliteDesign/velinstyle">GitHub</a>
         <a href="https://github.com/SkyliteDesign/velinstyle/blob/main/LICENSE">MIT License</a>

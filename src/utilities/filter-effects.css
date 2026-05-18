@@ -1,0 +1,103 @@
+/*
+ * Filter-Effect utilities — saturate, hue-rotate, contrast, invert, sepia,
+ * drop-shadow plus extended backdrop and glass composites.
+ *
+ * Layered under `utilities`; pair with the existing blur/brightness/grayscale
+ * helpers from src/utilities/position.css. The reduced-motion block at the
+ * bottom strips saturation/hue rotation because those distort color contrast
+ * for users who request reduced motion as a proxy for visual calm.
+ */
+
+@layer utilities {
+  /* === Saturate === */
+  .velin-saturate-0 { filter: saturate(0); }
+  .velin-saturate-50 { filter: saturate(0.5); }
+  .velin-saturate-100 { filter: saturate(1); }
+  .velin-saturate-150 { filter: saturate(1.5); }
+  .velin-saturate-200 { filter: saturate(2); }
+
+  /* === Hue rotate === */
+  .velin-hue-rotate-15 { filter: hue-rotate(15deg); }
+  .velin-hue-rotate-30 { filter: hue-rotate(30deg); }
+  .velin-hue-rotate-60 { filter: hue-rotate(60deg); }
+  .velin-hue-rotate-90 { filter: hue-rotate(90deg); }
+  .velin-hue-rotate-180 { filter: hue-rotate(180deg); }
+
+  /* === Contrast === */
+  .velin-contrast-50 { filter: contrast(0.5); }
+  .velin-contrast-75 { filter: contrast(0.75); }
+  .velin-contrast-100 { filter: contrast(1); }
+  .velin-contrast-125 { filter: contrast(1.25); }
+  .velin-contrast-150 { filter: contrast(1.5); }
+
+  /* === Invert === */
+  .velin-invert { filter: invert(1); }
+  .velin-invert-0 { filter: invert(0); }
+
+  /* === Sepia === */
+  .velin-sepia { filter: sepia(1); }
+  .velin-sepia-50 { filter: sepia(0.5); }
+  .velin-sepia-0 { filter: sepia(0); }
+
+  /* === Drop shadow (paints under transparent SVG/PNG content; differs from box-shadow) === */
+  .velin-drop-shadow-sm {
+    filter: drop-shadow(0 1px 1px oklch(0% 0 0 / 0.18));
+  }
+  .velin-drop-shadow-md {
+    filter: drop-shadow(0 4px 6px oklch(0% 0 0 / 0.18));
+  }
+  .velin-drop-shadow-lg {
+    filter: drop-shadow(0 12px 24px oklch(0% 0 0 / 0.22));
+  }
+  .velin-drop-shadow-glow {
+    filter: drop-shadow(0 0 1.5rem color-mix(in oklch, var(--velin-color-primary, #2563eb) 60%, transparent));
+  }
+
+  /* === Extended backdrop helpers === */
+  .velin-backdrop-saturate {
+    backdrop-filter: saturate(180%);
+    -webkit-backdrop-filter: saturate(180%);
+  }
+  .velin-backdrop-brightness-90 {
+    backdrop-filter: brightness(0.9);
+    -webkit-backdrop-filter: brightness(0.9);
+  }
+  .velin-backdrop-brightness-110 {
+    backdrop-filter: brightness(1.1);
+    -webkit-backdrop-filter: brightness(1.1);
+  }
+  .velin-backdrop-grayscale {
+    backdrop-filter: grayscale(1);
+    -webkit-backdrop-filter: grayscale(1);
+  }
+
+  /* === Glass composites — frosted surfaces for sticky bars/cards === */
+  .velin-glass {
+    background: color-mix(in oklch, var(--velin-color-surface-bright, #fff) 70%, transparent);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    border: 1px solid color-mix(in oklch, var(--velin-color-border, #ddd) 60%, transparent);
+  }
+  .velin-glass-strong {
+    background: color-mix(in oklch, var(--velin-color-surface-bright, #fff) 55%, transparent);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid color-mix(in oklch, var(--velin-color-border, #ddd) 70%, transparent);
+  }
+
+  /* Reduced-motion / reduced-transparency: strip color distortion. */
+  @media (prefers-reduced-motion: reduce) {
+    .velin-saturate-0,
+    .velin-saturate-50,
+    .velin-saturate-100,
+    .velin-saturate-150,
+    .velin-saturate-200,
+    .velin-hue-rotate-15,
+    .velin-hue-rotate-30,
+    .velin-hue-rotate-60,
+    .velin-hue-rotate-90,
+    .velin-hue-rotate-180 {
+      filter: none;
+    }
+  }
+}

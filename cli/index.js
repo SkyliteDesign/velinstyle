@@ -49,6 +49,7 @@ const LAYER_FILES = {
     'utilities/scroll.css', 'utilities/color-mix.css', 'utilities/scroll-animation.css',
     'utilities/view-transition.css', 'utilities/scope.css', 'utilities/anchor.css',
     'utilities/filter.css', 'utilities/container-style.css', 'utilities/state.css',
+    'utilities/safe-area.css',
   ],
   helpers: ['helpers/helpers.css'],
 };
@@ -79,7 +80,7 @@ function hasFlag(flag, alias) {
 
 function help() {
   console.log(`
-  ${C.bold('VelinStyle CLI')} v0.7.0
+  ${C.bold('VelinStyle CLI')} v0.8.0
 
   ${C.bold('Usage:')}
     velinstyle init                 Create velinstyle.config.js
@@ -90,6 +91,8 @@ function help() {
     velinstyle scan [path]          Security & accessibility scanner
     velinstyle prefix [path]        Add missing velin- prefix (dry-run; use --write)
     velinstyle blueprint [name]     Print HTML blueprint (run: velinstyle blueprint list)
+    velinstyle scaffold "<prompt>"  Generate layout HTML from a text description
+    velinstyle layout <sub>         Responsive layout audit and fixes
     velinstyle tokens build         Generate CSS variables from tokens.json
 
   ${C.bold('Icons subcommands:')}
@@ -106,6 +109,16 @@ function help() {
   ${C.bold('Blueprint:')}
     velinstyle blueprint list       Print all blueprint ids
     velinstyle blueprint <name> [--output, -o <file>]
+
+  ${C.bold('Scaffold (0.8.0):')}
+    velinstyle scaffold "<prompt>"  Compose blueprints from natural language
+    velinstyle scaffold list-intents  Show supported intent keywords
+    velinstyle scaffold "<prompt>" -o out.html [--json]
+
+  ${C.bold('Layout (0.8.0):')}
+    velinstyle layout audit [path]    Report flex/grid/responsive issues
+    velinstyle layout suggest [path]  Audit with fix suggestions
+    velinstyle layout fix [path]      Apply safe fixes (--dry-run default, --write)
 
   ${C.bold('Tokens:')}
     velinstyle tokens build [--input <path>] [--output, -o <file>]
@@ -497,6 +510,104 @@ async function prefixCmd() {
   }
 }
 
+async function scaffoldCmd() {
+  const sub = args[1];
+  const { scaffoldFromPrompt, listIntents } = await import('./scaffold.js');
+  if (sub === 'list-intents') {
+    console.log(`\n  ${C.bold('Scaffold intents:')}\n`);
+    for (const i of listIntents()) {
+      console.log(`    ${C.cyan(i.id)} — ${i.blueprints.join(' + ')}`);
+      console.log(C.dim(`      keywords: ${i.keywords.slice(0, 5).join(', ')}…`));
+    }
+    console.log('');
+    return;
+  }
+  const promptParts = [];
+  let i = 1;
+  while (i < args.length) {
+    const a = args[i];
+    if (a.startsWith('-')) break;
+    if (a !== 'scaffold') promptParts.push(a);
+    i += 1;
+  }
+  const prompt = promptParts.join(' ').trim() || sub;
+  if (!prompt || prompt === 'list-intents') {
+    console.log('Usage: velinstyle scaffold "<description>" [-o file.html] [--json]');
+    return;
+  }
+  const r = scaffoldFromPrompt(prompt);
+  if (!r.ok) {
+    console.log(C.red(r.error));
+    process.exit(1);
+  }
+  const out = getArg('--output', '-o');
+  const asJson = hasFlag('--json');
+  if (asJson) {
+    console.log(JSON.stringify(r, null, 2));
+  } else if (out) {
+    writeFileSync(resolve(out), r.html, 'utf-8');
+    console.log(C.green(`Wrote ${resolve(out)} (intent: ${r.intent}, ${r.confidence})`));
+    if (r.responsiveHints?.length) {
+      console.log(C.yellow(`  ${r.responsiveHints.length} layout hint(s) — run: velinstyle layout suggest ${out}`));
+    }
+  } else {
+    console.log(r.html);
+  }
+}
+
+async function layoutCmd() {
+  const sub = args[1] || 'audit';
+  const rawTarget = args[2] && !args[2].startsWith('-') ? args[2] : '.';
+  const targetPath = resolve(rawTarget);
+  const asJson = hasFlag('--json');
+  const write = hasFlag('--write');
+  const dryRun = hasFlag('--dry-run') || !write;
+
+  const { auditPath, suggestFromIssues, formatTextReport, fixPath } = await import('./layout-audit.js');
+
+  if (sub === 'fix') {
+    const result = fixPath(targetPath, { write, dryRun });
+    if (!result.ok) {
+      console.log(C.red(result.error || 'Fix failed'));
+      process.exit(1);
+    }
+    if (asJson) {
+      console.log(JSON.stringify(result, null, 2));
+      return;
+    }
+    if (result.changes.length === 0) {
+      console.log(C.green('No safe fixes to apply.'));
+      return;
+    }
+    for (const c of result.changes) {
+      console.log(`${dryRun ? '[dry-run] ' : ''}${c.file}`);
+      c.changes.forEach((ch) => console.log(C.dim(`  - ${ch}`)));
+    }
+    return;
+  }
+
+  const { issues, files } = auditPath(targetPath);
+  const outIssues = sub === 'suggest' ? suggestFromIssues(issues) : issues;
+
+  if (asJson) {
+    console.log(JSON.stringify({ files, issues: outIssues }, null, 2));
+    return;
+  }
+
+  console.log(formatTextReport(outIssues, files));
+  if (sub === 'suggest' && issues.length) {
+    console.log(C.bold('Suggested fixes:'));
+    for (const i of outIssues) {
+      console.log(`  [${i.id}] ${i.fix}`);
+      if (i.responsive?.mobile) {
+        console.log(C.dim(`    mobile: ${i.responsive.mobile}`));
+      }
+    }
+    console.log('');
+  }
+  process.exit(issues.some((x) => x.severity === 'error') ? 1 : 0);
+}
+
 async function scanCmd() {
   const targetPath = args[1] && !args[1].startsWith('-') ? resolve(args[1]) : resolve('.');
   const format = getArg('--format') || 'text';
@@ -508,6 +619,7 @@ async function scanCmd() {
     fixLang = 'de';
   }
   const severity = getArg('--severity') || 'warning';
+  const only = getArg('--only');
 
   const { scan } = await import('./scanner.js');
   const exitCode = scan(targetPath, {
@@ -516,6 +628,7 @@ async function scanCmd() {
     fixDryRun,
     fixLang: fixLang || undefined,
     format,
+    only,
   });
   process.exit(exitCode);
 }
@@ -532,6 +645,8 @@ switch (command) {
   case 'tokens': await tokensCmd(); break;
   case 'scan': scanCmd(); break;
   case 'prefix': await prefixCmd(); break;
+  case 'scaffold': await scaffoldCmd(); break;
+  case 'layout': await layoutCmd(); break;
   case '--help': case '-h': help(); break;
   default: help(); break;
 }

@@ -152,7 +152,18 @@
   velin-scroll-top:not(:defined),
   velin-scrollspy:not(:defined),
   velin-theme-toggle:not(:defined),
-  velin-icon:not(:defined) {
+  velin-icon:not(:defined),
+  velin-combobox:not(:defined),
+  velin-bottom-nav:not(:defined),
+  velin-sheet:not(:defined),
+  velin-segmented-control:not(:defined),
+  velin-rating:not(:defined),
+  velin-menubar:not(:defined),
+  velin-command:not(:defined),
+  velin-announcer:not(:defined),
+  velin-sparkline:not(:defined),
+  velin-counter:not(:defined),
+  velin-live-dot:not(:defined) {
     opacity: 0;
     visibility: hidden;
   }

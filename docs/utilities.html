@@ -561,6 +561,40 @@
             <span class="velin-animate-fade-in --delay-500" style="background:var(--velin-color-surface-dim);padding:var(--velin-space-2) var(--velin-space-3);border-radius:var(--velin-radius-sm);border:1px solid var(--velin-color-border);font-size:var(--velin-text-sm)">delay-500</span>
           </div>
 
+          <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">0.7.5 entrance &amp; effects</h3>
+          <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);margin-block-end:var(--velin-space-3)">Full chapter with live previews: <a href="https://velinstyle.info/docs/animations/overview.html#utilities-075" rel="noopener">velinstyle.info → Animations</a>.</p>
+          <table class="velin-table velin-doc-api" style="margin-block-end:var(--velin-space-4)">
+            <thead><tr><th>Class</th><th>Effect</th><th>Category</th></tr></thead>
+            <tbody>
+              <tr><td><code>.velin-animate-blur-in</code></td><td>Fade in, blur clears</td><td>Entrance</td></tr>
+              <tr><td><code>.velin-animate-blur-out</code></td><td>Fade out with blur</td><td>Exit</td></tr>
+              <tr><td><code>.velin-animate-rotate-in</code></td><td>Rotate and scale in</td><td>Entrance</td></tr>
+              <tr><td><code>.velin-animate-reveal-up</code></td><td>Clip-path reveal upward</td><td>Entrance</td></tr>
+              <tr><td><code>.velin-animate-reveal-down</code></td><td>Clip-path reveal downward</td><td>Entrance</td></tr>
+              <tr><td><code>.velin-animate-slide-fade-left</code></td><td>Slide from right, fade in</td><td>Entrance</td></tr>
+              <tr><td><code>.velin-animate-slide-fade-right</code></td><td>Slide from left, fade in</td><td>Entrance</td></tr>
+              <tr><td><code>.velin-animate-float</code></td><td>Gentle vertical loop</td><td>Attention</td></tr>
+              <tr><td><code>.velin-animate-glow</code></td><td>Primary box-shadow pulse</td><td>Attention</td></tr>
+              <tr><td><code>.velin-animate-flash</code></td><td>Opacity flash once</td><td>Attention</td></tr>
+            </tbody>
+          </table>
+          <div class="velin-doc-demo" style="display:grid;gap:var(--velin-space-2);grid-template-columns:repeat(auto-fill,minmax(9rem,1fr));margin-block-end:var(--velin-space-4)">
+            <span class="velin-animate-blur-in" style="padding:var(--velin-space-2);background:var(--velin-color-surface-dim);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm);text-align:center">blur-in</span>
+            <span class="velin-animate-rotate-in" style="padding:var(--velin-space-2);background:var(--velin-color-surface-dim);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm);text-align:center">rotate-in</span>
+            <span class="velin-animate-reveal-up" style="padding:var(--velin-space-2);background:var(--velin-color-surface-dim);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm);text-align:center">reveal-up</span>
+            <span class="velin-animate-reveal-down" style="padding:var(--velin-space-2);background:var(--velin-color-surface-dim);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm);text-align:center">reveal-down</span>
+            <span class="velin-animate-slide-fade-left" style="padding:var(--velin-space-2);background:var(--velin-color-surface-dim);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm);text-align:center">slide-fade-left</span>
+            <span class="velin-animate-slide-fade-right" style="padding:var(--velin-space-2);background:var(--velin-color-surface-dim);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm);text-align:center">slide-fade-right</span>
+            <span class="velin-animate-float" style="padding:var(--velin-space-2);background:var(--velin-color-surface-dim);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm);text-align:center">float</span>
+            <span class="velin-animate-glow velin-animate-hover" style="padding:var(--velin-space-2);background:var(--velin-color-primary-subtle);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm);text-align:center">glow (hover)</span>
+            <span class="velin-animate-flash" style="padding:var(--velin-space-2);background:var(--velin-color-surface-dim);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm);text-align:center">flash</span>
+            <span class="velin-animate-blur-out" style="padding:var(--velin-space-2);background:var(--velin-color-surface-dim);border-radius:var(--velin-radius-sm);font-size:var(--velin-text-sm);text-align:center">blur-out</span>
+          </div>
+          <h4 style="margin-block:var(--velin-space-3) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Hover trigger</h4>
+          <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);margin-block-end:var(--velin-space-2)">Add <code>.velin-animate-hover</code> so the animation stays paused until hover on fine pointers (<code>animation-play-state</code>).</p>
+          <h4 style="margin-block:var(--velin-space-3) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Reduced motion (0.7.5)</h4>
+          <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);margin-block-end:var(--velin-space-3)">Under <code>prefers-reduced-motion: reduce</code>, entrance classes use <code>animation: none</code> and reset opacity, filter, transform, and clip-path; <code>float</code>, <code>glow</code>, and <code>flash</code> are disabled.</p>
+
           <h3 style="margin-block:var(--velin-space-4) var(--velin-space-2);font-weight:var(--velin-weight-medium)">Infinite Loop</h3>
           <div class="velin-doc-demo">
             <div class="velin-animate-spin --infinite" style="display:inline-grid;place-items:center;background:var(--velin-color-primary);color:var(--velin-color-on-primary);inline-size:3rem;block-size:3rem;border-radius:var(--velin-radius-full);font-size:var(--velin-text-lg)">&#x21bb;</div>
@@ -908,7 +942,7 @@
 
   <footer class="velin-doc-footer">
     <div class="velin-doc-footer__inner">
-      <p>VelinStyle v0.6.1</p>
+      <p>VelinStyle v0.8.0</p>
       <div style="display:flex;gap:var(--velin-space-3);">
         <a href="https://github.com/SkyliteDesign/velinstyle">GitHub</a>
         <a href="https://github.com/SkyliteDesign/velinstyle/blob/main/LICENSE">MIT License</a>

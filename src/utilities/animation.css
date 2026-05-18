@@ -259,5 +259,101 @@
 
   /* === Hover trigger === */
   .velin-animate-hover { animation-play-state: paused; }
-  .velin-animate-hover:hover { animation-play-state: running; }
+  @media (hover: hover) and (pointer: fine) {
+    .velin-animate-hover:hover { animation-play-state: running; }
+  }
+
+  /* === 0.7.5 Animations === */
+  .velin-animate-blur-in {
+    animation: velin-blur-in var(--velin-duration-normal) var(--velin-ease-out) both;
+  }
+  .velin-animate-blur-out {
+    animation: velin-blur-out var(--velin-duration-normal) var(--velin-ease-in) both;
+  }
+  .velin-animate-rotate-in {
+    animation: velin-rotate-in var(--velin-duration-normal) var(--velin-ease-out) both;
+  }
+  .velin-animate-float {
+    animation: velin-float 3s var(--velin-ease-in-out) infinite;
+  }
+  .velin-animate-flash {
+    animation: velin-flash 0.6s var(--velin-ease-default) both;
+  }
+  .velin-animate-reveal-up {
+    animation: velin-reveal-up var(--velin-duration-normal) var(--velin-ease-out) both;
+  }
+  .velin-animate-reveal-down {
+    animation: velin-reveal-down var(--velin-duration-normal) var(--velin-ease-out) both;
+  }
+  .velin-animate-glow {
+    animation: velin-glow 2s var(--velin-ease-in-out) infinite;
+  }
+  .velin-animate-slide-fade-left {
+    animation: velin-slide-fade-left var(--velin-duration-normal) var(--velin-ease-out) both;
+  }
+  .velin-animate-slide-fade-right {
+    animation: velin-slide-fade-right var(--velin-duration-normal) var(--velin-ease-out) both;
+  }
+
+  @keyframes velin-blur-in {
+    from { opacity: 0; filter: blur(8px); }
+    to { opacity: 1; filter: blur(0); }
+  }
+  @keyframes velin-blur-out {
+    from { opacity: 1; filter: blur(0); }
+    to { opacity: 0; filter: blur(8px); }
+  }
+  @keyframes velin-rotate-in {
+    from { opacity: 0; transform: rotate(-8deg) scale(0.95); }
+    to { opacity: 1; transform: rotate(0) scale(1); }
+  }
+  @keyframes velin-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-0.35rem); }
+  }
+  @keyframes velin-flash {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0.35; }
+  }
+  @keyframes velin-reveal-up {
+    from { clip-path: inset(100% 0 0 0); opacity: 0; }
+    to { clip-path: inset(0 0 0 0); opacity: 1; }
+  }
+  @keyframes velin-reveal-down {
+    from { clip-path: inset(0 0 100% 0); opacity: 0; }
+    to { clip-path: inset(0 0 0 0); opacity: 1; }
+  }
+  @keyframes velin-glow {
+    0%, 100% { box-shadow: 0 0 0 0 transparent; }
+    50% { box-shadow: 0 0 1rem 0 color-mix(in oklch, var(--velin-color-primary, #2563eb) 35%, transparent); }
+  }
+  @keyframes velin-slide-fade-left {
+    from { opacity: 0; transform: translateX(1rem); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes velin-slide-fade-right {
+    from { opacity: 0; transform: translateX(-1rem); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .velin-animate-blur-in,
+    .velin-animate-blur-out,
+    .velin-animate-rotate-in,
+    .velin-animate-reveal-up,
+    .velin-animate-reveal-down,
+    .velin-animate-slide-fade-left,
+    .velin-animate-slide-fade-right {
+      animation: none;
+      opacity: 1;
+      filter: none;
+      transform: none;
+      clip-path: none;
+    }
+    .velin-animate-float,
+    .velin-animate-glow,
+    .velin-animate-flash {
+      animation: none;
+    }
+  }
 }

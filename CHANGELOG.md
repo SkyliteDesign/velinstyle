@@ -4,7 +4,43 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.8.0](https://github.com/SkyliteDesign/velinstyle/releases/tag/v0.8.0) - 2026-05-16
+
+### Added
+- **Motion tokens:** five new easings (`spring`, `elastic`, `expo-out`, `back-out`, `snappy`) and two new durations (`slowest 800ms`, `cinematic 1200ms`) in `tokens/motion.css`.
+- **Filter-effect utilities:** new `utilities/filter-effects.css` with `velin-saturate-*`, `velin-hue-rotate-*`, `velin-contrast-*`, `velin-invert`, `velin-sepia`, `velin-drop-shadow-*`, extended `velin-backdrop-*`, and `velin-glass` / `velin-glass-strong` composites.
+- **Chart-animation utilities:** new `utilities/chart-animation.css` with `velin-stroke-draw`, `velin-sparkline-glow`, `velin-value-bump`, `velin-live-pulse`, `velin-count-fade` keyframes and matching `velin-chart-line` / `velin-chart-area` / `velin-chart-glow` / `velin-spark-tick` / `velin-live-pulse` classes &mdash; all reduced-motion safe.
+- **Three new Web Components:** `<velin-sparkline>` (animated draw-in + live `update()` API), `<velin-counter>` (rAF + `Intl.NumberFormat` count-up with currency/percent/locale), `<velin-live-dot>` (slotted realtime indicator).
+- **Two motion helpers:** `velin-reveal.js` (`initReveal()` plus `[data-velin-reveal-auto]` auto-init) and `velin-flip.js` (`flipReorder()`, `filterList()` plus `[data-velin-flip]` + `[data-velin-filter-value]` / `[data-velin-filter-input]` auto-wiring).
+- **Demo upgrades:** crypto dashboard uses sparkline tick + counters + live-dot; forum and shop chips/searches drive real FLIP-animated list filtering; grid/list view toggle on the shop animates layout changes via FLIP.
+- **CLI `velinstyle scaffold`:** prompt-based HTML from blueprint composition (`cli/scaffold.js`, `scaffold-recipes.json`); `list-intents`, `-o`, `--json`.
+- **CLI `velinstyle layout`:** `audit`, `suggest`, and `fix` for flex/grid/responsive issues (`cli/layout-audit.js`).
+- **Docs:** new pages `docs/utilities/motion.html`, `docs/utilities/filter-effects.html`, `docs/utilities/chart-animation.html`, `docs/components/sparkline.html`, `docs/components/counter.html`, `docs/components/live-dot.html`; `docs/guides/prompt-scaffolding.html`, `docs/guides/responsive-layout.html`; layout and getting-started sections for 0.8.0 CLI.
+
+### Changed
+- `src/velinstyle.css` imports the new filter-effects + chart-animation utilities.
+- `components/index.js` exports the three new WCs and two helpers.
+- `index.html` drops the inline scroll-reveal IIFE in favour of the shared `velin-reveal` helper via `data-velin-reveal-auto`.
+- CLI help version **0.8.0**; package version **0.8.0**.
+
+
+
+### Added
+- **`velinstyle prefix` JSON maps:** optional `velinstyle-prefix-map.json` next to the migrated tree (or `--map <file>`) supplies explicit `token` → `velin-class` replacements; merged after auto map, overrides catalog and `--bootstrap-display`. Keys `_*` / `$*` ignored. Sample: `examples/velinstyle-prefix-map.sample.json`. Documented in README, README.de, `docs/migration.html`, `docs/guides/existing-project.html`.
+
+## Unreleased (Internal Publication)-> [0.7.5]- 2026-05-16
+
+### Added
+- **Security:** hardened `sanitize.js` (`stripControlChars`, `escapeHTMLAttribute`, `createSafeHTML`, stricter `sanitizeURL`); CLI scanner rules (`no-meta-refresh`, `no-inline-style`, `no-data-html-uri`, `dangerous-target`, `integrity-missing`, `postmessage-wildcard`) with `--only` filter; `npm run test:security`.
+- **Mobile:** `safe-area.css` utilities (`.velin-pb-safe`, `.velin-mobile-only` / `.velin-desktop-only`).
+- **Animations:** 10 utility classes in `animation.css` with `prefers-reduced-motion` and fine-pointer hover gating.
+- **Web Components (8):** `velin-combobox`, `velin-bottom-nav`, `velin-sheet`, `velin-segmented-control`, `velin-rating`, `velin-menubar`, `velin-command`, `velin-announcer`; shared `shadow-a11y-styles.js`.
+- **CLI blueprints (8):** `bottom-nav-mobile`, `empty-state`, `cookie-consent`, `filter-bar`, `notification-center`, `settings-panel`, `onboarding`, `pricing-table` (22 total).
+- **Vite + React:** `templates/vite-react-velinstyle`, expanded `@velinstyle/react` wrappers, `docs/guides/react-vite-starter.html`.
+
+### Changed
+- **`components/index.js`:** exports for new WCs and sanitize helpers.
+- **`reset.css`:** FOUC guard for new custom element tags.
 
 ## [0.7.0](https://github.com/SkyliteDesign/velinstyle/releases/tag/v0.7.0) - 2026-05-16
 
@@ -24,11 +60,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Fixed
 - **Target size:** alert/toast close, btn `--sm`, pagination ellipsis meet 44px minimum via `target-size.css`.
-
-## [Unreleased]
-
-### Added
-- **`velinstyle prefix` JSON maps:** optional `velinstyle-prefix-map.json` next to the migrated tree (or `--map <file>`) supplies explicit `token` → `velin-class` replacements; merged after auto map, overrides catalog and `--bootstrap-display`. Keys `_*` / `$*` ignored. Sample: `examples/velinstyle-prefix-map.sample.json`. Documented in README, README.de, `docs/migration.html`, `docs/guides/existing-project.html`.
 
 ## [0.6.1](https://github.com/SkyliteDesign/velinstyle/releases/tag/v0.6.1) - 2026-05-11
 

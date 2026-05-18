@@ -1,6 +1,6 @@
 {
   "name": "@birdapi/velinstyle",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
@@ -43,8 +43,9 @@
     "test": "vitest run",
     "test:a11y": "node tests/a11y/run.js",
     "test:contrast": "node scripts/check-contrast.js",
+    "test:security": "vitest run tests/sanitize.test.js tests/cli-security-scanner.test.js",
     "docs:prepare": "npm run build && node scripts/prepare-docs-pages.js",
-    "docs:sync-site": "npm run build && node ../velinstyle-site/tools/sync-0.7.0.py"
+    "docs:sync-site": "npm run build && python ../velinstyle-site/tools/sync-0.7.0.py"
   },
   "keywords": [
     "css",

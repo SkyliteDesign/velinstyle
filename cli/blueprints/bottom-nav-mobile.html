@@ -1,0 +1,17 @@
+<nav class="velin-pb-safe" aria-label="Primary">
+  <velin-bottom-nav current="home">
+    <a href="#home" data-nav="home" current>Home</a>
+    <a href="#search" data-nav="search">Search</a>
+    <a href="#profile" data-nav="profile">Profile</a>
+  </velin-bottom-nav>
+</nav>
+<script type="module">
+  import '../../dist/velinstyle-components.min.js';
+  const nav = document.querySelector('velin-bottom-nav');
+  nav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      nav.setAttribute('current', link.dataset.nav || '');
+    });
+  });
+</script>

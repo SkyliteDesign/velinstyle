@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vite &amp; React — VelinStyle</title>
+  <meta name="description" content="Vite-React-Starter und @velinstyle/react: VelinStyle CSS + Web Components in React 18.">
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="../docs.css">
+  <script src="../dist/velinstyle-components.iife.js"></script>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="../index.html" class="velin-nav__brand">VelinStyle</a>
+    <button type="button" class="velin-nav__toggle" data-velin-nav-toggle aria-label="Toggle menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="../getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="index.html" class="velin-nav__link" aria-current="page">Integration</a></li>
+      <li><a href="../components.html" class="velin-nav__link">Components</a></li>
+      <li><a href="../security.html" class="velin-nav__link">Security</a></li>
+    </ul>
+  </nav>
+  <div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+    <a href="index.html">← Integration</a> · Vollständige Doku: <a href="https://velinstyle.info/docs/guides/react-vite-starter.html">velinstyle.info</a>
+  </div>
+
+  <main id="main" class="velin-container">
+    <section class="velin-doc-section">
+      <h1 class="velin-doc-title">Vite &amp; React</h1>
+      <p class="velin-doc-lead">Zwei Wege: statisches <strong>Vite + HTML</strong> (<code>templates/vite-velinstyle</code>) oder <strong>React 18</strong> mit <code>@velinstyle/react</code> (<code>templates/vite-react-velinstyle</code>).</p>
+    </section>
+
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">React-Starter (0.7.5)</h2>
+<pre class="velin-doc-code">cd templates/vite-react-velinstyle
+npm install
+npm run dev</pre>
+      <p>Im Monorepo verweist <code>package.json</code> auf <code>file:../..</code> (VelinStyle) und <code>file:../../packages/react</code>.</p>
+    </section>
+
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">@velinstyle/react bauen</h2>
+<pre class="velin-doc-code">cd packages/react
+npm install
+npm run build</pre>
+    </section>
+
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">App-Einstieg</h2>
+<pre class="velin-doc-code">import { VelinThemeToggle, VelinSheet } from '@velinstyle/react';
+import 'velinstyle/dist/velinstyle.min.css';
+import 'velinstyle/dist/velinstyle-components.min.js';</pre>
+      <p>Wrapper sind dünne <code>React.forwardRef</code>-Hüllen um native Custom Elements — keine duplizierte Logik.</p>
+    </section>
+  </main>
+<script src="../assets/docs-a11y.js" defer></script>
+</body>
+</html>

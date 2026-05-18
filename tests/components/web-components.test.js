@@ -22,6 +22,14 @@ const COMPONENTS = [
   { tag: 'velin-countdown', module: '../../components/velin-countdown.js', observedAttrs: [] },
   { tag: 'velin-progress-ring', module: '../../components/velin-progress-ring.js', observedAttrs: [] },
   { tag: 'velin-persist', module: '../../components/velin-persist.js', observedAttrs: [] },
+  { tag: 'velin-combobox', module: '../../components/velin-combobox.js', observedAttrs: ['open', 'aria-label'] },
+  { tag: 'velin-bottom-nav', module: '../../components/velin-bottom-nav.js', observedAttrs: ['aria-label', 'current'] },
+  { tag: 'velin-sheet', module: '../../components/velin-sheet.js', observedAttrs: ['open'] },
+  { tag: 'velin-segmented-control', module: '../../components/velin-segmented-control.js', observedAttrs: ['aria-label'] },
+  { tag: 'velin-rating', module: '../../components/velin-rating.js', observedAttrs: ['value'] },
+  { tag: 'velin-menubar', module: '../../components/velin-menubar.js', observedAttrs: [] },
+  { tag: 'velin-command', module: '../../components/velin-command.js', observedAttrs: ['open'] },
+  { tag: 'velin-announcer', module: '../../components/velin-announcer.js', observedAttrs: [] },
 ];
 
 beforeAll(async () => {

@@ -1,0 +1,70 @@
+{
+  "intents": {
+    "navbar": {
+      "keywords": ["navbar", "navigation", "nav bar", "nav-bar", "header", "menü", "menu bar", "top bar"],
+      "blueprints": ["navbar-header"],
+      "optional": ["search-field"],
+      "optionalIf": { "search": ["search-field"], "suche": ["search-field"] },
+      "confidence": "high"
+    },
+    "modal": {
+      "keywords": ["modal", "dialog", "popup", "bestätigung", "confirm", "lightbox"],
+      "blueprints": ["modal"],
+      "confidence": "high"
+    },
+    "card": {
+      "keywords": ["card", "cards", "karte", "karten", "grid", "kacheln"],
+      "blueprints": ["card-grid"],
+      "confidence": "high"
+    },
+    "dashboard": {
+      "keywords": ["dashboard", "admin", "shell", "sidebar layout", "app shell"],
+      "blueprints": ["navbar-header", "layout-dashboard"],
+      "confidence": "high"
+    },
+    "login": {
+      "keywords": ["login", "sign in", "signin", "anmelden", "auth"],
+      "blueprints": ["form-login"],
+      "confidence": "high"
+    },
+    "footer": {
+      "keywords": ["footer", "fußzeile", "fusszeile", "site footer"],
+      "blueprints": ["footer-simple"],
+      "confidence": "high"
+    },
+    "pricing": {
+      "keywords": ["pricing", "preise", "plans", "tarife", "subscription"],
+      "blueprints": ["pricing-table"],
+      "confidence": "high"
+    },
+    "empty": {
+      "keywords": ["empty state", "empty-state", "keine daten", "no results", "leer"],
+      "blueprints": ["empty-state"],
+      "confidence": "high"
+    },
+    "hero": {
+      "keywords": ["hero", "landing", "above the fold", "cta section"],
+      "blueprints": ["hero-section"],
+      "confidence": "medium"
+    },
+    "table": {
+      "keywords": ["table", "datatable", "data table", "tabelle"],
+      "blueprints": ["table-responsive"],
+      "confidence": "high"
+    },
+    "onboarding": {
+      "keywords": ["onboarding", "wizard", "steps", "tutorial flow"],
+      "blueprints": ["onboarding"],
+      "confidence": "high"
+    }
+  },
+  "fallback": {
+    "intent": "hero",
+    "confidence": "low"
+  },
+  "slots": {
+    "brand": ["brand", "logo", "marke"],
+    "title": ["title", "titel", "heading", "überschrift"],
+    "cta": ["cta", "button", "get started", "loslegen", "start"]
+  }
+}

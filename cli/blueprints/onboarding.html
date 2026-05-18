@@ -1,0 +1,23 @@
+<velin-stepper-wc id="onboard" labels="Welcome,Profile,Done" active="0">
+  <section class="velin-p-6">
+    <h2 class="velin-text-xl velin-mbe-2">Welcome</h2>
+    <p class="velin-mbe-4">Set up your workspace in a few steps.</p>
+    <button type="button" class="velin-btn velin-btn--primary" data-next>Continue</button>
+  </section>
+  <section class="velin-p-6">
+    <h2 class="velin-text-xl velin-mbe-2">Profile</h2>
+    <input type="text" class="velin-input velin-mbe-4" placeholder="Your name" aria-label="Name" />
+    <button type="button" class="velin-btn velin-btn--primary" data-next>Continue</button>
+  </section>
+  <section class="velin-p-6">
+    <h2 class="velin-text-xl velin-mbe-2">Done</h2>
+    <p>You are ready to go.</p>
+  </section>
+</velin-stepper-wc>
+<script type="module">
+  import '../../dist/velinstyle-components.min.js';
+  const stepper = document.getElementById('onboard');
+  document.querySelectorAll('[data-next]').forEach((btn) => {
+    btn.addEventListener('click', () => stepper?.next());
+  });
+</script>

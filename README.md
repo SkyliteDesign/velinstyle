@@ -8,7 +8,7 @@
 <br>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-2563eb?style=flat-square)](LICENSE)
-[![Release](https://img.shields.io/badge/Release-v0.7.0-2563eb?style=flat-square)](CHANGELOG.md)
+[![Release](https://img.shields.io/badge/Release-v0.8.0-2563eb?style=flat-square)](CHANGELOG.md)
 [![WCAG AA](https://img.shields.io/badge/WCAG-AA-16a34a?style=flat-square)](docs/a11y.html)
 [![CSS min](https://img.shields.io/badge/CSS_min-~46KB-15803d?style=flat-square)]()
 [![JS min](https://img.shields.io/badge/JS_min-~66KB-15803d?style=flat-square)]()
@@ -73,8 +73,8 @@ Teams ship UI under pressure. **Accessibility** and **consistent theming** are o
 <tr><td align="center">🎨</td><td><strong>OKLCH + 13 theme presets</strong></td><td>Perceptually uniform colors; dark mode via token swap</td></tr>
 <tr><td align="center">📦</td><td><strong>~46 KB CSS + ~66 KB JS (min)</strong></td><td>Lean defaults vs. heavier all-in-one stacks</td></tr>
 <tr><td align="center">📐</td><td><strong>Container Queries + utilities</strong></td><td>Components adapt to <em>their</em> container, not only the viewport</td></tr>
-<tr><td align="center">🧩</td><td><strong>25 CSS modules · 21 Web Components</strong></td><td>Modals, tabs, drawers, toasts, icons—documented APIs in <a href="docs/css-components.html">CSS</a> &amp; <a href="docs/components.html">WC docs</a></td></tr>
-<tr><td align="center">🛠️</td><td><strong>Optional CLI</strong></td><td><code>init</code>, <code>build</code>, <code>icons</code>, <code>scan</code>, <code>prefix</code>, <code>blueprint</code>, <code>tokens build</code></td></tr>
+<tr><td align="center">🧩</td><td><strong>25 CSS modules · 29 Web Components</strong></td><td>Modals, tabs, drawers, toasts, icons—documented APIs in <a href="docs/css-components.html">CSS</a> &amp; <a href="docs/components.html">WC docs</a></td></tr>
+<tr><td align="center">🛠️</td><td><strong>Optional CLI</strong></td><td><code>init</code>, <code>build</code>, <code>icons</code>, <code>scan</code>, <code>prefix</code>, <code>blueprint</code>, <code>scaffold</code>, <code>layout</code>, <code>tokens build</code></td></tr>
 <tr><td align="center">🌍</td><td><strong>RTL-ready</strong></td><td>Logical properties and layout-minded defaults · <a href="samples/rtl.html">RTL sample</a></td></tr>
 </tbody>
 </table>
@@ -225,7 +225,29 @@ All commands: `npx velinstyle <command>` · `npx velinstyle --help`
 </details>
 
 <details>
-<summary><strong>blueprint</strong> — 14 HTML snippets</summary>
+<summary><strong>scaffold</strong> — prompt → HTML (0.8.0)</summary>
+
+- **`npx velinstyle scaffold list-intents`**
+- **`npx velinstyle scaffold "Navbar with search" -o nav.html`**
+- **`npx velinstyle scaffold "…" --json`** — for agents/CI
+
+See [docs/guides/prompt-scaffolding.html](docs/guides/prompt-scaffolding.html).
+
+</details>
+
+<details>
+<summary><strong>layout</strong> — responsive audit (0.8.0)</summary>
+
+- **`npx velinstyle layout audit [path]`**
+- **`npx velinstyle layout suggest [path]`**
+- **`npx velinstyle layout fix [path] --write`**
+
+See [docs/guides/responsive-layout.html](docs/guides/responsive-layout.html).
+
+</details>
+
+<details>
+<summary><strong>blueprint</strong> — 22 HTML snippets</summary>
 
 - **`npx velinstyle blueprint list`**
 - **`npx velinstyle blueprint &lt;name&gt; -o snippet.html`**

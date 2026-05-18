@@ -80,6 +80,51 @@ function scanSecurityHTML(content, file) {
         fix: (currentLine) => fixSafeExternalLinkLine(currentLine),
       });
     }
+
+    if (/<meta\s[^>]*http-equiv\s*=\s*["']refresh["']/i.test(line)) {
+      issues.push({
+        file, line: ln, severity: 0,
+        rule: 'security/no-meta-refresh',
+        message: '<meta http-equiv="refresh"> can redirect users without consent.',
+        fixable: false,
+      });
+    }
+
+    if (/\sstyle\s*=\s*["'][^"']+["']/i.test(line) && !/velin-user-content/i.test(line)) {
+      issues.push({
+        file, line: ln, severity: 1,
+        rule: 'security/no-inline-style',
+        message: 'Inline style attribute. Prefer CSS classes to reduce XSS surface.',
+        fixable: false,
+      });
+    }
+
+    if (/(?:href|src)\s*=\s*["']data:text\/html/i.test(line)) {
+      issues.push({
+        file, line: ln, severity: 0,
+        rule: 'security/no-data-html-uri',
+        message: 'data:text/html URI can execute script when mishandled.',
+        fixable: false,
+      });
+    }
+
+    if (/<form\b[^>]*\btarget\s*=\s*["']_blank["']/i.test(line)) {
+      issues.push({
+        file, line: ln, severity: 1,
+        rule: 'security/dangerous-target',
+        message: '<form target="_blank"> is unusual and can be abused. Prefer same-tab navigation.',
+        fixable: false,
+      });
+    }
+
+    if (/<script\b[^>]*\bsrc\s*=\s*["']https?:\/\//i.test(line) && !/\bintegrity\s*=/i.test(line)) {
+      issues.push({
+        file, line: ln, severity: 2,
+        rule: 'security/integrity-missing',
+        message: 'External <script> without integrity attribute. Use SRI for CDN scripts.',
+        fixable: false,
+      });
+    }
   });
 
   if (!/<meta\s[^>]*http-equiv\s*=\s*["']Content-Security-Policy["']/i.test(content)) {
@@ -136,9 +181,25 @@ function scanSecurityJS(content, file) {
         fixable: false,
       });
     }
+
+    if (/\.postMessage\s*\([^)]*,\s*['"]\*['"]\s*\)/.test(line)) {
+      issues.push({
+        file, line: ln, severity: 1,
+        rule: 'security/postmessage-wildcard',
+        message: 'postMessage with targetOrigin "*" accepts any origin.',
+        fixable: false,
+      });
+    }
   });
 
   return issues;
+}
+
+function issueCategory(rule) {
+  if (rule.startsWith('security/')) return 'security';
+  if (rule.startsWith('a11y/')) return 'a11y';
+  if (rule.startsWith('css/')) return 'css';
+  return 'other';
 }
 
 // ── Accessibility Scanner ────────────────────────────────────────────────────
@@ -325,6 +386,9 @@ export function scan(targetPath, options = {}) {
   const writeFixes = doFix && !fixDryRun;
   const runFixPipeline = doFix || fixDryRun;
   const ignore = options.ignore || DEFAULT_IGNORE;
+  const onlyCategories = options.only
+    ? options.only.split(',').map((s) => s.trim().toLowerCase())
+    : null;
 
   const htmlFiles = walkFiles(targetPath, ['.html', '.htm'], ignore);
   const cssFiles = walkFiles(targetPath, ['.css'], ignore);
@@ -349,6 +413,9 @@ export function scan(targetPath, options = {}) {
   }
 
   allIssues = allIssues.filter(i => i.severity <= minSeverity);
+  if (onlyCategories?.length) {
+    allIssues = allIssues.filter((i) => onlyCategories.includes(issueCategory(i.rule)));
+  }
   allIssues.sort((a, b) => a.severity - b.severity || a.file.localeCompare(b.file) || a.line - b.line);
 
   let fixSummary = null;
@@ -368,6 +435,7 @@ export function scan(targetPath, options = {}) {
       file: relative(targetPath, i.file),
       line: i.line,
       severity: SEVERITY_LABEL[i.severity],
+      category: issueCategory(i.rule),
       rule: i.rule,
       message: i.message,
       fixable: !!i.fixable,

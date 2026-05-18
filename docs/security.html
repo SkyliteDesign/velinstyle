@@ -77,7 +77,18 @@ const safe = escapeHTML(userInput);
 // "&lt;script&gt;alert('xss')&lt;/script&gt;" becomes harmless text</pre>
 
       <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">URL Validation</h3>
-      <p>The <code>sanitizeURL()</code> function validates URLs before use in <code>src</code> attributes, allowing only <code>http:</code>, <code>https:</code>, and <code>data:</code> protocols. JavaScript URLs are blocked.</p>
+      <p>The <code>sanitizeURL()</code> function validates URLs before use in <code>src</code> attributes, allowing <code>http:</code>, <code>https:</code>, <code>data:</code> (non-HTML), <code>mailto:</code>, and <code>tel:</code>. <code>javascript:</code>, <code>vbscript:</code>, and <code>data:text/html</code> are blocked.</p>
+      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">Additional helpers (0.7.5)</h3>
+      <pre class="demo-code">import {
+  escapeHTML, escapeHTMLAttribute, stripControlChars,
+  sanitizeURL, createSafeHTML, getTrustedPolicy,
+} from '@birdapi/velinstyle/components/sanitize.js';</pre>
+    </section>
+
+    <section class="section">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">CLI security scanner</h2>
+      <p>Run <code>npx velinstyle scan --format json</code> on your HTML. Filter by category with <code>--only security</code>. New rules in 0.7.5 include <code>no-meta-refresh</code>, <code>no-inline-style</code>, <code>no-data-html-uri</code>, <code>dangerous-target</code>, <code>integrity-missing</code>, and <code>postmessage-wildcard</code>.</p>
+      <p>Automated tests: <code>npm run test:security</code>.</p>
     </section>
 
     <!-- ============ CSP ============ -->
@@ -190,7 +201,7 @@ const policy = getTrustedPolicy();
 
   <footer style="padding-block:var(--velin-space-6);border-block-start:1px solid var(--velin-color-border);color:var(--velin-color-text-muted);font-size:var(--velin-text-sm);">
     <div class="velin-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--velin-space-4);">
-      <p>VelinStyle v0.6.1</p>
+      <p>VelinStyle v0.8.0</p>
       <div style="display:flex;gap:var(--velin-space-3);"><a href="https://github.com/SkyliteDesign/velinstyle">GitHub</a><a href="https://github.com/SkyliteDesign/velinstyle/blob/main/LICENSE">MIT License</a></div>
     </div>
   </footer>

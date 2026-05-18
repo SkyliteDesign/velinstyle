@@ -28,8 +28,12 @@ async function hydrateComponents(window) {
   window.eval(code);
 
   const tags = [
-    'velin-modal', 'velin-dropdown', 'velin-accordion', 'velin-tabs', 'velin-toast',
-    'velin-drawer', 'velin-popover', 'velin-carousel', 'velin-collapse', 'velin-tooltip-wc',
+    'velin-modal', 'velin-drawer', 'velin-tabs', 'velin-accordion', 'velin-dropdown',
+    'velin-toast', 'velin-dialog', 'velin-popover', 'velin-carousel', 'velin-collapse',
+    'velin-tooltip-wc', 'velin-lightbox', 'velin-stepper-wc', 'velin-countdown',
+    'velin-progress-ring', 'velin-theme-toggle', 'velin-copy', 'velin-scroll-top',
+    'velin-scrollspy', 'velin-icon', 'velin-combobox', 'velin-bottom-nav', 'velin-sheet',
+    'velin-segmented-control', 'velin-rating', 'velin-menubar', 'velin-command', 'velin-announcer',
   ];
   const timeout = new Promise((resolve) => setTimeout(resolve, 2000));
   const defined = Promise.all(

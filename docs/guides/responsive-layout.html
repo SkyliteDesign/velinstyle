@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Layout Audit — VelinStyle</title>
+  <meta name="description" content="velinstyle layout audit, suggest und fix für Flex, Grid und Breakpoints (0.8.0).">
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="../docs.css">
+  <script src="../dist/velinstyle-components.iife.js"></script>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="../index.html" class="velin-nav__brand">VelinStyle</a>
+    <button type="button" class="velin-nav__toggle" data-velin-nav-toggle aria-label="Toggle menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="../getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="index.html" class="velin-nav__link" aria-current="page">Integration</a></li>
+      <li><a href="../layout.html" class="velin-nav__link">Layout</a></li>
+    </ul>
+  </nav>
+  <div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+    <a href="index.html">← Integration</a> · <a href="https://velinstyle.info/docs/guides/responsive-layout.html">velinstyle.info</a>
+  </div>
+
+  <main id="main" class="velin-container">
+    <section class="velin-doc-section">
+      <h1 class="velin-doc-title">Responsive Layout Audit <span class="velin-badge velin-badge--primary">0.8.0</span></h1>
+      <p class="velin-doc-lead">Statische Prüfung von HTML auf typische Flex-, Grid- und Breakpoint-Fehler — mit Vorschlägen für Smartphone, Tablet und Desktop.</p>
+    </section>
+
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Befehle</h2>
+<pre class="velin-doc-code">npx velinstyle layout audit ./samples
+npx velinstyle layout suggest page.html
+npx velinstyle layout fix page.html --dry-run
+npx velinstyle layout fix page.html --write</pre>
+      <p><code>--json</code> liefert maschinenlesbare Reports für CI oder Agenten.</p>
+    </section>
+
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Regeln</h2>
+      <table class="velin-table">
+        <thead><tr><th>ID</th><th>Problem</th><th>Typische Lösung</th></tr></thead>
+        <tbody>
+          <tr><td><code>grid-missing-row</code></td><td><code>velin-col-*</code> ohne <code>velin-row</code></td><td>Parent <code>velin-row velin-g-4</code></td></tr>
+          <tr><td><code>flex-no-wrap-overflow</code></td><td>Flex ohne Wrap, viele Kinder</td><td><code>velin-flex--wrap</code></td></tr>
+          <tr><td><code>missing-container</code></td><td><code>main</code> ohne Container</td><td><code>velin-container</code></td></tr>
+          <tr><td><code>mobile-hidden-only</code></td><td><code>velin-hidden</code> ohne <code>velin-md-*</code></td><td><code>velin-hidden velin-md-flex</code></td></tr>
+          <tr><td><code>viewport-width</code></td><td><code>100vw</code></td><td><code>velin-w-full</code> + Container</td></tr>
+          <tr><td><code>table-not-responsive</code></td><td>Tabelle ohne Scroll-Wrapper</td><td>Blueprint <code>table-responsive</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Breakpoints (VelinStyle)</h2>
+      <table class="velin-table">
+        <thead><tr><th>Gerät</th><th>Ab</th><th>Utilities</th></tr></thead>
+        <tbody>
+          <tr><td>Smartphone</td><td>default</td><td><code>velin-mobile-only</code>, Stack / Wrap</td></tr>
+          <tr><td>Tablet</td><td>48rem (md)</td><td><code>velin-md-flex</code>, <code>velin-md-block</code></td></tr>
+          <tr><td>Desktop</td><td>62rem (lg)</td><td><code>velin-lg-*</code>, <code>velin-desktop-only</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Sichere Auto-Fixes</h2>
+      <p><code>layout fix --write</code> wendet nur eine Whitelist an: z. B. <code>velin-flex--wrap</code> ergänzen, <code>velin-hidden</code> mit <code>velin-md-block</code> paaren. Kein strukturelles DOM-Rewriting.</p>
+    </section>
+  </main>
+  <footer class="velin-container" style="padding-block:var(--velin-space-8);color:var(--velin-color-text-muted);font-size:var(--velin-text-sm)">
+    <p>VelinStyle v0.8.0</p>
+  </footer>
+<script src="../assets/docs-a11y.js" defer></script>
+</body>
+</html>

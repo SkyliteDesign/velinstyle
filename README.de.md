@@ -8,7 +8,7 @@
 <br>
 
 [![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-2563eb?style=flat-square)](LICENSE)
-[![Release](https://img.shields.io/badge/Release-v0.7.0-2563eb?style=flat-square)](CHANGELOG.md)
+[![Release](https://img.shields.io/badge/Release-v0.8.0-2563eb?style=flat-square)](CHANGELOG.md)
 [![WCAG AA](https://img.shields.io/badge/WCAG-AA-16a34a?style=flat-square)](docs/a11y.html)
 [![CSS min](https://img.shields.io/badge/CSS_min-~46KB-15803d?style=flat-square)]()
 [![JS min](https://img.shields.io/badge/JS_min-~66KB-15803d?style=flat-square)]()
@@ -73,8 +73,8 @@ Unter Zeitdruck landen **Barrierefreiheit** und **konsistentes Theming** oft ers
 <tr><td align="center">🎨</td><td><strong>OKLCH + 13 Theme-Presets</strong></td><td>Perzeptuell gleichmässige Farben; Dark Mode per Token-Swap</td></tr>
 <tr><td align="center">📦</td><td><strong>~46 KB CSS + ~66 KB JS (min)</strong></td><td>Schlank im Vergleich zu vielen All-in-One-Stacks</td></tr>
 <tr><td align="center">📐</td><td><strong>Container Queries + Utilities</strong></td><td>Bausteine passen sich <em>ihrem</em> Container an, nicht nur dem Viewport</td></tr>
-<tr><td align="center">🧩</td><td><strong>25 CSS-Module · 21 Web Components</strong></td><td>Modals, Tabs, Drawer, Toasts, Icons—APIs in <a href="docs/css-components.html">CSS</a> &amp; <a href="docs/components.html">WC-Docs</a></td></tr>
-<tr><td align="center">🛠️</td><td><strong>Optionale CLI</strong></td><td><code>init</code>, <code>build</code>, <code>icons</code>, <code>scan</code>, <code>prefix</code>, <code>blueprint</code>, <code>tokens build</code></td></tr>
+<tr><td align="center">🧩</td><td><strong>25 CSS-Module · 29 Web Components</strong></td><td>Modals, Tabs, Drawer, Toasts, Icons—APIs in <a href="docs/css-components.html">CSS</a> &amp; <a href="docs/components.html">WC-Docs</a></td></tr>
+<tr><td align="center">🛠️</td><td><strong>Optionale CLI</strong></td><td><code>init</code>, <code>build</code>, <code>icons</code>, <code>scan</code>, <code>prefix</code>, <code>blueprint</code>, <code>scaffold</code>, <code>layout</code>, <code>tokens build</code></td></tr>
 <tr><td align="center">🌍</td><td><strong>RTL-ready</strong></td><td>Logical Properties und layout-orientierte Defaults · <a href="samples/rtl.html">RTL-Beispiel</a></td></tr>
 </tbody>
 </table>
@@ -225,7 +225,29 @@ Alle Befehle: `npx velinstyle <befehl>` · `npx velinstyle --help`
 </details>
 
 <details>
-<summary><strong>blueprint</strong> — 14 HTML-Snippets</summary>
+<summary><strong>scaffold</strong> — Prompt → HTML (0.8.0)</summary>
+
+- **`npx velinstyle scaffold list-intents`**
+- **`npx velinstyle scaffold "Navbar mit Suche" -o nav.html`**
+- **`npx velinstyle scaffold "…" --json`** — für Agenten/CI
+
+Siehe [docs/guides/prompt-scaffolding.html](docs/guides/prompt-scaffolding.html).
+
+</details>
+
+<details>
+<summary><strong>layout</strong> — Responsive-Audit (0.8.0)</summary>
+
+- **`npx velinstyle layout audit [pfad]`**
+- **`npx velinstyle layout suggest [pfad]`**
+- **`npx velinstyle layout fix [pfad] --write`**
+
+Siehe [docs/guides/responsive-layout.html](docs/guides/responsive-layout.html).
+
+</details>
+
+<details>
+<summary><strong>blueprint</strong> — 22 HTML-Snippets</summary>
 
 - **`npx velinstyle blueprint list`**
 - **`npx velinstyle blueprint &lt;name&gt; -o datei.html`**

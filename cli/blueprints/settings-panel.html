@@ -1,0 +1,20 @@
+<velin-sheet id="settings-sheet" title="Settings">
+  <form class="velin-flex velin-flex-col velin-gap-4 velin-p-4">
+    <label class="velin-flex velin-flex-col velin-gap-1">
+      <span>Display name</span>
+      <input type="text" class="velin-input" name="name" autocomplete="name" />
+    </label>
+    <label class="velin-flex velin-items-center velin-gap-2">
+      <input type="checkbox" class="velin-checkbox" name="notify" />
+      <span>Email notifications</span>
+    </label>
+    <button type="submit" class="velin-btn velin-btn--primary">Save</button>
+  </form>
+</velin-sheet>
+<button type="button" class="velin-btn velin-btn--outline" id="open-settings">Open settings</button>
+<script type="module">
+  import '../../dist/velinstyle-components.min.js';
+  document.getElementById('open-settings')?.addEventListener('click', () => {
+    document.getElementById('settings-sheet')?.open?.();
+  });
+</script>

@@ -18,4 +18,6 @@ generate-all.py
 generate-docs.ps1
 test-write.py
 test.txt
+strip-coauthor-history.py
+strip-coauthor.py
 

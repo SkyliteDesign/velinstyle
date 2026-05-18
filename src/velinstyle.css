@@ -73,9 +73,12 @@
 @import "utilities/border.css";
 @import "utilities/position.css";
 @import "utilities/animation.css";
+@import "utilities/filter-effects.css";
+@import "utilities/chart-animation.css";
 @import "utilities/gradient.css";
 @import "utilities/print.css";
 @import "utilities/responsive.css";
+@import "utilities/safe-area.css";
 @import "utilities/divide.css";
 @import "utilities/scroll.css";
 @import "utilities/color-mix.css";

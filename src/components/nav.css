@@ -69,6 +69,7 @@
   }
 
   /* Mobile: stack nav vertically */
+  /* Aligns with --velin-bp-md (48rem) used in safe-area utilities */
   @media (max-width: 47.999rem) {
     .velin-nav {
       flex-wrap: wrap;

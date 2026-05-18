@@ -98,4 +98,22 @@
     transition: background-color 600000s 0s, color 600000s 0s;
   }
 
+  .velin-isolate {
+    isolation: isolate;
+    contain: layout style paint;
+  }
+
+  .velin-sensitive {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .velin-overlay-lock {
+    overscroll-behavior: contain;
+  }
+
+  .velin-user-content img[src^="data:"] {
+    max-inline-size: 100%;
+  }
+
 }

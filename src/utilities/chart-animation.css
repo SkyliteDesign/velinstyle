@@ -1,0 +1,101 @@
+/*
+ * Chart animation utilities — keyframes and helpers for sparkline draw-in,
+ * value bumps, live pulses, and count-up fades. Consumed by the
+ * <velin-sparkline>, <velin-counter>, <velin-live-dot> Web Components plus
+ * any plain SVG/HTML that wants a "live" feel without a chart library.
+ *
+ * Each animated class is gated by `prefers-reduced-motion: reduce` so the
+ * baseline experience stays calm. CSS custom properties exposed so authors
+ * can re-skin without forking selectors.
+ */
+
+@layer utilities {
+  /* === Keyframes === */
+  @keyframes velin-stroke-draw {
+    from { stroke-dashoffset: var(--velin-chart-len, 1000); }
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes velin-sparkline-glow {
+    0%, 100% {
+      filter: drop-shadow(0 0 0 transparent);
+    }
+    50% {
+      filter: drop-shadow(0 0 0.5rem color-mix(in oklch, var(--velin-chart-glow-color, var(--velin-color-primary, #2563eb)) 50%, transparent));
+    }
+  }
+
+  @keyframes velin-value-bump {
+    0% { transform: scale(1); }
+    35% { transform: scale(1.06); color: var(--velin-chart-bump-color, var(--velin-color-primary, #2563eb)); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes velin-live-pulse {
+    0% {
+      box-shadow: 0 0 0 0 color-mix(in oklch, var(--velin-live-color, var(--velin-color-success, oklch(60% 0.16 145))) 65%, transparent);
+    }
+    70% {
+      box-shadow: 0 0 0 0.65rem color-mix(in oklch, var(--velin-live-color, var(--velin-color-success, oklch(60% 0.16 145))) 0%, transparent);
+    }
+    100% {
+      box-shadow: 0 0 0 0 transparent;
+    }
+  }
+
+  @keyframes velin-count-fade {
+    from { opacity: 0; transform: translateY(0.4rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* === Utility classes === */
+  .velin-chart-line {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: var(--velin-chart-len, 1000);
+    stroke-dashoffset: 0;
+    animation: velin-stroke-draw var(--velin-duration-cinematic, 1200ms) var(--velin-ease-expo-out, ease-out) both;
+  }
+
+  .velin-chart-area {
+    fill: var(--velin-chart-area-fill, currentColor);
+    opacity: 0;
+    animation: velin-count-fade var(--velin-duration-slowest, 800ms) var(--velin-ease-expo-out, ease-out) 200ms forwards;
+  }
+
+  .velin-chart-glow {
+    animation: velin-sparkline-glow 2.4s var(--velin-ease-in-out, ease-in-out) infinite;
+  }
+
+  .velin-spark-tick {
+    animation: velin-value-bump var(--velin-duration-slow, 300ms) var(--velin-ease-spring, ease-out) both;
+  }
+
+  .velin-live-pulse {
+    animation: velin-live-pulse 1.8s var(--velin-ease-out, ease-out) infinite;
+    border-radius: 50%;
+  }
+
+  .velin-count-fade {
+    animation: velin-count-fade var(--velin-duration-slow, 300ms) var(--velin-ease-expo-out, ease-out) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .velin-chart-line,
+    .velin-chart-area,
+    .velin-chart-glow,
+    .velin-spark-tick,
+    .velin-live-pulse,
+    .velin-count-fade {
+      animation: none;
+      stroke-dashoffset: 0;
+      opacity: 1;
+      transform: none;
+      filter: none;
+      box-shadow: none;
+    }
+  }
+}

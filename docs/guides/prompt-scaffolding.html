@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Scaffolding — VelinStyle</title>
+  <meta name="description" content="velinstyle scaffold: HTML-Layouts und Komponenten aus Textbeschreibungen (0.8.0).">
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="../docs.css">
+  <script src="../dist/velinstyle-components.iife.js"></script>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="../index.html" class="velin-nav__brand">VelinStyle</a>
+    <button type="button" class="velin-nav__toggle" data-velin-nav-toggle aria-label="Toggle menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="../getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="index.html" class="velin-nav__link" aria-current="page">Integration</a></li>
+      <li><a href="../layout.html" class="velin-nav__link">Layout</a></li>
+      <li><a href="../components.html" class="velin-nav__link">Components</a></li>
+    </ul>
+  </nav>
+  <div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+    <a href="index.html">← Integration</a> · Vollständige Doku: <a href="https://velinstyle.info/docs/guides/prompt-scaffolding.html">velinstyle.info</a>
+  </div>
+
+  <main id="main" class="velin-container">
+    <section class="velin-doc-section">
+      <h1 class="velin-doc-title">Prompt Scaffolding <span class="velin-badge velin-badge--primary">0.8.0</span></h1>
+      <p class="velin-doc-lead">Erzeuge Navbars, Cards, Modals und Seitenlayouts aus einer Textbeschreibung — deterministisch über Blueprint-Komposition, ohne API-Schlüssel.</p>
+    </section>
+
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Befehle</h2>
+<pre class="velin-doc-code">npx velinstyle scaffold list-intents
+npx velinstyle scaffold "Navbar mit Logo und Suchfeld" -o nav.html
+npx velinstyle scaffold "Dashboard mit Sidebar" --json</pre>
+    </section>
+
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Unterstützte Intents</h2>
+      <table class="velin-table">
+        <thead><tr><th>Intent</th><th>Beispiel-Prompt</th><th>Blueprints</th></tr></thead>
+        <tbody>
+          <tr><td><code>navbar</code></td><td>Navigation mit Suche</td><td>navbar-header (+ search-field)</td></tr>
+          <tr><td><code>modal</code></td><td>Bestätigungs-Dialog</td><td>modal</td></tr>
+          <tr><td><code>card</code></td><td>3 Karten im Grid</td><td>card-grid</td></tr>
+          <tr><td><code>dashboard</code></td><td>Admin Shell</td><td>navbar-header, layout-dashboard</td></tr>
+          <tr><td><code>login</code></td><td>Login Formular</td><td>form-login</td></tr>
+          <tr><td><code>pricing</code></td><td>Preistabelle</td><td>pricing-table</td></tr>
+        </tbody>
+      </table>
+      <p>Rezepte: <code>cli/scaffold-recipes.json</code>. Unbekannte Prompts fallen auf <code>hero-section</code> zurück (<code>confidence: low</code>).</p>
+    </section>
+
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Workflow</h2>
+      <ol style="line-height:1.8; padding-inline-start:1.25rem;">
+        <li><code>velinstyle scaffold "…" -o snippet.html</code></li>
+        <li><code>velinstyle layout suggest snippet.html</code> — Responsive-Hinweise</li>
+        <li><code>velinstyle scan snippet.html</code> — A11y &amp; Security</li>
+        <li>Manuell anpassen, dann in dein Projekt übernehmen</li>
+      </ol>
+    </section>
+
+    <section class="velin-doc-section">
+      <h2 class="velin-doc-subtitle">Grenzen</h2>
+      <ul style="line-height:1.8; padding-inline-start:1.25rem;">
+        <li>Nur <code>velin-*</code>-Klassen und bestehende Blueprints — kein freies CSS.</li>
+        <li>Kein LLM im CLI; Cursor/Agenten können <code>--json</code> nutzen und Ergebnisse verfeinern.</li>
+        <li>Slots: <code>brand</code>, <code>title</code>, <code>cta</code> werden heuristisch aus dem Prompt extrahiert.</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="velin-container" style="padding-block:var(--velin-space-8);color:var(--velin-color-text-muted);font-size:var(--velin-text-sm)">
+    <p>VelinStyle v0.8.0</p>
+  </footer>
+<script src="../assets/docs-a11y.js" defer></script>
+</body>
+</html>
