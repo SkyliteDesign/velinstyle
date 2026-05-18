@@ -18,11 +18,15 @@
 
 <br>
 
+**Install**
+
 ```bash
-npm i @birdapi/velinstyle
+npm install @birdapi/velinstyle
 ```
 
-**[Open live demos →](https://velinstyle.info/demos/)** · **[Fork full pages →](https://github.com/SkyliteDesign/velinstyle/tree/main/showcase-demos)** · **[Docs](https://velinstyle.info/docs/)** · **[★ Star](https://github.com/SkyliteDesign/velinstyle)**
+<br>
+
+**[Open live demos](https://velinstyle.info/demos/)** · **[Fork full pages](https://github.com/SkyliteDesign/velinstyle/tree/main/showcase-demos)** · **[Docs](https://velinstyle.info/docs/)** · **[Star the repo](https://github.com/SkyliteDesign/velinstyle)**
 
 **English** · **[Deutsch](README.de.md)**
 
