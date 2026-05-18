@@ -48,7 +48,7 @@
     "docs:sync-site": "npm run build && python ../velinstyle-site/tools/sync-0.7.0.py",
     "readme:capture": "node tools/capture-readme-demos.mjs",
     "readme:assets:webp": "node tools/readme-png-to-webp.mjs",
-    "demos:sync": "node tools/sync-demos-to-repo.mjs"
+    "demos:sync": "node tools/sync-demos-to-repo.mjs --out showcase-demos && node tools/sync-demos-to-repo.mjs --out ../velinstyle-demos"
   },
   "keywords": [
     "css",

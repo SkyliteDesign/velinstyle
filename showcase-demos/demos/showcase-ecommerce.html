@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Synced from velinstyle-site — fork: https://github.com/SkyliteDesign/velinstyle-demos -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce showcase &mdash; VelinStyle</title>
+  <meta name="description" content="Storefront demo built with VelinStyle: product grid, cart sheet, mobile bottom-nav, segmented size picker, and toasts.">
+  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle.min.css">
+  <link rel="icon" href="../assets/img/velinstyle-logo.svg" type="image/svg+xml">
+  <style>
+    body { margin: 0; background: var(--velin-color-surface-dim); min-height: 100vh; }
+    .demo-bar {
+      background: var(--velin-color-surface-bright);
+      border-bottom: 1px solid var(--velin-color-border);
+      padding: max(var(--velin-space-3), env(safe-area-inset-top)) var(--velin-space-6) var(--velin-space-3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .demo-bar__inner {
+      max-width: 80rem;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--velin-space-3);
+    }
+    .brand { display: inline-flex; gap: var(--velin-space-2); align-items: center; font-weight: var(--velin-weight-bold); color: var(--velin-color-text); text-decoration: none; }
+    .brand img { width: 1.5rem; height: 1.5rem; }
+    .demo-bar__search { flex: 1; min-width: min(20rem, 100%); max-width: 28rem; }
+    .demo-bar__actions { display: flex; gap: var(--velin-space-2); align-items: center; }
+    .cart-button { position: relative; }
+    .cart-button .velin-badge {
+      position: absolute;
+      top: -.35rem;
+      inset-inline-end: -.35rem;
+      min-width: 1.1rem;
+      padding: 0 .25rem;
+      font-size: var(--velin-text-xs);
+    }
+    .page {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: var(--velin-space-8) var(--velin-space-4) calc(var(--velin-space-12) + 4.5rem);
+    }
+    .hero {
+      background: linear-gradient(135deg, var(--velin-color-primary-subtle), var(--velin-color-surface));
+      border-radius: var(--velin-radius-xl);
+      padding: var(--velin-space-10) var(--velin-space-6);
+      margin-bottom: var(--velin-space-8);
+      text-align: center;
+    }
+    .hero h1 { margin: 0 0 var(--velin-space-2); font-size: var(--velin-text-4xl); }
+    .hero p { margin: 0 auto; max-width: 36rem; color: var(--velin-color-text-muted); }
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--velin-space-3);
+      margin-bottom: var(--velin-space-5);
+    }
+    .filters__chips { display: flex; flex-wrap: wrap; gap: var(--velin-space-2); }
+    .filters__chips .velin-chip { cursor: pointer; border: 1px solid transparent; }
+    .filters__chips .velin-chip[data-velin-filter-active] {
+      background: var(--velin-color-primary);
+      color: var(--velin-color-on-primary, #fff);
+      border-color: var(--velin-color-primary);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+      gap: var(--velin-space-5);
+    }
+    .grid.is-list {
+      grid-template-columns: 1fr;
+      gap: var(--velin-space-3);
+    }
+    .grid.is-list .product { flex-direction: row; align-items: center; gap: var(--velin-space-4); }
+    .grid.is-list .product__media { width: 5rem; aspect-ratio: 1; flex-shrink: 0; }
+    .grid.is-list .product__title { flex: 1; }
+    .product {
+      background: var(--velin-color-surface-bright);
+      border: 1px solid var(--velin-color-border);
+      border-radius: var(--velin-radius-lg);
+      padding: var(--velin-space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--velin-space-2);
+    }
+    .product__media {
+      aspect-ratio: 4 / 3;
+      border-radius: var(--velin-radius-md);
+      background: linear-gradient(135deg, var(--velin-color-primary-subtle), var(--velin-color-surface-dim));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--velin-color-primary);
+      position: relative;
+      overflow: hidden;
+    }
+    .product__media velin-icon { opacity: .55; }
+    .product__sale {
+      position: absolute;
+      top: var(--velin-space-2);
+      inset-inline-start: var(--velin-space-2);
+    }
+    .product__title { margin: 0; font-size: var(--velin-text-base); font-weight: var(--velin-weight-semibold); }
+    .product__price { display: flex; align-items: baseline; gap: var(--velin-space-2); font-size: var(--velin-text-lg); font-weight: var(--velin-weight-bold); }
+    .product__price del { color: var(--velin-color-text-muted); font-size: var(--velin-text-sm); font-weight: var(--velin-weight-normal); }
+    .product__meta { display: flex; justify-content: space-between; align-items: center; font-size: var(--velin-text-xs); color: var(--velin-color-text-muted); }
+    .product__actions { display: flex; gap: var(--velin-space-2); margin-top: var(--velin-space-2); }
+    .product__actions .velin-btn { flex: 1; }
+    .cart-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--velin-space-3); }
+    .cart-list li { display: grid; grid-template-columns: 3rem 1fr auto; gap: var(--velin-space-3); align-items: center; padding-block: var(--velin-space-2); border-block-end: 1px solid var(--velin-color-border); }
+    .cart-list li:last-child { border-block-end: 0; }
+    .cart-list__media { width: 3rem; aspect-ratio: 1; border-radius: var(--velin-radius-md); background: var(--velin-color-primary-subtle); }
+    .cart-totals { display: flex; justify-content: space-between; padding-block: var(--velin-space-3); border-block-start: 1px solid var(--velin-color-border); font-weight: var(--velin-weight-semibold); }
+
+    velin-bottom-nav { display: none; }
+    @media (max-width: 48rem) {
+      velin-bottom-nav { display: flex; position: fixed; inset-inline: 0; inset-block-end: 0; z-index: 90; }
+      .desktop-only { display: none; }
+    }
+  </style>
+</head>
+<body>
+<svg data-velin-inline-sprite="1" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><symbol id="heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+  </symbol><symbol id="home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+  <polyline points="9 22 9 12 15 12 15 22"/>
+  </symbol><symbol id="search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="11" cy="11" r="8"/>
+  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+  </symbol><symbol id="user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+  <circle cx="12" cy="7" r="4"/>
+  </symbol></svg>
+
+<a href="#main" class="velin-skip-link">Skip to main content</a>
+  <header class="demo-bar">
+    <div class="demo-bar__inner">
+      <a href="https://velinstyle.info/" class="brand">
+        <img src="../assets/img/velinstyle-logo.svg" alt="" width="24" height="24">
+        VelinShop
+      </a>
+      <div class="demo-bar__search">
+        <label class="velin-visually-hidden" for="shop-search">Search products</label>
+        <velin-combobox id="shop-search" placeholder="Search products" aria-label="Search products">
+          <option value="hoodie">Velin Hoodie</option>
+          <option value="mug">Velin Mug</option>
+          <option value="cap">Velin Cap</option>
+          <option value="tote">Velin Tote</option>
+          <option value="shirt">Velin T-shirt</option>
+        </velin-combobox>
+      </div>
+      <div class="demo-bar__actions">
+        <a href="https://velinstyle.info/" class="velin-btn velin-btn--ghost velin-btn--sm desktop-only">Home</a>
+        <a href="index.html" class="velin-btn velin-btn--ghost velin-btn--sm desktop-only">Demos</a>
+        <button type="button" class="velin-btn velin-btn--outline velin-btn--icon cart-button" id="openCart" aria-label="Open cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="velin-badge velin-badge--primary" id="cartCount">3</span>
+        </button>
+        <velin-theme-toggle></velin-theme-toggle>
+      </div>
+    </div>
+  </header>
+
+  <main class="page" id="main">
+    <section class="hero">
+      <h1>Apparel built for accessibility advocates.</h1>
+      <p>Every product is fictional &mdash; the layout, ratings, and add-to-cart flow ship with VelinStyle 0.8.0 primitives.</p>
+    </section>
+
+    <section aria-labelledby="catalog-title">
+      <div class="filters">
+        <h2 id="catalog-title" style="margin:0;font-size:var(--velin-text-xl)">Catalog</h2>
+        <div class="filters__chips" role="group" aria-label="Product filters" data-velin-filter-group>
+          <button type="button" class="velin-chip velin-chip--sm" data-velin-filter-value="all" data-velin-filter-target="#productGrid" data-velin-filter-active>All</button>
+          <button type="button" class="velin-chip velin-chip--sm" data-velin-filter-value="apparel" data-velin-filter-target="#productGrid">Apparel</button>
+          <button type="button" class="velin-chip velin-chip--sm" data-velin-filter-value="drinkware" data-velin-filter-target="#productGrid">Drinkware</button>
+          <button type="button" class="velin-chip velin-chip--sm" data-velin-filter-value="stickers" data-velin-filter-target="#productGrid">Stickers</button>
+        </div>
+        <velin-segmented-control value="grid" aria-label="View" id="productView" style="margin-inline-start:auto">
+          <button type="button" data-value="grid">Grid</button>
+          <button type="button" data-value="list">List</button>
+        </velin-segmented-control>
+      </div>
+
+      <div class="grid" id="productGrid" data-velin-flip data-velin-filter-item=".product">
+        <article class="product" data-tags="apparel" data-search="velin hoodie forest sweater">
+          <div class="product__media">
+            <span class="velin-badge velin-badge--danger product__sale">-20%</span>
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>
+            </svg>
+          </div>
+          <h3 class="product__title">Velin Hoodie &mdash; Forest</h3>
+          <div class="product__price">€64<del>€80</del></div>
+          <div class="product__meta">
+            <velin-rating value="4" max="5" readonly aria-label="4 of 5 stars"></velin-rating>
+            <span>238 reviews</span>
+          </div>
+          <div class="product__actions">
+            <button type="button" class="velin-btn velin-btn--primary velin-btn--sm" data-add="Velin Hoodie">Add to cart</button>
+            <button type="button" class="velin-btn velin-btn--ghost velin-btn--sm velin-btn--icon" aria-label="Favorite Velin Hoodie">
+              <velin-icon name="heart" size="16"></velin-icon>
+            </button>
+          </div>
+        </article>
+
+        <article class="product" data-tags="drinkware" data-search="velin mug coffee tea">
+          <div class="product__media">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M17 8h1a4 4 0 0 1 0 8h-1"/>
+              <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+              <line x1="6" y1="2" x2="6" y2="4"/>
+              <line x1="10" y1="2" x2="10" y2="4"/>
+              <line x1="14" y1="2" x2="14" y2="4"/>
+            </svg>
+          </div>
+          <h3 class="product__title">Velin Mug 14oz</h3>
+          <div class="product__price">€18</div>
+          <div class="product__meta">
+            <velin-rating value="5" max="5" readonly aria-label="5 of 5 stars"></velin-rating>
+            <span>97 reviews</span>
+          </div>
+          <div class="product__actions">
+            <button type="button" class="velin-btn velin-btn--primary velin-btn--sm" data-add="Velin Mug">Add to cart</button>
+            <button type="button" class="velin-btn velin-btn--ghost velin-btn--sm velin-btn--icon" aria-label="Favorite Velin Mug">
+              <velin-icon name="heart" size="16"></velin-icon>
+            </button>
+          </div>
+        </article>
+
+        <article class="product" data-tags="apparel" data-search="velin tote bag carry">
+          <div class="product__media">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M16.5 9.4 7.55 4.24"/>
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <h3 class="product__title">Velin Tote bag</h3>
+          <div class="product__price">€22</div>
+          <div class="product__meta">
+            <velin-rating value="4" max="5" readonly aria-label="4 of 5 stars"></velin-rating>
+            <span>54 reviews</span>
+          </div>
+          <div class="product__actions">
+            <button type="button" class="velin-btn velin-btn--primary velin-btn--sm" data-add="Velin Tote">Add to cart</button>
+            <button type="button" class="velin-btn velin-btn--ghost velin-btn--sm velin-btn--icon" aria-label="Favorite Velin Tote">
+              <velin-icon name="heart" size="16"></velin-icon>
+            </button>
+          </div>
+        </article>
+
+        <article class="product" data-tags="stickers" data-search="sticker pack vinyl decals">
+          <div class="product__media">
+            <span class="velin-badge velin-badge--success product__sale">New</span>
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M15.5 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3Z"/>
+              <path d="M15 3v6h6"/>
+            </svg>
+          </div>
+          <h3 class="product__title">Sticker pack vol. 3</h3>
+          <div class="product__price">€9</div>
+          <div class="product__meta">
+            <velin-rating value="5" max="5" readonly aria-label="5 of 5 stars"></velin-rating>
+            <span>312 reviews</span>
+          </div>
+          <div class="product__actions">
+            <button type="button" class="velin-btn velin-btn--primary velin-btn--sm" data-add="Sticker pack">Add to cart</button>
+            <button type="button" class="velin-btn velin-btn--ghost velin-btn--sm velin-btn--icon" aria-label="Favorite Sticker pack">
+              <velin-icon name="heart" size="16"></velin-icon>
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="featured-title" style="margin-top:var(--velin-space-12)">
+      <h2 id="featured-title">Featured: Velin Cap</h2>
+      <div class="velin-cluster" style="gap:var(--velin-space-6);align-items:flex-start;display:flex;flex-wrap:wrap">
+        <div style="flex:1;min-width:18rem;background:var(--velin-color-surface-bright);border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);padding:var(--velin-space-5)">
+          <h3 style="margin:0 0 var(--velin-space-2)">Pick your size</h3>
+          <velin-segmented-control value="m" aria-label="Size">
+            <button type="button" data-value="s">S</button>
+            <button type="button" data-value="m">M</button>
+            <button type="button" data-value="l">L</button>
+            <button type="button" data-value="xl">XL</button>
+          </velin-segmented-control>
+          <h3 style="margin:var(--velin-space-4) 0 var(--velin-space-2)">Quantity</h3>
+          <velin-stepper id="capQty" value="1" min="1" max="9" aria-label="Cap quantity"></velin-stepper>
+          <div style="display:flex;gap:var(--velin-space-2);margin-top:var(--velin-space-4)">
+            <button type="button" class="velin-btn velin-btn--primary" id="capAddBtn">Add to cart</button>
+            <button type="button" class="velin-btn velin-btn--outline">Save for later</button>
+          </div>
+        </div>
+        <div style="flex:1;min-width:18rem;background:var(--velin-color-surface-bright);border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);padding:var(--velin-space-5)">
+          <h3 style="margin:0 0 var(--velin-space-2)">Reviews</h3>
+          <velin-rating value="4" max="5" readonly></velin-rating>
+          <p style="color:var(--velin-color-text-muted);font-size:var(--velin-text-sm);margin-top:var(--velin-space-3)">
+            "Fit is exactly as described, and the embroidery is sharp. The cap doesn't get warm even on long hikes." &mdash; Alex R.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <velin-sheet id="cartSheet" position="end" aria-label="Cart">
+    <h2 slot="header" style="margin:0;font-size:var(--velin-text-lg)">Your cart</h2>
+    <ul class="cart-list" id="cartList">
+      <li>
+        <span class="cart-list__media" aria-hidden="true"></span>
+        <span><strong>Velin Hoodie</strong><br><small>Size M &middot; Qty 1</small></span>
+        <span>€64</span>
+      </li>
+      <li>
+        <span class="cart-list__media" aria-hidden="true"></span>
+        <span><strong>Velin Mug</strong><br><small>Qty 2</small></span>
+        <span>€36</span>
+      </li>
+      <li>
+        <span class="cart-list__media" aria-hidden="true"></span>
+        <span><strong>Sticker pack</strong><br><small>Qty 1</small></span>
+        <span>€9</span>
+      </li>
+    </ul>
+    <div class="cart-totals">
+      <span>Total</span>
+      <span id="cartTotal">€109</span>
+    </div>
+    <div slot="footer" style="display:flex;gap:var(--velin-space-2);justify-content:flex-end;width:100%">
+      <button type="button" class="velin-btn velin-btn--ghost" id="closeCart">Continue shopping</button>
+      <button type="button" class="velin-btn velin-btn--primary">Checkout</button>
+    </div>
+  </velin-sheet>
+
+  <velin-bottom-nav aria-label="Storefront primary nav" current="home">
+    <a href="#" data-nav="home"><velin-icon name="home" size="22"></velin-icon><span>Home</span></a>
+    <a href="#" data-nav="search"><velin-icon name="search" size="22"></velin-icon><span>Search</span></a>
+    <a href="#" data-nav="cart" id="bottomCart">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      <span>Cart</span>
+    </a>
+    <a href="#" data-nav="account"><velin-icon name="user" size="22"></velin-icon><span>Account</span></a>
+  </velin-bottom-nav>
+
+  <velin-toast id="shopToast"></velin-toast>
+  <velin-announcer id="shopAnnouncer"></velin-announcer>
+
+  <script src="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle-components.iife.js"></script>
+  <script type="module">
+    import { flipReorder } from 'https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle-components.min.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const sheet = document.getElementById('cartSheet');
+      function openSheet() {
+        if (!sheet) return;
+        if (typeof sheet.show === 'function') sheet.show();
+        else sheet.setAttribute('open', '');
+      }
+      function closeSheet() {
+        if (!sheet) return;
+        if (typeof sheet.hide === 'function') sheet.hide();
+        else sheet.removeAttribute('open');
+      }
+      document.getElementById('openCart').addEventListener('click', openSheet);
+      document.getElementById('closeCart').addEventListener('click', closeSheet);
+
+      // Grid/List view toggle uses FLIP so the products animate to their new layout.
+      const grid = document.getElementById('productGrid');
+      const view = document.getElementById('productView');
+      view?.addEventListener('change', (e) => {
+        if (!grid) return;
+        const next = e.detail?.value || view.getAttribute('value') || 'grid';
+        flipReorder(grid, () => {
+          grid.classList.toggle('is-list', next === 'list');
+        }, { duration: 320 });
+      });
+
+      const toast = document.getElementById('shopToast');
+      const announcer = document.getElementById('shopAnnouncer');
+      const countEl = document.getElementById('cartCount');
+      let count = parseInt(countEl.textContent || '0', 10);
+      function addToCart(name) {
+        count += 1;
+        countEl.textContent = String(count);
+        toast?.show?.({ message: 'Added ' + name + ' to cart', type: 'success' });
+        announcer?.announce?.(name + ' added to cart, ' + count + ' items total', { politeness: 'polite' });
+      }
+      document.querySelectorAll('[data-add]').forEach((btn) => {
+        btn.addEventListener('click', () => addToCart(btn.getAttribute('data-add')));
+      });
+      document.getElementById('capAddBtn').addEventListener('click', () => addToCart('Velin Cap'));
+    });
+  </script>
+</body>
+</html>

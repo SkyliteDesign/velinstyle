@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Synced from velinstyle-site — fork: https://github.com/SkyliteDesign/velinstyle-demos -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Web Components — VelinStyle</title>
+  <meta name="description" content="VelinStyle Web Components: modal, toast, dropdown, stepper, and progress ring in one demo.">
+  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle.min.css">
+  <style>
+    body { margin: 0; background: var(--velin-color-surface-dim); }
+    .demo-bar {
+      background: var(--velin-color-surface-bright);
+      border-bottom: 1px solid var(--velin-color-border);
+      padding: max(var(--velin-space-3), env(safe-area-inset-top)) var(--velin-space-6) var(--velin-space-3);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .demo-bar__inner {
+      max-width: 56rem;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--velin-space-3);
+    }
+    .demo-bar nav { display: flex; gap: var(--velin-space-4); flex-wrap: wrap; }
+    .demo-bar a { font-size: var(--velin-text-sm); font-weight: var(--velin-weight-medium); color: var(--velin-color-text-muted); text-decoration: none; }
+    .demo-bar a:hover { color: var(--velin-color-primary); }
+    .page { max-width: 56rem; margin: 0 auto; padding: var(--velin-space-8) var(--velin-space-4) var(--velin-space-12); }
+    .page h1 { font-size: var(--velin-text-3xl); margin: 0 0 var(--velin-space-2); }
+    .page > p { color: var(--velin-color-text-muted); margin: 0 0 var(--velin-space-8); }
+    .panel {
+      background: var(--velin-color-surface-bright);
+      border: 1px solid var(--velin-color-border);
+      border-radius: var(--velin-radius-lg);
+      padding: var(--velin-space-6);
+      margin-bottom: var(--velin-space-6);
+    }
+    .panel h2 { font-size: var(--velin-text-lg); margin: 0 0 var(--velin-space-4); }
+    .row { display: flex; flex-wrap: wrap; gap: var(--velin-space-3); align-items: center; }
+    .ring-row { display: flex; align-items: center; gap: var(--velin-space-8); flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <header class="demo-bar">
+    <div class="demo-bar__inner">
+      <nav aria-label="Demo navigation">
+        <a href="https://velinstyle.info/">Home</a>
+        <a href="index.html">All demos</a>
+      </nav>
+      <velin-theme-toggle themes-base="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/themes/"></velin-theme-toggle>
+    </div>
+  </header>
+  <div class="page" id="main">
+    <h1>Interactive</h1>
+    <p>VelinStyle ships accessible custom elements—here are a few working together on one page.</p>
+
+    <section class="panel" aria-labelledby="modal-title">
+      <h2 id="modal-title">Modal</h2>
+      <p style="margin:0 0 var(--velin-space-4);font-size:var(--velin-text-sm);color:var(--velin-color-text-muted)">Focus trap, Escape to close, overlay click.</p>
+      <button type="button" class="velin-btn velin-btn--primary" id="openModalBtn">Open modal</button>
+      <velin-modal id="demoModal" title="Deploy to preview?">
+        <p style="margin:0">This is a live <code>velin-modal</code>. Primary action is safe to stub in a demo.</p>
+        <div slot="footer" style="display:flex;gap:var(--velin-space-2);justify-content:flex-end;width:100%">
+          <button type="button" class="velin-btn velin-btn--ghost" id="modalCancel">Cancel</button>
+          <button type="button" class="velin-btn velin-btn--primary" id="modalOk">Confirm</button>
+        </div>
+      </velin-modal>
+    </section>
+
+    <section class="panel" aria-labelledby="toast-title">
+      <h2 id="toast-title">Toast</h2>
+      <div class="row">
+        <button type="button" class="velin-btn velin-btn--outline velin-btn--sm" data-toast="info">Info toast</button>
+        <button type="button" class="velin-btn velin-btn--outline velin-btn--sm" data-toast="success">Success</button>
+        <button type="button" class="velin-btn velin-btn--outline velin-btn--sm" data-toast="warning">Warning</button>
+      </div>
+      <velin-toast id="demoToaster"></velin-toast>
+    </section>
+
+    <section class="panel" aria-labelledby="dropdown-title">
+      <h2 id="dropdown-title">Dropdown</h2>
+      <velin-dropdown>
+        <button type="button" slot="trigger" class="velin-btn velin-btn--secondary">
+          Actions <span aria-hidden="true">▾</span>
+        </button>
+        <button type="button" role="menuitem">Duplicate</button>
+        <button type="button" role="menuitem">Archive</button>
+        <a href="index.html" role="menuitem">Back to demos</a>
+      </velin-dropdown>
+    </section>
+
+    <section class="panel" aria-labelledby="stepper-title">
+      <h2 id="stepper-title">Stepper</h2>
+      <velin-stepper-wc labels="Account,Workspace,Invite" active="1">
+        <section style="padding:var(--velin-space-4) 0;">
+          <p style="margin:0;font-size:var(--velin-text-sm);color:var(--velin-color-text-muted)">Account — completed in this demo flow.</p>
+        </section>
+        <section style="padding:var(--velin-space-4) 0;">
+          <p style="margin:0;font-size:var(--velin-text-sm);color:var(--velin-color-text-muted)">Workspace — <strong>active</strong> step (<code>active="1"</code>). Wire <code>next()</code> / <code>prev()</code> from your app.</p>
+        </section>
+        <section style="padding:var(--velin-space-4) 0;">
+          <p style="margin:0">Invite step.</p>
+        </section>
+      </velin-stepper-wc>
+    </section>
+
+    <section class="panel" aria-labelledby="ring-title">
+      <h2 id="ring-title">Progress ring</h2>
+      <div class="ring-row">
+        <velin-progress-ring value="72" size="100" stroke="8"></velin-progress-ring>
+        <div style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);max-width:20rem">
+          Use <code>value</code> for completion. Pair with your own data fetch or upload state.
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="announcer-title">
+      <h2 id="announcer-title">Announcer <span class="velin-badge velin-badge--info" style="margin-inline-start:.5rem">New in 0.8.0</span></h2>
+      <p style="margin:0 0 var(--velin-space-4);font-size:var(--velin-text-sm);color:var(--velin-color-text-muted)">
+        Politely announces status messages to assistive tech (live region). Try the buttons—screen readers will read each message.
+      </p>
+      <div class="row">
+        <button type="button" class="velin-btn velin-btn--outline velin-btn--sm" data-announce="polite">Polite announcement</button>
+        <button type="button" class="velin-btn velin-btn--outline velin-btn--sm" data-announce="assertive">Assertive announcement</button>
+      </div>
+      <velin-announcer id="demoAnnouncer"></velin-announcer>
+    </section>
+
+    <section class="panel" aria-labelledby="sheet-title">
+      <h2 id="sheet-title">Sheet <span class="velin-badge velin-badge--info" style="margin-inline-start:.5rem">New in 0.8.0</span></h2>
+      <p style="margin:0 0 var(--velin-space-4);font-size:var(--velin-text-sm);color:var(--velin-color-text-muted)">
+        Side-anchored panel for filters, carts, or secondary forms. Opens via <code>show()</code>, closes on backdrop click.
+      </p>
+      <button type="button" class="velin-btn velin-btn--primary" id="openSheetBtn">Open sheet</button>
+      <velin-sheet id="demoSheet" position="end" aria-label="Demo sheet">
+        <h3 slot="header" style="margin:0;font-size:var(--velin-text-lg)">Side sheet</h3>
+        <p>Slide-in surface for tasks that need context but not a full modal. Pair with form-control inputs.</p>
+        <label class="velin-label" for="sheet-note">Note</label>
+        <textarea class="velin-textarea" id="sheet-note" rows="4" placeholder="What's on your mind?"></textarea>
+        <div slot="footer" style="display:flex;gap:var(--velin-space-2);justify-content:flex-end;width:100%">
+          <button type="button" class="velin-btn velin-btn--ghost" id="closeSheetBtn">Cancel</button>
+          <button type="button" class="velin-btn velin-btn--primary" id="saveSheetBtn">Save</button>
+        </div>
+      </velin-sheet>
+    </section>
+  </div>
+  <script src="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle-components.iife.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('demoModal');
+      document.getElementById('openModalBtn').addEventListener('click', () => modal.open());
+      document.getElementById('modalCancel').addEventListener('click', () => modal.close());
+      document.getElementById('modalOk').addEventListener('click', () => modal.close());
+
+      const toaster = document.getElementById('demoToaster');
+      document.querySelectorAll('[data-toast]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const type = btn.getAttribute('data-toast');
+          const messages = {
+            info: 'Preview link copied to clipboard (demo).',
+            success: 'Changes saved successfully.',
+            warning: 'Session expires in 5 minutes.'
+          };
+          toaster.show({ message: messages[type] || 'Notice', type });
+        });
+      });
+
+      const announcer = document.getElementById('demoAnnouncer');
+      document.querySelectorAll('[data-announce]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const mode = btn.getAttribute('data-announce');
+          const message = mode === 'assertive'
+            ? 'Critical update: payment method required.'
+            : 'Saved draft at ' + new Date().toLocaleTimeString();
+          if (announcer && typeof announcer.announce === 'function') {
+            announcer.announce(message, { politeness: mode });
+          } else if (announcer) {
+            announcer.setAttribute('message', message);
+            announcer.setAttribute('politeness', mode);
+          }
+        });
+      });
+
+      const sheet = document.getElementById('demoSheet');
+      function openSheet() {
+        if (!sheet) return;
+        if (typeof sheet.show === 'function') sheet.show();
+        else sheet.setAttribute('open', '');
+      }
+      function closeSheet() {
+        if (!sheet) return;
+        if (typeof sheet.hide === 'function') sheet.hide();
+        else sheet.removeAttribute('open');
+      }
+      document.getElementById('openSheetBtn').addEventListener('click', openSheet);
+      document.getElementById('closeSheetBtn').addEventListener('click', closeSheet);
+      document.getElementById('saveSheetBtn').addEventListener('click', closeSheet);
+    });
+  </script>
+</body>
+</html>

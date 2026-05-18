@@ -54,6 +54,7 @@ jobs:
         run: |
           node scripts/prepare-docs-pages.js
           cp -r dist docs/dist
+          cp -r showcase-demos docs/showcase-demos
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

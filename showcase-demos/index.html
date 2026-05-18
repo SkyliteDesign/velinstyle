@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live demos — VelinStyle</title>
+  <meta name="description" content="Interactive showcase pages built with VelinStyle: UI kit, SaaS landing, dashboard, and Web Components.">
+  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle.min.css">
+  <style>
+    body { background: var(--velin-color-surface-dim); margin: 0; min-height: 100vh; }
+    .demo-bar {
+      background: var(--velin-color-surface-bright);
+      border-bottom: 1px solid var(--velin-color-border);
+      padding: var(--velin-space-4) var(--velin-space-6);
+    }
+    .demo-bar__inner {
+      max-width: 72rem;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--velin-space-4);
+    }
+    .demo-bar a { font-weight: var(--velin-weight-semibold); text-decoration: none; color: var(--velin-color-primary); }
+    .demo-bar a:hover { text-decoration: underline; }
+    .demo-hero {
+      max-width: 48rem;
+      margin: 0 auto;
+      padding: var(--velin-space-12) var(--velin-space-4) var(--velin-space-8);
+      text-align: center;
+    }
+    .demo-hero h1 {
+      font-size: var(--velin-text-4xl);
+      font-weight: var(--velin-weight-extrabold);
+      letter-spacing: var(--velin-tracking-tight);
+      margin: 0 0 var(--velin-space-3);
+    }
+    .demo-hero p { color: var(--velin-color-text-muted); font-size: var(--velin-text-lg); margin: 0; }
+    .demo-grid {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 0 var(--velin-space-4) var(--velin-space-12);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+      gap: var(--velin-space-6);
+    }
+    .demo-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
+      background: var(--velin-color-surface-bright);
+      border: 1px solid var(--velin-color-border);
+      border-radius: var(--velin-radius-lg);
+      padding: var(--velin-space-6);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    .demo-card:hover {
+      border-color: var(--velin-color-primary);
+      box-shadow: var(--velin-shadow-lg);
+      transform: translateY(-3px);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .demo-card:hover { transform: none; }
+    }
+    .demo-card__tag {
+      font-size: var(--velin-text-xs);
+      font-weight: var(--velin-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--velin-color-primary);
+      margin-bottom: var(--velin-space-2);
+    }
+    .demo-card h2 {
+      font-size: var(--velin-text-xl);
+      margin: 0 0 var(--velin-space-2);
+    }
+    .demo-card p { margin: 0; font-size: var(--velin-text-sm); color: var(--velin-color-text-muted); flex: 1; }
+    .demo-card__cta { margin-top: var(--velin-space-4); font-weight: var(--velin-weight-semibold); color: var(--velin-color-primary); }
+  </style>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <header class="demo-bar">
+    <div class="demo-bar__inner">
+      <a href="https://velinstyle.info/">← VelinStyle home</a>
+      <velin-theme-toggle themes-base="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/themes/"></velin-theme-toggle>
+    </div>
+  </header>
+  <link rel="icon" href="../assets/img/velinstyle-logo.svg" type="image/svg+xml">
+  <main id="main">
+    <div class="demo-hero">
+      <h1>Live demos</h1>
+      <p>Full pages that stress-test layout, components, themes, and Web Components—open source and copy-friendly.</p>
+      <p style="margin-top:var(--velin-space-4);font-size:var(--velin-text-sm)">
+        <strong>Fork on GitHub:</strong>
+        <a href="https://github.com/SkyliteDesign/velinstyle-demos" target="_blank" rel="noopener noreferrer">velinstyle-demos</a>
+        — static HTML, unpkg CDN, zero build.
+        · <a href="https://skylitedesign.github.io/velinstyle-demos/" target="_blank" rel="noopener noreferrer">GitHub Pages mirror</a>
+      </p>
+    </div>
+    <div class="demo-grid">
+      <a class="demo-card" href="demos/showcase-ui-kit.html">
+        <span class="demo-card__tag">Components</span>
+        <h2>UI kit</h2>
+        <p>Buttons, badges, alerts, forms, lists, and accordion patterns in one dense surface.</p>
+        <span class="demo-card__cta">Open demo →</span>
+      </a>
+      <a class="demo-card" href="demos/showcase-saas.html">
+        <span class="demo-card__tag">Marketing</span>
+        <h2>SaaS landing</h2>
+        <p>Hero, logos, feature grid, testimonial, pricing teaser, and footer using layout utilities.</p>
+        <span class="demo-card__cta">Open demo →</span>
+      </a>
+      <a class="demo-card" href="demos/showcase-dashboard.html">
+        <span class="demo-card__tag">Application</span>
+        <h2>Dashboard</h2>
+        <p>Sidebar shell, KPI cards, charts placeholder, data table, and drawer-friendly actions.</p>
+        <span class="demo-card__cta">Open demo →</span>
+      </a>
+      <a class="demo-card" href="demos/showcase-interactive.html">
+        <span class="demo-card__tag">Web Components</span>
+        <h2>Interactive</h2>
+        <p>Modal, toast, dropdown, theme toggle, progress ring, stepper, plus the new 0.8.0 announcer and sheet.</p>
+        <span class="demo-card__cta">Open demo →</span>
+      </a>
+      <a class="demo-card" href="demos/showcase-forum.html">
+        <span class="demo-card__tag">Community</span>
+        <h2>Forum</h2>
+        <p>Thread list with avatars, ratings, chips, plus a tabbed detail panel and a reply composer with mention popover.</p>
+        <span class="demo-card__cta">Open demo →</span>
+      </a>
+      <a class="demo-card" href="demos/showcase-ecommerce.html">
+        <span class="demo-card__tag">Storefront</span>
+        <h2>E-Commerce</h2>
+        <p>Product grid, cart sheet, mobile bottom-nav, segmented size picker, stepper qty, and live announcer.</p>
+        <span class="demo-card__cta">Open demo →</span>
+      </a>
+      <a class="demo-card" href="demos/showcase-crypto.html">
+        <span class="demo-card__tag">Finance</span>
+        <h2>Crypto dashboard</h2>
+        <p>Menubar shell, Cmd-K command palette, KPI stats with progress rings, sparkline SVG, and order book.</p>
+        <span class="demo-card__cta">Open demo →</span>
+      </a>
+    </div>
+  </main>
+  <script src="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle-components.iife.js"></script>
+</body>
+</html>

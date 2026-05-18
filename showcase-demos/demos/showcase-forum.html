@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Synced from velinstyle-site — fork: https://github.com/SkyliteDesign/velinstyle-demos -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forum showcase &mdash; VelinStyle</title>
+  <meta name="description" content="Community forum demo built with VelinStyle: thread list, ratings, tags, reply composer, and tabs.">
+  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle.min.css">
+  <link rel="icon" href="../assets/img/velinstyle-logo.svg" type="image/svg+xml">
+  <style>
+    body { margin: 0; background: var(--velin-color-surface-dim); min-height: 100vh; }
+    .demo-bar {
+      background: var(--velin-color-surface-bright);
+      border-bottom: 1px solid var(--velin-color-border);
+      padding: max(var(--velin-space-3), env(safe-area-inset-top)) var(--velin-space-6) var(--velin-space-3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .demo-bar__inner {
+      max-width: 72rem;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--velin-space-3);
+    }
+    .demo-bar nav { display: flex; gap: var(--velin-space-4); flex-wrap: wrap; align-items: center; }
+    .demo-bar a { font-size: var(--velin-text-sm); font-weight: var(--velin-weight-medium); color: var(--velin-color-text-muted); text-decoration: none; }
+    .demo-bar a:hover { color: var(--velin-color-primary); }
+    .layout {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: var(--velin-space-8) var(--velin-space-4) var(--velin-space-12);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--velin-space-6);
+    }
+    @media (min-width: 64rem) {
+      .layout { grid-template-columns: minmax(0, 1.4fr) minmax(20rem, 1fr); }
+    }
+    .page-header h1 { margin: 0 0 var(--velin-space-2); font-size: var(--velin-text-3xl); }
+    .page-header p { margin: 0; color: var(--velin-color-text-muted); }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--velin-space-3);
+      align-items: center;
+      justify-content: space-between;
+      margin-block: var(--velin-space-5) var(--velin-space-4);
+    }
+    .filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--velin-space-2);
+    }
+    .filter-chips .velin-chip { cursor: pointer; border: 1px solid transparent; }
+    .filter-chips .velin-chip[data-velin-filter-active] {
+      background: var(--velin-color-primary);
+      color: var(--velin-color-on-primary, #fff);
+      border-color: var(--velin-color-primary);
+    }
+    .thread-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--velin-space-3);
+    }
+    .thread {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr auto;
+      gap: var(--velin-space-4);
+      align-items: start;
+      background: var(--velin-color-surface-bright);
+      border: 1px solid var(--velin-color-border);
+      border-radius: var(--velin-radius-lg);
+      padding: var(--velin-space-4) var(--velin-space-5);
+    }
+    .thread:hover { border-color: var(--velin-color-primary); }
+    .thread__avatar {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: var(--velin-color-primary-subtle);
+      color: var(--velin-color-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .thread__title {
+      font-weight: var(--velin-weight-semibold);
+      font-size: var(--velin-text-base);
+      margin: 0 0 var(--velin-space-1);
+    }
+    .thread__title a { color: inherit; text-decoration: none; }
+    .thread__title a:hover { color: var(--velin-color-primary); }
+    .thread__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--velin-space-3);
+      font-size: var(--velin-text-xs);
+      color: var(--velin-color-text-muted);
+      align-items: center;
+    }
+    .thread__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--velin-space-2);
+      margin-top: var(--velin-space-2);
+    }
+    .thread__stats {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: var(--velin-space-1);
+      font-size: var(--velin-text-xs);
+      color: var(--velin-color-text-muted);
+      min-width: 4rem;
+    }
+    .thread__stats strong { font-size: var(--velin-text-sm); color: var(--velin-color-text); }
+    .panel {
+      background: var(--velin-color-surface-bright);
+      border: 1px solid var(--velin-color-border);
+      border-radius: var(--velin-radius-lg);
+      padding: var(--velin-space-5);
+    }
+    .panel + .panel { margin-top: var(--velin-space-4); }
+    .panel h2 { margin: 0 0 var(--velin-space-3); font-size: var(--velin-text-lg); }
+    .composer label { display: block; margin-block-end: var(--velin-space-1); font-size: var(--velin-text-xs); color: var(--velin-color-text-muted); }
+    .composer textarea { width: 100%; min-height: 6rem; }
+    .composer__row { display: flex; justify-content: space-between; align-items: center; gap: var(--velin-space-3); margin-top: var(--velin-space-3); flex-wrap: wrap; }
+    .composer__hint { font-size: var(--velin-text-xs); color: var(--velin-color-text-muted); }
+  </style>
+</head>
+<body>
+<svg data-velin-inline-sprite="1" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><symbol id="user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+  <circle cx="12" cy="7" r="4"/>
+  </symbol></svg>
+
+<a href="#main" class="velin-skip-link">Skip to main content</a>
+  <header class="demo-bar">
+    <div class="demo-bar__inner">
+      <nav aria-label="Demo navigation">
+        <a href="https://velinstyle.info/">Home</a>
+        <a href="index.html">All demos</a>
+      </nav>
+      <velin-theme-toggle></velin-theme-toggle>
+    </div>
+  </header>
+
+  <main class="layout" id="main">
+    <section aria-labelledby="forum-title">
+      <header class="page-header">
+        <h1 id="forum-title">VelinTalk forum</h1>
+        <p>Community threads on accessibility, theming, and CLI workflows. Powered by VelinStyle 0.8.0 components.</p>
+      </header>
+
+      <div class="toolbar">
+        <div class="filter-chips" role="group" aria-label="Categories" data-velin-filter-group>
+          <button type="button" class="velin-chip velin-chip--sm" data-velin-filter-value="all" data-velin-filter-target="#threadList" data-velin-filter-active>All</button>
+          <button type="button" class="velin-chip velin-chip--sm" data-velin-filter-value="accessibility" data-velin-filter-target="#threadList">Accessibility</button>
+          <button type="button" class="velin-chip velin-chip--sm" data-velin-filter-value="theming" data-velin-filter-target="#threadList">Theming</button>
+          <button type="button" class="velin-chip velin-chip--sm" data-velin-filter-value="cli" data-velin-filter-target="#threadList">CLI</button>
+          <button type="button" class="velin-chip velin-chip--sm" data-velin-filter-value="components" data-velin-filter-target="#threadList">Web Components</button>
+          <button type="button" class="velin-chip velin-chip--sm" data-velin-filter-value="showcase" data-velin-filter-target="#threadList">Showcase</button>
+        </div>
+        <label class="velin-visually-hidden" for="forum-search">Search threads</label>
+        <input id="forum-search" type="search" class="velin-input" placeholder="Search threads&hellip;" aria-label="Search threads" data-velin-filter-input data-velin-filter-target="#threadList" style="min-width:14rem">
+      </div>
+
+      <p id="threadEmpty" hidden role="status" style="margin:var(--velin-space-3) 0;color:var(--velin-color-text-muted);font-size:var(--velin-text-sm)">No threads match your filter.</p>
+      <ul class="thread-list" id="threadList" data-velin-flip aria-label="Threads">
+        <li class="thread" data-tags="theming css" data-search="theme picker flash unthemed dark">
+          <span class="thread__avatar" aria-hidden="true"><velin-icon name="user" size="22"></velin-icon></span>
+          <div>
+            <h3 class="thread__title"><a href="#thread-1">How do you ship a 13-theme picker without a flash of un-themed content?</a></h3>
+            <div class="thread__meta">
+              <span><strong>Maria L.</strong></span>
+              <span class="velin-badge velin-badge--success">Solved</span>
+              <span>3 hours ago</span>
+              <velin-rating value="5" max="5" aria-label="5 of 5 stars" readonly></velin-rating>
+            </div>
+            <div class="thread__tags">
+              <span class="velin-chip velin-chip--sm">Theming</span>
+              <span class="velin-chip velin-chip--sm">CSS</span>
+            </div>
+          </div>
+          <div class="thread__stats">
+            <span><strong>18</strong> replies</span>
+            <span>312 views</span>
+          </div>
+        </li>
+        <li class="thread" data-tags="components css" data-search="has container queries velin-card">
+          <span class="thread__avatar" aria-hidden="true"><velin-icon name="user" size="22"></velin-icon></span>
+          <div>
+            <h3 class="thread__title"><a href="#thread-2">Combining <code>:has()</code> with container queries inside <code>velin-card</code></a></h3>
+            <div class="thread__meta">
+              <span><strong>Akira P.</strong></span>
+              <span class="velin-badge velin-badge--info">Discussion</span>
+              <span>Yesterday</span>
+              <velin-rating value="4" max="5" aria-label="4 of 5 stars" readonly></velin-rating>
+            </div>
+            <div class="thread__tags">
+              <span class="velin-chip velin-chip--sm">CSS</span>
+              <span class="velin-chip velin-chip--sm">Components</span>
+            </div>
+          </div>
+          <div class="thread__stats">
+            <span><strong>7</strong> replies</span>
+            <span>148 views</span>
+          </div>
+        </li>
+        <li class="thread" data-tags="cli layout accessibility" data-search="layout audit flex no wrap overflow">
+          <span class="thread__avatar" aria-hidden="true"><velin-icon name="user" size="22"></velin-icon></span>
+          <div>
+            <h3 class="thread__title"><a href="#thread-3">Layout audit reported flex-no-wrap-overflow &mdash; what's the right fix?</a></h3>
+            <div class="thread__meta">
+              <span><strong>Joana R.</strong></span>
+              <span class="velin-badge velin-badge--warning">Help</span>
+              <span>2 days ago</span>
+              <velin-rating value="3" max="5" aria-label="3 of 5 stars" readonly></velin-rating>
+            </div>
+            <div class="thread__tags">
+              <span class="velin-chip velin-chip--sm">CLI</span>
+              <span class="velin-chip velin-chip--sm">Layout</span>
+            </div>
+          </div>
+          <div class="thread__stats">
+            <span><strong>4</strong> replies</span>
+            <span>96 views</span>
+          </div>
+        </li>
+        <li class="thread" data-tags="showcase migration components" data-search="bootstrap admin replace sprint">
+          <span class="thread__avatar" aria-hidden="true"><velin-icon name="user" size="22"></velin-icon></span>
+          <div>
+            <h3 class="thread__title"><a href="#thread-4">Showcase: replacing a Bootstrap admin with VelinStyle in one sprint</a></h3>
+            <div class="thread__meta">
+              <span><strong>Ben C.</strong></span>
+              <span class="velin-badge velin-badge--primary">Showcase</span>
+              <span>Last week</span>
+              <velin-rating value="5" max="5" aria-label="5 of 5 stars" readonly></velin-rating>
+            </div>
+            <div class="thread__tags">
+              <span class="velin-chip velin-chip--sm">Showcase</span>
+              <span class="velin-chip velin-chip--sm">Migration</span>
+            </div>
+          </div>
+          <div class="thread__stats">
+            <span><strong>22</strong> replies</span>
+            <span>540 views</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <aside aria-labelledby="thread-detail-title" id="thread-1">
+      <div class="panel">
+        <h2 id="thread-detail-title">Selected thread</h2>
+        <p style="margin:0 0 var(--velin-space-3);font-size:var(--velin-text-sm);color:var(--velin-color-text-muted)">
+          <strong>Maria L.</strong> &middot; 3h ago &middot; <span class="velin-badge velin-badge--success">Solved</span>
+        </p>
+        <p style="margin:0">We solved the flash-of-un-themed content by storing the chosen slug in <code>localStorage</code> and writing it to <code>&lt;html data-velin-theme&gt;</code> in a tiny inline script before any stylesheet loads.</p>
+      </div>
+
+      <div class="panel">
+        <velin-tabs>
+          <div role="tablist" aria-label="Thread sections">
+            <button type="button" role="tab" aria-selected="true" aria-controls="tab-replies">Replies (18)</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="tab-sources">Sources</button>
+          </div>
+          <section role="tabpanel" id="tab-replies">
+            <ol class="velin-list-unstyled" style="display:flex;flex-direction:column;gap:var(--velin-space-3);margin:var(--velin-space-3) 0 0;padding:0">
+              <li>
+                <p style="margin:0 0 var(--velin-space-1);font-size:var(--velin-text-sm)"><strong>Akira P.</strong> &middot; 2h ago</p>
+                <p style="margin:0">Storing <code>velin-theme</code> in <code>localStorage</code> means SSR routes also need to read it server-side&mdash;otherwise hydration flashes.</p>
+              </li>
+              <li>
+                <p style="margin:0 0 var(--velin-space-1);font-size:var(--velin-text-sm)"><strong>Joana R.</strong> &middot; 1h ago</p>
+                <p style="margin:0">For static hosts the inline script in <code>&lt;head&gt;</code> is enough. We added <code>@vite-ignore</code> on the dynamic <code>&lt;link&gt;</code> import to keep bundlers happy.</p>
+              </li>
+            </ol>
+          </section>
+          <section role="tabpanel" id="tab-sources" hidden>
+            <ul style="margin:var(--velin-space-3) 0 0;padding-inline-start:var(--velin-space-5)">
+              <li><a href="../docs/customize/color-modes.html">Docs &mdash; color modes</a></li>
+              <li><a href="../docs/components/announcer.html">Docs &mdash; announcer</a></li>
+              <li><a href="../docs/guides/responsive-layout.html">Guide &mdash; responsive layout</a></li>
+            </ul>
+          </section>
+        </velin-tabs>
+      </div>
+
+      <div class="panel composer">
+        <h2>Reply</h2>
+        <label for="composer-text">Message</label>
+        <textarea class="velin-textarea" id="composer-text" placeholder="Share your experience…"></textarea>
+        <div class="composer__row">
+          <span class="composer__hint">Tip: type <code>@</code> to mention a user (powered by <code>velin-popover</code>).</span>
+          <div class="velin-cluster" style="gap:var(--velin-space-2);display:flex">
+            <button type="button" class="velin-btn velin-btn--ghost velin-btn--sm">Preview</button>
+            <button type="button" class="velin-btn velin-btn--primary velin-btn--sm" id="forumPostBtn">Post reply</button>
+          </div>
+        </div>
+        <velin-popover anchor="#composer-text" placement="top-start">
+          <div style="padding:var(--velin-space-2);min-width:8rem">
+            <p style="margin:0 0 var(--velin-space-1);font-size:var(--velin-text-xs);color:var(--velin-color-text-muted)">Mention</p>
+            <button type="button" class="velin-btn velin-btn--ghost velin-btn--sm" style="width:100%;justify-content:flex-start">@MariaL</button>
+            <button type="button" class="velin-btn velin-btn--ghost velin-btn--sm" style="width:100%;justify-content:flex-start">@AkiraP</button>
+          </div>
+        </velin-popover>
+      </div>
+    </aside>
+  </main>
+
+  <velin-toast id="forumToaster"></velin-toast>
+  <velin-announcer id="forumAnnouncer"></velin-announcer>
+
+  <script src="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle-components.iife.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const post = document.getElementById('forumPostBtn');
+      const toaster = document.getElementById('forumToaster');
+      const announcer = document.getElementById('forumAnnouncer');
+      post?.addEventListener('click', () => {
+        toaster?.show?.({ message: 'Reply posted (demo)', type: 'success' });
+        if (announcer && typeof announcer.announce === 'function') {
+          announcer.announce('Your reply has been posted', { politeness: 'polite' });
+        }
+      });
+
+      const list = document.getElementById('threadList');
+      const empty = document.getElementById('threadEmpty');
+      if (list && empty) {
+        const observer = new MutationObserver(() => {
+          const visible = Array.from(list.children).some((li) => !li.hidden);
+          empty.hidden = visible;
+        });
+        observer.observe(list, { attributes: true, subtree: true, attributeFilter: ['hidden'] });
+      }
+    });
+  </script>
+</body>
+</html>

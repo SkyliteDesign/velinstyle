@@ -22,7 +22,7 @@
 npm i @birdapi/velinstyle
 ```
 
-**[Live-Demos öffnen →](https://velinstyle.info/demos/)** · **[Full Pages forken →](https://github.com/SkyliteDesign/velinstyle-demos)** · **[Doku](https://velinstyle.info/docs/)** · **[★ Stern](https://github.com/SkyliteDesign/velinstyle)**
+**[Live-Demos öffnen →](https://velinstyle.info/demos/)** · **[Full Pages forken →](https://github.com/SkyliteDesign/velinstyle/tree/main/showcase-demos)** · **[Doku](https://velinstyle.info/docs/)** · **[★ Stern](https://github.com/SkyliteDesign/velinstyle)**
 
 **[English](README.md)** · **Deutsch**
 
@@ -38,7 +38,7 @@ npm i @birdapi/velinstyle
 
 ## Live-Demos
 
-Vollständige Anwendungsseiten — keine Spielzeug-Snippets. Live auf **[velinstyle.info](https://velinstyle.info/demos/)** oder **forken** aus **[velinstyle-demos](https://github.com/SkyliteDesign/velinstyle-demos)** (ohne Build, unpkg CDN).
+Vollständige Anwendungsseiten — keine Spielzeug-Snippets. Live auf **[velinstyle.info](https://velinstyle.info/demos/)** oder **forken** aus **[velinstyle-demos](https://github.com/SkyliteDesign/velinstyle/tree/main/showcase-demos)** (ohne Build, unpkg CDN).
 
 <table>
 <tr>
@@ -50,7 +50,7 @@ Vollständige Anwendungsseiten — keine Spielzeug-Snippets. Live auf **[velinst
 
 Sparkline, Live-Counter, Command Palette, Menubar, Order Book — **0.8.0 Motion** auf Finance-UI.
 
-**[Demo öffnen →](https://velinstyle.info/demos/showcase-crypto.html)** · **[Forken →](https://github.com/SkyliteDesign/velinstyle-demos/blob/main/demos/showcase-crypto.html)**
+**[Demo öffnen →](https://velinstyle.info/demos/showcase-crypto.html)** · **[Forken →](https://github.com/SkyliteDesign/velinstyle/blob/main/showcase-demos/demos/showcase-crypto.html)**
 
 </td>
 <td width="50%" valign="top">
@@ -61,7 +61,7 @@ Sparkline, Live-Counter, Command Palette, Menubar, Order Book — **0.8.0 Motion
 
 FLIP-Produktfilter, Cart-Sheet, Mobile Bottom-Nav, Segmented Sizes, Live-Announcer.
 
-**[Demo öffnen →](https://velinstyle.info/demos/showcase-ecommerce.html)** · **[Forken →](https://github.com/SkyliteDesign/velinstyle-demos/blob/main/demos/showcase-ecommerce.html)**
+**[Demo öffnen →](https://velinstyle.info/demos/showcase-ecommerce.html)** · **[Forken →](https://github.com/SkyliteDesign/velinstyle/blob/main/showcase-demos/demos/showcase-ecommerce.html)**
 
 </td>
 </tr>
@@ -74,7 +74,7 @@ FLIP-Produktfilter, Cart-Sheet, Mobile Bottom-Nav, Segmented Sizes, Live-Announc
 
 Hero, Logos, Feature-Grid, Testimonial, Pricing — nur Layout-Utilities.
 
-**[Demo öffnen →](https://velinstyle.info/demos/showcase-saas.html)** · **[Forken →](https://github.com/SkyliteDesign/velinstyle-demos/blob/main/demos/showcase-saas.html)**
+**[Demo öffnen →](https://velinstyle.info/demos/showcase-saas.html)** · **[Forken →](https://github.com/SkyliteDesign/velinstyle/blob/main/showcase-demos/demos/showcase-saas.html)**
 
 </td>
 <td width="50%" valign="top">
@@ -85,7 +85,7 @@ Hero, Logos, Feature-Grid, Testimonial, Pricing — nur Layout-Utilities.
 
 App-Shell, KPI-Karten, Datentabelle, Drawer-Aktionen.
 
-**[Demo öffnen →](https://velinstyle.info/demos/showcase-dashboard.html)** · **[Forken →](https://github.com/SkyliteDesign/velinstyle-demos/blob/main/demos/showcase-dashboard.html)**
+**[Demo öffnen →](https://velinstyle.info/demos/showcase-dashboard.html)** · **[Forken →](https://github.com/SkyliteDesign/velinstyle/blob/main/showcase-demos/demos/showcase-dashboard.html)**
 
 </td>
 </tr>
@@ -98,7 +98,7 @@ App-Shell, KPI-Karten, Datentabelle, Drawer-Aktionen.
 
 Modal, Toast, Command Palette, Sheet, Stepper — **32 Web Components**.
 
-**[Demo öffnen →](https://velinstyle.info/demos/showcase-interactive.html)** · **[Forken →](https://github.com/SkyliteDesign/velinstyle-demos/blob/main/demos/showcase-interactive.html)**
+**[Demo öffnen →](https://velinstyle.info/demos/showcase-interactive.html)** · **[Forken →](https://github.com/SkyliteDesign/velinstyle/blob/main/showcase-demos/demos/showcase-interactive.html)**
 
 </td>
 <td width="50%" valign="top">
@@ -109,7 +109,7 @@ Modal, Toast, Command Palette, Sheet, Stepper — **32 Web Components**.
 
 Threads, Ratings, Chips, Detail-Tabs, Mention-Composer.
 
-**[Demo öffnen →](https://velinstyle.info/demos/showcase-forum.html)** · **[Forken →](https://github.com/SkyliteDesign/velinstyle-demos/blob/main/demos/showcase-forum.html)**
+**[Demo öffnen →](https://velinstyle.info/demos/showcase-forum.html)** · **[Forken →](https://github.com/SkyliteDesign/velinstyle/blob/main/showcase-demos/demos/showcase-forum.html)**
 
 </td>
 </tr>
@@ -118,7 +118,7 @@ Threads, Ratings, Chips, Detail-Tabs, Mention-Composer.
 <p align="center">
   <a href="https://velinstyle.info/demos/"><strong>Alle Demos (UI kit u. a.) →</strong></a>
   &nbsp;·&nbsp;
-  <a href="https://skylitedesign.github.io/velinstyle-demos/"><strong>GitHub Pages Spiegel →</strong></a>
+  <a href="https://skylitedesign.github.io/velinstyle/showcase-demos/"><strong>GitHub Pages Spiegel →</strong></a>
 </p>
 
 ---
@@ -166,7 +166,7 @@ npm install @birdapi/velinstyle
 </html>
 ```
 
-**Klon:** `dist/` nicht im Repo — `npm install && npm run build`, oder [velinstyle-demos](https://github.com/SkyliteDesign/velinstyle-demos) nur mit unpkg.
+**Klon:** `dist/` nicht im Repo — `npm install && npm run build`, oder [velinstyle-demos](https://github.com/SkyliteDesign/velinstyle/tree/main/showcase-demos) nur mit unpkg.
 
 </details>
 
@@ -191,7 +191,7 @@ npm install @birdapi/velinstyle
 | **Produkt-Site** | [velinstyle.info](https://velinstyle.info) |
 | **Dokumentation** | [velinstyle.info/docs/](https://velinstyle.info/docs/) |
 | **Live-Demos** | [velinstyle.info/demos/](https://velinstyle.info/demos/) |
-| **Forkbare Demos** | [github.com/SkyliteDesign/velinstyle-demos](https://github.com/SkyliteDesign/velinstyle-demos) |
+| **Forkbare Demos** | [github.com/SkyliteDesign/velinstyle-demos](https://github.com/SkyliteDesign/velinstyle/tree/main/showcase-demos) |
 | **npm-Paket** | [@birdapi/velinstyle](https://www.npmjs.com/package/@birdapi/velinstyle) |
 | **GitHub (Framework)** | [SkyliteDesign/velinstyle](https://github.com/SkyliteDesign/velinstyle) |
 
@@ -235,7 +235,7 @@ npm run demos:sync   # Showcases → velinstyle-demos
 ## Mitmachen
 
 1. **[Stern dalassen](https://github.com/SkyliteDesign/velinstyle)**
-2. **[Live-Demo](https://velinstyle.info/demos/)** testen und [velinstyle-demos](https://github.com/SkyliteDesign/velinstyle-demos) forken
+2. **[Live-Demo](https://velinstyle.info/demos/)** testen und [velinstyle-demos](https://github.com/SkyliteDesign/velinstyle/tree/main/showcase-demos) forken
 3. **Issue oder PR** — Feedback willkommen
 
 ---

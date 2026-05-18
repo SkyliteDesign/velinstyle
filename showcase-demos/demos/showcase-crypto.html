@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Synced from velinstyle-site — fork: https://github.com/SkyliteDesign/velinstyle-demos -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crypto dashboard showcase &mdash; VelinStyle</title>
+  <meta name="description" content="Trading dashboard demo built with VelinStyle: menubar, command palette, KPI stats, sparkline, and order book.">
+  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle.min.css">
+  <link rel="icon" href="../assets/img/velinstyle-logo.svg" type="image/svg+xml">
+  <style>
+    body { margin: 0; background: var(--velin-color-surface-dim); min-height: 100vh; }
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--velin-space-3);
+      padding: max(var(--velin-space-3), env(safe-area-inset-top)) var(--velin-space-5) var(--velin-space-3);
+      background: var(--velin-color-surface-bright);
+      border-bottom: 1px solid var(--velin-color-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar__brand { display: inline-flex; gap: var(--velin-space-2); align-items: center; font-weight: var(--velin-weight-bold); color: var(--velin-color-text); text-decoration: none; }
+    .topbar__brand img { width: 1.5rem; height: 1.5rem; }
+    .topbar__spacer { flex: 1; }
+    .topbar a.demo-link { font-size: var(--velin-text-sm); color: var(--velin-color-text-muted); text-decoration: none; }
+    .topbar a.demo-link:hover { color: var(--velin-color-primary); }
+    .cmd-btn {
+      display: inline-flex; align-items: center; gap: var(--velin-space-2);
+      padding: var(--velin-space-2) var(--velin-space-3);
+      border-radius: var(--velin-radius-md);
+      border: 1px solid var(--velin-color-border);
+      background: var(--velin-color-surface);
+      color: var(--velin-color-text-muted);
+      cursor: pointer;
+      font-size: var(--velin-text-sm);
+    }
+    .cmd-btn kbd {
+      font-size: var(--velin-text-xs);
+      border: 1px solid var(--velin-color-border);
+      padding: 0 .3rem;
+      border-radius: var(--velin-radius-sm);
+      color: var(--velin-color-text);
+    }
+
+    .layout {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: var(--velin-space-6) var(--velin-space-4);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--velin-space-5);
+    }
+    @media (min-width: 64rem) {
+      .layout { grid-template-columns: minmax(0, 1.6fr) minmax(20rem, 1fr); }
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+      gap: var(--velin-space-4);
+    }
+    .kpi {
+      background: var(--velin-color-surface-bright);
+      border: 1px solid var(--velin-color-border);
+      border-radius: var(--velin-radius-lg);
+      padding: var(--velin-space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--velin-space-2);
+    }
+    .kpi__head { display: flex; justify-content: space-between; align-items: center; }
+    .kpi__label { font-size: var(--velin-text-xs); text-transform: uppercase; letter-spacing: 0.05em; color: var(--velin-color-text-muted); }
+    .kpi__value { font-size: var(--velin-text-2xl); font-weight: var(--velin-weight-bold); }
+    .kpi__delta { font-size: var(--velin-text-sm); }
+    .delta-up { color: var(--velin-color-success, oklch(60% 0.16 145)); }
+    .delta-down { color: var(--velin-color-danger, oklch(60% 0.2 25)); }
+    .panel {
+      background: var(--velin-color-surface-bright);
+      border: 1px solid var(--velin-color-border);
+      border-radius: var(--velin-radius-lg);
+      padding: var(--velin-space-5);
+    }
+    .panel h2 { margin: 0 0 var(--velin-space-3); font-size: var(--velin-text-lg); }
+    .chart {
+      width: 100%;
+      max-width: 100%;
+      height: 12rem;
+      display: block;
+    }
+    .order-book-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem var(--velin-space-3);
+      font-size: var(--velin-text-sm);
+    }
+    .order-row { display: flex; justify-content: space-between; padding-block: .25rem; }
+    .ask { color: var(--velin-color-danger, oklch(60% 0.2 25)); }
+    .bid { color: var(--velin-color-success, oklch(60% 0.16 145)); }
+    [data-velin-filter-active] {
+      background: var(--velin-color-primary);
+      color: var(--velin-color-on-primary, #fff);
+      border-color: var(--velin-color-primary);
+    }
+    .holdings-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--velin-space-2); }
+    .holdings-list li { display: flex; justify-content: space-between; padding-block: var(--velin-space-2); border-block-end: 1px dashed var(--velin-color-border); }
+    .holdings-list li:last-child { border-block-end: 0; }
+    .trade-form { display: flex; flex-direction: column; gap: var(--velin-space-3); }
+  </style>
+</head>
+<body>
+<svg data-velin-inline-sprite="1" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><symbol id="search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="11" cy="11" r="8"/>
+  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+  </symbol></svg>
+
+<a href="#main" class="velin-skip-link">Skip to main content</a>
+
+  <header class="topbar">
+    <a class="topbar__brand" href="https://velinstyle.info/">
+      <img src="../assets/img/velinstyle-logo.svg" alt="" width="24" height="24">
+      VelinCoin
+    </a>
+    <velin-menubar aria-label="App sections">
+      <button type="button" data-menu="markets">Markets</button>
+      <button type="button" data-menu="trade">Trade</button>
+      <button type="button" data-menu="portfolio">Portfolio</button>
+      <button type="button" data-menu="settings">Settings</button>
+    </velin-menubar>
+    <div class="topbar__spacer"></div>
+    <button type="button" class="cmd-btn" id="cmdkBtn">
+      <velin-icon name="search" size="14"></velin-icon>
+      Search assets&hellip;
+      <kbd>Ctrl K</kbd>
+    </button>
+    <a class="demo-link" href="https://velinstyle.info/">Home</a>
+    <a class="demo-link" href="index.html">Demos</a>
+    <velin-theme-toggle></velin-theme-toggle>
+  </header>
+
+  <main class="layout" id="main">
+    <section aria-labelledby="overview-title">
+      <header style="margin-bottom:var(--velin-space-5);display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:var(--velin-space-3)">
+        <div>
+          <h1 id="overview-title" style="margin:0">Markets overview</h1>
+          <p style="margin:0;color:var(--velin-color-text-muted)">Live-feel KPIs and an order book powered by VelinStyle 0.8.0 primitives.</p>
+        </div>
+        <velin-live-dot status="live">Realtime feed</velin-live-dot>
+      </header>
+
+      <div class="kpi-grid">
+        <div class="kpi">
+          <div class="kpi__head">
+            <span class="kpi__label">BTC / EUR</span>
+            <velin-progress-ring value="72" size="42" stroke="4" aria-label="72% to next target"></velin-progress-ring>
+          </div>
+          <div class="kpi__value"><velin-counter from="0" to="61840" duration="1100" format="currency" currency="EUR" decimals="0" locale="de-DE"></velin-counter></div>
+          <div class="kpi__delta delta-up">+2.4% 24h</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__head">
+            <span class="kpi__label">ETH / EUR</span>
+            <velin-progress-ring value="58" size="42" stroke="4" aria-label="58% to next target"></velin-progress-ring>
+          </div>
+          <div class="kpi__value"><velin-counter from="0" to="3210" duration="1000" format="currency" currency="EUR" decimals="0" locale="de-DE"></velin-counter></div>
+          <div class="kpi__delta delta-down">-0.8% 24h</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__head">
+            <span class="kpi__label">Portfolio</span>
+            <velin-progress-ring value="93" size="42" stroke="4" aria-label="93% target"></velin-progress-ring>
+          </div>
+          <div class="kpi__value"><velin-counter from="0" to="48210" duration="1200" format="currency" currency="EUR" decimals="0" locale="de-DE"></velin-counter></div>
+          <div class="kpi__delta delta-up">+€1,820 (7d)</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__head">
+            <span class="kpi__label">Open orders</span>
+            <velin-progress-ring value="40" size="42" stroke="4" aria-label="40% fill"></velin-progress-ring>
+          </div>
+          <div class="kpi__value"><velin-counter from="0" to="12" duration="800"></velin-counter></div>
+          <div class="kpi__delta">4 partial fills</div>
+        </div>
+      </div>
+
+      <section class="panel" aria-labelledby="chart-title" style="margin-top:var(--velin-space-5)">
+        <header style="display:flex;justify-content:space-between;align-items:center;gap:var(--velin-space-3);flex-wrap:wrap">
+          <h2 id="chart-title" style="margin:0">BTC last 24 hours</h2>
+          <velin-segmented-control value="24h" aria-label="Range" id="btcRange">
+            <button type="button" data-value="1h">1H</button>
+            <button type="button" data-value="24h">24H</button>
+            <button type="button" data-value="7d">7D</button>
+          </velin-segmented-control>
+        </header>
+        <velin-sparkline
+          id="btcSparkline"
+          values="42,45,44,47,52,49,55,53,58,61,59,64,62,67,72,68,74,71,78,82,79,85,90,88"
+          width="640"
+          height="160"
+          area
+          glow
+          animate="draw"
+          label="BTC price last 24 hours"
+          style="color:var(--velin-color-primary);display:block;width:100%;height:12rem;margin-top:var(--velin-space-3)"></velin-sparkline>
+        <p style="margin:var(--velin-space-3) 0 0;font-size:var(--velin-text-xs);color:var(--velin-color-text-muted)">Animated sparkline driven by the new <code>&lt;velin-sparkline&gt;</code> Web Component &mdash; updates every 4 s with a random walk.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="orderbook-title" style="margin-top:var(--velin-space-5)">
+        <header style="display:flex;justify-content:space-between;align-items:center;gap:var(--velin-space-3);flex-wrap:wrap;margin-bottom:var(--velin-space-3)">
+          <h2 id="orderbook-title" style="margin:0">Order book &mdash; BTC/EUR</h2>
+          <div data-velin-filter-group style="display:flex;gap:var(--velin-space-2);flex-wrap:wrap">
+            <button type="button" class="velin-chip velin-chip--sm" data-velin-filter-value="all" data-velin-filter-target="#orderBook" data-velin-filter-active>All</button>
+            <button type="button" class="velin-chip velin-chip--sm" data-velin-filter-value="ask" data-velin-filter-target="#orderBook">Asks</button>
+            <button type="button" class="velin-chip velin-chip--sm" data-velin-filter-value="bid" data-velin-filter-target="#orderBook">Bids</button>
+          </div>
+        </header>
+        <div class="order-book-grid" id="orderBook" data-velin-flip data-velin-filter-item=".order-row">
+          <div class="order-row ask" data-tags="ask"><span>61,920</span><span>0.18</span></div>
+          <div class="order-row bid" data-tags="bid"><span>61,820</span><span>0.55</span></div>
+          <div class="order-row ask" data-tags="ask"><span>61,900</span><span>0.42</span></div>
+          <div class="order-row bid" data-tags="bid"><span>61,800</span><span>1.22</span></div>
+          <div class="order-row ask" data-tags="ask"><span>61,880</span><span>1.10</span></div>
+          <div class="order-row bid" data-tags="bid"><span>61,780</span><span>0.74</span></div>
+          <div class="order-row ask" data-tags="ask"><span>61,860</span><span>2.05</span></div>
+          <div class="order-row bid" data-tags="bid"><span>61,760</span><span>3.40</span></div>
+        </div>
+      </section>
+    </section>
+
+    <aside aria-labelledby="trade-title">
+      <section class="panel">
+        <h2 id="trade-title">Quick trade</h2>
+        <velin-segmented-control value="buy" aria-label="Trade side" style="margin-block-end:var(--velin-space-3);display:block">
+          <button type="button" data-value="buy">Buy</button>
+          <button type="button" data-value="sell">Sell</button>
+        </velin-segmented-control>
+        <form class="trade-form" id="tradeForm" novalidate>
+          <div>
+            <label class="velin-label" for="trade-pair">Pair</label>
+            <velin-combobox id="trade-pair" placeholder="BTC/EUR" aria-label="Pair">
+              <option value="btc-eur">BTC/EUR</option>
+              <option value="eth-eur">ETH/EUR</option>
+              <option value="sol-eur">SOL/EUR</option>
+              <option value="ada-eur">ADA/EUR</option>
+            </velin-combobox>
+          </div>
+          <div>
+            <label class="velin-label" for="trade-amount">Amount</label>
+            <velin-stepper id="trade-amount" value="0.05" min="0" step="0.01" max="10" aria-label="Trade amount"></velin-stepper>
+          </div>
+          <div>
+            <label class="velin-label" for="trade-price">Limit price</label>
+            <input id="trade-price" class="velin-input" type="text" value="61,840" inputmode="decimal">
+          </div>
+          <button type="submit" class="velin-btn velin-btn--primary">Place order</button>
+        </form>
+      </section>
+
+      <section class="panel" style="margin-top:var(--velin-space-4)">
+        <h2>Holdings</h2>
+        <ul class="holdings-list">
+          <li><span><strong>BTC</strong><br><small>0.78 ≈ €48,200</small></span><span class="delta-up">+2.4%</span></li>
+          <li><span><strong>ETH</strong><br><small>4.30 ≈ €13,800</small></span><span class="delta-down">-0.8%</span></li>
+          <li><span><strong>SOL</strong><br><small>22 ≈ €2,840</small></span><span class="delta-up">+5.1%</span></li>
+          <li><span><strong>ADA</strong><br><small>4,200 ≈ €1,712</small></span><span class="delta-up">+1.0%</span></li>
+        </ul>
+      </section>
+    </aside>
+  </main>
+
+  <velin-command id="cmdk" placeholder="Search coins, orders, settings…">
+    <velin-command-item data-value="btc">BTC &mdash; Bitcoin</velin-command-item>
+    <velin-command-item data-value="eth">ETH &mdash; Ethereum</velin-command-item>
+    <velin-command-item data-value="sol">SOL &mdash; Solana</velin-command-item>
+    <velin-command-item data-value="ada">ADA &mdash; Cardano</velin-command-item>
+    <velin-command-item data-value="orders">Open orders</velin-command-item>
+    <velin-command-item data-value="settings">Account settings</velin-command-item>
+  </velin-command>
+
+  <velin-toast id="cryptoToast"></velin-toast>
+  <velin-announcer id="cryptoAnnouncer"></velin-announcer>
+
+  <script src="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle-components.iife.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cmd = document.getElementById('cmdk');
+      const cmdBtn = document.getElementById('cmdkBtn');
+      function openCmd() {
+        if (!cmd) return;
+        if (typeof cmd.open === 'function') cmd.open();
+        else cmd.setAttribute('open', '');
+      }
+      cmdBtn.addEventListener('click', openCmd);
+      document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          openCmd();
+        }
+      });
+
+      const form = document.getElementById('tradeForm');
+      const toast = document.getElementById('cryptoToast');
+      const announcer = document.getElementById('cryptoAnnouncer');
+      form?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        toast?.show?.({ message: 'Order placed (demo)', type: 'success' });
+        announcer?.announce?.('Order placed: 0.05 BTC at limit 61,840 EUR', { politeness: 'polite' });
+      });
+
+      // Random-walk tick for the sparkline + bumps the BTC counter for a live feel.
+      const sparkline = document.getElementById('btcSparkline');
+      const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (sparkline && !reducedMotion) {
+        let series = sparkline.values;
+        if (!series.length) {
+          series = sparkline.getAttribute('values').split(',').map(Number);
+        }
+        setInterval(() => {
+          const last = series[series.length - 1];
+          const next = Math.max(20, Math.min(110, last + (Math.random() - 0.5) * 6));
+          series = [...series.slice(1), Number(next.toFixed(2))];
+          sparkline.update(series);
+        }, 4000);
+      }
+    });
+  </script>
+</body>
+</html>
