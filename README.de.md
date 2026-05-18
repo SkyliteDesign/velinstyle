@@ -8,10 +8,10 @@
 <br>
 
 [![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-2563eb?style=flat-square)](LICENSE)
-[![Release](https://img.shields.io/badge/Release-v0.8.0-2563eb?style=flat-square)](CHANGELOG.md)
-[![WCAG AA](https://img.shields.io/badge/WCAG-AA-16a34a?style=flat-square)](docs/a11y.html)
-[![CSS min](https://img.shields.io/badge/CSS_min-~46KB-15803d?style=flat-square)]()
-[![JS min](https://img.shields.io/badge/JS_min-~66KB-15803d?style=flat-square)]()
+[![Release](https://img.shields.io/badge/Release-v0.8.0-2563eb?style=flat-square)](https://github.com/SkyliteDesign/velinstyle/releases/tag/v0.8.0)
+[![WCAG 2.2 AA](https://img.shields.io/badge/WCAG_2.2-AA-16a34a?style=flat-square)](docs/a11y.html)
+[![CSS min](https://img.shields.io/badge/CSS_min-~150KB-15803d?style=flat-square)]()
+[![JS min](https://img.shields.io/badge/JS_min-~111KB-15803d?style=flat-square)]()
 [![npm version](https://img.shields.io/npm/v/@birdapi/velinstyle?style=flat-square)](https://www.npmjs.com/package/@birdapi/velinstyle)
 [![GitHub Pages](https://img.shields.io/badge/Docs-GitHub_Pages-2563eb?style=flat-square)](https://skylitedesign.github.io/velinstyle/)
 
@@ -71,9 +71,10 @@ Unter Zeitdruck landen **Barrierefreiheit** und **konsistentes Theming** oft ers
 <tbody>
 <tr><td align="center">♿</td><td><strong>WCAG AA by design</strong></td><td>Fokus, ARIA und Tastatur in Komponenten und Overlays</td></tr>
 <tr><td align="center">🎨</td><td><strong>OKLCH + 13 Theme-Presets</strong></td><td>Perzeptuell gleichmässige Farben; Dark Mode per Token-Swap</td></tr>
-<tr><td align="center">📦</td><td><strong>~46 KB CSS + ~66 KB JS (min)</strong></td><td>Schlank im Vergleich zu vielen All-in-One-Stacks</td></tr>
+<tr><td align="center">📦</td><td><strong>~150 KB CSS + ~111 KB JS (min)</strong></td><td>Komplettes Framework inkl. Komponenten-Bundle; weiterhin schlanker als viele All-in-One-Stacks</td></tr>
 <tr><td align="center">📐</td><td><strong>Container Queries + Utilities</strong></td><td>Bausteine passen sich <em>ihrem</em> Container an, nicht nur dem Viewport</td></tr>
-<tr><td align="center">🧩</td><td><strong>25 CSS-Module · 29 Web Components</strong></td><td>Modals, Tabs, Drawer, Toasts, Icons—APIs in <a href="docs/css-components.html">CSS</a> &amp; <a href="docs/components.html">WC-Docs</a></td></tr>
+<tr><td align="center">🧩</td><td><strong>25 CSS-Module · 32 Web Components</strong></td><td>Modals, Sheets, Command Palette, Combobox, Rating—siehe <a href="docs/css-components.html">CSS</a> &amp; <a href="docs/components.html">WC-Docs</a></td></tr>
+<tr><td align="center">📈</td><td><strong>Motion &amp; Charts (0.8.0)</strong></td><td><code>&lt;velin-sparkline&gt;</code>, <code>&lt;velin-counter&gt;</code>, <code>&lt;velin-live-dot&gt;</code>, FLIP-Listenfilter, Scroll-Reveal—<a href="CHANGELOG.md#080---2026-05-16">Changelog</a></td></tr>
 <tr><td align="center">🛠️</td><td><strong>Optionale CLI</strong></td><td><code>init</code>, <code>build</code>, <code>icons</code>, <code>scan</code>, <code>prefix</code>, <code>blueprint</code>, <code>scaffold</code>, <code>layout</code>, <code>tokens build</code></td></tr>
 <tr><td align="center">🌍</td><td><strong>RTL-ready</strong></td><td>Logical Properties und layout-orientierte Defaults · <a href="samples/rtl.html">RTL-Beispiel</a></td></tr>
 </tbody>
@@ -121,8 +122,8 @@ npm install @birdapi/velinstyle
 <summary><strong>CDN-Alternative</strong> (ohne npm install)</summary>
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@latest/dist/velinstyle.min.css">
-<script type="module" src="https://unpkg.com/@birdapi/velinstyle@latest/dist/velinstyle-components.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle.min.css">
+<script type="module" src="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle-components.min.js"></script>
 ```
 
 </details>
@@ -139,6 +140,18 @@ npm install @birdapi/velinstyle
 
 > **Repository klonen?** `dist/` liegt nicht im Repo. `npm install` und `npm run build`, dann HTML auf `dist/velinstyle.min.css` und `dist/velinstyle-components.min.js` zeigen. Ohne ES-Module: `velinstyle-components.iife.js` — siehe [Dokumentation](docs/index.html).
 
+### <span>④</span> Motion &amp; Live-UI (0.8.0)
+
+```html
+<html data-velin-reveal-auto>
+  <velin-live-dot status="live">Echtzeit</velin-live-dot>
+  <velin-counter from="0" to="12840" duration="900"></velin-counter>
+  <velin-sparkline values="3,5,4,7,9" area glow animate="draw" label="Trend"></velin-sparkline>
+</html>
+```
+
+Scroll-Reveal startet automatisch mit dem Komponenten-Bundle. Für FLIP-gefilterte Listen: `data-velin-flip` am Container und `data-velin-filter-value` an den Chips—siehe [CHANGELOG](CHANGELOG.md#080---2026-05-16).
+
 ---
 
 ## Why VelinStyle?
@@ -152,7 +165,8 @@ Eine **einheitliche Produktsprache**—Präfix-Klassen (`velin-`), klare **`@lay
 | Dark Mode | ⚠️ Build / manuell | `dark:`-Varianten | ✅ **Token-Swap** (`data-velin-theme`) |
 | Layout | Viewport-first | Viewport-Utilities | ✅ **Container Queries** + Media |
 | Interaktion | ⚠️ Legacy-JS-Muster | Eigenes JS | ✅ **Web Components** |
-| Bundle (Richtwert) | ~230 KB CSS+JS | JIT / variabel | ✅ **~46 KB CSS + ~66 KB JS (min)** |
+| Bundle (Richtwert) | ~230 KB CSS+JS | JIT / variabel | ✅ **~150 KB CSS + ~111 KB JS (min)** |
+| Motion / Charts | — | — | ✅ **Sparkline, Counter, FLIP-Filter** |
 
 ---
 
@@ -252,7 +266,7 @@ Siehe [docs/guides/responsive-layout.html](docs/guides/responsive-layout.html).
 - **`npx velinstyle blueprint list`**
 - **`npx velinstyle blueprint &lt;name&gt; -o datei.html`**
 
-Ids: `modal`, `form-login`, `layout-dashboard`, `navbar-header`, `hero-section`, `card-grid`, `table-responsive`, `alert-stack`, `breadcrumb-bar`, `footer-simple`, `form-contact`, `pagination-bar`, `search-field`, `sidebar-layout`.
+Ids u. a. `modal`, `form-login`, `layout-dashboard`, `navbar-header`, `filter-bar`, `bottom-nav-mobile`, `cookie-consent`, `notification-center`, `onboarding`, `pricing-table`, `empty-state`—vollständige Liste mit `blueprint list`.
 
 </details>
 
@@ -276,12 +290,14 @@ npx velinstyle tokens build --input examples/tokens.sample.json -o tokens.css
 **Starter &amp; Pakete**
 
 - [templates/vite-velinstyle](templates/vite-velinstyle) — Vite + 3 Seiten + Theme-Toggle
+- [templates/vite-react-velinstyle](templates/vite-react-velinstyle) — Vite + React-Starter
 - [@velinstyle/react](packages/react) — experimentelle dünne React-Wrapper
 
 **Dokumentation**
 
-- [Erste Schritte](docs/getting-started.html) · [Migration](docs/migration.html)
+- [Erste Schritte](docs/getting-started.html) · [Migration](docs/migration.html) · [CHANGELOG](CHANGELOG.md#080---2026-05-16)
 - [A11y-Patterns](docs/a11y-patterns/index.html) · [Security](docs/security.html)
+- [Prompt-Scaffolding](docs/guides/prompt-scaffolding.html) · [Responsive Layout-Audit](docs/guides/responsive-layout.html)
 
 </td>
 <td width="50%" valign="top">
