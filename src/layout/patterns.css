@@ -6,7 +6,7 @@
     min-block-size: 100vh;
   }
 
-  @media (max-width: 48rem) {
+  @media (width <= 48rem) {
     .velin-layout-sidebar {
       grid-template-columns: 1fr;
     }
@@ -25,7 +25,7 @@
     grid-column: 1 / -1;
   }
 
-  @media (max-width: 48rem) {
+  @media (width <= 48rem) {
     .velin-layout-holy-grail {
       grid-template-columns: 1fr;
     }
@@ -64,7 +64,7 @@
     gap: var(--velin-space-8);
   }
 
-  @media (max-width: 56rem) {
+  @media (width <= 56rem) {
     .velin-layout-aside-main {
       grid-template-columns: 1fr;
     }
@@ -78,7 +78,7 @@
     min-block-size: auto;
   }
 
-  @media (max-width: 48rem) {
+  @media (width <= 48rem) {
     .velin-layout-split {
       grid-template-columns: 1fr;
     }
@@ -108,7 +108,7 @@
     grid-row: 2;
   }
 
-  @media (max-width: 48rem) {
+  @media (width <= 48rem) {
     .velin-layout-dashboard {
       grid-template-columns: 1fr;
       grid-template-rows: auto auto 1fr;

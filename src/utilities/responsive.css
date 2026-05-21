@@ -6,7 +6,7 @@
      =================================================================== */
 
   /* --- SM (min-width: 36rem / 576px) --- */
-  @media (min-width: 36rem) {
+  @media (width >= 36rem) {
     /* Display (extending existing) */
     .velin-sm-inline-block { display: inline-block; }
     .velin-sm-inline-flex { display: inline-flex; }
@@ -81,7 +81,7 @@
   }
 
   /* --- MD (min-width: 48rem / 768px) --- */
-  @media (min-width: 48rem) {
+  @media (width >= 48rem) {
     /* Display */
     .velin-md-inline-block { display: inline-block; }
     .velin-md-inline-flex { display: inline-flex; }
@@ -174,7 +174,7 @@
   }
 
   /* --- LG (min-width: 62rem / 992px) --- */
-  @media (min-width: 62rem) {
+  @media (width >= 62rem) {
     /* Display */
     .velin-lg-inline-block { display: inline-block; }
     .velin-lg-inline-flex { display: inline-flex; }
@@ -259,7 +259,7 @@
   }
 
   /* --- XL (min-width: 80rem / 1280px) --- */
-  @media (min-width: 80rem) {
+  @media (width >= 80rem) {
     /* Display */
     .velin-xl-block { display: block; }
     .velin-xl-flex { display: flex; }

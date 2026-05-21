@@ -10,7 +10,6 @@
     /* Fluid Type Scale -- clamp(min, preferred, max) */
     --velin-fluid-min-vw: 20;  /* 320px */
     --velin-fluid-max-vw: 90;  /* 1440px */
-
     --velin-text-xs: clamp(0.625rem, 0.6rem + 0.1vw, 0.75rem);
     --velin-text-sm: clamp(0.8rem, 0.76rem + 0.15vw, 0.875rem);
     --velin-text-base: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);

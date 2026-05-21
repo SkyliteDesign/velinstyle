@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "mime": "application/vnd.velinstyle.meta+json",
-  "generatedAt": "2026-05-21T06:35:51.408Z",
+  "generatedAt": "2026-05-21T06:41:39.863Z",
   "framework": {
     "name": "@birdapi/velinstyle",
     "version": "0.9.0",

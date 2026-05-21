@@ -2,12 +2,30 @@
   "extends": "stylelint-config-standard",
   "rules": {
     "custom-property-pattern": "^velin-.+",
-    "selector-class-pattern": "^velin-",
+    "selector-class-pattern": [
+      "^(velin-|-velin-|step($|__|--))",
+      { "message": "Expected velin-* utility, -velin-* negative utility, or stepper BEM (.step, .step__*, .step--*)" }
+    ],
     "keyframes-name-pattern": "^velin-",
     "at-rule-no-unknown": [true, {
       "ignoreAtRules": ["layer", "container", "scope"]
     }],
     "no-descending-specificity": null,
-    "import-notation": "string"
+    "import-notation": "string",
+    "hue-degree-notation": null,
+    "lightness-notation": null,
+    "alpha-value-notation": null,
+    "value-keyword-case": null,
+    "declaration-block-single-line-max-declarations": null,
+    "property-no-vendor-prefix": null,
+    "declaration-empty-line-before": null,
+    "comment-empty-line-before": null,
+    "at-rule-empty-line-before": null,
+    "rule-empty-line-before": null,
+    "color-function-alias-notation": null,
+    "color-function-notation": null,
+    "number-max-precision": null,
+    "declaration-block-no-duplicate-custom-properties": null,
+    "media-feature-range-notation": null
   }
 }

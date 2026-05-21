@@ -27,7 +27,7 @@
     display: none;
   }
 
-  @media (min-width: 48rem) {
+  @media (width >= 48rem) {
     .velin-mobile-only {
       display: none;
     }

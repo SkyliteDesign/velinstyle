@@ -8,8 +8,7 @@
     content: "";
     position: absolute;
     inset-inline-start: 0.5rem;
-    inset-block-start: var(--velin-space-2);
-    inset-block-end: var(--velin-space-2);
+    inset-block: var(--velin-space-2) var(--velin-space-2);
     inline-size: 2px;
     background: var(--velin-color-border);
   }

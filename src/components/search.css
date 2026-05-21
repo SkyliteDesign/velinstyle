@@ -81,14 +81,13 @@
     }
   }
 
-  @media (max-width: 640px) {
+  @media (width <= 640px) {
     .velin-search {
       min-inline-size: 0;
     }
 
     .velin-search__results {
-      inset-inline-start: 0;
-      inset-inline-end: 0;
+      inset-inline: 0;
       max-inline-size: min(100vw, 100%);
       box-sizing: border-box;
     }

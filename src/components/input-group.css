@@ -81,8 +81,7 @@
   .velin-float-label > .velin-input,
   .velin-float-label > .velin-select,
   .velin-float-label > .velin-textarea {
-    padding-block-start: var(--velin-space-5);
-    padding-block-end: var(--velin-space-1);
+    padding-block: var(--velin-space-5) var(--velin-space-1);
   }
 
   .velin-float-label > .velin-label {

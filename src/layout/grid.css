@@ -107,7 +107,7 @@
   .velin-row > .velin-col-12 { flex: 0 0 auto; inline-size: 100%; }
 
   /* Responsive columns */
-  @media (min-width: 36rem) {
+  @media (width >= 36rem) {
     .velin-sm-col { flex: 1 0 0%; }
     .velin-sm-col-auto { flex: 0 0 auto; inline-size: auto; }
     .velin-row > .velin-sm-col-1 { flex: 0 0 auto; inline-size: 8.333%; }
@@ -119,7 +119,7 @@
     .velin-row > .velin-sm-col-12 { flex: 0 0 auto; inline-size: 100%; }
   }
 
-  @media (min-width: 48rem) {
+  @media (width >= 48rem) {
     .velin-md-col { flex: 1 0 0%; }
     .velin-md-col-auto { flex: 0 0 auto; inline-size: auto; }
     .velin-row > .velin-md-col-1 { flex: 0 0 auto; inline-size: 8.333%; }
@@ -133,7 +133,7 @@
     .velin-row > .velin-md-col-12 { flex: 0 0 auto; inline-size: 100%; }
   }
 
-  @media (min-width: 62rem) {
+  @media (width >= 62rem) {
     .velin-lg-col { flex: 1 0 0%; }
     .velin-lg-col-auto { flex: 0 0 auto; inline-size: auto; }
     .velin-row > .velin-lg-col-1 { flex: 0 0 auto; inline-size: 8.333%; }
@@ -149,7 +149,7 @@
     .velin-row > .velin-lg-col-12 { flex: 0 0 auto; inline-size: 100%; }
   }
 
-  @media (min-width: 80rem) {
+  @media (width >= 80rem) {
     .velin-xl-col { flex: 1 0 0%; }
     .velin-row > .velin-xl-col-2 { flex: 0 0 auto; inline-size: 16.666%; }
     .velin-row > .velin-xl-col-3 { flex: 0 0 auto; inline-size: 25%; }
@@ -166,7 +166,7 @@
   .velin-offset-5 { margin-inline-start: 41.666%; }
   .velin-offset-6 { margin-inline-start: 50%; }
 
-  @media (min-width: 48rem) {
+  @media (width >= 48rem) {
     .velin-md-offset-0 { margin-inline-start: 0; }
     .velin-md-offset-1 { margin-inline-start: 8.333%; }
     .velin-md-offset-2 { margin-inline-start: 16.666%; }
@@ -174,7 +174,7 @@
     .velin-md-offset-4 { margin-inline-start: 33.333%; }
   }
 
-  @media (min-width: 62rem) {
+  @media (width >= 62rem) {
     .velin-lg-offset-0 { margin-inline-start: 0; }
     .velin-lg-offset-1 { margin-inline-start: 8.333%; }
     .velin-lg-offset-2 { margin-inline-start: 16.666%; }
@@ -209,13 +209,13 @@
   .velin-row-cols-5 > * { flex: 0 0 auto; inline-size: 20%; }
   .velin-row-cols-6 > * { flex: 0 0 auto; inline-size: 16.666%; }
 
-  @media (min-width: 48rem) {
+  @media (width >= 48rem) {
     .velin-md-row-cols-2 > * { flex: 0 0 auto; inline-size: 50%; }
     .velin-md-row-cols-3 > * { flex: 0 0 auto; inline-size: 33.333%; }
     .velin-md-row-cols-4 > * { flex: 0 0 auto; inline-size: 25%; }
   }
 
-  @media (min-width: 62rem) {
+  @media (width >= 62rem) {
     .velin-lg-row-cols-3 > * { flex: 0 0 auto; inline-size: 33.333%; }
     .velin-lg-row-cols-4 > * { flex: 0 0 auto; inline-size: 25%; }
     .velin-lg-row-cols-6 > * { flex: 0 0 auto; inline-size: 16.666%; }

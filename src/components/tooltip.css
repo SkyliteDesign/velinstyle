@@ -39,13 +39,11 @@
 
   /* Placement modifiers */
   .velin-tooltip--bottom .velin-tooltip__content {
-    inset-block-end: auto;
-    inset-block-start: calc(100% + var(--velin-space-2));
+    inset-block: calc(100% + var(--velin-space-2)) auto;
   }
 
   .velin-tooltip--bottom .velin-tooltip__content::after {
-    inset-block-start: auto;
-    inset-block-end: 100%;
+    inset-block: auto 100%;
     border-block-start-color: transparent;
     border-block-end-color: var(--velin-color-text);
   }

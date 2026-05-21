@@ -107,10 +107,8 @@
   }
 
   .velin-stepper--vertical .velin-stepper__step + .velin-stepper__step::before {
-    inset-inline-start: 1.125rem;
-    inset-inline-end: auto;
-    inset-block-start: auto;
-    inset-block-end: calc(100% - 0.5rem);
+    inset-inline: 1.125rem auto;
+    inset-block: auto calc(100% - 0.5rem);
     inline-size: 2px;
     block-size: calc(100% - 2.5rem);
   }

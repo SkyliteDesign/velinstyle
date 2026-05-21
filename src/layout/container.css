@@ -7,32 +7,32 @@
     container-name: velin;
   }
 
-  @media (min-width: 36rem) {
+  @media (width >= 36rem) {
     .velin-container {
       max-inline-size: 33rem;
       padding-inline: var(--velin-space-6);
     }
   }
 
-  @media (min-width: 48rem) {
+  @media (width >= 48rem) {
     .velin-container {
       max-inline-size: 45rem;
     }
   }
 
-  @media (min-width: 62rem) {
+  @media (width >= 62rem) {
     .velin-container {
       max-inline-size: 60rem;
     }
   }
 
-  @media (min-width: 80rem) {
+  @media (width >= 80rem) {
     .velin-container {
       max-inline-size: 76rem;
     }
   }
 
-  @media (min-width: 96rem) {
+  @media (width >= 96rem) {
     .velin-container {
       max-inline-size: 90rem;
     }

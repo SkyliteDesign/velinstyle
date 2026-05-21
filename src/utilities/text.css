@@ -89,7 +89,6 @@
 
   /* Text-wrap */
   .velin-text-balance { text-wrap: balance; }
-  .velin-text-pretty { text-wrap: pretty; }
   .velin-text-nowrap { text-wrap: nowrap; }
 
   /* Extended line-clamp */

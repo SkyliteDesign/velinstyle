@@ -28,7 +28,7 @@
   .velin-opacity-100 { opacity: 1; }
 
   /* Responsive display via min-width */
-  @media (min-width: 36rem) {
+  @media (width >= 36rem) {
     .velin-sm-block { display: block; }
     .velin-sm-flex { display: flex; }
     .velin-sm-grid { display: grid; }
@@ -36,7 +36,7 @@
     .velin-sm-inline { display: inline; }
   }
 
-  @media (min-width: 48rem) {
+  @media (width >= 48rem) {
     .velin-md-block { display: block; }
     .velin-md-flex { display: flex; }
     .velin-md-grid { display: grid; }
@@ -44,7 +44,7 @@
     .velin-md-inline { display: inline; }
   }
 
-  @media (min-width: 62rem) {
+  @media (width >= 62rem) {
     .velin-lg-block { display: block; }
     .velin-lg-flex { display: flex; }
     .velin-lg-grid { display: grid; }

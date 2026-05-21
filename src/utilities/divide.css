@@ -8,15 +8,11 @@
   }
 
   .velin-divide-y-2 > * + * {
-    border-block-start-width: 2px;
-    border-block-start-style: solid;
-    border-block-start-color: var(--velin-color-border);
+    border-block-start: 2px solid var(--velin-color-border);
   }
 
   .velin-divide-x-2 > * + * {
-    border-inline-start-width: 2px;
-    border-inline-start-style: solid;
-    border-inline-start-color: var(--velin-color-border);
+    border-inline-start: 2px solid var(--velin-color-border);
   }
 
   .velin-divide-primary > * + * { border-color: var(--velin-color-primary); }

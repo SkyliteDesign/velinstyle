@@ -70,7 +70,7 @@
 
   /* Mobile: stack nav vertically */
   /* Aligns with --velin-bp-md (48rem) used in safe-area utilities */
-  @media (max-width: 47.999rem) {
+  @media (width <= 47.999rem) {
     .velin-nav {
       flex-wrap: wrap;
     }
@@ -116,8 +116,7 @@
   /* Mega menu */
   .velin-nav__mega {
     position: absolute;
-    inset-inline-start: 0;
-    inset-inline-end: 0;
+    inset-inline: 0;
     inset-block-start: 100%;
     z-index: var(--velin-z-dropdown);
     background: var(--velin-color-surface-bright);
