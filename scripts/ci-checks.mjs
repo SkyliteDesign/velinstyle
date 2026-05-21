@@ -43,21 +43,34 @@ const count = (loaders.match(/^\s+'velin-/gm) || []).length;
 if (count < 36) fail(`Expected >= 36 loaders, got ${count}`);
 console.log(`Loaders OK: ${count} entries`);
 
-execSync('npm run search:index', { cwd: ROOT, stdio: 'inherit' });
-try {
-  execSync('git diff --exit-code dist/search-index.json', { cwd: ROOT, stdio: 'pipe' });
-} catch {
+function normalizeJsonTimestamp(path) {
+  const data = JSON.parse(readFileSync(path, 'utf-8'));
+  delete data.generatedAt;
+  return JSON.stringify(data);
+}
+
+const indexPath = join(ROOT, 'dist/search-index.json');
+const beforeIndex = normalizeJsonTimestamp(indexPath);
+execSync('npm run search:index', { cwd: ROOT, stdio: 'pipe' });
+const afterIndex = normalizeJsonTimestamp(indexPath);
+if (beforeIndex !== afterIndex) {
   fail('dist/search-index.json out of date — commit after npm run search:index');
 }
 console.log('Search index OK');
 
-execSync('npm run meta:build', { cwd: ROOT, stdio: 'inherit' });
 const agentPath = join(ROOT, 'dist/velin-agent.json');
+const llmsPath = join(ROOT, 'dist/llms.txt');
 if (!existsSync(agentPath)) fail('Missing dist/velin-agent.json — run npm run meta:build');
-try {
-  execSync('git diff --exit-code dist/velin-agent.json dist/llms.txt', { cwd: ROOT, stdio: 'pipe' });
-} catch {
-  fail('dist/velin-agent.json or dist/llms.txt out of date — run npm run meta:build and commit');
+const beforeAgent = normalizeJsonTimestamp(agentPath);
+const beforeLlms = readFileSync(llmsPath, 'utf-8');
+execSync('npm run meta:build', { cwd: ROOT, stdio: 'pipe' });
+const afterAgent = normalizeJsonTimestamp(agentPath);
+const afterLlms = readFileSync(llmsPath, 'utf-8');
+if (beforeAgent !== afterAgent) {
+  fail('dist/velin-agent.json out of date — run npm run meta:build and commit');
+}
+if (beforeLlms !== afterLlms) {
+  fail('dist/llms.txt out of date — run npm run meta:build and commit');
 }
 console.log('Velin-Meta OK');
 
