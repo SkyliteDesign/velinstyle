@@ -80,8 +80,12 @@ class VelinToast extends HTMLElement {
   }
 
   show({ message, type = 'info', duration = 5000 } = {}) {
+    const assertive = type === 'error' || type === 'danger';
+    this.setAttribute('role', assertive ? 'alert' : 'status');
+    this.setAttribute('aria-live', assertive ? 'assertive' : 'polite');
     const toast = document.createElement('div');
     toast.className = `toast toast--${type}`;
+    toast.setAttribute('role', assertive ? 'alert' : 'status');
     toast.innerHTML = `
       <div class="toast-content">${escapeHTML(message)}</div>
       <button class="toast-close" aria-label="Close">&#215;</button>

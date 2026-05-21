@@ -15,7 +15,7 @@ const LAYERS = ['tokens', 'reset', 'base', 'a11y', 'layout', 'components', 'util
 
 const LAYER_FILES = {
   tokens: [
-    'tokens/color.css', 'tokens/spacing.css', 'tokens/typography.css',
+    'tokens/fonts.css', 'tokens/color.css', 'tokens/spacing.css', 'tokens/typography.css',
     'tokens/radius.css', 'tokens/shadow.css', 'tokens/motion.css',
     'tokens/z-index.css', 'tokens/aspect-ratio.css',
   ],
@@ -25,6 +25,8 @@ const LAYER_FILES = {
     'a11y/sr-only.css', 'a11y/skip-link.css', 'a11y/reduced-motion.css',
     'a11y/forced-colors.css', 'a11y/skeleton.css', 'a11y/preferences.css',
     'a11y/focus-not-obscured.css', 'a11y/target-size.css', 'a11y/high-contrast-aaa.css',
+    'a11y/authentication.css', 'a11y/consistent-help.css', 'a11y/dragging-alternatives.css',
+    'a11y/focus-appearance.css',
   ],
   security: ['a11y/security.css'],
   layout: [
@@ -47,8 +49,9 @@ const LAYER_FILES = {
     'utilities/position.css', 'utilities/animation.css', 'utilities/gradient.css',
     'utilities/print.css', 'utilities/responsive.css', 'utilities/divide.css',
     'utilities/scroll.css', 'utilities/color-mix.css', 'utilities/scroll-animation.css',
-    'utilities/view-transition.css', 'utilities/scope.css', 'utilities/anchor.css',
-    'utilities/filter.css', 'utilities/container-style.css', 'utilities/state.css',
+    'utilities/view-transition.css',     'utilities/scope.css', 'utilities/anchor.css',
+    'utilities/filter.css', 'utilities/filter-effects.css', 'utilities/chart-animation.css',
+    'utilities/container-style.css', 'utilities/state.css',
     'utilities/safe-area.css',
   ],
   helpers: ['helpers/helpers.css'],
@@ -80,7 +83,7 @@ function hasFlag(flag, alias) {
 
 function help() {
   console.log(`
-  ${C.bold('VelinStyle CLI')} v0.8.0
+  ${C.bold('VelinStyle CLI')} v0.9.0
 
   ${C.bold('Usage:')}
     velinstyle init                 Create velinstyle.config.js
@@ -93,7 +96,12 @@ function help() {
     velinstyle blueprint [name]     Print HTML blueprint (run: velinstyle blueprint list)
     velinstyle scaffold "<prompt>"  Generate layout HTML from a text description
     velinstyle layout <sub>         Responsive layout audit and fixes
+    velinstyle perf <sub>           Performance audit (images, scripts) with --fix
     velinstyle tokens build         Generate CSS variables from tokens.json
+    velinstyle tokens validate      Validate tokens.json schema
+    velinstyle docs generate        Auto-generate Markdown API reference
+    velinstyle meta                 Build agent context (velin-agent.json, llms.txt)
+    velinstyle search index         Build JSON search index for VelinSearch
 
   ${C.bold('Icons subcommands:')}
     icons list                      Show available icon providers
@@ -120,14 +128,29 @@ function help() {
     velinstyle layout suggest [path]  Audit with fix suggestions
     velinstyle layout fix [path]      Apply safe fixes (--dry-run default, --write)
 
+  ${C.bold('Performance (0.9.0):')}
+    velinstyle perf audit [path]      Report CLS, lazy-load, script defer issues
+    velinstyle perf suggest [path]    Same as audit with fix hints
+    velinstyle perf fix [path]        Apply safe fixes (--write)
+
   ${C.bold('Tokens:')}
     velinstyle tokens build [--input <path>] [--output, -o <file>]
+    velinstyle tokens validate [--input <path>]
+
+  ${C.bold('Docs (0.9.0):')}
+    velinstyle docs generate [--scope all|components|tokens|utilities|cli|rules|a11y|meta] [--out docs/generated]
+    velinstyle meta [--out dist/velin-agent.json] [--llms-out dist/llms.txt] [--base-url URL]
+    velinstyle meta page <file.html> [--write]
+
+  ${C.bold('Search:')}
+    velinstyle search index [--out dist/search-index.json] [--extra-html dir1,dir2]
 
   ${C.bold('Scan options:')}
     --fix                           Auto-fix safe issues (writes files)
     --fix-dry-run                   Show files that would be auto-fixed; no write
     --fix-lang <code>               Default lang for a11y/html-lang fix (default: de)
     --severity <level>              Minimum severity: error, warning, info
+    --only <category>               Filter: security, pii, a11y, css, perf
 
   ${C.bold('Prefix options (velinstyle prefix):')}
     --write                         Write files (default is dry-run)
@@ -470,13 +493,64 @@ async function tokensBuildCmd() {
   }
 }
 
+async function tokensValidateCmd() {
+  const input = getArg('--input') || 'examples/tokens.sample.json';
+  const { validateTokensJson } = await import('./tokens-validate.js');
+  const result = validateTokensJson(resolve(input));
+  if (result.ok) {
+    console.log(C.green(`Valid: ${resolve(input)}`));
+    process.exit(0);
+  }
+  console.log(C.red(`Invalid: ${resolve(input)}`));
+  result.errors.forEach((e) => console.log(`  - ${e}`));
+  process.exit(1);
+}
+
 async function tokensCmd() {
   const sub = args[1];
   if (sub === 'build') {
     await tokensBuildCmd();
+  } else if (sub === 'validate') {
+    await tokensValidateCmd();
   } else {
-    console.log('Usage: velinstyle tokens build [--input tokens.json] [--output out.css]');
+    console.log('Usage: velinstyle tokens build|validate [--input tokens.json] [--output, -o <file>]');
   }
+}
+
+async function perfCmd() {
+  const sub = args[1] || 'audit';
+  const rawTarget = args[2] && !args[2].startsWith('-') ? args[2] : '.';
+  const targetPath = resolve(rawTarget);
+  const asJson = hasFlag('--json');
+  const write = hasFlag('--write');
+  const dryRun = hasFlag('--dry-run') || !write;
+
+  const { auditPath, formatTextReport, fixPath } = await import('./perf-audit.js');
+
+  if (sub === 'fix') {
+    const result = fixPath(targetPath, { write, dryRun });
+    if (asJson) {
+      console.log(JSON.stringify(result, null, 2));
+      return;
+    }
+    if (result.changes.length === 0) {
+      console.log(C.green('No safe performance fixes to apply.'));
+      return;
+    }
+    for (const c of result.changes) {
+      console.log(`${dryRun ? '[dry-run] ' : ''}${c.file}`);
+      c.changes.forEach((ch) => console.log(C.dim(`  - ${ch}`)));
+    }
+    return;
+  }
+
+  const { issues, files } = auditPath(targetPath);
+  if (asJson) {
+    console.log(JSON.stringify({ files, issues }, null, 2));
+    return;
+  }
+  console.log(formatTextReport(issues, files));
+  process.exit(issues.some((x) => x.severity === 'error') ? 1 : 0);
 }
 
 async function prefixCmd() {
@@ -608,6 +682,44 @@ async function layoutCmd() {
   process.exit(issues.some((x) => x.severity === 'error') ? 1 : 0);
 }
 
+async function docsCmd() {
+  const sub = args[1];
+  if (sub === 'generate') {
+    const scope = getArg('--scope') || 'all';
+    const out = getArg('--out') || join(PKG_ROOT, 'docs', 'generated');
+    const { generateDocs } = await import('./docs-generate.js');
+    const result = await generateDocs({ scope, outDir: resolve(out), searchIndex: true });
+    if (!result.ok) {
+      console.log(C.red(result.error));
+      process.exit(1);
+    }
+    console.log(C.green(`Generated ${result.written} file(s) → ${resolve(out)}`));
+    return;
+  }
+  console.log('Usage: velinstyle docs generate [--scope all|components|tokens|utilities|cli|rules|a11y|meta] [--out <dir>]');
+}
+
+async function metaCmd() {
+  const { metaMain } = await import('./meta.js');
+  await metaMain(process.argv.slice(2));
+}
+
+async function searchCmd() {
+  const sub = args[1];
+  if (sub === 'index') {
+    const out = getArg('--out') || join(PKG_ROOT, 'dist', 'search-index.json');
+    const extra = getArg('--extra-html');
+    const { buildSearchIndex } = await import('./search-index.js');
+    const result = buildSearchIndex({
+      outFile: resolve(out),
+      extraHtmlDirs: extra ? extra.split(',').map((p) => resolve(p.trim())) : [],
+    });
+    console.log(C.green(`Search index: ${result.count} entries → ${result.outFile}`));
+    return;
+  }
+  console.log('Usage: velinstyle search index [--out <file>] [--extra-html dir1,dir2]');
+}
+
 async function scanCmd() {
   const targetPath = args[1] && !args[1].startsWith('-') ? resolve(args[1]) : resolve('.');
   const format = getArg('--format') || 'text';
@@ -647,6 +759,10 @@ switch (command) {
   case 'prefix': await prefixCmd(); break;
   case 'scaffold': await scaffoldCmd(); break;
   case 'layout': await layoutCmd(); break;
+  case 'perf': await perfCmd(); break;
+  case 'docs': await docsCmd(); break;
+  case 'meta': await metaCmd(); break;
+  case 'search': await searchCmd(); break;
   case '--help': case '-h': help(); break;
   default: help(); break;
 }

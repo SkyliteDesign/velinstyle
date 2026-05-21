@@ -1,6 +1,6 @@
 import { JSDOM } from 'jsdom';
-import { readFileSync, readdirSync, existsSync } from 'fs';
-import { join, resolve, relative } from 'path';
+import { readFileSync, readdirSync, existsSync, writeFileSync } from 'fs';
+import { join, resolve, relative, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const ROOT = resolve(fileURLToPath(import.meta.url), '..', '..', '..');
@@ -30,7 +30,7 @@ async function hydrateComponents(window) {
   const tags = [
     'velin-modal', 'velin-drawer', 'velin-tabs', 'velin-accordion', 'velin-dropdown',
     'velin-toast', 'velin-dialog', 'velin-popover', 'velin-carousel', 'velin-collapse',
-    'velin-tooltip-wc', 'velin-lightbox', 'velin-stepper-wc', 'velin-countdown',
+    'velin-tooltip', 'velin-tooltip-wc', 'velin-lightbox', 'velin-stepper', 'velin-stepper-wc', 'velin-countdown',
     'velin-progress-ring', 'velin-theme-toggle', 'velin-copy', 'velin-scroll-top',
     'velin-scrollspy', 'velin-icon', 'velin-combobox', 'velin-bottom-nav', 'velin-sheet',
     'velin-segmented-control', 'velin-rating', 'velin-menubar', 'velin-command', 'velin-announcer',
@@ -48,6 +48,23 @@ async function hydrateComponents(window) {
 }
 
 function installJsdomPolyfills(window) {
+  const proto = window.HTMLCanvasElement?.prototype;
+  if (proto && !proto.__velinCanvasStub) {
+    proto.__velinCanvasStub = true;
+    proto.getContext = function getContext(type) {
+      if (type !== '2d') return null;
+      return {
+        canvas: this,
+        fillRect() {},
+        clearRect() {},
+        getImageData() { return { data: new Uint8ClampedArray(4) }; },
+        putImageData() {},
+        measureText() { return { width: 0 }; },
+        fillText() {},
+        strokeText() {},
+      };
+    };
+  }
   if (typeof window.matchMedia !== 'function') {
     window.matchMedia = (query) => ({
       matches: false,
@@ -74,10 +91,10 @@ async function runAxe(htmlPath, html) {
   }
 
   const axeRules = {
-    runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] },
+    runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa', 'best-practice'] },
     rules: {
-      'color-contrast': { enabled: false },
-      'color-contrast-enhanced': { enabled: false },
+      'color-contrast': { enabled: true },
+      'color-contrast-enhanced': { enabled: true },
     },
   };
   if (html.includes('<velin-tabs')) {
@@ -104,6 +121,7 @@ async function main() {
 
   let totalViolations = 0;
   let filesWithViolations = 0;
+  let passedFiles = 0;
 
   for (const { label, path: filePath } of allFiles) {
     try {
@@ -112,6 +130,7 @@ async function main() {
       const violationCount = results.violations.length;
 
       if (violationCount === 0) {
+        passedFiles++;
         console.log(`\n  PASS  ${label} (${results.passes.length} rules passed)`);
       } else {
         filesWithViolations++;
@@ -129,6 +148,16 @@ async function main() {
       totalViolations++;
     }
   }
+
+  const summaryPath = join(dirname(fileURLToPath(import.meta.url)), '.axe-summary.json');
+  const pct = allFiles.length ? Math.round((passedFiles / allFiles.length) * 100) : 0;
+  writeFileSync(summaryPath, JSON.stringify({
+    total: allFiles.length,
+    passed: passedFiles,
+    failed: filesWithViolations,
+    violations: totalViolations,
+    pct,
+  }, null, 2));
 
   console.log('\n' + '='.repeat(55));
   console.log(`Files scanned: ${allFiles.length}`);

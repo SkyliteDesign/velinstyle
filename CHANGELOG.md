@@ -4,6 +4,60 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+## [0.9.0](https://github.com/SkyliteDesign/velinstyle/releases/tag/v0.9.0) - 2026-05-19
+
+### Breaking
+- **Component names:** canonical tags are `<velin-tooltip>` and `<velin-stepper>`; source files `components/velin-tooltip.js` and `components/velin-stepper.js`. `<velin-tooltip-wc>` and `<velin-stepper-wc>` remain as **deprecated** aliases (console warning once).
+- **Spacing:** `.velin-mb-*` is margin-bottom only; use `.velin-my-*` for block-axis spacing.
+- **Visual:** default text/primary tokens are darker for AAA — use `data-velin-contrast="aa"` on `<html>` if you need the previous lighter palette without retuning tokens.
+
+### Migration
+- Replace `<velin-tooltip-wc>` → `<velin-tooltip>` and `<velin-stepper-wc>` → `<velin-stepper>` in HTML; legacy tags still work in 0.9.0.
+- Imports: `VelinTooltip` / `VelinStepper` from `@birdapi/velinstyle` (or component paths); `VelinTooltipWC` / `VelinStepperWC` re-exported as deprecated.
+
+### Fixed
+- **Security:** `velin-secure-field` no longer emits plaintext or AES keys; hardened `sanitizeURL` / `sanitizeSearchUrl`; DOMPurify SVG sanitization in `velin-icon`; search result URLs validated.
+- **Runtime:** auto-generated `COMPONENT_LOADERS` (38 tags); `bootFromDOM` scans all `velin-*` elements; stacked modal inert; `velin-copy` `value`/`text` unified; code-block copy fixed.
+- **WCAG 2.2:** corrected criterion comments; fixed `wcag22-auth` sample; new `wcag22-dragging` sample and `wcag22-matrix.md`.
+- **Utilities:** `.velin-mb-*` margin-bottom semantics corrected.
+
+### Added
+- **Audit follow-up:** `velin-scroll-top` declarative attribute; `src/base/wc-placeholder.css` CLS guards for all loader tags; `velin-persist` in `component-contracts.json`; Playwright cross-browser smoke (`npm run test:e2e`); shared docs theme picker assets (`docs/assets/theme-picker.*`).
+- **Velin-Meta:** `velinstyle meta` builds `dist/velin-agent.json` and `dist/llms.txt` for AI assistants; MIME `application/vnd.velinstyle.meta+json`; page-level `<script id="velin-meta">`; `velinstyle meta page <file> --write`; `docs generate --scope meta`; export `@birdapi/velinstyle/meta`.
+- **WCAG 2.2 AAA defaults:** OKLCH color tokens (`:root`, dark, 13 themes) validated at 7:1 via `npm run test:contrast`; `data-velin-contrast="aa"` opt-down to AA palette.
+- **A11y runtime:** `@birdapi/velinstyle/a11y` with `initA11y()` (live announcer, scroll padding); `core/a11y/component-contracts.json`; `docs/generated/a11y/wcag22-aaa-matrix.md`; `npm run test:a11y:coverage`.
+- **Component a11y:** `a11y-utils.js`, fixes for `velin-icon`, `velin-search`, `velin-theme-toggle`, `velin-popover` (`aria-labelledby`), dialogs, toasts, and more; scanner rules `velin-icon-label`, `sparkline-label`, `skeleton-text`.
+- **VelinHighlight:** `core/highlight/` (`velinSyntax`, `highlightElement`, `highlightAll`, `initHighlight`, `registerLanguage`, `lazyLoadLanguage`); lexers for JS/TS, HTML, CSS, JSON, Markdown, Shell, SQL, PHP, Blade; `highlight.css` with OKLCH/P3 token colors and reduced-motion fade.
+- **`<velin-code-block>`** Web Component (copy, line numbers, line highlight, collapsible); `velin-code` attribute bridge with lazy in-view highlighting.
+- **Export:** `@birdapi/velinstyle/highlight`; `bootFromDOM({ highlight: true })`; sample `samples/velin-code-block.html`; guide `docs/guides/syntax-highlight.html`.
+- **VelinSearch:** `core/search/` API (`velinSearch`, `createSearch`, `registerSearchProvider`), fuzzy offline search, highlight, category filters; optional Web Worker (`core/search/worker.js`).
+- **`<velin-search>`** Web Component with autocomplete, keyboard navigation, grouped results.
+- **Search benchmark:** `tests/search-benchmark.test.js` — fuzzy query over 10k entries (main thread under 400ms, worker under 500ms in CI); `npm run test:search:bench`.
+- **Motion runtime:** `core/motion/` (`initMotion`, `velinMotion`, rAF scheduler, stagger, smooth scroll); unified `.velin-in-view` with scroll-animation CSS fallback.
+- **Velin HTML attributes:** `core/attributes/` registry (20+ bridges); `bootFromDOM({ attributes: true })`.
+- **CLI:** `velinstyle search index` builds `dist/search-index.json`; `docs generate` emits `docs/generated/` + attributes index.
+- **PII scanner:** `hardcoded-email`, `hardcoded-secret`, `mailto-in-source`, `localstorage-pii` rules; `--only pii`; `--fix` masks emails (`cli/pii-scanner.js`).
+- **WCAG 2.2 CSS:** `authentication.css`, `consistent-help.css`, `dragging-alternatives.css`, `focus-appearance.css`; scanner rules `a11y/autocomplete-auth`, `a11y/invalid-describedby`.
+- **Font tokens:** `tokens/fonts.css`, utilities `.velin-font-display`, `.velin-tabular-nums`, `.velin-text-pretty`; `tokens build` supports `fonts` and `motion` blocks.
+- **JS runtime:** `components/runtime/` with `register`, `lazyDefine`, `whenDefined`, `bootFromDOM`; package exports `./runtime`, `./sanitize`, `./email`, `./secure`.
+- **CLI `velinstyle perf`:** `audit`, `suggest`, `fix` for images and scripts (`cli/perf-audit.js`).
+- **CLI `velinstyle tokens validate`:** JSON validation for OKLCH, themes, fonts (`cli/tokens-validate.js`, `examples/tokens.schema.json`).
+- **Web Components:** `<velin-email>` (reveal obfuscation), `<velin-secure-field>` (optional AES-GCM demo; subpath import).
+- **Docs:** `guides/performance-audit.html`, `extend/javascript-api.html`; security page PII section.
+- **Auto-generated reference:** `velinstyle docs generate` / `npm run docs:generate` writes Markdown to `docs/generated/` (components, tokens, utilities, CLI, scanner rules, a11y modules). CI verifies committed snapshots.
+- **Tokens JSON:** `zIndex` block in schema/build/validate; deterministic key order in `tokens build`; `examples/tokens.full.json`.
+
+### Changed
+- Documentation and samples: landmark structure (`<header role="banner">`), AAA migration section, updated `docs/a11y.html` and token pages.
+- `test:a11y` enables `color-contrast-enhanced`; JSDOM canvas stub for axe in CI.
+- Package and CLI version **0.9.0**; CI runs `tokens:validate`, `test:security`, `test:perf`, `ci:checks` (bundle budget, search-index drift, loader drift).
+- **Package:** `.` export → `runtime-entry.js`; full bundle at `@birdapi/velinstyle/bundle`; TypeScript `dist/velinstyle.d.ts`. Subpaths: `/search`, `/motion`, `/attributes`, `/highlight`, `/sanitize`. Distribution via [velinstyle.info](https://velinstyle.info).
+- `velin-reveal.js` delegates to `core/motion`; attribute bridge uses `<velin-tooltip>` / lazy loaders from renamed component files.
+- Generated docs: `velin-tooltip.md`, `velin-stepper.md` (replaces `*-wc.md` filenames).
+- `docs:sync-site` uses `velinstyle-site/tools/sync-0.9.0.py`.
+
 ## [0.8.0](https://github.com/SkyliteDesign/velinstyle/releases/tag/v0.8.0) - 2026-05-16
 
 ### Added

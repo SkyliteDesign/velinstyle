@@ -1,0 +1,22 @@
+/* WCAG 2.2 — consistent help (3.2.6) */
+@layer a11y {
+  .velin-field-help {
+    font-size: var(--velin-text-sm);
+    color: var(--velin-color-text-muted);
+    margin-block-start: var(--velin-space-1);
+    line-height: var(--velin-leading-snug);
+  }
+
+  .velin-form-legend {
+    font-size: var(--velin-text-lg);
+    font-weight: var(--velin-weight-semibold);
+    margin-block-end: var(--velin-space-2);
+    padding: 0;
+  }
+
+  .velin-form-section-help {
+    font-size: var(--velin-text-sm);
+    color: var(--velin-color-text-muted);
+    margin-block-end: var(--velin-space-4);
+  }
+}

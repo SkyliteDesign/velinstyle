@@ -12,5 +12,9 @@
   },
   "displayP3": {
     "color-primary": "color(display-p3 0.45 0.35 0.95)"
+  },
+  "fonts": {
+    "font-display": "system-ui, sans-serif",
+    "font-text": "system-ui, sans-serif"
   }
 }

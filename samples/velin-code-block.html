@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" data-velin-themes-base="../dist/themes">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>velin-code-block · VelinStyle</title>
+  <link rel="stylesheet" href="../dist/velinstyle.min.css">
+</head>
+<body class="velin-p-6">
+  <main id="main">
+    <h1>Syntax highlighting</h1>    
+        
+      <h2>Attribute bridge</h2>    
+      <pre velin-code="js"><code>const answer = 42;    
+    console.log(answer);</code></pre>    
+        
+      <h2>Web component</h2>    
+      <velin-code-block language="html" line-numbers highlight="2">    
+    &lt;button class="velin-btn velin-btn--primary"&gt;Save&lt;/button&gt;    
+    &lt;span class="velin-badge"&gt;New&lt;/span&gt;    
+      </velin-code-block>    
+        
+      <script type="module">    
+        import { bootFromDOM } from '../components/runtime/index.js';    
+        await bootFromDOM(document, { attributes: true, highlight: true });    
+      </script>
+  </main>
+</body>
+</html>

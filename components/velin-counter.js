@@ -61,6 +61,9 @@ class VelinCounter extends HTMLElement {
   }
 
   connectedCallback() {
+    this.setAttribute('role', 'status');
+    this.setAttribute('aria-live', 'polite');
+    this.setAttribute('aria-atomic', 'true');
     this._render(this._fromValue());
     if (this.getAttribute('autostart') === 'false') return;
     this._scheduleStart();

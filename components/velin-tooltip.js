@@ -23,7 +23,7 @@ const styles = `
 
 let tooltipId = 0;
 
-class VelinTooltipWC extends HTMLElement {
+class VelinTooltip extends HTMLElement {
   static get observedAttributes() { return ['content', 'placement']; }
 
   constructor() {
@@ -93,5 +93,24 @@ class VelinTooltipWC extends HTMLElement {
   }
 }
 
-customElements.define('velin-tooltip-wc', VelinTooltipWC);
-export default VelinTooltipWC;
+/** @deprecated Use `<velin-tooltip>` */
+class VelinTooltipWC extends VelinTooltip {
+  static _warned = false;
+
+  connectedCallback() {
+    if (!VelinTooltipWC._warned && typeof console !== 'undefined' && console.warn) {
+      VelinTooltipWC._warned = true;
+      console.warn('[velinstyle] <velin-tooltip-wc> is deprecated; use <velin-tooltip> instead.');
+    }
+    super.connectedCallback();
+  }
+}
+
+if (!customElements.get('velin-tooltip')) {
+  customElements.define('velin-tooltip', VelinTooltip);
+}
+if (!customElements.get('velin-tooltip-wc')) {
+  customElements.define('velin-tooltip-wc', VelinTooltipWC);
+}
+export default VelinTooltip;
+export { VelinTooltip, VelinTooltipWC };

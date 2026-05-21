@@ -1,11 +1,11 @@
 @layer tokens {
   :root {
     /* Font families */
-    --velin-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --velin-font-sans: var(--velin-font-text, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
     --velin-font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
-    --velin-font-mono: "Cascadia Code", "Fira Code", Consolas, "Courier New", monospace;
-    --velin-font-heading: var(--velin-font-sans);
-    --velin-font-body: var(--velin-font-sans);
+    --velin-font-mono: var(--velin-font-code, "Cascadia Code", "Fira Code", Consolas, "Courier New", monospace);
+    --velin-font-heading: var(--velin-font-display, var(--velin-font-sans));
+    --velin-font-body: var(--velin-font-text, var(--velin-font-sans));
 
     /* Fluid Type Scale -- clamp(min, preferred, max) */
     --velin-fluid-min-vw: 20;  /* 320px */

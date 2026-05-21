@@ -9,14 +9,23 @@
   .velin-m-8 { margin: var(--velin-space-8); }
   .velin-m-auto { margin: auto; }
 
-  /* Margin - block (top/bottom via logical props) */
-  .velin-mb-0 { margin-block: var(--velin-space-0); }
-  .velin-mb-1 { margin-block: var(--velin-space-1); }
-  .velin-mb-2 { margin-block: var(--velin-space-2); }
-  .velin-mb-3 { margin-block: var(--velin-space-3); }
-  .velin-mb-4 { margin-block: var(--velin-space-4); }
-  .velin-mb-6 { margin-block: var(--velin-space-6); }
-  .velin-mb-8 { margin-block: var(--velin-space-8); }
+  /* Margin - bottom */
+  .velin-mb-0 { margin-bottom: var(--velin-space-0); }
+  .velin-mb-1 { margin-bottom: var(--velin-space-1); }
+  .velin-mb-2 { margin-bottom: var(--velin-space-2); }
+  .velin-mb-3 { margin-bottom: var(--velin-space-3); }
+  .velin-mb-4 { margin-bottom: var(--velin-space-4); }
+  .velin-mb-6 { margin-bottom: var(--velin-space-6); }
+  .velin-mb-8 { margin-bottom: var(--velin-space-8); }
+
+  /* Margin - block axis (top + bottom) */
+  .velin-my-0 { margin-block: var(--velin-space-0); }
+  .velin-my-1 { margin-block: var(--velin-space-1); }
+  .velin-my-2 { margin-block: var(--velin-space-2); }
+  .velin-my-3 { margin-block: var(--velin-space-3); }
+  .velin-my-4 { margin-block: var(--velin-space-4); }
+  .velin-my-6 { margin-block: var(--velin-space-6); }
+  .velin-my-8 { margin-block: var(--velin-space-8); }
 
   /* Margin - inline (left/right via logical props) */
   .velin-mi-0 { margin-inline: var(--velin-space-0); }

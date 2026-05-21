@@ -18,7 +18,9 @@ function varName(key) {
 function emitBlock(indent, obj) {
   if (!obj || typeof obj !== 'object') return [];
   const lines = [];
-  for (const [k, v] of Object.entries(obj)) {
+  const keys = Object.keys(obj).sort((a, b) => a.localeCompare(b));
+  for (const k of keys) {
+    const v = obj[k];
     if (typeof v === 'string') {
       lines.push(`${indent}${varName(k)}: ${v};`);
     }
@@ -59,6 +61,24 @@ export function buildTokensFromJson(filePath) {
     lines.push('    :root {');
     lines.push(...emitBlock('      ', data.displayP3));
     lines.push('    }');
+    lines.push('  }');
+  }
+
+  if (data.fonts && typeof data.fonts === 'object') {
+    lines.push('  :root {');
+    lines.push(...emitBlock('    ', data.fonts));
+    lines.push('  }');
+  }
+
+  if (data.motion && typeof data.motion === 'object') {
+    lines.push('  :root {');
+    lines.push(...emitBlock('    ', data.motion));
+    lines.push('  }');
+  }
+
+  if (data.zIndex && typeof data.zIndex === 'object') {
+    lines.push('  :root {');
+    lines.push(...emitBlock('    ', data.zIndex));
     lines.push('  }');
   }
 

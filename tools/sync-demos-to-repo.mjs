@@ -11,7 +11,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const FRAMEWORK_ROOT = path.resolve(__dirname, '..');
 const SITE_ROOT = path.resolve(FRAMEWORK_ROOT, '../velinstyle-site');
 const DEFAULT_OUT = path.resolve(FRAMEWORK_ROOT, '../velinstyle-demos');
-const VERSION = '0.8.0';
+const VERSION = '0.9.0';
 const UNPKG = `https://unpkg.com/@birdapi/velinstyle@${VERSION}`;
 
 const outArg = process.argv.find((a, i) => process.argv[i - 1] === '--out');
@@ -62,6 +62,12 @@ async function main() {
 
   const siteAssets = path.join(SITE_ROOT, 'assets', 'img');
   await cp(siteAssets, path.join(outAssets, 'img'), { recursive: true, force: true }).catch(() => {});
+
+  for (const shared of ['demos-shared.css', 'demos-shared.js']) {
+    const src = path.join(siteDemos, shared);
+    await cp(src, path.join(outDemos, shared), { force: true });
+    console.log('Wrote', path.join(outDemos, shared));
+  }
 
   console.log(`Synced ${files.length} HTML file(s) -> ${OUT}`);
 }

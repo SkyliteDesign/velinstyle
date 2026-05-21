@@ -1,16 +1,35 @@
 VelinCore/
-VelinSecurity/ 
+VelinSecurity/
 VelinAuthPolice/
 VelinScript/
 SandBox/
 node_modules/
-dist/
+# Build output — ignore all of dist/ except CI-tracked artifacts
+dist/*
+!dist/search-index.json
+!dist/velin-agent.json
+!dist/llms.txt
 docs/dist/
 .cache/
 *.log
 .DS_Store
 Thumbs.db
 .env
+.env.*
+!.env.example
+
+# Test / coverage
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+tests/a11y/.axe-summary.json
+
+# Editor / IDE
+.cursor/
+.vscode/
+
+# Local docs / release drafts (not for the repo)
 RELEASING.md
 gen_funcs.py
 gen-common.ps1
@@ -20,5 +39,7 @@ test-write.py
 test.txt
 strip-coauthor-history.py
 strip-coauthor.py
+
+# Raw PNG screenshots only (committed demos use .webp)
 .github/assets/readme/*.png
 

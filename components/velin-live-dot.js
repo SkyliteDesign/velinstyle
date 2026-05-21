@@ -11,6 +11,8 @@
  *   pulse    "true" (default) | "false"   Disables the looped pulse.
  */
 
+import { liveDotLabel } from './a11y-utils.js';
+
 const STATUS_COLORS = {
   live: 'var(--velin-color-success, oklch(60% 0.16 145))',
   paused: 'var(--velin-color-text-muted, oklch(60% 0.02 240))',
@@ -70,6 +72,9 @@ class VelinLiveDot extends HTMLElement {
   _render() {
     const status = this.getAttribute('status') || 'live';
     const color = STATUS_COLORS[status] || STATUS_COLORS.live;
+    const label = this.getAttribute('aria-label') || liveDotLabel(status);
+    this.setAttribute('role', 'status');
+    this.setAttribute('aria-label', label);
     this.style.setProperty('--velin-live-color', color);
     this.shadowRoot.innerHTML = `
       <style>${styles}${KEYFRAMES_FALLBACK}</style>

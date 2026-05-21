@@ -1,37 +1,27 @@
-/* WCAG 1.4.6 Contrast (Enhanced) — optional AAA via data-velin-contrast="aaa" */
+/* WCAG 1.4.3 — lighter AA palette when authors opt out of default AAA tokens */
 @layer a11y {
-  :root[data-velin-contrast="aaa"] {
-    --velin-color-text: oklch(8% 0.01 250);
-    --velin-color-text-muted: oklch(28% 0.01 250);
-    --velin-color-text-subtle: oklch(38% 0.01 250);
-    --velin-color-border: oklch(35% 0.01 250);
-    --velin-color-border-strong: oklch(20% 0.01 250);
-    --velin-color-primary: oklch(38% 0.18 250);
-    --velin-color-primary-hover: oklch(32% 0.18 250);
-    --velin-color-on-primary: oklch(100% 0 0);
-    --velin-color-focus: oklch(35% 0.22 250);
+  :root[data-velin-contrast="aa"] {
+    --velin-color-text: oklch(15% 0.01 250);
+    --velin-color-text-muted: oklch(45% 0.01 250);
+    --velin-color-text-subtle: oklch(60% 0.005 250);
+    --velin-color-primary: oklch(55% 0.15 250);
+    --velin-color-primary-text: oklch(42% 0.15 250);
+    --velin-color-border: oklch(82% 0.01 250);
+    --velin-color-focus: oklch(60% 0.2 250);
   }
 
-  :root[data-velin-contrast="aaa"][data-velin-theme="dark"],
-  :root[data-velin-contrast="aaa"]:not([data-velin-theme="light"]) {
-    @media (prefers-color-scheme: dark) {
-      --velin-color-text: oklch(98% 0.005 250);
-      --velin-color-text-muted: oklch(82% 0.005 250);
-      --velin-color-text-subtle: oklch(72% 0.005 250);
-      --velin-color-border: oklch(55% 0.01 250);
-      --velin-color-border-strong: oklch(70% 0.01 250);
-      --velin-color-primary: oklch(78% 0.14 250);
-      --velin-color-on-primary: oklch(8% 0.01 250);
-    }
-  }
-
-  :root[data-velin-contrast="aaa"] .velin-btn {
+  /* Legacy: data-velin-contrast="aaa" kept for compatibility (defaults are already AAA) */
+  :root[data-velin-contrast="aaa"] .velin-btn,
+  :root:not([data-velin-contrast="aa"]) .velin-btn {
     border-width: 2px;
   }
 
   :root[data-velin-contrast="aaa"] .velin-input,
   :root[data-velin-contrast="aaa"] .velin-select,
-  :root[data-velin-contrast="aaa"] .velin-textarea {
+  :root[data-velin-contrast="aaa"] .velin-textarea,
+  :root:not([data-velin-contrast="aa"]) .velin-input,
+  :root:not([data-velin-contrast="aa"]) .velin-select,
+  :root:not([data-velin-contrast="aa"]) .velin-textarea {
     border-width: 2px;
   }
 }

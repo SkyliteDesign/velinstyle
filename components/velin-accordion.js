@@ -26,6 +26,18 @@ const styles = `
   ::slotted(details > summary::-webkit-details-marker) {
     display: none;
   }
+  ::slotted(details[open] > summary) {
+    background: var(--velin-color-primary-subtle, #eff6ff);
+    color: var(--velin-color-primary, #2563eb);
+  }
+  ::slotted(details > :not(summary)) {
+    padding: var(--velin-space-4, 1rem) var(--velin-space-5, 1.25rem);
+    background: var(--velin-color-bg-subtle, #f8fafc);
+    color: var(--velin-color-text-muted, #64748b);
+    font-size: var(--velin-text-sm, 0.875rem);
+    line-height: 1.6;
+    border-block-start: 1px solid var(--velin-color-border, #e2e8f0);
+  }
 `;
 
 class VelinAccordion extends HTMLElement {

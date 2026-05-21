@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Velin-Meta — VelinStyle</title>
+  <meta name="description" content="Velin-Meta: machine-readable agent context for AI assistants (velin-agent.json, llms.txt, page-level JSON).">
+  <link rel="alternate" type="application/vnd.velinstyle.meta+json" href="../dist/velin-agent.json" title="VelinStyle agent metadata">
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="../docs.css">
+  <script type="application/vnd.velinstyle.meta+json" id="velin-meta">
+{
+  "version": "0.9.0",
+  "mime": "application/vnd.velinstyle.meta+json",
+  "page": { "intent": "guide", "source": "docs/guides/velin-meta.html" },
+  "allowed": { "classesPrefix": ["velin-"], "components": [] },
+  "a11y": ["Documentation page for AI agent metadata"]
+}
+  </script>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <main id="main" class="velin-container velin-py-8">
+    <h1 class="velin-text-3xl velin-font-bold">Velin-Meta <span class="velin-badge velin-badge--primary">0.9.0</span></h1>
+    <p class="velin-text-muted velin-mbe-6">Agent-optimized metadata for Cursor, Copilot, and custom tools — not hidden from humans, but structured for machines.</p>
+
+    <h2 id="overview" class="velin-text-xl velin-font-bold">Overview</h2>
+    <p>Velin-Meta is <strong>not</strong> encryption or KI-only access. Any client can fetch <code>velin-agent.json</code>. It gives assistants a compact snapshot of VelinStyle: components, CLI, conventions, and links to generated reference.</p>
+
+    <h2 id="files" class="velin-text-xl velin-font-bold velin-mbs-4">Files and MIME</h2>
+    <ul class="velin-mbs-4">
+      <li><code>dist/velin-agent.json</code> — canonical bundle</li>
+      <li><code>dist/llms.txt</code> — short index (llms.txt convention)</li>
+      <li>MIME: <code>application/vnd.velinstyle.meta+json</code></li>
+    </ul>
+    <pre class="velin-code">npx velinstyle meta
+npx velinstyle meta --base-url https://velinstyle.info
+npx velinstyle meta page my-page.html --write</pre>
+
+    <h2 id="page-meta" class="velin-text-xl velin-font-bold velin-mbs-4">Page-level meta</h2>
+    <pre class="velin-code">&lt;script type="application/vnd.velinstyle.meta+json" id="velin-meta"&gt;
+{ "page": { "intent": "component-doc" }, "allowed": { "classesPrefix": ["velin-"] } }
+&lt;/script&gt;</pre>
+
+    <h2 id="cursor" class="velin-text-xl velin-font-bold velin-mbs-4">Cursor / agents</h2>
+    <p>Point your agent at <code>dist/velin-agent.json</code> or add to project rules:</p>
+    <pre class="velin-code">When editing VelinStyle HTML, follow conventions in dist/velin-agent.json.
+Use velin-* classes only. Run velinstyle scan on new markup.</pre>
+
+    <h2 id="related" class="velin-text-xl velin-font-bold velin-mbs-4">Related</h2>
+    <ul>
+      <li><a href="search.html">VelinSearch</a></li>
+      <li><a href="prompt-scaffolding.html">Prompt scaffolding</a></li>
+      <li><a href="api-reference.html">Generated API reference</a></li>
+      <li><a href="../generated/meta/README.md">Generated meta README</a></li>
+    </ul>
+  </main>
+  <footer class="velin-container velin-py-4 velin-text-sm velin-text-muted">VelinStyle v0.9.0</footer>
+</body>
+</html>

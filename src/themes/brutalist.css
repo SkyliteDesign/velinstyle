@@ -12,11 +12,11 @@
     --velin-radius-full: 0;
     --velin-radius-pill: 0;
 
-    --velin-color-primary: oklch(65% 0.25 30);
+    --velin-color-primary: oklch(38% 0.22 30);
     --velin-color-primary-hover: oklch(58% 0.25 30);
     --velin-color-primary-active: oklch(50% 0.25 30);
     --velin-color-primary-subtle: oklch(92% 0.05 30);
-    --velin-color-on-primary: oklch(0% 0 0);
+    --velin-color-on-primary: oklch(100% 0 0);
 
     --velin-color-secondary: oklch(85% 0.2 90);
     --velin-color-secondary-hover: oklch(78% 0.2 90);

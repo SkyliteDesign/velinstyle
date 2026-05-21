@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Performance audit - VelinStyle</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <main id="main" class="velin-container velin-py-8">
+    <h1 class="velin-text-3xl velin-font-bold">Performance audit <span class="velin-badge velin-badge--primary">0.9.0</span></h1>
+    <p class="velin-text-muted velin-mbe-6">CLI checks for CLS, lazy-loading, and script blocking.</p>
+    <pre class="velin-code">npx velinstyle perf audit samples/
+npx velinstyle perf suggest .
+npx velinstyle perf fix . --write</pre>
+    <h2 class="velin-text-xl velin-font-bold velin-mbs-6">Rules</h2>
+    <ul>
+      <li><code>img-missing-dimensions</code> — adds width/height (safe defaults)</li>
+      <li><code>img-no-lazy</code> — adds <code>loading="lazy"</code></li>
+      <li><code>script-no-defer</code> — adds <code>defer</code> on external scripts</li>
+      <li><code>unused-velin-import</code> — suggests <code>@birdapi/velinstyle/runtime</code></li>
+    </ul>
+  </main>
+  <footer class="velin-container velin-py-4 velin-text-sm velin-text-muted">VelinStyle v0.9.0</footer>
+  <script src="../assets/docs-a11y.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>VelinStyle WC smoke</title>
+  <link rel="stylesheet" href="/dist/velinstyle.min.css">
+</head>
+<body>
+  <main id="main">
+    <p velin-scroll-top="200"></p>
+    <velin-copy value="smoke-test" label="Copy"></velin-copy>
+    <velin-tooltip content="Hint">Hover me</velin-tooltip>
+    <velin-tooltip-wc content="Legacy">Legacy tip</velin-tooltip-wc>
+    <velin-stepper labels="One,Two,Three" active="0"></velin-stepper>
+    <velin-stepper-wc labels="A,B" active="0"></velin-stepper-wc>
+  </main>
+  <script type="module">
+    import { bootFromDOM } from '/components/runtime-entry.js';
+    await bootFromDOM(document, { attributes: true });
+  </script>
+</body>
+</html>

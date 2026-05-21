@@ -69,10 +69,10 @@ class VelinCarousel extends HTMLElement {
       <div class="track" role="group" aria-roledescription="carousel" part="track"><slot></slot></div>
       <div class="controls" part="controls">
         <button class="prev" aria-label="Previous slide" part="prev">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
         <button class="next" aria-label="Next slide" part="next">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><polyline points="9 6 15 12 9 18"/></svg>
         </button>
       </div>
       <div class="indicators" role="group" aria-label="Slide indicators" part="indicators"></div>

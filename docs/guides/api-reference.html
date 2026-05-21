@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Reference (generated) — VelinStyle</title>
+  <meta name="description" content="Auto-generated Markdown reference for Web Components, tokens, utilities, CLI, and scanner rules.">
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <link rel="stylesheet" href="../docs.css">
+  <script src="../dist/velinstyle-components.iife.js"></script>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <header role="banner">
+  <nav class="velin-nav" aria-label="Main navigation">
+    <a href="../index.html" class="velin-nav__brand">VelinStyle</a>
+    <button type="button" class="velin-nav__toggle" data-velin-nav-toggle aria-label="Toggle menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="velin-nav__list">
+      <li><a href="../getting-started.html" class="velin-nav__link">Get Started</a></li>
+      <li><a href="index.html" class="velin-nav__link">Integration</a></li>
+      <li><a href="../layout.html" class="velin-nav__link">Layout</a></li>
+      <li><a href="../components.html" class="velin-nav__link">Components</a></li>
+      <li><a href="../css-components.html" class="velin-nav__link">CSS Components</a></li>
+      <li><a href="../forms.html" class="velin-nav__link">Forms</a></li>
+      <li><a href="../utilities.html" class="velin-nav__link">Utilities</a></li>
+      <li><a href="../tokens.html" class="velin-nav__link">Tokens</a></li>
+      <li><a href="../themes.html" class="velin-nav__link">Themes</a></li>
+      <li><a href="../icons.html" class="velin-nav__link">Icons</a></li>
+      <li><a href="../a11y.html" class="velin-nav__link">A11y</a></li>
+      <li><a href="../security.html" class="velin-nav__link">Security</a></li>
+      <li data-velin-nav-api-reference><a href="../reference.html" class="velin-nav__link">API Reference</a></li>
+      <li><a href="../migration.html" class="velin-nav__link">Migration</a></li>
+    </ul>
+  </nav>
+  <div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
+    <strong>Generated reference (0.9.0)</strong> — Markdown under <code class="velin-doc-inline-code">docs/generated/</code>. Hub: <a href="../reference.html">reference.html</a>
+  </div>  </header>
+
+
+  <main id="main" class="velin-container">
+    <section class="velin-doc-section">
+      <h1 class="velin-doc-title">Auto-generated API reference</h1>
+      <p class="velin-doc-lead">
+        VelinStyle extracts API tables from source so CLI and component docs stay in sync with the codebase.
+        Output is committed Markdown; CI fails if you forget to regenerate after changes.
+      </p>
+    </section>
+
+    <section class="velin-doc-section" id="generate">
+      <h2 class="velin-doc-subtitle">Generate locally</h2>
+      <pre class="demo-code"><code>npm run docs:generate
+# or
+npx velinstyle docs generate
+npx velinstyle docs generate --scope components
+npx velinstyle docs generate --scope tokens --out docs/generated</code></pre>
+      <p>Scopes: <code class="velin-doc-inline-code">all</code>, <code class="velin-doc-inline-code">components</code>, <code class="velin-doc-inline-code">tokens</code>, <code class="velin-doc-inline-code">utilities</code>, <code class="velin-doc-inline-code">cli</code>, <code class="velin-doc-inline-code">rules</code>, <code class="velin-doc-inline-code">a11y</code>.</p>
+    </section>
+
+    <section class="velin-doc-section" id="sections">
+      <h2 class="velin-doc-subtitle">What gets generated</h2>
+      <table class="api-table">
+        <thead>
+          <tr><th>Section</th><th>Source</th><th>Markdown</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Web Components</td>
+            <td><code>components/velin-*.js</code></td>
+            <td><a href="../generated/components/README.md">components/</a></td>
+          </tr>
+          <tr>
+            <td>Design tokens</td>
+            <td><code>src/tokens/*.css</code></td>
+            <td><a href="../generated/tokens/README.md">tokens/</a></td>
+          </tr>
+          <tr>
+            <td>Utilities</td>
+            <td><code>src/utilities/*.css</code></td>
+            <td><a href="../generated/utilities/README.md">utilities/</a></td>
+          </tr>
+          <tr>
+            <td>CLI</td>
+            <td><code>cli/cli-manifest.json</code></td>
+            <td><a href="../generated/cli/commands.md">cli/commands.md</a></td>
+          </tr>
+          <tr>
+            <td>Scanner rules</td>
+            <td><code>cli/scanner-rules-data.js</code></td>
+            <td><a href="../generated/rules/scanner.md">rules/scanner.md</a></td>
+          </tr>
+          <tr>
+            <td>A11y CSS</td>
+            <td><code>src/a11y/*.css</code></td>
+            <td><a href="../generated/a11y/modules.md">a11y/modules.md</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="velin-doc-section" id="tokens-json">
+      <h2 class="velin-doc-subtitle">Tokens JSON pipeline</h2>
+      <p>Build custom token CSS from JSON (includes <code>fonts</code>, <code>motion</code>, <code>zIndex</code> blocks):</p>
+      <pre class="demo-code"><code>velinstyle tokens validate --input examples/tokens.full.json
+velinstyle tokens build --input examples/tokens.full.json -o custom-tokens.css</code></pre>
+      <p>Example file: <a href="https://github.com/SkyliteDesign/velinstyle/blob/main/examples/tokens.full.json">examples/tokens.full.json</a></p>
+    </section>
+
+    <section class="velin-doc-section" id="ci">
+      <h2 class="velin-doc-subtitle">CI</h2>
+      <p>GitHub Actions runs <code>npm run docs:generate</code> and requires <code>git diff --exit-code docs/generated</code> to be empty. Regenerate and commit after changing components, CSS, or CLI manifest.</p>
+    </section>
+  </main>
+<script src="../assets/docs-a11y.js" defer></script>
+</body>
+</html>

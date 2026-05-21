@@ -52,6 +52,25 @@ class VelinBottomNav extends HTMLElement {
 
   _onSlot() {
     this._syncCurrent();
+    this._syncSlotLabels();
+  }
+
+  _syncSlotLabels() {
+    const slot = this.shadowRoot?.querySelector('slot');
+    if (!slot) return;
+    slot.assignedElements().forEach((el) => {
+      const text = el.textContent?.replace(/\s+/g, ' ').trim();
+      if (!text && !el.getAttribute('aria-label')) {
+        const hint =
+          el.getAttribute('data-nav') ||
+          el.getAttribute('title') ||
+          el.getAttribute('aria-labelledby');
+        if (hint) el.setAttribute('aria-label', hint);
+      }
+      if (el.tagName === 'A' && !el.getAttribute('href')) {
+        el.setAttribute('role', 'button');
+      }
+    });
   }
 
   _syncCurrent() {

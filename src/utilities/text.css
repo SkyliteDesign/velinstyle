@@ -22,6 +22,10 @@
   .velin-font-sans { font-family: var(--velin-font-sans); }
   .velin-font-serif { font-family: var(--velin-font-serif); }
   .velin-font-mono { font-family: var(--velin-font-mono); }
+  .velin-font-display { font-family: var(--velin-font-display); }
+  .velin-font-text { font-family: var(--velin-font-text); }
+  .velin-tabular-nums { font-variant-numeric: tabular-nums; }
+  .velin-text-pretty { text-wrap: pretty; }
 
   /* Text align */
   .velin-text-start { text-align: start; }

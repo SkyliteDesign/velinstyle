@@ -29,6 +29,7 @@
 </head>
 <body>
   <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <header role="banner">
   <nav class="velin-nav" aria-label="Main navigation">
     <a href="index.html" class="velin-nav__brand">VelinStyle</a>
     <button type="button" class="velin-nav__toggle" data-velin-nav-toggle aria-label="Toggle menu" aria-expanded="false"
@@ -48,7 +49,8 @@
       <li><a href="icons.html" class="velin-nav__link">Icons</a></li>
       <li><a href="a11y.html" class="velin-nav__link" aria-current="page">A11y</a></li>
       <li><a href="a11y-patterns/index.html" class="velin-nav__link">A11y patterns</a></li>
-      <li><a href="security.html" class="velin-nav__link">Security</a></li>
+      <li><a href="security.html" class="velin-nav__link">Security</a></li>      <li data-velin-nav-api-reference><a href="reference.html" class="velin-nav__link">API Reference</a></li>
+
       <li><a href="migration.html" class="velin-nav__link">Migration</a></li>
     </ul>
   </nav>
@@ -56,12 +58,14 @@
   <strong>Full documentation available at <a href="https://velinstyle.info/docs/getting-started/introduction.html">velinstyle.info</a></strong> — This is the quick reference. Visit the full docs for 80+ pages with live examples, API tables, and guides.
 </div>
 
+  </header>
   <main id="main" class="velin-container">
     <h1 class="velin-text-4xl velin-font-bold" style="margin-block: var(--velin-space-8)">Accessibility</h1>
     <p class="velin-text-lg velin-text-muted" style="max-inline-size: 60ch; margin-block-end: var(--velin-space-8)">
-      VelinStyle is built accessibility-first. WCAG 2.2 AA compliance is structural, not optional. Enable enhanced contrast with <code>data-velin-contrast="aaa"</code> on <code>&lt;html&gt;</code>.
+      VelinStyle targets <strong>WCAG 2.2 Level AAA</strong> token defaults and component contracts — certification of your application remains your responsibility. See the <a href="generated/a11y/wcag22-aaa-matrix.md">AAA conformance matrix</a>. For lighter AA contrast, set <code>data-velin-contrast="aa"</code> on <code>&lt;html&gt;</code>. Run <code>npm run test:a11y:coverage</code> for framework coverage.
     </p>
 
+    <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Built-in features</h2>
     <div class="velin-grid velin-grid--auto-fit" style="margin-block-end: var(--velin-space-12)">
       <div class="feature-card">
         <h3 class="velin-text-lg velin-font-semibold">Focus Visible</h3>
@@ -130,7 +134,7 @@
     </section>
 
     <section class="section">
-      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">WCAG 2.2 AA Checklist</h2>
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">WCAG 2.2 checklist</h2>
       <div class="velin-table-wrapper">
         <table class="velin-table velin-table--striped">
           <thead>
@@ -144,7 +148,7 @@
             <tr>
               <td>1.4.3 Contrast (Minimum)</td>
               <td><span class="velin-badge velin-badge--success">Built-in</span></td>
-              <td>OKLCH palette designed for 4.5:1 minimum contrast</td>
+              <td>AAA defaults exceed 7:1; <code>data-velin-contrast="aa"</code> for 4.5:1 palette</td>
             </tr>
             <tr>
               <td>2.1.1 Keyboard</td>
@@ -183,12 +187,20 @@
             </tr>
             <tr>
               <td>1.4.6 Contrast (Enhanced)</td>
-              <td><span class="velin-badge velin-badge--info">Optional</span></td>
-              <td><code>data-velin-contrast="aaa"</code> on <code>&lt;html&gt;</code></td>
+              <td><span class="velin-badge velin-badge--success">Default</span></td>
+              <td>Token pairs validated via <code>npm run test:contrast</code></td>
             </tr>
           </tbody>
         </table>
       </div>
+    </section>
+
+    <section class="section">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">CSS brings accessibility</h2>
+      <p class="velin-text-muted velin-mbe-4">VelinStyle loads an <code>@layer a11y</code> bundle with skip links, screen-reader utilities, focus appearance, reduced motion, forced colors, target size on controls, and default <code>scroll-padding</code> for focus-not-obscured (2.4.11). Color tokens in <code>src/tokens/color.css</code> are tuned for AAA; optional AA via <code>data-velin-contrast="aa"</code>.</p>
+      <pre class="demo-code">import { initA11y } from '@birdapi/velinstyle/a11y';
+initA11y({ announcer: true, scrollPadding: true });</pre>
+      <p class="velin-text-muted">Measure framework coverage: <code>npm run test:a11y:coverage</code> · per-page axe: <code>npm run test:a11y</code> · token contrast: <code>npm run test:contrast</code>.</p>
     </section>
   </main>
 
@@ -197,7 +209,7 @@
     <button class="velin-btn velin-btn--sm velin-btn--ghost" onclick="document.documentElement.setAttribute('data-velin-theme','dark')" title="Dark mode">Dark</button>
   </div>
 
-  <footer style="padding-block:var(--velin-space-6);border-block-start:1px solid var(--velin-color-border);color:var(--velin-color-text-muted);font-size:var(--velin-text-sm);">
+  <footer role="contentinfo" style="padding-block:var(--velin-space-6);border-block-start:1px solid var(--velin-color-border);color:var(--velin-color-text-muted);font-size:var(--velin-text-sm);">
     <div class="velin-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--velin-space-4);">
       <p>VelinStyle v0.8.0</p>
       <div style="display:flex;gap:var(--velin-space-3);">
@@ -207,34 +219,15 @@
     </div>
   </footer>
 <!-- Theme Picker Widget -->
-<div style="position:fixed;bottom:1rem;right:1rem;z-index:1050;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;" id="themePicker">
-  <div id="themePanel" style="display:none;background:var(--velin-color-surface-bright,#fff);border:1px solid var(--velin-color-border,#dee2e6);border-radius:.75rem;padding:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:20rem;">
-    <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
-    <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
+<link rel="stylesheet" href="assets/theme-picker.css">
+<div role="region" aria-label="Theme picker" class="velin-docs-theme-picker" id="themePicker">
+  <div id="themePanel" class="velin-docs-theme-panel">
+    <p class="velin-docs-theme-panel__title">Theme waehlen</p>
+    <div class="velin-docs-theme-grid" id="themeGrid"></div>
   </div>
-  <button type="button" data-velin-theme-toggle  style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+  <button type="button" class="velin-docs-theme-trigger" aria-label="Theme waehlen" aria-expanded="false" aria-controls="themePanel">&#127912; Theme</button>
 </div>
-<script>
-(function(){
-  var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
-  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='dist/themes/'+t+'.min.css';document.head.appendChild(l);});
-  var names=['Default'].concat(themes).concat(['dark']);
-  var vals=[''].concat(themes).concat(['dark']);
-  var grid=document.getElementById('themeGrid');
-  names.forEach(function(n,i){
-    var b=document.createElement('button');
-    b.textContent=n.charAt(0).toUpperCase()+n.slice(1);
-    b.style.cssText='padding:.3rem .65rem;border:1px solid var(--velin-color-border,#dee2e6);border-radius:1rem;background:var(--velin-color-surface-dim,#f5f6f8);color:var(--velin-color-text,#212529);font-size:.75rem;cursor:pointer;white-space:nowrap;';
-    b.addEventListener('click',function(){
-      if(vals[i]){document.documentElement.setAttribute('data-velin-theme',vals[i]);}
-      else{document.documentElement.removeAttribute('data-velin-theme');}
-      grid.querySelectorAll('button').forEach(function(x){x.style.background='var(--velin-color-surface-dim,#f5f6f8)';x.style.color='var(--velin-color-text,#212529)';});
-      b.style.background='var(--velin-color-primary,#2563eb)';b.style.color='#fff';
-    });
-    grid.appendChild(b);
-  });
-})();
-</script>
+<script src="assets/theme-picker.js" defer></script>
 <script src="assets/docs-a11y.js" defer></script>
 </body>
 </html>

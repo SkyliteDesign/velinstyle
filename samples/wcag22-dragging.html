@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WCAG 2.2 dragging sample</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+</head>
+<body>
+  <main class="velin-container velin-py-8">
+    <h1>Reorder list (2.5.7)</h1>
+    <p class="velin-field-help">Drag items or use Move up / Move down buttons.</p>
+    <ul id="reorder-list" class="velin-stack velin-gap-2" aria-label="Reorderable tasks">
+      <li class="velin-card velin-p-3 velin-flex velin-flex--between" data-id="1">
+        <span>Task one</span>
+        <div class="velin-flex velin-gap-2">
+          <button type="button" class="velin-btn velin-btn--sm" data-move="up" aria-label="Move task one up">Up</button>
+          <button type="button" class="velin-btn velin-btn--sm" data-move="down" aria-label="Move task one down">Down</button>
+          <span class="velin-drag-handle" tabindex="0" aria-label="Drag task one" draggable="true">⋮⋮</span>
+        </div>
+      </li>
+      <li class="velin-card velin-p-3 velin-flex velin-flex--between" data-id="2">
+        <span>Task two</span>
+        <div class="velin-flex velin-gap-2">
+          <button type="button" class="velin-btn velin-btn--sm" data-move="up">Up</button>
+          <button type="button" class="velin-btn velin-btn--sm" data-move="down">Down</button>
+          <span class="velin-drag-handle" tabindex="0" draggable="true" aria-label="Drag task two">⋮⋮</span>
+        </div>
+      </li>
+    </ul>
+    <p class="velin-drag-keyboard-hint velin-mt-4">Keyboard: focus a row, then use Up/Down buttons.</p>
+  </main>
+  <script>
+    const list = document.getElementById('reorder-list');
+    list.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-move]');
+      if (!btn) return;
+      const li = btn.closest('li');
+      if (btn.dataset.move === 'up' && li.previousElementSibling) {
+        list.insertBefore(li, li.previousElementSibling);
+      } else if (btn.dataset.move === 'down' && li.nextElementSibling) {
+        list.insertBefore(li.nextElementSibling, li);
+      }
+    });
+  </script>
+</body>
+</html>

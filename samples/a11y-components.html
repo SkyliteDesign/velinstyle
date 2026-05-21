@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A11y component fixtures</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+  <script src="../dist/velinstyle-components.iife.js" defer></script>
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <main id="main" class="velin-container velin-py-8">
+    <h1>Accessibility component fixtures</h1>
+    <p class="velin-text-muted">Used by <code>npm run test:a11y</code>.</p>
+
+    <section class="velin-my-6">
+      <h2>Search</h2>
+      <velin-search index="search-index.json" aria-label="Search documentation"></velin-search>
+    </section>
+
+    <section class="velin-my-6">
+      <h2>Counter</h2>
+      <velin-counter from="0" to="42" duration="800"></velin-counter>
+    </section>
+
+    <section class="velin-my-6">
+      <h2>Live dot</h2>
+      <velin-live-dot status="live">Streaming</velin-live-dot>
+    </section>
+
+    <section class="velin-my-6">
+      <h2>Code block</h2>
+      <velin-code-block language="js" line-numbers collapsed>
+const hello = 'world';
+console.log(hello);
+      </velin-code-block>
+    </section>
+  </main>
+  <velin-announcer></velin-announcer>
+</body>
+</html>

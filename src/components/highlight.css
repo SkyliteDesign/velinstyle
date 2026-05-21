@@ -1,0 +1,182 @@
+@layer components {
+  pre.velin-syntax-pending code,
+  code.velin-syntax-pending {
+    opacity: 0;
+  }
+
+  pre.velin-syntax-ready code,
+  code.velin-syntax-ready {
+    opacity: 1;
+    transition: opacity var(--velin-duration-normal, 250ms) var(--velin-ease-out, ease-out);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    pre.velin-syntax-ready code,
+    code.velin-syntax-ready {
+      transition: none;
+    }
+  }
+
+  .velin-token {
+    font-family: inherit;
+  }
+
+  .velin-token--keyword {
+    color: oklch(45% 0.2 265);
+  }
+
+  .velin-token--string {
+    color: oklch(42% 0.14 145);
+  }
+
+  .velin-token--comment {
+    color: oklch(55% 0.02 265);
+    font-style: italic;
+  }
+
+  .velin-token--number {
+    color: oklch(48% 0.16 55);
+  }
+
+  .velin-token--operator {
+    color: oklch(50% 0.18 25);
+  }
+
+  .velin-token--punctuation {
+    color: oklch(52% 0.02 265);
+  }
+
+  .velin-token--identifier {
+    color: oklch(38% 0.04 265);
+  }
+
+  .velin-token--tag {
+    color: oklch(48% 0.18 25);
+  }
+
+  .velin-token--attr-name {
+    color: oklch(45% 0.16 265);
+  }
+
+  .velin-token--attr-value {
+    color: oklch(42% 0.14 145);
+  }
+
+  .velin-token--builtin {
+    color: oklch(46% 0.17 310);
+  }
+
+  .velin-token--regex {
+    color: oklch(50% 0.16 55);
+  }
+
+  @supports (color: color(display-p3 1 1 1)) {
+    .velin-token--keyword {
+      color: color(display-p3 0.2 0.35 0.85);
+    }
+
+    .velin-token--string {
+      color: color(display-p3 0.15 0.55 0.35);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-velin-theme='light']) .velin-token--keyword {
+      color: oklch(78% 0.14 285);
+    }
+  }
+
+  [data-velin-theme='dark'] .velin-token--keyword {
+    color: oklch(78% 0.14 285);
+  }
+
+  [data-velin-theme='dark'] .velin-token--string {
+    color: oklch(78% 0.12 145);
+  }
+
+  [data-velin-theme='dark'] .velin-token--comment {
+    color: oklch(62% 0.03 285);
+  }
+
+  [data-velin-theme='dark'] .velin-token--number {
+    color: oklch(80% 0.12 75);
+  }
+
+  [data-velin-theme='dark'] .velin-token--operator {
+    color: oklch(78% 0.14 25);
+  }
+
+  [data-velin-theme='dark'] .velin-token--tag {
+    color: oklch(78% 0.14 25);
+  }
+
+  [data-velin-theme='dark'] .velin-token--attr-name {
+    color: oklch(76% 0.12 285);
+  }
+
+  [data-velin-theme='dark'] .velin-token--identifier {
+    color: oklch(88% 0.02 285);
+  }
+
+  .velin-code-block__line--highlight {
+    background: color-mix(in oklch, var(--velin-color-primary, oklch(55% 0.2 265)) 18%, transparent);
+    display: block;
+    margin-inline: calc(-1 * var(--velin-space-4, 1rem));
+    padding-inline: var(--velin-space-4, 1rem);
+  }
+
+  velin-code-block {
+    display: block;
+    position: relative;
+  }
+
+  velin-code-block[data-collapsed] pre {
+    max-height: 12rem;
+    overflow: hidden;
+  }
+
+  velin-code-block .velin-code-block__gutter {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0;
+  }
+
+  velin-code-block .velin-code-block__line-numbers {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    align-items: flex-end;
+    padding: var(--velin-space-4);
+    padding-inline-end: var(--velin-space-2);
+    text-align: end;
+    user-select: none;
+    color: var(--velin-color-text-muted);
+    font-family: var(--velin-font-mono, ui-monospace, monospace);
+    font-size: var(--velin-text-sm, 0.875rem);
+    line-height: 1.55;
+    border-inline-end: 1px solid var(--velin-color-border);
+  }
+
+  velin-code-block .velin-code-block__line-numbers > span {
+    display: block;
+    min-height: 1.55em;
+    line-height: 1.55;
+  }
+
+  velin-code-block .velin-code-block__gutter pre,
+  velin-code-block .velin-code-block__gutter pre code {
+    margin: 0;
+    white-space: pre;
+    line-height: 1.55;
+    tab-size: 2;
+  }
+
+  velin-code-block .velin-code-block__toolbar {
+    position: absolute;
+    inset-block-start: var(--velin-space-2);
+    inset-inline-end: var(--velin-space-2);
+    display: flex;
+    gap: var(--velin-space-2);
+    z-index: 1;
+  }
+}

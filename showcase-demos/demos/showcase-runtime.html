@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" data-velin-reveal-auto>
+<head>
+<!-- Synced from velinstyle-site — fork: https://github.com/SkyliteDesign/velinstyle-demos -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- velin-seo -->
+  <link rel="canonical" href="https://velinstyle.info/demos/showcase-runtime.html">
+  <meta name="description" content="VelinStyle 0.9 runtime: motion, VelinSearch, VelinHighlight, code blocks, copy, email obfuscation, and Velin-Meta.">
+  <link rel="alternate" type="application/vnd.velinstyle.meta+json" href="../dist/velin-agent.json" title="VelinStyle agent metadata">
+  <link rel="alternate" type="text/plain" href="../dist/llms.txt" title="VelinStyle llms.txt">
+  <script type="application/ld+json">{"@context": "https://schema.org","@type": "SoftwareApplication","name": "VelinStyle","applicationCategory": "DeveloperApplication","operatingSystem": "Web","description": "VelinStyle 0.9 runtime demos.","url": "https://velinstyle.info/demos/showcase-runtime.html","softwareVersion": "0.9.0","license": "https://opensource.org/licenses/MIT","isAccessibleForFree": true,"publisher": {"@type": "Organization","name": "SkyliteDesign"}}</script>
+  <!-- /velin-seo -->
+  <title>Runtime 0.9 — VelinStyle demos</title>
+  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle.min.css">
+  <link rel="stylesheet" href="demos-shared.css">
+  <script src="../assets/js/velin-theme-init.js"></script>
+  <script>document.documentElement.setAttribute('data-velin-themes-base','../dist/themes');</script>
+  <link rel="icon" href="../assets/img/velinstyle-logo.svg" type="image/svg+xml">
+  <style>
+    body { margin: 0; background: var(--velin-color-surface-dim); --demo-bar-offset: 6.5rem; }
+    .demo-search-wrap { max-width: 28rem; }
+    velin-code-block { display: block; margin-top: var(--velin-space-3); font-size: 0.8125rem; }
+    .runtime-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+      gap: var(--velin-space-4);
+      margin-top: var(--velin-space-4);
+    }
+    .runtime-tile {
+      padding: var(--velin-space-4);
+      border: 1px solid var(--velin-color-border);
+      border-radius: var(--velin-radius-md);
+      background: var(--velin-color-bg-subtle);
+      font-size: var(--velin-text-sm);
+    }
+    .runtime-tile strong { display: block; margin-bottom: var(--velin-space-1); }
+  </style>
+</head>
+<body data-demo-page="showcase-runtime.html">
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <p class="demo-chrome-promo"><strong>Runtime 0.9.0</strong> · motion · search · highlight · attributes · Velin-Meta</p>
+  <header class="demo-chrome-header">
+    <div class="demo-chrome-header__row">
+      <a href="#main" class="demo-chrome-brand">
+        <img src="../assets/img/velinstyle-logo.svg" alt="" width="28" height="28" aria-hidden="true">
+        Runtime lab
+      </a>
+      <div class="demo-chrome-header__actions">
+        <a href="showcase-interactive.html" class="velin-btn velin-btn--ghost velin-btn--sm">Web Components</a>
+        <velin-theme-toggle themes-base="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/themes/"></velin-theme-toggle>
+      </div>
+    </div>
+    <div class="demo-chrome-strip"><div class="demo-chrome-strip__inner"><div data-demo-crossnav class="demo-crossnav"></div></div></div>
+  </header>
+
+  <main id="main" class="demo-layout demo-layout--toc">
+    <nav class="demo-toc" data-demo-toc aria-label="Sections"></nav>
+    <div>
+      <header class="demo-intro demo-section" id="overview">
+        <h1>Runtime 0.9</h1>
+        <p class="demo-intro__lead">
+          Subpath exports shipped in 0.9.0 — motion, fuzzy search, lazy syntax highlighting, declarative attributes,
+          and agent metadata. Scroll to trigger reveals; each section links to the matching guide.
+        </p>
+        <div class="demo-features">
+          <span class="velin-badge velin-badge--primary">Motion</span>
+          <span class="velin-badge velin-badge--info">VelinSearch</span>
+          <span class="velin-badge velin-badge--success">VelinHighlight</span>
+          <span class="velin-badge velin-badge--warning">Attributes</span>
+          <span class="velin-badge velin-badge--outline">Velin-Meta</span>
+        </div>
+      </header>
+
+      <section class="demo-section" id="motion" velin-reveal="slide-up">
+        <div class="panel">
+          <h2 id="motion-title">Motion &amp; stagger</h2>
+          <p class="demo-section__desc"><code>initMotion()</code> observes <code>velin-reveal</code> and <code>velin-stagger</code>. This page sets <code>data-velin-reveal-auto</code> on <code>&lt;html&gt;</code>.</p>
+          <div class="demo-motion-chips" velin-stagger="50" aria-hidden="true">
+            <span class="velin-badge velin-badge--primary" velin-reveal="fade">Fade</span>
+            <span class="velin-badge velin-badge--success" velin-reveal="slide-up">Slide</span>
+            <span class="velin-badge velin-badge--info" velin-reveal="scale">Scale</span>
+            <span class="velin-badge velin-badge--warning" velin-reveal="fade">Stagger</span>
+          </div>
+          <p class="demo-hint">Respects <code>prefers-reduced-motion</code> — animations are skipped when requested.</p>
+          <footer class="demo-section__foot"><a href="../docs/guides/motion-attributes.html">Motion attributes guide →</a></footer>
+        </div>
+      </section>
+
+      <section class="demo-section" id="search" velin-reveal="slide-up">
+        <div class="panel">
+          <h2 id="search-title">VelinSearch</h2>
+          <p class="demo-section__desc">Fuzzy offline search over <code>dist/search-index.json</code> (built with <code>velinstyle search index</code>). Keyboard: arrows, Enter, Escape.</p>
+          <div class="demo-search-wrap">
+            <velin-search
+              index="../dist/search-index.json"
+              categories="docs,components,api"
+              placeholder="Search docs &amp; components…"
+              min-chars="2"
+              fuzzy="0.25"
+              aria-label="Documentation search">
+            </velin-search>
+          </div>
+          <footer class="demo-section__foot"><a href="../docs/guides/site-search.html">Site search guide →</a></footer>
+        </div>
+      </section>
+
+      <section class="demo-section" id="highlight" velin-reveal="slide-up">
+        <div class="panel">
+          <h2 id="highlight-title">VelinHighlight &amp; code block</h2>
+          <p class="demo-section__desc"><code>&lt;velin-code-block&gt;</code> highlights when scrolled into view. Copy and line numbers are built in.</p>
+          <velin-code-block language="js" line-numbers>import { initHighlight } from '@birdapi/velinstyle/highlight';
+import { bootFromDOM } from '@birdapi/velinstyle/runtime';
+
+bootFromDOM(document, { highlight: true, attributes: true });</velin-code-block>
+          <div class="demo-row" style="margin-top:var(--velin-space-4)">
+            <velin-copy value="npm install @birdapi/velinstyle@0.9.0" label="Copy install"></velin-copy>
+          </div>
+          <footer class="demo-section__foot"><a href="../docs/guides/syntax-highlight.html">Syntax highlight guide →</a></footer>
+        </div>
+      </section>
+
+      <section class="demo-section" id="attributes" velin-reveal="slide-up">
+        <div class="panel">
+          <h2 id="attributes-title">Declarative attributes</h2>
+          <p class="demo-section__desc">Twenty-plus bridges — try <code>velin-copy</code> on this snippet and hover the tooltip.</p>
+          <p class="demo-hint">
+            <code>velin-tooltip</code> on a focusable control:
+            <velin-tooltip content="Keyboard accessible — Esc dismisses">?</velin-tooltip>
+          </p>
+          <pre class="velin-code-block" style="margin:0;padding:var(--velin-space-4);background:var(--velin-color-bg-subtle);border-radius:var(--velin-radius-md);font-size:var(--velin-text-sm)"><code>&lt;button velin-copy="npm i @birdapi/velinstyle"&gt;Copy&lt;/button&gt;</code></pre>
+          <footer class="demo-section__foot"><a href="../docs/guides/whats-new-extension.html">Extension APIs →</a></footer>
+        </div>
+      </section>
+
+      <section class="demo-section" id="email" velin-reveal="slide-up">
+        <div class="panel">
+          <h2 id="email-title">Email obfuscation</h2>
+          <p class="demo-section__desc"><code>&lt;velin-email&gt;</code> keeps addresses out of the DOM until the user reveals them — reduces scraper noise.</p>
+          <p>Contact: <velin-email obfuscated="c3VwcG9ydEB2ZWxpbnN0eWxlLmluZm8=" method="base64" label="Reveal support email"></velin-email></p>
+          <footer class="demo-section__foot"><a href="../docs/security.html">Security &amp; privacy →</a></footer>
+        </div>
+      </section>
+
+      <section class="demo-section" id="faq" velin-reveal="slide-up">
+        <div class="panel">
+          <h2 id="faq-title">Runtime FAQ</h2>
+          <p class="demo-section__desc">Common questions about 0.9 subpath exports — <code>velin-accordion</code> with exclusive panels.</p>
+          <velin-accordion exclusive>
+            <details open>
+              <summary>How do I enable motion?</summary>
+              <p style="margin:0">Call <code>bootFromDOM()</code> with <code>motion: true</code> or set <code>data-velin-reveal-auto</code> on <code>&lt;html&gt;</code> like this page.</p>
+            </details>
+            <details>
+              <summary>Where does VelinSearch load its index?</summary>
+              <p style="margin:0">Point <code>index</code> at <code>dist/search-index.json</code>, generated via <code>velinstyle search index</code> in your docs build.</p>
+            </details>
+            <details>
+              <summary>When does syntax highlighting run?</summary>
+              <p style="margin:0"><code>&lt;velin-code-block&gt;</code> uses Intersection Observer — code highlights when scrolled into view, keeping initial paint fast.</p>
+            </details>
+          </velin-accordion>
+          <footer class="demo-section__foot"><a href="../docs/components/accordion.html">Accordion docs →</a></footer>
+        </div>
+      </section>
+
+      <section class="demo-section" id="meta" velin-reveal="slide-up">
+        <div class="panel">
+          <h2 id="meta-title">Velin-Meta</h2>
+          <p class="demo-section__desc">Agent bundle for Cursor, Copilot, and custom tools — same files linked from the homepage.</p>
+          <div class="runtime-grid" aria-label="Agent artifacts">
+            <div class="runtime-tile"><strong>velin-agent.json</strong>Structured app metadata for agents.</div>
+            <div class="runtime-tile"><strong>llms.txt</strong>Plain-text index for LLM crawlers.</div>
+            <div class="runtime-tile"><strong>search-index.json</strong>Offline fuzzy search corpus.</div>
+          </div>
+          <div class="demo-row" style="margin-top:var(--velin-space-4)">
+            <a href="../dist/velin-agent.json" class="velin-btn velin-btn--primary velin-btn--sm">velin-agent.json</a>
+            <a href="../dist/llms.txt" class="velin-btn velin-btn--ghost velin-btn--sm">llms.txt</a>
+            <velin-copy value="@birdapi/velinstyle@0.9.0" label="Copy version"></velin-copy>
+            <a href="../docs/guides/velin-meta.html" class="velin-btn velin-btn--ghost velin-btn--sm">Guide</a>
+          </div>
+          <footer class="demo-section__foot"><a href="../docs/guides/velin-meta.html">Velin-Meta guide →</a></footer>
+        </div>
+      </section>
+
+      <footer class="demo-footer">
+        <span>VelinStyle 0.9 runtime</span>
+        <span><a href="../docs/extend/javascript-api.html">JavaScript API</a></span>
+      </footer>
+    </div>
+  </main>
+
+  <velin-scroll-top threshold="320"></velin-scroll-top>
+  <script src="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle-components.iife.js"></script>
+  <script src="demos-shared.js"></script>
+</body>
+</html>

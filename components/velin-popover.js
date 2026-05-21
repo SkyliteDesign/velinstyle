@@ -50,30 +50,62 @@ class VelinPopover extends HTMLElement {
     const role = triggerType === 'hover' ? 'tooltip' : 'dialog';
     this._isDialog = role === 'dialog';
 
+    const titleId = title ? `${this._popoverId}-title` : '';
     this.shadowRoot.innerHTML = `
       <style>${styles}</style>
       <slot name="trigger"></slot>
-      <div class="popover popover--${placement}" id="${this._popoverId}" role="${role}" part="popover">
-        ${title ? `<div class="popover__title" part="title">${escapeHTML(title)}</div>` : ''}
+      <div class="popover popover--${placement}" id="${this._popoverId}" role="${role}" part="popover"${titleId ? ` aria-labelledby="${titleId}"` : ''}>
+        ${title ? `<div class="popover__title" id="${titleId}" part="title">${escapeHTML(title)}</div>` : ''}
         <slot></slot>
       </div>
     `;
+    const popoverEl = this.shadowRoot.querySelector('.popover');
+    if (!title && popoverEl) {
+      const fallback =
+        this.getAttribute('aria-label') ||
+        (role === 'tooltip' ? 'Tooltip' : 'Popover');
+      popoverEl.setAttribute('aria-label', fallback);
+    }
 
     const triggerSlot = this.shadowRoot.querySelector('slot[name="trigger"]');
     triggerSlot.addEventListener('slotchange', () => this._wireTrigger(triggerType));
     this._wireTrigger(triggerType);
   }
 
+  _ensureTriggerInteractive(trigger) {
+    const tag = trigger.tagName;
+    if (tag !== 'BUTTON' && tag !== 'A' && trigger.getAttribute('role') !== 'button') {
+      trigger.setAttribute('role', 'button');
+      if (!trigger.hasAttribute('tabindex')) trigger.setAttribute('tabindex', '0');
+    }
+  }
+
+  _onTriggerKey(e) {
+    if (e.key === 'Escape') {
+      this.close();
+      return;
+    }
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      this.toggle();
+    }
+  }
+
   _wireTrigger(triggerType) {
     const trigger = this.shadowRoot.querySelector('slot[name="trigger"]')?.assignedElements()[0];
     if (!trigger) return;
 
+    this._ensureTriggerInteractive(trigger);
     const isHover = triggerType === 'hover';
     trigger.setAttribute('aria-haspopup', isHover ? 'true' : 'dialog');
     trigger.setAttribute('aria-expanded', this.hasAttribute('open') ? 'true' : 'false');
     if (this._isDialog) {
       trigger.setAttribute('aria-controls', this._popoverId);
     }
+
+    trigger.removeEventListener('keydown', this._onTriggerKeyBound);
+    this._onTriggerKeyBound = this._onTriggerKeyBound || this._onTriggerKey.bind(this);
+    trigger.addEventListener('keydown', this._onTriggerKeyBound);
 
     if (triggerType === 'click') {
       trigger.onclick = () => this.toggle();

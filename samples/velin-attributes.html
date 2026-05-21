@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" data-velin-theme="light" data-velin-reveal-auto>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Velin attributes sample</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+</head>
+<body class="velin-container" style="padding: 2rem;">
+  <main id="main">
+    <h1 velin-reveal velin-fade>Velin HTML attributes</h1>    
+      <blockquote velin-quote velin-reveal>Declarative extensions bridge to Web Components and motion.</blockquote>    
+      <pre velin-code="html"><code>&lt;button velin-copy="npm i @birdapi/velinstyle"&gt;Copy&lt;/button&gt;</code></pre>    
+      <ul velin-stagger="80" velin-reveal>    
+        <li velin-fade>Item one</li>    
+        <li velin-fade>Item two</li>    
+        <li velin-fade>Item three</li>    
+      </ul>    
+      <p><a href="#footer" velin-scroll>Smooth scroll to footer</a></p>    
+      <footer id="footer" velin-anchor style="margin-top: 4rem; padding: 2rem; background: var(--velin-color-surface);">    
+        <p>Footer anchor target</p>    
+      </footer>    
+      <script type="module">    
+        import { bootFromDOM } from '../components/runtime/index.js';    
+        bootFromDOM(document, { attributes: true });    
+      </script>
+  </main>
+</body>
+</html>

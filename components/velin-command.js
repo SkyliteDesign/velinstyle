@@ -113,8 +113,23 @@ class VelinCommand extends HTMLElement {
     });
   }
 
+  _visibleItems() {
+    const slot = this.shadowRoot.querySelector('slot');
+    return slot?.assignedElements().filter((el) => el.tagName === 'BUTTON' && !el.hidden) || [];
+  }
+
   _onKey(e) {
     if (e.key === 'Escape') { this.close(); return; }
+    const items = this._visibleItems();
+    if (items.length && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+      e.preventDefault();
+      const idx = items.indexOf(document.activeElement);
+      const next = e.key === 'ArrowDown'
+        ? items[(idx + 1) % items.length]
+        : items[(idx <= 0 ? items.length : idx) - 1];
+      next?.focus();
+      return;
+    }
     trapFocus(this.shadowRoot, e);
   }
 

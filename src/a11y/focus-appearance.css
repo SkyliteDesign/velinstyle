@@ -1,0 +1,20 @@
+/* WCAG 2.2 — focus appearance (2.4.13 AAA) */
+@layer a11y {
+  :root {
+    --velin-focus-ring-width: 3px;
+    --velin-focus-ring-offset: 2px;
+    --velin-focus-ring-color: var(--velin-color-focus, oklch(0.55 0.2 264));
+  }
+
+  :where(
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    [tabindex]:not([tabindex="-1"]):focus-visible
+  ) {
+    outline: var(--velin-focus-ring-width) solid var(--velin-focus-ring-color);
+    outline-offset: var(--velin-focus-ring-offset);
+  }
+}

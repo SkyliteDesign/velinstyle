@@ -129,24 +129,24 @@ class VelinThemeToggle extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <style>${styles}</style>
       <div class="group" part="group">
-        <button class="toggle" part="button" aria-label="Toggle dark mode">
-          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <button class="toggle" part="button" aria-label="Toggle dark mode" aria-pressed="false">
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">
             <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
             <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
             <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
           </svg>
-          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">
             <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
           </svg>
         </button>
         <button class="picker" part="picker" aria-label="Choose theme" aria-haspopup="menu" aria-expanded="false">
-          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
         </button>
       </div>
-      <ul class="menu" role="menu" hidden></ul>
+      <ul class="menu" role="menu" aria-label="Theme selection" hidden></ul>
     `;
 
     this._target = document.querySelector(this.getAttribute('target') || 'html');
@@ -157,6 +157,7 @@ class VelinThemeToggle extends HTMLElement {
 
     this._renderMenu();
     this._initPreference();
+    this._syncTogglePressed();
 
     this._toggleBtn.addEventListener('click', () => this._toggleDarkMode());
     this._pickerBtn.addEventListener('click', (e) => {
@@ -298,10 +299,16 @@ class VelinThemeToggle extends HTMLElement {
     }));
   }
 
+  _syncTogglePressed() {
+    const dark = this._currentSlug() === 'dark';
+    this._toggleBtn?.setAttribute('aria-pressed', dark ? 'true' : 'false');
+  }
+
   _toggleDarkMode() {
     const current = this._currentSlug();
     const next = current === 'dark' ? '' : 'dark';
     this._applyTheme(next, { persist: true });
+    this._syncTogglePressed();
   }
 }
 

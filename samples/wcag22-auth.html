@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WCAG 2.2 auth sample</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+</head>
+<body>
+  <main id="main" class="velin-container velin-py-8">
+    <form class="velin-auth-form" aria-labelledby="login-title" novalidate>
+      <h1 id="login-title">Sign in</h1>
+      <div class="velin-field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" class="velin-input" autocomplete="username" required aria-describedby="email-help">
+        <p class="velin-field-help" id="email-help">Use your work email.</p>
+      </div>
+      <div class="velin-field">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" class="velin-input" autocomplete="current-password" required aria-describedby="pw-help">
+        <p class="velin-field-help" id="pw-help">At least 12 characters.</p>
+      </div>
+      <button type="submit" class="velin-btn velin-btn--primary">Sign in</button>
+    </form>
+  </main>
+</body>
+</html>

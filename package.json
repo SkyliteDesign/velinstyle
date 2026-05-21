@@ -1,15 +1,34 @@
 {
   "name": "@birdapi/velinstyle",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
-  "types": "dist/velinstyle-components.d.ts",
-  "description": "WCAG-first CSS + Web Components: OKLCH themes, container queries, 35+ components—lean bundles, optional CLI. Ship inclusive UI faster.",
+  "types": "dist/velinstyle.d.ts",
+  "sideEffects": [
+    "components/index.js",
+    "components/velin-*.js"
+  ],
+  "description": "WCAG 2.2 AAA CSS + Web Components: OKLCH themes, PII scanner, perf CLI, runtime tree-shaking. Ship inclusive UI faster.",
   "type": "module",
   "main": "dist/velinstyle.css",
   "module": "dist/velinstyle-components.js",
+  "exports": {
+    ".": "./components/runtime-entry.js",
+    "./bundle": "./dist/velinstyle-components.min.js",
+    "./css": "./dist/velinstyle.min.css",
+    "./sanitize": "./components/sanitize.js",
+    "./runtime": "./components/runtime/index.js",
+    "./secure": "./components/velin-secure-field.js",
+    "./email": "./components/velin-email.js",
+    "./search": "./core/search/index.js",
+    "./motion": "./core/motion/index.js",
+    "./attributes": "./core/attributes/index.js",
+    "./highlight": "./core/highlight/index.js",
+    "./meta": "./core/meta/index.js",
+    "./a11y": "./components/a11y-entry.js"
+  },
   "bin": {
     "velinstyle": "cli/index.js"
   },
@@ -25,11 +44,16 @@
     "dist/",
     "src/",
     "components/",
+    "core/",
     "cli/",
+    "examples/search-index.schema.json",
     "icons/velin-icons.svg"
   ],
   "scripts": {
-    "build": "npm run build:css:min && npm run build:css:dev && npm run build:js:min && npm run build:js:dev && npm run build:js:iife && npm run build:themes && npm run build:icons",
+    "build": "npm run build:css:min && npm run build:css:dev && npm run build:js:min && npm run build:js:dev && npm run build:js:iife && npm run build:js:chunks && npm run build:loaders && npm run build:types && npm run build:themes && npm run build:icons",
+    "build:loaders": "node scripts/generate-component-loaders.mjs",
+    "build:types": "node scripts/generate-types.mjs",
+    "build:js:chunks": "esbuild components/runtime-entry.js --bundle --splitting --format=esm --outdir=dist/chunks --chunk-names=[name]-[hash]",
     "build:css:min": "lightningcss --bundle --minify src/velinstyle.css -o dist/velinstyle.min.css",
     "build:css:dev": "lightningcss --bundle src/velinstyle.css -o dist/velinstyle.css",
     "build:js:min": "esbuild components/index.js --bundle --minify --format=esm --outfile=dist/velinstyle-components.min.js",
@@ -42,10 +66,23 @@
     "lint": "stylelint \"src/**/*.css\"",
     "test": "vitest run",
     "test:a11y": "node tests/a11y/run.js",
+    "test:a11y:coverage": "node tests/a11y/coverage.js",
     "test:contrast": "node scripts/check-contrast.js",
     "test:security": "vitest run tests/sanitize.test.js tests/cli-security-scanner.test.js",
+    "test:perf": "vitest run tests/perf-audit.test.js",
+    "test:search:bench": "vitest run tests/search-benchmark.test.js",
+    "test:e2e": "playwright test",
+    "test:e2e:chromium": "playwright test --project=chromium",
+    "docs:patch-theme-picker": "node scripts/patch-docs-theme-picker.mjs",
+    "tokens:validate": "node cli/index.js tokens validate --input examples/tokens.sample.json",
+    "tokens:validate:full": "node cli/index.js tokens validate --input examples/tokens.full.json",
+    "docs:generate": "node cli/index.js docs generate",
+    "search:index": "node cli/index.js search index",
+    "meta:build": "node cli/index.js meta",
+    "ci:checks": "node scripts/ci-checks.mjs",
     "docs:prepare": "npm run build && node scripts/prepare-docs-pages.js",
-    "docs:sync-site": "npm run build && python ../velinstyle-site/tools/sync-0.7.0.py",
+    "docs:patch-nav": "node scripts/patch-docs-nav.js",
+    "docs:sync-site": "npm run build && npm run docs:generate && python ../velinstyle-site/tools/sync-framework-0.9.0.py && python ../velinstyle-site/tools/patch-site-a11y-aaa.py && python ../velinstyle-site/tools/patch-docs-090-final.py",
     "readme:capture": "node tools/capture-readme-demos.mjs",
     "readme:assets:webp": "node tools/readme-png-to-webp.mjs",
     "demos:sync": "node tools/sync-demos-to-repo.mjs --out showcase-demos && node tools/sync-demos-to-repo.mjs --out ../velinstyle-demos"
@@ -71,11 +108,15 @@
     "esbuild": "^0.24.0",
     "jsdom": "^26.1.0",
     "lightningcss-cli": "^1.28.0",
+    "@playwright/test": "^1.60.0",
     "playwright": "^1.60.0",
     "serve": "^14.0.0",
     "sharp": "^0.34.5",
     "stylelint": "^16.0.0",
     "stylelint-config-standard": "^36.0.0",
     "vitest": "^3.2.0"
+  },
+  "dependencies": {
+    "isomorphic-dompurify": "^3.13.0"
   }
 }

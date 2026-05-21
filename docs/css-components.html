@@ -18,6 +18,7 @@
 </head>
 <body>
   <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <header role="banner">
   <nav class="velin-nav" aria-label="Main navigation">
     <a href="index.html" class="velin-nav__brand">VelinStyle</a>
     <button type="button" class="velin-nav__toggle" data-velin-nav-toggle aria-label="Toggle menu" aria-expanded="false"
@@ -39,6 +40,7 @@
     </ul>
   </nav>
 
+  </header>
   <main id="main" class="velin-container">
     <h1 class="velin-text-4xl velin-font-bold" style="margin-block: var(--velin-space-8)">CSS Components</h1>
     <p class="velin-text-muted velin-mbe-8">Pure CSS components -- no JavaScript required. All classes use the <code>velin-</code> prefix.</p>
@@ -251,21 +253,21 @@
           <div class="velin-timeline__item">
             <div class="velin-timeline__marker"></div>
             <div class="velin-timeline__content">
-              <h4 class="velin-font-bold">v0.6.1 - Security Hardening</h4>
+              <h3 class="velin-font-bold velin-text-base">v0.6.1 - Security Hardening</h3>
               <p class="velin-text-muted velin-text-sm">XSS protection, CSP docs, security utilities.</p>
             </div>
           </div>
           <div class="velin-timeline__item">
             <div class="velin-timeline__marker"></div>
             <div class="velin-timeline__content">
-              <h4 class="velin-font-bold">v0.5.0 - The Next Level</h4>
+              <h3 class="velin-font-bold velin-text-base">v0.5.0 - The Next Level</h3>
               <p class="velin-text-muted velin-text-sm">14 new CSS/JS features, A11y fixes, CLI, 13 themes.</p>
             </div>
           </div>
           <div class="velin-timeline__item">
             <div class="velin-timeline__marker"></div>
             <div class="velin-timeline__content">
-              <h4 class="velin-font-bold">v0.4.0 - Bootstrap Level</h4>
+              <h3 class="velin-font-bold velin-text-base">v0.4.0 - Bootstrap Level</h3>
               <p class="velin-text-muted velin-text-sm">Full component library, documentation site.</p>
             </div>
           </div>
@@ -317,28 +319,15 @@
   </footer>
 
 <!-- Theme Picker Widget -->
-<div style="position:fixed;bottom:1rem;right:1rem;z-index:1050;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;" id="themePicker">
-  <div id="themePanel" style="display:none;background:var(--velin-color-surface-bright,#fff);border:1px solid var(--velin-color-border,#dee2e6);border-radius:.75rem;padding:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:20rem;">
-    <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
-    <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
+<link rel="stylesheet" href="assets/theme-picker.css">
+<div role="region" aria-label="Theme picker" class="velin-docs-theme-picker" id="themePicker">
+  <div id="themePanel" class="velin-docs-theme-panel">
+    <p class="velin-docs-theme-panel__title">Theme waehlen</p>
+    <div class="velin-docs-theme-grid" id="themeGrid"></div>
   </div>
-  <button type="button" data-velin-theme-toggle  style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+  <button type="button" class="velin-docs-theme-trigger" aria-label="Theme waehlen" aria-expanded="false" aria-controls="themePanel">&#127912; Theme</button>
 </div>
-<script>
-(function(){
-  var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
-  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='dist/themes/'+t+'.min.css';document.head.appendChild(l);});
-  var names=['Default'].concat(themes).concat(['dark']);
-  var vals=[''].concat(themes).concat(['dark']);
-  var grid=document.getElementById('themeGrid');
-  names.forEach(function(n,i){
-    var b=document.createElement('button');b.textContent=n.charAt(0).toUpperCase()+n.slice(1);
-    b.style.cssText='padding:.3rem .65rem;border:1px solid var(--velin-color-border,#dee2e6);border-radius:1rem;background:var(--velin-color-surface-dim,#f5f6f8);color:var(--velin-color-text,#212529);font-size:.75rem;cursor:pointer;white-space:nowrap;';
-    b.addEventListener('click',function(){if(vals[i]){document.documentElement.setAttribute('data-velin-theme',vals[i]);}else{document.documentElement.removeAttribute('data-velin-theme');}grid.querySelectorAll('button').forEach(function(x){x.style.background='var(--velin-color-surface-dim,#f5f6f8)';x.style.color='var(--velin-color-text,#212529)';});b.style.background='var(--velin-color-primary,#2563eb)';b.style.color='#fff';});
-    grid.appendChild(b);
-  });
-})();
-</script>
+<script src="assets/theme-picker.js" defer></script>
 <script src="assets/docs-a11y.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,72 @@
+/* Docs site theme picker — no inline styles (scanner-friendly) */
+.velin-docs-theme-picker {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.velin-docs-theme-panel {
+  display: none;
+  background: var(--velin-color-surface-bright, #fff);
+  border: 1px solid var(--velin-color-border, #dee2e6);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  max-width: 20rem;
+}
+
+.velin-docs-theme-panel[data-open] {
+  display: block;
+}
+
+.velin-docs-theme-panel__title {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--velin-color-text-muted, #6c757d);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.velin-docs-theme-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.velin-docs-theme-chip {
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--velin-color-border, #dee2e6);
+  border-radius: 1rem;
+  background: var(--velin-color-surface-dim, #f5f6f8);
+  color: var(--velin-color-text, #212529);
+  font-size: 0.75rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.velin-docs-theme-chip[data-active] {
+  background: var(--velin-color-primary, #2563eb);
+  color: var(--velin-color-on-primary, #fff);
+  border-color: var(--velin-color-primary, #2563eb);
+}
+
+.velin-docs-theme-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: var(--velin-color-primary, #2563eb);
+  color: var(--velin-color-on-primary, #fff);
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}

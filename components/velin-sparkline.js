@@ -120,7 +120,6 @@ class VelinSparkline extends HTMLElement {
     const wantsArea = this.hasAttribute('area') && this.getAttribute('area') !== 'false';
     const wantsGlow = this.hasAttribute('glow') && this.getAttribute('glow') !== 'false';
     const animate = (this.getAttribute('animate') || 'draw').toLowerCase();
-    const label = this.getAttribute('label');
 
     const points = buildPoints(values, w, h, min, max);
     const linePath = pointsToPath(points);
@@ -133,12 +132,7 @@ class VelinSparkline extends HTMLElement {
     svg.style.display = 'block';
     svg.style.width = '100%';
     svg.style.height = '100%';
-    if (label) {
-      svg.setAttribute('role', 'img');
-      svg.setAttribute('aria-label', label);
-    } else {
-      svg.setAttribute('aria-hidden', 'true');
-    }
+    this._applyA11y(svg);
 
     if (wantsArea) {
       const defs = document.createElementNS(NS, 'defs');
@@ -197,6 +191,32 @@ class VelinSparkline extends HTMLElement {
       void this.offsetWidth;
       this.classList.add('velin-spark-tick');
     }
+  }
+
+  _applyA11y(svg) {
+    const label = (this.getAttribute('label') || this.getAttribute('aria-label') || '').trim();
+    if (label) {
+      svg.setAttribute('role', 'img');
+      svg.setAttribute('aria-label', label);
+      svg.removeAttribute('aria-hidden');
+      svg.removeAttribute('aria-labelledby');
+      return;
+    }
+    const cap = this.closest('figure')?.querySelector('figcaption');
+    const capText = cap?.textContent?.trim();
+    if (capText) {
+      if (!cap.id) cap.id = `velin-sparkline-cap-${Math.random().toString(36).slice(2, 9)}`;
+      svg.setAttribute('role', 'img');
+      svg.setAttribute('aria-labelledby', cap.id);
+      svg.removeAttribute('aria-hidden');
+      svg.removeAttribute('aria-label');
+      return;
+    }
+    svg.setAttribute('role', 'presentation');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
+    svg.removeAttribute('aria-label');
+    svg.removeAttribute('aria-labelledby');
   }
 }
 

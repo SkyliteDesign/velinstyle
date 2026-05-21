@@ -13,7 +13,7 @@
   }
 
   /* Allow element to become visible on focus (e.g. skip links) */
-  .velin-sr-only--focusable:focus,
+  .velin-sr-only--focusable:focus-visible,
   .velin-sr-only--focusable:active {
     position: static;
     width: auto;

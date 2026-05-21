@@ -1,0 +1,97 @@
+{
+  "version": "0.9.0",
+  "commands": [
+    {
+      "name": "init",
+      "summary": "Create velinstyle.config.js",
+      "flags": [],
+      "example": "velinstyle init"
+    },
+    {
+      "name": "build",
+      "summary": "Build custom CSS with selected layers from config",
+      "flags": [],
+      "example": "velinstyle build"
+    },
+    {
+      "name": "themes",
+      "summary": "List available built-in themes",
+      "flags": [],
+      "example": "velinstyle themes"
+    },
+    {
+      "name": "add",
+      "summary": "Add a single component CSS file to your project",
+      "flags": [],
+      "example": "velinstyle add button"
+    },
+    {
+      "name": "icons",
+      "summary": "Manage icon providers (list, add, remove, build)",
+      "flags": ["--icons", "--variant"],
+      "subcommands": ["list", "add", "remove", "build"],
+      "example": "velinstyle icons add lucide --icons menu,search"
+    },
+    {
+      "name": "scan",
+      "summary": "Security, accessibility, CSS, and PII scanner",
+      "flags": ["--format", "--severity", "--only", "--fix", "--fix-dry-run", "--fix-lang"],
+      "example": "velinstyle scan . --only pii --fix-dry-run"
+    },
+    {
+      "name": "prefix",
+      "summary": "Add missing velin- prefix to classes (dry-run; use --write)",
+      "flags": ["--write", "--map", "--bootstrap-display"],
+      "example": "velinstyle prefix src/ --write"
+    },
+    {
+      "name": "blueprint",
+      "summary": "Print HTML blueprint snippets",
+      "flags": ["--output", "-o"],
+      "subcommands": ["list"],
+      "example": "velinstyle blueprint modal -o snippet.html"
+    },
+    {
+      "name": "scaffold",
+      "summary": "Generate layout HTML from natural language prompt",
+      "flags": ["--output", "-o", "--json"],
+      "subcommands": ["list-intents"],
+      "example": "velinstyle scaffold \"dashboard with sidebar\""
+    },
+    {
+      "name": "layout",
+      "summary": "Responsive layout audit (flex, grid, viewport)",
+      "flags": ["--json", "--write", "--dry-run"],
+      "subcommands": ["audit", "suggest", "fix"],
+      "example": "velinstyle layout suggest index.html"
+    },
+    {
+      "name": "perf",
+      "summary": "Performance audit for images and scripts",
+      "flags": ["--json", "--write", "--dry-run"],
+      "subcommands": ["audit", "suggest", "fix"],
+      "example": "velinstyle perf audit samples/"
+    },
+    {
+      "name": "tokens",
+      "summary": "Build or validate design tokens JSON",
+      "flags": ["--input", "--output", "-o"],
+      "subcommands": ["build", "validate"],
+      "example": "velinstyle tokens validate --input examples/tokens.full.json"
+    },
+    {
+      "name": "docs",
+      "summary": "Generate developer reference Markdown",
+      "flags": ["--scope", "--out"],
+      "subcommands": ["generate"],
+      "example": "velinstyle docs generate --scope all"
+    },
+    {
+      "name": "meta",
+      "summary": "Build Velin-Meta agent bundle (velin-agent.json, llms.txt)",
+      "flags": ["--out", "--llms-out", "--base-url", "--no-llms"],
+      "subcommands": ["page"],
+      "example": "velinstyle meta"
+    }
+  ]
+}

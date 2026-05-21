@@ -69,6 +69,10 @@ class VelinDialog extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot.innerHTML = `<style>${styles}</style><dialog part="dialog"></dialog>`;
+    const dialog = this.shadowRoot.querySelector('dialog');
+    if (dialog) {
+      dialog.setAttribute('aria-label', this.getAttribute('aria-label') || 'Dialog');
+    }
   }
 
   alert(message, { title = 'Alert', confirmText = 'OK' } = {}) {
@@ -102,11 +106,15 @@ class VelinDialog extends HTMLElement {
       ? `<input class="input" placeholder="${safePlaceholder}" value="${safeDefault}" part="input">`
       : '';
 
+    const titleId = `velin-dialog-title-${Math.random().toString(36).slice(2, 9)}`;
     dialog.innerHTML = `
-      <div class="header"><h3 class="title">${safeTitle}</h3><button class="close" aria-label="Close">&times;</button></div>
+      <div class="header"><h3 class="title" id="${titleId}">${safeTitle}</h3><button class="close" aria-label="Close">&times;</button></div>
       <div class="body"><p>${safeMsg}</p>${input}</div>
       <div class="footer">${footerBtns}</div>
     `;
+    dialog.setAttribute('aria-modal', 'true');
+    dialog.removeAttribute('aria-label');
+    dialog.setAttribute('aria-labelledby', titleId);
 
     dialog.showModal();
     if (type !== 'prompt') {

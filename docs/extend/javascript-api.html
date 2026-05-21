@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript runtime API - VelinStyle</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <main id="main" class="velin-container velin-py-8">
+    <h1 class="velin-text-3xl velin-font-bold">JavaScript runtime API <span class="velin-badge velin-badge--primary">0.9.0</span></h1>
+    <p class="velin-text-muted velin-mbe-6">Tree-shakeable runtime with lazy Web Components, core modules, and TypeScript types.</p>
+    <pre class="velin-code">import { register, lazyDefine, bootFromDOM } from '@birdapi/velinstyle';
+
+await register(['velin-modal', 'velin-search']);
+await bootFromDOM(document, { attributes: true, highlight: true });
+// Full bundle: import '@birdapi/velinstyle/bundle';</pre>
+    <p>Subpaths: <code>@birdapi/velinstyle/sanitize</code>, <code>/search</code>, <code>/motion</code>, <code>/attributes</code>, <code>/highlight</code>. Types: <code>dist/velinstyle.d.ts</code>.</p>
+    <h2 class="velin-text-xl velin-font-bold velin-mbs-4">VelinSearch</h2>
+    <pre class="velin-code">import { createSearch } from '@birdapi/velinstyle/search';
+const search = createSearch({ worker: true });
+await search.loadIndex('/search-index.json');
+const { results } = await search.query('modal', { fuzzy: 0.2 });</pre>
+    <h2 class="velin-text-xl velin-font-bold velin-mbs-4">Motion &amp; attributes</h2>
+    <pre class="velin-code">import { initMotion } from '@birdapi/velinstyle/motion';
+
+await bootFromDOM(document, { attributes: true });
+initMotion();</pre>
+  </main>
+  <footer class="velin-container velin-py-4 velin-text-sm velin-text-muted">VelinStyle v0.9.0</footer>
+  <script src="../assets/docs-a11y.js" defer></script>
+</body>
+</html>

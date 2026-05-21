@@ -85,22 +85,59 @@ export function restoreFocus(element) {
   }
 }
 
-let _inertSiblings = [];
+/** @type {{ host: HTMLElement, siblings: Set<Element> }[]} */
+const _inertStack = [];
+let _overflowDepth = 0;
+let _savedOverflow = '';
 
-export function setBackgroundInert(except) {
-  _inertSiblings = [];
-  for (const child of document.body.children) {
-    if (child === except || child.contains(except)) continue;
-    if (!child.hasAttribute('inert')) {
-      child.setAttribute('inert', '');
-      _inertSiblings.push(child);
-    }
+function activeInertElements() {
+  const out = new Set();
+  for (const layer of _inertStack) {
+    for (const el of layer.siblings) out.add(el);
   }
+  return out;
 }
 
-export function clearBackgroundInert() {
-  for (const el of _inertSiblings) {
-    el.removeAttribute('inert');
+export function setBackgroundInert(except) {
+  const host = except instanceof HTMLElement ? except : null;
+  if (!host) return;
+
+  const siblings = new Set();
+  for (const child of document.body.children) {
+    if (child === host || child.contains(host)) continue;
+    if (!child.hasAttribute('inert')) {
+      child.setAttribute('inert', '');
+      siblings.add(child);
+    }
   }
-  _inertSiblings = [];
+
+  _inertStack.push({ host, siblings });
+
+  if (_overflowDepth === 0) {
+    _savedOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+  }
+  _overflowDepth += 1;
+}
+
+export function clearBackgroundInert(except) {
+  let idx = -1;
+  if (except instanceof HTMLElement) {
+    idx = _inertStack.findLastIndex((layer) => layer.host === except);
+  } else if (_inertStack.length) {
+    idx = _inertStack.length - 1;
+  }
+  if (idx === -1) return;
+
+  const { siblings } = _inertStack.splice(idx, 1)[0];
+  const stillNeeded = activeInertElements();
+  for (const el of siblings) {
+    if (!stillNeeded.has(el)) el.removeAttribute('inert');
+  }
+
+  _overflowDepth = Math.max(0, _overflowDepth - 1);
+  if (_overflowDepth === 0) {
+    document.body.style.overflow = _savedOverflow;
+    _savedOverflow = '';
+  }
 }

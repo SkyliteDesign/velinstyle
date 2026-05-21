@@ -20,6 +20,7 @@
 </head>
 <body>
   <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <header role="banner">
   <nav class="velin-nav" aria-label="Main navigation">
     <a href="index.html" class="velin-nav__brand">VelinStyle</a>
     <button type="button" class="velin-nav__toggle" data-velin-nav-toggle aria-label="Toggle menu" aria-expanded="false"
@@ -42,6 +43,7 @@
     </ul>
   </nav>
 
+  </header>
   <main id="main" class="velin-container">
     <h1 class="velin-text-4xl velin-font-bold" style="margin-block: var(--velin-space-8)">Security</h1>
     <p class="velin-text-lg velin-text-muted" style="max-inline-size:60ch;margin-block-end:var(--velin-space-4)">
@@ -51,71 +53,22 @@
     <!-- ============ XSS Protection ============ -->
     <section class="section">
       <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">XSS Protection in Web Components</h2>
-      <p>All VelinStyle Web Components that render dynamic content use <code>escapeHTML()</code> internally to prevent Cross-Site Scripting (XSS) attacks.</p>
-
-      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">Protected Components</h3>
+      <p>Components that render dynamic content should use <code>escapeHTML()</code>, <code>sanitizeURL()</code>, or <code>sanitizeSearchUrl</code>. Icons use <code>sanitizeSVG()</code> (DOMPurify).</p>
+      <div class="velin-alert velin-alert--warning velin-mbe-4" role="note">
+        <strong>Demo only:</strong> <code>&lt;velin-secure-field&gt;</code> performs client-side encoding — never ship real secrets.
+      </div>
+      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">High-signal components</h3>
       <table class="sec-table">
-        <thead><tr><th>Component</th><th>Sanitized Values</th><th>Status</th></tr></thead>
+        <thead><tr><th>Component</th><th>Notes</th></tr></thead>
         <tbody>
-          <tr><td><code>&lt;velin-toast&gt;</code></td><td><code>message</code> in <code>.show()</code></td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
-          <tr><td><code>&lt;velin-dialog&gt;</code></td><td><code>message</code>, <code>title</code>, <code>confirmText</code>, <code>cancelText</code>, <code>placeholder</code>, <code>defaultValue</code></td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
-          <tr><td><code>&lt;velin-lightbox&gt;</code></td><td><code>src</code> (URL validated), <code>alt</code></td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
-          <tr><td><code>&lt;velin-countdown&gt;</code></td><td><code>label-*</code> attributes</td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
-          <tr><td><code>&lt;velin-stepper-wc&gt;</code></td><td><code>labels</code> attribute</td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
-          <tr><td><code>&lt;velin-tooltip-wc&gt;</code></td><td><code>content</code>, <code>placement</code></td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
-          <tr><td><code>&lt;velin-popover&gt;</code></td><td><code>title</code></td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
-          <tr><td><code>&lt;velin-drawer&gt;</code></td><td><code>title</code></td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
-          <tr><td><code>&lt;velin-modal&gt;</code></td><td><code>title</code></td><td><span class="security-badge security-badge--safe">Safe</span></td></tr>
+          <tr><td><code>&lt;velin-search&gt;</code></td><td>Escaped highlights; sanitized URLs</td></tr>
+          <tr><td><code>&lt;velin-icon&gt;</code></td><td>SVG sanitized</td></tr>
+          <tr><td><code>&lt;velin-email&gt;</code></td><td>Obfuscation only</td></tr>
+          <tr><td><code>&lt;velin-lightbox&gt;</code></td><td><code>sanitizeURL</code></td></tr>
+          <tr><td><code>&lt;velin-modal&gt;</code>, dialogs, toasts</td><td>Escaped dynamic text</td></tr>
         </tbody>
       </table>
-
-      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">How It Works</h3>
-      <p>VelinStyle uses a lightweight <code>escapeHTML()</code> function that converts <code>&lt;</code>, <code>&gt;</code>, <code>&amp;</code>, <code>"</code> and <code>'</code> into their HTML entity equivalents before inserting into the DOM:</p>
-      <pre class="demo-code">import { escapeHTML } from 'velinstyle/components/sanitize.js';
-
-const safe = escapeHTML(userInput);
-// "&lt;script&gt;alert('xss')&lt;/script&gt;" becomes harmless text</pre>
-
-      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">URL Validation</h3>
-      <p>The <code>sanitizeURL()</code> function validates URLs before use in <code>src</code> attributes, allowing <code>http:</code>, <code>https:</code>, <code>data:</code> (non-HTML), <code>mailto:</code>, and <code>tel:</code>. <code>javascript:</code>, <code>vbscript:</code>, and <code>data:text/html</code> are blocked.</p>
-      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">Additional helpers (0.7.5)</h3>
-      <pre class="demo-code">import {
-  escapeHTML, escapeHTMLAttribute, stripControlChars,
-  sanitizeURL, createSafeHTML, getTrustedPolicy,
-} from '@birdapi/velinstyle/components/sanitize.js';</pre>
-    </section>
-
-    <section class="section">
-      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">CLI security scanner</h2>
-      <p>Run <code>npx velinstyle scan --format json</code> on your HTML. Filter by category with <code>--only security</code>. New rules in 0.7.5 include <code>no-meta-refresh</code>, <code>no-inline-style</code>, <code>no-data-html-uri</code>, <code>dangerous-target</code>, <code>integrity-missing</code>, and <code>postmessage-wildcard</code>.</p>
-      <p>Automated tests: <code>npm run test:security</code>.</p>
-    </section>
-
-    <!-- ============ CSP ============ -->
-    <section class="section">
-      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Content Security Policy (CSP)</h2>
-      <p>VelinStyle Web Components inject <code>&lt;style&gt;</code> elements into their Shadow DOM. This requires appropriate CSP headers.</p>
-
-      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">Recommended CSP Headers</h3>
-      <pre class="demo-code">Content-Security-Policy:
-  default-src 'self';
-  style-src 'self' 'unsafe-inline';
-  script-src 'self';
-  img-src 'self' data:;</pre>
-
-      <div class="velin-alert velin-alert--warning" style="margin-block:var(--velin-space-4)">
-        <strong>Note:</strong> <code>style-src 'unsafe-inline'</code> is required because Shadow DOM components inject inline styles. This is standard practice for Web Component libraries.
-      </div>
-
-      <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">Trusted Types</h3>
-      <p>VelinStyle includes optional Trusted Types support. If your page enforces <code>require-trusted-types-for 'script'</code>, the framework provides a <code>velinstyle</code> policy:</p>
-      <pre class="demo-code">import { getTrustedPolicy } from 'velinstyle/components/sanitize.js';
-
-const policy = getTrustedPolicy();
-// Returns the TrustedTypePolicy if supported, null otherwise</pre>
-    </section>
-
-    <!-- ============ CSS Security Utilities ============ -->
+      <!-- ============ CSS Security Utilities ============ -->
     <section class="section">
       <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">CSS Security Utilities</h2>
       <p>Built-in CSS classes for common security patterns.</p>
@@ -182,6 +135,18 @@ const policy = getTrustedPolicy();
       </ol>
     </section>
 
+    <!-- ============ PII & Email (0.9.0) ============ -->
+    <section class="section">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">PII scanner &amp; email protection</h2>
+      <p>Three layers: CLI scan, display obfuscation, optional form encryption (transport helper only — TLS required).</p>
+      <pre class="demo-code">npx velinstyle scan --only pii
+npx velinstyle scan --only pii --fix</pre>
+      <h3 class="velin-text-lg velin-font-bold velin-mbs-4">Components</h3>
+      <pre class="demo-code">&lt;velin-email value="contact@domain.com" label="Show email"&gt;&lt;/velin-email&gt;
+&lt;velin-secure-field type="email" label="Email"&gt;&lt;/velin-secure-field&gt;</pre>
+      <p>Import secure field separately: <code>import '@birdapi/velinstyle/secure'</code></p>
+    </section>
+
     <!-- ============ Shadow DOM ============ -->
     <section class="section">
       <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">Shadow DOM Encapsulation</h2>
@@ -201,34 +166,21 @@ const policy = getTrustedPolicy();
 
   <footer style="padding-block:var(--velin-space-6);border-block-start:1px solid var(--velin-color-border);color:var(--velin-color-text-muted);font-size:var(--velin-text-sm);">
     <div class="velin-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--velin-space-4);">
-      <p>VelinStyle v0.8.0</p>
+      <p>VelinStyle v0.9.0</p>
       <div style="display:flex;gap:var(--velin-space-3);"><a href="https://github.com/SkyliteDesign/velinstyle">GitHub</a><a href="https://github.com/SkyliteDesign/velinstyle/blob/main/LICENSE">MIT License</a></div>
     </div>
   </footer>
 
 <!-- Theme Picker Widget -->
-<div style="position:fixed;bottom:1rem;right:1rem;z-index:1050;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;" id="themePicker">
-  <div id="themePanel" style="display:none;background:var(--velin-color-surface-bright,#fff);border:1px solid var(--velin-color-border,#dee2e6);border-radius:.75rem;padding:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:20rem;">
-    <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
-    <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
+<link rel="stylesheet" href="assets/theme-picker.css">
+<div role="region" aria-label="Theme picker" class="velin-docs-theme-picker" id="themePicker">
+  <div id="themePanel" class="velin-docs-theme-panel">
+    <p class="velin-docs-theme-panel__title">Theme waehlen</p>
+    <div class="velin-docs-theme-grid" id="themeGrid"></div>
   </div>
-  <button type="button" data-velin-theme-toggle  style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+  <button type="button" class="velin-docs-theme-trigger" aria-label="Theme waehlen" aria-expanded="false" aria-controls="themePanel">&#127912; Theme</button>
 </div>
-<script>
-(function(){
-  var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
-  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='dist/themes/'+t+'.min.css';document.head.appendChild(l);});
-  var names=['Default'].concat(themes).concat(['dark']);
-  var vals=[''].concat(themes).concat(['dark']);
-  var grid=document.getElementById('themeGrid');
-  names.forEach(function(n,i){
-    var b=document.createElement('button');b.textContent=n.charAt(0).toUpperCase()+n.slice(1);
-    b.style.cssText='padding:.3rem .65rem;border:1px solid var(--velin-color-border,#dee2e6);border-radius:1rem;background:var(--velin-color-surface-dim,#f5f6f8);color:var(--velin-color-text,#212529);font-size:.75rem;cursor:pointer;white-space:nowrap;';
-    b.addEventListener('click',function(){if(vals[i]){document.documentElement.setAttribute('data-velin-theme',vals[i]);}else{document.documentElement.removeAttribute('data-velin-theme');}grid.querySelectorAll('button').forEach(function(x){x.style.background='var(--velin-color-surface-dim,#f5f6f8)';x.style.color='var(--velin-color-text,#212529)';});b.style.background='var(--velin-color-primary,#2563eb)';b.style.color='#fff';});
-    grid.appendChild(b);
-  });
-})();
-</script>
+<script src="assets/theme-picker.js" defer></script>
 <script src="assets/docs-a11y.js" defer></script>
 </body>
 </html>

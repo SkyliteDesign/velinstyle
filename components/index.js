@@ -12,9 +12,9 @@ export { default as VelinScrollTop } from './velin-scroll-top.js';
 export { default as VelinCarousel } from './velin-carousel.js';
 export { default as VelinCollapse } from './velin-collapse.js';
 export { default as VelinScrollspy } from './velin-scrollspy.js';
-export { default as VelinTooltipWC } from './velin-tooltip-wc.js';
+export { default as VelinTooltip, VelinTooltipWC } from './velin-tooltip.js';
 export { default as VelinLightbox } from './velin-lightbox.js';
-export { default as VelinStepperWC } from './velin-stepper-wc.js';
+export { default as VelinStepper, VelinStepperWC } from './velin-stepper.js';
 export { default as VelinDialog } from './velin-dialog.js';
 export { default as VelinCountdown } from './velin-countdown.js';
 export { default as VelinProgressRing } from './velin-progress-ring.js';
@@ -27,10 +27,28 @@ export { default as VelinRating } from './velin-rating.js';
 export { default as VelinMenubar } from './velin-menubar.js';
 export { default as VelinCommand } from './velin-command.js';
 export { default as VelinAnnouncer } from './velin-announcer.js';
+export { default as VelinEmail } from './velin-email.js';
+export { register, lazyDefine, whenDefined, bootFromDOM } from './runtime/index.js';
 export { default as VelinSparkline } from './velin-sparkline.js';
 export { default as VelinCounter } from './velin-counter.js';
 export { default as VelinLiveDot } from './velin-live-dot.js';
-export { initReveal } from './velin-reveal.js';
+export { default as VelinCodeBlock } from './velin-code-block.js';
+export { default as VelinSearch } from './velin-search.js';
+export { bindDeclarativeSearch } from './velin-search.js';
+export { initReveal, initMotion, velinMotion } from './velin-reveal.js';
+export { initA11y, announce, getAnnouncer } from './a11y-entry.js';
+export { velinSearch, createSearch, registerSearchProvider } from '../core/search/index.js';
+export { bootAttributes, registerAttribute, listRegisteredAttributes } from '../core/attributes/index.js';
+export {
+  velinSyntax,
+  highlightElement,
+  highlightAll,
+  initHighlight,
+  observeCodeBlocks,
+  registerLanguage,
+  lazyLoadLanguage,
+  renderTokens,
+} from '../core/highlight/index.js';
 export { flipReorder, filterList } from './velin-flip.js';
 export { escapeHTML, escapeHTMLAttribute, sanitizeURL, stripControlChars, createSafeHTML, getTrustedPolicy } from './sanitize.js';
 export { VelinHapticObserver, vibrate, applyHaptic, PATTERNS as HapticPatterns } from './velin-haptic.js';
@@ -41,12 +59,4 @@ import './velin-counter.js';
 import './velin-live-dot.js';
 import './velin-reveal.js';
 import './velin-flip.js';
-import { VelinHapticObserver } from './velin-haptic.js';
-if (typeof document !== 'undefined') {
-  const _hapticInit = () => { new VelinHapticObserver().start(document.body); };
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', _hapticInit);
-  } else {
-    _hapticInit();
-  }
-}
+import './velin-email.js';

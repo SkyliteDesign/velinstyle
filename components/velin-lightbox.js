@@ -1,4 +1,5 @@
-import { trapFocus } from './focus-manager.js';
+import { trapFocus, setBackgroundInert, clearBackgroundInert } from './focus-manager.js';
+import { announce } from './a11y-utils.js';
 import { escapeHTML, sanitizeURL } from './sanitize.js';
 
 const styles = `
@@ -61,7 +62,7 @@ class VelinLightbox extends HTMLElement {
         <div class="content" part="content"></div>
         <button class="nav nav--next" aria-label="Next">&#8250;</button>
         <button class="close" aria-label="Close">&times;</button>
-        <div class="counter" part="counter"></div>
+        <div class="counter" part="counter" aria-live="polite" aria-atomic="true"></div>
       </div>
     `;
 
@@ -89,6 +90,7 @@ class VelinLightbox extends HTMLElement {
     this._previousFocus = document.activeElement;
     this._index = index;
     this.setAttribute('open', '');
+    setBackgroundInert(this);
     this._render();
     document.body.style.overflow = 'hidden';
     const overlay = this.shadowRoot.querySelector('.overlay');
@@ -99,6 +101,7 @@ class VelinLightbox extends HTMLElement {
 
   close() {
     this.removeAttribute('open');
+    clearBackgroundInert();
     document.body.style.overflow = '';
     if (this._previousFocus) {
       this._previousFocus.focus();
@@ -122,7 +125,9 @@ class VelinLightbox extends HTMLElement {
       container.innerHTML = `<img src="${escapeHTML(src)}" alt="${alt}">`;
     }
     const counter = this.shadowRoot.querySelector('.counter');
-    counter.textContent = `${this._index + 1} / ${this._items.length}`;
+    const label = `${this._index + 1} / ${this._items.length}`;
+    counter.textContent = label;
+    announce(`Slide ${label}`, 'polite');
   }
 }
 

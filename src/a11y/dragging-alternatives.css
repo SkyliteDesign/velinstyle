@@ -1,0 +1,30 @@
+/* WCAG 2.2 — dragging movements alternative (2.5.7) */
+@layer a11y {
+  .velin-drag-handle {
+    cursor: grab;
+    touch-action: none;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .velin-drag-handle:active {
+    cursor: grabbing;
+  }
+
+  .velin-drag-keyboard-hint {
+    font-size: var(--velin-text-xs);
+    color: var(--velin-color-text-muted);
+    margin-block-start: var(--velin-space-1);
+  }
+
+  .velin-drag-keyboard-hint kbd {
+    font-family: var(--velin-font-mono);
+    padding: 0.1em 0.35em;
+    border-radius: var(--velin-radius-sm);
+    border: 1px solid var(--velin-color-border);
+    background: var(--velin-color-surface-dim);
+  }
+}

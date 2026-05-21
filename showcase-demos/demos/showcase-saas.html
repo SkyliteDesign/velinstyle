@@ -1,59 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-velin-reveal-auto>
 <head>
 <!-- Synced from velinstyle-site — fork: https://github.com/SkyliteDesign/velinstyle-demos -->
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SaaS landing showcase — VelinStyle</title>
-  <meta name="description" content="Marketing-style landing page: hero, social proof, features, pricing teaser, built with VelinStyle layout utilities.">
-  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle.min.css">
+  <!-- velin-seo -->
+  <link rel="canonical" href="https://velinstyle.info/demos/showcase-saas.html">
+  <meta name="description" content="VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.">
+  <link rel="alternate" type="application/vnd.velinstyle.meta+json" href="../dist/velin-agent.json" title="VelinStyle agent metadata">
+  <link rel="alternate" type="text/plain" href="../dist/llms.txt" title="VelinStyle llms.txt">
+  <script type="application/ld+json">{"@context": "https://schema.org","@type": "SoftwareApplication","name": "VelinStyle","applicationCategory": "DeveloperApplication","operatingSystem": "Web","description": "VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.","url": "https://velinstyle.info/demos/showcase-saas.html","softwareVersion": "0.9.0","license": "https://opensource.org/licenses/MIT","isAccessibleForFree": true,"publisher": {"@type": "Organization","name": "SkyliteDesign"}}</script>
+  <!-- /velin-seo -->
+  <title>SaaS landing — VelinStyle demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle.min.css">
+  <link rel="stylesheet" href="demos-shared.css">
+  <script src="../assets/js/velin-theme-init.js"></script>
+  <script>document.documentElement.setAttribute('data-velin-themes-base','../dist/themes');</script>
   <style>
     body { margin: 0; background: var(--velin-color-surface); }
-    .demo-bar {
-      background: oklch(from var(--velin-color-surface-bright) l c h / 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--velin-color-border);
-      padding: max(var(--velin-space-3), env(safe-area-inset-top)) var(--velin-space-6) var(--velin-space-3);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .mobile-menu-trigger { display: none; }
-    @media (max-width: 48rem) {
-      .demo-bar nav .desktop-only { display: none; }
-      .mobile-menu-trigger { display: inline-flex; }
-    }
-    velin-bottom-nav {
-      display: none;
-      position: fixed;
-      inset-inline: 0;
-      inset-block-end: 0;
-      z-index: 90;
-    }
-    @media (max-width: 48rem) {
-      velin-bottom-nav { display: flex; }
-      main { padding-block-end: 5rem; }
-    }
-    .demo-bar__inner {
-      max-width: 72rem;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--velin-space-3);
-    }
-    .demo-bar nav { display: flex; gap: var(--velin-space-5); align-items: center; flex-wrap: wrap; }
-    .demo-bar a { font-size: var(--velin-text-sm); font-weight: var(--velin-weight-medium); color: var(--velin-color-text-muted); text-decoration: none; }
-    .demo-bar a:hover { color: var(--velin-color-primary); }
-    .hero {
+    .saas-hero {
       padding: var(--velin-space-16) var(--velin-space-4) var(--velin-space-12);
-      background: linear-gradient(180deg, var(--velin-color-primary-subtle) 0%, var(--velin-color-surface) 55%);
+      background: linear-gradient(180deg, var(--velin-color-primary-subtle) 0%, var(--velin-color-surface) 70%);
       text-align: center;
     }
-    .hero__inner { max-width: 44rem; margin: 0 auto; }
-    .hero__eyebrow {
+    .saas-hero__inner { max-width: 46rem; margin: 0 auto; }
+    .saas-hero__eyebrow {
       display: inline-block;
       font-size: var(--velin-text-xs);
       font-weight: var(--velin-weight-bold);
@@ -62,21 +34,30 @@
       color: var(--velin-color-primary);
       margin-bottom: var(--velin-space-3);
     }
-    .hero h1 {
+    .saas-hero h1 {
       font-size: clamp(var(--velin-text-3xl), 5vw, var(--velin-text-5xl));
       font-weight: var(--velin-weight-extrabold);
       letter-spacing: var(--velin-tracking-tight);
       margin: 0 0 var(--velin-space-4);
-      line-height: var(--velin-leading-tight);
+      line-height: 1.1;
     }
-    .hero p { font-size: var(--velin-text-lg); color: var(--velin-color-text-muted); margin: 0 0 var(--velin-space-8); }
-    .hero__actions { display: flex; gap: var(--velin-space-3); justify-content: center; flex-wrap: wrap; }
-    .logos {
+    .saas-hero p { font-size: var(--velin-text-lg); color: var(--velin-color-text-muted); margin: 0 0 var(--velin-space-6); line-height: 1.55; }
+    .saas-hero__actions { display: flex; gap: var(--velin-space-3); justify-content: center; flex-wrap: wrap; margin-bottom: var(--velin-space-6); }
+    .saas-hero__stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--velin-space-6);
+      font-size: var(--velin-text-sm);
+      color: var(--velin-color-text-muted);
+    }
+    .saas-hero__stats strong { display: block; font-size: var(--velin-text-2xl); color: var(--velin-color-text); font-weight: var(--velin-weight-bold); }
+    .saas-logos {
       padding: var(--velin-space-8) var(--velin-space-4);
       border-block: 1px solid var(--velin-color-border);
       background: var(--velin-color-surface-dim);
     }
-    .logos__row {
+    .saas-logos__row {
       max-width: 56rem;
       margin: 0 auto;
       display: flex;
@@ -88,171 +69,324 @@
       color: var(--velin-color-text-muted);
       font-size: var(--velin-text-sm);
     }
-    .section { padding: var(--velin-space-12) var(--velin-space-4); max-width: 72rem; margin: 0 auto; }
-    .section__head { text-align: center; max-width: 40rem; margin: 0 auto var(--velin-space-10); }
-    .section__head h2 { font-size: var(--velin-text-3xl); margin: 0 0 var(--velin-space-2); }
-    .section__head p { margin: 0; color: var(--velin-color-text-muted); }
-    .feat-grid {
+    .saas-section { padding: var(--velin-space-12) var(--velin-space-4); max-width: 72rem; margin: 0 auto; }
+    .saas-section__head { text-align: center; max-width: 42rem; margin: 0 auto var(--velin-space-10); }
+    .saas-section__head h2 { font-size: var(--velin-text-3xl); margin: 0 0 var(--velin-space-2); }
+    .saas-section__head p { margin: 0; color: var(--velin-color-text-muted); line-height: 1.55; }
+    .saas-feat-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
-      gap: var(--velin-space-6);
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+      gap: var(--velin-space-5);
     }
-    .feat {
+    .saas-feat {
       padding: var(--velin-space-6);
       border-radius: var(--velin-radius-lg);
       border: 1px solid var(--velin-color-border);
       background: var(--velin-color-surface-bright);
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
     }
-    .feat h3 { font-size: var(--velin-text-lg); margin: 0 0 var(--velin-space-2); }
-    .feat p { margin: 0; font-size: var(--velin-text-sm); color: var(--velin-color-text-muted); }
-    .quote {
-      max-width: 48rem;
+    .saas-feat:hover {
+      border-color: oklch(from var(--velin-color-primary) l c h / 0.35);
+      box-shadow: var(--velin-shadow-md);
+    }
+    .saas-feat__icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--velin-radius-md);
+      background: var(--velin-color-primary-subtle);
+      color: var(--velin-color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--velin-space-3);
+      font-weight: var(--velin-weight-bold);
+    }
+    .saas-feat h3 { font-size: var(--velin-text-lg); margin: 0 0 var(--velin-space-2); }
+    .saas-feat p { margin: 0; font-size: var(--velin-text-sm); color: var(--velin-color-text-muted); line-height: 1.5; }
+    .saas-split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--velin-space-8);
+      align-items: center;
+    }
+    @media (min-width: 56rem) { .saas-split { grid-template-columns: 1fr 1fr; } }
+    .saas-code-preview {
+      padding: var(--velin-space-5);
+      border-radius: var(--velin-radius-lg);
+      border: 1px solid var(--velin-color-border);
+      background: var(--velin-color-surface-dim);
+    }
+    .saas-pricing {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+      gap: var(--velin-space-5);
+      max-width: 56rem;
+      margin: 0 auto;
+    }
+    .saas-plan {
+      padding: var(--velin-space-6);
+      border-radius: var(--velin-radius-xl);
+      border: 1px solid var(--velin-color-border);
+      background: var(--velin-color-surface-bright);
+      text-align: center;
+    }
+    .saas-plan--featured {
+      border-color: var(--velin-color-primary);
+      box-shadow: 0 0 0 1px var(--velin-color-primary), var(--velin-shadow-lg);
+    }
+    .saas-plan .price { font-size: var(--velin-text-4xl); font-weight: var(--velin-weight-extrabold); margin: var(--velin-space-2) 0; }
+    .saas-quote {
+      max-width: 40rem;
       margin: 0 auto;
       padding: var(--velin-space-10) var(--velin-space-6);
       text-align: center;
       font-size: var(--velin-text-xl);
       font-weight: var(--velin-weight-medium);
       line-height: var(--velin-leading-relaxed);
+      border: none;
     }
-    .quote footer { margin-top: var(--velin-space-4); font-size: var(--velin-text-sm); color: var(--velin-color-text-muted); font-weight: var(--velin-weight-normal); }
-    .pricing-teaser {
+    .saas-quote footer { margin-top: var(--velin-space-4); font-size: var(--velin-text-sm); color: var(--velin-color-text-muted); font-weight: var(--velin-weight-normal); }
+    .saas-faq { max-width: 40rem; margin: 0 auto; }
+    velin-bottom-nav { display: none; position: fixed; inset-inline: 0; inset-block-end: 0; z-index: 90; }
+    @media (max-width: 48rem) {
+      velin-bottom-nav { display: flex; }
+      main { padding-block-end: 5rem; }
+      .demo-chrome-header__nav-links { display: none; }
+      .demo-chrome-mobile-trigger { display: inline-flex; }
+    }
+    .demo-chrome-mobile-trigger { display: none; }
+    .saas-cta-band {
       margin: var(--velin-space-12) auto;
-      max-width: 28rem;
-      padding: var(--velin-space-8);
+      max-width: 72rem;
+      padding: var(--velin-space-10) var(--velin-space-6);
+      text-align: center;
       border-radius: var(--velin-radius-xl);
-      border: 2px solid var(--velin-color-primary);
-      background: var(--velin-color-surface-bright);
-      text-align: center;
+      background: linear-gradient(135deg, var(--velin-color-primary), oklch(from var(--velin-color-primary) calc(l * 0.85) c h));
+      color: var(--velin-color-on-primary, #fff);
     }
-    .pricing-teaser .price { font-size: var(--velin-text-4xl); font-weight: var(--velin-weight-extrabold); }
-    .site-footer {
-      padding: var(--velin-space-10) var(--velin-space-4);
-      border-top: 1px solid var(--velin-color-border);
-      text-align: center;
-      color: var(--velin-color-text-muted);
-      font-size: var(--velin-text-sm);
-    }
+    .saas-cta-band h2 { margin: 0 0 var(--velin-space-3); font-size: var(--velin-text-2xl); }
+    .saas-cta-band p { margin: 0 0 var(--velin-space-5); opacity: 0.9; max-width: 36rem; margin-inline: auto; }
+    .site-footer { padding: var(--velin-space-10) var(--velin-space-4); border-top: 1px solid var(--velin-color-border); text-align: center; color: var(--velin-color-text-muted); font-size: var(--velin-text-sm); }
   </style>
 </head>
-<body>
-<svg data-velin-inline-sprite="1" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><symbol id="github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-  </symbol><symbol id="home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-  <polyline points="9 22 9 12 15 12 15 22"/>
-  </symbol><symbol id="image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-  <circle cx="8.5" cy="8.5" r="1.5"/>
-  <polyline points="21 15 16 10 5 21"/>
-  </symbol><symbol id="info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="12" r="10"/>
-  <line x1="12" y1="16" x2="12" y2="12"/>
-  <line x1="12" y1="8" x2="12.01" y2="8"/>
-  </symbol><symbol id="menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <line x1="3" y1="12" x2="21" y2="12"/>
-  <line x1="3" y1="6" x2="21" y2="6"/>
-  <line x1="3" y1="18" x2="21" y2="18"/>
-  </symbol></svg>
+<body data-demo-page="showcase-saas.html">
+<svg data-velin-inline-sprite="1" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+  <symbol id="github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></symbol>
+  <symbol id="home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+  <symbol id="menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+</svg>
 
-<a href="#main" class="velin-skip-link">Skip to main content</a>
-  <header class="demo-bar">
-    <div class="demo-bar__inner">
-      <nav aria-label="Demo navigation">
-        <a href="https://velinstyle.info/" class="desktop-only">Home</a>
-        <a href="index.html" class="desktop-only">Demos</a>
-        <button type="button" class="velin-btn velin-btn--ghost velin-btn--icon mobile-menu-trigger" id="mobileMenuTrigger" aria-label="Open menu" aria-controls="mobileMenu">
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <p class="demo-chrome-promo"><strong>VelinCloud</strong> demo · Ocean theme · WCAG 2.2 AAA defaults</p>
+
+  <header class="demo-chrome-header demo-chrome-header--blur">
+    <div class="demo-chrome-header__row">
+      <a href="#main" class="demo-chrome-brand">
+        <img src="../assets/img/velinstyle-logo.svg" alt="" width="28" height="28" aria-hidden="true">
+        VelinCloud
+      </a>
+      <nav class="demo-chrome-header__nav-links" aria-label="Product" style="display:flex;gap:var(--velin-space-5);flex-wrap:wrap">
+        <a href="#features" style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);text-decoration:none;font-weight:var(--velin-weight-medium)">Features</a>
+        <a href="#pricing" style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);text-decoration:none;font-weight:var(--velin-weight-medium)">Pricing</a>
+        <a href="#faq" style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);text-decoration:none;font-weight:var(--velin-weight-medium)">FAQ</a>
+      </nav>
+      <div class="demo-chrome-header__actions">
+        <button type="button" class="velin-btn velin-btn--ghost velin-btn--icon demo-chrome-mobile-trigger" id="mobileMenuTrigger" aria-label="Open menu">
           <velin-icon name="menu" size="18"></velin-icon>
         </button>
-      </nav>
-      <velin-theme-toggle themes-base="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/themes/"></velin-theme-toggle>
+        <a href="../docs/getting-started/introduction.html" class="velin-btn velin-btn--ghost velin-btn--sm">Docs</a>
+        <button type="button" class="velin-btn velin-btn--primary velin-btn--sm" id="trialBtn">Start trial</button>
+        <velin-theme-toggle themes-base="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/themes/"></velin-theme-toggle>
+      </div>
+    </div>
+    <div class="demo-chrome-strip" aria-label="Switch demo">
+      <div class="demo-chrome-strip__inner"><div data-demo-crossnav class="demo-crossnav"></div></div>
     </div>
   </header>
+
   <velin-sheet id="mobileMenu" position="start" aria-label="Site menu">
-    <h2 slot="header" style="margin:0;font-size:var(--velin-text-lg)">VelinStyle SaaS</h2>
-    <nav aria-label="Site sections" style="display:flex;flex-direction:column;gap:var(--velin-space-2)">
-      <a href="https://velinstyle.info/">Home</a>
-      <a href="index.html">All demos</a>
+    <h2 slot="header" style="margin:0;font-size:var(--velin-text-lg)">VelinCloud</h2>
+    <nav style="display:flex;flex-direction:column;gap:var(--velin-space-2)">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
       <a href="showcase-dashboard.html">Dashboard demo</a>
-      <a href="../docs/getting-started/introduction.html">Documentation</a>
+      <a href="index.html">All demos</a>
     </nav>
   </velin-sheet>
+
   <main id="main">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero__inner">
-        <span class="hero__eyebrow">VelinStyle + Ocean theme</span>
+    <section class="saas-hero" aria-labelledby="hero-title" velin-reveal="fade">
+      <div class="saas-hero__inner">
+        <span class="saas-hero__eyebrow">VelinStyle + Ocean theme</span>
         <h1 id="hero-title">Ship accessible interfaces without the framework tax.</h1>
-        <p>OKLCH tokens, container-aware layout, and components that respect focus and screen readers—demo page only, but the stack is real.</p>
-        <div class="hero__actions">
-          <a class="velin-btn velin-btn--primary velin-btn--lg" href="../docs/getting-started/introduction.html">Read the docs</a>
+        <p>OKLCH tokens, container-aware layout, motion, and Web Components that respect focus — a fictional SaaS landing built entirely with VelinStyle primitives.</p>
+        <div class="saas-hero__actions">
+          <button type="button" class="velin-btn velin-btn--primary velin-btn--lg" id="heroTrial">Start free trial</button>
           <a class="velin-btn velin-btn--outline velin-btn--lg" href="showcase-dashboard.html">See app UI</a>
         </div>
+        <div class="saas-hero__stats">
+          <div><strong>7:1+</strong> contrast defaults</div>
+          <div><strong>38</strong> Web Components</div>
+          <div><strong>13</strong> theme presets</div>
+        </div>
       </div>
     </section>
-    <section class="logos" aria-label="Trusted by teams">
-      <div class="logos__row">
-        <span>Northwind</span>
-        <span>Acme Cloud</span>
-        <span>Studio 42</span>
-        <span>Blue Harbor</span>
+
+    <section class="saas-logos" aria-label="Trusted by teams">
+      <div class="saas-logos__row">
+        <span>Northwind</span><span>Acme Cloud</span><span>Studio 42</span><span>Blue Harbor</span><span>Helix Labs</span><span>Frame.io clone</span>
       </div>
     </section>
-    <section class="section" aria-labelledby="features-title">
-      <div class="section__head">
+
+    <section class="saas-section" id="features" aria-labelledby="features-title">
+      <div class="saas-section__head">
         <h2 id="features-title">Everything in one layer stack</h2>
-        <p>Utilities stay predictable because cascade layers keep themes and components separated.</p>
+        <p>Utilities stay predictable because cascade layers keep themes, components, and security separate.</p>
       </div>
-      <div class="feat-grid">
-        <article class="feat">
+      <div class="saas-feat-grid" velin-stagger="40">
+        <article class="saas-feat" velin-reveal="slide-up">
+          <div class="saas-feat__icon" aria-hidden="true">A11y</div>
           <h3>WCAG-first patterns</h3>
-          <p>Skip links, focus rings, and overlay behavior that default to inclusive defaults.</p>
+          <p>Skip links, focus rings, overlay inert, and announcer feedback baked into components.</p>
         </article>
-        <article class="feat">
+        <article class="saas-feat" velin-reveal="slide-up">
+          <div class="saas-feat__icon" aria-hidden="true">🎨</div>
           <h3>13 theme presets</h3>
-          <p>This page uses Ocean—swap <code>data-velin-theme</code> or load another preset CSS.</p>
+          <p>Swap <code>data-velin-theme</code> or load preset CSS — this page uses Ocean.</p>
         </article>
-        <article class="feat">
-          <h3>Web Components</h3>
-          <p>Interactive widgets complement plain CSS components when you need behavior.</p>
+        <article class="saas-feat" velin-reveal="slide-up">
+          <div class="saas-feat__icon" aria-hidden="true">⚡</div>
+          <h3>Runtime 0.9</h3>
+          <p>Motion, search, highlight, and agent metadata — <a href="showcase-runtime.html">live demo</a>.</p>
+        </article>
+        <article class="saas-feat" velin-reveal="slide-up">
+          <div class="saas-feat__icon" aria-hidden="true">CLI</div>
+          <h3>Scanner &amp; perf</h3>
+          <p><code>velinstyle scan</code>, layout audit, and PII rules for CI pipelines.</p>
+        </article>
+        <article class="saas-feat" velin-reveal="slide-up">
+          <div class="saas-feat__icon" aria-hidden="true">📱</div>
+          <h3>Mobile shell</h3>
+          <p>Bottom nav, sheets, and safe-area utilities — resize to see mobile nav below.</p>
+        </article>
+        <article class="saas-feat" velin-reveal="slide-up">
+          <div class="saas-feat__icon" aria-hidden="true">🔍</div>
+          <h3>VelinSearch</h3>
+          <p>Fuzzy offline docs search in the <a href="showcase-dashboard.html">dashboard demo</a>.</p>
         </article>
       </div>
     </section>
-    <section class="section" style="border-block: 1px solid var(--velin-color-border); background: var(--velin-color-surface-dim);">
-      <blockquote class="quote">
+
+    <section class="saas-section" style="background:var(--velin-color-surface-dim);border-block:1px solid var(--velin-color-border)">
+      <div class="saas-split">
+        <div>
+          <h2 style="margin:0 0 var(--velin-space-3);font-size:var(--velin-text-2xl)">Developers love the token pipeline</h2>
+          <p style="margin:0 0 var(--velin-space-4);color:var(--velin-color-text-muted);line-height:1.55">Design tokens compile to CSS, JSON, and agent bundles. Validate OKLCH pairs in CI with <code>npm run test:contrast</code>.</p>
+          <ul style="margin:0;padding-inline-start:var(--velin-space-5);color:var(--velin-color-text-muted);font-size:var(--velin-text-sm);line-height:1.7">
+            <li>Subpath exports for motion, search, highlight</li>
+            <li><code>velin-code-block</code> with lazy syntax highlighting</li>
+            <li>Velin-Meta for Cursor &amp; Copilot</li>
+          </ul>
+        </div>
+        <div class="saas-code-preview">
+          <velin-code-block language="html" line-numbers>&lt;link rel="stylesheet" href="dist/velinstyle.min.css"&gt;
+&lt;script src="dist/velinstyle-components.iife.js"&gt;&lt;/script&gt;
+&lt;velin-theme-toggle&gt;&lt;/velin-theme-toggle&gt;</velin-code-block>
+        </div>
+      </div>
+    </section>
+
+    <section class="saas-section" style="border-block:1px solid var(--velin-color-border)">
+      <blockquote class="saas-quote">
         “We replaced three micro-libraries with VelinStyle tokens and one bundle. Our Lighthouse accessibility score jumped on the first pass.”
-        <footer>— Lead frontend, fictional quote for demo purposes</footer>
+        <footer>— Lead frontend, fictional quote</footer>
       </blockquote>
     </section>
-    <section class="section" aria-labelledby="pricing-title">
-      <div class="pricing-teaser">
-        <h2 id="pricing-title" class="velin-h4" style="margin-top:0">Team plan</h2>
-        <p class="price">$24<span style="font-size:var(--velin-text-base);font-weight:500">/seat</span></p>
-        <p style="color:var(--velin-color-text-muted);font-size:var(--velin-text-sm)">Includes CLI scanner, theme packs, and priority examples.</p>
-        <div style="margin-top:var(--velin-space-6)">
-          <button type="button" class="velin-btn velin-btn--primary velin-btn--block">Start trial</button>
-        </div>
+
+    <section class="saas-section" id="pricing" aria-labelledby="pricing-title">
+      <div class="saas-section__head">
+        <h2 id="pricing-title">Simple pricing</h2>
+        <p>Demo plans — buttons show toast feedback only.</p>
+      </div>
+      <div class="saas-pricing">
+        <article class="saas-plan">
+          <h3 style="margin:0">Starter</h3>
+          <p class="price">$0</p>
+          <p style="color:var(--velin-color-text-muted);font-size:var(--velin-text-sm)">Open source MIT</p>
+          <button type="button" class="velin-btn velin-btn--outline velin-btn--block velin-mbs-4" data-plan="Starter">Get started</button>
+        </article>
+        <article class="saas-plan saas-plan--featured">
+          <span class="velin-badge velin-badge--primary">Popular</span>
+          <h3 style="margin:var(--velin-space-2) 0 0">Team</h3>
+          <p class="price">$24<span style="font-size:var(--velin-text-base);font-weight:500">/seat</span></p>
+          <p style="color:var(--velin-color-text-muted);font-size:var(--velin-text-sm)">Scanner, themes, CLI layout</p>
+          <button type="button" class="velin-btn velin-btn--primary velin-btn--block velin-mbs-4" data-plan="Team">Start trial</button>
+        </article>
+        <article class="saas-plan">
+          <h3 style="margin:0">Enterprise</h3>
+          <p class="price">Custom</p>
+          <p style="color:var(--velin-color-text-muted);font-size:var(--velin-text-sm)">SSO, audit, support</p>
+          <button type="button" class="velin-btn velin-btn--ghost velin-btn--block velin-mbs-4" data-plan="Enterprise">Contact sales</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="saas-section" id="faq" aria-labelledby="faq-title">
+      <div class="saas-section__head">
+        <h2 id="faq-title">FAQ</h2>
+      </div>
+      <div class="saas-faq">
+        <velin-accordion exclusive>
+          <details open>
+            <summary>Is this a real product?</summary>
+            <div style="padding:var(--velin-space-3);font-size:var(--velin-text-sm);color:var(--velin-color-text-muted)">No — VelinCloud is a marketing demo for VelinStyle. VelinStyle itself is a real MIT framework.</div>
+          </details>
+          <details>
+            <summary>Can I use my own theme?</summary>
+            <div style="padding:var(--velin-space-3);font-size:var(--velin-text-sm);color:var(--velin-color-text-muted)">Yes. Load any preset from <code>dist/themes/</code> or override tokens in your CSS.</div>
+          </details>
+          <details>
+            <summary>Does it work without React?</summary>
+            <div style="padding:var(--velin-space-3);font-size:var(--velin-text-sm);color:var(--velin-color-text-muted)">Yes. These demos are plain HTML. React wrappers ship in the package for Vite starters.</div>
+          </details>
+        </velin-accordion>
+      </div>
+    </section>
+
+    <section class="saas-cta-band" aria-labelledby="cta-title">
+      <h2 id="cta-title">Ready to try VelinStyle?</h2>
+      <p>Explore the dashboard, e-commerce, and runtime demos — all built with the same token stack.</p>
+      <div style="display:flex;gap:var(--velin-space-3);justify-content:center;flex-wrap:wrap">
+        <a href="index.html" class="velin-btn velin-btn--secondary velin-btn--lg" style="background:#fff;color:var(--velin-color-primary)">All demos</a>
+        <a href="../docs/getting-started/introduction.html" class="velin-btn velin-btn--outline velin-btn--lg" style="border-color:#fff;color:#fff">Read docs</a>
       </div>
     </section>
   </main>
-  <velin-bottom-nav aria-label="Mobile primary nav" current="home">
-    <a href="https://velinstyle.info/" data-nav="home"><velin-icon name="home" size="22"></velin-icon><span>Home</span></a>
-    <a href="index.html" data-nav="demos"><velin-icon name="image" size="22"></velin-icon><span>Demos</span></a>
-    <a href="../docs/getting-started/introduction.html" data-nav="docs"><velin-icon name="info" size="22"></velin-icon><span>Docs</span></a>
+
+  <velin-bottom-nav aria-label="Mobile" current="home">
+    <a href="#main" data-nav="home"><velin-icon name="home" size="22"></velin-icon><span>Home</span></a>
+    <a href="index.html" data-nav="demos"><velin-icon name="menu" size="22"></velin-icon><span>Demos</span></a>
+    <a href="#pricing" data-nav="pricing"><span style="font-size:1.25rem">€</span><span>Pricing</span></a>
     <a href="https://github.com/SkyliteDesign/velinstyle" data-nav="github"><velin-icon name="github" size="22"></velin-icon><span>GitHub</span></a>
   </velin-bottom-nav>
+
   <footer class="site-footer">
-    <p>VelinStyle SaaS demo · <a href="index.html">More demos</a> · MIT License</p>
+    <p>VelinCloud SaaS demo · <a href="index.html">More demos</a> · MIT License</p>
   </footer>
-  <script src="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle-components.iife.js"></script>
+
+  <velin-toast id="saasToast"></velin-toast>
+  <script src="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle-components.iife.js"></script>
+  <script src="demos-shared.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      const toast = document.getElementById('saasToast');
+      const show = (msg) => toast?.show?.({ message: msg, type: 'success' });
+      document.querySelectorAll('[data-plan], #trialBtn, #heroTrial').forEach((el) => {
+        el.addEventListener('click', () => show((el.getAttribute('data-plan') || 'Trial') + ' selected (demo)'));
+      });
       const trigger = document.getElementById('mobileMenuTrigger');
       const sheet = document.getElementById('mobileMenu');
-      if (trigger && sheet) {
-        trigger.addEventListener('click', () => {
-          if (typeof sheet.show === 'function') sheet.show();
-          else sheet.setAttribute('open', '');
-        });
-      }
+      trigger?.addEventListener('click', () => { if (sheet?.show) sheet.show(); else sheet?.setAttribute('open',''); });
     });
   </script>
 </body>

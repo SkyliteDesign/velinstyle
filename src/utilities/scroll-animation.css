@@ -74,6 +74,40 @@
     to { transform: translateY(5%); }
   }
 
+  /* JS motion runtime (initMotion) — IntersectionObserver + .velin-in-view */
+  @supports not (animation-timeline: view()) {
+    .velin-animate-on-scroll:not(.velin-in-view) {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+    .velin-animate-on-scroll--fade:not(.velin-in-view) {
+      opacity: 0;
+      transform: none;
+    }
+    .velin-animate-on-scroll--slide-up:not(.velin-in-view) {
+      opacity: 0;
+      transform: translateY(2rem);
+    }
+    .velin-animate-on-scroll--scale:not(.velin-in-view) {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+    .velin-animate-on-scroll.velin-in-view,
+    .velin-animate-on-scroll--fade.velin-in-view,
+    .velin-animate-on-scroll--slide-up.velin-in-view,
+    .velin-animate-on-scroll--scale.velin-in-view {
+      opacity: 1;
+      transform: none;
+      transition:
+        opacity var(--velin-duration-normal, 400ms) var(--velin-ease-out, ease-out),
+        transform var(--velin-duration-normal, 400ms) var(--velin-ease-out, ease-out);
+    }
+  }
+
+  .velin-stagger-item {
+    transition-delay: var(--velin-stagger-delay, 0ms);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .velin-animate-on-scroll,
     .velin-animate-on-scroll--fade,

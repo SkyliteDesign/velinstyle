@@ -1,0 +1,1773 @@
+{
+  "version": 1,
+  "generatedAt": "2026-05-21T06:35:51.065Z",
+  "entries": [
+    {
+      "id": "examples:samples/a11y-patterns.html",
+      "title": "A11y patterns",
+      "excerpt": "samples/a11y-patterns.html",
+      "url": "samples/a11y-patterns.html",
+      "category": "examples",
+      "keywords": [
+        "a11y-patterns.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "examples:samples/a11y-components.html",
+      "title": "Accessibility component fixtures",
+      "excerpt": "samples/a11y-components.html",
+      "url": "samples/a11y-components.html",
+      "category": "examples",
+      "keywords": [
+        "a11y-components.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "docs:modules",
+      "title": "Accessibility CSS modules",
+      "excerpt": "Imported in @layer a11y from src/velinstyle.css.",
+      "url": "docs/generated/a11y/modules.html",
+      "category": "docs",
+      "keywords": [
+        "modules",
+        "docs",
+        "Accessibility CSS modules"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "examples:samples/settings.html",
+      "title": "Account Settings",
+      "excerpt": "samples/settings.html",
+      "url": "samples/settings.html",
+      "category": "examples",
+      "keywords": [
+        "settings.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "api:commands",
+      "title": "CLI commands",
+      "excerpt": "VelinStyle CLI v0.9.0. Run velinstyle --help for full usage.",
+      "url": "docs/generated/cli/commands.html",
+      "category": "api",
+      "keywords": [
+        "commands",
+        "api",
+        "CLI commands"
+      ],
+      "weight": 1.15
+    },
+    {
+      "id": "api:add",
+      "title": "CLI: add",
+      "excerpt": "Add a single component CSS file to your project",
+      "url": "docs/generated/cli/commands.html#add",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "add"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:blueprint",
+      "title": "CLI: blueprint",
+      "excerpt": "Print HTML blueprint snippets",
+      "url": "docs/generated/cli/commands.html#blueprint",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "blueprint"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:build",
+      "title": "CLI: build",
+      "excerpt": "Build custom CSS with selected layers from config",
+      "url": "docs/generated/cli/commands.html#build",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "build"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:docs",
+      "title": "CLI: docs",
+      "excerpt": "Generate developer reference Markdown",
+      "url": "docs/generated/cli/commands.html#docs",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "docs"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:icons",
+      "title": "CLI: icons",
+      "excerpt": "Manage icon providers (list, add, remove, build)",
+      "url": "docs/generated/cli/commands.html#icons",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "icons"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:init",
+      "title": "CLI: init",
+      "excerpt": "Create velinstyle.config.js",
+      "url": "docs/generated/cli/commands.html#init",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "init"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:layout",
+      "title": "CLI: layout",
+      "excerpt": "Responsive layout audit (flex, grid, viewport)",
+      "url": "docs/generated/cli/commands.html#layout",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "layout"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:meta",
+      "title": "CLI: meta",
+      "excerpt": "Build Velin-Meta agent bundle (velin-agent.json, llms.txt)",
+      "url": "docs/generated/cli/commands.html#meta",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "meta"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:perf",
+      "title": "CLI: perf",
+      "excerpt": "Performance audit for images and scripts",
+      "url": "docs/generated/cli/commands.html#perf",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "perf"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:prefix",
+      "title": "CLI: prefix",
+      "excerpt": "Add missing velin- prefix to classes (dry-run; use --write)",
+      "url": "docs/generated/cli/commands.html#prefix",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "prefix"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:scaffold",
+      "title": "CLI: scaffold",
+      "excerpt": "Generate layout HTML from natural language prompt",
+      "url": "docs/generated/cli/commands.html#scaffold",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "scaffold"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:scan",
+      "title": "CLI: scan",
+      "excerpt": "Security, accessibility, CSS, and PII scanner",
+      "url": "docs/generated/cli/commands.html#scan",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "scan"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:themes",
+      "title": "CLI: themes",
+      "excerpt": "List available built-in themes",
+      "url": "docs/generated/cli/commands.html#themes",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "themes"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:tokens",
+      "title": "CLI: tokens",
+      "excerpt": "Build or validate design tokens JSON",
+      "url": "docs/generated/cli/commands.html#tokens",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "tokens"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "examples:samples/signup.html",
+      "title": "Create your account",
+      "excerpt": "samples/signup.html",
+      "url": "samples/signup.html",
+      "category": "examples",
+      "keywords": [
+        "signup.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "examples:samples/dashboard.html",
+      "title": "Dashboard",
+      "excerpt": "samples/dashboard.html",
+      "url": "samples/dashboard.html",
+      "category": "examples",
+      "keywords": [
+        "dashboard.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "examples:samples/login.html",
+      "title": "Login - VelinStyle Sample",
+      "excerpt": "samples/login.html",
+      "url": "samples/login.html",
+      "category": "examples",
+      "keywords": [
+        "login.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "examples:samples/chat.html",
+      "title": "Messages - VelinStyle Sample",
+      "excerpt": "samples/chat.html",
+      "url": "samples/chat.html",
+      "category": "examples",
+      "keywords": [
+        "chat.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "examples:samples/email.html",
+      "title": "Q3 Strategy Review — Action Items",
+      "excerpt": "samples/email.html",
+      "url": "samples/email.html",
+      "category": "examples",
+      "keywords": [
+        "email.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "examples:samples/wcag22-dragging.html",
+      "title": "Reorder list (2.5.7)",
+      "excerpt": "samples/wcag22-dragging.html",
+      "url": "samples/wcag22-dragging.html",
+      "category": "examples",
+      "keywords": [
+        "wcag22-dragging.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "docs:scanner",
+      "title": "Scanner rules",
+      "excerpt": "Run velinstyle scan [path] for security, a11y, CSS, and PII checks. velinstyle perf audit for performance.",
+      "url": "docs/generated/rules/scanner.html",
+      "category": "docs",
+      "keywords": [
+        "scanner",
+        "docs",
+        "Scanner rules"
+      ],
+      "weight": 0.95
+    },
+    {
+      "id": "examples:samples/ecommerce.html",
+      "title": "ShopVelin E-Commerce - VelinStyle Sample",
+      "excerpt": "samples/ecommerce.html",
+      "url": "samples/ecommerce.html",
+      "category": "examples",
+      "keywords": [
+        "ecommerce.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "examples:samples/wcag22-auth.html",
+      "title": "Sign in",
+      "excerpt": "samples/wcag22-auth.html",
+      "url": "samples/wcag22-auth.html",
+      "category": "examples",
+      "keywords": [
+        "wcag22-auth.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "examples:samples/pricing.html",
+      "title": "Simple, transparent pricing",
+      "excerpt": "samples/pricing.html",
+      "url": "samples/pricing.html",
+      "category": "examples",
+      "keywords": [
+        "pricing.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "examples:samples/portfolio.html",
+      "title": "Studio Kante - VelinStyle Brutalist Theme Sample",
+      "excerpt": "samples/portfolio.html",
+      "url": "samples/portfolio.html",
+      "category": "examples",
+      "keywords": [
+        "portfolio.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "examples:samples/velin-code-block.html",
+      "title": "Syntax highlighting",
+      "excerpt": "samples/velin-code-block.html",
+      "url": "samples/velin-code-block.html",
+      "category": "examples",
+      "keywords": [
+        "velin-code-block.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "examples:samples/blog.html",
+      "title": "The Future of Accessible Web Design: Why Standards Matter More Than Ever",
+      "excerpt": "samples/blog.html",
+      "url": "samples/blog.html",
+      "category": "examples",
+      "keywords": [
+        "blog.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "docs:json-schema",
+      "title": "Tokens JSON schema",
+      "excerpt": "Schema file: examples/tokens.schema.json",
+      "url": "docs/generated/tokens/json-schema.html",
+      "category": "docs",
+      "keywords": [
+        "json-schema",
+        "docs",
+        "Tokens JSON schema"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:aspect-ratio",
+      "title": "Tokens: aspect-ratio",
+      "excerpt": "Source: src/tokens/aspect-ratio.css",
+      "url": "docs/generated/tokens/aspect-ratio.html",
+      "category": "docs",
+      "keywords": [
+        "aspect-ratio",
+        "docs",
+        "Tokens: aspect-ratio"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:color",
+      "title": "Tokens: color",
+      "excerpt": "Source: src/tokens/color.css",
+      "url": "docs/generated/tokens/color.html",
+      "category": "docs",
+      "keywords": [
+        "color",
+        "docs",
+        "Tokens: color"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:fonts",
+      "title": "Tokens: fonts",
+      "excerpt": "Source: src/tokens/fonts.css",
+      "url": "docs/generated/tokens/fonts.html",
+      "category": "docs",
+      "keywords": [
+        "fonts",
+        "docs",
+        "Tokens: fonts"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:motion",
+      "title": "Tokens: motion",
+      "excerpt": "Source: src/tokens/motion.css",
+      "url": "docs/generated/tokens/motion.html",
+      "category": "docs",
+      "keywords": [
+        "motion",
+        "docs",
+        "Tokens: motion"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:radius",
+      "title": "Tokens: radius",
+      "excerpt": "Source: src/tokens/radius.css",
+      "url": "docs/generated/tokens/radius.html",
+      "category": "docs",
+      "keywords": [
+        "radius",
+        "docs",
+        "Tokens: radius"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:shadow",
+      "title": "Tokens: shadow",
+      "excerpt": "Source: src/tokens/shadow.css",
+      "url": "docs/generated/tokens/shadow.html",
+      "category": "docs",
+      "keywords": [
+        "shadow",
+        "docs",
+        "Tokens: shadow"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:spacing",
+      "title": "Tokens: spacing",
+      "excerpt": "Source: src/tokens/spacing.css",
+      "url": "docs/generated/tokens/spacing.html",
+      "category": "docs",
+      "keywords": [
+        "spacing",
+        "docs",
+        "Tokens: spacing"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:typography",
+      "title": "Tokens: typography",
+      "excerpt": "Source: src/tokens/typography.css",
+      "url": "docs/generated/tokens/typography.html",
+      "category": "docs",
+      "keywords": [
+        "typography",
+        "docs",
+        "Tokens: typography"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:z-index",
+      "title": "Tokens: z-index",
+      "excerpt": "Source: src/tokens/z-index.css",
+      "url": "docs/generated/tokens/z-index.html",
+      "category": "docs",
+      "keywords": [
+        "z-index",
+        "docs",
+        "Tokens: z-index"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:anchor",
+      "title": "Utilities: anchor",
+      "excerpt": "Source: src/utilities/anchor.css",
+      "url": "docs/generated/utilities/anchor.html",
+      "category": "docs",
+      "keywords": [
+        "anchor",
+        "docs",
+        "Utilities: anchor"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:animation",
+      "title": "Utilities: animation",
+      "excerpt": "Source: src/utilities/animation.css",
+      "url": "docs/generated/utilities/animation.html",
+      "category": "docs",
+      "keywords": [
+        "animation",
+        "docs",
+        "Utilities: animation"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:border",
+      "title": "Utilities: border",
+      "excerpt": "Source: src/utilities/border.css",
+      "url": "docs/generated/utilities/border.html",
+      "category": "docs",
+      "keywords": [
+        "border",
+        "docs",
+        "Utilities: border"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:chart-animation",
+      "title": "Utilities: chart-animation",
+      "excerpt": "Source: src/utilities/chart-animation.css",
+      "url": "docs/generated/utilities/chart-animation.html",
+      "category": "docs",
+      "keywords": [
+        "chart-animation",
+        "docs",
+        "Utilities: chart-animation"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:color-mix",
+      "title": "Utilities: color-mix",
+      "excerpt": "Source: src/utilities/color-mix.css",
+      "url": "docs/generated/utilities/color-mix.html",
+      "category": "docs",
+      "keywords": [
+        "color-mix",
+        "docs",
+        "Utilities: color-mix"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:container-style",
+      "title": "Utilities: container-style",
+      "excerpt": "Source: src/utilities/container-style.css",
+      "url": "docs/generated/utilities/container-style.html",
+      "category": "docs",
+      "keywords": [
+        "container-style",
+        "docs",
+        "Utilities: container-style"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:display",
+      "title": "Utilities: display",
+      "excerpt": "Source: src/utilities/display.css",
+      "url": "docs/generated/utilities/display.html",
+      "category": "docs",
+      "keywords": [
+        "display",
+        "docs",
+        "Utilities: display"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:divide",
+      "title": "Utilities: divide",
+      "excerpt": "Source: src/utilities/divide.css",
+      "url": "docs/generated/utilities/divide.html",
+      "category": "docs",
+      "keywords": [
+        "divide",
+        "docs",
+        "Utilities: divide"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:filter",
+      "title": "Utilities: filter",
+      "excerpt": "Source: src/utilities/filter.css",
+      "url": "docs/generated/utilities/filter.html",
+      "category": "docs",
+      "keywords": [
+        "filter",
+        "docs",
+        "Utilities: filter"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:filter-effects",
+      "title": "Utilities: filter-effects",
+      "excerpt": "Source: src/utilities/filter-effects.css",
+      "url": "docs/generated/utilities/filter-effects.html",
+      "category": "docs",
+      "keywords": [
+        "filter-effects",
+        "docs",
+        "Utilities: filter-effects"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:gradient",
+      "title": "Utilities: gradient",
+      "excerpt": "Source: src/utilities/gradient.css",
+      "url": "docs/generated/utilities/gradient.html",
+      "category": "docs",
+      "keywords": [
+        "gradient",
+        "docs",
+        "Utilities: gradient"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:position",
+      "title": "Utilities: position",
+      "excerpt": "Source: src/utilities/position.css",
+      "url": "docs/generated/utilities/position.html",
+      "category": "docs",
+      "keywords": [
+        "position",
+        "docs",
+        "Utilities: position"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:print",
+      "title": "Utilities: print",
+      "excerpt": "Source: src/utilities/print.css",
+      "url": "docs/generated/utilities/print.html",
+      "category": "docs",
+      "keywords": [
+        "print",
+        "docs",
+        "Utilities: print"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:responsive",
+      "title": "Utilities: responsive",
+      "excerpt": "Source: src/utilities/responsive.css",
+      "url": "docs/generated/utilities/responsive.html",
+      "category": "docs",
+      "keywords": [
+        "responsive",
+        "docs",
+        "Utilities: responsive"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:safe-area",
+      "title": "Utilities: safe-area",
+      "excerpt": "Source: src/utilities/safe-area.css",
+      "url": "docs/generated/utilities/safe-area.html",
+      "category": "docs",
+      "keywords": [
+        "safe-area",
+        "docs",
+        "Utilities: safe-area"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:scope",
+      "title": "Utilities: scope",
+      "excerpt": "Source: src/utilities/scope.css",
+      "url": "docs/generated/utilities/scope.html",
+      "category": "docs",
+      "keywords": [
+        "scope",
+        "docs",
+        "Utilities: scope"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:scroll",
+      "title": "Utilities: scroll",
+      "excerpt": "Source: src/utilities/scroll.css",
+      "url": "docs/generated/utilities/scroll.html",
+      "category": "docs",
+      "keywords": [
+        "scroll",
+        "docs",
+        "Utilities: scroll"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:scroll-animation",
+      "title": "Utilities: scroll-animation",
+      "excerpt": "Source: src/utilities/scroll-animation.css",
+      "url": "docs/generated/utilities/scroll-animation.html",
+      "category": "docs",
+      "keywords": [
+        "scroll-animation",
+        "docs",
+        "Utilities: scroll-animation"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:sizing",
+      "title": "Utilities: sizing",
+      "excerpt": "Source: src/utilities/sizing.css",
+      "url": "docs/generated/utilities/sizing.html",
+      "category": "docs",
+      "keywords": [
+        "sizing",
+        "docs",
+        "Utilities: sizing"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:state",
+      "title": "Utilities: state",
+      "excerpt": "Source: src/utilities/state.css",
+      "url": "docs/generated/utilities/state.html",
+      "category": "docs",
+      "keywords": [
+        "state",
+        "docs",
+        "Utilities: state"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:text",
+      "title": "Utilities: text",
+      "excerpt": "Source: src/utilities/text.css",
+      "url": "docs/generated/utilities/text.html",
+      "category": "docs",
+      "keywords": [
+        "text",
+        "docs",
+        "Utilities: text"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:view-transition",
+      "title": "Utilities: view-transition",
+      "excerpt": "Source: src/utilities/view-transition.css",
+      "url": "docs/generated/utilities/view-transition.html",
+      "category": "docs",
+      "keywords": [
+        "view-transition",
+        "docs",
+        "Utilities: view-transition"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "examples:samples/velin-attributes.html",
+      "title": "Velin HTML attributes",
+      "excerpt": "samples/velin-attributes.html",
+      "url": "samples/velin-attributes.html",
+      "category": "examples",
+      "keywords": [
+        "velin-attributes.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "components:velin-accordion",
+      "title": "velin-accordion",
+      "excerpt": "Source: components/velin-accordion.js",
+      "url": "docs/generated/components/velin-accordion.html",
+      "category": "components",
+      "keywords": [
+        "velin-accordion",
+        "components",
+        "velin-accordion"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-accordion",
+      "title": "velin-accordion",
+      "excerpt": "Accordion sections (bridges to <velin-accordion>).",
+      "url": "docs/generated/attributes/velin-accordion.html",
+      "category": "docs",
+      "keywords": [
+        "velin-accordion",
+        "docs",
+        "velin-accordion"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "docs:velin-anchor",
+      "title": "velin-anchor",
+      "excerpt": "Scroll-margin for anchor targets.",
+      "url": "docs/generated/attributes/velin-anchor.html",
+      "category": "docs",
+      "keywords": [
+        "velin-anchor",
+        "docs",
+        "velin-anchor"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-announcer",
+      "title": "velin-announcer",
+      "excerpt": "Source: components/velin-announcer.js",
+      "url": "docs/generated/components/velin-announcer.html",
+      "category": "components",
+      "keywords": [
+        "velin-announcer",
+        "components",
+        "velin-announcer"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-bottom-nav",
+      "title": "velin-bottom-nav",
+      "excerpt": "Source: components/velin-bottom-nav.js",
+      "url": "docs/generated/components/velin-bottom-nav.html",
+      "category": "components",
+      "keywords": [
+        "velin-bottom-nav",
+        "components",
+        "velin-bottom-nav"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-carousel",
+      "title": "velin-carousel",
+      "excerpt": "Source: components/velin-carousel.js",
+      "url": "docs/generated/components/velin-carousel.html",
+      "category": "components",
+      "keywords": [
+        "velin-carousel",
+        "components",
+        "velin-carousel"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-code",
+      "title": "velin-code",
+      "excerpt": "Code block with copy button and VelinHighlight syntax colors (use language or velin-code=\"js\").",
+      "url": "docs/generated/attributes/velin-code.html",
+      "category": "docs",
+      "keywords": [
+        "velin-code",
+        "docs",
+        "velin-code"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-code-block",
+      "title": "velin-code-block",
+      "excerpt": "Source: components/velin-code-block.js",
+      "url": "docs/generated/components/velin-code-block.html",
+      "category": "components",
+      "keywords": [
+        "velin-code-block",
+        "components",
+        "velin-code-block"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-collapse",
+      "title": "velin-collapse",
+      "excerpt": "Source: components/velin-collapse.js",
+      "url": "docs/generated/components/velin-collapse.html",
+      "category": "components",
+      "keywords": [
+        "velin-collapse",
+        "components",
+        "velin-collapse"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-combobox",
+      "title": "velin-combobox",
+      "excerpt": "Source: components/velin-combobox.js",
+      "url": "docs/generated/components/velin-combobox.html",
+      "category": "components",
+      "keywords": [
+        "velin-combobox",
+        "components",
+        "velin-combobox"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-command",
+      "title": "velin-command",
+      "excerpt": "Source: components/velin-command.js",
+      "url": "docs/generated/components/velin-command.html",
+      "category": "components",
+      "keywords": [
+        "velin-command",
+        "components",
+        "velin-command"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-copy",
+      "title": "velin-copy",
+      "excerpt": "Source: components/velin-copy.js",
+      "url": "docs/generated/components/velin-copy.html",
+      "category": "components",
+      "keywords": [
+        "velin-copy",
+        "components",
+        "velin-copy"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-copy",
+      "title": "velin-copy",
+      "excerpt": "Copy text to clipboard (bridges to <velin-copy>).",
+      "url": "docs/generated/attributes/velin-copy.html",
+      "category": "docs",
+      "keywords": [
+        "velin-copy",
+        "docs",
+        "velin-copy"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-countdown",
+      "title": "velin-countdown",
+      "excerpt": "Source: components/velin-countdown.js",
+      "url": "docs/generated/components/velin-countdown.html",
+      "category": "components",
+      "keywords": [
+        "velin-countdown",
+        "components",
+        "velin-countdown"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-counter",
+      "title": "velin-counter",
+      "excerpt": "Source: components/velin-counter.js",
+      "url": "docs/generated/components/velin-counter.html",
+      "category": "components",
+      "keywords": [
+        "velin-counter",
+        "components",
+        "velin-counter"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-counter",
+      "title": "velin-counter",
+      "excerpt": "Animated number counter (bridges to <velin-counter>).",
+      "url": "docs/generated/attributes/velin-counter.html",
+      "category": "docs",
+      "keywords": [
+        "velin-counter",
+        "docs",
+        "velin-counter"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-dialog",
+      "title": "velin-dialog",
+      "excerpt": "Source: components/velin-dialog.js",
+      "url": "docs/generated/components/velin-dialog.html",
+      "category": "components",
+      "keywords": [
+        "velin-dialog",
+        "components",
+        "velin-dialog"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-drawer",
+      "title": "velin-drawer",
+      "excerpt": "Source: components/velin-drawer.js",
+      "url": "docs/generated/components/velin-drawer.html",
+      "category": "components",
+      "keywords": [
+        "velin-drawer",
+        "components",
+        "velin-drawer"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-dropdown",
+      "title": "velin-dropdown",
+      "excerpt": "Source: components/velin-dropdown.js",
+      "url": "docs/generated/components/velin-dropdown.html",
+      "category": "components",
+      "keywords": [
+        "velin-dropdown",
+        "components",
+        "velin-dropdown"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-email",
+      "title": "velin-email",
+      "excerpt": "Source: components/velin-email.js",
+      "url": "docs/generated/components/velin-email.html",
+      "category": "components",
+      "keywords": [
+        "velin-email",
+        "components",
+        "velin-email"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-fade",
+      "title": "velin-fade",
+      "excerpt": "Fade-in on scroll.",
+      "url": "docs/generated/attributes/velin-fade.html",
+      "category": "docs",
+      "keywords": [
+        "velin-fade",
+        "docs",
+        "velin-fade"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-flip",
+      "title": "velin-flip",
+      "excerpt": "Source: components/velin-flip.js",
+      "url": "docs/generated/components/velin-flip.html",
+      "category": "components",
+      "keywords": [
+        "velin-flip",
+        "components",
+        "velin-flip"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-grid",
+      "title": "velin-grid",
+      "excerpt": "Auto grid layout (column count).",
+      "url": "docs/generated/attributes/velin-grid.html",
+      "category": "docs",
+      "keywords": [
+        "velin-grid",
+        "docs",
+        "velin-grid"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-haptic",
+      "title": "velin-haptic",
+      "excerpt": "Source: components/velin-haptic.js",
+      "url": "docs/generated/components/velin-haptic.html",
+      "category": "components",
+      "keywords": [
+        "velin-haptic",
+        "components",
+        "velin-haptic"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-highlight",
+      "title": "velin-highlight",
+      "excerpt": "Inline text mark (not syntax highlighting — use velin-code or velinSyntax).",
+      "url": "docs/generated/attributes/velin-highlight.html",
+      "category": "docs",
+      "keywords": [
+        "velin-highlight",
+        "docs",
+        "velin-highlight"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "docs:velin-hover",
+      "title": "velin-hover",
+      "excerpt": "Hover lift/glow animation.",
+      "url": "docs/generated/attributes/velin-hover.html",
+      "category": "docs",
+      "keywords": [
+        "velin-hover",
+        "docs",
+        "velin-hover"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-icon",
+      "title": "velin-icon",
+      "excerpt": "Source: components/velin-icon.js",
+      "url": "docs/generated/components/velin-icon.html",
+      "category": "components",
+      "keywords": [
+        "velin-icon",
+        "components",
+        "velin-icon"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-lazy",
+      "title": "velin-lazy",
+      "excerpt": "Lazy-load images with optional skeleton.",
+      "url": "docs/generated/attributes/velin-lazy.html",
+      "category": "docs",
+      "keywords": [
+        "velin-lazy",
+        "docs",
+        "velin-lazy"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-lightbox",
+      "title": "velin-lightbox",
+      "excerpt": "Source: components/velin-lightbox.js",
+      "url": "docs/generated/components/velin-lightbox.html",
+      "category": "components",
+      "keywords": [
+        "velin-lightbox",
+        "components",
+        "velin-lightbox"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-live-dot",
+      "title": "velin-live-dot",
+      "excerpt": "Source: components/velin-live-dot.js",
+      "url": "docs/generated/components/velin-live-dot.html",
+      "category": "components",
+      "keywords": [
+        "velin-live-dot",
+        "components",
+        "velin-live-dot"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-loading",
+      "title": "velin-loading",
+      "excerpt": "Loading spinner state.",
+      "url": "docs/generated/attributes/velin-loading.html",
+      "category": "docs",
+      "keywords": [
+        "velin-loading",
+        "docs",
+        "velin-loading"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-menubar",
+      "title": "velin-menubar",
+      "excerpt": "Source: components/velin-menubar.js",
+      "url": "docs/generated/components/velin-menubar.html",
+      "category": "components",
+      "keywords": [
+        "velin-menubar",
+        "components",
+        "velin-menubar"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-modal",
+      "title": "velin-modal",
+      "excerpt": "Source: components/velin-modal.js",
+      "url": "docs/generated/components/velin-modal.html",
+      "category": "components",
+      "keywords": [
+        "velin-modal",
+        "components",
+        "velin-modal"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-modal",
+      "title": "velin-modal",
+      "excerpt": "Opens a modal dialog (bridges to <velin-modal>).",
+      "url": "docs/generated/attributes/velin-modal.html",
+      "category": "docs",
+      "keywords": [
+        "velin-modal",
+        "docs",
+        "velin-modal"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "docs:velin-notify",
+      "title": "velin-notify",
+      "excerpt": "Show a toast notification (bridges to <velin-toast>).",
+      "url": "docs/generated/attributes/velin-notify.html",
+      "category": "docs",
+      "keywords": [
+        "velin-notify",
+        "docs",
+        "velin-notify"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "docs:velin-parallax",
+      "title": "velin-parallax",
+      "excerpt": "Parallax background (slow optional).",
+      "url": "docs/generated/attributes/velin-parallax.html",
+      "category": "docs",
+      "keywords": [
+        "velin-parallax",
+        "docs",
+        "velin-parallax"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-persist",
+      "title": "velin-persist",
+      "excerpt": "Source: components/velin-persist.js",
+      "url": "docs/generated/components/velin-persist.html",
+      "category": "components",
+      "keywords": [
+        "velin-persist",
+        "components",
+        "velin-persist"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-popover",
+      "title": "velin-popover",
+      "excerpt": "Source: components/velin-popover.js",
+      "url": "docs/generated/components/velin-popover.html",
+      "category": "components",
+      "keywords": [
+        "velin-popover",
+        "components",
+        "velin-popover"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-progress",
+      "title": "velin-progress",
+      "excerpt": "Progress bar or ring (ring for <velin-progress-ring>).",
+      "url": "docs/generated/attributes/velin-progress.html",
+      "category": "docs",
+      "keywords": [
+        "velin-progress",
+        "docs",
+        "velin-progress"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-progress-ring",
+      "title": "velin-progress-ring",
+      "excerpt": "Source: components/velin-progress-ring.js",
+      "url": "docs/generated/components/velin-progress-ring.html",
+      "category": "components",
+      "keywords": [
+        "velin-progress-ring",
+        "components",
+        "velin-progress-ring"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-quote",
+      "title": "velin-quote",
+      "excerpt": "Styled blockquote.",
+      "url": "docs/generated/attributes/velin-quote.html",
+      "category": "docs",
+      "keywords": [
+        "velin-quote",
+        "docs",
+        "velin-quote"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-rating",
+      "title": "velin-rating",
+      "excerpt": "Source: components/velin-rating.js",
+      "url": "docs/generated/components/velin-rating.html",
+      "category": "components",
+      "keywords": [
+        "velin-rating",
+        "components",
+        "velin-rating"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-reveal",
+      "title": "velin-reveal",
+      "excerpt": "Source: components/velin-reveal.js",
+      "url": "docs/generated/components/velin-reveal.html",
+      "category": "components",
+      "keywords": [
+        "velin-reveal",
+        "components",
+        "velin-reveal"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-reveal",
+      "title": "velin-reveal",
+      "excerpt": "Reveal element when scrolled into view.",
+      "url": "docs/generated/attributes/velin-reveal.html",
+      "category": "docs",
+      "keywords": [
+        "velin-reveal",
+        "docs",
+        "velin-reveal"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "docs:velin-scale",
+      "title": "velin-scale",
+      "excerpt": "Scale-in on scroll.",
+      "url": "docs/generated/attributes/velin-scale.html",
+      "category": "docs",
+      "keywords": [
+        "velin-scale",
+        "docs",
+        "velin-scale"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "docs:velin-scroll",
+      "title": "velin-scroll",
+      "excerpt": "Smooth scroll to anchor (href=\"#id\").",
+      "url": "docs/generated/attributes/velin-scroll.html",
+      "category": "docs",
+      "keywords": [
+        "velin-scroll",
+        "docs",
+        "velin-scroll"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-scroll-top",
+      "title": "velin-scroll-top",
+      "excerpt": "Source: components/velin-scroll-top.js",
+      "url": "docs/generated/components/velin-scroll-top.html",
+      "category": "components",
+      "keywords": [
+        "velin-scroll-top",
+        "components",
+        "velin-scroll-top"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-scroll-top",
+      "title": "velin-scroll-top",
+      "excerpt": "Velin HTML attribute extension.",
+      "url": "docs/generated/attributes/velin-scroll-top.html",
+      "category": "docs",
+      "keywords": [
+        "velin-scroll-top",
+        "docs",
+        "velin-scroll-top"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-scrollspy",
+      "title": "velin-scrollspy",
+      "excerpt": "Source: components/velin-scrollspy.js",
+      "url": "docs/generated/components/velin-scrollspy.html",
+      "category": "components",
+      "keywords": [
+        "velin-scrollspy",
+        "components",
+        "velin-scrollspy"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-search",
+      "title": "velin-search",
+      "excerpt": "Source: components/velin-search.js",
+      "url": "docs/generated/components/velin-search.html",
+      "category": "components",
+      "keywords": [
+        "velin-search",
+        "components",
+        "velin-search"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-search",
+      "title": "velin-search",
+      "excerpt": "Attach VelinSearch to an element.",
+      "url": "docs/generated/attributes/velin-search.html",
+      "category": "docs",
+      "keywords": [
+        "velin-search",
+        "docs",
+        "velin-search"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-secure-field",
+      "title": "velin-secure-field",
+      "excerpt": "Source: components/velin-secure-field.js",
+      "url": "docs/generated/components/velin-secure-field.html",
+      "category": "components",
+      "keywords": [
+        "velin-secure-field",
+        "components",
+        "velin-secure-field"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-segmented-control",
+      "title": "velin-segmented-control",
+      "excerpt": "Source: components/velin-segmented-control.js",
+      "url": "docs/generated/components/velin-segmented-control.html",
+      "category": "components",
+      "keywords": [
+        "velin-segmented-control",
+        "components",
+        "velin-segmented-control"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-sheet",
+      "title": "velin-sheet",
+      "excerpt": "Source: components/velin-sheet.js",
+      "url": "docs/generated/components/velin-sheet.html",
+      "category": "components",
+      "keywords": [
+        "velin-sheet",
+        "components",
+        "velin-sheet"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-skeleton",
+      "title": "velin-skeleton",
+      "excerpt": "Skeleton placeholder (text, avatar, image, …).",
+      "url": "docs/generated/attributes/velin-skeleton.html",
+      "category": "docs",
+      "keywords": [
+        "velin-skeleton",
+        "docs",
+        "velin-skeleton"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "docs:velin-slide",
+      "title": "velin-slide",
+      "excerpt": "Slide-in on scroll (up, down, …).",
+      "url": "docs/generated/attributes/velin-slide.html",
+      "category": "docs",
+      "keywords": [
+        "velin-slide",
+        "docs",
+        "velin-slide"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-sparkline",
+      "title": "velin-sparkline",
+      "excerpt": "Source: components/velin-sparkline.js",
+      "url": "docs/generated/components/velin-sparkline.html",
+      "category": "components",
+      "keywords": [
+        "velin-sparkline",
+        "components",
+        "velin-sparkline"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-stagger",
+      "title": "velin-stagger",
+      "excerpt": "Stagger child animations (delay in ms).",
+      "url": "docs/generated/attributes/velin-stagger.html",
+      "category": "docs",
+      "keywords": [
+        "velin-stagger",
+        "docs",
+        "velin-stagger"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-stepper",
+      "title": "velin-stepper",
+      "excerpt": "Source: components/velin-stepper.js",
+      "url": "docs/generated/components/velin-stepper.html",
+      "category": "components",
+      "keywords": [
+        "velin-stepper",
+        "components",
+        "velin-stepper"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-tabs",
+      "title": "velin-tabs",
+      "excerpt": "Source: components/velin-tabs.js",
+      "url": "docs/generated/components/velin-tabs.html",
+      "category": "components",
+      "keywords": [
+        "velin-tabs",
+        "components",
+        "velin-tabs"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-tabs",
+      "title": "velin-tabs",
+      "excerpt": "Tab navigation (bridges to <velin-tabs>).",
+      "url": "docs/generated/attributes/velin-tabs.html",
+      "category": "docs",
+      "keywords": [
+        "velin-tabs",
+        "docs",
+        "velin-tabs"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "docs:velin-theme",
+      "title": "velin-theme",
+      "excerpt": "Theme toggle or set data-velin-theme.",
+      "url": "docs/generated/attributes/velin-theme.html",
+      "category": "docs",
+      "keywords": [
+        "velin-theme",
+        "docs",
+        "velin-theme"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "components:velin-theme-toggle",
+      "title": "velin-theme-toggle",
+      "excerpt": "Source: components/velin-theme-toggle.js",
+      "url": "docs/generated/components/velin-theme-toggle.html",
+      "category": "components",
+      "keywords": [
+        "velin-theme-toggle",
+        "components",
+        "velin-theme-toggle"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-toast",
+      "title": "velin-toast",
+      "excerpt": "Source: components/velin-toast.js",
+      "url": "docs/generated/components/velin-toast.html",
+      "category": "components",
+      "keywords": [
+        "velin-toast",
+        "components",
+        "velin-toast"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-tooltip",
+      "title": "velin-tooltip",
+      "excerpt": "Source: components/velin-tooltip.js",
+      "url": "docs/generated/components/velin-tooltip.html",
+      "category": "components",
+      "keywords": [
+        "velin-tooltip",
+        "components",
+        "velin-tooltip"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "docs:velin-tooltip",
+      "title": "velin-tooltip",
+      "excerpt": "Tooltip on hover/focus (bridges to <velin-tooltip>).",
+      "url": "docs/generated/attributes/velin-tooltip.html",
+      "category": "docs",
+      "keywords": [
+        "velin-tooltip",
+        "docs",
+        "velin-tooltip"
+      ],
+      "weight": 1.2
+    },
+    {
+      "id": "examples:samples/velin-search.html",
+      "title": "VelinSearch",
+      "excerpt": "samples/velin-search.html",
+      "url": "samples/velin-search.html",
+      "category": "examples",
+      "keywords": [
+        "velin-search.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "examples:samples/landing.html",
+      "title": "VelinStyle Landing Page - Sample",
+      "excerpt": "samples/landing.html",
+      "url": "samples/landing.html",
+      "category": "examples",
+      "keywords": [
+        "landing.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "examples:samples/kanban.html",
+      "title": "VelinStyle Roadmap",
+      "excerpt": "samples/kanban.html",
+      "url": "samples/kanban.html",
+      "category": "examples",
+      "keywords": [
+        "kanban.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "docs:wcag22-aaa-matrix",
+      "title": "WCAG 2.2 AAA framework matrix",
+      "excerpt": "> **Using VelinStyle does not certify your application.** This matrix tracks what the **framework** provides by default.",
+      "url": "docs/generated/a11y/wcag22-aaa-matrix.html",
+      "category": "docs",
+      "keywords": [
+        "wcag22-aaa-matrix",
+        "docs",
+        "WCAG 2.2 AAA framework matrix"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "docs:wcag22-matrix",
+      "title": "WCAG 2.2 conformance matrix (VelinStyle framework)",
+      "excerpt": "Framework helpers mapped to WCAG 2.2 success criteria. **Using VelinStyle does not certify your application.**",
+      "url": "docs/generated/a11y/wcag22-matrix.html",
+      "category": "docs",
+      "keywords": [
+        "wcag22-matrix",
+        "docs",
+        "WCAG 2.2 conformance matrix (VelinStyle framework)"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "examples:samples/rtl.html",
+      "title": "عرض اتجاه من اليمين إلى اليسار (RTL)",
+      "excerpt": "samples/rtl.html",
+      "url": "samples/rtl.html",
+      "category": "examples",
+      "keywords": [
+        "rtl.html",
+        "sample",
+        "example"
+      ],
+      "weight": 0.85
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VelinSearch - VelinStyle</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <main id="main" class="velin-container velin-py-8">
+    <h1 class="velin-text-3xl velin-font-bold">VelinSearch</h1>
+    <p class="velin-text-muted velin-mbe-6">Central framework search with fuzzy matching, keyboard navigation, and offline JSON index.</p>
+    <h2 class="velin-text-xl velin-font-bold">Web Component</h2>
+    <pre class="velin-code">&lt;velin-search index="/search-index.json" categories="docs,components,api,examples"&gt;&lt;/velin-search&gt;</pre>
+    <h2 class="velin-text-xl velin-font-bold velin-mbs-4">JavaScript API</h2>
+    <pre class="velin-code">import { velinSearch, registerSearchProvider } from '@birdapi/velinstyle/search';
+
+await velinSearch.loadIndex('/search-index.json');
+registerSearchProvider('app', () => [{ id: '1', title: 'Custom', url: '/x', category: 'examples' }]);
+const { results, groups } = await velinSearch.query('modal', { fuzzy: 0.2 });</pre>
+    <h2 class="velin-text-xl velin-font-bold velin-mbs-4">Build index</h2>
+    <pre class="velin-code">npx velinstyle search index --out dist/search-index.json
+npm run docs:generate   # also writes dist/search-index.json</pre>
+  </main>
+  <footer class="velin-container velin-py-4 velin-text-sm velin-text-muted">VelinStyle</footer>
+</body>
+</html>

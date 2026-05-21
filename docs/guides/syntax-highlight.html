@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" data-velin-themes-base="../../dist/themes">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syntax highlighting - VelinStyle</title>
+  <link rel="stylesheet" href="../../dist/velinstyle.min.css">
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <main id="main" class="velin-container velin-py-8">
+    <h1 class="velin-text-3xl velin-font-bold">VelinHighlight</h1>
+    <p class="velin-text-muted velin-mbe-6">
+      Token-based syntax highlighting without Prism or other CDN dependencies. Uses OKLCH token colors from
+      <code>highlight.css</code> and lazy-loads lexers when blocks scroll into view.
+    </p>
+
+    <h2>JavaScript API</h2>
+    <pre velin-code="js" data-velin-highlight="immediate"><code>import { velinSyntax, initHighlight } from '@birdapi/velinstyle/highlight';
+
+initHighlight(document);
+// or: velinSyntax.highlightElement(document.querySelector('pre'));</code></pre>
+
+    <h2>HTML attribute</h2>
+    <pre velin-code language="html" data-velin-highlight="immediate"><code>&lt;pre velin-code="js"&gt;const x = 42;&lt;/pre&gt;</code></pre>
+
+    <h2>Web component</h2>
+    <velin-code-block language="css" line-numbers highlight="1-2">
+.velin-btn { padding: 0.5rem 1rem; }
+.velin-btn--primary { background: var(--velin-color-primary); }
+    </velin-code-block>
+
+    <p class="velin-mbs-6">Languages: JavaScript, TypeScript, HTML, CSS, JSON, Markdown, Shell, SQL.</p>
+  </main>
+  <script type="module">
+    import { bootFromDOM } from '../../components/runtime/index.js';
+    await bootFromDOM(document, { attributes: true, highlight: true });
+  </script>
+</body>
+</html>

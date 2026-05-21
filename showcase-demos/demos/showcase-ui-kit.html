@@ -5,34 +5,21 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UI kit showcase — VelinStyle</title>
-  <meta name="description" content="VelinStyle components: buttons, badges, alerts, forms, and accordion in a single professional surface.">
-  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle.min.css">
+  <!-- velin-seo -->
+  <link rel="canonical" href="https://velinstyle.info/demos/showcase-ui-kit.html">
+  <meta name="description" content="VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.">
+  <link rel="alternate" type="application/vnd.velinstyle.meta+json" href="../dist/velin-agent.json" title="VelinStyle agent metadata">
+  <link rel="alternate" type="text/plain" href="../dist/llms.txt" title="VelinStyle llms.txt">
+  <script type="application/ld+json">{"@context": "https://schema.org","@type": "SoftwareApplication","name": "VelinStyle","applicationCategory": "DeveloperApplication","operatingSystem": "Web","description": "VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.","url": "https://velinstyle.info/demos/showcase-ui-kit.html","softwareVersion": "0.9.0","license": "https://opensource.org/licenses/MIT","isAccessibleForFree": true,"publisher": {"@type": "Organization","name": "SkyliteDesign"}}</script>
+  <!-- /velin-seo -->
+
+<title>UI kit showcase — VelinStyle</title>
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle.min.css">
+<link rel="stylesheet" href="demos-shared.css">
+  <script src="../assets/js/velin-theme-init.js"></script>
+  <script>document.documentElement.setAttribute('data-velin-themes-base','../dist/themes');</script>
   <style>
-    body { margin: 0; background: var(--velin-color-surface-dim); }
-    .demo-bar {
-      background: var(--velin-color-surface-bright);
-      border-bottom: 1px solid var(--velin-color-border);
-      padding: max(var(--velin-space-3), env(safe-area-inset-top)) var(--velin-space-6) var(--velin-space-3);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .demo-bar__inner {
-      max-width: 72rem;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--velin-space-3);
-    }
-    .demo-bar nav { display: flex; gap: var(--velin-space-4); flex-wrap: wrap; align-items: center; }
-    .demo-bar a { font-size: var(--velin-text-sm); font-weight: var(--velin-weight-medium); color: var(--velin-color-text-muted); text-decoration: none; }
-    .demo-bar a:hover { color: var(--velin-color-primary); }
-    .page { max-width: 72rem; margin: 0 auto; padding: var(--velin-space-8) var(--velin-space-4) var(--velin-space-12); }
-    .page-title { font-size: var(--velin-text-3xl); font-weight: var(--velin-weight-bold); margin: 0 0 var(--velin-space-2); }
-    .page-lead { color: var(--velin-color-text-muted); margin: 0 0 var(--velin-space-8); max-width: 52ch; }
+    body { margin: 0; background: var(--velin-color-surface-dim); --demo-bar-offset: 6.5rem; }
     .panel {
       background: var(--velin-color-surface-bright);
       border: 1px solid var(--velin-color-border);
@@ -46,27 +33,43 @@
     .muted { color: var(--velin-color-text-muted); font-size: var(--velin-text-sm); margin-block-end: var(--velin-space-2); }
   </style>
 </head>
-<body>
+<body data-demo-page="showcase-ui-kit.html">
 <svg data-velin-inline-sprite="1" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><symbol id="search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <circle cx="11" cy="11" r="8"/>
   <line x1="21" y1="21" x2="16.65" y2="16.65"/>
   </symbol></svg>
 
 <a href="#main" class="velin-skip-link">Skip to main content</a>
-  <header class="demo-bar">
-    <div class="demo-bar__inner">
-      <nav aria-label="Demo navigation">
-        <a href="https://velinstyle.info/">Home</a>
-        <a href="index.html">All demos</a>
-      </nav>
-      <velin-theme-toggle themes-base="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/themes/"></velin-theme-toggle>
+  <p class="demo-chrome-promo"><strong>Design system</strong> reference · all CSS components on one scrollable page</p>
+  <header class="demo-chrome-header">
+    <div class="demo-chrome-header__row">
+      <a href="#main" class="demo-chrome-brand">
+        <img src="../assets/img/velinstyle-logo.svg" alt="" width="28" height="28" aria-hidden="true">
+        UI kit
+      </a>
+      <div class="demo-chrome-header__actions">
+        <a href="showcase-interactive.html" class="velin-btn velin-btn--ghost velin-btn--sm">Web Components</a>
+        <velin-theme-toggle themes-base="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/themes/"></velin-theme-toggle>
+      </div>
     </div>
+    <div class="demo-chrome-strip"><div class="demo-chrome-strip__inner"><div data-demo-crossnav class="demo-crossnav"></div></div></div>
   </header>
-  <div class="velin-container page" id="main">
-    <h1 class="page-title">UI kit</h1>
-    <p class="page-lead">A compact surface that shows how VelinStyle tokens and BEM-style components read together in a real product layout.</p>
 
-    <section class="panel" aria-labelledby="actions-heading">
+  <main id="main" class="demo-layout demo-layout--toc velin-container" style="max-width:80rem;margin-inline:auto;padding-block:var(--velin-space-8)">
+    <nav class="demo-toc" data-demo-toc aria-label="Sections"></nav>
+    <div>
+    <header class="demo-intro demo-section" id="overview">
+      <h1>UI kit</h1>
+      <p class="demo-intro__lead">Buttons, forms, feedback, data display, and inputs — token-backed BEM classes you compose in product screens. Pair with the <a href="showcase-interactive.html">Interactive</a> and <a href="showcase-runtime.html">Runtime 0.9</a> demos.</p>
+      <div class="demo-features">
+        <span class="velin-badge velin-badge--primary">Actions</span>
+        <span class="velin-badge velin-badge--success">Forms</span>
+        <span class="velin-badge velin-badge--info">Data</span>
+        <span class="velin-badge velin-badge--outline">WC</span>
+      </div>
+    </header>
+
+    <section class="demo-section panel" id="actions" aria-labelledby="actions-heading">
       <h2 id="actions-heading">Actions</h2>
       <p class="muted">Button variants and sizes</p>
       <div class="row">
@@ -83,7 +86,7 @@
       </div>
     </section>
 
-    <section class="panel" aria-labelledby="badges-heading">
+    <section class="demo-section panel" id="badges" aria-labelledby="badges-heading">
       <h2 id="badges-heading">Status &amp; badges</h2>
       <div class="row">
         <span class="velin-badge velin-badge--primary">Primary</span>
@@ -95,7 +98,7 @@
       </div>
     </section>
 
-    <section class="panel" aria-labelledby="alerts-heading">
+    <section class="demo-section panel" id="alerts" aria-labelledby="alerts-heading">
       <h2 id="alerts-heading">Feedback</h2>
       <div class="stack">
         <div class="velin-alert velin-alert--success" role="status">Deployment finished — your preview is live.</div>
@@ -105,7 +108,7 @@
       </div>
     </section>
 
-    <section class="panel" aria-labelledby="forms-heading">
+    <section class="demo-section panel" id="forms" aria-labelledby="forms-heading">
       <h2 id="forms-heading">Forms</h2>
       <div class="velin-grid" style="grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: var(--velin-space-6);">
         <div>
@@ -131,32 +134,26 @@
       </div>
     </section>
 
-    <section class="panel" aria-labelledby="accordion-heading">
+    <section class="demo-section panel" id="accordion" aria-labelledby="accordion-heading">
       <h2 id="accordion-heading">Accordion</h2>
       <p class="muted">Keyboard-friendly disclosure via <code>velin-accordion</code></p>
       <velin-accordion exclusive>
         <details open>
           <summary>Design tokens</summary>
-          <div style="padding: var(--velin-space-3); color: var(--velin-color-text-muted); font-size: var(--velin-text-sm);">
-            Colors, spacing, and radii are exposed as CSS custom properties so themes and dark mode stay consistent.
-          </div>
+          <p>Colors, spacing, and radii are exposed as CSS custom properties so themes and dark mode stay consistent.</p>
         </details>
         <details>
           <summary>Container queries</summary>
-          <div style="padding: var(--velin-space-3); color: var(--velin-color-text-muted); font-size: var(--velin-text-sm);">
-            Layout utilities combine with container queries so components respond to their parent, not only the viewport.
-          </div>
+          <p>Layout utilities combine with container queries so components respond to their parent, not only the viewport.</p>
         </details>
         <details>
           <summary>Web Components</summary>
-          <div style="padding: var(--velin-space-3); color: var(--velin-color-text-muted); font-size: var(--velin-text-sm);">
-            Overlays, tabs, and inputs ship with focus management and ARIA patterns aligned to WCAG 2.2 AA goals.
-          </div>
+          <p>Overlays, tabs, and inputs ship with focus management and ARIA patterns aligned to WCAG 2.2 AAA-oriented defaults.</p>
         </details>
       </velin-accordion>
     </section>
 
-    <section class="panel" aria-labelledby="rating-heading">
+    <section class="demo-section panel" id="inputs" aria-labelledby="rating-heading">
       <h2 id="rating-heading">Rating &amp; segmented control <span class="velin-badge velin-badge--info" style="margin-inline-start:.5rem">New in 0.8.0</span></h2>
       <p class="muted">Star input and segmented toggles share theme tokens and respect <code>prefers-reduced-motion</code>.</p>
       <div class="stack">
@@ -185,7 +182,98 @@
         <option value="lit">Lit</option>
       </velin-combobox>
     </section>
-  </div>
-  <script src="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle-components.iife.js"></script>
+
+    <section class="demo-section panel" id="typography" aria-labelledby="typography-heading">
+      <h2 id="typography-heading">Typography &amp; display</h2>
+      <p class="muted">Font tokens: <code>.velin-font-display</code>, <code>.velin-tabular-nums</code>, <code>.velin-text-pretty</code></p>
+      <p class="velin-font-display" style="font-size:var(--velin-text-2xl);margin:0 0 var(--velin-space-2)">Display heading</p>
+      <p class="velin-text-pretty" style="margin:0 0 var(--velin-space-3);max-width:48ch">Pretty text wraps long lines for readability in marketing copy and docs intros.</p>
+      <p style="margin:0;font-size:var(--velin-text-xl)"><span class="velin-tabular-nums">1,284,092.40</span> EUR <span class="velin-text-muted" style="font-size:var(--velin-text-sm)">tabular nums</span></p>
+    </section>
+
+    <section class="demo-section panel" id="tables" aria-labelledby="tables-heading">
+      <h2 id="tables-heading">Data table</h2>
+      <p class="muted">Striped, hover, and responsive wrapper utilities.</p>
+      <div class="velin-table-wrapper">
+        <table class="velin-table velin-table--striped velin-table--hover">
+          <thead>
+            <tr><th scope="col">Token</th><th scope="col">Role</th><th scope="col">AAA</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>--velin-color-text</code></td><td>Body</td><td><span class="velin-badge velin-badge--success">7:1+</span></td></tr>
+            <tr><td><code>--velin-color-primary</code></td><td>Actions</td><td><span class="velin-badge velin-badge--success">7:1+</span></td></tr>
+            <tr><td><code>--velin-color-text-muted</code></td><td>Secondary</td><td><span class="velin-badge velin-badge--info">Checked</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="demo-section panel" id="cards" aria-labelledby="cards-heading">
+      <h2 id="cards-heading">Cards &amp; skeleton</h2>
+      <div class="demo-card-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:var(--velin-space-4)">
+        <article class="velin-card">
+          <div class="velin-card__body">
+            <h3 class="velin-card__title" style="margin:0 0 var(--velin-space-2)">Card title</h3>
+            <p class="velin-card__text" style="margin:0;color:var(--velin-color-text-muted);font-size:var(--velin-text-sm)">Composable surfaces for dashboards and settings.</p>
+          </div>
+        </article>
+        <article class="velin-card" aria-busy="true">
+          <div class="velin-card__body">
+            <div class="velin-skeleton velin-skeleton--text" style="width:70%"></div>
+            <div class="velin-skeleton velin-skeleton--text velin-mbs-2" style="width:100%"></div>
+            <div class="velin-skeleton velin-skeleton--text" style="width:45%"></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="demo-section panel" id="progress" aria-labelledby="progress-heading">
+      <h2 id="progress-heading">Progress &amp; loading</h2>
+      <p class="muted">Spinners and progress bars for async states.</p>
+      <div class="row" style="align-items:flex-end">
+        <div class="velin-spinner velin-spinner--primary" role="status" aria-label="Loading"></div>
+        <div style="flex:1;min-width:12rem">
+          <label class="velin-label">Upload progress</label>
+          <div class="velin-progress" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"><div class="velin-progress__bar" style="width:65%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section panel" id="nav" aria-labelledby="nav-heading">
+      <h2 id="nav-heading">Navigation patterns</h2>
+      <p class="muted">Breadcrumb and pagination utilities.</p>
+      <nav aria-label="Breadcrumb" class="velin-breadcrumb velin-breadcrumb--arrow velin-mbs-4">
+        <ol class="velin-breadcrumb__list">
+          <li class="velin-breadcrumb__item"><a class="velin-breadcrumb__link" href="index.html">Demos</a></li>
+          <li class="velin-breadcrumb__item" aria-current="page">UI kit</li>
+        </ol>
+      </nav>
+      <nav aria-label="Pagination">
+        <ul class="velin-pagination">
+          <li><button type="button" class="velin-pagination__link" disabled aria-label="Previous page">Prev</button></li>
+          <li><button type="button" class="velin-pagination__link velin-pagination__link--active" aria-current="page">1</button></li>
+          <li><button type="button" class="velin-pagination__link">2</button></li>
+          <li><button type="button" class="velin-pagination__link">3</button></li>
+          <li><button type="button" class="velin-pagination__link" aria-label="Next page">Next</button></li>
+        </ul>
+      </nav>
+    </section>
+
+    <section class="demo-section panel" id="code" aria-labelledby="code-heading">
+      <h2 id="code-heading">Code block</h2>
+      <p class="muted"><code>&lt;velin-code-block&gt;</code> with lazy highlight — see <a href="showcase-runtime.html">Runtime demo</a>.</p>
+      <velin-code-block language="html" line-numbers>&lt;button class="velin-btn velin-btn--primary"&gt;
+  Launch
+&lt;/button&gt;</velin-code-block>
+    </section>
+
+    <footer class="demo-footer">
+      <span>VelinStyle UI kit</span>
+      <span><a href="../docs/utilities.html">Utilities docs</a></span>
+    </footer>
+    </div>
+  </main>
+  <script src="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle-components.iife.js"></script>
+  <script src="demos-shared.js"></script>
 </body>
 </html>

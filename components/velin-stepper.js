@@ -49,10 +49,14 @@ const styles = `
   .panels ::slotted(*) { display: none; }
   .panels ::slotted([data-active]) { display: block; }
   @media (prefers-reduced-motion: reduce) { .step__marker { transition: none; } }
+  .velin-sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
 `;
 
-class VelinStepperWC extends HTMLElement {
-  static get observedAttributes() { return ['active']; }
+class VelinStepper extends HTMLElement {
+  static get observedAttributes() { return ['active', 'aria-label', 'labels']; }
 
   constructor() {
     super();
@@ -67,19 +71,25 @@ class VelinStepperWC extends HTMLElement {
 
   _buildSteps() {
     const labels = (this.getAttribute('labels') || '').split(',').map(s => s.trim());
+    const listLabel = this.getAttribute('aria-label') || 'Progress';
     const stepsHTML = labels.map((label, i) => {
       const state = i < this._current ? 'completed' : i === this._current ? 'active' : '';
-      const marker = i < this._current ? '&#10003;' : (i + 1);
+      const status =
+        i < this._current ? 'completed' : i === this._current ? 'current step' : 'upcoming';
+      const marker =
+        i < this._current
+          ? '<span class="velin-sr-only">Completed</span><span aria-hidden="true">&#10003;</span>'
+          : `<span aria-hidden="true">${i + 1}</span>`;
       const ariaCurrent = i === this._current ? ' aria-current="step"' : '';
-      return `<div class="step ${state}" role="listitem"${ariaCurrent}><span class="step__marker" aria-hidden="true">${marker}</span><span class="step__label">${escapeHTML(label)}</span></div>`;
+      const itemLabel = label ? `${label}, ${status}` : `Step ${i + 1}, ${status}`;
+      return `<div class="step ${state}" role="listitem" aria-label="${escapeHTML(itemLabel)}"${ariaCurrent}><span class="step__marker">${marker}</span><span class="step__label">${escapeHTML(label)}</span></div>`;
     }).join('');
 
     this.shadowRoot.innerHTML = `
       <style>${styles}</style>
-      <div class="steps" role="list" aria-label="Progress" part="steps">${stepsHTML}</div>
+      <div class="steps" role="list" aria-label="${escapeHTML(listLabel)}" part="steps">${stepsHTML}</div>
       <div class="panels" part="panels"><slot></slot></div>
     `;
-    this._updatePanels();
   }
 
   _updatePanels() {
@@ -124,5 +134,24 @@ class VelinStepperWC extends HTMLElement {
   }
 }
 
-customElements.define('velin-stepper-wc', VelinStepperWC);
-export default VelinStepperWC;
+/** @deprecated Use `<velin-stepper>` */
+class VelinStepperWC extends VelinStepper {
+  static _warned = false;
+
+  connectedCallback() {
+    if (!VelinStepperWC._warned && typeof console !== 'undefined' && console.warn) {
+      VelinStepperWC._warned = true;
+      console.warn('[velinstyle] <velin-stepper-wc> is deprecated; use <velin-stepper> instead.');
+    }
+    super.connectedCallback();
+  }
+}
+
+if (!customElements.get('velin-stepper')) {
+  customElements.define('velin-stepper', VelinStepper);
+}
+if (!customElements.get('velin-stepper-wc')) {
+  customElements.define('velin-stepper-wc', VelinStepperWC);
+}
+export default VelinStepper;
+export { VelinStepper, VelinStepperWC };

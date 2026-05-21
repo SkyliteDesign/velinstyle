@@ -1,0 +1,37 @@
+/* WCAG 2.2 — authentication patterns (3.3.8 visible labels, error association) */
+@layer a11y {
+  .velin-auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--velin-space-4);
+    max-width: 28rem;
+  }
+
+  .velin-auth-form .velin-field-error {
+    color: var(--velin-color-danger, #b91c1c);
+    font-size: var(--velin-text-sm);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--velin-space-2);
+  }
+
+  .velin-auth-form .velin-field-error::before {
+    content: "";
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-block-start: 0.1em;
+    background: currentColor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='8' x2='12' y2='12'/%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
+  .velin-input[aria-invalid="true"],
+  .velin-auth-form .velin-input:invalid:not(:placeholder-shown) {
+    border-color: var(--velin-color-danger, #b91c1c);
+    outline-color: var(--velin-color-danger, #b91c1c);
+  }
+
+  .velin-auth-form .velin-input[aria-invalid="true"] {
+    background-image: linear-gradient(transparent, transparent);
+  }
+}

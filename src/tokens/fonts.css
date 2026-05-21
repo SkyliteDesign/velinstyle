@@ -1,0 +1,10 @@
+@layer tokens {
+  :root {
+    --velin-font-display: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --velin-font-text: var(--velin-font-display);
+    --velin-font-code: "JetBrains Mono", "Cascadia Code", "Fira Code", Consolas, monospace;
+    --velin-font-features: "cv02", "ss01";
+    --velin-font-optical: auto;
+    --velin-font-size-adjust-fallback: 0.52;
+  }
+}

@@ -1,0 +1,40 @@
+# VelinStyle 0.9.0
+
+> VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.
+> Full machine context: https://velinstyle.info/dist/velin-agent.json
+> MIME: application/vnd.velinstyle.meta+json
+
+## Framework
+- npm: @birdapi/velinstyle
+- VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.
+- Components: 36 canonical Web Components (`velin-*`); 38 lazy-loader entries
+- HTML attributes: 27 `velin-*` bridges
+- CLI: velinstyle (scan, scaffold, docs generate, search index, meta)
+
+## Conventions
+- Positioning: VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components — not a JS-only library or a utility-only CSS kit.
+- Use only velin-* utility classes and documented Web Components.
+- Prefer data-velin-theme on <html> for theme switching.
+- Run velinstyle scan on generated HTML before shipping.
+- Do not put secrets, API keys, or raw emails in velin-meta or page meta.
+- Resolve doc links against docs root (/docs/), not the current page folder.
+
+## Key guides
+- [Velin-Meta](https://velinstyle.info/docs/guides/velin-meta.html)
+- [VelinSearch](https://velinstyle.info/docs/guides/velin-search.html)
+- [Syntax highlighting](https://velinstyle.info/docs/guides/syntax-highlight.html)
+- [Prompt scaffolding](https://velinstyle.info/docs/guides/prompt-scaffolding.html)
+- [API reference (generated)](https://velinstyle.info/docs/guides/api-reference.html)
+
+## Generated reference
+- [Components index](https://velinstyle.info/docs/generated/components/)
+- [Tokens](https://velinstyle.info/docs/generated/tokens/)
+- [Utilities](https://velinstyle.info/docs/generated/utilities/)
+- [CLI commands](https://velinstyle.info/docs/generated/cli/commands.md)
+
+## Usage for agents
+```
+npx velinstyle meta
+npx velinstyle docs generate
+npx velinstyle search index
+```

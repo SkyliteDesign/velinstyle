@@ -15,9 +15,9 @@ const COMPONENTS = [
   { tag: 'velin-carousel', module: '../../components/velin-carousel.js', observedAttrs: ['autoplay', 'interval'] },
   { tag: 'velin-collapse', module: '../../components/velin-collapse.js', observedAttrs: ['open'] },
   { tag: 'velin-scrollspy', module: '../../components/velin-scrollspy.js', observedAttrs: [] },
-  { tag: 'velin-tooltip-wc', module: '../../components/velin-tooltip-wc.js', observedAttrs: ['content', 'placement'] },
+  { tag: 'velin-tooltip', module: '../../components/velin-tooltip.js', observedAttrs: ['content', 'placement'] },
   { tag: 'velin-lightbox', module: '../../components/velin-lightbox.js', observedAttrs: [] },
-  { tag: 'velin-stepper-wc', module: '../../components/velin-stepper-wc.js', observedAttrs: [] },
+  { tag: 'velin-stepper', module: '../../components/velin-stepper.js', observedAttrs: [] },
   { tag: 'velin-dialog', module: '../../components/velin-dialog.js', observedAttrs: [] },
   { tag: 'velin-countdown', module: '../../components/velin-countdown.js', observedAttrs: [] },
   { tag: 'velin-progress-ring', module: '../../components/velin-progress-ring.js', observedAttrs: [] },
@@ -30,10 +30,28 @@ const COMPONENTS = [
   { tag: 'velin-menubar', module: '../../components/velin-menubar.js', observedAttrs: [] },
   { tag: 'velin-command', module: '../../components/velin-command.js', observedAttrs: ['open'] },
   { tag: 'velin-announcer', module: '../../components/velin-announcer.js', observedAttrs: [] },
+  { tag: 'velin-code-block', module: '../../components/velin-code-block.js', observedAttrs: [] },
+  { tag: 'velin-email', module: '../../components/velin-email.js', observedAttrs: ['value', 'obfuscate', 'label'] },
+  { tag: 'velin-live-dot', module: '../../components/velin-live-dot.js', observedAttrs: [] },
+  { tag: 'velin-sparkline', module: '../../components/velin-sparkline.js', observedAttrs: [] },
+  { tag: 'velin-search', module: '../../components/velin-search.js', observedAttrs: [] },
+  { tag: 'velin-counter', module: '../../components/velin-counter.js', observedAttrs: [] },
+  { tag: 'velin-secure-field', module: '../../components/velin-secure-field.js', observedAttrs: ['type', 'name', 'label', 'mode', 'autocomplete'] },
+];
+
+const CONTRACT_TAGS = [
+  'velin-accordion', 'velin-announcer', 'velin-bottom-nav', 'velin-carousel', 'velin-code-block',
+  'velin-collapse', 'velin-combobox', 'velin-command', 'velin-copy', 'velin-countdown', 'velin-counter',
+  'velin-dialog', 'velin-drawer', 'velin-dropdown', 'velin-email', 'velin-icon', 'velin-lightbox',
+  'velin-live-dot', 'velin-menubar', 'velin-modal', 'velin-persist', 'velin-popover', 'velin-progress-ring',
+  'velin-rating', 'velin-scroll-top', 'velin-scrollspy', 'velin-search', 'velin-secure-field',
+  'velin-segmented-control', 'velin-sheet', 'velin-sparkline', 'velin-stepper', 'velin-tabs',
+  'velin-theme-toggle', 'velin-toast', 'velin-tooltip',
 ];
 
 beforeAll(async () => {
   await import('../../components/index.js');
+  await import('../../components/velin-secure-field.js');
 });
 
 describe('Web Component registration', () => {
@@ -54,8 +72,28 @@ describe('Web Component instantiation', () => {
   }
 });
 
+describe('contract coverage', () => {
+  it('tests every tag listed in component-contracts.json', () => {
+    const tested = new Set(COMPONENTS.map((c) => c.tag));
+    for (const tag of CONTRACT_TAGS) {
+      expect(tested.has(tag)).toBe(true);
+    }
+  });
+});
+
 describe('Web Component shadow DOM', () => {
-  const withShadow = COMPONENTS.filter((c) => !['velin-icon', 'velin-scrollspy', 'velin-persist'].includes(c.tag));
+  const withShadow = COMPONENTS.filter(
+    (c) =>
+      ![
+        'velin-icon',
+        'velin-scrollspy',
+        'velin-persist',
+        'velin-sparkline',
+        'velin-code-block',
+        'velin-search',
+        'velin-counter',
+      ].includes(c.tag),
+  );
 
   for (const { tag } of withShadow) {
     it(`${tag} attaches a shadow root on connect`, () => {
@@ -230,6 +268,9 @@ describe('velin-icon', () => {
     document.body.appendChild(el);
     const svg = el.querySelector('svg');
     expect(svg.getAttribute('aria-hidden')).toBe('true');
+    expect(svg.getAttribute('role')).toBe('presentation');
+    const use = svg.querySelector('use');
+    if (use) expect(use.getAttribute('aria-hidden')).toBe('true');
     el.remove();
   });
 
@@ -296,5 +337,86 @@ describe('velin-scroll-top', () => {
     expect(btn).not.toBeNull();
     expect(btn.getAttribute('aria-label')).toBe('Scroll to top');
     el.remove();
+  });
+});
+
+describe('velin-search', () => {
+  it('input has default aria-label', async () => {
+    const el = document.createElement('velin-search');
+    document.body.appendChild(el);
+    await customElements.whenDefined('velin-search');
+    await new Promise((r) => setTimeout(r, 50));
+    const input = el.querySelector('[data-velin-search-input]');
+    expect(input?.getAttribute('aria-label')).toBe('Search');
+    el.remove();
+  });
+});
+
+describe('velin-counter', () => {
+  it('exposes live region', () => {
+    const el = document.createElement('velin-counter');
+    el.setAttribute('to', '10');
+    document.body.appendChild(el);
+    expect(el.getAttribute('role')).toBe('status');
+    expect(el.getAttribute('aria-live')).toBe('polite');
+    el.remove();
+  });
+});
+
+describe('velin-live-dot', () => {
+  it('exposes status via aria-label on host', () => {
+    const el = document.createElement('velin-live-dot');
+    el.setAttribute('status', 'live');
+    document.body.appendChild(el);
+    expect(el.getAttribute('aria-label')).toBeTruthy();
+    el.remove();
+  });
+});
+
+describe('velin-sparkline', () => {
+  it('uses role=img when label is set', () => {
+    const el = document.createElement('velin-sparkline');
+    el.setAttribute('values', '1,2,3');
+    el.setAttribute('label', 'Weekly trend');
+    document.body.appendChild(el);
+    const svg = el.querySelector('svg');
+    expect(svg?.getAttribute('role')).toBe('img');
+    expect(svg?.getAttribute('aria-label')).toBe('Weekly trend');
+    el.remove();
+  });
+});
+
+describe('velin-email', () => {
+  it('renders reveal button before showing address', () => {
+    const el = document.createElement('velin-email');
+    el.setAttribute('value', 'dGVzdEBleGFtcGxlLmNvbQ==');
+    el.setAttribute('obfuscate', 'base64');
+    document.body.appendChild(el);
+    const btn = el.shadowRoot.querySelector('button');
+    expect(btn).not.toBeNull();
+    expect(el.shadowRoot.querySelector('.revealed')).toBeNull();
+    el.remove();
+  });
+});
+
+describe('velin-code-block', () => {
+  it('renders code in light DOM with optional expand control', async () => {
+    const el = document.createElement('velin-code-block');
+    el.textContent = 'const x = 1;';
+    document.body.appendChild(el);
+    await customElements.whenDefined('velin-code-block');
+    await new Promise((r) => setTimeout(r, 20));
+    expect(el.querySelector('pre, code, [part="code"]')).toBeTruthy();
+    el.remove();
+  });
+});
+
+describe('Legacy *-wc aliases (deprecated)', () => {
+  it('velin-tooltip-wc remains registered', () => {
+    expect(customElements.get('velin-tooltip-wc')).toBeDefined();
+  });
+
+  it('velin-stepper-wc remains registered', () => {
+    expect(customElements.get('velin-stepper-wc')).toBeDefined();
   });
 });

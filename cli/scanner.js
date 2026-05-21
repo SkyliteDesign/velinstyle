@@ -1,6 +1,9 @@
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'fs';
 import { join, relative, extname } from 'path';
 import { applyFixes, fixSafeExternalLinkLine, fixZIndexLine } from './apply-fixes.js';
+import { scanPIIHTML, scanPIIJS } from './pii-scanner.js';
+
+export { SCANNER_RULES, PERF_RULES } from './scanner-rules-data.js';
 
 const SEVERITY = { error: 0, warning: 1, info: 2 };
 const SEVERITY_LABEL = { 0: 'ERROR', 1: 'WARNING', 2: 'INFO' };
@@ -197,8 +200,10 @@ function scanSecurityJS(content, file) {
 
 function issueCategory(rule) {
   if (rule.startsWith('security/')) return 'security';
+  if (rule.startsWith('pii/')) return 'pii';
   if (rule.startsWith('a11y/')) return 'a11y';
   if (rule.startsWith('css/')) return 'css';
+  if (rule.startsWith('perf/')) return 'perf';
   return 'other';
 }
 
@@ -222,11 +227,23 @@ function scanA11yHTML(content, file) {
 
     const imgMatches = line.matchAll(/<img\b[^>]*>/gi);
     for (const m of imgMatches) {
-      if (!/\balt\s*=/i.test(m[0])) {
+      const tag = m[0];
+      if (!/\balt\s*=/i.test(tag)) {
         issues.push({
           file, line: ln, severity: 0,
           rule: 'a11y/img-alt',
           message: '<img> without alt attribute. Add alt="" for decorative or descriptive text.',
+          fixable: false,
+        });
+      } else if (
+        /\balt\s*=\s*["']\s*["']/i.test(tag)
+        && !/\baria-hidden\s*=\s*["']true["']/i.test(tag)
+        && !/\brole\s*=\s*["']presentation["']/i.test(tag)
+      ) {
+        issues.push({
+          file, line: ln, severity: 1,
+          rule: 'a11y/img-decorative',
+          message: 'Decorative <img alt=""> should include aria-hidden="true" so assistive tech ignores it consistently.',
           fixable: false,
         });
       }
@@ -242,6 +259,31 @@ function scanA11yHTML(content, file) {
           fixable: false,
         });
       }
+    }
+
+    if (/<button\b[^>]*>[\s\S]*<velin-icon\b/i.test(line) && /<velin-icon\b(?![^>]*\blabel\s*=)/i.test(line)) {
+      issues.push({
+        file, line: ln, severity: 1,
+        rule: 'a11y/velin-icon-label',
+        message: '<velin-icon> inside icon-only <button> should have a label attribute.',
+        fixable: false,
+      });
+    }
+    if (/<velin-sparkline\b/i.test(line) && !/<velin-sparkline\b[^>]*\blabel\s*=/i.test(line) && !/<figcaption/i.test(line)) {
+      issues.push({
+        file, line: ln, severity: 1,
+        rule: 'a11y/sparkline-label',
+        message: '<velin-sparkline> needs label or a parent <figure> with <figcaption>.',
+        fixable: false,
+      });
+    }
+    if (/\bvelin-skeleton\b/i.test(line) && />\s*[^<\s][^<]+</i.test(line)) {
+      issues.push({
+        file, line: ln, severity: 1,
+        rule: 'a11y/skeleton-text',
+        message: 'velin-skeleton on elements with visible text may hide content from assistive tech.',
+        fixable: false,
+      });
     }
 
     const inputMatches = line.matchAll(/<input\b[^>]*>/gi);
@@ -311,6 +353,27 @@ function scanA11yHTML(content, file) {
           fixable: false,
         });
       }
+    }
+
+    if (/<form\b/i.test(line) && /type\s*=\s*["'](?:password|email)["']/i.test(line)) {
+      const formCtx = content.slice(Math.max(0, content.indexOf(line) - 800), content.indexOf(line) + 200);
+      if (/type\s*=\s*["']password["']/i.test(formCtx) && !/autocomplete\s*=/i.test(line) && !/autocomplete\s*=/i.test(formCtx)) {
+        issues.push({
+          file, line: ln, severity: 1,
+          rule: 'a11y/autocomplete-auth',
+          message: 'Auth field missing autocomplete (WCAG 2.2 / 1.3.5). Add autocomplete="username" or "current-password".',
+          fixable: false,
+        });
+      }
+    }
+
+    if (/aria-invalid\s*=\s*["']true["']/i.test(line) && !/aria-describedby/i.test(line)) {
+      issues.push({
+        file, line: ln, severity: 1,
+        rule: 'a11y/invalid-describedby',
+        message: 'aria-invalid without aria-describedby linking to error help text.',
+        fixable: false,
+      });
     }
   });
 
@@ -396,10 +459,13 @@ export function scan(targetPath, options = {}) {
 
   let allIssues = [];
 
+  const fixEmailPlaceholder = options.fixEmailPlaceholder || 'user@example.com';
+
   for (const file of htmlFiles) {
     const content = readFileSync(file, 'utf-8');
     allIssues.push(...scanSecurityHTML(content, file));
     allIssues.push(...scanA11yHTML(content, file));
+    allIssues.push(...scanPIIHTML(content, file, { fixEmailPlaceholder }));
   }
 
   for (const file of cssFiles) {
@@ -410,6 +476,7 @@ export function scan(targetPath, options = {}) {
   for (const file of jsFiles) {
     const content = readFileSync(file, 'utf-8');
     allIssues.push(...scanSecurityJS(content, file));
+    allIssues.push(...scanPIIJS(content, file));
   }
 
   allIssues = allIssues.filter(i => i.severity <= minSeverity);

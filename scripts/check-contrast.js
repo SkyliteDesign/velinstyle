@@ -1,9 +1,10 @@
-import { readFileSync } from 'fs';
-import { resolve, dirname } from 'path';
+import { readFileSync, readdirSync, existsSync } from 'fs';
+import { resolve, dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const colorCss = readFileSync(resolve(ROOT, 'src/tokens/color.css'), 'utf-8');
+const AAA_MIN = 7;
+const AA_MIN = 4.5;
 
 function parseOklch(str) {
   const m = str.match(/oklch\(\s*([\d.]+%?)\s+([\d.]+)\s+([\d.]+)/i);
@@ -43,40 +44,78 @@ function contrastRatio(l1, l2) {
   return (hi + 0.05) / (lo + 0.05);
 }
 
-function extractVar(name) {
-  const re = new RegExp(`${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}:\\s*(oklch\\([^;]+\\))`, 'i');
-  const m = colorCss.match(re);
-  return m ? parseOklch(m[1]) : null;
+function extractVars(css, scopeLabel) {
+  const vars = {};
+  const re = /(--velin-color-[\w-]+)\s*:\s*(oklch\([^;]+)\)/gi;
+  let m;
+  while ((m = re.exec(css)) !== null) vars[m[1]] = m[2];
+  return { vars, scopeLabel };
 }
 
-const PAIRS = [
-  { fg: '--velin-color-text', bg: '--velin-color-surface-bright', min: 4.5, label: 'text on surface-bright' },
-  { fg: '--velin-color-text-muted', bg: '--velin-color-surface-bright', min: 4.5, label: 'muted text on surface-bright' },
-  { fg: '--velin-color-on-primary', bg: '--velin-color-primary', min: 4.5, label: 'on-primary on primary' },
-  { fg: '--velin-color-on-danger', bg: '--velin-color-danger', min: 4.5, label: 'on-danger on danger' },
-];
+function checkPairs(vars, pairs, scope) {
+  let failed = 0;
+  for (const pair of pairs) {
+    const fg = vars[pair.fg] ? parseOklch(vars[pair.fg]) : null;
+    const bg = vars[pair.bg] ? parseOklch(vars[pair.bg]) : null;
+    if (!fg || !bg) {
+      console.log(`  SKIP  [${scope}] ${pair.label}`);
+      continue;
+    }
+    const ratio = contrastRatio(relLuminance(fg), relLuminance(bg));
+    const ok = ratio >= pair.min;
+    if (!ok) failed++;
+    console.log(`  ${ok ? 'PASS' : 'FAIL'}  [${scope}] ${pair.label}: ${ratio.toFixed(2)}:1 (min ${pair.min}:1)`);
+  }
+  return failed;
+}
 
 const AAA_PAIRS = [
-  { fg: '--velin-color-text', bg: '--velin-color-surface-bright', min: 7, label: 'text on surface-bright (AAA)' },
-  { fg: '--velin-color-on-primary', bg: '--velin-color-primary', min: 7, label: 'on-primary on primary (AAA)' },
+  { fg: '--velin-color-text', bg: '--velin-color-surface-bright', min: AAA_MIN, label: 'text on surface-bright' },
+  { fg: '--velin-color-text-muted', bg: '--velin-color-surface-bright', min: AAA_MIN, label: 'muted on surface-bright' },
+  { fg: '--velin-color-primary-text', bg: '--velin-color-surface-bright', min: AAA_MIN, label: 'primary-text on surface-bright' },
+  { fg: '--velin-color-success-text', bg: '--velin-color-surface-bright', min: AAA_MIN, label: 'success-text on surface-bright' },
+  { fg: '--velin-color-danger-text', bg: '--velin-color-surface-bright', min: AAA_MIN, label: 'danger-text on surface-bright' },
+  { fg: '--velin-color-on-primary', bg: '--velin-color-primary', min: AAA_MIN, label: 'on-primary on primary' },
+  { fg: '--velin-color-on-danger', bg: '--velin-color-danger', min: AAA_MIN, label: 'on-danger on danger' },
 ];
 
-let failed = 0;
+const AA_PAIRS = [
+  { fg: '--velin-color-text-subtle', bg: '--velin-color-surface-bright', min: AA_MIN, label: 'subtle on surface-bright (AA)' },
+];
 
-console.log('VelinStyle contrast check (OKLCH tokens)\n');
-
-for (const pair of [...PAIRS, ...AAA_PAIRS]) {
-  const fg = extractVar(pair.fg);
-  const bg = extractVar(pair.bg);
-  if (!fg || !bg) {
-    console.log(`  SKIP  ${pair.label} (could not parse tokens)`);
-    continue;
-  }
-  const ratio = contrastRatio(relLuminance(fg), relLuminance(bg));
-  const ok = ratio >= pair.min;
-  if (!ok) failed++;
-  console.log(`  ${ok ? 'PASS' : 'FAIL'}  ${pair.label}: ${ratio.toFixed(2)}:1 (min ${pair.min}:1)`);
+function loadScope(cssPath, label) {
+  const css = readFileSync(cssPath, 'utf-8');
+  return extractVars(css, label);
 }
 
-console.log(failed ? `\n${failed} pair(s) below minimum.` : '\nAll token pairs meet contrast requirements.');
-process.exit(failed ? 1 : 0);
+let totalFailed = 0;
+console.log('VelinStyle contrast check (WCAG 2.2 AAA token pairs)\n');
+
+const colorPath = join(ROOT, 'src/tokens/color.css');
+const colorCss = readFileSync(colorPath, 'utf-8');
+const rootBlock = colorCss.match(/:root\s*\{([^}]+)\}/s)?.[1] || '';
+const darkBlock = colorCss.match(/\[data-velin-theme="dark"\]\s*\{([^}]+)\}/s)?.[1] || '';
+
+totalFailed += checkPairs(extractVars(rootBlock, ':root').vars, [...AAA_PAIRS, ...AA_PAIRS], ':root');
+if (darkBlock) {
+  const base = extractVars(rootBlock, ':root').vars;
+  const dark = extractVars(darkBlock, 'dark').vars;
+  totalFailed += checkPairs({ ...base, ...dark }, AAA_PAIRS, 'dark');
+}
+
+const themesDir = join(ROOT, 'src/themes');
+if (existsSync(themesDir)) {
+  for (const file of readdirSync(themesDir).filter((f) => f.endsWith('.css'))) {
+    const themeCss = readFileSync(join(themesDir, file), 'utf-8');
+    const themeName = file.replace('.css', '');
+    const merged = { ...extractVars(rootBlock, ':root').vars, ...extractVars(themeCss, themeName).vars };
+    const themePairs = [
+      { fg: '--velin-color-text', bg: '--velin-color-surface-bright', min: AAA_MIN, label: 'text on surface-bright' },
+      { fg: '--velin-color-on-primary', bg: '--velin-color-primary', min: AAA_MIN, label: 'on-primary on primary' },
+    ];
+    totalFailed += checkPairs(merged, themePairs, `theme:${themeName}`);
+  }
+}
+
+console.log(totalFailed ? `\n${totalFailed} pair(s) below minimum.` : '\nAll checked token pairs meet requirements.');
+process.exit(totalFailed ? 1 : 0);

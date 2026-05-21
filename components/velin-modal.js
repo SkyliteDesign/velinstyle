@@ -98,14 +98,17 @@ class VelinModal extends HTMLElement {
   }
 
   connectedCallback() {
-    const title = this.getAttribute('title') || '';
+    const title = (this.getAttribute('title') || '').trim();
     const safeTitle = escapeHTML(title);
+    const dialogLabel = title
+      ? 'aria-labelledby="velin-modal-title"'
+      : `aria-label="${escapeHTML(this.getAttribute('aria-label') || 'Dialog')}"`;
     this.shadowRoot.innerHTML = `
       <style>${styles}</style>
       <div class="overlay" part="overlay">
-        <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="velin-modal-title" part="dialog">
+        <div class="dialog" role="dialog" aria-modal="true" ${dialogLabel} part="dialog">
           <div class="header" part="header">
-            <h2 class="title" id="velin-modal-title">${safeTitle}</h2>
+            <h2 class="title" id="velin-modal-title"${title ? '' : ' class="velin-sr-only"'}>${safeTitle || 'Dialog'}</h2>
             <button class="close-btn" aria-label="Close" part="close">&#215;</button>
           </div>
           <div class="body" part="body"><slot></slot></div>

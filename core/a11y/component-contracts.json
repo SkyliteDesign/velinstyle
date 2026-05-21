@@ -1,0 +1,221 @@
+{
+  "wcagLevel": "AAA",
+  "version": "0.9.0",
+  "components": {
+    "velin-accordion": {
+      "status": "pass",
+      "roles": ["group"],
+      "keyboard": "Arrow/Home/End between summaries",
+      "reducedMotion": true,
+      "requiredAttributes": [],
+      "notes": "Wires aria-controls on summary elements."
+    },
+    "velin-announcer": {
+      "status": "pass",
+      "roles": ["status"],
+      "liveRegion": "polite|assertive",
+      "keyboard": "N/A",
+      "reducedMotion": true
+    },
+    "velin-bottom-nav": {
+      "status": "pass",
+      "roles": ["navigation"],
+      "requiredAttributes": ["aria-label"],
+      "keyboard": "Native links or buttons in slot",
+      "notes": "Host aria-label; slotchange syncs aria-current and infers item labels from data-nav/title."
+    },
+    "velin-carousel": {
+      "status": "pass",
+      "roles": ["group", "button"],
+      "keyboard": "Arrows, Home, End, dots",
+      "reducedMotion": true
+    },
+    "velin-code-block": {
+      "status": "pass",
+      "roles": ["button"],
+      "requiredAttributes": [],
+      "keyboard": "Expand toggle keyboard",
+      "notes": "Expand uses aria-expanded and aria-controls."
+    },
+    "velin-collapse": {
+      "status": "pass",
+      "roles": ["button"],
+      "keyboard": "Enter/Space on trigger",
+      "requiredAttributes": []
+    },
+    "velin-combobox": {
+      "status": "pass",
+      "roles": ["combobox", "listbox"],
+      "keyboard": "Roving, Escape, Enter",
+      "requiredAttributes": ["aria-label"]
+    },
+    "velin-command": {
+      "status": "pass",
+      "roles": ["dialog"],
+      "keyboard": "Escape, arrows in results, Tab trap",
+      "requiredAttributes": []
+    },
+    "velin-copy": {
+      "status": "pass",
+      "roles": ["button"],
+      "requiredAttributes": ["aria-label"],
+      "keyboard": "Native button"
+    },
+    "velin-countdown": {
+      "status": "pass",
+      "roles": ["timer"],
+      "liveRegion": "polite",
+      "keyboard": "N/A"
+    },
+    "velin-counter": {
+      "status": "pass",
+      "roles": ["status"],
+      "liveRegion": "polite",
+      "keyboard": "N/A",
+      "reducedMotion": true
+    },
+    "velin-dialog": {
+      "status": "pass",
+      "roles": ["dialog"],
+      "keyboard": "Native dialog, Escape",
+      "requiredAttributes": [],
+      "notes": "aria-labelledby on dialog, aria-modal true."
+    },
+    "velin-drawer": {
+      "status": "pass",
+      "roles": ["dialog"],
+      "keyboard": "Escape, Tab trap",
+      "requiredAttributes": []
+    },
+    "velin-dropdown": {
+      "status": "pass",
+      "roles": ["menu", "button"],
+      "keyboard": "Roving, typeahead, Escape"
+    },
+    "velin-email": {
+      "status": "pass",
+      "roles": ["button"],
+      "requiredAttributes": ["aria-label"]
+    },
+    "velin-icon": {
+      "status": "pass",
+      "roles": ["img", "presentation"],
+      "requiredAttributes": ["label"],
+      "notes": "Decorative when no label; SVG aria-hidden. Do not set aria-hidden on host in JS."
+    },
+    "velin-lightbox": {
+      "status": "pass",
+      "roles": ["dialog"],
+      "keyboard": "Escape, arrows, Tab trap",
+      "liveRegion": "polite"
+    },
+    "velin-live-dot": {
+      "status": "pass",
+      "roles": ["status"],
+      "requiredAttributes": [],
+      "notes": "Status exposed via aria-label on host, not color alone."
+    },
+    "velin-menubar": {
+      "status": "pass",
+      "roles": ["menubar", "menu"],
+      "requiredAttributes": ["aria-label"],
+      "keyboard": "Roving arrows"
+    },
+    "velin-modal": {
+      "status": "pass",
+      "roles": ["dialog"],
+      "keyboard": "Escape, Tab trap",
+      "requiredAttributes": []
+    },
+    "velin-persist": {
+      "status": "pass",
+      "keyboard": "N/A",
+      "notes": "display:contents; auto-saves form field values (WCAG 3.3.7 Redundant Entry helper). Clears on form submit."
+    },
+    "velin-popover": {
+      "status": "pass",
+      "roles": ["dialog", "tooltip"],
+      "keyboard": "Escape, Enter/Space on trigger; focus opens hover mode",
+      "notes": "aria-labelledby or default aria-label; non-button triggers get role=button."
+    },
+    "velin-progress-ring": {
+      "status": "pass",
+      "roles": ["progressbar"],
+      "requiredAttributes": []
+    },
+    "velin-rating": {
+      "status": "pass",
+      "roles": ["radiogroup"],
+      "keyboard": "Roving, arrows"
+    },
+    "velin-scroll-top": {
+      "status": "pass",
+      "roles": ["button"],
+      "requiredAttributes": ["aria-label"],
+      "reducedMotion": true
+    },
+    "velin-scrollspy": {
+      "status": "pass",
+      "keyboard": "Native nav links",
+      "notes": "Sets aria-current on active link."
+    },
+    "velin-search": {
+      "status": "pass",
+      "roles": ["combobox", "listbox"],
+      "requiredAttributes": ["aria-label"],
+      "keyboard": "Arrows, Enter, Escape",
+      "notes": "Default aria-label Search when unset."
+    },
+    "velin-secure-field": {
+      "status": "pass",
+      "roles": ["textbox"],
+      "requiredAttributes": [],
+      "notes": "Native label association."
+    },
+    "velin-segmented-control": {
+      "status": "pass",
+      "roles": ["group"],
+      "requiredAttributes": ["aria-label"],
+      "keyboard": "Roving"
+    },
+    "velin-sheet": {
+      "status": "pass",
+      "roles": ["dialog"],
+      "keyboard": "Escape, Tab trap"
+    },
+    "velin-sparkline": {
+      "status": "pass",
+      "roles": ["img", "presentation"],
+      "requiredAttributes": ["label"],
+      "notes": "Uses label, aria-label, or figcaption aria-labelledby."
+    },
+    "velin-stepper": {
+      "status": "pass",
+      "roles": ["list"],
+      "keyboard": "N/A (display); pair with buttons calling next()/prev()",
+      "notes": "aria-label per step (completed/current/upcoming); sr-only Completed text; aria-current on active step."
+    },
+    "velin-tabs": {
+      "status": "pass",
+      "roles": ["tablist", "tab", "tabpanel"],
+      "keyboard": "Roving, auto-select arrows"
+    },
+    "velin-theme-toggle": {
+      "status": "pass",
+      "roles": ["button", "menu"],
+      "keyboard": "Menu arrows, Escape",
+      "notes": "aria-pressed on theme toggle."
+    },
+    "velin-toast": {
+      "status": "pass",
+      "roles": ["status", "alert"],
+      "liveRegion": "polite|assertive",
+      "keyboard": "Close button"
+    },
+    "velin-tooltip": {
+      "status": "pass",
+      "roles": ["tooltip"],
+      "keyboard": "Escape, focusin"
+    }
+  }
+}

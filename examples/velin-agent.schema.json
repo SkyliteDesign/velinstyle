@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/velin-agent.schema.json",
+  "title": "VelinAgentBundle",
+  "description": "Machine-readable VelinStyle context for AI assistants (MIME application/vnd.velinstyle.meta+json).",
+  "type": "object",
+  "required": ["schemaVersion", "mime", "generatedAt", "framework", "conventions"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 1 },
+    "mime": { "type": "string", "const": "application/vnd.velinstyle.meta+json" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "framework": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "homepage": { "type": "string", "format": "uri" },
+        "repository": { "type": "string" }
+      }
+    },
+    "packageExports": { "type": "array", "items": { "type": "string" } },
+    "release": {
+      "type": "object",
+      "properties": {
+        "breaking": { "type": "array", "items": { "type": "string" } },
+        "migration": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "components": {
+      "type": "object",
+      "properties": {
+        "tags": { "type": "array", "items": { "type": "string", "pattern": "^velin-" } },
+        "count": { "type": "integer" }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "properties": {
+        "names": { "type": "array", "items": { "type": "string" } },
+        "count": { "type": "integer" }
+      }
+    },
+    "cli": {
+      "type": "object",
+      "properties": {
+        "commands": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "documentation": {
+      "type": "object",
+      "properties": {
+        "generated": { "type": "string" },
+        "guides": { "type": "object", "additionalProperties": { "type": "string" } }
+      }
+    },
+    "conventions": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+  }
+}

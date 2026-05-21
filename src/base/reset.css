@@ -131,40 +131,4 @@
     display: none !important;
   }
 
-  /* Prevent FOUC for VelinStyle custom elements before registration */
-  velin-modal:not(:defined),
-  velin-drawer:not(:defined),
-  velin-tabs:not(:defined),
-  velin-accordion:not(:defined),
-  velin-dropdown:not(:defined),
-  velin-toast:not(:defined),
-  velin-dialog:not(:defined),
-  velin-popover:not(:defined),
-  velin-tooltip-wc:not(:defined),
-  velin-lightbox:not(:defined),
-  velin-carousel:not(:defined),
-  velin-collapse:not(:defined),
-  velin-stepper-wc:not(:defined),
-  velin-countdown:not(:defined),
-  velin-progress-ring:not(:defined),
-  velin-persist:not(:defined),
-  velin-copy:not(:defined),
-  velin-scroll-top:not(:defined),
-  velin-scrollspy:not(:defined),
-  velin-theme-toggle:not(:defined),
-  velin-icon:not(:defined),
-  velin-combobox:not(:defined),
-  velin-bottom-nav:not(:defined),
-  velin-sheet:not(:defined),
-  velin-segmented-control:not(:defined),
-  velin-rating:not(:defined),
-  velin-menubar:not(:defined),
-  velin-command:not(:defined),
-  velin-announcer:not(:defined),
-  velin-sparkline:not(:defined),
-  velin-counter:not(:defined),
-  velin-live-dot:not(:defined) {
-    opacity: 0;
-    visibility: hidden;
-  }
 }

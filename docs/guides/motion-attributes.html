@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" data-velin-reveal-auto>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motion &amp; attributes - VelinStyle</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <main id="main" class="velin-container velin-py-8">
+    <h1 class="velin-text-3xl velin-font-bold" velin-reveal velin-fade>Motion &amp; HTML attributes</h1>
+    <p class="velin-text-muted velin-mbe-6" velin-reveal>Declarative <code>velin-*</code> attributes bridge to Web Components and the motion runtime.</p>
+    <pre class="velin-code">import { bootFromDOM } from '@birdapi/velinstyle/runtime';
+import { initMotion } from '@birdapi/velinstyle/motion';
+
+bootFromDOM(document, { attributes: true });
+initMotion();</pre>
+    <ul velin-stagger="60" velin-reveal class="velin-mbs-6">
+      <li><code>velin-reveal</code> / <code>velin-fade</code> / <code>velin-slide</code> — scroll animations</li>
+      <li><code>velin-modal</code> / <code>velin-tabs</code> — lazy-load Web Components</li>
+      <li><code>velin-code</code> / <code>velin-quote</code> — content helpers</li>
+    </ul>
+    <p>See <code>docs/generated/attributes/</code> for the full attribute reference.</p>
+  </main>
+  <script type="module">
+    import { bootFromDOM } from '../../components/runtime/index.js';
+    bootFromDOM(document, { attributes: true });
+  </script>
+</body>
+</html>

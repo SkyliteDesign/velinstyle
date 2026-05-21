@@ -14,8 +14,10 @@
     transition: var(--velin-transition-transform);
   }
 
-  .velin-skip-link:focus {
+  .velin-skip-link:focus-visible {
     inset-block-start: var(--velin-space-4);
+    outline: 3px solid var(--velin-color-focus);
+    outline-offset: 2px;
   }
 
   @media (prefers-reduced-motion: reduce) {

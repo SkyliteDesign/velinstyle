@@ -30,6 +30,7 @@
 </head>
 <body>
   <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <header role="banner">
   <nav class="velin-nav" aria-label="Main navigation">
     <a href="index.html" class="velin-nav__brand">VelinStyle</a>
     <button type="button" class="velin-nav__toggle" data-velin-nav-toggle aria-label="Toggle menu" aria-expanded="false"
@@ -55,6 +56,7 @@
   <strong>Full documentation at <a href="https://velinstyle.info/docs/getting-started/introduction.html">velinstyle.info</a></strong>
 </div>
 
+  </header>
   <main id="main" class="velin-container">
     <h1 class="velin-text-4xl velin-font-bold" style="margin-block: var(--velin-space-8)">Web Components</h1>
     <p class="velin-text-muted velin-mbe-8">29 interactive Web Components with full keyboard support, ARIA attributes, and XSS-safe rendering.</p>
@@ -253,14 +255,14 @@
 
     <!-- ============ 8. Tooltip ============ -->
     <section class="section" id="tooltip">
-      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-tooltip-wc</h2>
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-tooltip</h2>
       <p class="velin-text-muted velin-mbe-4">Pure-CSS tooltip with auto-flip and keyboard support.</p>
       <div class="demo-box">
         <div class="velin-flex velin-flex--gap-3">
-          <velin-tooltip-wc content="Tooltip on top" placement="top"><button class="velin-btn">Top</button></velin-tooltip-wc>
-          <velin-tooltip-wc content="Tooltip on bottom" placement="bottom"><button class="velin-btn">Bottom</button></velin-tooltip-wc>
-          <velin-tooltip-wc content="Tooltip on left" placement="start"><button class="velin-btn">Start</button></velin-tooltip-wc>
-          <velin-tooltip-wc content="Tooltip on right" placement="end"><button class="velin-btn">End</button></velin-tooltip-wc>
+          <velin-tooltip content="Tooltip on top" placement="top"><button class="velin-btn">Top</button></velin-tooltip>
+          <velin-tooltip content="Tooltip on bottom" placement="bottom"><button class="velin-btn">Bottom</button></velin-tooltip>
+          <velin-tooltip content="Tooltip on left" placement="start"><button class="velin-btn">Start</button></velin-tooltip>
+          <velin-tooltip content="Tooltip on right" placement="end"><button class="velin-btn">End</button></velin-tooltip>
         </div>
       </div>
       <h3 class="api-heading">Attributes</h3>
@@ -373,14 +375,14 @@
 
     <!-- ============ 13. Stepper ============ -->
     <section class="section" id="stepper">
-      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-stepper-wc</h2>
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-stepper</h2>
       <p class="velin-text-muted velin-mbe-4">Multi-step progress indicator with panel management.</p>
       <div class="demo-box">
-        <velin-stepper-wc id="demo-stepper" labels="Account, Profile, Review" active="0">
+        <velin-stepper id="demo-stepper" labels="Account, Profile, Review" active="0">
           <div><p>Step 1: Create your account.</p></div>
           <div><p>Step 2: Fill in your profile details.</p></div>
           <div><p>Step 3: Review and confirm everything.</p></div>
-        </velin-stepper-wc>
+        </velin-stepper>
         <div class="velin-flex velin-flex--gap-3" style="margin-top:var(--velin-space-4)">
           <button class="velin-btn velin-btn--ghost" onclick="document.getElementById('demo-stepper').prev()">Previous</button>
           <button class="velin-btn velin-btn--primary" onclick="document.getElementById('demo-stepper').next()">Next</button>
@@ -741,34 +743,15 @@
   </script>
 
 <!-- Theme Picker Widget -->
-<div style="position:fixed;bottom:1rem;right:1rem;z-index:1050;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;" id="themePicker">
-  <div id="themePanel" style="display:none;background:var(--velin-color-surface-bright,#fff);border:1px solid var(--velin-color-border,#dee2e6);border-radius:.75rem;padding:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:20rem;">
-    <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
-    <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
+<link rel="stylesheet" href="assets/theme-picker.css">
+<div role="region" aria-label="Theme picker" class="velin-docs-theme-picker" id="themePicker">
+  <div id="themePanel" class="velin-docs-theme-panel">
+    <p class="velin-docs-theme-panel__title">Theme waehlen</p>
+    <div class="velin-docs-theme-grid" id="themeGrid"></div>
   </div>
-  <button type="button" data-velin-theme-toggle  style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+  <button type="button" class="velin-docs-theme-trigger" aria-label="Theme waehlen" aria-expanded="false" aria-controls="themePanel">&#127912; Theme</button>
 </div>
-<script>
-(function(){
-  var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
-  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='dist/themes/'+t+'.min.css';document.head.appendChild(l);});
-  var names=['Default'].concat(themes).concat(['dark']);
-  var vals=[''].concat(themes).concat(['dark']);
-  var grid=document.getElementById('themeGrid');
-  names.forEach(function(n,i){
-    var b=document.createElement('button');
-    b.textContent=n.charAt(0).toUpperCase()+n.slice(1);
-    b.style.cssText='padding:.3rem .65rem;border:1px solid var(--velin-color-border,#dee2e6);border-radius:1rem;background:var(--velin-color-surface-dim,#f5f6f8);color:var(--velin-color-text,#212529);font-size:.75rem;cursor:pointer;white-space:nowrap;';
-    b.addEventListener('click',function(){
-      if(vals[i]){document.documentElement.setAttribute('data-velin-theme',vals[i]);}
-      else{document.documentElement.removeAttribute('data-velin-theme');}
-      grid.querySelectorAll('button').forEach(function(x){x.style.background='var(--velin-color-surface-dim,#f5f6f8)';x.style.color='var(--velin-color-text,#212529)';});
-      b.style.background='var(--velin-color-primary,#2563eb)';b.style.color='#fff';
-    });
-    grid.appendChild(b);
-  });
-})();
-</script>
+<script src="assets/theme-picker.js" defer></script>
 <script src="assets/docs-a11y.js" defer></script>
 </body>
 </html>

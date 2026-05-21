@@ -1,0 +1,96 @@
+@layer components {
+  .velin-search {
+    position: relative;
+    inline-size: 100%;
+  }
+
+  .velin-search__input {
+    inline-size: 100%;
+    padding: var(--velin-space-2) var(--velin-space-3);
+    border: 1px solid var(--velin-color-border);
+    border-radius: var(--velin-radius-md);
+    background: var(--velin-color-surface);
+    color: var(--velin-color-text);
+  }
+
+  .velin-search__results {
+    position: absolute;
+    inset-block-start: calc(100% + var(--velin-space-1));
+    inset-inline: 0;
+    z-index: var(--velin-z-dropdown, 100);
+    max-block-size: 20rem;
+    overflow: auto;
+    border: 1px solid var(--velin-color-border);
+    border-radius: var(--velin-radius-md);
+    background: var(--velin-color-surface);
+    box-shadow: var(--velin-shadow-lg);
+    opacity: 0;
+    transform: translateY(-0.25rem);
+    transition:
+      opacity var(--velin-duration-fast, 150ms) ease,
+      transform var(--velin-duration-fast, 150ms) ease;
+  }
+
+  .velin-search__results--open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .velin-search__group-label {
+    padding: var(--velin-space-2) var(--velin-space-3);
+    font-size: var(--velin-text-xs, 0.75rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--velin-color-text-muted);
+    border-block-end: 1px solid var(--velin-color-border);
+  }
+
+  .velin-search__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--velin-space-1);
+    padding: var(--velin-space-2) var(--velin-space-3);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .velin-search__item:hover,
+  .velin-search__item--active {
+    background: var(--velin-color-surface-hover, color-mix(in oklch, var(--velin-color-primary) 12%, transparent));
+  }
+
+  .velin-search__title {
+    font-weight: 600;
+  }
+
+  .velin-search__excerpt {
+    font-size: var(--velin-text-sm, 0.875rem);
+    color: var(--velin-color-text-muted);
+  }
+
+  .velin-search-hit {
+    background: color-mix(in oklch, var(--velin-color-primary) 35%, transparent);
+    border-radius: 2px;
+    padding-inline: 1px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .velin-search__results {
+      transition: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .velin-search {
+      min-inline-size: 0;
+    }
+
+    .velin-search__results {
+      inset-inline-start: 0;
+      inset-inline-end: 0;
+      max-inline-size: min(100vw, 100%);
+      box-sizing: border-box;
+    }
+  }
+}

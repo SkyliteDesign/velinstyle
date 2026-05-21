@@ -1,0 +1,102 @@
+/**
+ * Reserve space for custom elements before upgrade to reduce CLS.
+ * Loaded from reset.css — pairs opacity:0 with min dimensions per display mode.
+ */
+@layer base {
+  velin-modal:not(:defined),
+  velin-drawer:not(:defined),
+  velin-dialog:not(:defined),
+  velin-sheet:not(:defined),
+  velin-lightbox:not(:defined),
+  velin-command:not(:defined) {
+    display: block;
+    block-size: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    contain: layout style;
+  }
+
+  velin-tabs:not(:defined),
+  velin-accordion:not(:defined),
+  velin-carousel:not(:defined),
+  velin-collapse:not(:defined),
+  velin-stepper:not(:defined),
+  velin-stepper-wc:not(:defined),
+  velin-bottom-nav:not(:defined),
+  velin-menubar:not(:defined),
+  velin-segmented-control:not(:defined),
+  velin-code-block:not(:defined),
+  velin-secure-field:not(:defined),
+  velin-search:not(:defined) {
+    display: block;
+    min-block-size: 2.75rem;
+    opacity: 0;
+    visibility: hidden;
+    contain: layout style;
+  }
+
+  velin-dropdown:not(:defined),
+  velin-combobox:not(:defined),
+  velin-popover:not(:defined),
+  velin-tooltip:not(:defined),
+  velin-tooltip-wc:not(:defined),
+  velin-rating:not(:defined),
+  velin-copy:not(:defined),
+  velin-email:not(:defined),
+  velin-countdown:not(:defined),
+  velin-counter:not(:defined),
+  velin-live-dot:not(:defined),
+  velin-progress-ring:not(:defined),
+  velin-icon:not(:defined),
+  velin-theme-toggle:not(:defined) {
+    display: inline-block;
+    min-inline-size: 2.75rem;
+    min-block-size: 2.75rem;
+    vertical-align: middle;
+    opacity: 0;
+    visibility: hidden;
+    contain: layout style;
+  }
+
+  velin-sparkline:not(:defined) {
+    display: inline-block;
+    min-inline-size: 4rem;
+    min-block-size: 1.5rem;
+    vertical-align: middle;
+    opacity: 0;
+    visibility: hidden;
+    contain: layout style;
+  }
+
+  velin-scroll-top:not(:defined) {
+    position: fixed;
+    inset-block-end: var(--velin-space-4, 1rem);
+    inset-inline-end: var(--velin-space-4, 1rem);
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    contain: layout style;
+  }
+
+  velin-toast:not(:defined),
+  velin-announcer:not(:defined) {
+    position: fixed;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    contain: strict;
+  }
+
+  velin-persist:not(:defined),
+  velin-scrollspy:not(:defined) {
+    display: contents;
+    opacity: 0;
+    visibility: hidden;
+  }
+}

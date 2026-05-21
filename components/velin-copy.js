@@ -1,3 +1,5 @@
+import { escapeHTML } from './sanitize.js';
+
 const styles = `
   :host { display: inline-flex; }
   button {
@@ -27,14 +29,14 @@ class VelinCopy extends HTMLElement {
   }
 
   connectedCallback() {
-    const label = this.getAttribute('label') || '';
+    const label = escapeHTML(this.getAttribute('label') || '');
     this.shadowRoot.innerHTML = `
       <style>${styles}</style>
       <button part="button" aria-label="Copy">
-        <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
         </svg>
-        <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <polyline points="20 6 9 17 4 12"/>
         </svg>
         ${label ? `<span>${label}</span>` : ''}
@@ -44,8 +46,17 @@ class VelinCopy extends HTMLElement {
     this.shadowRoot.querySelector('button').addEventListener('click', () => this._copy());
   }
 
+  _getCopyText() {
+    return (
+      this.getAttribute('value') ||
+      this.getAttribute('text') ||
+      this.dataset.source ||
+      ''
+    );
+  }
+
   async _copy() {
-    const value = this.getAttribute('value') || '';
+    const value = this._getCopyText();
     if (!value) return;
 
     try {
@@ -72,5 +83,7 @@ class VelinCopy extends HTMLElement {
   }
 }
 
-customElements.define('velin-copy', VelinCopy);
+if (!customElements.get('velin-copy')) {
+  customElements.define('velin-copy', VelinCopy);
+}
 export default VelinCopy;

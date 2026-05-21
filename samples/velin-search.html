@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" data-velin-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VelinSearch sample</title>
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+</head>
+<body class="velin-container" style="padding: 2rem;">
+  <main id="main">
+    <h1>VelinSearch</h1>    
+      <p>Type at least 2 characters. Uses <code>dist/search-index.json</code> when built.</p>    
+      <velin-search index="../dist/search-index.json" categories="docs,components,api,examples" placeholder="Search framework…"></velin-search>    
+      <script type="module">    
+        import '../components/velin-search.js';    
+      </script>
+  </main>
+</body>
+</html>

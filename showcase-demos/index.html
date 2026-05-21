@@ -3,9 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Live demos — VelinStyle</title>
-  <meta name="description" content="Interactive showcase pages built with VelinStyle: UI kit, SaaS landing, dashboard, and Web Components.">
-  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle.min.css">
+  <!-- velin-seo -->
+  <link rel="canonical" href="https://velinstyle.info/demos/index.html">
+  <meta name="description" content="VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.">
+  <link rel="alternate" type="application/vnd.velinstyle.meta+json" href="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velin-agent.json" title="VelinStyle agent metadata">
+  <link rel="alternate" type="text/plain" href="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/llms.txt" title="VelinStyle llms.txt">
+  <script type="application/ld+json">{"@context": "https://schema.org","@type": "SoftwareApplication","name": "VelinStyle","applicationCategory": "DeveloperApplication","operatingSystem": "Web","description": "VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.","url": "https://velinstyle.info/demos/index.html","softwareVersion": "0.9.0","license": "https://opensource.org/licenses/MIT","isAccessibleForFree": true,"publisher": {"@type": "Organization","name": "SkyliteDesign"}}</script>
+  <!-- /velin-seo -->
+
+<title>Live demos — VelinStyle</title>
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle.min.css">
+  <script src="../assets/js/velin-theme-init.js"></script>
+  <script>document.documentElement.setAttribute('data-velin-themes-base','https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/themes');</script>
   <style>
     body { background: var(--velin-color-surface-dim); margin: 0; min-height: 100vh; }
     .demo-bar {
@@ -79,21 +88,48 @@
     }
     .demo-card p { margin: 0; font-size: var(--velin-text-sm); color: var(--velin-color-text-muted); flex: 1; }
     .demo-card__cta { margin-top: var(--velin-space-4); font-weight: var(--velin-weight-semibold); color: var(--velin-color-primary); }
+    .demo-card__features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: var(--velin-space-3);
+    }
+    .demo-card__features span {
+      font-size: 0.65rem;
+      font-weight: var(--velin-weight-semibold);
+      padding: 0.15rem 0.45rem;
+      border-radius: var(--velin-radius-full, 999px);
+      background: var(--velin-color-bg-subtle);
+      color: var(--velin-color-text-muted);
+    }
+    .demo-overview {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 0 var(--velin-space-4) var(--velin-space-4);
+    }
+    .demo-overview h2 {
+      font-size: var(--velin-text-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--velin-color-text-muted);
+      margin: 0 0 var(--velin-space-4);
+    }
   </style>
+  <link rel="stylesheet" href="demos-shared.css">
 </head>
 <body>
   <a href="#main" class="velin-skip-link">Skip to main content</a>
   <header class="demo-bar">
     <div class="demo-bar__inner">
       <a href="https://velinstyle.info/">← VelinStyle home</a>
-      <velin-theme-toggle themes-base="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/themes/"></velin-theme-toggle>
+      <velin-theme-toggle themes-base="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/themes/"></velin-theme-toggle>
     </div>
   </header>
   <link rel="icon" href="../assets/img/velinstyle-logo.svg" type="image/svg+xml">
   <main id="main">
     <div class="demo-hero">
       <h1>Live demos</h1>
-      <p>Full pages that stress-test layout, components, themes, and Web Components—open source and copy-friendly.</p>
+      <p>Full pages for VelinStyle <strong>0.9.0</strong> — CSS, Web Components, motion, search, highlight, and agent metadata. Open source and copy-friendly.</p>
       <p style="margin-top:var(--velin-space-4);font-size:var(--velin-text-sm)">
         <strong>Fork on GitHub:</strong>
         <a href="https://github.com/SkyliteDesign/velinstyle-demos" target="_blank" rel="noopener noreferrer">velinstyle-demos</a>
@@ -101,51 +137,85 @@
         · <a href="https://skylitedesign.github.io/velinstyle-demos/" target="_blank" rel="noopener noreferrer">GitHub Pages mirror</a>
       </p>
     </div>
+    <div class="demo-overview">
+      <h2>Start here</h2>
+    </div>
     <div class="demo-grid">
+      <a class="demo-card" href="demos/showcase-runtime.html">
+        <span class="demo-card__tag">0.9.0</span>
+        <h2>Runtime lab</h2>
+        <p>Motion, VelinSearch, syntax highlighting, copy/email helpers, and Velin-Meta — with in-page sections and doc links.</p>
+        <div class="demo-card__features">
+          <span>Motion</span><span>Search</span><span>Highlight</span><span>Meta</span>
+        </div>
+        <span class="demo-card__cta">Open demo →</span>
+      </a>
       <a class="demo-card" href="demos/showcase-ui-kit.html">
         <span class="demo-card__tag">Components</span>
         <h2>UI kit</h2>
-        <p>Buttons, badges, alerts, forms, lists, and accordion patterns in one dense surface.</p>
+        <p>Full design-system page: actions, forms, data tables, cards, progress, breadcrumb, pagination, and code blocks with TOC.</p>
+        <div class="demo-card__features">
+          <span>TOC</span><span>Tables</span><span>Nav</span>
+        </div>
         <span class="demo-card__cta">Open demo →</span>
       </a>
       <a class="demo-card" href="demos/showcase-saas.html">
         <span class="demo-card__tag">Marketing</span>
         <h2>SaaS landing</h2>
-        <p>Hero, logos, feature grid, testimonial, pricing teaser, and footer using layout utilities.</p>
+        <p>Hero, logos, feature grid, testimonial, pricing, motion reveals, mobile bottom-nav, and theme presets.</p>
+        <div class="demo-card__features">
+          <span>Layout</span><span>Reveal</span><span>Mobile</span>
+        </div>
         <span class="demo-card__cta">Open demo →</span>
       </a>
       <a class="demo-card" href="demos/showcase-dashboard.html">
         <span class="demo-card__tag">Application</span>
         <h2>Dashboard</h2>
-        <p>Sidebar shell, KPI cards, charts placeholder, data table, and drawer-friendly actions.</p>
+        <p>VelinDash shell: sidebar, 6 KPIs, sparkline, activity feed, notifications, 8-row orders table, Cmd+K, doc search.</p>
+        <div class="demo-card__features">
+          <span>Shell</span><span>Live</span><span>Toast</span>
+        </div>
         <span class="demo-card__cta">Open demo →</span>
       </a>
       <a class="demo-card" href="demos/showcase-interactive.html">
         <span class="demo-card__tag">Web Components</span>
         <h2>Interactive</h2>
-        <p>Modal, toast, dropdown, theme toggle, progress ring, stepper, plus the new 0.8.0 announcer and sheet.</p>
+        <p>Demo chrome + TOC: modal, sheet, drawer, tabs, stepper, persist, carousel, lightbox — keyboard-first patterns.</p>
+        <div class="demo-card__features">
+          <span>Chrome</span><span>Overlays</span><span>Lightbox</span>
+        </div>
         <span class="demo-card__cta">Open demo →</span>
       </a>
       <a class="demo-card" href="demos/showcase-forum.html">
         <span class="demo-card__tag">Community</span>
         <h2>Forum</h2>
-        <p>Thread list with avatars, ratings, chips, plus a tabbed detail panel and a reply composer with mention popover.</p>
+        <p>Thread list with FLIP filters, ratings, tabs, composer, popover mentions, and live announcer feedback.</p>
+        <div class="demo-card__features">
+          <span>FLIP</span><span>Tabs</span><span>A11y</span>
+        </div>
         <span class="demo-card__cta">Open demo →</span>
       </a>
       <a class="demo-card" href="demos/showcase-ecommerce.html">
         <span class="demo-card__tag">Storefront</span>
         <h2>E-Commerce</h2>
-        <p>Product grid, cart sheet, mobile bottom-nav, segmented size picker, stepper qty, and live announcer.</p>
+        <p>Full storefront: hero, sidebar filters, 8 products, PDP, cart sheet, sort, grid/list, mobile nav.</p>
+        <div class="demo-card__features">
+          <span>Sheet</span><span>FLIP</span><span>Mobile</span>
+        </div>
         <span class="demo-card__cta">Open demo →</span>
       </a>
       <a class="demo-card" href="demos/showcase-crypto.html">
         <span class="demo-card__tag">Finance</span>
         <h2>Crypto dashboard</h2>
-        <p>Menubar shell, Cmd-K command palette, KPI stats with progress rings, sparkline SVG, and order book.</p>
+        <p>Menubar, Cmd-K, animated counters, sparkline, progress rings, live dot, FLIP order book filters.</p>
+        <div class="demo-card__features">
+          <span>Charts</span><span>Command</span><span>Live</span>
+        </div>
         <span class="demo-card__cta">Open demo →</span>
       </a>
     </div>
   </main>
-  <script src="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle-components.iife.js"></script>
+  <script src="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle-components.iife.js"></script>
+  <script src="demos-shared.js"></script>
 </body>
 </html>

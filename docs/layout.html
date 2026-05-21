@@ -9,6 +9,7 @@
 </head>
 <body>
   <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <header role="banner">
   <nav class="velin-nav" aria-label="Main navigation">
     <a href="index.html" class="velin-nav__brand">VelinStyle</a>
     <button type="button" class="velin-nav__toggle" data-velin-nav-toggle aria-label="Toggle menu" aria-expanded="false"
@@ -27,13 +28,15 @@
       <li><a href="themes.html" class="velin-nav__link">Themes</a></li>
       <li><a href="icons.html" class="velin-nav__link">Icons</a></li>
       <li><a href="a11y.html" class="velin-nav__link">A11y</a></li>
-      <li><a href="security.html" class="velin-nav__link">Security</a></li>
+      <li><a href="security.html" class="velin-nav__link">Security</a></li>      <li data-velin-nav-api-reference><a href="reference.html" class="velin-nav__link">API Reference</a></li>
+
       <li><a href="migration.html" class="velin-nav__link">Migration</a></li>
     </ul>
   </nav>
 <div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
   <strong>Full documentation available at <a href="https://velinstyle.info/docs/getting-started/introduction.html">velinstyle.info</a></strong> — This is the quick reference. Visit the full docs for 80+ pages with live examples, API tables, and guides.
 </div>
+  </header>
   <main id="main" class="velin-container">
 
     <!-- Hero -->
@@ -409,14 +412,14 @@
       <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">.velin-layout-sidebar</h3>
       <p>Sidebar + main content. Collapses to a single column below 48rem.</p>
       <div class="velin-layout-sidebar" style="min-block-size:auto;border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);overflow:hidden;margin-block-end:var(--velin-space-4);">
-        <aside style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-4);">
+        <div class="velin-layout-demo-aside" style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-4);">
           <p style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-2);">Sidebar</p>
           <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);">Navigation, filters, etc.</p>
-        </aside>
-        <main style="background:var(--velin-color-surface-bright);padding:var(--velin-space-4);">
+        </div>
+        <div class="velin-layout-demo-main" style="background:var(--velin-color-surface-bright);padding:var(--velin-space-4);">
           <p style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-2);">Main Content</p>
           <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);">Your primary content area fills the remaining space.</p>
-        </main>
+        </div>
       </div>
       <pre class="velin-doc-code">&lt;div class="velin-layout-sidebar"&gt;
   &lt;aside&gt;Sidebar&lt;/aside&gt;
@@ -428,13 +431,13 @@
       <p>Classic layout with full-width header/footer and a sidebar beside the main content.</p>
       <div class="velin-layout-holy-grail" style="min-block-size:20rem;border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);overflow:hidden;margin-block-end:var(--velin-space-4);">
         <header style="background:var(--velin-color-primary-subtle);padding:var(--velin-space-3);text-align:center;font-weight:var(--velin-weight-semibold);">Header (full width)</header>
-        <aside style="background:var(--velin-color-info-subtle);padding:var(--velin-space-4);">
+        <div class="velin-layout-demo-aside" style="background:var(--velin-color-info-subtle);padding:var(--velin-space-4);">
           <p style="font-weight:var(--velin-weight-semibold);">Sidebar</p>
-        </aside>
-        <main style="background:var(--velin-color-surface-bright);padding:var(--velin-space-4);">
+        </div>
+        <div class="velin-layout-demo-main" style="background:var(--velin-color-surface-bright);padding:var(--velin-space-4);">
           <p style="font-weight:var(--velin-weight-semibold);">Content</p>
           <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);">Main area grows to fill available space.</p>
-        </main>
+        </div>
         <footer style="background:var(--velin-color-secondary-subtle);padding:var(--velin-space-3);text-align:center;font-weight:var(--velin-weight-semibold);">Footer (full width)</footer>
       </div>
       <pre class="velin-doc-code">&lt;div class="velin-layout-holy-grail"&gt;
@@ -449,9 +452,9 @@
       <p>Footer always sits at the bottom, even with minimal content. The <code class="velin-doc-inline-code">&lt;main&gt;</code> grows to fill available space.</p>
       <div class="velin-layout-sticky-footer" style="min-block-size:16rem;border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);overflow:hidden;margin-block-end:var(--velin-space-4);">
         <header style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-3);text-align:center;font-weight:var(--velin-weight-semibold);">Header</header>
-        <main style="background:var(--velin-color-surface-bright);padding:var(--velin-space-4);">
+        <div class="velin-layout-demo-main" style="background:var(--velin-color-surface-bright);padding:var(--velin-space-4);">
           <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);">Minimal content &mdash; footer still sticks to the bottom.</p>
-        </main>
+        </div>
         <footer style="background:var(--velin-color-warning-subtle);padding:var(--velin-space-3);text-align:center;font-weight:var(--velin-weight-semibold);">Sticky Footer</footer>
       </div>
       <pre class="velin-doc-code">&lt;div class="velin-layout-sticky-footer"&gt;
@@ -497,10 +500,10 @@
           <p style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-2);">Main Content</p>
           <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);">Primary content takes 1fr of available space. Great for article layouts with a table of contents or related links on the side.</p>
         </div>
-        <aside style="background:var(--velin-color-secondary-subtle);padding:var(--velin-space-4);">
+        <div class="velin-layout-demo-aside" style="background:var(--velin-color-secondary-subtle);padding:var(--velin-space-4);">
           <p style="font-weight:var(--velin-weight-semibold);margin-block-end:var(--velin-space-2);">Right Sidebar</p>
           <p style="font-size:var(--velin-text-sm);color:var(--velin-color-text-muted);">Fixed 20rem width.</p>
-        </aside>
+        </div>
       </div>
       <pre class="velin-doc-code">&lt;div class="velin-layout-aside-main"&gt;
   &lt;main&gt;Main Content&lt;/main&gt;
@@ -518,8 +521,8 @@
       <p>Expected direct children: <strong>header</strong>, <strong>aside</strong>, <strong>main</strong> (in that order).</p>
       <div class="velin-layout-dashboard" style="min-block-size:14rem;border:1px solid var(--velin-color-border);border-radius:var(--velin-radius-lg);overflow:hidden;">
         <header style="padding:var(--velin-space-2);background:var(--velin-color-surface-bright);border-block-end:1px solid var(--velin-color-border);font-weight:var(--velin-weight-semibold);">Header</header>
-        <aside style="padding:var(--velin-space-3);background:var(--velin-color-surface-dim);">Nav</aside>
-        <main style="padding:var(--velin-space-3);background:var(--velin-color-surface-bright);">Main</main>
+        <div class="velin-layout-demo-aside" style="padding:var(--velin-space-3);background:var(--velin-color-surface-dim);">Nav</div>
+        <div class="velin-layout-demo-main" style="padding:var(--velin-space-3);background:var(--velin-color-surface-bright);">Main</div>
       </div>
 
       <h3 style="font-weight:var(--velin-weight-semibold);margin-block:var(--velin-space-6) var(--velin-space-3);">.velin-layout-auth</h3>
@@ -642,34 +645,15 @@ npx velinstyle layout fix page.html --write</pre>
     </div>
   </footer>
 <!-- Theme Picker Widget -->
-<div style="position:fixed;bottom:1rem;right:1rem;z-index:1050;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;" id="themePicker">
-  <div id="themePanel" style="display:none;background:var(--velin-color-surface-bright,#fff);border:1px solid var(--velin-color-border,#dee2e6);border-radius:.75rem;padding:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:20rem;">
-    <p style="margin:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--velin-color-text-muted,#6c757d);text-transform:uppercase;letter-spacing:.04em;">Theme waehlen</p>
-    <div style="display:flex;flex-wrap:wrap;gap:.35rem;" id="themeGrid"></div>
+<link rel="stylesheet" href="assets/theme-picker.css">
+<div role="region" aria-label="Theme picker" class="velin-docs-theme-picker" id="themePicker">
+  <div id="themePanel" class="velin-docs-theme-panel">
+    <p class="velin-docs-theme-panel__title">Theme waehlen</p>
+    <div class="velin-docs-theme-grid" id="themeGrid"></div>
   </div>
-  <button type="button" data-velin-theme-toggle  style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--velin-color-primary,#2563eb);color:var(--velin-color-on-primary,#fff);border:none;border-radius:2rem;cursor:pointer;font-size:.8125rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);" aria-label="Theme waehlen">&#127912; Theme</button>
+  <button type="button" class="velin-docs-theme-trigger" aria-label="Theme waehlen" aria-expanded="false" aria-controls="themePanel">&#127912; Theme</button>
 </div>
-<script>
-(function(){
-  var themes=['sharp','soft','brutalist','neon','earth','ocean','sunset','nordic','retro','corporate','pastel','midnight','forest'];
-  themes.forEach(function(t){var l=document.createElement('link');l.rel='stylesheet';l.href='dist/themes/'+t+'.min.css';document.head.appendChild(l);});
-  var names=['Default'].concat(themes).concat(['dark']);
-  var vals=[''].concat(themes).concat(['dark']);
-  var grid=document.getElementById('themeGrid');
-  names.forEach(function(n,i){
-    var b=document.createElement('button');
-    b.textContent=n.charAt(0).toUpperCase()+n.slice(1);
-    b.style.cssText='padding:.3rem .65rem;border:1px solid var(--velin-color-border,#dee2e6);border-radius:1rem;background:var(--velin-color-surface-dim,#f5f6f8);color:var(--velin-color-text,#212529);font-size:.75rem;cursor:pointer;white-space:nowrap;';
-    b.addEventListener('click',function(){
-      if(vals[i]){document.documentElement.setAttribute('data-velin-theme',vals[i]);}
-      else{document.documentElement.removeAttribute('data-velin-theme');}
-      grid.querySelectorAll('button').forEach(function(x){x.style.background='var(--velin-color-surface-dim,#f5f6f8)';x.style.color='var(--velin-color-text,#212529)';});
-      b.style.background='var(--velin-color-primary,#2563eb)';b.style.color='#fff';
-    });
-    grid.appendChild(b);
-  });
-})();
-</script>
+<script src="assets/theme-picker.js" defer></script>
 <script src="assets/docs-a11y.js" defer></script>
 </body>
 </html>

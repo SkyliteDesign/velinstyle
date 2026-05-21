@@ -5,21 +5,32 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard showcase — VelinStyle</title>
-  <meta name="description" content="Application shell with sidebar, KPI cards, and data table using VelinStyle components.">
-  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle.min.css">
+  <!-- velin-seo -->
+  <link rel="canonical" href="https://velinstyle.info/demos/showcase-dashboard.html">
+  <meta name="description" content="VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.">
+  <link rel="alternate" type="application/vnd.velinstyle.meta+json" href="../dist/velin-agent.json" title="VelinStyle agent metadata">
+  <link rel="alternate" type="text/plain" href="../dist/llms.txt" title="VelinStyle llms.txt">
+  <script type="application/ld+json">{"@context": "https://schema.org","@type": "SoftwareApplication","name": "VelinStyle","applicationCategory": "DeveloperApplication","operatingSystem": "Web","description": "VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.","url": "https://velinstyle.info/demos/showcase-dashboard.html","softwareVersion": "0.9.0","license": "https://opensource.org/licenses/MIT","isAccessibleForFree": true,"publisher": {"@type": "Organization","name": "SkyliteDesign"}}</script>
+  <!-- /velin-seo -->
+
+<title>Dashboard showcase — VelinStyle</title>
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle.min.css">
+<link rel="stylesheet" href="demos-shared.css">
+<link rel="icon" href="../assets/img/velinstyle-logo.svg" type="image/svg+xml">
+  <script src="../assets/js/velin-theme-init.js"></script>
+  <script>document.documentElement.setAttribute('data-velin-themes-base','../dist/themes');</script>
   <style>
     body { margin: 0; background: var(--velin-color-surface-dim); min-height: 100vh; }
-    .shell {
+    .dash-shell {
       display: grid;
       grid-template-columns: 15rem 1fr;
-      min-height: 100vh;
+      min-height: calc(100vh - 6.5rem);
     }
     @media (max-width: 56rem) {
-      .shell { grid-template-columns: 1fr; }
-      .sidebar { display: none; }
+      .dash-shell { grid-template-columns: 1fr; }
+      .dash-sidebar { display: none; }
     }
-    .sidebar {
+    .dash-sidebar {
       background: var(--velin-color-surface);
       border-inline-end: 1px solid var(--velin-color-border);
       padding: var(--velin-space-6);
@@ -27,14 +38,14 @@
       flex-direction: column;
       gap: var(--velin-space-1);
     }
-    .sidebar__brand {
+    .dash-sidebar__brand {
       font-size: var(--velin-text-lg);
       font-weight: var(--velin-weight-extrabold);
       text-decoration: none;
       color: var(--velin-color-text);
       margin-bottom: var(--velin-space-6);
     }
-    .sidebar__link {
+    .dash-sidebar__link {
       display: flex;
       align-items: center;
       gap: var(--velin-space-2);
@@ -45,79 +56,87 @@
       font-size: var(--velin-text-sm);
       font-weight: var(--velin-weight-medium);
     }
-    .sidebar__link:hover,
-    .sidebar__link[aria-current="page"] {
+    .dash-sidebar__link:hover,
+    .dash-sidebar__link[aria-current="page"] {
       background: var(--velin-color-primary-subtle);
       color: var(--velin-color-primary);
     }
-    .main { padding: var(--velin-space-6); min-width: 0; }
-    .topbar {
+    .dash-main { padding: var(--velin-space-6); min-width: 0; }
+    .dash-topbar {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       gap: var(--velin-space-4);
-      margin-bottom: var(--velin-space-8);
     }
-    .topbar h1 { font-size: var(--velin-text-2xl); margin: 0; }
-    .topbar__actions { display: flex; align-items: center; gap: var(--velin-space-2); }
-    @media (min-width: 56.01rem) {
-      .topbar__menu { display: none; }
-    }
-    .kpi-grid {
+    .dash-topbar h1 { font-size: var(--velin-text-2xl); margin: 0 0 var(--velin-space-1); }
+    .dash-topbar__lead { margin: 0; font-size: var(--velin-text-sm); color: var(--velin-color-text-muted); max-width: 42ch; }
+    .dash-topbar__actions { display: flex; align-items: center; gap: var(--velin-space-2); flex-wrap: wrap; }
+    @media (min-width: 56.01rem) { .dash-topbar__menu { display: none; } }
+    .dash-kpi-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
       gap: var(--velin-space-4);
-      margin-bottom: var(--velin-space-8);
     }
-    .kpi {
+    .dash-kpi {
       background: var(--velin-color-surface-bright);
       border: 1px solid var(--velin-color-border);
       border-radius: var(--velin-radius-md);
       padding: var(--velin-space-5);
     }
-    .kpi__label { font-size: var(--velin-text-xs); color: var(--velin-color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-    .kpi__value { font-size: var(--velin-text-2xl); font-weight: var(--velin-weight-bold); margin-top: var(--velin-space-1); }
-    .chart {
+    .dash-kpi__label { font-size: var(--velin-text-xs); color: var(--velin-color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .dash-kpi__value { font-size: var(--velin-text-2xl); font-weight: var(--velin-weight-bold); margin-top: var(--velin-space-1); }
+    .dash-kpi__delta { font-size: var(--velin-text-xs); margin-top: var(--velin-space-1); color: var(--velin-color-success); }
+    .dash-kpi__delta--down { color: var(--velin-color-warning); }
+    .dash-split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--velin-space-6);
+    }
+    @media (min-width: 56rem) {
+      .dash-split { grid-template-columns: 1.4fr 1fr; }
+      .dash-split--wide { grid-template-columns: 1fr 22rem; }
+    }
+    .dash-card {
       background: var(--velin-color-surface-bright);
       border: 1px solid var(--velin-color-border);
       border-radius: var(--velin-radius-md);
-      padding: var(--velin-space-6);
-      margin-bottom: var(--velin-space-8);
-      min-height: 10rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--velin-color-text-muted);
-      font-size: var(--velin-text-sm);
+      padding: var(--velin-space-5);
     }
-    .table-card {
-      background: var(--velin-color-surface-bright);
-      border: 1px solid var(--velin-color-border);
-      border-radius: var(--velin-radius-md);
-      overflow: hidden;
-    }
-    .table-card__head {
+    .dash-card__head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: var(--velin-space-4) var(--velin-space-5);
-      border-bottom: 1px solid var(--velin-color-border);
-    }
-    .demo-bar-mini {
-      display: flex;
-      justify-content: flex-end;
-      padding: max(var(--velin-space-2), env(safe-area-inset-top)) var(--velin-space-4) var(--velin-space-2);
-      background: var(--velin-color-surface);
-      border-bottom: 1px solid var(--velin-color-border);
       gap: var(--velin-space-3);
-      align-items: center;
+      margin-bottom: var(--velin-space-4);
     }
-    .demo-bar-mini a { font-size: var(--velin-text-xs); color: var(--velin-color-text-muted); text-decoration: none; }
-    .demo-bar-mini a:hover { color: var(--velin-color-primary); }
+    .dash-card__head h2 { margin: 0; font-size: var(--velin-text-lg); }
+    .dash-activity { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--velin-space-3); }
+    .dash-activity li {
+      display: flex;
+      gap: var(--velin-space-3);
+      font-size: var(--velin-text-sm);
+      padding-bottom: var(--velin-space-3);
+      border-bottom: 1px solid var(--velin-color-border);
+    }
+    .dash-activity li:last-child { border-bottom: none; padding-bottom: 0; }
+    .dash-activity time { font-size: var(--velin-text-xs); color: var(--velin-color-text-muted); white-space: nowrap; }
+    .dash-notify { display: flex; flex-direction: column; gap: var(--velin-space-3); }
+    .dash-notify__item {
+      display: flex;
+      gap: var(--velin-space-3);
+      align-items: flex-start;
+      padding: var(--velin-space-3);
+      border-radius: var(--velin-radius-sm);
+      background: var(--velin-color-bg-subtle);
+      font-size: var(--velin-text-sm);
+    }
+    .dash-table-card { overflow: hidden; padding: 0; }
+    .dash-table-card .dash-card__head { padding: var(--velin-space-4) var(--velin-space-5); margin: 0; border-bottom: 1px solid var(--velin-color-border); }
+    .dash-status { display: inline-flex; align-items: center; gap: var(--velin-space-2); font-size: var(--velin-text-sm); color: var(--velin-color-text-muted); }
   </style>
 </head>
-<body>
+<body data-demo-page="showcase-dashboard.html">
 <svg data-velin-inline-sprite="1" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><symbol id="calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
   <line x1="16" y1="2" x2="16" y2="6"/>
@@ -144,72 +163,139 @@
   </symbol></svg>
 
 <a href="#main" class="velin-skip-link">Skip to main content</a>
-  <div class="demo-bar-mini">
-    <a href="https://velinstyle.info/">Home</a>
-    <a href="index.html">Demos</a>
-    <velin-theme-toggle themes-base="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/themes/"></velin-theme-toggle>
+<p class="demo-chrome-promo"><strong>VelinDash</strong> application shell · Cmd+K · doc search · live KPIs</p>
+<header class="demo-chrome-header">
+  <div class="demo-chrome-header__row">
+    <a href="#main" class="demo-chrome-brand">
+      <img src="../assets/img/velinstyle-logo.svg" alt="" width="28" height="28" aria-hidden="true">
+      VelinDash
+    </a>
+    <div class="demo-chrome-header__actions">
+      <a href="showcase-runtime.html" class="velin-btn velin-btn--ghost velin-btn--sm">Runtime 0.9</a>
+      <velin-theme-toggle themes-base="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/themes/"></velin-theme-toggle>
+    </div>
   </div>
-  <velin-drawer title="Navigation" id="dashDrawer" side="start">
-    <nav aria-label="Mobile navigation" class="velin-stack" style="gap: var(--velin-space-1);">
-      <a href="#" class="velin-btn velin-btn--ghost" style="justify-content: flex-start;">Overview</a>
-      <a href="#" class="velin-btn velin-btn--ghost" style="justify-content: flex-start;">Orders</a>
-      <a href="#" class="velin-btn velin-btn--ghost" style="justify-content: flex-start;">Customers</a>
-      <a href="#" class="velin-btn velin-btn--ghost" style="justify-content: flex-start;">Settings</a>
-    </nav>
-    <button type="button" class="velin-btn velin-btn--primary velin-btn--sm velin-mbs-4" onclick="document.getElementById('dashDrawer').close()">Close</button>
-  </velin-drawer>
-  <div class="shell">
-    <aside class="sidebar" aria-label="Sidebar">
-      <a class="sidebar__brand" href="index.html">VelinDash</a>
-      <a class="sidebar__link" href="#" aria-current="page"><velin-icon name="home" size="18"></velin-icon> Overview</a>
-      <a class="sidebar__link" href="#"><velin-icon name="calendar" size="18"></velin-icon> Orders</a>
-      <a class="sidebar__link" href="#"><velin-icon name="users" size="18"></velin-icon> Customers</a>
-      <a class="sidebar__link" href="#"><velin-icon name="settings" size="18"></velin-icon> Settings</a>
-    </aside>
-    <div class="main" id="main">
-      <header class="topbar">
-        <div style="display:flex;align-items:center;gap:var(--velin-space-3);">
-          <button type="button" class="velin-btn velin-btn--outline velin-btn--icon topbar__menu" aria-label="Open menu" onclick="document.getElementById('dashDrawer').open()">
-            <velin-icon name="menu" size="20"></velin-icon>
-          </button>
+  <div class="demo-chrome-strip"><div class="demo-chrome-strip__inner"><div data-demo-crossnav class="demo-crossnav"></div></div></div>
+</header>
+
+<velin-drawer title="Navigation" id="dashDrawer" side="start">
+  <nav aria-label="Mobile navigation" class="velin-stack" style="gap: var(--velin-space-1);">
+    <a href="#main" class="velin-btn velin-btn--ghost" style="justify-content: flex-start;">Overview</a>
+    <a href="#" class="velin-btn velin-btn--ghost" style="justify-content: flex-start;">Orders</a>
+    <a href="#" class="velin-btn velin-btn--ghost" style="justify-content: flex-start;">Customers</a>
+    <a href="#" class="velin-btn velin-btn--ghost" style="justify-content: flex-start;">Settings</a>
+  </nav>
+  <button type="button" class="velin-btn velin-btn--primary velin-btn--sm velin-mbs-4" onclick="document.getElementById('dashDrawer').close()">Close</button>
+</velin-drawer>
+
+<div class="dash-shell">
+  <aside class="dash-sidebar" aria-label="Sidebar">
+    <a class="dash-sidebar__brand" href="index.html">VelinDash</a>
+    <a class="dash-sidebar__link" href="#main" aria-current="page"><velin-icon name="home" size="18"></velin-icon> Overview</a>
+    <a class="dash-sidebar__link" href="#"><velin-icon name="calendar" size="18"></velin-icon> Orders</a>
+    <a class="dash-sidebar__link" href="#"><velin-icon name="users" size="18"></velin-icon> Customers</a>
+    <a class="dash-sidebar__link" href="#"><velin-icon name="settings" size="18"></velin-icon> Settings</a>
+  </aside>
+
+  <div class="dash-main" id="main">
+    <header class="dash-topbar">
+      <div style="display:flex;align-items:flex-start;gap:var(--velin-space-3);min-width:0">
+        <button type="button" class="velin-btn velin-btn--outline velin-btn--icon dash-topbar__menu" aria-label="Open menu" onclick="document.getElementById('dashDrawer').open()">
+          <velin-icon name="menu" size="20"></velin-icon>
+        </button>
+        <div>
           <h1>Overview</h1>
-        </div>
-        <div class="topbar__actions">
-          <button type="button" class="velin-btn velin-btn--ghost velin-btn--sm" id="cmdkBtn">
-            <velin-icon name="search" size="14"></velin-icon> Search <kbd style="margin-inline-start:.4rem;font-size:.7rem;border:1px solid var(--velin-color-border);padding:0 .3rem;border-radius:.25rem">Ctrl K</kbd>
-          </button>
-          <button type="button" class="velin-btn velin-btn--ghost velin-btn--sm">Export</button>
-          <button type="button" class="velin-btn velin-btn--primary velin-btn--sm">New order</button>
-        </div>
-      </header>
-      <velin-menubar aria-label="Workspace menubar" style="margin-block-end:var(--velin-space-6)">
-        <button type="button" data-menu="file">File</button>
-        <button type="button" data-menu="view">View</button>
-        <button type="button" data-menu="reports">Reports</button>
-        <button type="button" data-menu="help">Help</button>
-      </velin-menubar>
-      <div class="kpi-grid">
-        <div class="kpi">
-          <div class="kpi__label">Revenue</div>
-          <div class="kpi__value">€48.2k</div>
-        </div>
-        <div class="kpi">
-          <div class="kpi__label">Active users</div>
-          <div class="kpi__value">1,284</div>
-        </div>
-        <div class="kpi">
-          <div class="kpi__label">Churn</div>
-          <div class="kpi__value">1.2%</div>
-        </div>
-        <div class="kpi">
-          <div class="kpi__label">NPS</div>
-          <div class="kpi__value">62</div>
+          <p class="dash-topbar__lead">Operations dashboard with menubar, fuzzy doc search, animated counters, sparkline trend, and command palette — fictional data for layout testing.</p>
+          <p class="dash-status velin-mbs-2"><velin-live-dot status="online" label="All systems operational"></velin-live-dot></p>
         </div>
       </div>
-      <div class="chart" aria-hidden="true">Chart placeholder — swap for your analytics embed.</div>
-      <section class="table-card" aria-labelledby="orders-heading">
-        <div class="table-card__head">
-          <h2 id="orders-heading" style="margin:0;font-size:var(--velin-text-lg);">Recent orders</h2>
+      <div class="dash-topbar__actions">
+        <button type="button" class="velin-btn velin-btn--ghost velin-btn--sm" id="cmdkBtn">
+          <velin-icon name="search" size="14"></velin-icon> Search <kbd style="margin-inline-start:.4rem;font-size:.7rem;border:1px solid var(--velin-color-border);padding:0 .3rem;border-radius:.25rem">Ctrl K</kbd>
+        </button>
+        <button type="button" class="velin-btn velin-btn--ghost velin-btn--sm">Export</button>
+        <button type="button" class="velin-btn velin-btn--primary velin-btn--sm">New order</button>
+      </div>
+    </header>
+
+    <velin-menubar aria-label="Workspace menubar">
+      <button type="button" data-menu="file">File</button>
+      <button type="button" data-menu="view">View</button>
+      <button type="button" data-menu="reports">Reports</button>
+      <button type="button" data-menu="help">Help</button>
+    </velin-menubar>
+
+    <section class="dash-card" aria-labelledby="search-heading">
+      <div class="dash-card__head">
+        <h2 id="search-heading">Documentation search</h2>
+        <velin-segmented-control id="periodRange" aria-label="Time range">
+          <button type="button" value="7d" aria-pressed="true">7d</button>
+          <button type="button" value="30d">30d</button>
+          <button type="button" value="90d">90d</button>
+        </velin-segmented-control>
+      </div>
+      <p style="margin:0 0 var(--velin-space-3);font-size:var(--velin-text-sm);color:var(--velin-color-text-muted)"><code>&lt;velin-search&gt;</code> over <code>dist/search-index.json</code> — use Cmd+K below for in-app commands.</p>
+      <velin-search index="../dist/search-index.json" categories="docs,components" placeholder="Search docs &amp; components…" min-chars="2" fuzzy="0.2" style="max-width:28rem;display:block"></velin-search>
+    </section>
+
+    <div class="dash-kpi-grid" aria-label="Key metrics">
+      <div class="dash-kpi">
+        <div class="dash-kpi__label">Revenue</div>
+        <div class="dash-kpi__value"><velin-counter from="0" to="48200" duration="1200" format="currency" currency="EUR" locale="de-DE"></velin-counter></div>
+        <div class="dash-kpi__delta">+12.4% vs last period</div>
+      </div>
+      <div class="dash-kpi">
+        <div class="dash-kpi__label">Active users</div>
+        <div class="dash-kpi__value"><velin-counter from="0" to="1284" duration="900"></velin-counter></div>
+        <div class="dash-kpi__delta">+86 this week</div>
+      </div>
+      <div class="dash-kpi">
+        <div class="dash-kpi__label">Churn</div>
+        <div class="dash-kpi__value"><velin-counter from="0" to="1.2" duration="700" format="percent" decimals="1"></velin-counter></div>
+        <div class="dash-kpi__delta dash-kpi__delta--down">−0.3 pts</div>
+      </div>
+      <div class="dash-kpi">
+        <div class="dash-kpi__label">NPS</div>
+        <div class="dash-kpi__value"><velin-counter from="0" to="62" duration="800"></velin-counter></div>
+        <div class="dash-kpi__delta">Stable</div>
+      </div>
+      <div class="dash-kpi">
+        <div class="dash-kpi__label">Orders</div>
+        <div class="dash-kpi__value"><velin-counter from="0" to="318" duration="750"></velin-counter></div>
+        <div class="dash-kpi__delta">+24 today</div>
+      </div>
+      <div class="dash-kpi">
+        <div class="dash-kpi__label">Support SLA</div>
+        <div class="dash-kpi__value"><velin-counter from="0" to="94" duration="600" format="percent" decimals="0"></velin-counter></div>
+        <div class="dash-kpi__delta">Within target</div>
+      </div>
+    </div>
+
+    <div class="dash-split">
+      <section class="dash-card" aria-labelledby="spark-heading">
+        <div class="dash-card__head">
+          <h2 id="spark-heading">Revenue trend</h2>
+          <span class="velin-badge velin-badge--success">Live</span>
+        </div>
+        <velin-sparkline values="12,18,15,22,28,24,32,30,38,42,45,48" width="100%" height="9rem" animate style="color:var(--velin-color-primary)"></velin-sparkline>
+        <p style="margin:var(--velin-space-3) 0 0;font-size:var(--velin-text-xs);color:var(--velin-color-text-muted)"><code>&lt;velin-sparkline&gt;</code> with draw-in animation — respects reduced motion.</p>
+      </section>
+      <section class="dash-card" aria-labelledby="activity-heading">
+        <div class="dash-card__head"><h2 id="activity-heading">Activity</h2></div>
+        <ul class="dash-activity">
+          <li><div><strong>Order #9103</strong> paid by L. Weber<br><span class="velin-badge velin-badge--success velin-badge--sm">Paid</span></div><time datetime="2026-05-19T09:12">09:12</time></li>
+          <li><div><strong>Export</strong> completed — 2.4k rows</div><time datetime="2026-05-19T08:55">08:55</time></li>
+          <li><div><strong>User</strong> invited to workspace “Design”</div><time datetime="2026-05-19T08:40">08:40</time></li>
+          <li><div><strong>Webhook</strong> retry succeeded</div><time datetime="2026-05-19T08:22">08:22</time></li>
+          <li><div><strong>Theme</strong> switched to Nordic preset</div><time datetime="2026-05-19T07:58">07:58</time></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="dash-split dash-split--wide">
+      <section class="dash-card dash-table-card" aria-labelledby="orders-heading">
+        <div class="dash-card__head">
+          <h2 id="orders-heading">Recent orders</h2>
           <button type="button" class="velin-btn velin-btn--ghost velin-btn--sm">View all</button>
         </div>
         <div class="velin-table-wrapper">
@@ -223,55 +309,90 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>#9102</td>
-                <td>M. Chen</td>
-                <td>€320.00</td>
-                <td><span class="velin-badge velin-badge--success">Paid</span></td>
-              </tr>
-              <tr>
-                <td>#9101</td>
-                <td>A. Rossi</td>
-                <td>€89.50</td>
-                <td><span class="velin-badge velin-badge--warning">Pending</span></td>
-              </tr>
-              <tr>
-                <td>#9100</td>
-                <td>J. Okonkwo</td>
-                <td>€1,204.00</td>
-                <td><span class="velin-badge velin-badge--info">Shipped</span></td>
-              </tr>
+              <tr><td>#9105</td><td>S. Patel</td><td>€156.00</td><td><span class="velin-badge velin-badge--success">Paid</span></td></tr>
+              <tr><td>#9104</td><td>K. Nguyen</td><td>€42.90</td><td><span class="velin-badge velin-badge--info">Shipped</span></td></tr>
+              <tr><td>#9103</td><td>L. Weber</td><td>€890.00</td><td><span class="velin-badge velin-badge--success">Paid</span></td></tr>
+              <tr><td>#9102</td><td>M. Chen</td><td>€320.00</td><td><span class="velin-badge velin-badge--success">Paid</span></td></tr>
+              <tr><td>#9101</td><td>A. Rossi</td><td>€89.50</td><td><span class="velin-badge velin-badge--warning">Pending</span></td></tr>
+              <tr><td>#9100</td><td>J. Okonkwo</td><td>€1,204.00</td><td><span class="velin-badge velin-badge--info">Shipped</span></td></tr>
+              <tr><td>#9099</td><td>E. Berg</td><td>€67.20</td><td><span class="velin-badge velin-badge--outline">Refunded</span></td></tr>
+              <tr><td>#9098</td><td>R. Silva</td><td>€512.00</td><td><span class="velin-badge velin-badge--success">Paid</span></td></tr>
             </tbody>
           </table>
         </div>
       </section>
+      <section class="dash-card" aria-labelledby="notify-heading">
+        <div class="dash-card__head"><h2 id="notify-heading">Notifications</h2><span class="velin-badge velin-badge--primary">3</span></div>
+        <div class="dash-notify">
+          <div class="dash-notify__item"><velin-progress-ring value="100" size="40" stroke="4" color="var(--velin-color-success)" aria-hidden="true"></velin-progress-ring><div><strong>Backup complete</strong><br>Nightly snapshot finished at 04:00 UTC.</div></div>
+          <div class="dash-notify__item"><velin-progress-ring value="45" size="40" stroke="4" aria-hidden="true"></velin-progress-ring><div><strong>Import in progress</strong><br>Customer CSV — 45% processed.</div></div>
+          <div class="dash-notify__item"><span class="velin-badge velin-badge--warning">Review</span><div><strong>Policy update</strong><br>Accept new data processing terms by Friday.</div></div>
+        </div>
+        <button type="button" class="velin-btn velin-btn--outline velin-btn--sm" style="margin-top:var(--velin-space-4);width:100%" id="toastDemoBtn">Send test toast</button>
+      </section>
     </div>
+
+    <section class="dash-card" aria-labelledby="help-heading">
+      <div class="dash-card__head"><h2 id="help-heading">Help &amp; shortcuts</h2></div>
+      <velin-accordion exclusive>
+        <details open>
+          <summary>Keyboard shortcuts</summary>
+          <p style="margin:0"><kbd>Ctrl</kbd>+<kbd>K</kbd> opens the command palette. Arrow keys navigate menubar and search results; <kbd>Esc</kbd> closes overlays.</p>
+        </details>
+        <details>
+          <summary>Exporting data</summary>
+          <p style="margin:0">Use <strong>Export</strong> in the top bar for CSV snapshots. Large exports run asynchronously — progress appears in Notifications.</p>
+        </details>
+        <details>
+          <summary>Documentation search</summary>
+          <p style="margin:0">The search field queries the same <code>search-index.json</code> as the Runtime demo — ideal for linking docs inside your app shell.</p>
+        </details>
+      </velin-accordion>
+    </section>
+
+    <footer class="demo-footer">
+      <span>VelinDash demo</span>
+      <span><a href="../docs/components/command.html">Command palette docs</a></span>
+    </footer>
   </div>
-  <velin-command id="cmdk" placeholder="Search orders, customers, settings…">
-    <velin-command-item data-value="overview">Overview</velin-command-item>
-    <velin-command-item data-value="orders">Recent orders</velin-command-item>
-    <velin-command-item data-value="customers">Customers</velin-command-item>
-    <velin-command-item data-value="settings">Settings</velin-command-item>
-    <velin-command-item data-value="export">Export CSV</velin-command-item>
-  </velin-command>
-  <script src="https://unpkg.com/@birdapi/velinstyle@0.8.0/dist/velinstyle-components.iife.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cmd = document.getElementById('cmdk');
-      const btn = document.getElementById('cmdkBtn');
-      function openCmd() {
-        if (!cmd) return;
-        if (typeof cmd.open === 'function') cmd.open();
-        else cmd.setAttribute('open', '');
+</div>
+
+<velin-command id="cmdk" placeholder="Search orders, customers, settings…">
+  <velin-command-item data-value="overview">Overview</velin-command-item>
+  <velin-command-item data-value="orders">Recent orders</velin-command-item>
+  <velin-command-item data-value="customers">Customers</velin-command-item>
+  <velin-command-item data-value="settings">Settings</velin-command-item>
+  <velin-command-item data-value="export">Export CSV</velin-command-item>
+  <velin-command-item data-value="docs">Open documentation search</velin-command-item>
+</velin-command>
+<velin-toast id="dashToast"></velin-toast>
+<velin-scroll-top threshold="400"></velin-scroll-top>
+<script src="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle-components.iife.js"></script>
+<script src="demos-shared.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cmd = document.getElementById('cmdk');
+    const btn = document.getElementById('cmdkBtn');
+    function openCmd() {
+      if (!cmd) return;
+      if (typeof cmd.open === 'function') cmd.open();
+      else cmd.setAttribute('open', '');
+    }
+    if (btn) btn.addEventListener('click', openCmd);
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        openCmd();
       }
-      if (btn) btn.addEventListener('click', openCmd);
-      document.addEventListener('keydown', (e) => {
-        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-          e.preventDefault();
-          openCmd();
-        }
-      });
     });
-  </script>
+    document.getElementById('toastDemoBtn')?.addEventListener('click', () => {
+      document.getElementById('dashToast')?.show?.({ message: 'Dashboard toast — demo only.', type: 'info' });
+    });
+    document.getElementById('periodRange')?.addEventListener('velin-change', (e) => {
+      const v = e.detail?.value || '7d';
+      document.getElementById('dashToast')?.show?.({ message: 'Range: ' + v + ' (demo)', type: 'success' });
+    });
+  });
+</script>
 </body>
 </html>

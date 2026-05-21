@@ -11,6 +11,7 @@
 </head>
 <body>
   <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <header role="banner">
   <nav class="velin-nav" aria-label="Main navigation">
     <a href="../index.html" class="velin-nav__brand">VelinStyle</a>
     <button type="button" class="velin-nav__toggle" data-velin-nav-toggle aria-label="Toggle menu" aria-expanded="false"
@@ -29,13 +30,15 @@
       <li><a href="../themes.html" class="velin-nav__link">Themes</a></li>
       <li><a href="../icons.html" class="velin-nav__link">Icons</a></li>
       <li><a href="../a11y.html" class="velin-nav__link">A11y</a></li>
-      <li><a href="../security.html" class="velin-nav__link">Security</a></li>
+      <li><a href="../security.html" class="velin-nav__link">Security</a></li>      <li data-velin-nav-api-reference><a href="../reference.html" class="velin-nav__link">API Reference</a></li>
+
       <li><a href="../migration.html" class="velin-nav__link">Migration</a></li>
     </ul>
   </nav>
   <div class="velin-alert velin-alert--info" style="border-radius: 0; margin: 0; text-align: center;">
     <strong>Vollständige Doku:</strong> <a href="https://velinstyle.info/docs/">velinstyle.info</a> — diese Seiten sind die Kurz-Integration für das Repo unter <code class="velin-doc-inline-code">docs/guides/</code>.
-  </div>
+  </div>  </header>
+
 
   <main id="main" class="velin-container">
     <section class="velin-doc-section">
@@ -54,6 +57,11 @@
         <li><a href="react-vite-starter.html"><strong>Vite &amp; React</strong></a> — <code>templates/vite-react-velinstyle</code> und <code>@velinstyle/react</code>.</li>
         <li><a href="prompt-scaffolding.html"><strong>Prompt Scaffolding</strong></a> — <code>velinstyle scaffold</code> (0.8.0).</li>
         <li><a href="responsive-layout.html"><strong>Responsive Layout</strong></a> — <code>velinstyle layout audit|suggest|fix</code> (0.8.0).</li>
+        <li><a href="performance-audit.html"><strong>Performance audit</strong></a> — <code>velinstyle perf audit|suggest|fix</code> (0.9.0).</li>
+        <li><a href="api-reference.html"><strong>API reference (generated)</strong></a> — <code>velinstyle docs generate</code> (0.9.0).</li>
+        <li><a href="velin-meta.html"><strong>Velin-Meta (AI agents)</strong></a> — <code>velinstyle meta</code>, <code>velin-agent.json</code> (0.9.0).</li>
+        <li><a href="../reference.html"><strong>Generated Markdown hub</strong></a> — <code>docs/generated/</code>.</li>
+        <li><a href="../extend/javascript-api.html"><strong>JavaScript runtime API</strong></a> — tree-shaking &amp; lazy register (0.9.0).</li>
       </ul>
       <p style="margin-block-start:var(--velin-space-4); color:var(--velin-color-text-muted); font-size:var(--velin-text-sm);">
         Gemeinsam für alle: zuerst <a href="../getting-started.html">Getting Started</a> lesen, dann hier den passenden Stack wählen.
