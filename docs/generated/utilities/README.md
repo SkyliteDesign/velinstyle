@@ -28,5 +28,5 @@ Classes in `@layer utilities` from `src/utilities/`.
 | sizing | 40 | [sizing.md](./sizing.md) |
 | spacing | 67 | [spacing.md](./spacing.md) |
 | state | 14 | [state.md](./state.md) |
-| text | 67 | [text.md](./text.md) |
+| text | 66 | [text.md](./text.md) |
 | view-transition | 16 | [view-transition.md](./view-transition.md) |

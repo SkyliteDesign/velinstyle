@@ -10,7 +10,7 @@
 ```
 
 [![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-2563eb?style=flat-square)](LICENSE)
-[![Release](https://img.shields.io/badge/Release-v0.9.0-2563eb?style=flat-square)](https://github.com/SkyliteDesign/velinstyle/releases/tag/v0.9.0)
+[![Release](https://img.shields.io/badge/Release-v1.0.0-2563eb?style=flat-square)](https://github.com/SkyliteDesign/velinstyle/releases/tag/v1.0.0)
 [![npm version](https://img.shields.io/npm/v/@birdapi/velinstyle?style=flat-square)](https://www.npmjs.com/package/@birdapi/velinstyle)
 [![WCAG 2.2 AAA](https://img.shields.io/badge/WCAG_2.2-AAA-16a34a?style=flat-square)](https://velinstyle.info/docs/a11y.html)
 [![GitHub Stars](https://img.shields.io/github/stars/SkyliteDesign/velinstyle?style=flat-square)](https://github.com/SkyliteDesign/velinstyle/stargazers)
@@ -28,7 +28,7 @@ npm i @birdapi/velinstyle
 
 ---
 
-**VelinStyle** ist das **WCAG-2.2-AAA-CSS-Framework** mit nativer JavaScript-Runtime und Web Components — CSS-Utilities, 0.9.0-Module (Search, Motion, Highlight, Attributes, Meta) und Security-Toolchain, **ohne externe UI-Framework-Abhängigkeiten** im Kern.
+**VelinStyle** ist das **WCAG-2.2-AAA-CSS-Framework** mit nativer JavaScript-Runtime und Web Components — CSS-Utilities, 1.0.0-Module (Search, Motion, Highlight, Attributes, Meta) und Security-Toolchain, **ohne externe UI-Framework-Abhängigkeiten** im Kern.
 
 Gedacht für Teams mit **lesbarem HTML**, **AAA-Token-Defaults** (AA über `data-velin-contrast="aa"`) und **CLI-Automatisierung** statt Utility-Chaos.
 
@@ -70,8 +70,8 @@ npm i @birdapi/velinstyle
 **CDN (Version pinnen):**
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle.min.css">
-<script type="module" src="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle-components.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle.min.css">
+<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle-components.min.js"></script>
 ```
 
 Nach dem Klonen: `npm install && npm run build` — `dist/` wird erzeugt, nicht committet.
@@ -86,8 +86,8 @@ Nach dem Klonen: `npm install && npm run build` — `dist/` wird erzeugt, nicht 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle.min.css">
-  <script type="module" src="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle-components.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle.min.css">
+  <script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle-components.min.js"></script>
 </head>
 <body class="velin-p-6">
   <button type="button" class="velin-btn velin-btn--primary" velin-reveal="slide-up">Loslegen</button>
@@ -98,7 +98,7 @@ Nach dem Klonen: `npm install && npm run build` — `dist/` wird erzeugt, nicht 
 
 ---
 
-## Core-Module (0.9.0)
+## Core-Module (1.0.0)
 
 | Export | Beschreibung |
 | --- | --- |

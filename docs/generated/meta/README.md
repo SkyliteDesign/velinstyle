@@ -23,7 +23,7 @@ npx velinstyle meta page path/to/page.html
 ```html
 <script type="application/vnd.velinstyle.meta+json" id="velin-meta">
 {
-  "version": "0.9.0",
+  "version": "1.0.0",
   "page": { "intent": "component-doc" },
   "allowed": { "classesPrefix": ["velin-"] }
 }
@@ -32,7 +32,7 @@ npx velinstyle meta page path/to/page.html
 
 ## Snapshot
 
-- Framework: @birdapi/velinstyle@0.9.0
+- Framework: @birdapi/velinstyle@1.0.0
 - Components: 36
 - Attributes: 27
 - CLI commands: 14

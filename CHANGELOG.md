@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [1.0.0](https://github.com/SkyliteDesign/velinstyle/releases/tag/v1.0.0) - 2026-05-29
+
+### Fixed
+- **Search:** Worker mode now requires an explicit `workerUrl` (prevents broken defaults in non-ESM/IIFE builds).
+- **Build:** IIFE bundle no longer emits `import.meta` warnings during build.
+
+### Changed
+- **CI:** runs on Linux, Windows, and macOS; Playwright full cross-browser only on Linux (Chromium smoke elsewhere).
+
 ## [0.9.0](https://github.com/SkyliteDesign/velinstyle/releases/tag/v0.9.0) - 2026-05-19
 
 ### Breaking
@@ -352,4 +361,3 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - **Build Tooling**: Lightning CSS for CSS bundling/minification, ESBuild for JS bundling
 - **CI/CD**: GitHub Actions workflow for build and a11y tests
 - **Linting**: Stylelint configuration enforcing `velin-` prefix convention
-

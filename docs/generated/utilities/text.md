@@ -58,7 +58,6 @@ Source: `src/utilities/text.css`
 | `.velin-text-lg` | `font-size: var(--velin-text-lg);` |
 | `.velin-text-nowrap` | `text-wrap: nowrap;` |
 | `.velin-text-pretty` | `text-wrap: pretty;` |
-| `.velin-text-pretty` | `text-wrap: pretty;` |
 | `.velin-text-sm` | `font-size: var(--velin-text-sm);` |
 | `.velin-text-start` | `text-align: start;` |
 | `.velin-text-xl` | `font-size: var(--velin-text-xl);` |

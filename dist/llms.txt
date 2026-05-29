@@ -1,4 +1,4 @@
-# VelinStyle 0.9.0
+# VelinStyle 1.0.0
 
 > VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.
 > Full machine context: https://velinstyle.info/dist/velin-agent.json

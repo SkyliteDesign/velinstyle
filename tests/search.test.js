@@ -3,7 +3,8 @@ import { VelinSearchEngine } from '../core/search/engine.js';
 import { highlightHtml } from '../core/search/highlight.js';
 import { velinSearch, registerSearchProvider, createSearch } from '../core/search/index.js';
 import { buildSearchIndex } from '../cli/search-index.js';
-import { existsSync } from 'fs';
+import { existsSync, mkdtempSync, rmSync } from 'fs';
+import { tmpdir } from 'os';
 import { join } from 'path';
 
 describe('VelinSearch engine', () => {
@@ -72,10 +73,15 @@ describe('search index CLI', () => {
   it('builds index from generated docs when present', () => {
     const gen = join(process.cwd(), 'docs', 'generated');
     if (!existsSync(gen)) return;
-    const { ok, count } = buildSearchIndex({
-      outFile: join(process.cwd(), 'dist', 'search-index.test.json'),
-    });
-    expect(ok).toBe(true);
-    expect(count).toBeGreaterThan(10);
+    const tmp = mkdtempSync(join(tmpdir(), 'velinstyle-search-index-'));
+    try {
+      const { ok, count } = buildSearchIndex({
+        outFile: join(tmp, 'search-index.test.json'),
+      });
+      expect(ok).toBe(true);
+      expect(count).toBeGreaterThan(10);
+    } finally {
+      rmSync(tmp, { recursive: true, force: true });
+    }
   });
 });

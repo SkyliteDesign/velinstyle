@@ -10,11 +10,11 @@
   <meta name="description" content="VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.">
   <link rel="alternate" type="application/vnd.velinstyle.meta+json" href="../dist/velin-agent.json" title="VelinStyle agent metadata">
   <link rel="alternate" type="text/plain" href="../dist/llms.txt" title="VelinStyle llms.txt">
-  <script type="application/ld+json">{"@context": "https://schema.org","@type": "SoftwareApplication","name": "VelinStyle","applicationCategory": "DeveloperApplication","operatingSystem": "Web","description": "VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.","url": "https://velinstyle.info/demos/showcase-interactive.html","softwareVersion": "0.9.0","license": "https://opensource.org/licenses/MIT","isAccessibleForFree": true,"publisher": {"@type": "Organization","name": "SkyliteDesign"}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org","@type": "SoftwareApplication","name": "VelinStyle","applicationCategory": "DeveloperApplication","operatingSystem": "Web","description": "VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.","url": "https://velinstyle.info/demos/showcase-interactive.html","softwareVersion": "1.0.0","license": "https://opensource.org/licenses/MIT","isAccessibleForFree": true,"publisher": {"@type": "Organization","name": "SkyliteDesign"}}</script>
   <!-- /velin-seo -->
 
 <title>Interactive Web Components — VelinStyle</title>
-<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle.min.css">
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle.min.css">
 <link rel="stylesheet" href="demos-shared.css">
   <script src="../assets/js/velin-theme-init.js"></script>
   <script>document.documentElement.setAttribute('data-velin-themes-base','../dist/themes');</script>
@@ -36,7 +36,7 @@
       </a>
       <div class="demo-chrome-header__actions">
         <a href="showcase-runtime.html" class="velin-btn velin-btn--ghost velin-btn--sm">Runtime 0.9</a>
-        <velin-theme-toggle themes-base="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/themes/"></velin-theme-toggle>
+        <velin-theme-toggle themes-base="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/themes/"></velin-theme-toggle>
       </div>
     </div>
     <div class="demo-chrome-strip"><div class="demo-chrome-strip__inner"><div data-demo-crossnav class="demo-crossnav"></div></div></div>
@@ -105,7 +105,7 @@
         </div>
         <div class="panel">
           <h2 id="popover-tooltip-title">Popover &amp; tooltip</h2>
-          <p class="demo-section__desc">Use <code>&lt;velin-tooltip&gt;</code> (canonical in 0.9.0; <code>velin-tooltip-wc</code> is deprecated).</p>
+          <p class="demo-section__desc">Use <code>&lt;velin-tooltip&gt;</code> (canonical in 1.0.0; <code>velin-tooltip-wc</code> is deprecated).</p>
           <div class="row">
             <velin-popover>
               <button type="button" slot="trigger" class="velin-btn velin-btn--secondary">Popover menu</button>
@@ -197,7 +197,7 @@
             <input class="velin-input" id="persist-note" type="text" placeholder="Reload page — value remains">
           </velin-persist>
           <div class="row" style="margin-top:var(--velin-space-4)">
-            <velin-copy value="npm install @birdapi/velinstyle@0.9.0" label="Copy install command"></velin-copy>
+            <velin-copy value="npm install @birdapi/velinstyle@1.0.0" label="Copy install command"></velin-copy>
           </div>
         </div>
       </section>
@@ -240,7 +240,7 @@
   </main>
 
   <velin-scroll-top threshold="280"></velin-scroll-top>
-  <script src="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle-components.iife.js"></script>
+  <script src="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle-components.iife.js"></script>
   <script src="demos-shared.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {

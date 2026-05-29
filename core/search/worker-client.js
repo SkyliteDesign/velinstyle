@@ -5,10 +5,9 @@ let _nextId = 0;
  */
 export function createSearchWorker(workerUrl) {
   if (typeof Worker === 'undefined') return null;
+  if (!workerUrl) return null;
 
-  const url =
-    workerUrl ||
-    new URL('./worker.js', import.meta.url).href;
+  const url = workerUrl;
 
   let worker;
   try {

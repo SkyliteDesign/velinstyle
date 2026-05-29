@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync, mkdtempSync, rmSync } from 'fs';
+import { tmpdir } from 'os';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { normalizeEntry } from '../core/search/types.js';
@@ -14,6 +15,7 @@ import {
 import { buildMeta } from '../cli/meta.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+const PKG_VERSION = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf-8')).version;
 
 describe('velin-meta', () => {
   it('sanitizeSearchUrl keeps relative index paths', () => {
@@ -47,7 +49,7 @@ describe('velin-meta', () => {
   it('buildAgentBundle includes framework and components', async () => {
     const bundle = await buildAgentBundle({ pkgRoot: ROOT });
     expect(bundle.mime).toBe(VELIN_META_MIME);
-    expect(bundle.framework.version).toBe('0.9.0');
+    expect(bundle.framework.version).toBe(PKG_VERSION);
     expect(bundle.components.count).toBe(36);
     expect(bundle.components.loaderCount).toBe(38);
     expect(bundle.components.legacyAliases).toEqual(
@@ -74,14 +76,18 @@ describe('velin-meta', () => {
   });
 
   it('buildMeta writes dist files', async () => {
-    const result = await buildMeta({
-      outFile: join(ROOT, 'dist', 'velin-agent.test.json'),
-      llmsFile: join(ROOT, 'dist', 'llms.test.txt'),
-    });
-    expect(result.ok).toBe(true);
-    expect(existsSync(join(ROOT, 'dist', 'velin-agent.test.json'))).toBe(true);
-    const raw = readFileSync(join(ROOT, 'dist', 'velin-agent.test.json'), 'utf-8');
-    expect(raw).not.toMatch(/api[_-]?key|password\s*=/i);
+    const tmp = mkdtempSync(join(tmpdir(), 'velinstyle-meta-'));
+    try {
+      const outFile = join(tmp, 'velin-agent.test.json');
+      const llmsFile = join(tmp, 'llms.test.txt');
+      const result = await buildMeta({ outFile, llmsFile });
+      expect(result.ok).toBe(true);
+      expect(existsSync(outFile)).toBe(true);
+      const raw = readFileSync(outFile, 'utf-8');
+      expect(raw).not.toMatch(/api[_-]?key|password\s*=/i);
+    } finally {
+      rmSync(tmp, { recursive: true, force: true });
+    }
   });
 });
 

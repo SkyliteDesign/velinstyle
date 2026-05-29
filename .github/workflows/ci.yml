@@ -8,10 +8,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
         node-version: [20.x, 22.x]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
@@ -68,18 +69,20 @@ jobs:
         run: npx velinstyle scan docs samples --only a11y --severity warning
 
       - name: Install Playwright browsers
+        if: runner.os == 'Linux'
         run: npx playwright install --with-deps chromium firefox webkit
 
+      - name: Install Playwright browsers (Chromium only)
+        if: runner.os != 'Linux'
+        run: npx playwright install chromium
+
       - name: Cross-browser WC smoke (Playwright)
+        if: runner.os == 'Linux'
         run: npm run test:e2e
 
+      - name: WC smoke (Chromium)
+        if: runner.os != 'Linux'
+        run: npm run test:e2e:chromium
+
       - name: Check dist output exists
-        run: |
-          test -f dist/velinstyle.css
-          test -f dist/velinstyle.min.css
-          test -f dist/velinstyle-components.js
-          test -f dist/velinstyle-components.min.js
-          test -f dist/velinstyle-components.iife.js
-          test -f dist/velin-icons.svg
-          test -f dist/velinstyle.d.ts
-          test -d dist/chunks
+        run: node -e "const fs=require('node:fs'); const must=(p)=>{ if(!fs.existsSync(p)) { console.error('Missing: '+p); process.exit(1);} }; ['dist/velinstyle.css','dist/velinstyle.min.css','dist/velinstyle-components.js','dist/velinstyle-components.min.js','dist/velinstyle-components.iife.js','dist/velin-icons.svg','dist/velinstyle.d.ts','dist/chunks'].forEach(must);"

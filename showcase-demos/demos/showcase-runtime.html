@@ -10,10 +10,10 @@
   <meta name="description" content="VelinStyle 0.9 runtime: motion, VelinSearch, VelinHighlight, code blocks, copy, email obfuscation, and Velin-Meta.">
   <link rel="alternate" type="application/vnd.velinstyle.meta+json" href="../dist/velin-agent.json" title="VelinStyle agent metadata">
   <link rel="alternate" type="text/plain" href="../dist/llms.txt" title="VelinStyle llms.txt">
-  <script type="application/ld+json">{"@context": "https://schema.org","@type": "SoftwareApplication","name": "VelinStyle","applicationCategory": "DeveloperApplication","operatingSystem": "Web","description": "VelinStyle 0.9 runtime demos.","url": "https://velinstyle.info/demos/showcase-runtime.html","softwareVersion": "0.9.0","license": "https://opensource.org/licenses/MIT","isAccessibleForFree": true,"publisher": {"@type": "Organization","name": "SkyliteDesign"}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org","@type": "SoftwareApplication","name": "VelinStyle","applicationCategory": "DeveloperApplication","operatingSystem": "Web","description": "VelinStyle 1.0 runtime demos.","url": "https://velinstyle.info/demos/showcase-runtime.html","softwareVersion": "1.0.0","license": "https://opensource.org/licenses/MIT","isAccessibleForFree": true,"publisher": {"@type": "Organization","name": "SkyliteDesign"}}</script>
   <!-- /velin-seo -->
   <title>Runtime 0.9 — VelinStyle demos</title>
-  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle.min.css">
   <link rel="stylesheet" href="demos-shared.css">
   <script src="../assets/js/velin-theme-init.js"></script>
   <script>document.documentElement.setAttribute('data-velin-themes-base','../dist/themes');</script>
@@ -40,7 +40,7 @@
 </head>
 <body data-demo-page="showcase-runtime.html">
   <a href="#main" class="velin-skip-link">Skip to main content</a>
-  <p class="demo-chrome-promo"><strong>Runtime 0.9.0</strong> · motion · search · highlight · attributes · Velin-Meta</p>
+  <p class="demo-chrome-promo"><strong>Runtime 1.0.0</strong> · motion · search · highlight · attributes · Velin-Meta</p>
   <header class="demo-chrome-header">
     <div class="demo-chrome-header__row">
       <a href="#main" class="demo-chrome-brand">
@@ -49,7 +49,7 @@
       </a>
       <div class="demo-chrome-header__actions">
         <a href="showcase-interactive.html" class="velin-btn velin-btn--ghost velin-btn--sm">Web Components</a>
-        <velin-theme-toggle themes-base="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/themes/"></velin-theme-toggle>
+        <velin-theme-toggle themes-base="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/themes/"></velin-theme-toggle>
       </div>
     </div>
     <div class="demo-chrome-strip"><div class="demo-chrome-strip__inner"><div data-demo-crossnav class="demo-crossnav"></div></div></div>
@@ -61,7 +61,7 @@
       <header class="demo-intro demo-section" id="overview">
         <h1>Runtime 0.9</h1>
         <p class="demo-intro__lead">
-          Subpath exports shipped in 0.9.0 — motion, fuzzy search, lazy syntax highlighting, declarative attributes,
+          Subpath exports shipped in 1.0.0 — motion, fuzzy search, lazy syntax highlighting, declarative attributes,
           and agent metadata. Scroll to trigger reveals; each section links to the matching guide.
         </p>
         <div class="demo-features">
@@ -115,7 +115,7 @@ import { bootFromDOM } from '@birdapi/velinstyle/runtime';
 
 bootFromDOM(document, { highlight: true, attributes: true });</velin-code-block>
           <div class="demo-row" style="margin-top:var(--velin-space-4)">
-            <velin-copy value="npm install @birdapi/velinstyle@0.9.0" label="Copy install"></velin-copy>
+            <velin-copy value="npm install @birdapi/velinstyle@1.0.0" label="Copy install"></velin-copy>
           </div>
           <footer class="demo-section__foot"><a href="../docs/guides/syntax-highlight.html">Syntax highlight guide →</a></footer>
         </div>
@@ -177,7 +177,7 @@ bootFromDOM(document, { highlight: true, attributes: true });</velin-code-block>
           <div class="demo-row" style="margin-top:var(--velin-space-4)">
             <a href="../dist/velin-agent.json" class="velin-btn velin-btn--primary velin-btn--sm">velin-agent.json</a>
             <a href="../dist/llms.txt" class="velin-btn velin-btn--ghost velin-btn--sm">llms.txt</a>
-            <velin-copy value="@birdapi/velinstyle@0.9.0" label="Copy version"></velin-copy>
+            <velin-copy value="@birdapi/velinstyle@1.0.0" label="Copy version"></velin-copy>
             <a href="../docs/guides/velin-meta.html" class="velin-btn velin-btn--ghost velin-btn--sm">Guide</a>
           </div>
           <footer class="demo-section__foot"><a href="../docs/guides/velin-meta.html">Velin-Meta guide →</a></footer>
@@ -192,7 +192,7 @@ bootFromDOM(document, { highlight: true, attributes: true });</velin-code-block>
   </main>
 
   <velin-scroll-top threshold="320"></velin-scroll-top>
-  <script src="https://unpkg.com/@birdapi/velinstyle@0.9.0/dist/velinstyle-components.iife.js"></script>
+  <script src="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle-components.iife.js"></script>
   <script src="demos-shared.js"></script>
 </body>
 </html>
