@@ -1,6 +1,6 @@
 {
   "wcagLevel": "AAA",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "components": {
     "velin-accordion": {
       "status": "pass",
@@ -74,6 +74,15 @@
       "keyboard": "N/A",
       "reducedMotion": true
     },
+    "velin-data-table": {
+      "status": "pass",
+      "roles": ["button"],
+      "keyboard": "Native buttons for column sort and pagination",
+      "liveRegion": "polite",
+      "reducedMotion": true,
+      "requiredAttributes": [],
+      "notes": "Enhances a light-DOM table. Sort state exposed via aria-sort; sort triggers are real buttons. Needs a caption, aria-label, or label attribute (warns otherwise). Filtered and off-page rows use hidden so they leave the a11y tree; sort, filter and page changes are announced."
+    },
     "velin-dialog": {
       "status": "pass",
       "roles": ["dialog"],
@@ -96,6 +105,14 @@
       "status": "pass",
       "roles": ["button"],
       "requiredAttributes": ["aria-label"]
+    },
+    "velin-form-summary": {
+      "status": "pass",
+      "roles": ["alert", "link"],
+      "keyboard": "Summary links move focus to the offending field",
+      "liveRegion": "assertive",
+      "requiredAttributes": [],
+      "notes": "Disables native validation bubbles and renders a focusable role=alert summary. Sets aria-invalid and wires aria-describedby to per-field messages (WCAG 3.3.1, 3.3.3, 4.1.2). Field errors clear as soon as the field becomes valid."
     },
     "velin-icon": {
       "status": "pass",

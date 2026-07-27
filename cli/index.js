@@ -11,6 +11,8 @@ const PKG_ROOT = join(__dirname, '..');
 const args = process.argv.slice(2);
 const command = args[0];
 
+const CLI_VERSION = JSON.parse(readFileSync(join(PKG_ROOT, 'package.json'), 'utf-8')).version;
+
 const LAYERS = ['tokens', 'reset', 'base', 'a11y', 'layout', 'components', 'utilities', 'security', 'helpers'];
 
 const LAYER_FILES = {
@@ -36,7 +38,7 @@ const LAYER_FILES = {
   components: [
     'components/button.css', 'components/card.css', 'components/input.css',
     'components/nav.css', 'components/alert.css', 'components/badge.css',
-    'components/table.css', 'components/tooltip.css', 'components/modal.css',
+    'components/table.css', 'components/data-table.css', 'components/tooltip.css', 'components/modal.css',
     'components/breadcrumb.css', 'components/pagination.css', 'components/progress.css',
     'components/spinner.css', 'components/list-group.css', 'components/avatar.css',
     'components/switch.css', 'components/divider.css', 'components/chip.css',
@@ -83,7 +85,7 @@ function hasFlag(flag, alias) {
 
 function help() {
   console.log(`
-  ${C.bold('VelinStyle CLI')} v0.9.0
+  ${C.bold('VelinStyle CLI')} v${CLI_VERSION}
 
   ${C.bold('Usage:')}
     velinstyle init                 Create velinstyle.config.js

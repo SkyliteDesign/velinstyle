@@ -1,6 +1,6 @@
 {
   "name": "@birdapi/velinstyle",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
@@ -50,8 +50,10 @@
     "icons/velin-icons.svg"
   ],
   "scripts": {
-    "build": "npm run build:css:min && npm run build:css:dev && npm run build:js:min && npm run build:js:dev && npm run build:js:iife && npm run build:js:chunks && npm run build:loaders && npm run build:types && npm run build:themes && npm run build:icons",
+    "build": "npm run build:css:min && npm run build:css:dev && npm run build:js:min && npm run build:js:dev && npm run build:js:iife && npm run build:js:chunks && npm run build:loaders && npm run build:react:src && npm run build:types && npm run build:themes && npm run build:icons",
     "build:loaders": "node scripts/generate-component-loaders.mjs",
+    "build:react:src": "node scripts/generate-react-wrappers.mjs",
+    "build:react": "npm run build:react:src && npm --prefix packages/react run build",
     "build:types": "node scripts/generate-types.mjs",
     "build:js:chunks": "esbuild components/runtime-entry.js --bundle --splitting --format=esm --outdir=dist/chunks --chunk-names=[name]-[hash]",
     "build:css:min": "lightningcss --bundle --minify src/velinstyle.css -o dist/velinstyle.min.css",
@@ -80,6 +82,10 @@
     "search:index": "node cli/index.js search index",
     "meta:build": "node cli/index.js meta",
     "ci:checks": "node scripts/ci-checks.mjs",
+    "release:check": "node scripts/check-release-sync.mjs",
+    "release:sync": "node scripts/check-release-sync.mjs --fix",
+    "prepublishOnly": "npm run build && npm run search:index && npm run meta:build && npm run release:check -- --skip-site",
+    "pack:check": "npm pack --dry-run",
     "docs:prepare": "npm run build && node scripts/prepare-docs-pages.js",
     "docs:patch-nav": "node scripts/patch-docs-nav.js",
     "docs:sync-site": "npm run build && npm run docs:generate && python ../velinstyle-site/tools/sync-framework-0.9.0.py && python ../velinstyle-site/tools/patch-site-a11y-aaa.py && python ../velinstyle-site/tools/patch-docs-090-final.py",

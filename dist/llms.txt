@@ -1,4 +1,4 @@
-# VelinStyle 1.0.0
+# VelinStyle 1.1.0
 
 > VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.
 > Full machine context: https://velinstyle.info/dist/velin-agent.json
@@ -7,7 +7,7 @@
 ## Framework
 - npm: @birdapi/velinstyle
 - VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.
-- Components: 36 canonical Web Components (`velin-*`); 38 lazy-loader entries
+- Components: 38 canonical Web Components (`velin-*`); 40 lazy-loader entries
 - HTML attributes: 27 `velin-*` bridges
 - CLI: velinstyle (scan, scaffold, docs generate, search index, meta)
 

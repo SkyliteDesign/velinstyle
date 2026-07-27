@@ -42,12 +42,14 @@ Built for teams who want **readable HTML**, **AAA token defaults** (AA via `data
 - **35+ components** — semantic BEM classes (`velin-btn`, `velin-card`, `velin-grid`, …)
 - **Motion runtime** — reveal, stagger, scroll-driven animation, rAF scheduler
 - **VelinSearch** — fuzzy offline search with highlighting and categories
-- **Syntax highlighting** — lazy in-view highlighting for JS, HTML, CSS, JSON, and more
+- **Syntax highlighting** — lazy in-view highlighting for JS, TS, HTML, CSS, JSON, Bash, Python, YAML, Go, Rust, and more
 - **HTML attributes** — 27 declarative bridges (`velin-modal`, `velin-reveal`, `velin-scroll-top`, `velin-code`, …)
-- **Quality** — 36/36 component a11y contracts, Playwright cross-browser smoke (`npm run test:e2e`), CLS placeholders (`wc-placeholder.css`)
+- **Quality** — 38/38 component a11y contracts, Playwright cross-browser smoke (`npm run test:e2e`), CLS placeholders (`wc-placeholder.css`)
 - **Security tools** — `scan`, PII rules, sanitize API, hardened components
 - **CLI** — init, build, scan, scaffold, tokens, docs generate, perf audit, layout audit
 - **Velin-Meta** — `velin-agent.json`, `llms.txt`, and page-level agent JSON for AI assistants
+- **React adapter** — `@velinstyle/react` wraps every canonical Web Component with typed props and events
+- **Release guard** — `npm run release:check` fails the build on version or docs drift between framework and site
 
 ---
 
@@ -70,8 +72,8 @@ npm i @birdapi/velinstyle
 **CDN (pin version):**
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle.min.css">
-<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle-components.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.1.0/dist/velinstyle.min.css">
+<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.1.0/dist/velinstyle-components.min.js"></script>
 ```
 
 After cloning, run `npm install && npm run build` — `dist/` is generated, not committed.
@@ -86,8 +88,8 @@ After cloning, run `npm install && npm run build` — `dist/` is generated, not 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle.min.css">
-  <script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle-components.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.1.0/dist/velinstyle.min.css">
+  <script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.1.0/dist/velinstyle-components.min.js"></script>
 </head>
 <body class="velin-p-6">
   <button type="button" class="velin-btn velin-btn--primary" velin-reveal="slide-up">Ship it</button>
@@ -112,9 +114,11 @@ After cloning, run `npm install && npm run build` — `dist/` is generated, not 
 
 ## Web Components
 
-**36 canonical** custom elements (38 lazy-loader entries including legacy `velin-tooltip-wc` and `velin-stepper-wc`) — use plain CSS when you do not need behavior. `src/base/wc-placeholder.css` reduces layout shift before elements upgrade.
+**38 canonical** custom elements (40 lazy-loader entries including legacy `velin-tooltip-wc` and `velin-stepper-wc`) — use plain CSS when you do not need behavior. `src/base/wc-placeholder.css` reduces layout shift before elements upgrade.
 
-Examples: `velin-modal`, `velin-search`, `velin-code-block`, `velin-drawer`, `velin-stepper`, `velin-tooltip`, `velin-toast`, `velin-persist`.
+Examples: `velin-modal`, `velin-search`, `velin-code-block`, `velin-drawer`, `velin-stepper`, `velin-tooltip`, `velin-toast`, `velin-persist`, `velin-data-table`, `velin-form-summary`.
+
+React wrappers for every canonical element ship in [`@velinstyle/react`](./packages/react/README.md).
 
 - [Component documentation](https://velinstyle.info/docs/components/buttons.html)
 - [Generated Web Component API](https://velinstyle.info/docs/generated/components/README.md)

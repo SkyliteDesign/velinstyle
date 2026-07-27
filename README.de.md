@@ -42,12 +42,14 @@ Gedacht für Teams mit **lesbarem HTML**, **AAA-Token-Defaults** (AA über `data
 - **35+ Komponenten** — semantische BEM-Klassen (`velin-btn`, `velin-card`, `velin-grid`, …)
 - **Motion-Runtime** — Reveal, Stagger, scroll-getriebene Animation, rAF-Scheduler
 - **VelinSearch** — fuzzy Offline-Suche mit Highlighting und Kategorien
-- **Syntax-Highlighting** — lazy In-View für JS, HTML, CSS, JSON und mehr
+- **Syntax-Highlighting** — lazy In-View für JS, TS, HTML, CSS, JSON, Bash, Python, YAML, Go, Rust und mehr
 - **HTML-Attribute** — 27 deklarative Bridges (`velin-modal`, `velin-reveal`, `velin-scroll-top`, `velin-code`, …)
-- **Qualität** — 36/36 A11y-Component-Contracts, Playwright Cross-Browser-Smoke (`npm run test:e2e`), CLS-Platzhalter (`wc-placeholder.css`)
+- **Qualität** — 38/38 A11y-Component-Contracts, Playwright Cross-Browser-Smoke (`npm run test:e2e`), CLS-Platzhalter (`wc-placeholder.css`)
 - **Security-Tools** — `scan`, PII-Regeln, Sanitize-API, gehärtete Komponenten
 - **CLI** — init, build, scan, scaffold, tokens, docs generate, perf audit, layout audit
 - **Velin-Meta** — `velin-agent.json`, `llms.txt` und Page-Level-Agent-JSON für KI-Assistenten
+- **React-Adapter** — `@velinstyle/react` umhüllt jede kanonische Web Component mit typisierten Props und Events
+- **Release-Guard** — `npm run release:check` bricht den Build bei Versions- oder Docs-Drift zwischen Framework und Site ab
 
 ---
 
@@ -70,8 +72,8 @@ npm i @birdapi/velinstyle
 **CDN (Version pinnen):**
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle.min.css">
-<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle-components.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.1.0/dist/velinstyle.min.css">
+<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.1.0/dist/velinstyle-components.min.js"></script>
 ```
 
 Nach dem Klonen: `npm install && npm run build` — `dist/` wird erzeugt, nicht committet.
@@ -86,8 +88,8 @@ Nach dem Klonen: `npm install && npm run build` — `dist/` wird erzeugt, nicht 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle.min.css">
-  <script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.0.0/dist/velinstyle-components.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.1.0/dist/velinstyle.min.css">
+  <script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.1.0/dist/velinstyle-components.min.js"></script>
 </head>
 <body class="velin-p-6">
   <button type="button" class="velin-btn velin-btn--primary" velin-reveal="slide-up">Loslegen</button>
@@ -112,9 +114,11 @@ Nach dem Klonen: `npm install && npm run build` — `dist/` wird erzeugt, nicht 
 
 ## Web Components
 
-**36 kanonische** Custom Elements (38 Lazy-Loader-Einträge inkl. Legacy `velin-tooltip-wc` und `velin-stepper-wc`) — reines CSS, wenn kein Verhalten nötig ist. `src/base/wc-placeholder.css` verringert Layout-Shift vor dem Upgrade.
+**38 kanonische** Custom Elements (40 Lazy-Loader-Einträge inkl. Legacy `velin-tooltip-wc` und `velin-stepper-wc`) — reines CSS, wenn kein Verhalten nötig ist. `src/base/wc-placeholder.css` verringert Layout-Shift vor dem Upgrade.
 
-Beispiele: `velin-modal`, `velin-search`, `velin-code-block`, `velin-drawer`, `velin-stepper`, `velin-tooltip`, `velin-toast`, `velin-persist`.
+Beispiele: `velin-modal`, `velin-search`, `velin-code-block`, `velin-drawer`, `velin-stepper`, `velin-tooltip`, `velin-toast`, `velin-persist`, `velin-data-table`, `velin-form-summary`.
+
+React-Wrapper für alle kanonischen Elemente liefert [`@velinstyle/react`](./packages/react/README.md).
 
 - [Komponenten-Dokumentation](https://velinstyle.info/docs/components/buttons.html)
 - [Generierte Web-Component-API](https://velinstyle.info/docs/generated/components/README.md)

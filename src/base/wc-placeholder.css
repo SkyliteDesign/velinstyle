@@ -99,4 +99,11 @@
     opacity: 0;
     visibility: hidden;
   }
+
+  /* The table renders before upgrade, so only reserve the block for enhancement. */
+  velin-data-table:not(:defined),
+  velin-form-summary:not(:defined) {
+    display: block;
+    contain: layout style;
+  }
 }

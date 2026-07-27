@@ -1,0 +1,93 @@
+@layer components {
+  .velin-data-table {
+    display: block;
+  }
+
+  /*
+   * Wins over the stacked `display: block` rows in table.css so filtering and
+   * pagination keep hidden rows out of the layout and the a11y tree.
+   */
+  .velin-data-table tr[hidden] {
+    display: none;
+  }
+
+  .velin-data-table__th {
+    padding: 0;
+  }
+
+  .velin-data-table__sort {
+    display: flex;
+    align-items: center;
+    gap: var(--velin-space-2);
+    inline-size: 100%;
+    min-block-size: 2.75rem;
+    padding: var(--velin-space-3) var(--velin-space-4);
+    border: none;
+    background: none;
+    font: inherit;
+    font-weight: var(--velin-weight-semibold);
+    color: inherit;
+    text-align: inherit;
+    cursor: pointer;
+  }
+
+  .velin-data-table__sort:hover {
+    background-color: var(--velin-color-surface-dim);
+  }
+
+  .velin-data-table__sort-icon {
+    flex-shrink: 0;
+    inline-size: 0.75rem;
+    color: var(--velin-color-text-muted);
+  }
+
+  /* Direction is announced via aria-sort; the glyph is decorative. */
+  .velin-data-table__sort-icon::after {
+    content: "\2195";
+  }
+
+  [aria-sort="ascending"] .velin-data-table__sort-icon::after {
+    content: "\2191";
+  }
+
+  [aria-sort="descending"] .velin-data-table__sort-icon::after {
+    content: "\2193";
+  }
+
+  [aria-sort="ascending"] .velin-data-table__sort-icon,
+  [aria-sort="descending"] .velin-data-table__sort-icon {
+    color: var(--velin-color-primary);
+  }
+
+  .velin-data-table__empty td {
+    padding-block: var(--velin-space-6);
+    color: var(--velin-color-text-muted);
+    text-align: center;
+  }
+
+  .velin-data-table__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--velin-space-3);
+    flex-wrap: wrap;
+    margin-block-start: var(--velin-space-4);
+  }
+
+  .velin-data-table__page-status {
+    margin: 0;
+    color: var(--velin-color-text-muted);
+    font-size: var(--velin-text-sm);
+  }
+
+  @media (forced-colors: active) {
+    .velin-data-table__sort:hover {
+      background-color: Highlight;
+      color: HighlightText;
+    }
+
+    .velin-data-table__sort-icon {
+      color: CanvasText;
+    }
+  }
+}

@@ -2,6 +2,8 @@ VelinCore/
 VelinSecurity/
 VelinAuthPolice/
 VelinScript/
+velinstyle-demos/
+velinstyle-site/
 SandBox/
 node_modules/
 # Build output — ignore all of dist/ except CI-tracked artifacts

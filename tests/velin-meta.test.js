@@ -13,9 +13,12 @@ import {
   VELIN_META_MIME,
 } from '../core/meta/index.js';
 import { buildMeta } from '../cli/meta.js';
+import { COMPONENT_LOADERS } from '../components/runtime/component-loaders.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const PKG_VERSION = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf-8')).version;
+const LOADER_TAGS = Object.keys(COMPONENT_LOADERS);
+const CANONICAL_COUNT = LOADER_TAGS.filter((tag) => !tag.endsWith('-wc')).length;
 
 describe('velin-meta', () => {
   it('sanitizeSearchUrl keeps relative index paths', () => {
@@ -50,8 +53,9 @@ describe('velin-meta', () => {
     const bundle = await buildAgentBundle({ pkgRoot: ROOT });
     expect(bundle.mime).toBe(VELIN_META_MIME);
     expect(bundle.framework.version).toBe(PKG_VERSION);
-    expect(bundle.components.count).toBe(36);
-    expect(bundle.components.loaderCount).toBe(38);
+    expect(bundle.components.count).toBe(CANONICAL_COUNT);
+    expect(bundle.components.loaderCount).toBe(LOADER_TAGS.length);
+    expect(bundle.components.count).toBeGreaterThanOrEqual(36);
     expect(bundle.components.legacyAliases).toEqual(
       expect.arrayContaining(['velin-stepper-wc', 'velin-tooltip-wc']),
     );

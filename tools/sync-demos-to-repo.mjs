@@ -4,6 +4,7 @@
  * Usage: node tools/sync-demos-to-repo.mjs [--out ../velinstyle-demos]
  */
 import { cp, mkdir, readFile, writeFile, readdir } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -11,7 +12,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const FRAMEWORK_ROOT = path.resolve(__dirname, '..');
 const SITE_ROOT = path.resolve(FRAMEWORK_ROOT, '../velinstyle-site');
 const DEFAULT_OUT = path.resolve(FRAMEWORK_ROOT, '../velinstyle-demos');
-const VERSION = '0.9.0';
+const VERSION = JSON.parse(readFileSync(path.join(FRAMEWORK_ROOT, 'package.json'), 'utf-8')).version;
 const UNPKG = `https://unpkg.com/@birdapi/velinstyle@${VERSION}`;
 
 const outArg = process.argv.find((a, i) => process.argv[i - 1] === '--out');

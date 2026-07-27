@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-05-29T12:13:11.270Z",
+  "generatedAt": "2026-07-27T10:44:37.850Z",
   "entries": [
     {
       "id": "examples:samples/a11y-patterns.html",
@@ -57,7 +57,7 @@
     {
       "id": "api:commands",
       "title": "CLI commands",
-      "excerpt": "VelinStyle CLI v1.0.0. Run velinstyle --help for full usage.",
+      "excerpt": "VelinStyle CLI v1.1.0. Run velinstyle --help for full usage.",
       "url": "docs/generated/cli/commands.html",
       "category": "api",
       "keywords": [
@@ -1042,6 +1042,19 @@
       "weight": 1.2
     },
     {
+      "id": "components:velin-data-table",
+      "title": "velin-data-table",
+      "excerpt": "Source: components/velin-data-table.js",
+      "url": "docs/generated/components/velin-data-table.html",
+      "category": "components",
+      "keywords": [
+        "velin-data-table",
+        "components",
+        "velin-data-table"
+      ],
+      "weight": 1.3
+    },
+    {
       "id": "components:velin-dialog",
       "title": "velin-dialog",
       "excerpt": "Source: components/velin-dialog.js",
@@ -1116,6 +1129,19 @@
         "velin-flip",
         "components",
         "velin-flip"
+      ],
+      "weight": 1.3
+    },
+    {
+      "id": "components:velin-form-summary",
+      "title": "velin-form-summary",
+      "excerpt": "Source: components/velin-form-summary.js",
+      "url": "docs/generated/components/velin-form-summary.html",
+      "category": "components",
+      "keywords": [
+        "velin-form-summary",
+        "components",
+        "velin-form-summary"
       ],
       "weight": 1.3
     },

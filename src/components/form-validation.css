@@ -58,6 +58,46 @@
     white-space: normal;
   }
 
+  /* Error summary (velin-form-summary) */
+  .velin-form-summary {
+    display: block;
+  }
+
+  .velin-form-summary[hidden] {
+    display: none;
+  }
+
+  .velin-form-summary__panel {
+    margin-block-end: var(--velin-space-4);
+  }
+
+  .velin-form-summary__heading {
+    margin: 0 0 var(--velin-space-2);
+    font-weight: var(--velin-weight-semibold);
+  }
+
+  .velin-form-summary__list {
+    margin: 0;
+    padding-inline-start: var(--velin-space-5);
+  }
+
+  .velin-form-summary__list li + li {
+    margin-block-start: var(--velin-space-1);
+  }
+
+  /* inline-block + min-block-size keeps the target size at 24px (WCAG 2.5.8). */
+  .velin-form-summary__list a {
+    display: inline-block;
+    min-block-size: 1.5rem;
+    padding-block: var(--velin-space-1);
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  .velin-field-error:empty {
+    display: none;
+  }
+
   @supports selector(:user-invalid) {
     .velin-form--validated .velin-input:user-valid,
     .velin-form--validated .velin-select:user-valid,

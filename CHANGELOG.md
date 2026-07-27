@@ -6,6 +6,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [1.1.0](https://github.com/SkyliteDesign/velinstyle/releases/tag/v1.1.0) - 2026-07-27
+
+Minor release: no breaking changes. The deprecated `<velin-tooltip-wc>` and `<velin-stepper-wc>` aliases still work.
+
+### Added
+- **`<velin-data-table>`:** progressive enhancement for a light-DOM `<table>` — sortable columns via real `<button>` headers with `aria-sort`, text/number/date sort types (`data-sort`, `data-sort-value`), substring filtering bound to any input (`filter-input`), optional pagination (`page-size`), and an empty state (`empty-text`). Sort, filter and page changes are announced; filtered and off-page rows use `hidden` so they leave the accessibility tree. Requires a `<caption>`, `aria-label`, or `label` attribute.
+- **`<velin-form-summary>`:** accessible error summary for any `<form>`. Replaces the transient native validation bubble with a focusable `role="alert"` panel listing every invalid field, wires `aria-invalid` and `aria-describedby` to per-field messages, moves focus to the offending field from summary links, and clears each error as soon as the field becomes valid. Supports `data-error-message`, `data-error-label`, `data-error-ignore` and author-supplied `[data-velin-error-for]` containers.
+- **Highlight languages:** Python, YAML, Go and Rust lexers, lazy-loaded like the existing ones. Aliases `py`, `python3`, `yml`, `golang`, `rs` resolve to them; `yaml` previously fell back to plain text.
+- **Release sync guard:** `npm run release:check` compares every machine-readable version surface (CLI manifest, a11y contracts, `velin-agent.json`, doc header badges, landing-page version badges, `velin-meta` blocks, JSON-LD `softwareVersion`, npm/CDN install pins, generated docs, changelog copies) against `package.json`. It also checks the component counts quoted in prose across both repos — English and German — against `components.count` / `components.loaderCount` in `velin-agent.json`, so adding a component cannot leave the docs claiming the old number. `npm run release:sync` rewrites the mechanical ones. Wired into `ci:checks` and the site build; site checks are skipped when the sibling repo is absent.
+- **WCAG matrix:** 3.3.1 Error Identification and 3.3.3 Error Suggestion are now tracked and owned by `velin-form-summary`.
+
+### Changed
+- **`@velinstyle/react` is official (1.1.0):** wrappers now cover **all 38 canonical** `velin-*` elements instead of 12, generated from the component registry so CI fails when they drift. Props map correctly for custom elements — booleans become presence attributes, objects and arrays are assigned as element properties instead of being stringified, and `onVelin*` handlers bind the matching custom event (`onVelinSearchSelect` → `velin-search-select`). Ships TypeScript definitions and `createVelinComponent` for your own tags. Deprecated `*-wc` aliases are intentionally excluded.
+- **CLI version:** `velinstyle --help` reads the version from `package.json` instead of a hardcoded string that had drifted to 0.9.0.
+- **Demo sync:** `tools/sync-demos-to-repo.mjs` derives its unpkg pin from `package.json` rather than a hardcoded 0.9.0.
+
+### Fixed
+- **Docs drift:** stale `@birdapi/velinstyle@0.9.0` install snippets and `velin-meta` version blocks across the site, plus a `@0.4.0` CDN example in the framework docs landing page. The site guide generators now read the framework version instead of embedding it.
+- **Component counts:** the docs claimed 36 canonical components and 38 loader entries in 20+ places; both repos now report 38 and 40, and the guard keeps them honest.
+- **Duplicate heading:** the site accessibility page shipped the “Component contracts” section twice with the same `id="contracts"`, because a one-shot patch script had been applied twice.
+- **Site changelog copy:** the a11y bulk-patch script rewrote a link inside the copied `CHANGELOG.md`, which made the copy permanently differ from the framework original. Verbatim copies (`CHANGELOG.md`, `docs/generated/`) are now excluded from that script.
+- **Docs coverage audit:** `audit-docs-coverage.py` crashed on Windows consoles because its report contains `→`; it now forces UTF-8 output, and recognises the two new component pages.
+- **Release guard robustness:** the repo walk crashed with `ENOENT` when a file disappeared mid-scan, which made the check fail intermittently alongside tests that use temporary directories. Dot-directories are now skipped and vanished files are ignored.
+
+### Build
+- `npm run build` regenerates the React wrapper sources; `npm run build:react` also bundles the package.
+- New CI gates: React wrapper drift and release sync.
+- The loader-count gate now derives its minimum from `component-contracts.json` instead of a hardcoded 36.
+- Full-bundle JS budget raised from 200 KB to 215 KB (209.4 KB actual, 46.9 KB brotli) to cover the two new components. Applications using `register()` / `bootFromDOM()` pay only for what they load.
+
 ## [1.0.0](https://github.com/SkyliteDesign/velinstyle/releases/tag/v1.0.0) - 2026-05-29
 
 ### Fixed

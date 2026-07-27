@@ -37,12 +37,15 @@ const COMPONENTS = [
   { tag: 'velin-search', module: '../../components/velin-search.js', observedAttrs: [] },
   { tag: 'velin-counter', module: '../../components/velin-counter.js', observedAttrs: [] },
   { tag: 'velin-secure-field', module: '../../components/velin-secure-field.js', observedAttrs: ['type', 'name', 'label', 'mode', 'autocomplete'] },
+  { tag: 'velin-data-table', module: '../../components/velin-data-table.js', observedAttrs: ['page-size', 'filter-input', 'empty-text', 'label'] },
+  { tag: 'velin-form-summary', module: '../../components/velin-form-summary.js', observedAttrs: ['for', 'heading'] },
 ];
 
 const CONTRACT_TAGS = [
   'velin-accordion', 'velin-announcer', 'velin-bottom-nav', 'velin-carousel', 'velin-code-block',
   'velin-collapse', 'velin-combobox', 'velin-command', 'velin-copy', 'velin-countdown', 'velin-counter',
-  'velin-dialog', 'velin-drawer', 'velin-dropdown', 'velin-email', 'velin-icon', 'velin-lightbox',
+  'velin-data-table', 'velin-dialog', 'velin-drawer', 'velin-dropdown', 'velin-email', 'velin-form-summary',
+  'velin-icon', 'velin-lightbox',
   'velin-live-dot', 'velin-menubar', 'velin-modal', 'velin-persist', 'velin-popover', 'velin-progress-ring',
   'velin-rating', 'velin-scroll-top', 'velin-scrollspy', 'velin-search', 'velin-secure-field',
   'velin-segmented-control', 'velin-sheet', 'velin-sparkline', 'velin-stepper', 'velin-tabs',
@@ -92,6 +95,8 @@ describe('Web Component shadow DOM', () => {
         'velin-code-block',
         'velin-search',
         'velin-counter',
+        'velin-data-table',
+        'velin-form-summary',
       ].includes(c.tag),
   );
 

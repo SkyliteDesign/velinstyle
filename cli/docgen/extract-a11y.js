@@ -21,10 +21,12 @@ export const WCAG_AAA_CRITERIA = [
   { id: '2.5.7', level: 'AA', name: 'Dragging Movements', owner: 'CSS + Sample', status: 'pass', testId: 'wcag22-dragging' },
   { id: '2.5.8', level: 'AA', name: 'Target Size', owner: 'CSS + WC', status: 'pass', testId: 'target-size' },
   { id: '3.2.6', level: 'A', name: 'Consistent Help', owner: 'CSS', status: 'pass', testId: 'consistent-help' },
-  { id: '3.3.2', level: 'A', name: 'Labels or Instructions', owner: 'Forms + WC', status: 'partial', testId: 'scan-a11y' },
+  { id: '3.3.1', level: 'A', name: 'Error Identification', owner: 'velin-form-summary', status: 'pass', testId: 'velin-form-summary' },
+  { id: '3.3.2', level: 'A', name: 'Labels or Instructions', owner: 'Forms + WC + velin-form-summary', status: 'partial', testId: 'scan-a11y' },
+  { id: '3.3.3', level: 'AA', name: 'Error Suggestion', owner: 'velin-form-summary', status: 'pass', testId: 'velin-form-summary' },
   { id: '3.3.7', level: 'A', name: 'Redundant Entry', owner: 'velin-persist + Author', status: 'partial', testId: 'velin-persist' },
   { id: '3.3.8', level: 'AA', name: 'Accessible Authentication', owner: 'CSS + Sample', status: 'pass', testId: 'wcag22-auth' },
-  { id: '4.1.2', level: 'A', name: 'Name, Role, Value', owner: 'Web Components', status: 'partial', testId: 'contracts' },
+  { id: '4.1.2', level: 'A', name: 'Name, Role, Value', owner: 'Web Components + velin-form-summary', status: 'partial', testId: 'contracts' },
   { id: '4.1.3', level: 'AA', name: 'Status Messages', owner: 'Announcer + WC', status: 'pass', testId: 'live-regions' },
 ];
 

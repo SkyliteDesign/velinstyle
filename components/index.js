@@ -33,6 +33,8 @@ export { default as VelinSparkline } from './velin-sparkline.js';
 export { default as VelinCounter } from './velin-counter.js';
 export { default as VelinLiveDot } from './velin-live-dot.js';
 export { default as VelinCodeBlock } from './velin-code-block.js';
+export { default as VelinDataTable } from './velin-data-table.js';
+export { default as VelinFormSummary } from './velin-form-summary.js';
 export { default as VelinSearch } from './velin-search.js';
 export { bindDeclarativeSearch } from './velin-search.js';
 export { initReveal, initMotion, velinMotion } from './velin-reveal.js';

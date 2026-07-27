@@ -17,11 +17,13 @@ Custom elements in `components/`. Import via `@birdapi/velinstyle` or lazy-load 
 | `<velin-copy>` | 0 | 1 | [velin-copy.md](./velin-copy.md) |
 | `<velin-countdown>` | 1 | 1 | [velin-countdown.md](./velin-countdown.md) |
 | `<velin-counter>` | 9 | 0 | [velin-counter.md](./velin-counter.md) |
+| `<velin-data-table>` | 4 | 3 | [velin-data-table.md](./velin-data-table.md) |
 | `<velin-dialog>` | 0 | 1 | [velin-dialog.md](./velin-dialog.md) |
 | `<velin-drawer>` | 1 | 1 | [velin-drawer.md](./velin-drawer.md) |
 | `<velin-dropdown>` | 1 | 1 | [velin-dropdown.md](./velin-dropdown.md) |
 | `<velin-email>` | 3 | 1 | [velin-email.md](./velin-email.md) |
 | `<velin-flip>` | 0 | 0 | [velin-flip.md](./velin-flip.md) |
+| `<velin-form-summary>` | 2 | 3 | [velin-form-summary.md](./velin-form-summary.md) |
 | `<velin-haptic>` | 0 | 0 | [velin-haptic.md](./velin-haptic.md) |
 | `<velin-icon>` | 6 | 0 | [velin-icon.md](./velin-icon.md) |
 | `<velin-lightbox>` | 0 | 1 | [velin-lightbox.md](./velin-lightbox.md) |

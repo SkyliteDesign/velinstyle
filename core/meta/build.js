@@ -85,7 +85,7 @@ export function buildPageMeta(html, sourcePath = '', pkgRoot = '.') {
       : 'page';
 
   return {
-    version: readPackageMeta(pkgRoot).version || '0.9.0',
+    version: readPackageMeta(pkgRoot).version || '0.0.0',
     mime: VELIN_META_MIME,
     page: {
       intent,

@@ -9,7 +9,13 @@ import { fileURLToPath } from 'url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-const MAX_BUNDLE_JS = 200 * 1024;
+/**
+ * Budgets for the *full* bundles, which contain every component. They grow with
+ * the component count, so the ceiling is raised deliberately per release rather
+ * than tracked automatically. Applications should prefer `register()` /
+ * `bootFromDOM()` and pay only for the components they use.
+ */
+const MAX_BUNDLE_JS = 215 * 1024;
 const MAX_BUNDLE_CSS = 170 * 1024;
 
 function fail(msg) {
@@ -40,8 +46,20 @@ try {
 }
 const loaders = readFileSync(loadersPath, 'utf-8');
 const count = (loaders.match(/^\s+'velin-/gm) || []).length;
-if (count < 36) fail(`Expected >= 36 loaders, got ${count}`);
-console.log(`Loaders OK: ${count} entries`);
+// Every contracted component needs a loader; deprecated aliases add a few more.
+const contracts = JSON.parse(readFileSync(join(ROOT, 'core/a11y/component-contracts.json'), 'utf-8'));
+const contracted = Object.keys(contracts.components).length;
+if (count < contracted) fail(`Expected >= ${contracted} loaders (one per contract), got ${count}`);
+console.log(`Loaders OK: ${count} entries for ${contracted} contracted components`);
+
+const reactSrc = join(ROOT, 'packages/react/src');
+execSync('node scripts/generate-react-wrappers.mjs', { cwd: ROOT, stdio: 'inherit' });
+try {
+  execSync(`git diff --exit-code ${reactSrc}`, { cwd: ROOT, stdio: 'pipe' });
+} catch {
+  fail('React wrappers out of date — run npm run build:react and commit');
+}
+console.log('React wrappers OK');
 
 function normalizeJsonTimestamp(path) {
   const data = JSON.parse(readFileSync(path, 'utf-8'));
@@ -73,5 +91,8 @@ if (beforeLlms !== afterLlms) {
   fail('dist/llms.txt out of date — run npm run meta:build and commit');
 }
 console.log('Velin-Meta OK');
+
+// Site checks are skipped automatically when the sibling repo is absent (CI).
+execSync('node scripts/check-release-sync.mjs', { cwd: ROOT, stdio: 'inherit' });
 
 console.log('All CI checks passed');

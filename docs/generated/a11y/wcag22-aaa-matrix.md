@@ -22,10 +22,12 @@ Framework target: **WCAG 2.2 Level AAA** (token defaults + component contracts).
 | 2.5.7 | AA | Dragging Movements | CSS + Sample | pass | `wcag22-dragging` |
 | 2.5.8 | AA | Target Size | CSS + WC | pass | `target-size` |
 | 3.2.6 | A | Consistent Help | CSS | pass | `consistent-help` |
-| 3.3.2 | A | Labels or Instructions | Forms + WC | partial | `scan-a11y` |
+| 3.3.1 | A | Error Identification | velin-form-summary | pass | `velin-form-summary` |
+| 3.3.2 | A | Labels or Instructions | Forms + WC + velin-form-summary | partial | `scan-a11y` |
+| 3.3.3 | AA | Error Suggestion | velin-form-summary | pass | `velin-form-summary` |
 | 3.3.7 | A | Redundant Entry | velin-persist + Author | partial | `velin-persist` |
 | 3.3.8 | AA | Accessible Authentication | CSS + Sample | pass | `wcag22-auth` |
-| 4.1.2 | A | Name, Role, Value | Web Components | partial | `contracts` |
+| 4.1.2 | A | Name, Role, Value | Web Components + velin-form-summary | partial | `contracts` |
 | 4.1.3 | AA | Status Messages | Announcer + WC | pass | `live-regions` |
 ## Web component contracts
 | Element | Status | Keyboard | Live region | Required attrs |
@@ -41,10 +43,12 @@ Framework target: **WCAG 2.2 Level AAA** (token defaults + component contracts).
 | `<velin-copy>` | pass | Native button | — | `aria-label` |
 | `<velin-countdown>` | pass | N/A | polite | — |
 | `<velin-counter>` | pass | N/A | polite | — |
+| `<velin-data-table>` | pass | Native buttons for column sort and pagination | polite | — |
 | `<velin-dialog>` | pass | Native dialog, Escape | — | — |
 | `<velin-drawer>` | pass | Escape, Tab trap | — | — |
 | `<velin-dropdown>` | pass | Roving, typeahead, Escape | — | — |
 | `<velin-email>` | pass | — | — | `aria-label` |
+| `<velin-form-summary>` | pass | Summary links move focus to the offending field | assertive | — |
 | `<velin-icon>` | pass | — | — | `label` |
 | `<velin-lightbox>` | pass | Escape, arrows, Tab trap | polite | — |
 | `<velin-live-dot>` | pass | — | — | — |

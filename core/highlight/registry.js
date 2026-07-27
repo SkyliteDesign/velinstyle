@@ -28,6 +28,14 @@ const LAZY_LOADERS = {
   console: () => import('./languages/plain.js'),
   php: () => import('./languages/php.js'),
   blade: () => import('./languages/blade.js'),
+  python: () => import('./languages/python.js'),
+  py: () => import('./languages/python.js'),
+  yaml: () => import('./languages/yaml.js'),
+  yml: () => import('./languages/yaml.js'),
+  go: () => import('./languages/go.js'),
+  golang: () => import('./languages/go.js'),
+  rust: () => import('./languages/rust.js'),
+  rs: () => import('./languages/rust.js'),
 };
 
 /** @param {string} name */
@@ -49,11 +57,14 @@ export function normalizeLanguage(name) {
     md: 'markdown',
     plaintext: 'text',
     'plain-text': 'text',
-    yml: 'text',
-    yaml: 'text',
+    yml: 'yaml',
     toml: 'text',
     ini: 'text',
     php8: 'php',
+    py: 'python',
+    python3: 'python',
+    golang: 'go',
+    rs: 'rust',
   };
   return map[n] || n;
 }

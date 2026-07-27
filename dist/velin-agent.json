@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "mime": "application/vnd.velinstyle.meta+json",
-  "generatedAt": "2026-05-29T12:13:11.252Z",
+  "generatedAt": "2026-07-27T10:44:37.810Z",
   "framework": {
     "name": "@birdapi/velinstyle",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "homepage": "https://velinstyle.info",
     "repository": "https://github.com/SkyliteDesign/velinstyle.git",
     "tagline": "VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components."
@@ -47,10 +47,12 @@
       "velin-copy",
       "velin-countdown",
       "velin-counter",
+      "velin-data-table",
       "velin-dialog",
       "velin-drawer",
       "velin-dropdown",
       "velin-email",
+      "velin-form-summary",
       "velin-icon",
       "velin-lightbox",
       "velin-live-dot",
@@ -73,7 +75,7 @@
       "velin-toast",
       "velin-tooltip"
     ],
-    "count": 36,
+    "count": 38,
     "loaderTags": [
       "velin-accordion",
       "velin-announcer",
@@ -86,10 +88,12 @@
       "velin-copy",
       "velin-countdown",
       "velin-counter",
+      "velin-data-table",
       "velin-dialog",
       "velin-drawer",
       "velin-dropdown",
       "velin-email",
+      "velin-form-summary",
       "velin-icon",
       "velin-lightbox",
       "velin-live-dot",
@@ -114,7 +118,7 @@
       "velin-tooltip",
       "velin-tooltip-wc"
     ],
-    "loaderCount": 38,
+    "loaderCount": 40,
     "legacyAliases": [
       "velin-stepper-wc",
       "velin-tooltip-wc"
@@ -439,6 +443,17 @@
         "keyboard": "N/A",
         "reducedMotion": true
       },
+      "velin-data-table": {
+        "status": "pass",
+        "roles": [
+          "button"
+        ],
+        "keyboard": "Native buttons for column sort and pagination",
+        "liveRegion": "polite",
+        "reducedMotion": true,
+        "requiredAttributes": [],
+        "notes": "Enhances a light-DOM table. Sort state exposed via aria-sort; sort triggers are real buttons. Needs a caption, aria-label, or label attribute (warns otherwise). Filtered and off-page rows use hidden so they leave the a11y tree; sort, filter and page changes are announced."
+      },
       "velin-dialog": {
         "status": "pass",
         "roles": [
@@ -472,6 +487,17 @@
         "requiredAttributes": [
           "aria-label"
         ]
+      },
+      "velin-form-summary": {
+        "status": "pass",
+        "roles": [
+          "alert",
+          "link"
+        ],
+        "keyboard": "Summary links move focus to the offending field",
+        "liveRegion": "assertive",
+        "requiredAttributes": [],
+        "notes": "Disables native validation bubbles and renders a focusable role=alert summary. Sets aria-invalid and wires aria-describedby to per-field messages (WCAG 3.3.1, 3.3.3, 4.1.2). Field errors clear as soon as the field becomes valid."
       },
       "velin-icon": {
         "status": "pass",
@@ -657,7 +683,7 @@
   },
   "searchIndex": {
     "path": "dist/search-index.json",
-    "entryCount": 137
+    "entryCount": 139
   },
   "documentation": {
     "generated": "docs/generated/",
