@@ -10,7 +10,7 @@
 ```
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-2563eb?style=flat-square)](LICENSE)
-[![Release](https://img.shields.io/badge/Release-v1.0.0-2563eb?style=flat-square)](https://github.com/SkyliteDesign/velinstyle/releases/tag/v1.0.0)
+[![Release](https://img.shields.io/badge/Release-v1.1.0-2563eb?style=flat-square)](https://github.com/SkyliteDesign/velinstyle/releases/tag/v1.1.0)
 [![npm version](https://img.shields.io/npm/v/@birdapi/velinstyle?style=flat-square)](https://www.npmjs.com/package/@birdapi/velinstyle)
 [![WCAG 2.2 AAA](https://img.shields.io/badge/WCAG_2.2-AAA-16a34a?style=flat-square)](https://velinstyle.info/docs/a11y.html)
 [![GitHub stars](https://img.shields.io/github/stars/SkyliteDesign/velinstyle?style=flat-square)](https://github.com/SkyliteDesign/velinstyle/stargazers)
@@ -28,7 +28,7 @@ npm i @birdapi/velinstyle
 
 ---
 
-**VelinStyle** is the **WCAG 2.2 AAA CSS framework** with native JavaScript runtime and Web Components — CSS utilities, 1.0.0 modules (search, motion, highlight, attributes, meta), and security tooling, with **no external UI framework dependencies** in the core.
+**VelinStyle** is the **WCAG 2.2 AAA CSS framework** with native JavaScript runtime and Web Components — CSS utilities, 1.1.0 modules (search, motion, highlight, attributes, meta), and security tooling, with **no external UI framework dependencies** in the core.
 
 Built for teams who want **readable HTML**, **AAA token defaults** (AA via `data-velin-contrast="aa"`), and **CLI automation** instead of utility sprawl.
 
@@ -100,7 +100,7 @@ After cloning, run `npm install && npm run build` — `dist/` is generated, not 
 
 ---
 
-## Core modules (1.0.0)
+## Core modules (1.1.0)
 
 | Export | Description |
 | --- | --- |
