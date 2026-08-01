@@ -155,7 +155,7 @@ Expect stricter `scan` / `review` after 1.2 — fix markup; do not weaken gates.
 |------|------|
 | Components | [Introduction](https://velinstyle.info/docs/getting-started/introduction.html) |
 | Live demos | [velinstyle.info/demos](https://velinstyle.info/demos/) |
-| A11y matrix | [docs/a11y](https://velinstyle.info/docs/a11y.html) |
+| A11y matrix | [docs/a11y](https://velinstyle.info/docs/getting-started/accessibility.html) |
 | Landing in 15 min | [docs/guides/landing-15-min.html](https://velinstyle.info/docs/guides/landing-15-min.html) |
 | FAQ / Troubleshooting / Deploy | [`FAQ.md`](FAQ.md) · [`TROUBLESHOOTING.md`](TROUBLESHOOTING.md) · [`DEPLOY.md`](DEPLOY.md) |
 | Design Intelligence | [`docs/guides/design-intelligence.md`](docs/guides/design-intelligence.md) |

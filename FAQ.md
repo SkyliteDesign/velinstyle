@@ -24,7 +24,7 @@ An accessibility-first **CSS + Web Components** framework with a **CLI**, plus *
 
 ### Does AAA mean my app is certified?
 
-**No.** Defaults are **AAA-oriented**. Your markup, content, and flows still need review. See the [a11y matrix](https://velinstyle.info/docs/a11y.html).
+**No.** Defaults are **AAA-oriented**. Your markup, content, and flows still need review. See the [a11y matrix](https://velinstyle.info/docs/getting-started/accessibility.html).
 
 ### What can I ship today?
 

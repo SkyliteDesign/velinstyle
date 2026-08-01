@@ -345,7 +345,7 @@ No required migration. Optional: adopt `<velin-form-summary>` on forms and `<vel
 - **Tokens JSON:** `zIndex` block in schema/build/validate; deterministic key order in `tokens build`; `examples/tokens.full.json`.
 
 ### Changed
-- Documentation and samples: landmark structure (`<header role="banner">`), AAA migration section, updated `docs/a11y.html` and token pages.
+- Documentation and samples: landmark structure (`<header role="banner">`), AAA migration section, updated `docs/getting-started/accessibility.html` (formerly `docs/a11y.html`) and token pages.
 - `test:a11y` enables `color-contrast-enhanced`; JSDOM canvas stub for axe in CI.
 - Package and CLI version **0.9.0**; CI runs `tokens:validate`, `test:security`, `test:perf`, `ci:checks` (bundle budget, search-index drift, loader drift).
 - **Package:** `.` export → `runtime-entry.js`; full bundle at `@birdapi/velinstyle/bundle`; TypeScript `dist/velinstyle.d.ts`. Subpaths: `/search`, `/motion`, `/attributes`, `/highlight`, `/sanitize`. Distribution via [velinstyle.info](https://velinstyle.info).

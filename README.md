@@ -19,7 +19,7 @@ One framework. One CLI. One design system. One AI-ready ecosystem.
 [![GitHub stars](https://img.shields.io/github/stars/SkyliteDesign/velinstyle?style=flat-square)](https://github.com/SkyliteDesign/velinstyle/stargazers)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=flat-square)](https://nodejs.org/)
 [![Browsers](https://img.shields.io/badge/Browsers-modern-0ea5e9?style=flat-square)](https://velinstyle.info/docs/getting-started/introduction.html)
-[![WCAG 2.2 AAA support](https://img.shields.io/badge/WCAG_2.2-AAA_support-16a34a?style=flat-square)](https://velinstyle.info/docs/a11y.html)
+[![WCAG 2.2 AAA support](https://img.shields.io/badge/WCAG_2.2-AAA_support-16a34a?style=flat-square)](https://velinstyle.info/docs/getting-started/accessibility.html)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-2563eb?style=flat-square)](CONTRIBUTING.md)
 
 ```bash
@@ -37,7 +37,7 @@ VelinStyle is a **production CSS + Web Components framework** with **WCAG 2.2 AA
 **Best fit today:** marketing landings, docs shells, simple admin starters.  
 **Not yet:** sole primary stack for large multipage shop + enterprise admin without custom work.
 
-> **Release:** **1.2.0** (Core + Design Intelligence Foundation + Trust/Ship). Using VelinStyle does **not** certify your app — see the [a11y matrix](https://velinstyle.info/docs/a11y.html).
+> **Release:** **1.2.0** (Core + Design Intelligence Foundation + Trust/Ship). Using VelinStyle does **not** certify your app — see the [a11y matrix](https://velinstyle.info/docs/getting-started/accessibility.html).
 
 ---
 
@@ -204,7 +204,7 @@ Accessibility is a **default**, not a plugin.
 - `prefers-reduced-motion` gating
 - Component a11y contracts + scanner rules
 
-Docs: [a11y matrix](https://velinstyle.info/docs/a11y.html) · AAA marketing language: see `VELINSTYLE_2030.md` (strategy ADRs are local-only)
+Docs: [a11y matrix](https://velinstyle.info/docs/getting-started/accessibility.html) · AAA marketing language: see `VELINSTYLE_2030.md` (strategy ADRs are local-only)
 
 ---
 

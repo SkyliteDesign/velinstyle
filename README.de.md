@@ -19,7 +19,7 @@ Ein Framework. Eine CLI. Ein Design System. Ein AI-fähiges Ökosystem.
 [![GitHub Stars](https://img.shields.io/github/stars/SkyliteDesign/velinstyle?style=flat-square)](https://github.com/SkyliteDesign/velinstyle/stargazers)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=flat-square)](https://nodejs.org/)
 [![Browser](https://img.shields.io/badge/Browser-modern-0ea5e9?style=flat-square)](https://velinstyle.info/docs/getting-started/introduction.html)
-[![WCAG 2.2 AAA Support](https://img.shields.io/badge/WCAG_2.2-AAA_Support-16a34a?style=flat-square)](https://velinstyle.info/docs/a11y.html)
+[![WCAG 2.2 AAA Support](https://img.shields.io/badge/WCAG_2.2-AAA_Support-16a34a?style=flat-square)](https://velinstyle.info/docs/getting-started/accessibility.html)
 [![PRs Welcome](https://img.shields.io/badge/PRs-willkommen-2563eb?style=flat-square)](CONTRIBUTING.de.md)
 
 ```bash
@@ -37,7 +37,7 @@ VelinStyle ist ein **produktives CSS- + Web-Components-Framework** mit **WCAG-2.
 **Passung heute:** Marketing-Landings, Docs-Shells, einfache Admin-Starter.  
 **Noch nicht:** alleiniger Primary-Stack für große Multipage-Shops + Enterprise-Admin ohne Custom-Arbeit.
 
-> **Release:** **1.2.0** (Core + Design Intelligence Foundation + Trust/Ship). VelinStyle **zertifiziert keine Anwendung** — siehe [A11y-Matrix](https://velinstyle.info/docs/a11y.html).
+> **Release:** **1.2.0** (Core + Design Intelligence Foundation + Trust/Ship). VelinStyle **zertifiziert keine Anwendung** — siehe [A11y-Matrix](https://velinstyle.info/docs/getting-started/accessibility.html).
 
 ---
 
@@ -133,7 +133,7 @@ Minimal-HTML und Import-Pfade: [`GETTING_STARTED.md`](GETTING_STARTED.md) · Sys
 
 **40 kanonische** Custom Elements (**42** Lazy-Loader inkl. Legacy-`*-wc`). Progressive Enhancement: HTML/CSS first, WC nur bei Verhalten.
 
-AAA-orientierte Token-Defaults, Fokus-Management, Reduced Motion, Scanner-Contracts — siehe [A11y-Matrix](https://velinstyle.info/docs/a11y.html).
+AAA-orientierte Token-Defaults, Fokus-Management, Reduced Motion, Scanner-Contracts — siehe [A11y-Matrix](https://velinstyle.info/docs/getting-started/accessibility.html).
 
 ---
 
