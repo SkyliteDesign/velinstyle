@@ -4,8 +4,12 @@
 
 Auto grid layout (column count).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| column count | Auto-fit grid columns | CSS grid |
 ## Example
 
 ```html
-<div velin-grid>…</div>
+<div velin-grid="3">…</div>
 ```

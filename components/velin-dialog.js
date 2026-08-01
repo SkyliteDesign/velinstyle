@@ -150,7 +150,10 @@ class VelinDialog extends HTMLElement {
     }
     this._resolve(value);
     this._resolve = null;
-    this.dispatchEvent(new CustomEvent('velin-dialog-close', { bubbles: true, detail: { value } }));
+    const detail = { value };
+    this.dispatchEvent(new CustomEvent('velin-close', { bubbles: true, detail }));
+    // Deprecated alias — remove after deprecation window (ADR 0012)
+    this.dispatchEvent(new CustomEvent('velin-dialog-close', { bubbles: true, detail }));
   }
 }
 

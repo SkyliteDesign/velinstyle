@@ -4,6 +4,17 @@
 
 Source: `components/velin-command.js`
 
+## Minimal working example
+Copy-paste starter (load CSS + `velinstyle-components` / `bootFromDOM` as needed):
+
+```html
+<velin-command>
+  <input slot="input" type="search" class="velin-input" placeholder="Jump to…" aria-label="Command">
+  <button type="button" data-velin-command-item value="home">Home</button>
+  <button type="button" data-velin-command-item value="settings">Settings</button>
+</velin-command>
+```
+
 ## Accessibility
 WCAG contract status: **pass** (framework target: AAA).
 
@@ -28,3 +39,4 @@ WCAG contract status: **pass** (framework target: AAA).
 | --- | --- |
 | Method | `close()` |
 | Method | `open()` |
+| Method | `toggle()` |

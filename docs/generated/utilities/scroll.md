@@ -14,7 +14,6 @@ Source: `src/utilities/scroll.css`
 | `.velin-scroll-pt-4` | `scroll-padding-block-start: var(--velin-space-4);` |
 | `.velin-scroll-pt-8` | `scroll-padding-block-start: var(--velin-space-8);` |
 | `.velin-scroll-smooth` | `scroll-behavior: smooth;` |
-| `.velin-scroll-smooth` | `scroll-behavior: auto;` |
 | `.velin-snap-always` | `scroll-snap-stop: always;` |
 | `.velin-snap-center` | `scroll-snap-align: center;` |
 | `.velin-snap-end` | `scroll-snap-align: end;` |

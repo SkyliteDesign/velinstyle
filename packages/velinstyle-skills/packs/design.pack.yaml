@@ -1,0 +1,10 @@
+id: design
+name: Design Pack
+version: 1.0.0
+priority: recommended
+skills:
+  - velin-design-hero-compose
+  - velin-design-section-rhythm
+  - velin-design-surface-roles
+  - velin-themes-apply-token
+  - velin-motion-reduced-safe

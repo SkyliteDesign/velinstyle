@@ -1,0 +1,9 @@
+{
+  "id": "faq",
+  "target": "section:faq",
+  "rules": [
+    { "id": "faq-questions", "scope": "section", "section": "faq", "rule": "Entries must be clear interrogatives", "severity": "error" },
+    { "id": "faq-pattern", "scope": "section", "section": "faq", "rule": "Use accordion/disclosure, not long marketing paragraphs", "severity": "error" },
+    { "id": "faq-count", "scope": "section", "section": "faq", "rule": "Prefer 5–8 high-intent FAQs", "severity": "info" }
+  ]
+}

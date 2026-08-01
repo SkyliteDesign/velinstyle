@@ -4,6 +4,15 @@
 
 Source: `components/velin-tooltip.js`
 
+## Minimal working example
+Copy-paste starter (load CSS + `velinstyle-components` / `bootFromDOM` as needed):
+
+```html
+<velin-tooltip content="Save draft">
+  <button type="button" class="velin-btn">Save</button>
+</velin-tooltip>
+```
+
 ## Accessibility
 WCAG contract status: **pass** (framework target: AAA).
 

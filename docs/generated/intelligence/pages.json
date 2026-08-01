@@ -1,0 +1,668 @@
+[
+  {
+    "id": "landing",
+    "name": "Landing",
+    "audience": "prospects",
+    "businessType": "general",
+    "pageGoal": "explain offer and convert",
+    "conversionGoal": "lead or signup",
+    "requiredSections": [
+      "hero",
+      "benefits",
+      "services",
+      "testimonials",
+      "faq",
+      "cta",
+      "footer"
+    ],
+    "optionalSections": [
+      "trust-bar",
+      "process",
+      "pricing"
+    ],
+    "forbiddenSections": [],
+    "seoIntent": "brand + primary offer",
+    "accessibilityRisks": [
+      "hero contrast",
+      "form labels"
+    ],
+    "defaultTone": "clear-confident",
+    "recommendedComponents": [
+      "css-button",
+      "css-card",
+      "velin-accordion",
+      "velin-form-summary"
+    ],
+    "designConstraintIds": [
+      "hero",
+      "faq",
+      "contact"
+    ],
+    "promptKeywords": [
+      "landing page",
+      "homepage",
+      "marketing site"
+    ]
+  },
+  {
+    "id": "corporate",
+    "name": "Corporate",
+    "audience": "stakeholders",
+    "businessType": "corporate",
+    "pageGoal": "trust and company overview",
+    "conversionGoal": "contact",
+    "requiredSections": [
+      "hero",
+      "benefits",
+      "process",
+      "testimonials",
+      "cta",
+      "footer"
+    ],
+    "optionalSections": [
+      "services",
+      "faq"
+    ],
+    "forbiddenSections": [],
+    "seoIntent": "company entity",
+    "accessibilityRisks": [
+      "long pages without landmarks"
+    ],
+    "defaultTone": "formal",
+    "recommendedComponents": [
+      "css-nav",
+      "css-card",
+      "css-button"
+    ],
+    "designConstraintIds": [
+      "hero"
+    ],
+    "promptKeywords": [
+      "corporate",
+      "company",
+      "about"
+    ]
+  },
+  {
+    "id": "lawyer",
+    "name": "Lawyer / Professional services",
+    "audience": "clients seeking counsel",
+    "businessType": "professional-services",
+    "pageGoal": "credibility + consultation booking",
+    "conversionGoal": "contact form",
+    "requiredSections": [
+      "hero",
+      "trust-bar",
+      "services",
+      "process",
+      "testimonials",
+      "faq",
+      "contact",
+      "footer"
+    ],
+    "optionalSections": [
+      "benefits",
+      "pricing",
+      "cta"
+    ],
+    "forbiddenSections": [],
+    "seoIntent": "local professional services",
+    "accessibilityRisks": [
+      "form validation",
+      "contrast on dark heroes"
+    ],
+    "defaultTone": "trustworthy-calm",
+    "recommendedComponents": [
+      "css-card",
+      "css-button",
+      "velin-accordion",
+      "velin-form-summary",
+      "css-input"
+    ],
+    "designConstraintIds": [
+      "hero",
+      "faq",
+      "contact"
+    ],
+    "promptKeywords": [
+      "steuerberater",
+      "lawyer",
+      "attorney",
+      "kanzlei",
+      "tax advisor",
+      "professional services"
+    ]
+  },
+  {
+    "id": "healthcare",
+    "name": "Healthcare",
+    "audience": "patients",
+    "businessType": "healthcare",
+    "pageGoal": "services + appointment",
+    "conversionGoal": "book / contact",
+    "requiredSections": [
+      "hero",
+      "services",
+      "process",
+      "testimonials",
+      "faq",
+      "contact",
+      "footer"
+    ],
+    "optionalSections": [
+      "trust-bar",
+      "benefits"
+    ],
+    "forbiddenSections": [],
+    "seoIntent": "clinic / practice",
+    "accessibilityRisks": [
+      "reading level",
+      "form a11y"
+    ],
+    "defaultTone": "reassuring",
+    "recommendedComponents": [
+      "css-card",
+      "velin-accordion",
+      "velin-form-summary"
+    ],
+    "designConstraintIds": [
+      "hero",
+      "faq",
+      "contact"
+    ],
+    "promptKeywords": [
+      "clinic",
+      "doctor",
+      "healthcare",
+      "praxis"
+    ]
+  },
+  {
+    "id": "restaurant",
+    "name": "Restaurant",
+    "audience": "diners",
+    "businessType": "hospitality",
+    "pageGoal": "menu interest + reservation",
+    "conversionGoal": "reserve",
+    "requiredSections": [
+      "hero",
+      "services",
+      "testimonials",
+      "cta",
+      "footer"
+    ],
+    "optionalSections": [
+      "process",
+      "faq",
+      "trust-bar"
+    ],
+    "forbiddenSections": [],
+    "seoIntent": "local restaurant",
+    "accessibilityRisks": [
+      "image-heavy pages"
+    ],
+    "defaultTone": "inviting",
+    "recommendedComponents": [
+      "css-card",
+      "css-button"
+    ],
+    "designConstraintIds": [
+      "hero"
+    ],
+    "promptKeywords": [
+      "restaurant",
+      "cafe",
+      "menu"
+    ]
+  },
+  {
+    "id": "portfolio",
+    "name": "Portfolio",
+    "audience": "clients/hiring",
+    "businessType": "creative",
+    "pageGoal": "showcase work",
+    "conversionGoal": "contact",
+    "requiredSections": [
+      "hero",
+      "services",
+      "testimonials",
+      "cta",
+      "footer"
+    ],
+    "optionalSections": [
+      "process",
+      "faq"
+    ],
+    "forbiddenSections": [],
+    "seoIntent": "personal brand",
+    "accessibilityRisks": [
+      "image alts"
+    ],
+    "defaultTone": "expressive",
+    "recommendedComponents": [
+      "css-card",
+      "css-button"
+    ],
+    "designConstraintIds": [
+      "hero"
+    ],
+    "promptKeywords": [
+      "portfolio",
+      "designer",
+      "photographer"
+    ]
+  },
+  {
+    "id": "agency",
+    "name": "Agency",
+    "audience": "business buyers",
+    "businessType": "agency",
+    "pageGoal": "capabilities + leads",
+    "conversionGoal": "contact",
+    "requiredSections": [
+      "hero",
+      "benefits",
+      "services",
+      "process",
+      "testimonials",
+      "cta",
+      "footer"
+    ],
+    "optionalSections": [
+      "pricing",
+      "faq"
+    ],
+    "forbiddenSections": [],
+    "seoIntent": "agency services",
+    "accessibilityRisks": [
+      "busy layouts"
+    ],
+    "defaultTone": "confident",
+    "recommendedComponents": [
+      "css-card",
+      "css-button",
+      "velin-accordion"
+    ],
+    "designConstraintIds": [
+      "hero",
+      "faq"
+    ],
+    "promptKeywords": [
+      "agency",
+      "marketing agency",
+      "studio"
+    ]
+  },
+  {
+    "id": "saas",
+    "name": "SaaS",
+    "audience": "buyers/users",
+    "businessType": "saas",
+    "pageGoal": "product value + signup",
+    "conversionGoal": "trial/signup",
+    "requiredSections": [
+      "hero",
+      "benefits",
+      "services",
+      "pricing",
+      "testimonials",
+      "faq",
+      "cta",
+      "footer"
+    ],
+    "optionalSections": [
+      "trust-bar",
+      "process"
+    ],
+    "forbiddenSections": [],
+    "seoIntent": "product category",
+    "accessibilityRisks": [
+      "pricing tables",
+      "modals"
+    ],
+    "defaultTone": "product-led",
+    "recommendedComponents": [
+      "css-card",
+      "css-button",
+      "velin-accordion",
+      "velin-modal"
+    ],
+    "designConstraintIds": [
+      "hero",
+      "faq"
+    ],
+    "promptKeywords": [
+      "saas",
+      "software",
+      "app landing"
+    ]
+  },
+  {
+    "id": "docs",
+    "name": "Docs",
+    "audience": "developers",
+    "businessType": "documentation",
+    "pageGoal": "teach and reference",
+    "conversionGoal": "task completion",
+    "requiredSections": [
+      "navbar",
+      "hero",
+      "footer"
+    ],
+    "optionalSections": [
+      "faq"
+    ],
+    "forbiddenSections": [
+      "pricing"
+    ],
+    "seoIntent": "technical documentation",
+    "accessibilityRisks": [
+      "skip links",
+      "code contrast"
+    ],
+    "defaultTone": "technical",
+    "recommendedComponents": [
+      "css-nav",
+      "velin-theme-toggle",
+      "velin-search"
+    ],
+    "designConstraintIds": [],
+    "promptKeywords": [
+      "documentation",
+      "docs site",
+      "api docs"
+    ]
+  },
+  {
+    "id": "dashboard",
+    "name": "Dashboard",
+    "audience": "operators",
+    "businessType": "app-shell",
+    "pageGoal": "monitor and act",
+    "conversionGoal": "task completion",
+    "requiredSections": [
+      "navbar",
+      "footer"
+    ],
+    "optionalSections": [],
+    "forbiddenSections": [
+      "pricing",
+      "testimonials"
+    ],
+    "seoIntent": "often noindex",
+    "accessibilityRisks": [
+      "dense tables",
+      "live regions"
+    ],
+    "defaultTone": "utilitarian",
+    "recommendedComponents": [
+      "css-nav",
+      "velin-data-table",
+      "css-alert"
+    ],
+    "designConstraintIds": [],
+    "promptKeywords": [
+      "dashboard",
+      "admin",
+      "app shell"
+    ]
+  },
+  {
+    "id": "crm",
+    "name": "CRM",
+    "audience": "sales ops",
+    "businessType": "crm",
+    "pageGoal": "manage relationships",
+    "conversionGoal": "task completion",
+    "requiredSections": [
+      "navbar"
+    ],
+    "optionalSections": [],
+    "forbiddenSections": [
+      "testimonials"
+    ],
+    "seoIntent": "app",
+    "accessibilityRisks": [
+      "data-dense UI"
+    ],
+    "defaultTone": "utilitarian",
+    "recommendedComponents": [
+      "velin-data-table",
+      "css-input",
+      "velin-form-summary"
+    ],
+    "designConstraintIds": [],
+    "promptKeywords": [
+      "crm",
+      "contacts",
+      "pipeline"
+    ]
+  },
+  {
+    "id": "erp",
+    "name": "ERP",
+    "audience": "internal ops",
+    "businessType": "erp",
+    "pageGoal": "operational workflows",
+    "conversionGoal": "task completion",
+    "requiredSections": [
+      "navbar"
+    ],
+    "optionalSections": [],
+    "forbiddenSections": [
+      "pricing",
+      "testimonials"
+    ],
+    "seoIntent": "app",
+    "accessibilityRisks": [
+      "complex forms"
+    ],
+    "defaultTone": "utilitarian",
+    "recommendedComponents": [
+      "velin-data-table",
+      "css-input",
+      "velin-dialog"
+    ],
+    "designConstraintIds": [],
+    "promptKeywords": [
+      "erp",
+      "inventory",
+      "operations"
+    ]
+  },
+  {
+    "id": "blog",
+    "name": "Blog",
+    "audience": "readers",
+    "businessType": "content",
+    "pageGoal": "inform and retain",
+    "conversionGoal": "newsletter/contact",
+    "requiredSections": [
+      "navbar",
+      "hero",
+      "footer"
+    ],
+    "optionalSections": [
+      "cta",
+      "faq"
+    ],
+    "forbiddenSections": [],
+    "seoIntent": "articles",
+    "accessibilityRisks": [
+      "reading length"
+    ],
+    "defaultTone": "editorial",
+    "recommendedComponents": [
+      "css-nav",
+      "css-card"
+    ],
+    "designConstraintIds": [
+      "hero"
+    ],
+    "promptKeywords": [
+      "blog",
+      "articles",
+      "magazine"
+    ]
+  },
+  {
+    "id": "shop",
+    "name": "Shop",
+    "audience": "buyers",
+    "businessType": "ecommerce",
+    "pageGoal": "browse and purchase",
+    "conversionGoal": "checkout",
+    "requiredSections": [
+      "navbar",
+      "hero",
+      "services",
+      "cta",
+      "footer"
+    ],
+    "optionalSections": [
+      "testimonials",
+      "faq",
+      "trust-bar"
+    ],
+    "forbiddenSections": [],
+    "seoIntent": "products",
+    "accessibilityRisks": [
+      "product cards",
+      "filters"
+    ],
+    "defaultTone": "commercial",
+    "recommendedComponents": [
+      "css-card",
+      "css-button",
+      "velin-form-summary"
+    ],
+    "designConstraintIds": [
+      "hero"
+    ],
+    "promptKeywords": [
+      "shop",
+      "store",
+      "ecommerce"
+    ]
+  },
+  {
+    "id": "event",
+    "name": "Event",
+    "audience": "attendees",
+    "businessType": "event",
+    "pageGoal": "inform and register",
+    "conversionGoal": "registration",
+    "requiredSections": [
+      "hero",
+      "benefits",
+      "process",
+      "faq",
+      "cta",
+      "footer"
+    ],
+    "optionalSections": [
+      "testimonials",
+      "pricing"
+    ],
+    "forbiddenSections": [],
+    "seoIntent": "event entity",
+    "accessibilityRisks": [
+      "countdown motion"
+    ],
+    "defaultTone": "exciting-clear",
+    "recommendedComponents": [
+      "css-button",
+      "css-card",
+      "velin-accordion"
+    ],
+    "designConstraintIds": [
+      "hero",
+      "faq"
+    ],
+    "promptKeywords": [
+      "event",
+      "conference",
+      "meetup"
+    ]
+  },
+  {
+    "id": "course",
+    "name": "Course",
+    "audience": "learners",
+    "businessType": "education",
+    "pageGoal": "curriculum + enroll",
+    "conversionGoal": "enroll",
+    "requiredSections": [
+      "hero",
+      "benefits",
+      "process",
+      "pricing",
+      "faq",
+      "cta",
+      "footer"
+    ],
+    "optionalSections": [
+      "testimonials"
+    ],
+    "forbiddenSections": [],
+    "seoIntent": "course offering",
+    "accessibilityRisks": [
+      "long outlines"
+    ],
+    "defaultTone": "instructive",
+    "recommendedComponents": [
+      "css-card",
+      "velin-accordion",
+      "css-button"
+    ],
+    "designConstraintIds": [
+      "hero",
+      "faq"
+    ],
+    "promptKeywords": [
+      "course",
+      "training",
+      "workshop"
+    ]
+  },
+  {
+    "id": "community",
+    "name": "Community",
+    "audience": "members",
+    "businessType": "community",
+    "pageGoal": "belonging + join",
+    "conversionGoal": "join",
+    "requiredSections": [
+      "hero",
+      "benefits",
+      "testimonials",
+      "faq",
+      "cta",
+      "footer"
+    ],
+    "optionalSections": [
+      "services",
+      "process"
+    ],
+    "forbiddenSections": [],
+    "seoIntent": "community brand",
+    "accessibilityRisks": [
+      "user content"
+    ],
+    "defaultTone": "welcoming",
+    "recommendedComponents": [
+      "css-card",
+      "css-button",
+      "velin-accordion"
+    ],
+    "designConstraintIds": [
+      "hero",
+      "faq"
+    ],
+    "promptKeywords": [
+      "community",
+      "forum",
+      "membership"
+    ]
+  }
+]

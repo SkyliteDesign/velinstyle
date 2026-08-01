@@ -1,0 +1,18 @@
+<!-- VelinStyle blueprint: app chrome (menubar + command) -->
+<header class="velin-flex velin-flex--justify-between velin-flex--items-center velin-flex--wrap velin-gap-3 velin-p-3 velin-border-block-end" role="banner">
+  <strong class="velin-text-lg">Brand</strong>
+  <velin-menubar aria-label="App menu">
+    <button type="button" data-menu="file">File</button>
+    <button type="button" data-menu="view">View</button>
+    <button type="button" data-menu="help">Help</button>
+  </velin-menubar>
+  <button type="button" class="velin-btn velin-btn--outline velin-btn--sm" id="open-command" aria-keyshortcuts="Control+K Meta+K">Command</button>
+</header>
+<velin-command id="app-command" aria-label="Command palette"></velin-command>
+<script type="module">
+  // Prefer package entry; for offline vendor installs use: import './vendor/velinstyle/velinstyle-components.min.js';
+  import '@birdapi/velinstyle/bundle';
+  document.getElementById('open-command')?.addEventListener('click', () => {
+    document.getElementById('app-command')?.open?.();
+  });
+</script>

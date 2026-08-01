@@ -1,0 +1,10 @@
+id: enterprise
+name: Enterprise Pack
+version: 1.0.0
+priority: advanced
+skills:
+  - velin-security-scan-pii
+  - velin-security-sanitize-html
+  - velin-perf-audit-fix
+  - velin-migration-prefix-classes
+  - velin-release-meta-rebuild

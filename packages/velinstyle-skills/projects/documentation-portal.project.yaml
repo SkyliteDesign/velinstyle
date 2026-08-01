@@ -1,0 +1,13 @@
+id: documentation-portal
+name: Documentation Portal
+priority: recommended
+workflowGraph: component-ship
+packs:
+  - documentation
+  - review
+skills:
+  - velin-docs-generate-api
+  - velin-ai-agent-briefing
+optimizedFor:
+  - cursor
+  - vscode

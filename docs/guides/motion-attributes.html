@@ -11,6 +11,14 @@
   <main id="main" class="velin-container velin-py-8">
     <h1 class="velin-text-3xl velin-font-bold" velin-reveal velin-fade>Motion &amp; HTML attributes</h1>
     <p class="velin-text-muted velin-mbe-6" velin-reveal>Declarative <code>velin-*</code> attributes bridge to Web Components and the motion runtime.</p>
+
+    <div class="velin-alert velin-alert--info" role="note" style="margin-block-end:1.5rem">
+      <strong>Attribute vs WC vs <code>bootFromDOM</code>:</strong>
+      attributes like <code>velin-reveal</code> need <code>bootFromDOM(document, { attributes: true })</code> (or the full components bundle).
+      Custom elements (<code>&lt;velin-tooltip&gt;</code>) need the components bundle / lazy define.
+      Attributes alone do nothing without a boot path.
+    </div>
+
     <pre class="velin-code">import { bootFromDOM } from '@birdapi/velinstyle/runtime';
 import { initMotion } from '@birdapi/velinstyle/motion';
 

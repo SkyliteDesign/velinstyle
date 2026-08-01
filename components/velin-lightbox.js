@@ -92,7 +92,6 @@ class VelinLightbox extends HTMLElement {
     this.setAttribute('open', '');
     setBackgroundInert(this);
     this._render();
-    document.body.style.overflow = 'hidden';
     const overlay = this.shadowRoot.querySelector('.overlay');
     overlay.removeEventListener('keydown', this._onTrapKey);
     overlay.addEventListener('keydown', this._onTrapKey);
@@ -101,13 +100,16 @@ class VelinLightbox extends HTMLElement {
 
   close() {
     this.removeAttribute('open');
-    clearBackgroundInert();
-    document.body.style.overflow = '';
+    clearBackgroundInert(this);
     if (this._previousFocus) {
       this._previousFocus.focus();
       this._previousFocus = null;
     }
     this.dispatchEvent(new CustomEvent('velin-close', { bubbles: true }));
+  }
+
+  disconnectedCallback() {
+    clearBackgroundInert(this);
   }
 
   _prev() { this._index = (this._index - 1 + this._items.length) % this._items.length; this._render(); }

@@ -1,0 +1,11 @@
+id: laravel-dashboard
+workflowGraph: release-gate
+packs:
+  - enterprise
+  - frontend
+theme: midnight
+demo: samples/dashboard.html
+docs:
+  - docs/guides/laravel.html
+starterFiles:
+  - templates/vite-velinstyle/index.html

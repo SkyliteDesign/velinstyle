@@ -4,6 +4,10 @@
 
 Tab navigation (bridges to `<velin-tabs>`).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty / present) | Bridge host to tabs controller | `<velin-tabs>` |
 ## Example
 
 ```html

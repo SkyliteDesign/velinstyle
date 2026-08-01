@@ -1,0 +1,14 @@
+id: component-ship
+name: Component Ship Workflow
+entry: select
+nodes:
+  select: { skill: velin-components-select-compose }
+  contract: { skill: velin-components-api-contract }
+  a11y: { skill: velin-components-accessibility-map }
+  docs: { skill: velin-docs-component-guide }
+  review: { skill: velin-review-page-gate }
+edges:
+  - { from: select, to: contract }
+  - { from: contract, to: a11y }
+  - { from: a11y, to: docs }
+  - { from: docs, to: review }

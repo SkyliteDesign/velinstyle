@@ -111,10 +111,60 @@ export function extractComponents(componentsDir) {
   return sortByKey(items, 'tag');
 }
 
+const MINIMAL_EXAMPLES = {
+  'velin-copy': `<velin-copy value="npm i @birdapi/velinstyle" label="Copy"></velin-copy>
+<!-- Shadow button is built-in. Prefer value= or text= (or data-source). Do not use data-velin-copy. -->`,
+  'velin-tooltip': `<velin-tooltip content="Save draft">
+  <button type="button" class="velin-btn">Save</button>
+</velin-tooltip>`,
+  'velin-lightbox': `<velin-lightbox>
+  <a href="photo.jpg"><img src="photo-thumb.jpg" alt="Gallery photo"></a>
+</velin-lightbox>`,
+  'velin-icon': `<!-- Set <meta name="velin-icon-sprite" content="vendor/velinstyle/velin-icons.svg"> once -->
+<velin-icon name="check" size="20" label="Done"></velin-icon>`,
+  'velin-command': `<velin-command>
+  <input slot="input" type="search" class="velin-input" placeholder="Jump to…" aria-label="Command">
+  <button type="button" data-velin-command-item value="home">Home</button>
+  <button type="button" data-velin-command-item value="settings">Settings</button>
+</velin-command>`,
+  'velin-menubar': `<velin-menubar>
+  <button type="button" data-velin-menubar-trigger>File</button>
+  <div data-velin-menubar-panel hidden>
+    <button type="button" role="menuitem">New</button>
+    <button type="button" role="menuitem">Open</button>
+  </div>
+</velin-menubar>`,
+  'velin-form-summary': `<form novalidate>
+  <velin-form-summary></velin-form-summary>
+  <label class="velin-label" for="email">Email</label>
+  <input id="email" class="velin-input" type="email" required>
+  <button type="submit" class="velin-btn velin-btn--primary">Send</button>
+</form>`,
+  'velin-data-table': `<velin-data-table filter-input="#filter" page-size="5" label="Team">
+  <label class="velin-label" for="filter">Filter</label>
+  <input id="filter" class="velin-input" type="search">
+  <table>
+    <caption>Team</caption>
+    <thead><tr><th data-sort="text">Name</th><th data-sort="number">Score</th></tr></thead>
+    <tbody>
+      <tr><td>Ada</td><td data-sort-value="98">98</td></tr>
+      <tr><td>Grace</td><td data-sort-value="95">95</td></tr>
+    </tbody>
+  </table>
+</velin-data-table>`,
+};
+
 export function renderComponent(meta, contracts) {
   let md = banner(meta.file);
   md += heading(1, `<${meta.tag}>`);
   md += `\nSource: \`${meta.file}\`\n\n`;
+
+  const snippet = MINIMAL_EXAMPLES[meta.tag];
+  if (snippet) {
+    md += heading(2, 'Minimal working example');
+    md += 'Copy-paste starter (load CSS + `velinstyle-components` / `bootFromDOM` as needed):\n\n';
+    md += '```html\n' + snippet.trim() + '\n```\n\n';
+  }
 
   if (meta.description) {
     md += heading(2, 'Description');
@@ -129,10 +179,19 @@ export function renderComponent(meta, contracts) {
   if (meta.observedAttributes.length) {
     md += table(
       ['Attribute', 'Notes'],
-      meta.observedAttributes.map((a) => [`\`${a}\``, 'Observed — triggers `attributeChangedCallback` when changed']),
+      meta.observedAttributes.map((a) => {
+        const required = contracts?.requiredAttributes?.includes(a) ? ' (required by a11y contract)' : '';
+        return [`\`${a}\``, `Observed — triggers \`attributeChangedCallback\` when changed${required}`];
+      }),
     );
   } else {
-    md += '_No `observedAttributes` declared._\n\n';
+    md += '_No `observedAttributes` declared._ Author-facing configuration may still use slots, properties, or child markup — see **Slots** / **Public API** below.\n\n';
+    if (meta.slots.length) {
+      md += table(
+        ['Author surface', 'Notes'],
+        meta.slots.map((s) => [`slot \`${s}\``, 'Content projection (not an observed attribute)']),
+      );
+    }
   }
 
   md += heading(2, 'Events');

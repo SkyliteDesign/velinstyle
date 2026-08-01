@@ -1,0 +1,29 @@
+<!-- VelinStyle blueprint: ops console (holy-grail + table) -->
+<div class="velin-layout-holy-grail">
+  <header class="velin-p-3 velin-border-block-end" role="banner">
+    <strong>Ops console</strong>
+  </header>
+  <aside class="velin-p-4" aria-label="Console navigation">
+    <nav class="velin-flex velin-flex--col velin-gap-2">
+      <a class="velin-btn velin-btn--ghost velin-btn--sm" href="#queue">Queue</a>
+      <a class="velin-btn velin-btn--ghost velin-btn--sm" href="#reviews">Reviews</a>
+      <a class="velin-btn velin-btn--ghost velin-btn--sm" href="#shipped">Shipped</a>
+    </nav>
+  </aside>
+  <main id="main" class="velin-p-6" role="main">
+    <h1 class="velin-text-xl velin-font-bold velin-mbe-4">Queue</h1>
+    <div class="velin-table-wrapper">
+      <table class="velin-table">
+        <caption class="velin-sr-only">Ops queue</caption>
+        <thead>
+          <tr><th scope="col">Item</th><th scope="col">Owner</th><th scope="col">Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Brand refresh</td><td>Alex</td><td><span class="velin-badge velin-badge--success">Ready</span></td></tr>
+          <tr><td>Case study</td><td>Sam</td><td><span class="velin-badge">Draft</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <footer class="velin-p-3 velin-border-block-start velin-text-sm velin-text-muted" role="contentinfo">Status · live</footer>
+</div>

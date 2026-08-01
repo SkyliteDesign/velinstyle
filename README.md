@@ -9,47 +9,85 @@
   ╚═══╝  ╚══════╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝
 ```
 
+**Accessibility-first CSS Framework · Web Components · Design Intelligence · AI Workflows**
+
+One framework. One CLI. One design system. One AI-ready ecosystem.
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-2563eb?style=flat-square)](LICENSE)
-[![Release](https://img.shields.io/badge/Release-v1.1.0-2563eb?style=flat-square)](https://github.com/SkyliteDesign/velinstyle/releases/tag/v1.1.0)
-[![npm version](https://img.shields.io/npm/v/@birdapi/velinstyle?style=flat-square)](https://www.npmjs.com/package/@birdapi/velinstyle)
-[![WCAG 2.2 AAA](https://img.shields.io/badge/WCAG_2.2-AAA-16a34a?style=flat-square)](https://velinstyle.info/docs/a11y.html)
+[![npm](https://img.shields.io/npm/v/@birdapi/velinstyle?style=flat-square)](https://www.npmjs.com/package/@birdapi/velinstyle)
+[![npm downloads](https://img.shields.io/npm/dm/@birdapi/velinstyle?style=flat-square)](https://www.npmjs.com/package/@birdapi/velinstyle)
 [![GitHub stars](https://img.shields.io/github/stars/SkyliteDesign/velinstyle?style=flat-square)](https://github.com/SkyliteDesign/velinstyle/stargazers)
+[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=flat-square)](https://nodejs.org/)
+[![Browsers](https://img.shields.io/badge/Browsers-modern-0ea5e9?style=flat-square)](https://velinstyle.info/docs/getting-started/introduction.html)
+[![WCAG 2.2 AAA support](https://img.shields.io/badge/WCAG_2.2-AAA_support-16a34a?style=flat-square)](https://velinstyle.info/docs/a11y.html)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-2563eb?style=flat-square)](CONTRIBUTING.md)
 
 ```bash
 npm i @birdapi/velinstyle
 ```
 
-**[Website](https://velinstyle.info)** · **[Docs](https://velinstyle.info/docs/)** · **[Demos](https://velinstyle.info/demos/)** · **[npm](https://www.npmjs.com/package/@birdapi/velinstyle)** · **[Star on GitHub](https://github.com/SkyliteDesign/velinstyle)**
-
-**English** · **[Deutsch](README.de.md)**
+**[Website](https://velinstyle.info)** · **[Docs](https://velinstyle.info/docs/getting-started/introduction.html)** · **[Demos](https://velinstyle.info/demos/)** · **[Getting Started](GETTING_STARTED.md)** · **[Architecture](ARCHITECTURE.md)** · **[Deutsch](README.de.md)**
 
 </div>
 
 ---
 
-**VelinStyle** is the **WCAG 2.2 AAA CSS framework** with native JavaScript runtime and Web Components — CSS utilities, 1.1.0 modules (search, motion, highlight, attributes, meta), and security tooling, with **no external UI framework dependencies** in the core.
+VelinStyle is a **production CSS + Web Components framework** with **WCAG 2.2 AAA-oriented defaults**, a real **CLI ship surface**, and the first **Design Intelligence / AI Foundation** systems (beta). No external UI framework in the core.
 
-Built for teams who want **readable HTML**, **AAA token defaults** (AA via `data-velin-contrast="aa"`), and **CLI automation** instead of utility sprawl.
+**Best fit today:** marketing landings, docs shells, simple admin starters.  
+**Not yet:** sole primary stack for large multipage shop + enterprise admin without custom work.
 
-> **Dogfooding:** The entire VelinStyle website and documentation runs 100% on VelinStyle — no external scripts or UI frameworks.
+> **Release:** **1.2.0** (Core + Design Intelligence Foundation + Trust/Ship). Using VelinStyle does **not** certify your app — see the [a11y matrix](https://velinstyle.info/docs/a11y.html).
 
 ---
 
-## Features at a glance
+## Why VelinStyle
 
-- **CSS utilities** — `velin-*` spacing, color, flex, motion, safe-area; cascade layers + OKLCH tokens
-- **35+ components** — semantic BEM classes (`velin-btn`, `velin-card`, `velin-grid`, …)
-- **Motion runtime** — reveal, stagger, scroll-driven animation, rAF scheduler
-- **VelinSearch** — fuzzy offline search with highlighting and categories
-- **Syntax highlighting** — lazy in-view highlighting for JS, TS, HTML, CSS, JSON, Bash, Python, YAML, Go, Rust, and more
-- **HTML attributes** — 27 declarative bridges (`velin-modal`, `velin-reveal`, `velin-scroll-top`, `velin-code`, …)
-- **Quality** — 38/38 component a11y contracts, Playwright cross-browser smoke (`npm run test:e2e`), CLS placeholders (`wc-placeholder.css`)
-- **Security tools** — `scan`, PII rules, sanitize API, hardened components
-- **CLI** — init, build, scan, scaffold, tokens, docs generate, perf audit, layout audit
-- **Velin-Meta** — `velin-agent.json`, `llms.txt`, and page-level agent JSON for AI assistants
-- **React adapter** — `@velinstyle/react` wraps every canonical Web Component with typed props and events
-- **Release guard** — `npm run release:check` fails the build on version or docs drift between framework and site
+| Need | What you get |
+|------|----------------|
+| Readable HTML | Semantic BEM (`velin-btn--primary`), not utility walls |
+| Accessibility | AAA-capable tokens, focus management, reduced motion — built in |
+| Ship without a build | CDN CSS + optional WCs; Vite/React when you want them |
+| Predictable overrides | Cascade layers + OKLCH design tokens |
+| Quality gates | `scan`, `review`, `check` — catch real defects before merge |
+| AI that helps | Skills, workflows, and agent metadata — **Mensch → Framework → KI** |
+
+Compared to **Tailwind**: less class sprawl, stronger defaults for contrast and semantics.  
+Compared to **Bootstrap**: modern tokens/layers, optional progressive WCs, CLI automation instead of jQuery-era chrome.
+
+---
+
+## Feature highlights
+
+| | Area | What it does |
+|---|------|----------------|
+| 🎨 | **CSS Framework** | OKLCH themes, utilities, components, lite preset for marketing budgets |
+| 🧩 | **Web Components** | 40 canonical custom elements; use CSS alone when you need no JS |
+| ⚡ | **Runtime** | Search, motion, highlight, attributes, `bootFromDOM` tree-shaking |
+| 🛠 | **CLI** | `create` · `serve` · `doctor` · `check` · `scan` · `review` · `skills` |
+| 🧠 | **Design Intelligence** | Plan → constraints → page/section registry → review (beta) |
+| 🤖 | **AI Skills** | 40 skills, packs, bundles, templates, workflow graphs (beta) |
+| 📦 | **Registry** | Skills + page/section registries as machine-readable contracts |
+| 📄 | **AI Metadata** | `velin-agent.json`, `llms.txt`, page-level agent JSON |
+| 📚 | **Documentation** | Dogfooded site — 100% VelinStyle |
+| 🔍 | **Review Engine** | Heuristic design / a11y / SEO / conversion gates (beta) |
+| 🛡 | **Scan Engine** | A11y, security, CSS honesty, PII |
+| 🚀 | **Performance** | Lite CSS, chunked runtime, CLS placeholders |
+| ♿ | **Accessibility** | Contracts, WCAG 2.2 tooling, keyboard + ARIA patterns |
+
+---
+
+## What's new in 1.2
+
+Not a CSS bump — a **foundation release**.
+
+- **Ship surface** — `create landing|dashboard|docs|auth`, `serve`, `doctor`, `check` (`--json` / `--sarif`)
+- **Design Intelligence (beta)** — Prompt Engine (`plan`), Review Engine, knowledge graph seed, design constraints
+- **AI Foundation (beta)** — skill engine, workflows, richer agent metadata
+- **New primitives** — `<velin-calendar>`, `<velin-file-dropzone>`, editable `<velin-data-table>`
+- **Trust gates** — stricter scan/review so junk pages cannot fake green scores
+
+Details: [`RELEASE_NOTES_1.2.0.md`](RELEASE_NOTES_1.2.0.md) · full history: [`CHANGELOG.md`](CHANGELOG.md)
 
 ---
 
@@ -57,30 +95,31 @@ Built for teams who want **readable HTML**, **AAA token defaults** (AA via `data
 
 ```bash
 npm i @birdapi/velinstyle
+pnpm add @birdapi/velinstyle
+yarn add @birdapi/velinstyle
+bun add @birdapi/velinstyle
 ```
 
-| Path | Use |
-| --- | --- |
-| `@birdapi/velinstyle/css` | Full minified stylesheet |
-| `@birdapi/velinstyle/bundle` | Web Components ESM bundle |
-| `@birdapi/velinstyle/search` | VelinSearch module |
-| `@birdapi/velinstyle/motion` | Motion runtime |
-| `@birdapi/velinstyle/attributes` | HTML attribute bridges |
-| `@birdapi/velinstyle/highlight` | Syntax highlighting |
-| `@birdapi/velinstyle/meta` | Agent metadata API |
-
-**CDN (pin version):**
+**CDN** (pin a version):
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.1.0/dist/velinstyle.min.css">
-<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.1.0/dist/velinstyle-components.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.0/dist/velinstyle.min.css">
+<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.2.0/dist/velinstyle-components.min.js"></script>
 ```
 
-After cloning, run `npm install && npm run build` — `dist/` is generated, not committed.
+> Pin **`@1.2.0`** (or `@latest` after publish). Examples above match this package version.
+
+| Export | Use |
+|--------|-----|
+| `@birdapi/velinstyle/css` | Full stylesheet |
+| `@birdapi/velinstyle/bundle` | Web Components ESM |
+| `/search` `/motion` `/attributes` `/highlight` `/meta` `/sanitize` | Tree-shakeable modules |
+
+After clone: `npm install && npm run build` — `dist/` is generated, not committed.
 
 ---
 
-## Quickstart
+## Quick start
 
 ```html
 <!DOCTYPE html>
@@ -88,143 +127,173 @@ After cloning, run `npm install && npm run build` — `dist/` is generated, not 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.1.0/dist/velinstyle.min.css">
-  <script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.1.0/dist/velinstyle-components.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.0/dist/velinstyle.min.css">
+  <script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.2.0/dist/velinstyle-components.min.js"></script>
 </head>
 <body class="velin-p-6">
-  <button type="button" class="velin-btn velin-btn--primary" velin-reveal="slide-up">Ship it</button>
-  <velin-code-block language="html" line-numbers>&lt;p class="velin-text-muted"&gt;Hello VelinStyle&lt;/p&gt;</velin-code-block>
+  <button type="button" class="velin-btn velin-btn--primary">Ship it</button>
+  <velin-toast></velin-toast>
 </body>
 </html>
 ```
 
----
+Scaffold + gate (local 1.2 tree / after publish):
 
-## Core modules (1.1.0)
+```bash
+npx @birdapi/velinstyle create landing ./my-site
+cd my-site && npx @birdapi/velinstyle serve . && npx @birdapi/velinstyle check .
+```
 
-| Export | Description |
-| --- | --- |
-| `@birdapi/velinstyle/search` | Fuzzy offline search, providers, optional Web Worker |
-| `@birdapi/velinstyle/motion` | `initMotion`, stagger, smooth scroll, unified `.velin-in-view` |
-| `@birdapi/velinstyle/attributes` | Registry of declarative `velin-*` HTML attribute bridges |
-| `@birdapi/velinstyle/highlight` | `velinSyntax`, lazy language packs, OKLCH token colors |
-| `@birdapi/velinstyle/meta` | `buildAgentBundle`, page meta MIME `application/vnd.velinstyle.meta+json` |
-
----
-
-## Web Components
-
-**38 canonical** custom elements (40 lazy-loader entries including legacy `velin-tooltip-wc` and `velin-stepper-wc`) — use plain CSS when you do not need behavior. `src/base/wc-placeholder.css` reduces layout shift before elements upgrade.
-
-Examples: `velin-modal`, `velin-search`, `velin-code-block`, `velin-drawer`, `velin-stepper`, `velin-tooltip`, `velin-toast`, `velin-persist`, `velin-data-table`, `velin-form-summary`.
-
-React wrappers for every canonical element ship in [`@velinstyle/react`](./packages/react/README.md).
-
-- [Component documentation](https://velinstyle.info/docs/components/buttons.html)
-- [Generated Web Component API](https://velinstyle.info/docs/generated/components/README.md)
+More: [`GETTING_STARTED.md`](GETTING_STARTED.md)
 
 ---
 
 ## CLI
 
-| Command | Purpose |
-| --- | --- |
-| `npx velinstyle init` | Create `velinstyle.config.js` in your project |
-| `npx velinstyle scan` | Security, accessibility, CSS, and PII checks |
-| `npx velinstyle search index` | Build `dist/search-index.json` for offline doc search |
-| `npx velinstyle tokens build` | Compile design tokens JSON to CSS |
-| `npx velinstyle meta` | Generate `velin-agent.json` and `llms.txt` |
+| Command | Role |
+|---------|------|
+| `init` | Project config |
+| `create` | Opinionated scaffolds (`landing` · `dashboard` · `docs` · `auth`) |
+| `build` | CSS build (`--preset lite` for marketing) |
+| `serve` | Static preview |
+| `doctor` | Install / path health |
+| `check` | doctor + blueprints + scan + review |
+| `scan` | A11y / security / CSS / PII |
+| `review` | Design-intelligence gate (beta) |
+| `plan` | Prompt → plan JSON → render (beta) |
+| `skills` / `workflow` | AI skill registry & graphs (beta) |
+| `meta` | Agent bundle + `llms.txt` |
+| `wc api <tag>` | Human-readable WC API from source |
 
-Also: `npx velinstyle docs generate` — Markdown reference under `docs/generated/`.
-
----
-
-## Security
-
-VelinStyle ships **first-class security tooling**, not an afterthought:
-
-- **`velinstyle scan`** — markup and a11y rules; PII scanner (`--only pii`, `--fix`)
-- **`@birdapi/velinstyle/sanitize`** — URL and text sanitization helpers
-- **`<velin-secure-field>`** — no plaintext secrets in the DOM; hardened search/copy URLs
-
-[Security documentation](https://velinstyle.info/docs/extend/security.html)
+```bash
+npx @birdapi/velinstyle check . --profile marketing
+npx @birdapi/velinstyle wc api velin-toast
+```
 
 ---
 
-## Velin-Meta
+## AI Skills & Design Intelligence
 
-Machine-readable context for **Cursor, Copilot, and custom agents**:
+**AI Skills** give agents and humans a shared vocabulary: skill records, packs, bundles, templates, and workflow graphs. They exist so tooling can scaffold, review, and ship **without inventing VelinStyle from scratch**.
 
-- **Global bundle** — `dist/velin-agent.json` + `dist/llms.txt` via `velinstyle meta`
-- **Page-level meta** — `<script type="application/vnd.velinstyle.meta+json" id="velin-meta">`
-- **CLI** — `velinstyle meta page my.html --write`
+**Design Intelligence** adds structure ordinary CSS frameworks lack: a knowledge graph seed, page/section registries, design constraints, and `plan` / `review` so pages are assembled from known patterns — then checked against profiles (`marketing` · `app` · `docs` · `ecommerce`).
 
-[Velin-Meta guide](https://velinstyle.info/docs/guides/velin-meta.html)
+Deep dive: [`ARCHITECTURE.md`](ARCHITECTURE.md) · [`VELINSTYLE_2030.md`](VELINSTYLE_2030.md) · Strategy (lokal, nicht im Git): [`docs/strategy/README.md`](docs/strategy/README.md)
 
 ---
 
-## Docs & website
+## Components
 
-- [velinstyle.info](https://velinstyle.info) — product site and demos
-- [Guides](https://velinstyle.info/docs/guides/index.html) · [Feature scope](https://velinstyle.info/docs/guides/feature-scope.html)
-- [API reference](https://velinstyle.info/docs/guides/api-reference.html) — generated from source
-- [Generated Markdown](https://velinstyle.info/docs/generated/index.html) — components, tokens, utilities, CLI, rules
+**40 canonical** custom elements (**42** lazy-loader entries including legacy `*-wc` aliases).
+
+Philosophy: **progressive enhancement** — semantic HTML + CSS first; upgrade to a Web Component only when you need behavior (focus traps, sorting, offline search).
+
+Highlights: `velin-modal`, `velin-drawer`, `velin-search`, `velin-data-table`, `velin-form-summary`, `velin-calendar`, `velin-file-dropzone`, `velin-toast`, `velin-code-block`.
+
+React: [`@velinstyle/react`](./packages/react/README.md) wraps every canonical tag.
 
 ---
 
-## Changelog
+## Accessibility
 
-See [CHANGELOG.md](CHANGELOG.md) for releases, breaking changes, and migration notes.
+Accessibility is a **default**, not a plugin.
+
+- WCAG 2.2 **AAA-oriented** token defaults (`data-velin-contrast="aa"` when you need the lighter palette)
+- Semantic HTML patterns and BEM components
+- Keyboard support, focus management, `inert` overlays
+- `prefers-reduced-motion` gating
+- Component a11y contracts + scanner rules
+
+Docs: [a11y matrix](https://velinstyle.info/docs/a11y.html) · AAA marketing language: see `VELINSTYLE_2030.md` (strategy ADRs are local-only)
+
+---
+
+## Documentation map
+
+| Layer | File / link | Audience |
+|-------|-------------|----------|
+| Landing | This README | First 30 seconds |
+| First build | [`GETTING_STARTED.md`](GETTING_STARTED.md) | New adopters |
+| FAQ | [`FAQ.md`](FAQ.md) | Common questions |
+| Troubleshooting | [`TROUBLESHOOTING.md`](TROUBLESHOOTING.md) | When stuck |
+| Deploy | [`DEPLOY.md`](DEPLOY.md) | Ship to production |
+| Systems | [`ARCHITECTURE.md`](ARCHITECTURE.md) | Advanced / AI / DI |
+| Design Intelligence | [`docs/guides/design-intelligence.md`](docs/guides/design-intelligence.md) | Plan / review |
+| CLI ship surface | [`docs/guides/cli-ship-surface.md`](docs/guides/cli-ship-surface.md) | create / check / wc |
+| AI Skills | [`docs/guides/ai-skills.md`](docs/guides/ai-skills.md) | Skills / workflows |
+| Product site | [velinstyle.info/docs](https://velinstyle.info/docs/getting-started/introduction.html) | Guides, demos, reference |
+| Upgrade | [`UPGRADING.md`](UPGRADING.md) | 1.1 → 1.2 |
+| North star | [`VELINSTYLE_2030.md`](VELINSTYLE_2030.md) | Long-term vision |
+
+---
+
+## Repository structure
+
+```
+velinstyle/
+├── src/                 # CSS source (tokens, base, components, utilities)
+├── components/          # Web Components (JS)
+├── core/                # Runtime: search, motion, highlight, attributes, meta
+├── cli/                 # velinstyle binary
+├── packages/            # React wrappers, skill-engine, skills registry
+├── schemas/             # Design Intelligence + skill contracts
+├── docs/                # Docs + strategy ADRs
+├── samples/             # Local HTML samples
+├── templates/           # Starters (e.g. Vite + React)
+├── fixtures/            # Scanner / chaos fixtures
+└── showcase-demos/      # Full-page demos
+```
+
+---
+
+## Philosophy
+
+**Mensch → Framework → Design Intelligence → AI**
+
+Humans own product intent. The framework ships reliable CSS and components. Design Intelligence encodes patterns and constraints. AI skills and workflows accelerate scaffolding and review — they **support** developers; they do not replace judgment, accessibility ownership, or design responsibility.
+
+---
+
+## Roadmap (maturity)
+
+| Status | Surfaces |
+|--------|----------|
+| **Stable** | CSS · Utilities · Runtime · Web Components · CLI core · Blueprints |
+| **Beta** | Review Engine · Prompt Engine · Knowledge Graph · AI Metadata · Design Constraints |
+| **Foundation** | AI Skills · Workflow Graphs · Registries |
+| **Planned** | Studio · Utility Engine Generator |
 
 ---
 
 ## Comparison
 
-| | Bootstrap | Tailwind | Shoelace | **VelinStyle** |
-| --- | :---: | :---: | :---: | :---: |
-| HTML readability | Medium | Low | Medium | **High** |
-| Class predictability | Medium | Low | Medium | **`velin-btn--primary`** |
-| Utility sprawl | Low | **High** | Low | **Controlled** |
-| Override story | Hard | Config file | Shadow DOM | **CSS layers + tokens** |
-| Accessibility | Partial | DIY | Good WC | **WCAG 2.2 AAA tokens** |
-| Dark mode | Manual | `dark:` everywhere | Theme attr | **Token swap** |
-| App chrome | Legacy JS | BYO | WC only | **CSS + optional WCs** |
-| Ship speed | Fast | Fast (with build) | Fast | **CDN, no build required** |
-| Runtime modules | — | — | — | **Search, motion, meta, …** |
+| | Bootstrap | Tailwind | **VelinStyle** |
+|---|:---:|:---:|:---:|
+| HTML readability | Medium | Low | **High** |
+| Utility sprawl | Low | High | **Controlled** |
+| A11y defaults | Partial | DIY | **AAA-capable tokens** |
+| Dark mode | Manual | `dark:` everywhere | **Token swap** |
+| Build required | No | Usually | **CDN optional** |
+| Design / AI gates | — | — | **plan · review · skills** |
 
 ---
 
-## Live demos
+## Contributing
 
-Full application pages on [velinstyle.info/demos/](https://velinstyle.info/demos/) — [Crypto](https://velinstyle.info/demos/showcase-crypto.html) · [E-Commerce](https://velinstyle.info/demos/showcase-ecommerce.html) · [Dashboard](https://velinstyle.info/demos/showcase-dashboard.html) · [All demos](https://velinstyle.info/demos/) · [Fork showcase-demos](https://github.com/SkyliteDesign/velinstyle/tree/main/showcase-demos)
+1. Fork → `npm install && npm run build`
+2. Change code · run `npm test`, `npm run test:a11y`, `npm run test:e2e`
+3. Open a PR
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+---
+
+## License
+
+[MIT](LICENSE) — © 2026 VelinStyle · [SkyliteDesign](https://github.com/SkyliteDesign)
 
 <p align="center">
   <a href="https://velinstyle.info/demos/showcase-crypto.html">
     <img src=".github/assets/readme/hero-demo.webp" alt="VelinStyle crypto dashboard demo" width="720">
   </a>
 </p>
-
----
-
-## Contributing
-
-PRs welcome.
-
-1. Fork the repo
-2. `npm install && npm run build`
-3. Make your change · run `npm test`, `npm run test:a11y`, and `npm run test:e2e` (after `npm run build`)
-4. Open a pull request
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for code style and review process.
-
----
-
-## License
-
-[MIT](LICENSE) — Copyright © 2026 VelinStyle
-
-<div align="center">
-
-Made with care for the web by [SkyliteDesign](https://github.com/SkyliteDesign)
-
-</div>

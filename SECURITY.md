@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-We address security issues in the **latest minor release** on the `main` branch (currently **0.6.x**). Older tags may not receive backports unless the issue is critical.
+We address security issues in the **latest minor release** on the `main` branch (currently **1.2.x**). Older tags may not receive backports unless the issue is critical.
 
 ## Reporting a vulnerability
 

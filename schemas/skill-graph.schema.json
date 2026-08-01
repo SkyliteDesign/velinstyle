@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/skill-graph.schema.json",
+  "title": "VelinStyle Workflow Graph",
+  "type": "object",
+  "required": ["id", "entry", "nodes", "edges"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "entry": { "type": "string" },
+    "nodes": { "type": "object" },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "when": { "type": "string" }
+        }
+      }
+    }
+  }
+}

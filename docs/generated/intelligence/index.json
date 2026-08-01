@@ -1,0 +1,10 @@
+{
+  "version": "1.2.0",
+  "generatedAt": "2026-08-01T07:08:36.191Z",
+  "pageCount": 17,
+  "sectionCount": 12,
+  "componentCount": 17,
+  "constraintCount": 3,
+  "agentBundle": "dist/velin-agent.json",
+  "llmsTxt": "dist/llms.txt"
+}

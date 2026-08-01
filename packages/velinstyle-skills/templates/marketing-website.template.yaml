@@ -1,0 +1,13 @@
+id: marketing-website
+workflowGraph: landingpage
+packs:
+  - frontend
+  - design
+  - review
+theme: default
+demo: samples/landing.html
+docs:
+  - docs/guides/prompt-scaffolding.html
+  - docs/guides/landing-15-min.html
+starterFiles:
+  - templates/vite-velinstyle/index.html

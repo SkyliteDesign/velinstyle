@@ -4,10 +4,17 @@
 
 Skeleton placeholder (`text`, `avatar`, `image`, …).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| `text` | Text-line placeholder | Skeleton CSS |
+| `avatar` | Circular placeholder | Skeleton CSS |
+| `image` | Media block placeholder | Skeleton CSS |
+| `card` / other | Preset shapes when supported | Skeleton CSS |
 ## Example
 
 ```html
-<div velin-skeleton>…</div>
+<div velin-skeleton="text"></div>
 ```
 
 ## Accessibility

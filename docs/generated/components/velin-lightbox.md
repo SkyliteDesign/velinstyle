@@ -4,6 +4,15 @@
 
 Source: `components/velin-lightbox.js`
 
+## Minimal working example
+Copy-paste starter (load CSS + `velinstyle-components` / `bootFromDOM` as needed):
+
+```html
+<velin-lightbox>
+  <a href="photo.jpg"><img src="photo-thumb.jpg" alt="Gallery photo"></a>
+</velin-lightbox>
+```
+
 ## Accessibility
 WCAG contract status: **pass** (framework target: AAA).
 
@@ -12,8 +21,11 @@ WCAG contract status: **pass** (framework target: AAA).
 - **Live region:** `polite`
 
 ## Attributes
-_No `observedAttributes` declared._
+_No `observedAttributes` declared._ Author-facing configuration may still use slots, properties, or child markup — see **Slots** / **Public API** below.
 
+| Author surface | Notes |
+| --- | --- |
+| slot `(default)` | Content projection (not an observed attribute) |
 ## Events
 - `velin-close` (bubbles)
 ## CSS parts

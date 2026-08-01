@@ -4,6 +4,14 @@
 
 Source: `components/velin-copy.js`
 
+## Minimal working example
+Copy-paste starter (load CSS + `velinstyle-components` / `bootFromDOM` as needed):
+
+```html
+<velin-copy value="npm i @birdapi/velinstyle" label="Copy"></velin-copy>
+<!-- Shadow button is built-in. Prefer value= or text= (or data-source). Do not use data-velin-copy. -->
+```
+
 ## Accessibility
 WCAG contract status: **pass** (framework target: AAA).
 
@@ -12,7 +20,7 @@ WCAG contract status: **pass** (framework target: AAA).
 - **Required attributes:** `aria-label`
 
 ## Attributes
-_No `observedAttributes` declared._
+_No `observedAttributes` declared._ Author-facing configuration may still use slots, properties, or child markup — see **Slots** / **Public API** below.
 
 ## Events
 - `velin-copied` (bubbles)

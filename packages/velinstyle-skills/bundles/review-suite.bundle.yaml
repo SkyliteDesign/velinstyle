@@ -1,0 +1,11 @@
+id: review-suite
+origin: official
+packs:
+  - accessibility
+  - review
+graphs:
+  - release-gate
+templates:
+
+docs:
+  - docs/guides/ai-skills.html

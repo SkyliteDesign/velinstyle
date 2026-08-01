@@ -13,7 +13,7 @@ See also: [`examples/tokens.full.json`](../../examples/tokens.full.json) for JSO
 | fonts | 6 | [fonts.md](./fonts.md) |
 | motion | 22 | [motion.md](./motion.md) |
 | radius | 9 | [radius.md](./radius.md) |
-| shadow | 15 | [shadow.md](./shadow.md) |
+| shadow | 22 | [shadow.md](./shadow.md) |
 | spacing | 18 | [spacing.md](./spacing.md) |
 | typography | 33 | [typography.md](./typography.md) |
 | z-index | 11 | [z-index.md](./z-index.md) |

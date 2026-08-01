@@ -1,0 +1,14 @@
+id: marketing-website
+name: Marketing Website
+priority: recommended
+workflowGraph: landingpage
+packs:
+  - frontend
+  - design
+  - review
+skills:
+  - velin-ai-plan-scaffold-review
+  - velin-review-conversion-hero
+optimizedFor:
+  - cursor
+  - claude-code

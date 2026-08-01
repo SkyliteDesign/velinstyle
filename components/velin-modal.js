@@ -146,7 +146,6 @@ class VelinModal extends HTMLElement {
     this._previouslyFocused = saveFocus();
     setBackgroundInert(this);
     document.addEventListener('keydown', this._onKeydown);
-    document.body.style.overflow = 'hidden';
 
     requestAnimationFrame(() => {
       const focusable = getFocusableElements(this.shadowRoot);
@@ -156,8 +155,7 @@ class VelinModal extends HTMLElement {
 
   _close() {
     document.removeEventListener('keydown', this._onKeydown);
-    document.body.style.overflow = '';
-    clearBackgroundInert();
+    clearBackgroundInert(this);
     restoreFocus(this._previouslyFocused);
   }
 
@@ -171,7 +169,7 @@ class VelinModal extends HTMLElement {
 
   disconnectedCallback() {
     document.removeEventListener('keydown', this._onKeydown);
-    document.body.style.overflow = '';
+    clearBackgroundInert(this);
   }
 }
 

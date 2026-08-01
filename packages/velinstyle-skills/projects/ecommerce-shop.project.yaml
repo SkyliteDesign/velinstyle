@@ -1,0 +1,12 @@
+id: ecommerce-shop
+name: E-Commerce Shop
+priority: advanced
+workflowGraph: landingpage
+packs:
+  - enterprise
+  - review
+skills:
+  - velin-security-sanitize-html
+  - velin-review-conversion-hero
+optimizedFor:
+  - cursor

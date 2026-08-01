@@ -1,0 +1,12 @@
+id: laravel-dashboard
+name: Laravel Dashboard
+priority: advanced
+workflowGraph: release-gate
+packs:
+  - enterprise
+  - frontend
+skills:
+  - velin-dx-project-init
+optimizedFor:
+  - cursor
+  - claude-code

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/token-graph.schema.json",
+  "title": "VelinStyle Token Semantic Graph",
+  "type": "object",
+  "required": ["version", "tokens"],
+  "properties": {
+    "version": { "type": "integer", "minimum": 1 },
+    "tokens": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "layer", "usage"],
+        "properties": {
+          "name": { "type": "string" },
+          "layer": { "type": "string", "enum": ["core", "semantic", "component"] },
+          "usage": { "type": "string" },
+          "cssVariable": { "type": "string" },
+          "pairsWith": { "type": "array", "items": { "type": "string" } },
+          "contrastTarget": { "type": "string", "enum": ["aa", "aaa", "none"] },
+          "surfaceRole": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    }
+  }
+}

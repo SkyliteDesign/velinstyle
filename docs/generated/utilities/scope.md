@@ -6,5 +6,9 @@ Source: `src/utilities/scope.css`
 
 | Class | CSS output |
 | --- | --- |
+| `.velin-card` | `:scope { container-type: inline-size;` |
+| `.velin-drawer` | `:scope { container-type: inline-size;` |
+| `.velin-modal` | `:scope { container-type: inline-size;` |
+| `.velin-nav` | `:scope { container-type: inline-size;` |
 | `.velin-scope` | `container-type: inline-size;` |
 | `.velin-scope-island` | `contain: layout style paint; container-type: inline-size;` |

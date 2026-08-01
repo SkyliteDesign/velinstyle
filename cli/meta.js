@@ -29,6 +29,31 @@ export async function buildMeta(options = {}) {
     written.push(llmsFile);
   }
 
+  // JSON twins for agents (pages, sections, knowledge, constraints)
+  const twinDir = join(PKG_ROOT, 'docs', 'generated', 'intelligence');
+  mkdirSync(twinDir, { recursive: true });
+  const twins = {
+    'pages.json': bundle.knowledgeGraph?.pages || [],
+    'sections.json': bundle.knowledgeGraph?.sections || [],
+    'components.json': bundle.knowledgeGraph?.components || [],
+    'design-constraints.json': bundle.knowledgeGraph?.designConstraints || [],
+    'index.json': {
+      version: bundle.framework.version,
+      generatedAt: bundle.generatedAt,
+      pageCount: bundle.knowledgeGraph?.pageCount || 0,
+      sectionCount: bundle.knowledgeGraph?.sectionCount || 0,
+      componentCount: bundle.knowledgeGraph?.componentCount || 0,
+      constraintCount: bundle.knowledgeGraph?.designConstraints?.length || 0,
+      agentBundle: 'dist/velin-agent.json',
+      llmsTxt: 'dist/llms.txt',
+    },
+  };
+  for (const [name, data] of Object.entries(twins)) {
+    const target = join(twinDir, name);
+    writeFileSync(target, JSON.stringify(data, null, 2), 'utf-8');
+    written.push(target);
+  }
+
   return { ok: true, bundle, written, count: written.length };
 }
 
@@ -43,7 +68,30 @@ export function metaPage(htmlPath, options = {}) {
   }
   const html = readFileSync(abs, 'utf-8');
   const rel = htmlPath.replace(/\\/g, '/');
-  const meta = buildPageMeta(html, rel, PKG_ROOT);
+  let meta = buildPageMeta(html, rel, PKG_ROOT);
+
+  // Merge curated fields from existing velin-meta so --write does not clobber goals/intent.
+  const existingMatch = html.match(
+    /<script[^>]*id=["']velin-meta["'][^>]*>([\s\S]*?)<\/script>/i,
+  );
+  if (existingMatch) {
+    try {
+      const prev = JSON.parse(existingMatch[1]);
+      meta = mergePageMeta(prev, meta);
+      if (options.write && meta._droppedKeys?.length) {
+        console.warn(
+          `velin-meta --write: dropping non-allowlisted keys: ${meta._droppedKeys.join(', ')} ` +
+            `(kept: ${[...META_MERGE_ALLOWLIST].join(', ')})`,
+        );
+      }
+      delete meta._droppedKeys;
+    } catch {
+      /* keep generated meta */
+    }
+  } else {
+    delete meta._droppedKeys;
+  }
+
   const script = serializePageMetaScript(meta);
 
   if (options.write) {
@@ -61,6 +109,41 @@ export function metaPage(htmlPath, options = {}) {
   }
 
   return { ok: true, meta, script };
+}
+
+/** Keys preserved from previous velin-meta on --write (plus nested page.*). */
+const META_MERGE_ALLOWLIST = new Set([
+  'page', 'goals', 'intent', 'notes', 'curated', 'id', 'title',
+]);
+
+/** Preserve curated page goals/intent while refreshing component inventory. */
+function mergePageMeta(prev, next) {
+  const out = { ...next };
+  const dropped = [];
+  if (prev && typeof prev === 'object') {
+    for (const key of Object.keys(prev)) {
+      if (!META_MERGE_ALLOWLIST.has(key) && !(key in next)) {
+        dropped.push(key);
+      }
+    }
+    out.page = { ...(next.page || {}), ...(prev.page || {}), ...(next.page || {}) };
+    if (prev.page?.intent) out.page.intent = prev.page.intent;
+    if (prev.page?.goals) out.page.goals = prev.page.goals;
+    if (prev.page?.title) out.page.title = prev.page.title;
+    if (prev.page?.id) out.page.id = prev.page.id;
+    if (prev.goals) out.goals = prev.goals;
+    if (prev.intent) out.intent = prev.intent;
+    if (prev.notes) out.notes = prev.notes;
+    if (prev.curated) out.curated = prev.curated;
+    if (prev.id && !out.id) out.id = prev.id;
+  }
+  out.allowed = next.allowed;
+  out.attributes = next.attributes;
+  out.a11y = next.a11y;
+  out.version = next.version;
+  out.mime = next.mime;
+  out._droppedKeys = dropped;
+  return out;
 }
 
 export async function metaMain(argv = process.argv.slice(2)) {

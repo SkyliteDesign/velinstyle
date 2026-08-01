@@ -8,12 +8,14 @@ Source: `src/utilities/scroll-animation.css`
 | --- | --- |
 | `.velin-animate-on-scroll` | `animation: velin-scroll-reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 100%;` |
 | `.velin-animate-on-scroll--fade` | `animation: velin-fade-in linear both; animation-timeline: view(); animation-range: entry 0% entry 60%;` |
+| `.velin-animate-on-scroll--fade:not` | `opacity: 0; transform: none;` |
 | `.velin-animate-on-scroll--scale` | `animation: velin-scale-in linear both; animation-timeline: view(); animation-range: entry 0% entry 80%;` |
+| `.velin-animate-on-scroll--scale:not` | `opacity: 0; transform: scale(0.92);` |
 | `.velin-animate-on-scroll--slide-up` | `animation: velin-slide-up linear both; animation-timeline: view(); animation-range: entry 0% entry 60%;` |
-| `.velin-in-view` | `opacity: 1; transform: none; transition: opacity var(--velin-duration-normal, 400ms) var(--velin-ease-out, ease-out), t…` |
+| `.velin-animate-on-scroll--slide-up:not` | `opacity: 0; transform: translateY(2rem);` |
+| `.velin-in-view` | `.velin-animate-on-scroll:not(.velin-in-view) { opacity: 0; transform: translateY(1.5rem);` |
 | `.velin-parallax` | `animation: velin-parallax-shift linear; animation-timeline: scroll();` |
 | `.velin-parallax--slow` | `animation: velin-parallax-shift-slow linear; animation-timeline: scroll();` |
-| `.velin-parallax--slow` | `animation: none; opacity: 1; transform: none;` |
 | `.velin-scroll-progress` | `position: fixed; inset-block-start: 0; inset-inline-start: 0; inline-size: 100%; block-size: 3px; background: var(--vel…` |
 | `.velin-scroll-progress--thick` | `block-size: 4px;` |
 | `.velin-stagger-item` | `transition-delay: var(--velin-stagger-delay, 0ms);` |

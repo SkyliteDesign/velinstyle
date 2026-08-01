@@ -35,6 +35,7 @@ Framework target: **WCAG 2.2 Level AAA** (token defaults + component contracts).
 | `<velin-accordion>` | pass | Arrow/Home/End between summaries | — | — |
 | `<velin-announcer>` | pass | N/A | polite\|assertive | — |
 | `<velin-bottom-nav>` | pass | Native links or buttons in slot | — | `aria-label` |
+| `<velin-calendar>` | pass | Arrows, Home/End, PageUp/Down, Enter/Space | — | — |
 | `<velin-carousel>` | pass | Arrows, Home, End, dots | — | — |
 | `<velin-code-block>` | pass | Expand toggle keyboard | — | — |
 | `<velin-collapse>` | pass | Enter/Space on trigger | — | — |
@@ -43,11 +44,12 @@ Framework target: **WCAG 2.2 Level AAA** (token defaults + component contracts).
 | `<velin-copy>` | pass | Native button | — | `aria-label` |
 | `<velin-countdown>` | pass | N/A | polite | — |
 | `<velin-counter>` | pass | N/A | polite | — |
-| `<velin-data-table>` | pass | Native buttons for column sort and pagination | polite | — |
+| `<velin-data-table>` | pass | Sort buttons; editable cells: Enter/F2 edit, Escape cancel; pagination | polite | — |
 | `<velin-dialog>` | pass | Native dialog, Escape | — | — |
 | `<velin-drawer>` | pass | Escape, Tab trap | — | — |
 | `<velin-dropdown>` | pass | Roving, typeahead, Escape | — | — |
 | `<velin-email>` | pass | — | — | `aria-label` |
+| `<velin-file-dropzone>` | pass | Browse button + native file input | polite | — |
 | `<velin-form-summary>` | pass | Summary links move focus to the offending field | assertive | — |
 | `<velin-icon>` | pass | — | — | `label` |
 | `<velin-lightbox>` | pass | Escape, arrows, Tab trap | polite | — |

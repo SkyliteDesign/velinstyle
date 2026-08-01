@@ -11,9 +11,14 @@ const styles = `
     padding: 10vh var(--velin-space-4, 1rem) var(--velin-space-4, 1rem);
     background: var(--velin-color-overlay, rgba(0,0,0,0.4));
     opacity: 0; visibility: hidden;
+    pointer-events: none;
     transition: opacity 150ms ease, visibility 150ms ease;
   }
-  :host([open]) .overlay { opacity: 1; visibility: visible; }
+  :host([open]) .overlay {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
   .panel {
     inline-size: min(32rem, 100%);
     background: var(--velin-color-surface-bright, #fff);
@@ -66,6 +71,7 @@ class VelinCommand extends HTMLElement {
       </div>
     `;
     this.shadowRoot.querySelector('.search').addEventListener('input', this._onInput);
+    this.shadowRoot.querySelector('.overlay')?.addEventListener('click', this._onOverlayClick);
     this.shadowRoot.querySelector('slot')?.addEventListener('slotchange', () => this._filter(''));
     this._filter('');
   }
@@ -79,6 +85,14 @@ class VelinCommand extends HTMLElement {
     this.removeAttribute('open');
     this.dispatchEvent(new CustomEvent('velin-close', { bubbles: true }));
   }
+  toggle() {
+    if (this.hasAttribute('open')) this.close();
+    else this.open();
+  }
+
+  _onOverlayClick = (event) => {
+    if (event.target === event.currentTarget) this.close();
+  };
 
   _open() {
     this._prev = saveFocus();
@@ -92,7 +106,7 @@ class VelinCommand extends HTMLElement {
 
   _close() {
     document.removeEventListener('keydown', this._onKey);
-    clearBackgroundInert();
+    clearBackgroundInert(this);
     restoreFocus(this._prev);
     const input = this.shadowRoot.querySelector('.search');
     if (input) input.value = '';
@@ -135,6 +149,8 @@ class VelinCommand extends HTMLElement {
 
   disconnectedCallback() {
     document.removeEventListener('keydown', this._onKey);
+    this.shadowRoot?.querySelector('.overlay')?.removeEventListener('click', this._onOverlayClick);
+    if (this.hasAttribute('open')) clearBackgroundInert(this);
   }
 }
 

@@ -1,7 +1,7 @@
 /**
  * Performance audit for static HTML — images, scripts, inline styles.
  */
-import { existsSync, readFileSync, writeFileSync, readdirSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync, readdirSync, statSync } from 'fs';
 import { join, extname, relative } from 'path';
 
 const DEFAULT_IGNORE = ['node_modules', 'dist', '.git', '.next', 'build'];
@@ -16,6 +16,19 @@ export function walkHtmlFiles(dir, ignore = DEFAULT_IGNORE) {
     else if (extname(entry.name).toLowerCase() === '.html') results.push(full);
   }
   return results;
+}
+
+/** Accept a single .html file or a directory. */
+function collectHtmlFiles(targetPath, ignore = DEFAULT_IGNORE) {
+  if (!existsSync(targetPath)) return [];
+  const st = statSync(targetPath);
+  if (st.isFile()) {
+    return extname(targetPath).toLowerCase() === '.html' ? [targetPath] : [];
+  }
+  if (st.isDirectory()) {
+    return walkHtmlFiles(targetPath, ignore);
+  }
+  return [];
 }
 
 function lineOf(content, index) {
@@ -118,7 +131,7 @@ export function auditHtml(html, meta = {}) {
 }
 
 export function auditPath(targetPath) {
-  const files = walkHtmlFiles(targetPath);
+  const files = collectHtmlFiles(targetPath);
   const issues = [];
   for (const file of files) {
     const html = readFileSync(file, 'utf-8');

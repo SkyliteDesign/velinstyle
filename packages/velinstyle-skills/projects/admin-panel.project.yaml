@@ -1,0 +1,12 @@
+id: admin-panel
+name: Admin Panel
+priority: recommended
+workflowGraph: release-gate
+packs:
+  - enterprise
+  - review
+skills:
+  - velin-perf-audit-fix
+  - velin-security-scan-pii
+optimizedFor:
+  - cursor

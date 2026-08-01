@@ -9,6 +9,7 @@ Custom elements in `components/`. Import via `@birdapi/velinstyle` or lazy-load 
 | `<velin-accordion>` | 0 | 0 | [velin-accordion.md](./velin-accordion.md) |
 | `<velin-announcer>` | 0 | 0 | [velin-announcer.md](./velin-announcer.md) |
 | `<velin-bottom-nav>` | 2 | 0 | [velin-bottom-nav.md](./velin-bottom-nav.md) |
+| `<velin-calendar>` | 4 | 1 | [velin-calendar.md](./velin-calendar.md) |
 | `<velin-carousel>` | 2 | 1 | [velin-carousel.md](./velin-carousel.md) |
 | `<velin-code-block>` | 4 | 0 | [velin-code-block.md](./velin-code-block.md) |
 | `<velin-collapse>` | 1 | 2 | [velin-collapse.md](./velin-collapse.md) |
@@ -17,11 +18,12 @@ Custom elements in `components/`. Import via `@birdapi/velinstyle` or lazy-load 
 | `<velin-copy>` | 0 | 1 | [velin-copy.md](./velin-copy.md) |
 | `<velin-countdown>` | 1 | 1 | [velin-countdown.md](./velin-countdown.md) |
 | `<velin-counter>` | 9 | 0 | [velin-counter.md](./velin-counter.md) |
-| `<velin-data-table>` | 4 | 3 | [velin-data-table.md](./velin-data-table.md) |
-| `<velin-dialog>` | 0 | 1 | [velin-dialog.md](./velin-dialog.md) |
+| `<velin-data-table>` | 5 | 4 | [velin-data-table.md](./velin-data-table.md) |
+| `<velin-dialog>` | 0 | 2 | [velin-dialog.md](./velin-dialog.md) |
 | `<velin-drawer>` | 1 | 1 | [velin-drawer.md](./velin-drawer.md) |
 | `<velin-dropdown>` | 1 | 1 | [velin-dropdown.md](./velin-dropdown.md) |
 | `<velin-email>` | 3 | 1 | [velin-email.md](./velin-email.md) |
+| `<velin-file-dropzone>` | 4 | 2 | [velin-file-dropzone.md](./velin-file-dropzone.md) |
 | `<velin-flip>` | 0 | 0 | [velin-flip.md](./velin-flip.md) |
 | `<velin-form-summary>` | 2 | 3 | [velin-form-summary.md](./velin-form-summary.md) |
 | `<velin-haptic>` | 0 | 0 | [velin-haptic.md](./velin-haptic.md) |

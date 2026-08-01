@@ -4,6 +4,10 @@
 
 Loading spinner state.
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty / present) | Busy / spinner state (`aria-busy`) | Loading CSS |
 ## Example
 
 ```html

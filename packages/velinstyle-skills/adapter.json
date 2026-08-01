@@ -1,0 +1,8 @@
+{
+  "id": "velinstyle",
+  "name": "VelinStyle Adapter",
+  "frameworkPackage": "@birdapi/velinstyle",
+  "registryFile": "registry.json",
+  "catalogFile": "catalog.json",
+  "description": "Bridges the shared skill engine to VelinStyle CLI and meta surfaces."
+}

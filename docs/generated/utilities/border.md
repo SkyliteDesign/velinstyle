@@ -14,6 +14,8 @@ Source: `src/utilities/border.css`
 | `.velin-border-block-start` | `border-block-start: 1px solid var(--velin-color-border);` |
 | `.velin-border-danger` | `border-color: var(--velin-color-danger);` |
 | `.velin-border-inline` | `border-inline: 1px solid var(--velin-color-border);` |
+| `.velin-border-inline-end` | `border-inline-end: 1px solid var(--velin-color-border);` |
+| `.velin-border-inline-start` | `border-inline-start: 1px solid var(--velin-color-border);` |
 | `.velin-border-primary` | `border-color: var(--velin-color-primary);` |
 | `.velin-border-secondary` | `border-color: var(--velin-color-secondary);` |
 | `.velin-border-strong` | `border-color: var(--velin-color-border-strong);` |

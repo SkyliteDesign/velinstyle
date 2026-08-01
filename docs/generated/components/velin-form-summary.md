@@ -4,6 +4,18 @@
 
 Source: `components/velin-form-summary.js`
 
+## Minimal working example
+Copy-paste starter (load CSS + `velinstyle-components` / `bootFromDOM` as needed):
+
+```html
+<form novalidate>
+  <velin-form-summary></velin-form-summary>
+  <label class="velin-label" for="email">Email</label>
+  <input id="email" class="velin-input" type="email" required>
+  <button type="submit" class="velin-btn velin-btn--primary">Send</button>
+</form>
+```
+
 ## Accessibility
 WCAG contract status: **pass** (framework target: AAA).
 

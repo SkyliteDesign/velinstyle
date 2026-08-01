@@ -16,6 +16,7 @@
 import { readFileSync, writeFileSync, copyFileSync, existsSync, readdirSync, statSync } from 'fs';
 import { join, dirname, relative, sep } from 'path';
 import { fileURLToPath } from 'url';
+import { spawnSync } from 'child_process';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE_ROOT = join(ROOT, '..', 'velinstyle-site');
@@ -381,6 +382,19 @@ if (counts) {
   checkDocPatterns('Lazy-loader component count', String(counts.loaders), countPatterns('lazy-loader', counts.loaders), { roots });
 } else {
   record('Component counts', ['dist/velin-agent.json missing counts — run npm run meta:build']);
+}
+
+/** Validate Design Intelligence data files against schemas/ contracts. */
+{
+  const script = join(ROOT, 'scripts', 'validate-intelligence-schemas.mjs');
+  const run = spawnSync(process.execPath, [script, '--json'], { encoding: 'utf-8' });
+  let payload = { ok: false, problems: [`validator exit ${run.status}`] };
+  try {
+    payload = JSON.parse(run.stdout || '{}');
+  } catch {
+    payload = { ok: false, problems: [run.stderr || run.stdout || 'validator produced no JSON'] };
+  }
+  record('Intelligence schemas', payload.ok ? [] : (payload.problems || ['schema validation failed']));
 }
 
 const failed = results.filter((r) => !r.ok);

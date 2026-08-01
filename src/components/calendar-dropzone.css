@@ -1,0 +1,5 @@
+/* Host hooks for calendar / dropzone when used without shadow pierce */
+velin-calendar,
+velin-file-dropzone {
+  display: block;
+}

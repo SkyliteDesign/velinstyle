@@ -15,5 +15,3 @@ Source: `src/utilities/anchor.css`
 | `.velin-anchored--start` | `right: anchor(left); top: anchor(center); translate: 0 -50%; margin-right: var(--velin-space-2, 0.5rem);` |
 | `.velin-anchored--top` | `bottom: anchor(top); left: anchor(center); translate: -50% 0; margin-bottom: var(--velin-space-2, 0.5rem);` |
 | `.velin-anchored-named` | `position: absolute; position-anchor: var(--velin-anchor-name, --velin-anchor); inset: auto;` |
-| `.velin-anchored-named` | `z-index: var(--velin-z-dropdown, 100); background: var(--velin-color-surface-bright); border: 1px solid var(--velin-col…` |
-| `.velin-anchored-named` | `position: absolute;` |

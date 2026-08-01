@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/skill-template.schema.json",
+  "title": "VelinStyle Project Template",
+  "type": "object",
+  "required": ["id", "workflowGraph", "packs"],
+  "properties": {
+    "id": { "type": "string" },
+    "workflowGraph": { "type": "string" },
+    "packs": { "type": "array", "items": { "type": "string" } },
+    "theme": { "type": "string" },
+    "demo": { "type": "string" },
+    "docs": { "type": "array", "items": { "type": "string" } },
+    "starterFiles": { "type": "array", "items": { "type": "string" } },
+    "defaults": { "type": "object" }
+  }
+}

@@ -4,6 +4,10 @@
 
 Scale-in on scroll.
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty / present) | Scale in on scroll | Motion runtime |
 ## Example
 
 ```html

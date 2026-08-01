@@ -4,6 +4,10 @@
 
 Animated number counter (bridges to `<velin-counter>`).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| number | Target value to animate toward | `<velin-counter>` |
 ## Example
 
 ```html

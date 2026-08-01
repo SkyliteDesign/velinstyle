@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Skills — VelinStyle</title>
+</head>
+<body style="font-family:system-ui,sans-serif;max-width:42rem;margin:2rem auto;padding:0 1rem;line-height:1.5">
+  <main id="main">
+    <h1>AI Skills</h1>
+    <p>Registry-first skills for agents and the <code>velinstyle skills</code> CLI. This is a <strong>foundation</strong> catalog — not an auto-builder for shop/admin UIs.</p>
+    <h2>Quick start</h2>
+    <pre><code>velinstyle skills list --capability review
+velinstyle skills show velin-review-page-gate --human
+velinstyle skills doctor
+velinstyle workflow landingpage --json</code></pre>
+    <h2>Source of truth</h2>
+    <ul>
+      <li><code>packages/velinstyle-skills/registry.json</code></li>
+      <li>Prose: <code>packages/velinstyle-skills/skills/**/SKILL.md</code></li>
+      <li>Strategy: <code>interne_docs/strategy/AI_SKILLS.md</code> (maintainer monorepo; not published)</li>
+    </ul>
+    <h2>Honesty</h2>
+    <p><code>skills run</code> inspects steps (dry-run). It does not apply markup. Prefer <code>create landing|dashboard|docs|auth</code> + <code>check</code> for shippable starters. Multipage shop/admin kits are planned later.</p>
+    <p>Also see <a href="ai-skills.md">ai-skills.md</a> (source notes).</p>
+  </main>
+</body>
+</html>

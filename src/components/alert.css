@@ -10,6 +10,17 @@
     color: var(--velin-color-text);
     font-size: var(--velin-text-base);
     line-height: var(--velin-leading-normal);
+    min-inline-size: 0;
+    max-inline-size: 100%;
+    overflow-wrap: break-word;
+  }
+
+  /*
+   * Text-only alerts (no icon/close/content shell): use block flow so
+   * inline <strong>/<code> nodes do not become horizontal flex items.
+   */
+  .velin-alert:not(:has(.velin-alert__icon, .velin-alert__close, .velin-alert__content)) {
+    display: block;
   }
 
   .velin-alert[role="alert"] {
@@ -24,7 +35,17 @@
   }
 
   .velin-alert__content {
-    flex-grow: 1;
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    overflow-wrap: break-word;
+  }
+
+  .velin-alert__content > p {
+    margin-block: 0 var(--velin-space-2);
+  }
+
+  .velin-alert__content > p:last-child {
+    margin-block-end: 0;
   }
 
   .velin-alert__title {

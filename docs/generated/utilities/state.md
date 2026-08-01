@@ -10,13 +10,9 @@ Source: `src/utilities/state.css`
 | `.velin-is-empty` | `position: relative; min-block-size: 8rem; display: flex; align-items: center; justify-content: center; flex-direction: …` |
 | `.velin-is-empty::before` | `content: "∅"; font-size: var(--velin-text-3xl); opacity: 0.5;` |
 | `.velin-is-error` | `border: 2px solid var(--velin-color-danger) !important; position: relative;` |
-| `.velin-is-error` | `border-color: LinkText;` |
 | `.velin-is-error::after` | `content: "⚠"; position: absolute; inset-block-start: var(--velin-space-2); inset-inline-end: var(--velin-space-2); colo…` |
 | `.velin-is-loading` | `position: relative; pointer-events: none; overflow: hidden;` |
 | `.velin-is-loading::after` | `content: ""; position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; bac…` |
 | `.velin-is-loading::before` | `content: ""; position: absolute; z-index: 3; inset-block-start: 50%; inset-inline-start: 50%; translate: -50% -50%; inl…` |
-| `.velin-is-loading::before` | `animation-duration: 3s;` |
-| `.velin-is-loading::before` | `border-color: ButtonText; border-block-start-color: Highlight;` |
 | `.velin-is-success` | `border: 2px solid var(--velin-color-success) !important; position: relative;` |
-| `.velin-is-success` | `border-color: LinkText;` |
 | `.velin-is-success::after` | `content: "✓"; position: absolute; inset-block-start: var(--velin-space-2); inset-inline-end: var(--velin-space-2); colo…` |

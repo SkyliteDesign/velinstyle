@@ -1,0 +1,21 @@
+id: landingpage
+name: Landing Page Workflow
+entry: plan
+nodes:
+  plan: { skill: velin-dev-plan-first }
+  hero: { skill: velin-design-hero-compose }
+  sections: { skill: velin-design-section-rhythm }
+  components: { skill: velin-components-select-compose }
+  a11y: { skill: velin-a11y-page-checklist }
+  seo: { skill: velin-review-seo-meta }
+  review: { skill: velin-review-page-gate }
+  release: { skill: velin-release-meta-rebuild }
+edges:
+  - { from: plan, to: hero }
+  - { from: hero, to: sections }
+  - { from: sections, to: components }
+  - { from: components, to: a11y }
+  - { from: components, to: seo }
+  - { from: a11y, to: review }
+  - { from: seo, to: review }
+  - { from: review, to: release, when: review.passed }

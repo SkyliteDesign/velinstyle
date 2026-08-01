@@ -3,7 +3,7 @@
 import { existsSync, readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync, rmSync, statSync } from 'fs';
 import { join, resolve, basename, dirname } from 'path';
 import { execSync } from 'child_process';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 import { listProviders, getProviderUrl, PROVIDERS } from './icon-providers.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
@@ -33,7 +33,7 @@ const LAYER_FILES = {
   security: ['a11y/security.css'],
   layout: [
     'layout/breakpoints.css', 'layout/container.css', 'layout/grid.css',
-    'layout/flex.css', 'layout/patterns.css',
+    'layout/flex.css', 'layout/patterns.css', 'layout/app-shell.css',
   ],
   components: [
     'components/button.css', 'components/card.css', 'components/input.css',
@@ -44,6 +44,7 @@ const LAYER_FILES = {
     'components/switch.css', 'components/divider.css', 'components/chip.css',
     'components/timeline.css', 'components/stepper.css', 'components/stat.css',
     'components/drawer.css', 'components/input-group.css', 'components/form-validation.css', 'components/collapse.css',
+    'components/calendar-dropzone.css',
   ],
   utilities: [
     'utilities/color.css', 'utilities/spacing.css', 'utilities/display.css',
@@ -93,10 +94,18 @@ function help() {
     velinstyle themes               List available themes
     velinstyle add <name>           Add a single component CSS
     velinstyle icons <subcommand>   Manage icon providers
-    velinstyle scan [path]          Security & accessibility scanner
+    velinstyle scan [path|file]     Security & accessibility scanner (dir or .html/.css/.js)
     velinstyle prefix [path]        Add missing velin- prefix (dry-run; use --write)
     velinstyle blueprint [name]     Print HTML blueprint (run: velinstyle blueprint list)
-    velinstyle scaffold "<prompt>"  Generate layout HTML from a text description
+    velinstyle blueprint <name> --strict  Fail if emitted classes ∉ CSS
+    velinstyle create <kind> [dir]  Scaffold: landing|dashboard|docs|auth
+    velinstyle serve [dir]          Static preview server (default port 4173)
+    velinstyle doctor               Check dist, icons, config, Windows ESM paths
+    velinstyle check [path]         doctor + blueprint --strict + scan + review
+    velinstyle scaffold "<prompt>"  Plan-first page HTML or recipe fragment
+    velinstyle plan "<prompt>"      Emit page plan JSON (no HTML)
+    velinstyle review [file|html]   Design / a11y / SEO / conversion review gate
+    velinstyle wc api <tag>         Human-readable Web Component API from source
     velinstyle layout <sub>         Responsive layout audit and fixes
     velinstyle perf <sub>           Performance audit (images, scripts) with --fix
     velinstyle tokens build         Generate CSS variables from tokens.json
@@ -104,6 +113,8 @@ function help() {
     velinstyle docs generate        Auto-generate Markdown API reference
     velinstyle meta                 Build agent context (velin-agent.json, llms.txt)
     velinstyle search index         Build JSON search index for VelinSearch
+    velinstyle skills <subcommand>  Registry-first AI skills commands
+    velinstyle workflow <id>        Resolve workflow graph / project workflow
 
   ${C.bold('Icons subcommands:')}
     icons list                      Show available icon providers
@@ -117,13 +128,27 @@ function help() {
     velinstyle icons build
 
   ${C.bold('Blueprint:')}
-    velinstyle blueprint list       Print all blueprint ids
-    velinstyle blueprint <name> [--output, -o <file>]
+    velinstyle blueprint list [--strict]  Print ids (strict validates all)
+    velinstyle blueprint <name> [--output, -o <file>] [--strict]
 
-  ${C.bold('Scaffold (0.8.0):')}
-    velinstyle scaffold "<prompt>"  Compose blueprints from natural language
-    velinstyle scaffold list-intents  Show supported intent keywords
+  ${C.bold('Create / serve / doctor / check:')}
+    velinstyle create landing|dashboard|docs|auth [dir] [--theme earth] [--no-copy]
+    velinstyle serve [dir] [--port 4173]
+    velinstyle doctor
+    velinstyle check [path] [--json|--sarif] [--profile marketing|app|docs|fragment|ecommerce]
+    Alias: validate → check · documentation → docs generate help
+
+  ${C.bold('Web Components:')}
+    velinstyle wc api <tag>         e.g. velinstyle wc api velin-toast
+
+  ${C.bold('Scaffold (1.2.0):')}
+    velinstyle scaffold "<prompt>"  Plan → render → review for pages; recipes for fragments
+    velinstyle scaffold list-intents  Show recipe intent keywords
     velinstyle scaffold "<prompt>" -o out.html [--json]
+
+  ${C.bold('Plan / Review (1.2.0):')}
+    velinstyle plan "<prompt>" [--json] [-o plan.json]
+    velinstyle review <file.html> [--json] [--prompt "..."]
 
   ${C.bold('Layout (0.8.0):')}
     velinstyle layout audit [path]    Report flex/grid/responsive issues
@@ -131,9 +156,9 @@ function help() {
     velinstyle layout fix [path]      Apply safe fixes (--dry-run default, --write)
 
   ${C.bold('Performance (0.9.0):')}
-    velinstyle perf audit [path]      Report CLS, lazy-load, script defer issues
-    velinstyle perf suggest [path]    Same as audit with fix hints
-    velinstyle perf fix [path]        Apply safe fixes (--write)
+    velinstyle perf audit [path|file] Report CLS, lazy-load, script defer issues
+    velinstyle perf suggest [path|file] Same as audit with fix hints
+    velinstyle perf fix [path|file]   Apply safe fixes (--write)
 
   ${C.bold('Tokens:')}
     velinstyle tokens build [--input <path>] [--output, -o <file>]
@@ -142,17 +167,28 @@ function help() {
   ${C.bold('Docs (0.9.0):')}
     velinstyle docs generate [--scope all|components|tokens|utilities|cli|rules|a11y|meta] [--out docs/generated]
     velinstyle meta [--out dist/velin-agent.json] [--llms-out dist/llms.txt] [--base-url URL]
-    velinstyle meta page <file.html> [--write]
+    velinstyle meta page <file.html> [--write]  Merge curated meta (goals/intent) on --write
 
   ${C.bold('Search:')}
     velinstyle search index [--out dist/search-index.json] [--extra-html dir1,dir2]
+
+  ${C.bold('Skills:')}
+    velinstyle skills list [--capability review] [--status beta] [--json]
+    velinstyle skills show <skill-id> [--human]
+    velinstyle skills install <skill-id|pack|bundle:id|project:id> [--target .cursor/skills]
+    velinstyle skills run <skill-id> [--json]
+    velinstyle skills validate
+    velinstyle skills packs|bundles|templates|projects|graphs
+
+  ${C.bold('Workflow:')}
+    velinstyle workflow <graph-id|project:id> [--json]
 
   ${C.bold('Scan options:')}
     --fix                           Auto-fix safe issues (writes files)
     --fix-dry-run                   Show files that would be auto-fixed; no write
     --fix-lang <code>               Default lang for a11y/html-lang fix (default: de)
     --severity <level>              Minimum severity: error, warning, info
-    --only <category>               Filter: security, pii, a11y, css, perf
+    --only <category>               Filter: security, pii, a11y, css, wc, perf
 
   ${C.bold('Prefix options (velinstyle prefix):')}
     --write                         Write files (default is dry-run)
@@ -166,6 +202,7 @@ function help() {
   ${C.bold('Build options:')}
     --output, -o <path>             Output file path (default: ./velinstyle-custom.css)
     --minify                        Minify output
+    --preset lite                   Marketing subset layers (tokens+reset+base+layout+components+utilities)
 
   ${C.bold('General:')}
     --help, -h                      Show this help
@@ -178,36 +215,86 @@ function init() {
   const configPath = resolve('velinstyle.config.js');
   if (existsSync(configPath)) {
     console.log('velinstyle.config.js already exists.');
-    return;
-  }
-
-  const config = `// VelinStyle Configuration
+  } else {
+    const config = `// VelinStyle Configuration
 export default {
+  // Marketing lite: layers: ['tokens','reset','base','layout','components','utilities'] + theme
+  // See docs/guides/marketing-lite-css.html
   layers: [
-    'tokens',      // Design tokens (colors, spacing, typography, etc.)
-    'reset',       // CSS reset + layer order
-    'base',        // Focus styles + content styles
-    'a11y',        // Accessibility + security utilities
-    'layout',      // Grid, container, flex, breakpoints
-    'components',  // All UI components (button, card, nav, etc.)
-    'utilities',   // Utility classes (display, spacing, text, etc.)
-    'helpers',     // Helper classes (ratios, stacks, stretched-link, etc.)
+    'tokens',
+    'reset',
+    'base',
+    'a11y',
+    'layout',
+    'components',
+    'utilities',
+    'helpers',
   ],
-  theme: null,     // e.g. 'neon', 'ocean', 'corporate'
+  theme: null,     // e.g. 'earth', 'nordic', 'ocean'
   output: './velinstyle-custom.css',
   minify: true,
   scan: {
-    enabled: false,    // Set true to auto-scan on build
+    enabled: false,
     severity: 'warning',
     fix: false,
     ignore: ['node_modules', 'dist', '.git'],
   },
 };
 `;
+    writeFileSync(configPath, config);
+    console.log(C.green('Created velinstyle.config.js'));
+  }
 
-  writeFileSync(configPath, config);
-  console.log(C.green('Created velinstyle.config.js'));
-  console.log('Edit the layers array, then run: velinstyle build');
+  const vendorDir = resolve('vendor', 'velinstyle');
+  const distCss = join(PKG_ROOT, 'dist', 'velinstyle.min.css');
+  if (existsSync(distCss)) {
+    mkdirSync(vendorDir, { recursive: true });
+    for (const f of ['velinstyle.min.css', 'velinstyle-components.min.js', 'velin-icons.svg']) {
+      const src = join(PKG_ROOT, 'dist', f);
+      if (existsSync(src)) writeFileSync(join(vendorDir, f), readFileSync(src));
+    }
+    const themesSrc = join(PKG_ROOT, 'dist', 'themes');
+    if (existsSync(themesSrc)) {
+      mkdirSync(join(vendorDir, 'themes'), { recursive: true });
+      for (const name of readdirSync(themesSrc)) {
+        const src = join(themesSrc, name);
+        if (statSync(src).isFile()) writeFileSync(join(vendorDir, 'themes', name), readFileSync(src));
+      }
+    }
+    console.log(C.green(`Copied dist assets → ${vendorDir}`));
+  } else {
+    console.log(C.yellow('Framework dist/ not found — skip vendor copy. Build the framework or copy dist manually into vendor/velinstyle.'));
+  }
+
+  const starter = resolve('index.velin-starter.html');
+  if (!existsSync(starter) && !existsSync(resolve('index.html'))) {
+    writeFileSync(
+      starter,
+      `<!DOCTYPE html>
+<html lang="en" data-velin-reveal-auto>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="velin-icon-sprite" content="vendor/velinstyle/velin-icons.svg">
+  <title>VelinStyle starter</title>
+  <link rel="stylesheet" href="vendor/velinstyle/velinstyle.min.css">
+</head>
+<body>
+  <a class="velin-skip-link" href="#main">Skip to main</a>
+  <main id="main" class="velin-container velin-py-8">
+    <h1 class="velin-text-3xl velin-font-bold">VelinStyle starter</h1>
+    <p class="velin-text-muted">Run <code>velinstyle serve</code> or <code>velinstyle create landing</code>.</p>
+  </main>
+  <script type="module" src="vendor/velinstyle/velinstyle-components.min.js"></script>
+</body>
+</html>
+`,
+      'utf-8',
+    );
+    console.log(C.green('Created index.velin-starter.html'));
+  }
+
+  console.log('Next: velinstyle build  ·  velinstyle serve  ·  velinstyle doctor');
 }
 
 // ── Build ────────────────────────────────────────────────────────────────────
@@ -217,12 +304,18 @@ async function build() {
   let config;
 
   if (existsSync(configPath)) {
-    config = (await import(configPath)).default;
+    config = (await import(pathToFileURL(configPath).href)).default;
   } else {
     config = { layers: LAYERS, theme: null, output: './velinstyle-custom.css', minify: true };
   }
 
-  const output = getArg('--output', '-o') || config.output || './velinstyle-custom.css';
+  const LITE_LAYERS = ['tokens', 'reset', 'base', 'layout', 'components', 'utilities'];
+  const preset = getArg('--preset') || config.preset;
+  if (preset === 'lite') {
+    config = { ...config, layers: LITE_LAYERS };
+  }
+
+  const output = getArg('--output', '-o') || getArg('--out') || config.output || './velinstyle-custom.css';
   const minify = hasFlag('--minify') || config.minify;
   const selectedLayers = config.layers || LAYERS;
 
@@ -254,17 +347,40 @@ async function build() {
   const tmpPath = resolve('.velinstyle-tmp.css');
   writeFileSync(tmpPath, css);
 
+  const outAbs = resolve(output);
+  let bundled = false;
   try {
+    const binName = process.platform === 'win32' ? 'lightningcss.cmd' : 'lightningcss';
+    const localBin = join(PKG_ROOT, 'node_modules', '.bin', binName);
+    const cli = existsSync(localBin) ? `"${localBin}"` : 'npx lightningcss';
     const minifyFlag = minify ? '--minify' : '';
-    execSync(`npx lightningcss --bundle ${minifyFlag} "${tmpPath}" -o "${resolve(output)}"`, {
+    execSync(`${cli} --bundle ${minifyFlag} "${tmpPath}" -o "${outAbs}"`, {
       stdio: 'inherit',
+      cwd: PKG_ROOT,
+      shell: true,
     });
+    bundled = true;
     console.log(C.green(`Built: ${output}`) + ` (layers: ${selectedLayers.join(', ')}${config.theme ? ', theme: ' + config.theme : ''})`);
   } catch {
-    writeFileSync(resolve(output), css);
+    writeFileSync(outAbs, css);
     console.log(C.yellow(`Built (unbundled): ${output}`));
+    console.log(C.yellow('  Install lightningcss-cli in the VelinStyle package (or run build from the framework repo) for minified output.'));
   } finally {
     try { unlinkSync(tmpPath); } catch { /* ignore */ }
+  }
+
+  if (preset === 'lite' && existsSync(outAbs)) {
+    const liteBytes = statSync(outAbs).size;
+    const fullMin = join(PKG_ROOT, 'dist', 'velinstyle.min.css');
+    if (existsSync(fullMin)) {
+      const fullBytes = statSync(fullMin).size;
+      const liteKb = (liteBytes / 1024).toFixed(1);
+      const fullKb = (fullBytes / 1024).toFixed(1);
+      console.log(`  Size: lite ${liteKb} KB vs dist/velinstyle.min.css ${fullKb} KB`);
+      if (!bundled || liteBytes >= fullBytes) {
+        console.log(C.yellow(`  Warning: lite output is not smaller than the full min CSS${bundled ? '' : ' (unbundled)'}.`));
+      }
+    }
   }
 
   if (config.scan?.enabled) {
@@ -458,24 +574,99 @@ function iconsBuildCmd() {
 
 async function blueprintCmd() {
   const sub = args[1];
-  const { listBlueprints, emitBlueprint } = await import('./blueprint.js');
+  const strict = hasFlag('--strict');
+  const { listBlueprints, emitBlueprint, validateAllBlueprints } = await import('./blueprint.js');
+  if (sub === '--help' || sub === '-h') {
+    console.log(`Usage: velinstyle blueprint [list|<name>] [--output|-o <file>] [--strict]
+
+  list                 List blueprint ids
+  list --strict        Validate all blueprints against CSS
+  <name>               Emit HTML (stdout or -o file)
+  <name> --strict      Fail if classes missing from CSS
+`);
+    return;
+  }
   if (!sub || sub === 'list') {
+    if (strict) {
+      const results = validateAllBlueprints();
+      const bad = results.filter((r) => !r.ok);
+      if (bad.length) {
+        for (const r of bad) {
+          console.log(C.red(`${r.id}: ${r.missing?.join(', ') || r.error}`));
+        }
+        process.exit(1);
+      }
+      console.log(C.green(`All ${results.length} blueprints pass --strict`));
+      return;
+    }
     console.log(`\n  ${C.bold('Available blueprints:')}\n`);
     listBlueprints().forEach((b) => console.log(`    - ${b}`));
-    console.log(`\n  ${C.dim('Example: velinstyle blueprint modal -o snippet.html')}\n`);
+    console.log(`\n  ${C.dim('Example: velinstyle blueprint modal -o snippet.html --strict')}\n`);
     return;
   }
   const out = getArg('--output', '-o');
-  const r = emitBlueprint(sub, { output: out || null });
+  const r = emitBlueprint(sub, { output: out || null, strict });
   if (!r.ok) {
     console.log(C.red(r.error));
-    return;
+    process.exit(1);
   }
   if (r.text) {
     console.log(r.text);
   } else {
     console.log(C.green(`Wrote blueprint to ${r.path}`));
   }
+}
+
+async function serveCmd() {
+  const raw = args[1] && !args[1].startsWith('-') ? args[1] : '.';
+  const port = Number(getArg('--port')) || 4173;
+  const { serveStatic } = await import('./serve.js');
+  const result = await serveStatic({ dir: resolve(raw), port });
+  if (!result.ok) {
+    console.log(C.red(result.error));
+    process.exit(1);
+  }
+  console.log(C.green(`Serving ${result.dir}`));
+  console.log(`  ${result.url}`);
+  console.log(C.dim('Press Ctrl+C to stop'));
+}
+
+async function doctorCmd() {
+  const { runDoctor, formatDoctorReport } = await import('./doctor.js');
+  const raw = args[1] && !args[1].startsWith('-') ? resolve(args[1]) : process.cwd();
+  let cwd = raw;
+  try {
+    if (existsSync(raw) && statSync(raw).isFile()) cwd = dirname(raw);
+  } catch { /* use raw */ }
+  const report = await runDoctor({ cwd, pkgRoot: PKG_ROOT });
+  console.log(formatDoctorReport(report));
+  process.exit(report.ok ? 0 : 1);
+}
+
+async function createCmd() {
+  const kind = args[1];
+  if (!kind || kind === '--help' || kind === '-h') {
+    console.log(`Usage: velinstyle create <landing|dashboard|docs|auth> [dir] [--theme earth] [--no-copy]`);
+    process.exit(kind ? 0 : 1);
+  }
+  const { CREATE_KINDS, createProject } = await import('./create.js');
+  if (!CREATE_KINDS.includes(kind)) {
+    console.log(C.red(`Unknown kind "${kind}". Use: ${CREATE_KINDS.join('|')}`));
+    process.exit(1);
+  }
+  const dir = args[2] && !args[2].startsWith('-') ? args[2] : kind;
+  const theme = getArg('--theme') || undefined;
+  const copyAssets = !hasFlag('--no-copy');
+  const r = createProject({ kind, dir: resolve(dir), pkgRoot: PKG_ROOT, theme, copyAssets });
+  if (!r.ok) {
+    console.log(C.red(r.error));
+    process.exit(1);
+  }
+  console.log(C.green(`Created ${kind} at ${r.dir}`));
+  console.log(C.dim(`  index: ${r.indexPath}`));
+  if (r.vendorRel) console.log(C.dim(`  vendor: ${r.vendorRel}/`));
+  if (r.vendorCopied?.length) console.log(C.dim(`  copied: ${r.vendorCopied.join(', ')}`));
+  console.log(C.dim(`  Next: velinstyle serve ${dir} · velinstyle check ${dir}`));
 }
 
 async function tokensBuildCmd() {
@@ -622,13 +813,84 @@ async function scaffoldCmd() {
     console.log(JSON.stringify(r, null, 2));
   } else if (out) {
     writeFileSync(resolve(out), r.html, 'utf-8');
-    console.log(C.green(`Wrote ${resolve(out)} (intent: ${r.intent}, ${r.confidence})`));
+    console.log(C.green(`Wrote ${resolve(out)} (intent: ${r.intent}, ${r.confidence}${r.mode ? `, mode: ${r.mode}` : ''})`));
+    if (r.review?.gate) {
+      console.log(C.dim(`  review gate: ${r.review.gate} (promptScore ${r.review.promptScore})`));
+    }
     if (r.responsiveHints?.length) {
       console.log(C.yellow(`  ${r.responsiveHints.length} layout hint(s) — run: velinstyle layout suggest ${out}`));
     }
   } else {
     console.log(r.html);
   }
+}
+
+async function planCmd() {
+  const promptParts = [];
+  let i = 1;
+  while (i < args.length) {
+    const a = args[i];
+    if (a.startsWith('-')) break;
+    promptParts.push(a);
+    i += 1;
+  }
+  const prompt = promptParts.join(' ').trim();
+  if (!prompt) {
+    console.log('Usage: velinstyle plan "<description>" [--json] [-o plan.json]');
+    return;
+  }
+  const { analyzePrompt, buildPlan } = await import('./prompt-engine.js');
+  const analysis = analyzePrompt(prompt);
+  const plan = buildPlan(analysis, prompt);
+  const payload = { analysis, plan };
+  const out = getArg('--output', '-o');
+  if (out) {
+    writeFileSync(resolve(out), JSON.stringify(payload, null, 2), 'utf-8');
+    console.log(C.green(`Wrote plan ${resolve(out)} (page: ${plan.page?.id}, sections: ${plan.sections.length})`));
+    return;
+  }
+  console.log(JSON.stringify(payload, null, 2));
+}
+
+async function reviewCmd() {
+  const target = args[1] && !args[1].startsWith('-') ? args[1] : null;
+  if (!target) {
+    console.log('Usage: velinstyle review <file.html> [--json] [--prompt "..."] [--profile marketing|app|docs|fragment]');
+    return;
+  }
+  const full = resolve(target);
+  if (!existsSync(full)) {
+    console.log(C.red(`File not found: ${full}`));
+    process.exit(1);
+  }
+  const html = readFileSync(full, 'utf-8');
+  const prompt = getArg('--prompt') || '';
+  const profile = getArg('--profile');
+  let plan;
+  if (prompt) {
+    const { analyzePrompt, buildPlan } = await import('./prompt-engine.js');
+    plan = buildPlan(analyzePrompt(prompt), prompt);
+  }
+  const { reviewHtml } = await import('./review.js');
+  const report = reviewHtml(html, { plan, prompt, profile: profile || undefined });
+  if (hasFlag('--json')) {
+    console.log(JSON.stringify(report, null, 2));
+  } else {
+    console.log(`\n  ${C.bold('Review gate:')} ${report.gate}  ${C.dim(`profile ${report.profile} · promptScore ${report.promptScore}`)}`);
+    console.log(C.dim(`  design ${report.scores.design} · a11y ${report.scores.accessibility} · seo ${report.scores.seo} · perf ${report.scores.performance} · conversion ${report.scores.conversion}`));
+    if (report.issues.length) {
+      console.log(`\n  ${C.bold('Issues:')}`);
+      for (const issue of report.issues) {
+        const color = issue.severity === 'error' ? C.red : C.yellow;
+        console.log(color(`    [${issue.severity}] ${issue.code}: ${issue.message}`));
+        console.log(C.dim(`      fix: ${issue.fix}`));
+      }
+    } else {
+      console.log(C.green('\n  No issues.'));
+    }
+    console.log('');
+  }
+  process.exit(report.gate === 'fail' ? 1 : 0);
 }
 
 async function layoutCmd() {
@@ -722,6 +984,38 @@ async function searchCmd() {
   console.log('Usage: velinstyle search index [--out <file>] [--extra-html dir1,dir2]');
 }
 
+async function skillsCmd() {
+  const { skillsCommand } = await import('./skills.js');
+  await skillsCommand(args.slice(1));
+}
+
+async function workflowCmd() {
+  const { workflowCommand } = await import('./workflow.js');
+  await workflowCommand(args.slice(1));
+}
+
+async function wcCmd() {
+  const sub = args[1];
+  if (sub === 'api' || sub === '--help' || sub === '-h' || !sub) {
+    if (sub !== 'api') {
+      console.log(`Usage: velinstyle wc api <tag>\nExample: velinstyle wc api velin-toast`);
+      if (sub === '--help' || sub === '-h' || !sub) process.exit(0);
+    }
+    const tag = args[2];
+    const { describeWcApi, formatWcApi } = await import('./wc-api.js');
+    const report = describeWcApi(PKG_ROOT, tag);
+    if (!report.ok) {
+      console.error(report.error);
+      process.exit(1);
+    }
+    if (hasFlag('--json')) console.log(JSON.stringify(report, null, 2));
+    else console.log(formatWcApi(report));
+    return;
+  }
+  console.error(`Unknown wc subcommand: ${sub}. Use: velinstyle wc api <tag>`);
+  process.exit(1);
+}
+
 async function scanCmd() {
   const targetPath = args[1] && !args[1].startsWith('-') ? resolve(args[1]) : resolve('.');
   const format = getArg('--format') || 'text';
@@ -747,24 +1041,217 @@ async function scanCmd() {
   process.exit(exitCode);
 }
 
+async function checkCmd() {
+  const raw = args[1] && !args[1].startsWith('-') ? args[1] : '.';
+  const target = resolve(raw);
+  const asJson = hasFlag('--json');
+  const asSarif = hasFlag('--sarif');
+  const profile = getArg('--profile');
+  let failed = 0;
+  const steps = [];
+
+  const quiet = asJson || asSarif;
+
+  if (!quiet) console.log(C.bold('\n── doctor ──'));
+  const { runDoctor, formatDoctorReport } = await import('./doctor.js');
+  let doctorCwd = target;
+  try {
+    if (existsSync(target) && statSync(target).isFile()) doctorCwd = dirname(target);
+  } catch { /* keep target */ }
+  const doc = await runDoctor({ cwd: doctorCwd, pkgRoot: PKG_ROOT });
+  if (!quiet) console.log(formatDoctorReport(doc));
+  if (!doc.ok) failed += 1;
+  steps.push({ step: 'doctor', ok: doc.ok, detail: { checks: doc.checks?.length, warnings: doc.warnings?.length } });
+
+  if (!quiet) console.log(C.bold('\n── blueprint --strict ──'));
+  const { validateAllBlueprints } = await import('./blueprint.js');
+  const bp = validateAllBlueprints();
+  const badBp = bp.filter((r) => !r.ok);
+  if (badBp.length) {
+    if (!quiet) {
+      for (const r of badBp) console.log(C.red(`${r.id}: ${r.missing?.join(', ') || r.error}`));
+    }
+    failed += 1;
+  } else if (!quiet) {
+    console.log(C.green(`All ${bp.length} blueprints pass --strict`));
+  }
+  steps.push({ step: 'blueprint', ok: badBp.length === 0, total: bp.length, failed: badBp.length });
+
+  if (!quiet) console.log(C.bold('\n── scan ──'));
+  const { scan } = await import('./scanner.js');
+  const scanResult = scan(target, { severity: 'warning', format: 'json', returnData: true });
+  if (!quiet && scanResult.issues?.length) {
+    for (const i of scanResult.issues.slice(0, 40)) {
+      console.log(`  ${i.severity} ${i.rule} L${i.line}: ${i.message}`);
+    }
+    if (scanResult.issues.length > 40) console.log(C.dim(`  … ${scanResult.issues.length - 40} more`));
+  } else if (!quiet) {
+    console.log(C.green('No scan issues at warning+'));
+  }
+  if (scanResult.exitCode) failed += 1;
+  steps.push({
+    step: 'scan',
+    ok: !scanResult.exitCode,
+    errors: scanResult.errors,
+    warnings: scanResult.warnings,
+    issues: scanResult.issues,
+  });
+
+  let htmlFile = null;
+  let reviewReport = null;
+  try {
+    const st = statSync(target);
+    if (st.isFile() && /\.html?$/i.test(target)) htmlFile = target;
+    else if (st.isDirectory()) {
+      const idx = join(target, 'index.html');
+      if (existsSync(idx)) htmlFile = idx;
+    }
+  } catch { /* skip review */ }
+
+  if (htmlFile) {
+    if (!quiet) console.log(C.bold('\n── review ──'));
+    const { reviewHtml } = await import('./review.js');
+    const html = readFileSync(htmlFile, 'utf-8');
+    reviewReport = reviewHtml(html, { prompt: '', profile: profile || undefined });
+    if (!quiet) {
+      console.log(`Gate: ${reviewReport.gate} (profile ${reviewReport.profile}, promptScore ${reviewReport.promptScore ?? '—'})`);
+    }
+    if (reviewReport.gate === 'fail') failed += 1;
+    steps.push({ step: 'review', ok: reviewReport.gate !== 'fail', gate: reviewReport.gate, report: reviewReport });
+  } else {
+    if (!quiet) console.log(C.dim('\n── review skipped (no index.html / HTML file) ──'));
+    steps.push({ step: 'review', ok: true, skipped: true });
+  }
+
+  const payload = {
+    ok: failed === 0,
+    failedSteps: failed,
+    target,
+    steps,
+  };
+
+  if (asSarif) {
+    const results = [];
+    for (const issue of scanResult.issues || []) {
+      results.push({
+        ruleId: issue.rule,
+        level: issue.severity === 'ERROR' ? 'error' : issue.severity === 'WARNING' ? 'warning' : 'note',
+        message: { text: issue.message },
+        locations: [{
+          physicalLocation: {
+            artifactLocation: { uri: issue.file || htmlFile || target },
+            region: { startLine: issue.line || 1 },
+          },
+        }],
+      });
+    }
+    for (const issue of reviewReport?.issues || []) {
+      results.push({
+        ruleId: issue.code,
+        level: issue.severity === 'error' ? 'error' : 'warning',
+        message: { text: issue.message },
+        locations: [{
+          physicalLocation: {
+            artifactLocation: { uri: htmlFile || target },
+            region: { startLine: 1 },
+          },
+        }],
+      });
+    }
+    const sarif = {
+      $schema: 'https://json.schemastore.org/sarif-2.1.0.json',
+      version: '2.1.0',
+      runs: [{
+        tool: { driver: { name: 'velinstyle-check', informationUri: 'https://github.com/SkyliteDesign/velinstyle', version: CLI_VERSION } },
+        results,
+      }],
+    };
+    console.log(JSON.stringify(sarif, null, 2));
+  } else if (asJson) {
+    console.log(JSON.stringify(payload, null, 2));
+  } else if (failed) {
+    console.log(C.red(`\ncheck failed (${failed} step(s))`));
+  } else {
+    console.log(C.green('\ncheck passed'));
+  }
+
+  process.exit(failed ? 1 : 0);
+}
+
+function suggestCommand(unknown) {
+  const names = [
+    'init', 'build', 'themes', 'add', 'icons', 'blueprint', 'create', 'serve', 'doctor', 'check',
+    'validate', 'tokens', 'scan', 'prefix', 'scaffold', 'plan', 'review', 'layout', 'perf',
+    'docs', 'documentation', 'meta', 'search', 'skills', 'workflow', 'wc',
+  ];
+  const q = String(unknown || '').toLowerCase();
+  function editDistance(a, b) {
+    const m = a.length;
+    const n = b.length;
+    const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+    for (let i = 0; i <= m; i += 1) dp[i][0] = i;
+    for (let j = 0; j <= n; j += 1) dp[0][j] = j;
+    for (let i = 1; i <= m; i += 1) {
+      for (let j = 1; j <= n; j += 1) {
+        dp[i][j] = a[i - 1] === b[j - 1]
+          ? dp[i - 1][j - 1]
+          : 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+      }
+    }
+    return dp[m][n];
+  }
+  return names
+    .map((name) => ({ name, dist: editDistance(q, name) }))
+    .sort((a, b) => a.dist - b.dist || a.name.localeCompare(b.name))
+    .slice(0, 3)
+    .filter((s) => s.dist <= Math.max(4, Math.ceil(q.length / 2)))
+    .map((s) => s.name);
+}
+
+function unknownCommand(cmd) {
+  console.log(C.red(`Unknown command '${cmd}'.`));
+  const suggestions = suggestCommand(cmd);
+  if (suggestions.length) {
+    console.log(`Did you mean ${suggestions.map((s) => C.cyan(s)).join(', ')}?`);
+  }
+  console.log(C.dim('Run velinstyle --help for the command list.'));
+  process.exit(1);
+}
+
 // ── Router ───────────────────────────────────────────────────────────────────
 
-switch (command) {
+const ALIASES = {
+  validate: 'check',
+  documentation: 'docs',
+};
+
+const resolvedCommand = ALIASES[command] || command;
+
+switch (resolvedCommand) {
   case 'init': init(); break;
   case 'build': build(); break;
   case 'themes': themes(); break;
   case 'add': add(); break;
   case 'icons': icons(); break;
   case 'blueprint': await blueprintCmd(); break;
+  case 'create': await createCmd(); break;
+  case 'serve': await serveCmd(); break;
+  case 'doctor': await doctorCmd(); break;
+  case 'check': await checkCmd(); break;
   case 'tokens': await tokensCmd(); break;
   case 'scan': scanCmd(); break;
   case 'prefix': await prefixCmd(); break;
   case 'scaffold': await scaffoldCmd(); break;
+  case 'plan': await planCmd(); break;
+  case 'review': await reviewCmd(); break;
   case 'layout': await layoutCmd(); break;
   case 'perf': await perfCmd(); break;
   case 'docs': await docsCmd(); break;
   case 'meta': await metaCmd(); break;
   case 'search': await searchCmd(); break;
-  case '--help': case '-h': help(); break;
-  default: help(); break;
+  case 'skills': await skillsCmd(); break;
+  case 'workflow': await workflowCmd(); break;
+  case 'wc': await wcCmd(); break;
+  case '--help': case '-h': case undefined: help(); break;
+  default: unknownCommand(command); break;
 }

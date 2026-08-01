@@ -11,7 +11,7 @@ WCAG contract status: **pass** (framework target: AAA).
 - **Notes:** Sets aria-current on active link.
 
 ## Attributes
-_No `observedAttributes` declared._
+_No `observedAttributes` declared._ Author-facing configuration may still use slots, properties, or child markup — see **Slots** / **Public API** below.
 
 ## Events
 - `velin-spy-change` (bubbles)

@@ -1,0 +1,12 @@
+id: portfolio
+name: Portfolio
+priority: recommended
+workflowGraph: landingpage
+packs:
+  - design
+  - frontend
+skills:
+  - velin-motion-reveal-feedback
+optimizedFor:
+  - cursor
+  - vscode

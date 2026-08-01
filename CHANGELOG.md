@@ -1,33 +1,273 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to this project are documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+For a developer-friendly overview of **1.2.0**, see [`RELEASE_NOTES_1.2.0.md`](RELEASE_NOTES_1.2.0.md). Upgrade guidance: [`UPGRADING.md`](UPGRADING.md).
+
+---
+
+## [Unreleased]
+
+### Added
+
+### Changed
+
+### Fixed
+
+---
+
+## [1.2.0](https://github.com/SkyliteDesign/velinstyle/releases/tag/v1.2.0) - 2026-08-01
+
+VelinStyle **1.2.0** ships Core + Design Intelligence Foundation and the Trust/Ship surface (`create`, `check`, `serve`, `doctor`), trust-oriented scan/review gates, AI skills registry tooling, and new app primitives (calendar, file dropzone, editable data table). Claims stay honest: excellent for landings and docs; not yet a primary multipage shop/enterprise-admin stack.
+
+### 🚀 Highlights
+
+#### Framework
+- Logical spacing honesty and denser padding steps for blueprint fidelity
+- App-shell layout utilities
+- Lite CSS preset for marketing budgets
+
+#### Design Intelligence (Beta)
+- Review profiles (`marketing` | `app` | `docs` | `fragment` | `ecommerce`)
+- Thin-content floors so junk pages cannot score conversion/SEO at 10
+
+#### AI Foundation (Beta)
+- Skill engine + 40 official skill records, packs, bundles, templates, workflows
+- `velinstyle skills` / `workflow` CLI; `skills doctor` path integrity
+
+#### CLI
+- `create landing|dashboard|docs|auth`, `check` (`--json` / `--sarif`), `serve`, `doctor`
+- `wc api <tag>`, `build --preset lite`, `--out` / `-o` aliases
+
+#### Components
+- `<velin-calendar>`, `<velin-file-dropzone>`, `<velin-data-table editable>`
+
+#### Blueprints
+- `split-hero`, `pricing-band`, `app-chrome`, `ops-console`
+
+#### Quality
+- Trust scan rules (nested interactive, contrast-inline, role=button, and more)
+- Chaos + misses fixtures; blueprint `--strict` CI
+- Windows ESM path fixes; vendor mini-docs on create
+
+### Release Status
+
+| Area | Status |
+|------|--------|
+| CSS Framework | Stable |
+| Utilities | Stable (honesty expansions) |
+| Runtime | Stable |
+| Web Components | Stable (+ new primitives) |
+| CLI | Stable (expanded surface) |
+| Blueprints | Stable |
+| Review Engine | Beta |
+| Prompt Engine | Beta |
+| Knowledge Graph | Beta |
+| AI Metadata | Beta |
+| AI Skills | Beta / Foundation |
+| Workflow Graphs | Beta / Foundation |
+| Studio | Planned |
+| Utility Engine Generator | Planned |
+
+### Added
+
+#### CLI
+- `velinstyle serve`, `velinstyle doctor`, `velinstyle create landing|dashboard|docs|auth`
+- `blueprint --strict` / `npm run check:blueprints` CI gate
+- `velinstyle check` (doctor + blueprint `--strict` + scan + review) with `--json` / `--sarif`
+- Aliases: `validate` → `check`, `documentation` → `docs`
+- `velinstyle wc api <tag>` (source-backed WC API + examples)
+- `velinstyle skills doctor` / `npm run skills:doctor` path integrity
+- `velinstyle build --preset lite` marketing layer subset; `--out` / `--output` / `-o` aliases
+- `velinstyle skills show <id> --human` Markdown view
+
+#### Components
+- `<velin-calendar>` (month picker)
+- `<velin-file-dropzone>` (client upload UX)
+- `<velin-data-table editable>` inline edit (`velin-data-table-edit` event)
+
+#### Scanner / Review
+- Scan rules: `a11y/duplicate-id`, `css/unknown-velin-class`, `wc/invalid-attribute`, HTML `security/no-document-write`, `a11y/target-size-min`, `a11y/nested-interactive`, `a11y/contrast-inline`, `a11y/role-button-contract`
+- `check:chaos` covers chaos + `misses.html` (fixtures under `fixtures/`)
+- Review thin-content floors (SEO/conversion capped on junk pages)
+- Review `--profile marketing|app|docs|fragment|ecommerce`
+
+#### Utilities / Layout
+- Spacing: `velin-py-*` (padding-block alias) and denser `velin-pb-*` / `velin-pi-*` steps **10** and **12**
+- Logical spacing honesty: `velin-mbe-1/3`, `velin-mbs-1/3`, `velin-pbe-*`, `velin-pbs-*`, `velin-border-inline-end/start`
+- App-shell layout utilities
+
+#### Blueprints
+- `split-hero`, `pricing-band`, `app-chrome`, `ops-console` (validated classes only)
+
+#### AI Skills
+- AI Runtime foundation: `packages/skill-engine` and `packages/velinstyle-skills` (registry-first)
+- 40 official skill records across 16 categories (capabilities, compatibility, status, confidence, cost hints, dependency graph metadata, typed inputs/outputs)
+- Workflow graph manifests (`landingpage`, `component-ship`, `release-gate`), plus packs, bundles, project templates, and project skill chains
+- CLI: `velinstyle skills ...`, `velinstyle workflow ...`
+- Schemas: `skill-record`, `skill-registry`, `skill-pack`, `skill-graph`, `skill-bundle`, `skill-template`, `skill-project`
+
+#### Documentation
+- Guides: `landing-15-min`, `marketing-lite-css`, `docs/guides/ai-skills.html`, `docs/guides/ecommerce.html`
+- Docgen minimal WC copy-paste examples (copy, tooltip, lightbox, icon, command, menubar, form-summary, data-table)
+- Strategy/ADR deep-dives remain maintainer-local (monorepo `interne_docs/strategy/`; not published)
+- `UPGRADING.md` draft for **1.1.0 → 1.2.0** (publish when cutting the minor)
+- `RELEASE_NOTES_1.2.0.md` companion overview
+
+### Changed
+
+#### Security
+- Production dependency `isomorphic-dompurify` **3.13 → 3.21.0** (DOMPurify 3.4.x) so `npm audit --omit=dev` reports **0** vulnerabilities before the 1.2.0 upload
+
+#### CLI
+- `velinstyle scan` and `velinstyle perf` accept a single HTML/CSS/JS file or a directory (no more `ENOTDIR` on file paths)
+- `velinstyle init` copies vendor assets when framework `dist/` is available and scaffolds starter HTML with `data-velin-reveal-auto` + icon sprite meta
+- `velinstyle create` emits zero-warning HTML (no inline styles, `label for`/`id`), copies vendor into the target dir, boots via `bootFromDOM` when the package resolves (vendor full-bundle fallback)
+- Create vendor copy includes mini WC docs under `vendor/velinstyle/docs/`
+- `velinstyle build` invokes local `lightningcss` from the package `node_modules`; `--preset lite` prints size vs `dist/velinstyle.min.css`
+- Unknown CLI commands exit **1** with "Did you mean ...?" instead of dumping help with a success-looking exit
+- Top-level `--help` / README CLI tables list all create kinds and `wc api` / `skills doctor`
+- `velinstyle meta page --write` merges curated `goals`/`intent` and **warns** when dropping non-allowlisted keys
+
+#### Review Engine
+- Hero CTA heuristic strips scripts/styles/code-blocks and counts only real `<a>`/`<button>` CTAs in hero scope
+
+#### Components / Runtime
+- `velin-icon` default sprite is relative/configurable (`sprite` attr → meta/`data-velin-icon-sprite` → `VelinIcon.defaultSprite` → `velin-icons.svg`) instead of hardcoded `/dist/velin-icons.svg`
+
+#### AI Skills
+- Skills templates/demos remap to existing files (`samples/ecommerce.html`, `samples/landing.html`, ...)
+- `velin-agent.json` and `llms.txt` include AI skills catalog and workflow discovery hints
+- Publish inputs include skills packages and schemas; prepublish runs `skills:generate`, `skills:validate`, `skills:doctor`, and `check:blueprints`
+
+#### Documentation
+- Docs clarify `<velin-copy>` (`value`/`text` + Shadow button), tooltip `content`, lightbox, icon sprite, attribute vs WC vs `bootFromDOM`, flex `--` naming, breadcrumb `__item`/`__link`, Windows/vendor install, and review CTA semantics
+- README fit statement: landing/docs/simple admin yes; multipage shop + enterprise admin primary **not yet**; npm circulation note until 1.2.0 cut
+
+### Fixed
+
+#### Windows
+- `velinstyle build`: config import uses `pathToFileURL` (no `ERR_UNSUPPORTED_ESM_URL_SCHEME` on drive-letter paths)
+
+#### Scanner
+- Duplicate IDs, unknown `velin-*` classes, invalid WC attributes, and inline `document.write` in HTML are detected
+- Nested interactive / inline contrast / role=button contract gaps from Round-4 `misses.html`
+- `scan` / `perf` no longer fail with `ENOTDIR` on a single `.html` file
+
+#### CLI
+- Subcommand `--help` for `skills`, `workflow`, `blueprint` (no longer treated as unknown ids)
+- `build --out` alias honored alongside `--output`/`-o`
+- Doctor resolves config from parent dir when given a file path
+- Lite preset appeared larger than full min CSS when `npx lightningcss` failed in consumer CWDs (now uses package-local CLI)
+
+#### Blueprints
+- Class drift: `process-steps`, notification/filter/settings flex naming, cookie `mbe`, settings switch markup
+- Offline blueprints no longer reference `../../dist/...`
+- Sample `velin-py-*` classes had no CSS rules (section spacing appeared broken)
+
+#### Components
+- Offline/vendor icon installs broke when the sprite default pointed at absolute `/dist/...`
+- `<velin-accordion>`: summary/panel styles via light-DOM CSS (`::slotted()` cannot style descendants of slotted `<details>`); `aria-expanded` sync; panel background prefers `--velin-color-surface-dim` (dark-safe)
+- `<velin-command>`: closed overlay `pointer-events: none`; backdrop click closes; `toggle()`; inert cleanup host-scoped
+- `<velin-calendar>` day grid overflow in narrow sidebars; cells fluid with `minmax(0,1fr)`
+
+#### Review Engine
+- `design.hero-cta-max` false positives from Velin-Meta JSON and demo snippets in the HTML prefix
+- Empty/junk pages no longer score conversion/SEO at 10
+- `app`/`docs` profiles no longer advise "H1 in the hero"; conversion soft-capped for app/docs
+- Review catches missing `lang`, img without `alt`, and unlabeled placeholder-only inputs (static HTML)
+
+#### AI Skills / Documentation
+- Broken skills template paths (`samples/shop.html`, `examples/landing-demo.html`, missing guides) remapped / guides added
+
+
+### Also included (Design Intelligence Foundation)
+
+Merged from the in-repo foundation draft previously dated 2026-07-28:
+
+- Knowledge graph seed, page registry (17 types), section/blueprint system, design constraints (hero/FAQ/contact)
+- Prompt Engine (`velinstyle plan`) and Review Engine baseline (`velinstyle review`)
+- Schemas under `schemas/` for design intelligence; intelligence twins under `docs/generated/intelligence/`
+- Overlay inert cleanup, dark shadow parity, dialog `velin-close` canonical event, responsive display ownership
+- Release framed as Core + Design Intelligence Foundation (Studio / full Utility Engine generator remain planned)
+
+### Breaking Changes
+
+No breaking changes in Unreleased relative to 1.1.0 public API contracts. Stricter scan/review may newly fail previously green pages (intentional trust improvement).
+
+### Migration Notes
+
+See [`UPGRADING.md`](UPGRADING.md) (1.1.0 → 1.2.0). After install: refresh vendor copies if vendored, run `doctor` + `check` (use `--profile app` for admin shells).
+
+### Developer Notes
+
+1.2.0 prioritizes **trust and ship DX**: gates that catch real defects, scaffolds that pass `check`, discoverable WC APIs offline, and honest maturity labels for Design Intelligence / AI foundation surfaces.
+
+---
 
 ## [1.1.0](https://github.com/SkyliteDesign/velinstyle/releases/tag/v1.1.0) - 2026-07-27
 
-Minor release: no breaking changes. The deprecated `<velin-tooltip-wc>` and `<velin-stepper-wc>` aliases still work.
+VelinStyle 1.1 ships accessible form/table primitives, expands React wrappers to the full canonical set, and adds release-sync guards so docs, agent metadata, and package version cannot drift. No breaking changes; deprecated `<velin-tooltip-wc>` and `<velin-stepper-wc>` aliases still work.
+
+### 🚀 Highlights
+
+#### Components
+- `<velin-data-table>` progressive enhancement
+- `<velin-form-summary>` accessible error summary
+
+#### Framework
+- Official `@velinstyle/react` coverage for all canonical tags
+- Release sync guard (`release:check` / `release:sync`)
+
+#### Quality
+- Docs/version/count drift fixes across framework and site
+- Highlight lexers: Python, YAML, Go, Rust
+
+### Release Status
+
+| Area | Status |
+|------|--------|
+| CSS / WC / Runtime | Stable |
+| React wrappers | Stable (full coverage) |
+| CLI | Stable |
+| Design Intelligence | Not yet (arrives in 1.2) |
 
 ### Added
-- **`<velin-data-table>`:** progressive enhancement for a light-DOM `<table>` — sortable columns via real `<button>` headers with `aria-sort`, text/number/date sort types (`data-sort`, `data-sort-value`), substring filtering bound to any input (`filter-input`), optional pagination (`page-size`), and an empty state (`empty-text`). Sort, filter and page changes are announced; filtered and off-page rows use `hidden` so they leave the accessibility tree. Requires a `<caption>`, `aria-label`, or `label` attribute.
+
+#### Components
+- **`<velin-data-table>`:** progressive enhancement for a light-DOM `<table>` -- sortable columns via real `<button>` headers with `aria-sort`, text/number/date sort types (`data-sort`, `data-sort-value`), substring filtering bound to any input (`filter-input`), optional pagination (`page-size`), and an empty state (`empty-text`). Sort, filter and page changes are announced; filtered and off-page rows use `hidden` so they leave the accessibility tree. Requires a `<caption>`, `aria-label`, or `label` attribute.
 - **`<velin-form-summary>`:** accessible error summary for any `<form>`. Replaces the transient native validation bubble with a focusable `role="alert"` panel listing every invalid field, wires `aria-invalid` and `aria-describedby` to per-field messages, moves focus to the offending field from summary links, and clears each error as soon as the field becomes valid. Supports `data-error-message`, `data-error-label`, `data-error-ignore` and author-supplied `[data-velin-error-for]` containers.
+
+#### Runtime / Highlight
 - **Highlight languages:** Python, YAML, Go and Rust lexers, lazy-loaded like the existing ones. Aliases `py`, `python3`, `yml`, `golang`, `rs` resolve to them; `yaml` previously fell back to plain text.
-- **Release sync guard:** `npm run release:check` compares every machine-readable version surface (CLI manifest, a11y contracts, `velin-agent.json`, doc header badges, landing-page version badges, `velin-meta` blocks, JSON-LD `softwareVersion`, npm/CDN install pins, generated docs, changelog copies) against `package.json`. It also checks the component counts quoted in prose across both repos — English and German — against `components.count` / `components.loaderCount` in `velin-agent.json`, so adding a component cannot leave the docs claiming the old number. `npm run release:sync` rewrites the mechanical ones. Wired into `ci:checks` and the site build; site checks are skipped when the sibling repo is absent.
+
+#### Quality / Process
+- **Release sync guard:** `npm run release:check` compares every machine-readable version surface (CLI manifest, a11y contracts, `velin-agent.json`, doc header badges, landing-page version badges, `velin-meta` blocks, JSON-LD `softwareVersion`, npm/CDN install pins, generated docs, changelog copies) against `package.json`. It also checks the component counts quoted in prose across both repos -- English and German -- against `components.count` / `components.loaderCount` in `velin-agent.json`, so adding a component cannot leave the docs claiming the old number. `npm run release:sync` rewrites the mechanical ones. Wired into `ci:checks` and the site build; site checks are skipped when the sibling repo is absent.
 - **WCAG matrix:** 3.3.1 Error Identification and 3.3.3 Error Suggestion are now tracked and owned by `velin-form-summary`.
 
 ### Changed
-- **`@velinstyle/react` is official (1.1.0):** wrappers now cover **all 38 canonical** `velin-*` elements instead of 12, generated from the component registry so CI fails when they drift. Props map correctly for custom elements — booleans become presence attributes, objects and arrays are assigned as element properties instead of being stringified, and `onVelin*` handlers bind the matching custom event (`onVelinSearchSelect` → `velin-search-select`). Ships TypeScript definitions and `createVelinComponent` for your own tags. Deprecated `*-wc` aliases are intentionally excluded.
+
+#### React
+- **`@velinstyle/react` is official (1.1.0):** wrappers now cover **all 38 canonical** `velin-*` elements instead of 12, generated from the component registry so CI fails when they drift. Props map correctly for custom elements -- booleans become presence attributes, objects and arrays are assigned as element properties instead of being stringified, and `onVelin*` handlers bind the matching custom event (`onVelinSearchSelect` → `velin-search-select`). Ships TypeScript definitions and `createVelinComponent` for your own tags. Deprecated `*-wc` aliases are intentionally excluded.
+
+#### CLI
 - **CLI version:** `velinstyle --help` reads the version from `package.json` instead of a hardcoded string that had drifted to 0.9.0.
+
+#### Tooling
 - **Demo sync:** `tools/sync-demos-to-repo.mjs` derives its unpkg pin from `package.json` rather than a hardcoded 0.9.0.
 
 ### Fixed
+
+#### Documentation
 - **Docs drift:** stale `@birdapi/velinstyle@0.9.0` install snippets and `velin-meta` version blocks across the site, plus a `@0.4.0` CDN example in the framework docs landing page. The site guide generators now read the framework version instead of embedding it.
 - **Component counts:** the docs claimed 36 canonical components and 38 loader entries in 20+ places; both repos now report 38 and 40, and the guard keeps them honest.
-- **Duplicate heading:** the site accessibility page shipped the “Component contracts” section twice with the same `id="contracts"`, because a one-shot patch script had been applied twice.
+- **Duplicate heading:** the site accessibility page shipped the "Component contracts" section twice with the same `id="contracts"`, because a one-shot patch script had been applied twice.
 - **Site changelog copy:** the a11y bulk-patch script rewrote a link inside the copied `CHANGELOG.md`, which made the copy permanently differ from the framework original. Verbatim copies (`CHANGELOG.md`, `docs/generated/`) are now excluded from that script.
 - **Docs coverage audit:** `audit-docs-coverage.py` crashed on Windows consoles because its report contains `→`; it now forces UTF-8 output, and recognises the two new component pages.
+
+#### Quality / Process
 - **Release guard robustness:** the repo walk crashed with `ENOENT` when a file disappeared mid-scan, which made the check fail intermittently alongside tests that use temporary directories. Dot-directories are now skipped and vanished files are ignored.
 
 ### Build
@@ -35,6 +275,22 @@ Minor release: no breaking changes. The deprecated `<velin-tooltip-wc>` and `<ve
 - New CI gates: React wrapper drift and release sync.
 - The loader-count gate now derives its minimum from `component-contracts.json` instead of a hardcoded 36.
 - Full-bundle JS budget raised from 200 KB to 215 KB (209.4 KB actual, 46.9 KB brotli) to cover the two new components. Applications using `register()` / `bootFromDOM()` pay only for what they load.
+
+### Breaking Changes
+
+No breaking changes.
+
+### Migration Notes
+
+No required migration. Optional: adopt `<velin-form-summary>` on forms and `<velin-data-table>` for progressive table UX.
+
+### Developer Notes
+
+1.1.0 hardens the **docs <→ package truth** loop and ships two high-leverage a11y components so forms and data UIs can meet WCAG error-identification patterns without custom scaffolding.
+
+---
+
+<!-- Older releases (1.0.0 and below) retain their historical Keep a Changelog sections. Content is unchanged. -->
 
 ## [1.0.0](https://github.com/SkyliteDesign/velinstyle/releases/tag/v1.0.0) - 2026-05-29
 
@@ -121,7 +377,7 @@ Minor release: no breaking changes. The deprecated `<velin-tooltip-wc>` and `<ve
 ### Added
 - **`velinstyle prefix` JSON maps:** optional `velinstyle-prefix-map.json` next to the migrated tree (or `--map <file>`) supplies explicit `token` → `velin-class` replacements; merged after auto map, overrides catalog and `--bootstrap-display`. Keys `_*` / `$*` ignored. Sample: `examples/velinstyle-prefix-map.sample.json`. Documented in README, README.de, `docs/migration.html`, `docs/guides/existing-project.html`.
 
-## Unreleased (Internal Publication)-> [0.7.5]- 2026-05-16
+## Unreleased (Internal Publication) → [0.7.5] - 2026-05-16
 
 ### Added
 - **Security:** hardened `sanitize.js` (`stripControlChars`, `escapeHTMLAttribute`, `createSafeHTML`, stricter `sanitizeURL`); CLI scanner rules (`no-meta-refresh`, `no-inline-style`, `no-data-html-uri`, `dangerous-target`, `integrity-missing`, `postmessage-wildcard`) with `--only` filter; `npm run test:security`.

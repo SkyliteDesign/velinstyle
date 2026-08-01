@@ -2,8 +2,11 @@ import { readFileSync, readdirSync, existsSync } from 'fs';
 import { join, basename } from 'path';
 import { banner, heading, table, sortByKey } from './markdown.js';
 
-const CLASS_RULE_RE = /\.(velin-[\w\\\/:-]+)\s*\{([^}]*)\}/g;
-const NESTED_CLASS_RE = /[\s,>+~](\.velin-[\w\\\/:-]+)\s*\{([^}]*)\}/g;
+/**
+ * Match `.velin-*` even when combinators follow before the block
+ * (e.g. `.velin-divide-y > * + * { … }`).
+ */
+const CLASS_RULE_RE = /\.(velin-[\w\\\/:-]+)(?=[^{]*\{)[^{]*\{([^}]*)\}/g;
 
 function truncateCss(body, max = 120) {
   const one = body.replace(/\s+/g, ' ').trim();
@@ -13,17 +16,14 @@ function truncateCss(body, max = 120) {
 
 export function parseUtilityCss(content) {
   const classes = [];
+  const seen = new Set();
   let m;
   const re = new RegExp(CLASS_RULE_RE.source, 'g');
   while ((m = re.exec(content)) !== null) {
-    classes.push({ selector: m[1], output: truncateCss(m[2]) });
-  }
-  const nested = new RegExp(NESTED_CLASS_RE.source, 'g');
-  while ((m = nested.exec(content)) !== null) {
-    const sel = m[1].replace(/^\./, '');
-    if (!classes.some((c) => c.selector === sel)) {
-      classes.push({ selector: sel, output: truncateCss(m[2]) });
-    }
+    const selector = m[1];
+    if (seen.has(selector)) continue;
+    seen.add(selector);
+    classes.push({ selector, output: truncateCss(m[2]) });
   }
   return classes;
 }

@@ -1,0 +1,13 @@
+id: ecommerce-shop
+workflowGraph: landingpage
+packs:
+  - frontend
+  - review
+  - enterprise
+theme: default
+demo: samples/ecommerce.html
+docs:
+  - docs/guides/ecommerce.html
+  - docs/guides/prompt-scaffolding.html
+starterFiles:
+  - templates/vite-velinstyle/index.html

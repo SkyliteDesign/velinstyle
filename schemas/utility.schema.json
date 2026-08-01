@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/utility.schema.json",
+  "title": "VelinStyle Utility Source Schema",
+  "description": "Draft machine-readable source for the Utility Engine (VS-035 / #12). Authors edit this shape; the generator emits CSS, catalog, and docs. Hand-authored src/utilities/*.css remain authoritative until the generator MVP lands (ADR 0007).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "prefix", "breakpoints", "families"],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Schema document version for the generator."
+    },
+    "prefix": {
+      "type": "string",
+      "const": "velin",
+      "description": "Mandatory class prefix (ADR 0004)."
+    },
+    "breakpoints": {
+      "type": "object",
+      "description": "Viewport breakpoints. Keys become name segments before the property.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["minWidth"],
+        "properties": {
+          "minWidth": {
+            "type": "string",
+            "description": "CSS length used in @media (width >= …)."
+          },
+          "token": {
+            "type": "string",
+            "description": "Optional CSS variable name; wiring tokens into @media is a follow-up."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "scales": {
+      "type": "object",
+      "description": "Named token scales referenced by family values.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": { "type": "string" }
+      }
+    },
+    "variantBudgets": {
+      "type": "object",
+      "description": "Placeholder for VS-039 — which variant families may expand which utilities.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "allow": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "maxClasses": { "type": "integer", "minimum": 0 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "families": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/family" }
+    }
+  },
+  "$defs": {
+    "family": {
+      "type": "object",
+      "required": ["id", "property", "values"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable family id (e.g. display, spacing)."
+        },
+        "property": {
+          "type": "string",
+          "description": "CSS property name emitted for each value."
+        },
+        "classStem": {
+          "type": "string",
+          "description": "Optional stem override when class name ≠ property (e.g. w for inline-size)."
+        },
+        "logicalDefault": {
+          "type": "boolean",
+          "default": true,
+          "description": "Prefer logical properties (ADR 0002)."
+        },
+        "output": {
+          "type": "string",
+          "enum": ["generated", "hand"],
+          "default": "generated",
+          "description": "generated → src/utilities/generated/; hand → legacy file until migrated."
+        },
+        "responsive": {
+          "type": "boolean",
+          "default": false,
+          "description": "When true, emit viewport variants for breakpoints in allowlist."
+        },
+        "responsiveBreakpoints": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Subset of breakpoint keys; empty means all."
+        },
+        "values": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/value" }
+        }
+      }
+    },
+    "value": {
+      "type": "object",
+      "required": ["name", "css"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Class segment after stem (e.g. block → .velin-block)."
+        },
+        "css": {
+          "type": "string",
+          "description": "Declaration value (e.g. block, var(--velin-space-4))."
+        },
+        "scaleRef": {
+          "type": "string",
+          "description": "Optional scales.* key for docs/catalog."
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "version": 1,
+      "prefix": "velin",
+      "breakpoints": {
+        "sm": { "minWidth": "36rem" },
+        "md": { "minWidth": "48rem" },
+        "lg": { "minWidth": "62rem" },
+        "xl": { "minWidth": "80rem" },
+        "2xl": { "minWidth": "96rem" }
+      },
+      "families": [
+        {
+          "id": "display",
+          "property": "display",
+          "responsive": true,
+          "responsiveBreakpoints": ["sm", "md", "lg", "xl"],
+          "output": "hand",
+          "values": [
+            { "name": "block", "css": "block" },
+            { "name": "flex", "css": "flex" },
+            { "name": "grid", "css": "grid" },
+            { "name": "hidden", "css": "none" },
+            { "name": "inline", "css": "inline" },
+            { "name": "inline-block", "css": "inline-block" },
+            { "name": "inline-flex", "css": "inline-flex" },
+            { "name": "contents", "css": "contents" }
+          ]
+        }
+      ]
+    }
+  ]
+}

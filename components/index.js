@@ -35,6 +35,8 @@ export { default as VelinLiveDot } from './velin-live-dot.js';
 export { default as VelinCodeBlock } from './velin-code-block.js';
 export { default as VelinDataTable } from './velin-data-table.js';
 export { default as VelinFormSummary } from './velin-form-summary.js';
+export { default as VelinCalendar } from './velin-calendar.js';
+export { default as VelinFileDropzone } from './velin-file-dropzone.js';
 export { default as VelinSearch } from './velin-search.js';
 export { bindDeclarativeSearch } from './velin-search.js';
 export { initReveal, initMotion, velinMotion } from './velin-reveal.js';

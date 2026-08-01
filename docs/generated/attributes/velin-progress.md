@@ -4,8 +4,13 @@
 
 Progress bar or ring (`ring` for `<velin-progress-ring>`).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| `0`–`100` | Linear progress value | `<velin-progress>` |
+| `ring` | Use progress ring instead of bar | `<velin-progress-ring>` |
 ## Example
 
 ```html
-<div velin-progress>…</div>
+<div velin-progress="42"></div>
 ```

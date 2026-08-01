@@ -1,7 +1,9 @@
-import { existsSync, readFileSync, readdirSync, writeFileSync } from 'fs';
+import { existsSync, readFileSync, readdirSync, writeFileSync, statSync } from 'fs';
 import { join, relative, extname } from 'path';
 import { applyFixes, fixSafeExternalLinkLine, fixZIndexLine } from './apply-fixes.js';
 import { scanPIIHTML, scanPIIJS } from './pii-scanner.js';
+import { loadKnownCssClasses } from './blueprint.js';
+import { contrastFromInlineStyle, parseColor, contrastRatio, relLuminance } from './contrast-utils.js';
 
 export { SCANNER_RULES, PERF_RULES } from './scanner-rules-data.js';
 
@@ -35,6 +37,19 @@ function walkFiles(dir, exts, ignore = DEFAULT_IGNORE) {
     }
   }
   return results;
+}
+
+/** Accept a single file or a directory (same pattern as layout-audit). */
+function collectFiles(targetPath, exts, ignore = DEFAULT_IGNORE) {
+  if (!existsSync(targetPath)) return [];
+  const st = statSync(targetPath);
+  if (st.isFile()) {
+    return exts.includes(extname(targetPath).toLowerCase()) ? [targetPath] : [];
+  }
+  if (st.isDirectory()) {
+    return walkFiles(targetPath, exts, ignore);
+  }
+  return [];
 }
 
 // ── Security Scanner ─────────────────────────────────────────────────────────
@@ -98,6 +113,15 @@ function scanSecurityHTML(content, file) {
         file, line: ln, severity: 1,
         rule: 'security/no-inline-style',
         message: 'Inline style attribute. Prefer CSS classes to reduce XSS surface.',
+        fixable: false,
+      });
+    }
+
+    if (/document\.write\s*\(/.test(line)) {
+      issues.push({
+        file, line: ln, severity: 0,
+        rule: 'security/no-document-write',
+        message: 'document.write() detected in HTML/script. This is dangerous and blocks parsing.',
         fixable: false,
       });
     }
@@ -203,8 +227,309 @@ function issueCategory(rule) {
   if (rule.startsWith('pii/')) return 'pii';
   if (rule.startsWith('a11y/')) return 'a11y';
   if (rule.startsWith('css/')) return 'css';
+  if (rule.startsWith('wc/')) return 'wc';
   if (rule.startsWith('perf/')) return 'perf';
   return 'other';
+}
+
+/** Author-facing attrs per tag (observed + documented aliases). Global HTML attrs ignored. */
+const WC_ATTR_ALLOW = {
+  'velin-tooltip': new Set(['content', 'placement']),
+  'velin-copy': new Set(['value', 'text', 'label']),
+  'velin-icon': new Set(['name', 'size', 'label', 'provider', 'variant', 'sprite', 'aria-label', 'aria-hidden', 'class']),
+  'velin-sparkline': new Set(['values', 'width', 'height', 'min', 'max', 'area', 'glow', 'animate', 'label']),
+  'velin-data-table': new Set(['page-size', 'filter-input', 'empty-text', 'label', 'editable', 'sortable', 'class']),
+  'velin-form-summary': new Set([]),
+  'velin-theme-toggle': new Set(['themes-base', 'theme', 'themes']),
+  'velin-calendar': new Set(['value', 'min', 'max', 'label', 'class']),
+  'velin-file-dropzone': new Set(['accept', 'multiple', 'label', 'progress', 'class']),
+  'velin-code-block': new Set(['language', 'class']),
+};
+
+const WC_GLOBAL_ATTRS = new Set([
+  'id', 'class', 'slot', 'part', 'style', 'hidden', 'title', 'role', 'tabindex',
+  'aria-label', 'aria-labelledby', 'aria-describedby', 'aria-hidden', 'aria-expanded',
+  'aria-controls', 'aria-live', 'aria-atomic', 'dir', 'lang', 'data-velin-component',
+]);
+
+function lineNumberAt(content, index) {
+  return content.slice(0, Math.max(0, index)).split('\n').length;
+}
+
+function scanDuplicateIds(content, file) {
+  const issues = [];
+  const seen = new Map();
+  for (const m of content.matchAll(/\bid\s*=\s*["']([^"']+)["']/gi)) {
+    const id = m[1];
+    const ln = lineNumberAt(content, m.index);
+    if (seen.has(id)) {
+      issues.push({
+        file,
+        line: ln,
+        severity: 0,
+        rule: 'a11y/duplicate-id',
+        message: `Duplicate id="${id}" (also at line ${seen.get(id)}).`,
+        fixable: false,
+      });
+    } else {
+      seen.set(id, ln);
+    }
+  }
+  return issues;
+}
+
+function scanUnknownVelinClasses(content, file, knownClasses) {
+  const issues = [];
+  if (!knownClasses) return issues;
+  for (const m of content.matchAll(/\bclass\s*=\s*["']([^"']+)["']/gi)) {
+    const ln = lineNumberAt(content, m.index);
+    for (const token of m[1].split(/\s+/)) {
+      if (!token.startsWith('velin-')) continue;
+      if (!knownClasses.has(token)) {
+        issues.push({
+          file,
+          line: ln,
+          severity: 1,
+          rule: 'css/unknown-velin-class',
+          message: `Unknown VelinStyle class "${token}".`,
+          fixable: false,
+        });
+      }
+    }
+  }
+  return issues;
+}
+
+function scanInvalidWcAttributes(content, file) {
+  const issues = [];
+  for (const m of content.matchAll(/<(velin-[a-z0-9-]+)\b([^>]*)>/gi)) {
+    const tag = m[1].toLowerCase();
+    const attrBlob = m[2] || '';
+    const allow = WC_ATTR_ALLOW[tag];
+    if (!allow) continue;
+    const ln = lineNumberAt(content, m.index);
+    for (const am of attrBlob.matchAll(/([:@]?[a-zA-Z_:][\w:.-]*)\s*=/g)) {
+      const name = am[1].toLowerCase();
+      if (name.startsWith('on')) continue;
+      if (name.startsWith('aria-') || name.startsWith('data-')) {
+        // data-velin-copy is wrong API for <velin-copy>; allow only data-* that we document via dataset.source → data-source
+        if (tag === 'velin-copy' && name !== 'data-source' && name.startsWith('data-')) {
+          issues.push({
+            file,
+            line: ln,
+            severity: 1,
+            rule: 'wc/invalid-attribute',
+            message: `<${tag}> does not use "${name}". Prefer value="…" or text="…".`,
+            fixable: false,
+          });
+        }
+        continue;
+      }
+      if (WC_GLOBAL_ATTRS.has(name) || allow.has(name)) continue;
+      issues.push({
+        file,
+        line: ln,
+        severity: 1,
+        rule: 'wc/invalid-attribute',
+        message: `<${tag}> does not observe attribute "${name}". Allowed: ${[...allow].join(', ') || '(none besides globals)'}.`,
+        fixable: false,
+      });
+    }
+  }
+  return issues;
+}
+
+function collectTinyTapClasses(content) {
+  const tiny = new Set();
+  for (const block of content.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)) {
+    const css = block[1];
+    for (const rule of css.matchAll(/\.([a-zA-Z_-][\w-]*)\s*\{([^}]*)\}/g)) {
+      const body = rule[2];
+      const w = body.match(/(?:^|;)\s*(?:width|inline-size)\s*:\s*([\d.]+)px/i);
+      const h = body.match(/(?:^|;)\s*(?:height|block-size)\s*:\s*([\d.]+)px/i);
+      const wp = w ? Number(w[1]) : Infinity;
+      const hp = h ? Number(h[1]) : Infinity;
+      if (wp <= 24 || hp <= 24) tiny.add(rule[1]);
+    }
+  }
+  return tiny;
+}
+
+function scanTargetSizeMin(content, file) {
+  const issues = [];
+  const tinyClasses = collectTinyTapClasses(content);
+  const interactiveRe = /<(button|a|input|select|textarea|summary)\b([^>]*)>/gi;
+  for (const m of content.matchAll(interactiveRe)) {
+    const attrs = m[2] || '';
+    const ln = lineNumberAt(content, m.index);
+    let tiny = false;
+    const styleM = attrs.match(/\bstyle\s*=\s*["']([^"']*)["']/i);
+    if (styleM) {
+      const s = styleM[1];
+      for (const dim of s.matchAll(/(?:width|height|inline-size|block-size)\s*:\s*([\d.]+)px/gi)) {
+        if (Number(dim[1]) <= 24) tiny = true;
+      }
+    }
+    const classM = attrs.match(/\bclass\s*=\s*["']([^"']*)["']/i);
+    if (classM) {
+      for (const c of classM[1].split(/\s+/)) {
+        if (tinyClasses.has(c)) tiny = true;
+      }
+    }
+    if (tiny) {
+      issues.push({
+        file,
+        line: ln,
+        severity: 1,
+        rule: 'a11y/target-size-min',
+        message: `<${m[1]}> appears to have a hit target ≤24px (WCAG 2.5.8 heuristic).`,
+        fixable: false,
+      });
+    }
+  }
+  return issues;
+}
+
+function scanNestedInteractive(content, file) {
+  const issues = [];
+  const html = content
+    .replace(/<script\b[\s\S]*?<\/script>/gi, '')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, '');
+
+  for (const m of html.matchAll(/<(button|a)\b([^>]*)>([\s\S]*?)<\/\1>/gi)) {
+    const outer = m[1].toLowerCase();
+    const innerHtml = m[3] || '';
+    const ln = lineNumberAt(content, m.index);
+    const nestedTag = innerHtml.match(/<(button|a)\b/i);
+    if (nestedTag) {
+      issues.push({
+        file,
+        line: ln,
+        severity: 0,
+        rule: 'a11y/nested-interactive',
+        message: `Nested interactive elements (<${outer}> contains <${nestedTag[1].toLowerCase()}>). Use a single control.`,
+        fixable: false,
+      });
+    }
+    if (/\brole\s*=\s*["'](button|link|menuitem)["']/i.test(innerHtml)) {
+      const role = innerHtml.match(/\brole\s*=\s*["'](button|link|menuitem)["']/i)[1];
+      issues.push({
+        file,
+        line: ln,
+        severity: 0,
+        rule: 'a11y/nested-interactive',
+        message: `<${outer}> contains an element with role="${role}" (nested interactive).`,
+        fixable: false,
+      });
+    }
+  }
+
+  // role=button wrapping another interactive
+  for (const m of html.matchAll(/<([a-z][\w-]*)\b([^>]*\brole\s*=\s*["']button["'][^>]*)>([\s\S]*?)<\/\1>/gi)) {
+    const innerHtml = m[3] || '';
+    if (/<(button|a)\b/i.test(innerHtml) || /\brole\s*=\s*["'](button|link)["']/i.test(innerHtml)) {
+      issues.push({
+        file,
+        line: lineNumberAt(content, m.index),
+        severity: 0,
+        rule: 'a11y/nested-interactive',
+        message: `role="button" host contains nested interactive content.`,
+        fixable: false,
+      });
+    }
+  }
+
+  return issues;
+}
+
+function scanContrastInline(content, file) {
+  const issues = [];
+  for (const m of content.matchAll(/<([a-z][\w-]*)\b([^>]*?\bstyle\s*=\s*["']([^"']*)["'][^>]*)>/gi)) {
+    const style = m[3];
+    const result = contrastFromInlineStyle(style);
+    if (!result) continue;
+    if (!result.pass) {
+      issues.push({
+        file,
+        line: lineNumberAt(content, m.index),
+        severity: 0,
+        rule: 'a11y/contrast-inline',
+        message: `Inline color contrast ${result.ratio.toFixed(2)}:1 fails WCAG AA (${result.min}:1). color=${result.fg} on ${result.bg}.`,
+        fixable: false,
+      });
+    }
+  }
+
+  // Authored <style> blocks: flag pairs of color + background-color in the same rule when both parse
+  for (const block of content.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)) {
+    const css = block[1];
+    const blockStart = block.index ?? 0;
+    for (const rule of css.matchAll(/([^{]+)\{([^}]*)\}/g)) {
+      const body = rule[2];
+      const colorM = body.match(/(?:^|;)\s*color\s*:\s*([^;]+)/i);
+      const bgM = body.match(/(?:^|;)\s*(?:background-color|background)\s*:\s*([^;]+)/i);
+      if (!colorM || !bgM) continue;
+      const fg = parseColor(colorM[1].trim());
+      const bgRaw = bgM[1].trim();
+      if (/gradient|url\(/i.test(bgRaw)) continue;
+      const bg = parseColor(bgRaw.split(/\s+/)[0]);
+      if (!fg || !bg) continue;
+      const ratio = contrastRatio(relLuminance(fg), relLuminance(bg));
+      if (ratio < 4.5) {
+        issues.push({
+          file,
+          line: lineNumberAt(content, blockStart + (rule.index || 0)),
+          severity: 0,
+          rule: 'a11y/contrast-inline',
+          message: `Authored CSS contrast ${ratio.toFixed(2)}:1 fails WCAG AA (4.5:1) in rule "${rule[1].trim().slice(0, 40)}".`,
+          fixable: false,
+        });
+      }
+    }
+  }
+  return issues;
+}
+
+const VELIN_WC_WITH_KEYBOARD = new Set([
+  'velin-popover', 'velin-collapse', 'velin-dropdown', 'velin-menubar', 'velin-command',
+  'velin-tabs', 'velin-accordion', 'velin-dialog', 'velin-modal', 'velin-drawer', 'velin-sheet',
+]);
+
+function scanRoleButtonContract(content, file) {
+  const issues = [];
+  for (const m of content.matchAll(/<([a-z][\w-]*)\b([^>]*\brole\s*=\s*["']button["'][^>]*)>/gi)) {
+    const tag = m[1].toLowerCase();
+    const attrs = m[2] || '';
+    const ln = lineNumberAt(content, m.index);
+    if (tag === 'button' || tag === 'summary') continue;
+    if (VELIN_WC_WITH_KEYBOARD.has(tag)) continue;
+
+    const hasTab = /\btabindex\s*=\s*["']?(?:0|-?\d+)/i.test(attrs);
+    const hasKeyHandler = /\bon(?:keydown|keyup|keypress)\s*=/i.test(attrs);
+    // Look ahead ~800 chars for a nearby script attaching keys (weak); prefer explicit warning
+    if (!hasTab) {
+      issues.push({
+        file,
+        line: ln,
+        severity: 1,
+        rule: 'a11y/role-button-contract',
+        message: `role="button" on <${tag}> without tabindex. Use <button> or add tabindex="0" and Enter/Space handlers.`,
+        fixable: false,
+      });
+      continue;
+    }
+    if (!hasKeyHandler) {
+      issues.push({
+        file,
+        line: ln,
+        severity: 1,
+        rule: 'a11y/role-button-contract',
+        message: `role="button" on <${tag}> lacks Enter/Space keyboard handling. Prefer <button> or handle keydown.`,
+        fixable: false,
+      });
+    }
+  }
+  return issues;
 }
 
 // ── Accessibility Scanner ────────────────────────────────────────────────────
@@ -453,18 +778,26 @@ export function scan(targetPath, options = {}) {
     ? options.only.split(',').map((s) => s.trim().toLowerCase())
     : null;
 
-  const htmlFiles = walkFiles(targetPath, ['.html', '.htm'], ignore);
-  const cssFiles = walkFiles(targetPath, ['.css'], ignore);
-  const jsFiles = walkFiles(targetPath, ['.js', '.mjs'], ignore);
+  const htmlFiles = collectFiles(targetPath, ['.html', '.htm'], ignore);
+  const cssFiles = collectFiles(targetPath, ['.css'], ignore);
+  const jsFiles = collectFiles(targetPath, ['.js', '.mjs'], ignore);
 
   let allIssues = [];
 
   const fixEmailPlaceholder = options.fixEmailPlaceholder || 'user@example.com';
+  const knownClasses = htmlFiles.length ? loadKnownCssClasses({ includeDist: true }) : null;
 
   for (const file of htmlFiles) {
     const content = readFileSync(file, 'utf-8');
     allIssues.push(...scanSecurityHTML(content, file));
     allIssues.push(...scanA11yHTML(content, file));
+    allIssues.push(...scanDuplicateIds(content, file));
+    allIssues.push(...scanTargetSizeMin(content, file));
+    allIssues.push(...scanNestedInteractive(content, file));
+    allIssues.push(...scanContrastInline(content, file));
+    allIssues.push(...scanRoleButtonContract(content, file));
+    allIssues.push(...scanInvalidWcAttributes(content, file));
+    allIssues.push(...scanUnknownVelinClasses(content, file, knownClasses));
     allIssues.push(...scanPIIHTML(content, file, { fixEmailPlaceholder }));
   }
 
@@ -520,7 +853,27 @@ export function scan(targetPath, options = {}) {
         changedFiles: fixSummary.changedRelPaths,
       };
     }
+    if (options.returnData) {
+      return { exitCode: errors > 0 ? 1 : 0, ...payload };
+    }
     console.log(JSON.stringify(payload, null, 2));
+  } else if (options.returnData) {
+    return {
+      exitCode: errors > 0 ? 1 : 0,
+      total: allIssues.length,
+      errors,
+      warnings,
+      infos,
+      issues: allIssues.map((i) => ({
+        file: relative(targetPath, i.file),
+        line: i.line,
+        severity: SEVERITY_LABEL[i.severity],
+        category: issueCategory(i.rule),
+        rule: i.rule,
+        message: i.message,
+        fixable: !!i.fixable,
+      })),
+    };
   } else {
     console.log(`\n  ${C.bold('VelinStyle Scanner Report')}\n`);
     console.log(`  Scanned: ${htmlFiles.length} HTML, ${cssFiles.length} CSS, ${jsFiles.length} JS files\n`);

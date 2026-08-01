@@ -1,8 +1,11 @@
-blank_issues_enabled: false
+blank_issues_enabled: true
 contact_links:
   - name: Documentation
-    url: https://skylitedesign.github.io/velinstyle/
-    about: Guides, components, and getting started on GitHub Pages
+    url: https://velinstyle.info/docs/getting-started/introduction.html
+    about: Guides, components, and getting started
+  - name: Product north star
+    url: https://github.com/SkyliteDesign/velinstyle/blob/main/VELINSTYLE_2030.md
+    about: Product identity and roadmap north star (detailed strategy ADRs are maintainer-local)
   - name: npm package
     url: https://www.npmjs.com/package/@birdapi/velinstyle
     about: Install @birdapi/velinstyle from the birdapi org on npm

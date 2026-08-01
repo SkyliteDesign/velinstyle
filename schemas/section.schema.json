@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/section.schema.json",
+  "title": "VelinStyle Section Blueprint Meta",
+  "type": "object",
+  "required": ["id", "role"],
+  "properties": {
+    "id": { "type": "string" },
+    "role": { "type": "string" },
+    "blueprintFile": { "type": "string" },
+    "inputs": { "type": "array", "items": { "type": "string" } },
+    "requiredContent": { "type": "array", "items": { "type": "string" } },
+    "optionalContent": { "type": "array", "items": { "type": "string" } },
+    "designRules": { "type": "array", "items": { "type": "string" } },
+    "a11yRules": { "type": "array", "items": { "type": "string" } },
+    "seoRules": { "type": "array", "items": { "type": "string" } },
+    "compatiblePrev": { "type": "array", "items": { "type": "string" } },
+    "compatibleNext": { "type": "array", "items": { "type": "string" } },
+    "examplePrompts": { "type": "array", "items": { "type": "string" } },
+    "commonMistakes": { "type": "array", "items": { "type": "string" } }
+  }
+}

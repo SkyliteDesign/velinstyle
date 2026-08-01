@@ -13,8 +13,11 @@ WCAG contract status: **pass** (framework target: AAA).
 - **Notes:** Wires aria-controls on summary elements.
 
 ## Attributes
-_No `observedAttributes` declared._
+_No `observedAttributes` declared._ Author-facing configuration may still use slots, properties, or child markup — see **Slots** / **Public API** below.
 
+| Author surface | Notes |
+| --- | --- |
+| slot `(default)` | Content projection (not an observed attribute) |
 ## Events
 _None._
 ## CSS parts

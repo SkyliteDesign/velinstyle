@@ -4,6 +4,12 @@
 
 Slide-in on scroll (`up`, `down`, …).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| `up` | Slide from below | Motion runtime |
+| `down` | Slide from above | Motion runtime |
+| `left` / `right` | Horizontal slide | Motion runtime |
 ## Example
 
 ```html

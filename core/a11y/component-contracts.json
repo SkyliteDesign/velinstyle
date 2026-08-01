@@ -1,6 +1,6 @@
 {
   "wcagLevel": "AAA",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "components": {
     "velin-accordion": {
       "status": "pass",
@@ -77,11 +77,28 @@
     "velin-data-table": {
       "status": "pass",
       "roles": ["button"],
-      "keyboard": "Native buttons for column sort and pagination",
+      "keyboard": "Sort buttons; editable cells: Enter/F2 edit, Escape cancel; pagination",
       "liveRegion": "polite",
       "reducedMotion": true,
       "requiredAttributes": [],
-      "notes": "Enhances a light-DOM table. Sort state exposed via aria-sort; sort triggers are real buttons. Needs a caption, aria-label, or label attribute (warns otherwise). Filtered and off-page rows use hidden so they leave the a11y tree; sort, filter and page changes are announced."
+      "notes": "Enhances a light-DOM table. Optional editable attribute or data-editable cells for inline edit (velin-data-table-edit). No virtualization in v1."
+    },
+    "velin-calendar": {
+      "status": "pass",
+      "roles": ["group", "grid", "button"],
+      "keyboard": "Arrows, Home/End, PageUp/Down, Enter/Space",
+      "reducedMotion": true,
+      "requiredAttributes": [],
+      "notes": "Month calendar. value ISO date; velin-change event. Optional min/max."
+    },
+    "velin-file-dropzone": {
+      "status": "pass",
+      "roles": ["group"],
+      "keyboard": "Browse button + native file input",
+      "liveRegion": "polite",
+      "reducedMotion": true,
+      "requiredAttributes": [],
+      "notes": "Client-side dropzone. Events velin-files / velin-error. Does not upload to a server."
     },
     "velin-dialog": {
       "status": "pass",

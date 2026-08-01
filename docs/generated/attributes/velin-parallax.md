@@ -4,10 +4,15 @@
 
 Parallax background (`slow` optional).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty) | Default parallax speed | Motion runtime |
+| `slow` | Reduced parallax factor | Motion runtime |
 ## Example
 
 ```html
-<div velin-parallax>…</div>
+<div velin-parallax="slow">…</div>
 ```
 
 ## Accessibility

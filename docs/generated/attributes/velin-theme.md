@@ -4,8 +4,13 @@
 
 Theme toggle or set `data-velin-theme`.
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| `toggle` | Cycle light/dark (or theme picker behavior) | `data-velin-theme` |
+| `<name>` | Set named theme / scheme | `data-velin-theme` |
 ## Example
 
 ```html
-<div velin-theme>…</div>
+<button type="button" velin-theme="toggle">Theme</button>
 ```

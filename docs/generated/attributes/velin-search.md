@@ -4,6 +4,10 @@
 
 Attach VelinSearch to an element.
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty / present) | Attach search UI / behavior | VelinSearch / `<velin-search>` |
 ## Example
 
 ```html

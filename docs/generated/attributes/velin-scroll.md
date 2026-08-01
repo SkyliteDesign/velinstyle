@@ -4,6 +4,10 @@
 
 Smooth scroll to anchor (`href="#id"`).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty / present) | Smooth-scroll using `href="#id"` | Scroll behavior |
 ## Example
 
 ```html

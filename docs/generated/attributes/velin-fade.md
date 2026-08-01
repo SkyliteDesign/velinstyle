@@ -4,6 +4,10 @@
 
 Fade-in on scroll.
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty / present) | Fade in on scroll | Motion runtime |
 ## Example
 
 ```html

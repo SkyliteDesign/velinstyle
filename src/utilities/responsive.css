@@ -7,7 +7,12 @@
 
   /* --- SM (min-width: 36rem / 576px) --- */
   @media (width >= 36rem) {
-    /* Display (extending existing) */
+    /* Display (single owner for viewport variants — VS-037) */
+    .velin-sm-block { display: block; }
+    .velin-sm-flex { display: flex; }
+    .velin-sm-grid { display: grid; }
+    .velin-sm-hidden { display: none; }
+    .velin-sm-inline { display: inline; }
     .velin-sm-inline-block { display: inline-block; }
     .velin-sm-inline-flex { display: inline-flex; }
     .velin-sm-contents { display: contents; }
@@ -83,6 +88,11 @@
   /* --- MD (min-width: 48rem / 768px) --- */
   @media (width >= 48rem) {
     /* Display */
+    .velin-md-block { display: block; }
+    .velin-md-flex { display: flex; }
+    .velin-md-grid { display: grid; }
+    .velin-md-hidden { display: none; }
+    .velin-md-inline { display: inline; }
     .velin-md-inline-block { display: inline-block; }
     .velin-md-inline-flex { display: inline-flex; }
     .velin-md-contents { display: contents; }
@@ -176,6 +186,11 @@
   /* --- LG (min-width: 62rem / 992px) --- */
   @media (width >= 62rem) {
     /* Display */
+    .velin-lg-block { display: block; }
+    .velin-lg-flex { display: flex; }
+    .velin-lg-grid { display: grid; }
+    .velin-lg-hidden { display: none; }
+    .velin-lg-inline { display: inline; }
     .velin-lg-inline-block { display: inline-block; }
     .velin-lg-inline-flex { display: inline-flex; }
     .velin-lg-contents { display: contents; }

@@ -1,0 +1,1004 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-08-01T07:08:34.857Z",
+  "totals": {
+    "skills": 40,
+    "packs": 6,
+    "workflowGraphs": 3,
+    "bundles": 2,
+    "templates": 8,
+    "projects": 8
+  },
+  "skills": [
+    {
+      "id": "velin-design-hero-compose",
+      "name": "Hero Compose",
+      "category": "design",
+      "priority": "core",
+      "status": "beta",
+      "confidence": "high",
+      "capabilities": [
+        "build",
+        "review"
+      ],
+      "description": "Composes first viewport hero following VelinStyle hierarchy and CTA constraints."
+    },
+    {
+      "id": "velin-design-section-rhythm",
+      "name": "Section Rhythm",
+      "category": "design",
+      "priority": "recommended",
+      "status": "beta",
+      "confidence": "high",
+      "capabilities": [
+        "build"
+      ],
+      "description": "Aligns spacing rhythm and section purpose to design rules."
+    },
+    {
+      "id": "velin-design-surface-roles",
+      "name": "Surface Roles",
+      "category": "design",
+      "priority": "recommended",
+      "status": "beta",
+      "confidence": "medium",
+      "capabilities": [
+        "build",
+        "theme"
+      ],
+      "description": "Maps sections to base/raised/overlay surface roles."
+    },
+    {
+      "id": "velin-dev-plan-first",
+      "name": "Plan First",
+      "category": "development",
+      "priority": "core",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "ai-orchestration",
+        "build"
+      ],
+      "description": "Creates a plan JSON before implementation to reduce hallucinations."
+    },
+    {
+      "id": "velin-dev-page-scaffold",
+      "name": "Page Scaffold",
+      "category": "development",
+      "priority": "core",
+      "status": "beta",
+      "confidence": "high",
+      "capabilities": [
+        "build"
+      ],
+      "description": "Renders plan-based HTML and runs review gates."
+    },
+    {
+      "id": "velin-dev-component-wire",
+      "name": "Component Wire",
+      "category": "development",
+      "priority": "recommended",
+      "status": "beta",
+      "confidence": "medium",
+      "capabilities": [
+        "build"
+      ],
+      "description": "Wires selected components with predictable APIs and semantics."
+    },
+    {
+      "id": "velin-components-select-compose",
+      "name": "Select Components",
+      "category": "components",
+      "priority": "core",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "build"
+      ],
+      "description": "Chooses component set that matches page intent and constraints."
+    },
+    {
+      "id": "velin-components-api-contract",
+      "name": "API Contract",
+      "category": "components",
+      "priority": "recommended",
+      "status": "beta",
+      "confidence": "high",
+      "capabilities": [
+        "documentation",
+        "review"
+      ],
+      "description": "Validates component contracts and event/API usage."
+    },
+    {
+      "id": "velin-components-recipe",
+      "name": "Component Recipe",
+      "category": "components",
+      "priority": "recommended",
+      "status": "beta",
+      "confidence": "medium",
+      "capabilities": [
+        "build",
+        "documentation"
+      ],
+      "description": "Builds reusable component recipes for recurring UI blocks."
+    },
+    {
+      "id": "velin-components-accessibility-map",
+      "name": "Component Accessibility Map",
+      "category": "components",
+      "priority": "advanced",
+      "status": "beta",
+      "confidence": "medium",
+      "capabilities": [
+        "accessibility",
+        "documentation"
+      ],
+      "description": "Maps every chosen component to a11y expectations and test hooks."
+    },
+    {
+      "id": "velin-utilities-layout-apply",
+      "name": "Utilities Layout Apply",
+      "category": "utilities",
+      "priority": "core",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "build"
+      ],
+      "description": "Applies utility classes for layout and responsive structure."
+    },
+    {
+      "id": "velin-utilities-prefix-fix",
+      "name": "Utilities Prefix Fix",
+      "category": "utilities",
+      "priority": "recommended",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "migrate"
+      ],
+      "description": "Normalizes classes to velin-* naming."
+    },
+    {
+      "id": "velin-utilities-token-map",
+      "name": "Utilities Token Map",
+      "category": "utilities",
+      "priority": "advanced",
+      "status": "beta",
+      "confidence": "medium",
+      "capabilities": [
+        "theme",
+        "documentation"
+      ],
+      "description": "Documents how utility usage maps to token taxonomy."
+    },
+    {
+      "id": "velin-themes-apply-token",
+      "name": "Theme Apply Token",
+      "category": "themes",
+      "priority": "core",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "theme",
+        "build"
+      ],
+      "description": "Applies built-in themes through token-safe patterns."
+    },
+    {
+      "id": "velin-themes-contrast-check",
+      "name": "Theme Contrast Check",
+      "category": "themes",
+      "priority": "recommended",
+      "status": "beta",
+      "confidence": "high",
+      "capabilities": [
+        "accessibility",
+        "theme",
+        "review"
+      ],
+      "description": "Checks token contrast and theme compatibility for WCAG goals."
+    },
+    {
+      "id": "velin-motion-reduced-safe",
+      "name": "Motion Reduced Safe",
+      "category": "motion",
+      "priority": "core",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "motion",
+        "accessibility"
+      ],
+      "description": "Applies motion while honoring prefers-reduced-motion."
+    },
+    {
+      "id": "velin-motion-reveal-feedback",
+      "name": "Motion Reveal Feedback",
+      "category": "motion",
+      "priority": "recommended",
+      "status": "beta",
+      "confidence": "medium",
+      "capabilities": [
+        "motion",
+        "build"
+      ],
+      "description": "Adds intentional reveal and feedback motion hierarchies."
+    },
+    {
+      "id": "velin-a11y-page-checklist",
+      "name": "A11y Page Checklist",
+      "category": "accessibility",
+      "priority": "core",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "accessibility",
+        "review"
+      ],
+      "description": "Runs page-level accessibility checklist before release."
+    },
+    {
+      "id": "velin-a11y-scan-fix",
+      "name": "A11y Scan Fix",
+      "category": "accessibility",
+      "priority": "core",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "accessibility",
+        "review"
+      ],
+      "description": "Uses scanner output to fix high-confidence accessibility issues."
+    },
+    {
+      "id": "velin-a11y-focus-keyboard",
+      "name": "Focus Keyboard",
+      "category": "accessibility",
+      "priority": "recommended",
+      "status": "beta",
+      "confidence": "high",
+      "capabilities": [
+        "accessibility",
+        "test"
+      ],
+      "description": "Validates keyboard navigation and visible focus behavior."
+    },
+    {
+      "id": "velin-testing-a11y-suite",
+      "name": "Testing A11y Suite",
+      "category": "testing",
+      "priority": "recommended",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "test",
+        "accessibility"
+      ],
+      "description": "Runs accessibility test suite and triages regressions."
+    },
+    {
+      "id": "velin-testing-visual-smoke",
+      "name": "Testing Visual Smoke",
+      "category": "testing",
+      "priority": "advanced",
+      "status": "beta",
+      "confidence": "medium",
+      "capabilities": [
+        "test",
+        "review"
+      ],
+      "description": "Runs visual smoke checks across key breakpoints."
+    },
+    {
+      "id": "velin-review-page-gate",
+      "name": "Review Page Gate",
+      "category": "review",
+      "priority": "core",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "review"
+      ],
+      "description": "Runs design/a11y/seo/perf/conversion gate and reports score."
+    },
+    {
+      "id": "velin-review-conversion-hero",
+      "name": "Review Conversion Hero",
+      "category": "review",
+      "priority": "recommended",
+      "status": "beta",
+      "confidence": "medium",
+      "capabilities": [
+        "review",
+        "seo"
+      ],
+      "description": "Reviews hero conversion quality and CTA hierarchy."
+    },
+    {
+      "id": "velin-review-seo-meta",
+      "name": "Review SEO Meta",
+      "category": "review",
+      "priority": "recommended",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "review",
+        "seo"
+      ],
+      "description": "Checks SEO metadata and content semantics."
+    },
+    {
+      "id": "velin-docs-component-guide",
+      "name": "Docs Component Guide",
+      "category": "documentation",
+      "priority": "recommended",
+      "status": "beta",
+      "confidence": "high",
+      "capabilities": [
+        "documentation"
+      ],
+      "description": "Writes component-focused documentation with quality checklists."
+    },
+    {
+      "id": "velin-docs-generate-api",
+      "name": "Docs Generate API",
+      "category": "documentation",
+      "priority": "core",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "documentation"
+      ],
+      "description": "Generates API Markdown and verifies documentation footprint."
+    },
+    {
+      "id": "velin-migration-prefix-classes",
+      "name": "Migration Prefix Classes",
+      "category": "migration",
+      "priority": "core",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "migrate"
+      ],
+      "description": "Migrates class names to velin-* convention."
+    },
+    {
+      "id": "velin-migration-legacy-wc",
+      "name": "Migration Legacy WC",
+      "category": "migration",
+      "priority": "recommended",
+      "status": "beta",
+      "confidence": "high",
+      "capabilities": [
+        "migrate",
+        "review"
+      ],
+      "description": "Replaces legacy *-wc tags with canonical components."
+    },
+    {
+      "id": "velin-release-changelog-sync",
+      "name": "Release Changelog Sync",
+      "category": "release",
+      "priority": "recommended",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "release",
+        "documentation"
+      ],
+      "description": "Keeps changelog and docs in sync before release."
+    },
+    {
+      "id": "velin-release-meta-rebuild",
+      "name": "Release Meta Rebuild",
+      "category": "release",
+      "priority": "core",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "release",
+        "ai-orchestration"
+      ],
+      "description": "Rebuilds velin-agent.json and llms.txt before publishing."
+    },
+    {
+      "id": "velin-dx-project-init",
+      "name": "DX Project Init",
+      "category": "developer-experience",
+      "priority": "core",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "dx",
+        "build"
+      ],
+      "description": "Bootstraps VelinStyle projects with sane defaults."
+    },
+    {
+      "id": "velin-dx-doctor-setup",
+      "name": "DX Doctor Setup",
+      "category": "developer-experience",
+      "priority": "advanced",
+      "status": "experimental",
+      "confidence": "medium",
+      "capabilities": [
+        "dx",
+        "review"
+      ],
+      "description": "Runs setup diagnostics and proposes fixes for dev experience gaps."
+    },
+    {
+      "id": "velin-perf-audit-fix",
+      "name": "Perf Audit Fix",
+      "category": "performance",
+      "priority": "recommended",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "performance",
+        "review"
+      ],
+      "description": "Audits performance and applies safe optimization fixes."
+    },
+    {
+      "id": "velin-perf-runtime-tree-shake",
+      "name": "Perf Runtime Tree Shake",
+      "category": "performance",
+      "priority": "advanced",
+      "status": "beta",
+      "confidence": "medium",
+      "capabilities": [
+        "performance",
+        "build"
+      ],
+      "description": "Reduces runtime payload using explicit component loading strategy."
+    },
+    {
+      "id": "velin-security-scan-pii",
+      "name": "Security Scan PII",
+      "category": "security",
+      "priority": "core",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "security",
+        "review"
+      ],
+      "description": "Scans for PII exposure and common security mistakes."
+    },
+    {
+      "id": "velin-security-sanitize-html",
+      "name": "Security Sanitize HTML",
+      "category": "security",
+      "priority": "recommended",
+      "status": "stable",
+      "confidence": "high",
+      "capabilities": [
+        "security",
+        "build"
+      ],
+      "description": "Applies safe HTML sanitization guidance for dynamic content."
+    },
+    {
+      "id": "velin-ai-agent-briefing",
+      "name": "AI Agent Briefing",
+      "category": "ai-workflows",
+      "priority": "core",
+      "status": "beta",
+      "confidence": "high",
+      "capabilities": [
+        "ai-orchestration",
+        "documentation"
+      ],
+      "description": "Prepares agent context and guardrails from velin metadata."
+    },
+    {
+      "id": "velin-ai-plan-scaffold-review",
+      "name": "AI Plan Scaffold Review",
+      "category": "ai-workflows",
+      "priority": "core",
+      "status": "beta",
+      "confidence": "high",
+      "capabilities": [
+        "ai-orchestration",
+        "build",
+        "review"
+      ],
+      "description": "Runs the canonical AI workflow from prompt to reviewed HTML."
+    },
+    {
+      "id": "velin-ai-skill-authoring",
+      "name": "AI Skill Authoring",
+      "category": "ai-workflows",
+      "priority": "advanced",
+      "status": "beta",
+      "confidence": "medium",
+      "capabilities": [
+        "ai-orchestration",
+        "documentation"
+      ],
+      "description": "Authors new skills with registry-first metadata quality gates."
+    }
+  ],
+  "packs": [
+    {
+      "id": "frontend",
+      "name": "Frontend Pack",
+      "version": "1.0.0",
+      "priority": "core",
+      "skills": [
+        "velin-dx-project-init",
+        "velin-dev-plan-first",
+        "velin-dev-page-scaffold",
+        "velin-components-select-compose",
+        "velin-utilities-layout-apply"
+      ]
+    },
+    {
+      "id": "design",
+      "name": "Design Pack",
+      "version": "1.0.0",
+      "priority": "recommended",
+      "skills": [
+        "velin-design-hero-compose",
+        "velin-design-section-rhythm",
+        "velin-design-surface-roles",
+        "velin-themes-apply-token",
+        "velin-motion-reduced-safe"
+      ]
+    },
+    {
+      "id": "accessibility",
+      "name": "Accessibility Pack",
+      "version": "1.0.0",
+      "priority": "core",
+      "skills": [
+        "velin-a11y-page-checklist",
+        "velin-a11y-scan-fix",
+        "velin-a11y-focus-keyboard",
+        "velin-testing-a11y-suite"
+      ]
+    },
+    {
+      "id": "documentation",
+      "name": "Documentation Pack",
+      "version": "1.0.0",
+      "priority": "recommended",
+      "skills": [
+        "velin-docs-component-guide",
+        "velin-docs-generate-api",
+        "velin-release-changelog-sync"
+      ]
+    },
+    {
+      "id": "review",
+      "name": "Review Pack",
+      "version": "1.0.0",
+      "priority": "core",
+      "skills": [
+        "velin-review-page-gate",
+        "velin-review-conversion-hero",
+        "velin-review-seo-meta",
+        "velin-security-scan-pii"
+      ]
+    },
+    {
+      "id": "enterprise",
+      "name": "Enterprise Pack",
+      "version": "1.0.0",
+      "priority": "advanced",
+      "skills": [
+        "velin-security-scan-pii",
+        "velin-security-sanitize-html",
+        "velin-perf-audit-fix",
+        "velin-migration-prefix-classes",
+        "velin-release-meta-rebuild"
+      ]
+    }
+  ],
+  "workflowGraphs": [
+    {
+      "id": "landingpage",
+      "name": "Landing Page Workflow",
+      "entry": "plan"
+    },
+    {
+      "id": "component-ship",
+      "name": "Component Ship Workflow",
+      "entry": "select"
+    },
+    {
+      "id": "release-gate",
+      "name": "Release Gate Workflow",
+      "entry": "review"
+    }
+  ],
+  "bundles": [
+    {
+      "id": "landing-starter",
+      "origin": "official",
+      "packs": [
+        "frontend",
+        "design",
+        "review"
+      ],
+      "graphs": [
+        "landingpage"
+      ],
+      "templates": [
+        "landing-page"
+      ],
+      "docs": [
+        "docs/guides/ai-skills.html"
+      ]
+    },
+    {
+      "id": "review-suite",
+      "origin": "official",
+      "packs": [
+        "accessibility",
+        "review"
+      ],
+      "graphs": [
+        "release-gate"
+      ],
+      "templates": [],
+      "docs": [
+        "docs/guides/ai-skills.html"
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "id": "landing-page",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "frontend",
+        "design"
+      ],
+      "theme": "default",
+      "demo": "samples/landing.html",
+      "docs": [
+        "docs/guides/prompt-scaffolding.html",
+        "docs/guides/landing-15-min.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "marketing-landing",
+        "sections": [
+          "hero",
+          "features",
+          "faq",
+          "contact"
+        ]
+      }
+    },
+    {
+      "id": "marketing-website",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "frontend",
+        "design",
+        "review"
+      ],
+      "theme": "default",
+      "demo": "samples/landing.html",
+      "docs": [
+        "docs/guides/prompt-scaffolding.html",
+        "docs/guides/landing-15-min.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "marketing-site",
+        "sections": [
+          "hero",
+          "benefits",
+          "proof",
+          "faq",
+          "contact"
+        ]
+      }
+    },
+    {
+      "id": "documentation-portal",
+      "workflowGraph": "component-ship",
+      "packs": [
+        "documentation",
+        "review"
+      ],
+      "theme": "default",
+      "demo": "docs/index.html",
+      "docs": [
+        "docs/guides/ai-skills.html",
+        "docs/guides/prompt-scaffolding.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "docs-portal",
+        "sections": [
+          "hero",
+          "toc",
+          "examples",
+          "faq"
+        ]
+      }
+    },
+    {
+      "id": "admin-panel",
+      "workflowGraph": "release-gate",
+      "packs": [
+        "enterprise",
+        "review"
+      ],
+      "theme": "midnight",
+      "demo": "samples/dashboard.html",
+      "docs": [
+        "docs/guides/ai-skills.html",
+        "docs/guides/prompt-scaffolding.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "admin-panel",
+        "sections": [
+          "kpis",
+          "table",
+          "forms"
+        ]
+      }
+    },
+    {
+      "id": "blog",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "frontend",
+        "review"
+      ],
+      "theme": "default",
+      "demo": "samples/blog.html",
+      "docs": [
+        "docs/guides/ai-skills.html",
+        "docs/guides/prompt-scaffolding.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "blog",
+        "sections": [
+          "hero",
+          "posts",
+          "faq",
+          "contact"
+        ]
+      }
+    },
+    {
+      "id": "ecommerce-shop",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "frontend",
+        "review",
+        "enterprise"
+      ],
+      "theme": "default",
+      "demo": "samples/ecommerce.html",
+      "docs": [
+        "docs/guides/ecommerce.html",
+        "docs/guides/prompt-scaffolding.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "shop",
+        "sections": [
+          "hero",
+          "products",
+          "proof",
+          "faq"
+        ]
+      }
+    },
+    {
+      "id": "portfolio",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "design",
+        "frontend"
+      ],
+      "theme": "soft",
+      "demo": "samples/portfolio.html",
+      "docs": [
+        "docs/guides/ai-skills.html",
+        "docs/guides/prompt-scaffolding.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "portfolio",
+        "sections": [
+          "hero",
+          "projects",
+          "about",
+          "contact"
+        ]
+      }
+    },
+    {
+      "id": "laravel-dashboard",
+      "workflowGraph": "release-gate",
+      "packs": [
+        "enterprise",
+        "frontend"
+      ],
+      "theme": "midnight",
+      "demo": "samples/dashboard.html",
+      "docs": [
+        "docs/guides/laravel.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "dashboard",
+        "sections": [
+          "kpis",
+          "table",
+          "forms"
+        ]
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": "marketing-website",
+      "name": "Marketing Website",
+      "priority": "recommended",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "frontend",
+        "design",
+        "review"
+      ],
+      "skills": [
+        "velin-ai-plan-scaffold-review",
+        "velin-review-conversion-hero"
+      ],
+      "optimizedFor": [
+        "cursor",
+        "claude-code"
+      ]
+    },
+    {
+      "id": "documentation-portal",
+      "name": "Documentation Portal",
+      "priority": "recommended",
+      "workflowGraph": "component-ship",
+      "packs": [
+        "documentation",
+        "review"
+      ],
+      "skills": [
+        "velin-docs-generate-api",
+        "velin-ai-agent-briefing"
+      ],
+      "optimizedFor": [
+        "cursor",
+        "vscode"
+      ]
+    },
+    {
+      "id": "admin-panel",
+      "name": "Admin Panel",
+      "priority": "recommended",
+      "workflowGraph": "release-gate",
+      "packs": [
+        "enterprise",
+        "review"
+      ],
+      "skills": [
+        "velin-perf-audit-fix",
+        "velin-security-scan-pii"
+      ],
+      "optimizedFor": [
+        "cursor"
+      ]
+    },
+    {
+      "id": "landing-page",
+      "name": "Landing Page",
+      "priority": "core",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "frontend",
+        "design"
+      ],
+      "skills": [
+        "velin-review-conversion-hero"
+      ],
+      "optimizedFor": [
+        "cursor",
+        "windsurf"
+      ]
+    },
+    {
+      "id": "blog",
+      "name": "Blog",
+      "priority": "recommended",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "frontend",
+        "review"
+      ],
+      "skills": [
+        "velin-review-seo-meta"
+      ],
+      "optimizedFor": [
+        "cursor"
+      ]
+    },
+    {
+      "id": "ecommerce-shop",
+      "name": "E-Commerce Shop",
+      "priority": "advanced",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "enterprise",
+        "review"
+      ],
+      "skills": [
+        "velin-security-sanitize-html",
+        "velin-review-conversion-hero"
+      ],
+      "optimizedFor": [
+        "cursor"
+      ]
+    },
+    {
+      "id": "portfolio",
+      "name": "Portfolio",
+      "priority": "recommended",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "design",
+        "frontend"
+      ],
+      "skills": [
+        "velin-motion-reveal-feedback"
+      ],
+      "optimizedFor": [
+        "cursor",
+        "vscode"
+      ]
+    },
+    {
+      "id": "laravel-dashboard",
+      "name": "Laravel Dashboard",
+      "priority": "advanced",
+      "workflowGraph": "release-gate",
+      "packs": [
+        "enterprise",
+        "frontend"
+      ],
+      "skills": [
+        "velin-dx-project-init"
+      ],
+      "optimizedFor": [
+        "cursor",
+        "claude-code"
+      ]
+    }
+  ]
+}

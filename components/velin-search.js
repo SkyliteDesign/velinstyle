@@ -129,7 +129,7 @@ class VelinSearch extends HTMLElement {
       return;
     }
     if (!this._indexLoaded) await this._loadIndex();
-    const { groups } = this._search.query(q, {
+    const { groups } = await this._search.query(q, {
       minChars: this.minChars,
       fuzzy: this.fuzzy,
       categories: this.categories || undefined,

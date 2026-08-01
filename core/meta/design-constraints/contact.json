@@ -1,0 +1,9 @@
+{
+  "id": "contact",
+  "target": "section:contact",
+  "rules": [
+    { "id": "contact-labels", "scope": "section", "section": "contact", "rule": "Visible labels on all fields", "severity": "error" },
+    { "id": "contact-summary", "scope": "section", "section": "contact", "rule": "Include velin-form-summary for errors", "severity": "error" },
+    { "id": "contact-submit", "scope": "section", "section": "contact", "rule": "Single primary submit button", "severity": "warning" }
+  ]
+}

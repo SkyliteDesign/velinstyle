@@ -32,8 +32,28 @@ function resolveProviderUrl(provider, variant) {
 }
 
 const _svgCache = new Map();
+const DEFAULT_SPRITE = 'velin-icons.svg';
+
+/**
+ * Resolve default sprite URL: attribute → meta/html data → VelinIcon.defaultSprite → relative fallback.
+ * Avoids hardcoded absolute `/dist/...` which breaks offline/vendor installs.
+ */
+function resolveDefaultSpriteUrl() {
+  if (typeof document !== 'undefined') {
+    const meta = document.querySelector('meta[name="velin-icon-sprite"]');
+    const fromMeta = meta?.getAttribute('content')?.trim();
+    if (fromMeta) return fromMeta;
+    const fromHtml = document.documentElement?.getAttribute('data-velin-icon-sprite')?.trim();
+    if (fromHtml) return fromHtml;
+  }
+  const configured = typeof VelinIcon.defaultSprite === 'string' ? VelinIcon.defaultSprite.trim() : '';
+  return configured || DEFAULT_SPRITE;
+}
 
 class VelinIcon extends HTMLElement {
+  /** @type {string} Relative or absolute sprite URL used when `sprite` attribute is omitted. */
+  static defaultSprite = DEFAULT_SPRITE;
+
   static get observedAttributes() {
     return ['name', 'size', 'label', 'provider', 'variant', 'sprite'];
   }
@@ -99,7 +119,8 @@ class VelinIcon extends HTMLElement {
     if (spriteAttr === '' || (spriteAttr == null && isLocalSymbol)) {
       href = `#${name}`;
     } else {
-      const spriteUrl = sanitizeURL(spriteAttr || '/dist/velin-icons.svg') || '/dist/velin-icons.svg';
+      const fallback = resolveDefaultSpriteUrl();
+      const spriteUrl = sanitizeURL(spriteAttr || fallback) || fallback || DEFAULT_SPRITE;
       href = `${spriteUrl}#${name}`;
     }
     use.setAttribute('href', href);

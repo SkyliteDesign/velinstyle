@@ -1,6 +1,6 @@
 {
   "name": "@birdapi/velinstyle",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
@@ -27,7 +27,8 @@
     "./attributes": "./core/attributes/index.js",
     "./highlight": "./core/highlight/index.js",
     "./meta": "./core/meta/index.js",
-    "./a11y": "./components/a11y-entry.js"
+    "./a11y": "./components/a11y-entry.js",
+    "./skills-registry": "./packages/velinstyle-skills/registry.json"
   },
   "bin": {
     "velinstyle": "cli/index.js"
@@ -46,6 +47,9 @@
     "components/",
     "core/",
     "cli/",
+    "packages/skill-engine/",
+    "packages/velinstyle-skills/",
+    "schemas/",
     "examples/search-index.schema.json",
     "icons/velin-icons.svg"
   ],
@@ -80,18 +84,28 @@
     "tokens:validate:full": "node cli/index.js tokens validate --input examples/tokens.full.json",
     "docs:generate": "node cli/index.js docs generate",
     "search:index": "node cli/index.js search index",
+    "skills:generate": "node packages/velinstyle-skills/scripts/generate-assets.mjs && node -e \"import('./packages/velinstyle-skills/index.js').then(m=>m.writeCatalogFile())\"",
+    "skills:validate": "node scripts/validate-skills.mjs",
+    "skills:doctor": "node scripts/check-skills-paths.mjs",
     "meta:build": "node cli/index.js meta",
     "ci:checks": "node scripts/ci-checks.mjs",
+    "check:blueprints": "node scripts/check-blueprint-classes.mjs",
+    "check:chaos": "node scripts/check-chaos-detection.mjs",
     "release:check": "node scripts/check-release-sync.mjs",
     "release:sync": "node scripts/check-release-sync.mjs --fix",
-    "prepublishOnly": "npm run build && npm run search:index && npm run meta:build && npm run release:check -- --skip-site",
+    "intelligence:validate": "node scripts/validate-intelligence-schemas.mjs",
+    "prepublishOnly": "npm run build && npm run check:blueprints && npm run search:index && npm run skills:generate && npm run skills:validate && npm run skills:doctor && npm run meta:build && npm run intelligence:validate && npm run release:check -- --skip-site",
     "pack:check": "npm pack --dry-run",
     "docs:prepare": "npm run build && node scripts/prepare-docs-pages.js",
     "docs:patch-nav": "node scripts/patch-docs-nav.js",
     "docs:sync-site": "npm run build && npm run docs:generate && python ../velinstyle-site/tools/sync-framework-0.9.0.py && python ../velinstyle-site/tools/patch-site-a11y-aaa.py && python ../velinstyle-site/tools/patch-docs-090-final.py",
     "readme:capture": "node tools/capture-readme-demos.mjs",
     "readme:assets:webp": "node tools/readme-png-to-webp.mjs",
-    "demos:sync": "node tools/sync-demos-to-repo.mjs --out showcase-demos && node tools/sync-demos-to-repo.mjs --out ../velinstyle-demos"
+    "demos:sync": "node tools/sync-demos-to-repo.mjs --out showcase-demos && node tools/sync-demos-to-repo.mjs --out ../velinstyle-demos",
+    "strategy:bootstrap-issues": "node scripts/bootstrap-github-backlog.mjs",
+    "strategy:bootstrap-issues:dry": "node scripts/bootstrap-github-backlog.mjs --dry-run",
+    "strategy:bootstrap-next30": "node scripts/bootstrap-github-backlog.mjs --issues-only --seed=../interne_docs/strategy/next-30-issues.json --map=../interne_docs/strategy/next-30-issue-map.json",
+    "strategy:bootstrap-next30:dry": "node scripts/bootstrap-github-backlog.mjs --dry-run --issues-only --seed=../interne_docs/strategy/next-30-issues.json --map=../interne_docs/strategy/next-30-issue-map.json"
   },
   "keywords": [
     "css",
@@ -110,11 +124,11 @@
   "author": "SkyliteDesign",
   "license": "MIT",
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "axe-core": "^4.10.0",
     "esbuild": "^0.24.0",
     "jsdom": "^26.1.0",
     "lightningcss-cli": "^1.28.0",
-    "@playwright/test": "^1.60.0",
     "playwright": "^1.60.0",
     "serve": "^14.0.0",
     "sharp": "^0.34.5",
@@ -123,6 +137,6 @@
     "vitest": "^3.2.0"
   },
   "dependencies": {
-    "isomorphic-dompurify": "^3.13.0"
+    "isomorphic-dompurify": "^3.21.0"
   }
 }

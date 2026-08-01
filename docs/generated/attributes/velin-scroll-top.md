@@ -2,10 +2,19 @@
 
 # velin-scroll-top
 
-Velin HTML attribute extension.
+Inject / configure `<velin-scroll-top>` (empty or `threshold` px).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty) | Mount default scroll-top control | `<velin-scroll-top>` |
+| threshold px | Show after scroll distance | `<velin-scroll-top>` |
 ## Example
 
 ```html
-<div velin-scroll-top>…</div>
+<body velin-scroll-top>
 ```
+
+## Accessibility
+
+Ensure the control has an accessible name when rendered.

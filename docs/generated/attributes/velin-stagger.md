@@ -4,10 +4,14 @@
 
 Stagger child animations (delay in ms).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| ms number | Stagger delay between children | Motion runtime |
 ## Example
 
 ```html
-<div velin-stagger>…</div>
+<ul velin-stagger="80">…</ul>
 ```
 
 ## Accessibility

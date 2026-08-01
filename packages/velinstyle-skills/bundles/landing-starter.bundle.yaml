@@ -1,0 +1,12 @@
+id: landing-starter
+origin: official
+packs:
+  - frontend
+  - design
+  - review
+graphs:
+  - landingpage
+templates:
+  - landing-page
+docs:
+  - docs/guides/ai-skills.html

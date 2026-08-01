@@ -1,0 +1,116 @@
+[
+  {
+    "id": "contact",
+    "target": "section:contact",
+    "rules": [
+      {
+        "id": "contact-labels",
+        "scope": "section",
+        "section": "contact",
+        "rule": "Visible labels on all fields",
+        "severity": "error"
+      },
+      {
+        "id": "contact-summary",
+        "scope": "section",
+        "section": "contact",
+        "rule": "Include velin-form-summary for errors",
+        "severity": "error"
+      },
+      {
+        "id": "contact-submit",
+        "scope": "section",
+        "section": "contact",
+        "rule": "Single primary submit button",
+        "severity": "warning"
+      }
+    ]
+  },
+  {
+    "id": "faq",
+    "target": "section:faq",
+    "rules": [
+      {
+        "id": "faq-questions",
+        "scope": "section",
+        "section": "faq",
+        "rule": "Entries must be clear interrogatives",
+        "severity": "error"
+      },
+      {
+        "id": "faq-pattern",
+        "scope": "section",
+        "section": "faq",
+        "rule": "Use accordion/disclosure, not long marketing paragraphs",
+        "severity": "error"
+      },
+      {
+        "id": "faq-count",
+        "scope": "section",
+        "section": "faq",
+        "rule": "Prefer 5–8 high-intent FAQs",
+        "severity": "info"
+      }
+    ]
+  },
+  {
+    "id": "hero",
+    "target": "section:hero",
+    "rules": [
+      {
+        "id": "hero-headline-lines",
+        "scope": "section",
+        "section": "hero",
+        "rule": "Headline max 2 lines on desktop",
+        "severity": "error"
+      },
+      {
+        "id": "hero-cta-max",
+        "scope": "section",
+        "section": "hero",
+        "rule": "Maximum 2 CTAs",
+        "severity": "error"
+      },
+      {
+        "id": "hero-image-side",
+        "scope": "section",
+        "section": "hero",
+        "rule": "Image left OR right, not competing dual heroes",
+        "severity": "warning"
+      },
+      {
+        "id": "hero-padding",
+        "scope": "section",
+        "section": "hero",
+        "rule": "Section padding by breakpoint",
+        "breakpoints": {
+          "mobile": "var(--velin-space-8)",
+          "tablet": "var(--velin-space-10)",
+          "desktop": "var(--velin-space-12)"
+        },
+        "severity": "warning"
+      },
+      {
+        "id": "hero-contrast",
+        "scope": "section",
+        "section": "hero",
+        "rule": "Text/surface pairs must meet contrast contract",
+        "severity": "error"
+      },
+      {
+        "id": "hero-motion",
+        "scope": "section",
+        "section": "hero",
+        "rule": "Animation only when motion-safe",
+        "severity": "warning"
+      },
+      {
+        "id": "hero-container",
+        "scope": "section",
+        "section": "hero",
+        "rule": "Content inside documented container width",
+        "severity": "warning"
+      }
+    ]
+  }
+]

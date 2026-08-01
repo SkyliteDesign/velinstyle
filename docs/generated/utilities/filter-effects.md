@@ -23,7 +23,6 @@ Source: `src/utilities/filter-effects.css`
 | `.velin-glass-strong` | `background: color-mix(in oklch, var(--velin-color-surface-bright, #fff) 55%, transparent); backdrop-filter: blur(20px) …` |
 | `.velin-hue-rotate-15` | `filter: hue-rotate(15deg);` |
 | `.velin-hue-rotate-180` | `filter: hue-rotate(180deg);` |
-| `.velin-hue-rotate-180` | `filter: none;` |
 | `.velin-hue-rotate-30` | `filter: hue-rotate(30deg);` |
 | `.velin-hue-rotate-60` | `filter: hue-rotate(60deg);` |
 | `.velin-hue-rotate-90` | `filter: hue-rotate(90deg);` |

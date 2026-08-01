@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/skill-pack.schema.json",
+  "title": "VelinStyle Skill Pack",
+  "type": "object",
+  "required": ["id", "name", "skills"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "version": { "type": "string" },
+    "priority": { "type": "string" },
+    "skills": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+  }
+}

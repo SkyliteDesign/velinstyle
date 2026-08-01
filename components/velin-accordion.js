@@ -1,20 +1,24 @@
-const styles = `
-  :host {
+const LIGHT_STYLE_ID = 'velin-accordion-light-css';
+
+/** Light-DOM styles: ::slotted() cannot target descendants of slotted <details>. */
+const lightStyles = `
+  velin-accordion {
     display: block;
     border: 1px solid var(--velin-color-border, #ddd);
     border-radius: var(--velin-radius-md, 0.5rem);
     overflow: hidden;
   }
-  ::slotted(details) {
+  velin-accordion details {
     border-bottom: 1px solid var(--velin-color-border, #ddd);
   }
-  ::slotted(details:last-child) {
+  velin-accordion details:last-child {
     border-bottom: none;
   }
-  ::slotted(details > summary) {
+  velin-accordion details > summary {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: var(--velin-space-3, 0.75rem);
     padding: var(--velin-space-4, 1rem);
     min-block-size: 2.75rem;
     font-size: var(--velin-text-base, 1rem);
@@ -23,16 +27,29 @@ const styles = `
     user-select: none;
     list-style: none;
   }
-  ::slotted(details > summary::-webkit-details-marker) {
+  velin-accordion details > summary::-webkit-details-marker {
     display: none;
   }
-  ::slotted(details[open] > summary) {
+  velin-accordion details > summary::after {
+    content: "";
+    flex-shrink: 0;
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    border-inline-end: 2px solid currentColor;
+    border-block-end: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 150ms ease;
+  }
+  velin-accordion details[open] > summary {
     background: var(--velin-color-primary-subtle, #eff6ff);
     color: var(--velin-color-primary, #2563eb);
   }
-  ::slotted(details > :not(summary)) {
+  velin-accordion details[open] > summary::after {
+    transform: rotate(225deg);
+  }
+  velin-accordion details > :not(summary) {
     padding: var(--velin-space-4, 1rem) var(--velin-space-5, 1.25rem);
-    background: var(--velin-color-bg-subtle, #f8fafc);
+    background: var(--velin-color-surface-dim, var(--velin-color-bg-subtle, #f8fafc));
     color: var(--velin-color-text-muted, #64748b);
     font-size: var(--velin-text-sm, 0.875rem);
     line-height: 1.6;
@@ -40,16 +57,33 @@ const styles = `
   }
 `;
 
+const shadowStyles = `
+  :host {
+    display: block;
+  }
+`;
+
+function ensureLightStyles() {
+  if (typeof document === 'undefined') return;
+  if (document.getElementById(LIGHT_STYLE_ID)) return;
+  const style = document.createElement('style');
+  style.id = LIGHT_STYLE_ID;
+  style.textContent = lightStyles;
+  document.head.appendChild(style);
+}
+
 class VelinAccordion extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
     this._onToggle = this._onToggle.bind(this);
+    this._onKeydown = this._onKeydown.bind(this);
   }
 
   connectedCallback() {
+    ensureLightStyles();
     this.shadowRoot.innerHTML = `
-      <style>${styles}</style>
+      <style>${shadowStyles}</style>
       <slot></slot>
     `;
 
@@ -57,7 +91,7 @@ class VelinAccordion extends HTMLElement {
     this._wireDetails();
 
     this.addEventListener('toggle', this._onToggle, true);
-    this.addEventListener('keydown', this._onKeydown.bind(this));
+    this.addEventListener('keydown', this._onKeydown);
   }
 
   _wireDetails() {
@@ -69,14 +103,24 @@ class VelinAccordion extends HTMLElement {
       if (panel && !panel.id) panel.id = panelId;
       if (summary && panel) {
         summary.setAttribute('aria-controls', panelId);
+        summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+      }
+      if (summary && !summary.hasAttribute('tabindex')) {
+        summary.setAttribute('tabindex', '0');
       }
     }
   }
 
   _onToggle(event) {
-    if (!this._exclusive) return;
     const openedDetail = event.target;
-    if (!openedDetail.open) return;
+    if (!(openedDetail instanceof HTMLDetailsElement)) return;
+
+    const summary = openedDetail.querySelector('summary');
+    if (summary) {
+      summary.setAttribute('aria-expanded', openedDetail.open ? 'true' : 'false');
+    }
+
+    if (!this._exclusive || !openedDetail.open) return;
 
     const details = [...this.querySelectorAll('details')];
     details.forEach((d) => {
@@ -109,6 +153,10 @@ class VelinAccordion extends HTMLElement {
         event.preventDefault();
         nextIndex = summaries.length - 1;
         break;
+      case 'Enter':
+      case ' ':
+        // Native summary already toggles on Enter/Space; don't double-handle.
+        return;
       default:
         return;
     }
@@ -117,6 +165,7 @@ class VelinAccordion extends HTMLElement {
 
   disconnectedCallback() {
     this.removeEventListener('toggle', this._onToggle, true);
+    this.removeEventListener('keydown', this._onKeydown);
   }
 }
 

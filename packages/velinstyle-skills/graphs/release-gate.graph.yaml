@@ -1,0 +1,15 @@
+id: release-gate
+name: Release Gate Workflow
+entry: review
+nodes:
+  review: { skill: velin-review-page-gate }
+  perf: { skill: velin-perf-audit-fix }
+  security: { skill: velin-security-scan-pii }
+  changelog: { skill: velin-release-changelog-sync }
+  meta: { skill: velin-release-meta-rebuild }
+edges:
+  - { from: review, to: perf }
+  - { from: review, to: security }
+  - { from: perf, to: changelog }
+  - { from: security, to: changelog }
+  - { from: changelog, to: meta }

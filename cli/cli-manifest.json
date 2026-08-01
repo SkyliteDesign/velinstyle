@@ -1,17 +1,17 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "commands": [
     {
       "name": "init",
-      "summary": "Create velinstyle.config.js",
+      "summary": "Create velinstyle.config.js, optional vendor copy, and starter HTML with reveal/sprite defaults",
       "flags": [],
       "example": "velinstyle init"
     },
     {
       "name": "build",
       "summary": "Build custom CSS with selected layers from config",
-      "flags": [],
-      "example": "velinstyle build"
+      "flags": ["--output", "-o", "--minify", "--preset"],
+      "example": "velinstyle build --preset lite -o ./lite.css"
     },
     {
       "name": "themes",
@@ -34,9 +34,9 @@
     },
     {
       "name": "scan",
-      "summary": "Security, accessibility, CSS, and PII scanner",
+      "summary": "Security, accessibility, CSS, and PII scanner (directory or single file)",
       "flags": ["--format", "--severity", "--only", "--fix", "--fix-dry-run", "--fix-lang"],
-      "example": "velinstyle scan . --only pii --fix-dry-run"
+      "example": "velinstyle scan index.html"
     },
     {
       "name": "prefix",
@@ -46,17 +46,61 @@
     },
     {
       "name": "blueprint",
-      "summary": "Print HTML blueprint snippets",
-      "flags": ["--output", "-o"],
+      "summary": "Print HTML blueprint snippets; --strict fails on classes missing from CSS",
+      "flags": ["--output", "-o", "--strict"],
       "subcommands": ["list"],
-      "example": "velinstyle blueprint modal -o snippet.html"
+      "example": "velinstyle blueprint modal -o snippet.html --strict"
+    },
+    {
+      "name": "create",
+      "summary": "Scaffold a runnable project: landing | dashboard | docs | auth",
+      "flags": ["--theme", "--no-copy"],
+      "subcommands": ["landing", "dashboard", "docs", "auth"],
+      "example": "velinstyle create landing ./my-site --theme earth"
+    },
+    {
+      "name": "serve",
+      "summary": "Serve a directory over HTTP (default port 4173)",
+      "flags": ["--port"],
+      "example": "velinstyle serve . --port 4173"
+    },
+    {
+      "name": "doctor",
+      "summary": "Check dist assets, themes, config, icons, and Windows ESM import hints",
+      "flags": [],
+      "example": "velinstyle doctor"
+    },
+    {
+      "name": "check",
+      "summary": "Aggregate gate: doctor + blueprint --strict + scan + review (alias: validate)",
+      "flags": ["--json", "--sarif", "--profile"],
+      "example": "velinstyle check . --profile marketing"
     },
     {
       "name": "scaffold",
-      "summary": "Generate layout HTML from natural language prompt",
+      "summary": "Plan-first page HTML or recipe fragment from natural language",
       "flags": ["--output", "-o", "--json"],
       "subcommands": ["list-intents"],
-      "example": "velinstyle scaffold \"dashboard with sidebar\""
+      "example": "velinstyle scaffold \"Steuerberater Landingpage mit Kontakt\""
+    },
+    {
+      "name": "plan",
+      "summary": "Emit page plan JSON from a prompt (no HTML)",
+      "flags": ["--output", "-o", "--json"],
+      "example": "velinstyle plan \"SaaS landing with pricing\""
+    },
+    {
+      "name": "review",
+      "summary": "Design / a11y / SEO / performance / conversion review gate",
+      "flags": ["--json", "--prompt", "--profile"],
+      "example": "velinstyle review out.html --profile marketing"
+    },
+    {
+      "name": "wc",
+      "summary": "Inspect Web Component APIs from source",
+      "flags": [],
+      "subcommands": ["api"],
+      "example": "velinstyle wc api velin-toast"
     },
     {
       "name": "layout",
@@ -67,10 +111,10 @@
     },
     {
       "name": "perf",
-      "summary": "Performance audit for images and scripts",
+      "summary": "Performance audit for images and scripts (directory or .html file)",
       "flags": ["--json", "--write", "--dry-run"],
       "subcommands": ["audit", "suggest", "fix"],
-      "example": "velinstyle perf audit samples/"
+      "example": "velinstyle perf audit index.html"
     },
     {
       "name": "tokens",
@@ -81,17 +125,37 @@
     },
     {
       "name": "docs",
-      "summary": "Generate developer reference Markdown",
+      "summary": "Generate developer reference Markdown (alias: documentation)",
       "flags": ["--scope", "--out"],
       "subcommands": ["generate"],
       "example": "velinstyle docs generate --scope all"
     },
     {
       "name": "meta",
-      "summary": "Build Velin-Meta agent bundle (velin-agent.json, llms.txt)",
-      "flags": ["--out", "--llms-out", "--base-url", "--no-llms"],
+      "summary": "Build Velin-Meta agent bundle; page --write merges curated goals/intent",
+      "flags": ["--out", "--llms-out", "--base-url", "--no-llms", "--write"],
       "subcommands": ["page"],
-      "example": "velinstyle meta"
+      "example": "velinstyle meta page index.html --write"
+    },
+    {
+      "name": "search",
+      "summary": "Build JSON search index for VelinSearch",
+      "flags": ["--out", "--extra-html"],
+      "subcommands": ["index"],
+      "example": "velinstyle search index --out dist/search-index.json"
+    },
+    {
+      "name": "skills",
+      "summary": "Registry-first AI skill catalog and install runner",
+      "flags": ["--capability", "--status", "--priority", "--origin", "--category", "--target", "--no-deps", "--json", "--human"],
+      "subcommands": ["list", "show", "install", "run", "validate", "doctor", "packs", "bundles", "templates", "projects", "graphs"],
+      "example": "velinstyle skills show scaffold.landing --human"
+    },
+    {
+      "name": "workflow",
+      "summary": "Resolve workflow graph or project workflow steps",
+      "flags": ["--json", "--dry-run", "--step"],
+      "example": "velinstyle workflow landingpage --json"
     }
   ]
 }

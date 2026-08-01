@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/skill-registry.schema.json",
+  "title": "VelinStyle Skill Registry",
+  "type": "object",
+  "required": ["version", "skills", "packs", "workflowGraphs", "bundles", "templates", "projects"],
+  "properties": {
+    "version": { "type": "string" },
+    "adapter": { "type": "string" },
+    "skills": { "type": "array", "items": { "$ref": "./skill-record.schema.json" } },
+    "packs": { "type": "array" },
+    "workflowGraphs": { "type": "array" },
+    "bundles": { "type": "array" },
+    "templates": { "type": "array" },
+    "projects": { "type": "array" }
+  }
+}

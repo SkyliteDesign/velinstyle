@@ -4,10 +4,14 @@
 
 Show a toast notification (bridges to `<velin-toast>`).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| message | Toast body text | `<velin-toast>` |
 ## Example
 
 ```html
-<div velin-notify>…</div>
+<button type="button" velin-notify="Saved">Notify</button>
 ```
 
 ## Accessibility

@@ -1,0 +1,10 @@
+id: frontend
+name: Frontend Pack
+version: 1.0.0
+priority: core
+skills:
+  - velin-dx-project-init
+  - velin-dev-plan-first
+  - velin-dev-page-scaffold
+  - velin-components-select-compose
+  - velin-utilities-layout-apply

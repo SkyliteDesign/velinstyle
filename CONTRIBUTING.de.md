@@ -33,16 +33,20 @@ Der Ordner `dist/` steht in `.gitignore` und ist **nicht** im Repository. Nach `
 
 ```
 velinstyle/
+├── VELINSTYLE_2030.md    # Produktidentitaet (Phase-0-Nordstern)
 ├── src/                  # Quell-CSS (Tokens, Base, A11y, Layout, Components, Utilities)
 ├── components/           # Web Components (JS-Quellcode)
 ├── cli/                  # VelinStyle-CLI (init, build, icons, scan, prefix, …)
 ├── icons/                # SVG-Icon-Quelldateien + Sprite-Builder
 ├── dist/                 # Build-Ausgabe (generiert; nicht direkt bearbeiten)
 ├── docs/                 # Dokumentationsseiten (Kurzreferenz im Repo)
+├── docs/strategy/        # Epics, Backlog, Utility Engine / API / DX
 ├── samples/              # Beispielseiten
 ├── scripts/              # Build-Skripte
 └── tests/                # Testdateien (`tests/setup.js` — Vitest/jsdom-Helfer)
 ```
+
+Vor groesseren Features bitte [VELINSTYLE_2030.md](VELINSTYLE_2030.md) und den lokalen Strategie-Index lesen (`interne_docs/strategy/` im Monorepo; siehe [docs/strategy/README.md](docs/strategy/README.md)). Beitraege, die der Produktidentitaet widersprechen (z. B. Adapter-Zoo vor WC-Integrationsguides oder unbegrenzte Tailwind-artige Utility-Expansion), sollten zuerst als RFC diskutiert werden.
 
 Die Marketing-Site und erweiterte Doku unter [velinstyle.info](https://velinstyle.info) liegen in einem **eigenen Repository** (`velinstyle-site`). Issues und PRs dafuer gehoeren dorthin, nicht hierher.
 

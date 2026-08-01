@@ -69,6 +69,16 @@ class VelinBottomNav extends HTMLElement {
       }
       if (el.tagName === 'A' && !el.getAttribute('href')) {
         el.setAttribute('role', 'button');
+        if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+        if (!el._velinBottomNavKey) {
+          el._velinBottomNavKey = (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              el.click();
+            }
+          };
+          el.addEventListener('keydown', el._velinBottomNavKey);
+        }
       }
     });
   }

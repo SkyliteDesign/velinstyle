@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/design-constraint.schema.json",
+  "title": "VelinStyle Design Constraint Pack",
+  "type": "object",
+  "required": ["id", "target", "rules"],
+  "properties": {
+    "id": { "type": "string" },
+    "target": { "type": "string" },
+    "rules": {
+      "type": "array",
+      "items": { "$ref": "https://velinstyle.info/schemas/design-rule.schema.json" }
+    }
+  }
+}

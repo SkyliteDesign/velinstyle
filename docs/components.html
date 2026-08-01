@@ -124,12 +124,12 @@
     <!-- ============ 3. Accordion ============ -->
     <section class="section" id="accordion">
       <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-accordion</h2>
-      <p class="velin-text-muted velin-mbe-4">Native <code>&lt;details&gt;</code> with optional exclusive mode. Arrow keys navigate between items.</p>
+      <p class="velin-text-muted velin-mbe-4">Native <code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code> with optional exclusive mode. Arrow keys navigate between items. Panel styles use light-DOM CSS (slotted descendants cannot be styled with <code>::slotted()</code>).</p>
       <div class="demo-box">
         <velin-accordion exclusive>
-          <details><summary>What is VelinStyle?</summary><div style="padding:var(--velin-space-4)"><p>An accessibility-first CSS framework.</p></div></details>
-          <details><summary>How do I install it?</summary><div style="padding:var(--velin-space-4)"><pre class="demo-code">npm install velinstyle</pre></div></details>
-          <details><summary>Can I customize it?</summary><div style="padding:var(--velin-space-4)"><p>Yes! Override CSS custom properties or use theme presets.</p></div></details>
+          <details><summary>What is VelinStyle?</summary><div><p>An accessibility-first CSS framework.</p></div></details>
+          <details><summary>How do I install it?</summary><div><pre class="demo-code">npm install velinstyle</pre></div></details>
+          <details><summary>Can I customize it?</summary><div><p>Yes! Override CSS custom properties or use theme presets.</p></div></details>
         </velin-accordion>
       </div>
       <h3 class="api-heading">Attributes</h3>
@@ -140,6 +140,7 @@
       <table class="api-table"><tr><th>Key</th><th>Action</th></tr>
         <tr><td>ArrowUp/Down</td><td>Navigate between summaries</td></tr>
         <tr><td>Home / End</td><td>Jump to first/last item</td></tr>
+        <tr><td>Enter / Space</td><td>Toggle the focused item (native details)</td></tr>
       </table>
     </section>
 
@@ -699,8 +700,25 @@
       </div>
     </section>
 
+    <section class="section" id="calendar">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-calendar</h2>
+      <p class="velin-text-muted velin-mbe-4">Month calendar. <code>value</code> (ISO date), optional <code>min</code>/<code>max</code>, event <code>velin-change</code>. Keyboard: arrows, Home/End, PageUp/Down, Enter.</p>
+      <div class="demo-box">
+        <velin-calendar label="Demo calendar"></velin-calendar>
+      </div>
+    </section>
+
+    <section class="section" id="file-dropzone">
+      <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-file-dropzone</h2>
+      <p class="velin-text-muted velin-mbe-4">Client-side dropzone. Events <code>velin-files</code> / <code>velin-error</code>. Does not upload to a server — wire your API.</p>
+      <div class="demo-box">
+        <velin-file-dropzone label="Demo uploads" accept=".png,.jpg,.pdf" multiple></velin-file-dropzone>
+      </div>
+    </section>
+
     <section class="section" id="command">
       <h2 class="velin-text-2xl velin-font-bold velin-mbe-4">velin-command</h2>
+      <p class="velin-text-muted velin-mbe-4">Command palette. Close with Escape, backdrop click, or <code>toggle()</code>. Closed overlay does not intercept pointer events.</p>
       <div class="demo-box">
         <button type="button" class="velin-btn velin-btn--outline" id="demo-command-open">Open palette</button>
         <velin-command id="demo-command">
@@ -708,6 +726,12 @@
           <button type="button">Settings</button>
         </velin-command>
       </div>
+      <h3 class="api-heading">Methods</h3>
+      <table class="api-table"><tr><th>Name</th><th>Description</th></tr>
+        <tr><td><code>open()</code></td><td>Open the palette</td></tr>
+        <tr><td><code>close()</code></td><td>Close the palette</td></tr>
+        <tr><td><code>toggle()</code></td><td>Toggle open/close</td></tr>
+      </table>
     </section>
 
     <section class="section" id="announcer">
@@ -723,7 +747,7 @@
       document.getElementById('demo-sheet')?.open();
     });
     document.getElementById('demo-command-open')?.addEventListener('click', function () {
-      document.getElementById('demo-command')?.open();
+      document.getElementById('demo-command')?.toggle();
     });
   </script>
 

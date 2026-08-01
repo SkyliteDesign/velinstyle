@@ -4,6 +4,10 @@
 
 Hover lift/glow animation.
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty / present) | Hover lift / glow | Motion CSS |
 ## Example
 
 ```html

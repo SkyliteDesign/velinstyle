@@ -4,6 +4,11 @@
 
 Copy text to clipboard (bridges to `<velin-copy>`).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty) | Copy host text content | `<velin-copy>` / Clipboard API |
+| `selector` / value | Copy from related node when provided by enhance | Clipboard API |
 ## Example
 
 ```html

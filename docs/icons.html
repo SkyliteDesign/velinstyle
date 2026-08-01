@@ -148,7 +148,14 @@
 &lt;velin-icon name="warning" size="20" label="Warning"&gt;&lt;/velin-icon&gt;
 
 &lt;!-- Custom sprite path --&gt;
-&lt;velin-icon name="star" sprite="/assets/velin-icons.svg"&gt;&lt;/velin-icon&gt;</pre>
+&lt;velin-icon name="star" sprite="/assets/velin-icons.svg"&gt;&lt;/velin-icon&gt;
+
+&lt;!-- Or set a page-wide default (no /dist hardcode) --&gt;
+&lt;meta name="velin-icon-sprite" content="vendor/velinstyle/velin-icons.svg"&gt;</pre>
+
+      <p class="velin-text-sm velin-text-muted" style="margin-block: var(--velin-space-3)">
+        Default when <code>sprite</code> is omitted: meta / <code>data-velin-icon-sprite</code> / <code>VelinIcon.defaultSprite</code> / relative <code>velin-icons.svg</code>.
+      </p>
 
       <h3 class="velin-text-lg velin-font-bold velin-mbs-6 velin-mbe-2">Method 2: Inline SVG (static / file:// usage)</h3>
       <pre style="background: var(--velin-color-surface-dim); padding: var(--velin-space-4); border-radius: var(--velin-radius-md); font-family: var(--velin-font-mono); font-size: var(--velin-text-sm); overflow-x: auto; border: 1px solid var(--velin-color-border);">&lt;!-- Decorative icon --&gt;

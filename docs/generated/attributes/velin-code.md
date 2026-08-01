@@ -4,6 +4,10 @@
 
 Code block with copy button and VelinHighlight syntax colors (use `language` or `velin-code="js"`).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| language id (`js`, `css`, …) | Syntax highlight + copy chrome | VelinHighlight / `<velin-code-block>` |
 ## Example
 
 ```html

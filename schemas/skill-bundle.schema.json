@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/skill-bundle.schema.json",
+  "title": "VelinStyle Skill Bundle",
+  "type": "object",
+  "required": ["id", "origin", "packs"],
+  "properties": {
+    "id": { "type": "string" },
+    "origin": { "type": "string", "enum": ["official", "community", "enterprise"] },
+    "packs": { "type": "array", "items": { "type": "string" } },
+    "graphs": { "type": "array", "items": { "type": "string" } },
+    "templates": { "type": "array", "items": { "type": "string" } },
+    "docs": { "type": "array", "items": { "type": "string" } }
+  }
+}

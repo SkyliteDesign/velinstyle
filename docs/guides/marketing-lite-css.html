@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketing lite CSS — VelinStyle</title>
+  <meta name="description" content="Build a smaller VelinStyle CSS subset for marketing pages via preset lite.">
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <main id="main" class="velin-container velin-py-8">
+    <h1 class="velin-text-3xl velin-font-bold">Marketing lite CSS</h1>
+    <p class="velin-text-muted velin-mbe-6">Prefer a layer subset over the full bundle when the page only needs tokens, layout, buttons/cards, and spacing/flex utilities.</p>
+
+    <h2 class="velin-text-2xl velin-font-bold">Preset</h2>
+    <pre class="velin-code" style="overflow:auto;padding:1rem;background:var(--velin-color-surface-dim,#f4f4f5);border-radius:0.5rem">velinstyle build --preset lite -o ./velinstyle-lite.css --minify
+
+# Or in velinstyle.config.js:
+# export default { preset: 'lite', output: './velinstyle-lite.css', minify: true };</pre>
+
+    <p class="velin-mbs-4">Lite layers: <code>tokens</code>, <code>reset</code>, <code>base</code>, <code>layout</code>, <code>components</code>, <code>utilities</code> (skips <code>a11y</code> / <code>helpers</code> unless you add them).</p>
+
+    <h2 class="velin-text-2xl velin-font-bold velin-mbs-6">JS path</h2>
+    <p>Do not ship the full components IIFE for a static marketing page. Prefer:</p>
+    <ul style="line-height:1.8">
+      <li><code>bootFromDOM(document, { attributes: true })</code> + only the WCs you use, or</li>
+      <li>lazy <code>register()</code> / runtime chunks for form-summary, theme-toggle, etc.</li>
+    </ul>
+
+    <p class="velin-mbs-6">Measure after build: compare <code>velinstyle-lite.css</code> to <code>dist/velinstyle.min.css</code>. Typical minify sizes in 1.2.0: lite ≈ <strong>140&nbsp;KB</strong> vs full ≈ <strong>162&nbsp;KB</strong> (~87%). The CLI prints both sizes after <code>--preset lite</code> and warns if lite is not smaller (e.g. unbundled fallback). Prefer lazy WC / <code>bootFromDOM</code> for JS.</p>
+    <p>Next: <a href="landing-15-min.html">Landing in 15 minutes</a>.</p>
+  </main>
+</body>
+</html>

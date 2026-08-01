@@ -6,7 +6,8 @@
   </velin-bottom-nav>
 </nav>
 <script type="module">
-  import '../../dist/velinstyle-components.min.js';
+  // Prefer package entry; for offline vendor installs use: import './vendor/velinstyle/velinstyle-components.min.js';
+  import '@birdapi/velinstyle/bundle';
   const nav = document.querySelector('velin-bottom-nav');
   nav?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', (e) => {

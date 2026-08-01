@@ -4,6 +4,10 @@
 
 Scroll-margin for anchor targets.
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty / length) | Apply scroll-margin for in-page targets | CSS scroll-margin |
 ## Example
 
 ```html

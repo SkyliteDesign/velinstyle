@@ -4,6 +4,14 @@
 
 Source: `components/velin-icon.js`
 
+## Minimal working example
+Copy-paste starter (load CSS + `velinstyle-components` / `bootFromDOM` as needed):
+
+```html
+<!-- Set <meta name="velin-icon-sprite" content="vendor/velinstyle/velin-icons.svg"> once -->
+<velin-icon name="check" size="20" label="Done"></velin-icon>
+```
+
 ## Accessibility
 WCAG contract status: **pass** (framework target: AAA).
 

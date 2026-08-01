@@ -12,9 +12,10 @@ WCAG contract status: **pass** (framework target: AAA).
 - **Notes:** aria-labelledby on dialog, aria-modal true.
 
 ## Attributes
-_No `observedAttributes` declared._
+_No `observedAttributes` declared._ Author-facing configuration may still use slots, properties, or child markup — see **Slots** / **Public API** below.
 
 ## Events
+- `velin-close` (bubbles)
 - `velin-dialog-close` (bubbles)
 ## CSS parts
 - `dialog`

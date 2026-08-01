@@ -1,0 +1,8 @@
+id: documentation
+name: Documentation Pack
+version: 1.0.0
+priority: recommended
+skills:
+  - velin-docs-component-guide
+  - velin-docs-generate-api
+  - velin-release-changelog-sync

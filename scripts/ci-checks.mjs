@@ -15,8 +15,8 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
  * than tracked automatically. Applications should prefer `register()` /
  * `bootFromDOM()` and pay only for the components they use.
  */
-const MAX_BUNDLE_JS = 215 * 1024;
-const MAX_BUNDLE_CSS = 170 * 1024;
+const MAX_BUNDLE_JS = 230 * 1024;
+const MAX_BUNDLE_CSS = 175 * 1024;
 
 function fail(msg) {
   console.error(`CI check failed: ${msg}`);
@@ -75,6 +75,14 @@ if (beforeIndex !== afterIndex) {
   fail('dist/search-index.json out of date — commit after npm run search:index');
 }
 console.log('Search index OK');
+
+execSync('node scripts/check-blueprint-classes.mjs', { cwd: ROOT, stdio: 'inherit' });
+console.log('Blueprints OK');
+
+if (existsSync(join(ROOT, '..', 'VelinStyle_Live_test_sandbox', 'fixtures', 'broken-chaos.html'))) {
+  execSync('node scripts/check-chaos-detection.mjs', { cwd: ROOT, stdio: 'inherit' });
+  console.log('Chaos detection OK');
+}
 
 const agentPath = join(ROOT, 'dist/velin-agent.json');
 const llmsPath = join(ROOT, 'dist/llms.txt');

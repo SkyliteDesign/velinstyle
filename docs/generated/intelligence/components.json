@@ -1,0 +1,1431 @@
+[
+  {
+    "id": "css-button",
+    "kind": "css-component",
+    "classPrefix": "velin-btn",
+    "category": "actions",
+    "subcategory": "button",
+    "purpose": "Primary interactive control for actions and form submit.",
+    "family": "actions",
+    "maturity": "core",
+    "recommendedPages": [
+      "landing",
+      "saas",
+      "dashboard",
+      "shop"
+    ],
+    "recommendedSections": [
+      "hero",
+      "cta",
+      "contact",
+      "pricing"
+    ],
+    "compatibleWith": [
+      "css-card",
+      "css-input",
+      "velin-form-summary"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "role": "native button/link",
+      "keyboard": "Enter/Space on button"
+    },
+    "seo": {
+      "impact": "low",
+      "notes": "CTA copy affects conversion, not crawl structure"
+    },
+    "performance": {
+      "cost": "css-only"
+    },
+    "variants": [
+      "primary",
+      "secondary",
+      "ghost",
+      "danger",
+      "sm",
+      "lg"
+    ],
+    "density": [
+      "comfortable",
+      "default",
+      "compact"
+    ],
+    "themeSupport": [
+      "light",
+      "dark",
+      "system"
+    ],
+    "motion": {
+      "hover": true,
+      "reducedMotionSafe": true
+    },
+    "examples": [
+      "<button class=\"velin-btn velin-btn--primary\">Save</button>"
+    ],
+    "promptKeywords": [
+      "button",
+      "cta",
+      "call to action",
+      "submit"
+    ],
+    "designIntelligence": {
+      "visualWeight": 4,
+      "importance": "primary",
+      "hierarchy": "action",
+      "spacingRules": [
+        "pair with gap-3 or gap-4 in CTA groups"
+      ],
+      "typographyRules": [
+        "label ≤ 3 words preferred"
+      ],
+      "animationRules": [
+        "no infinite pulse on primary CTA"
+      ],
+      "colorRules": [
+        "primary uses --velin-color-primary + on-primary text"
+      ],
+      "eyeFlow": "place primary CTA after supporting copy",
+      "compositionRules": [
+        "max 2 CTAs in hero"
+      ],
+      "commonMistakes": [
+        "three equal CTAs",
+        "low contrast ghost on muted"
+      ],
+      "bestPractices": [
+        "one primary + optional secondary"
+      ]
+    }
+  },
+  {
+    "id": "css-card",
+    "kind": "css-component",
+    "classPrefix": "velin-card",
+    "category": "content",
+    "subcategory": "card",
+    "purpose": "Grouped content surface for features, services, pricing tiers.",
+    "family": "surfaces",
+    "maturity": "core",
+    "recommendedPages": [
+      "landing",
+      "saas",
+      "agency",
+      "portfolio"
+    ],
+    "recommendedSections": [
+      "services",
+      "benefits",
+      "pricing"
+    ],
+    "compatibleWith": [
+      "css-button",
+      "css-badge",
+      "velin-icon"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "notes": "Heading inside card; don't nest interactive without care"
+    },
+    "seo": {
+      "impact": "medium",
+      "notes": "Card headings help section semantics"
+    },
+    "performance": {
+      "cost": "css-only"
+    },
+    "variants": [
+      "raised",
+      "bordered"
+    ],
+    "density": [
+      "comfortable",
+      "default",
+      "compact"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {
+      "reducedMotionSafe": true
+    },
+    "examples": [
+      "<article class=\"velin-card\">…</article>"
+    ],
+    "promptKeywords": [
+      "card",
+      "feature",
+      "service",
+      "tile"
+    ],
+    "designIntelligence": {
+      "visualWeight": 3,
+      "importance": "secondary",
+      "hierarchy": "section-item",
+      "spacingRules": [
+        "grid gap-4 or gap-6"
+      ],
+      "typographyRules": [
+        "H3 title + short body"
+      ],
+      "animationRules": [
+        "optional entrance; respect reduced motion"
+      ],
+      "colorRules": [
+        "raised surface + text tokens"
+      ],
+      "eyeFlow": "scan titles across grid first",
+      "compositionRules": [
+        "2–4 columns desktop; 1 mobile"
+      ],
+      "commonMistakes": [
+        "uneven card heights with sparse content",
+        "too many cards above fold"
+      ],
+      "bestPractices": [
+        "equal structure: icon, title, text, optional link"
+      ]
+    }
+  },
+  {
+    "id": "css-input",
+    "kind": "css-component",
+    "classPrefix": "velin-input",
+    "category": "forms",
+    "subcategory": "field",
+    "purpose": "Text entry fields with labels for forms.",
+    "family": "forms",
+    "maturity": "core",
+    "recommendedPages": [
+      "landing",
+      "saas",
+      "dashboard",
+      "shop"
+    ],
+    "recommendedSections": [
+      "contact",
+      "login"
+    ],
+    "compatibleWith": [
+      "velin-form-summary",
+      "css-button"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "notes": "Visible label required; wire aria-invalid via form-summary"
+    },
+    "seo": {
+      "impact": "low"
+    },
+    "performance": {
+      "cost": "css-only"
+    },
+    "variants": [
+      "default",
+      "invalid"
+    ],
+    "density": [
+      "default",
+      "compact",
+      "data-dense"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {},
+    "examples": [
+      "<label>Name<input class=\"velin-input\"></label>"
+    ],
+    "promptKeywords": [
+      "input",
+      "form field",
+      "text field"
+    ],
+    "designIntelligence": {
+      "visualWeight": 2,
+      "importance": "primary",
+      "hierarchy": "form-control",
+      "spacingRules": [
+        "stack fields with gap-4"
+      ],
+      "typographyRules": [
+        "label above field"
+      ],
+      "animationRules": [],
+      "colorRules": [
+        "invalid uses danger tokens"
+      ],
+      "eyeFlow": "label → field → help → errors summary",
+      "compositionRules": [
+        "group related fields"
+      ],
+      "commonMistakes": [
+        "placeholder-only labels"
+      ],
+      "bestPractices": [
+        "pair with velin-form-summary"
+      ]
+    }
+  },
+  {
+    "id": "css-alert",
+    "kind": "css-component",
+    "classPrefix": "velin-alert",
+    "category": "feedback",
+    "subcategory": "alert",
+    "purpose": "Inline status messages.",
+    "family": "feedback",
+    "maturity": "core",
+    "recommendedPages": [
+      "dashboard",
+      "saas",
+      "docs"
+    ],
+    "recommendedSections": [
+      "contact",
+      "onboarding"
+    ],
+    "compatibleWith": [
+      "velin-form-summary"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "role": "status/alert depending on urgency"
+    },
+    "seo": {
+      "impact": "none"
+    },
+    "performance": {
+      "cost": "css-only"
+    },
+    "variants": [
+      "info",
+      "success",
+      "warning",
+      "danger"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {},
+    "examples": [
+      "<div class=\"velin-alert velin-alert--info\">…</div>"
+    ],
+    "promptKeywords": [
+      "alert",
+      "banner",
+      "notice"
+    ],
+    "designIntelligence": {
+      "visualWeight": 3,
+      "importance": "secondary",
+      "hierarchy": "feedback",
+      "spacingRules": [
+        "margin-block before forms"
+      ],
+      "typographyRules": [
+        "concise message"
+      ],
+      "animationRules": [],
+      "colorRules": [
+        "semantic status tokens"
+      ],
+      "eyeFlow": "near the related control",
+      "compositionRules": [
+        "one alert per concern"
+      ],
+      "commonMistakes": [
+        "using alert for marketing hero"
+      ],
+      "bestPractices": [
+        "pair with actionable next step"
+      ]
+    }
+  },
+  {
+    "id": "css-nav",
+    "kind": "css-component",
+    "classPrefix": "velin-nav",
+    "category": "navigation",
+    "subcategory": "nav",
+    "purpose": "Site or app navigation chrome.",
+    "family": "navigation",
+    "maturity": "core",
+    "recommendedPages": [
+      "landing",
+      "corporate",
+      "docs",
+      "dashboard"
+    ],
+    "recommendedSections": [
+      "navbar"
+    ],
+    "compatibleWith": [
+      "velin-theme-toggle",
+      "velin-search"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "notes": "Landmark nav; skip link on pages"
+    },
+    "seo": {
+      "impact": "high",
+      "notes": "Primary internal links"
+    },
+    "performance": {
+      "cost": "css-only"
+    },
+    "variants": [
+      "header",
+      "pills"
+    ],
+    "density": [
+      "comfortable",
+      "default",
+      "compact"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {},
+    "examples": [
+      "<nav class=\"velin-nav\">…</nav>"
+    ],
+    "promptKeywords": [
+      "navbar",
+      "navigation",
+      "header menu"
+    ],
+    "designIntelligence": {
+      "visualWeight": 3,
+      "importance": "primary",
+      "hierarchy": "chrome",
+      "spacingRules": [
+        "sticky optional; padding-inline token"
+      ],
+      "typographyRules": [
+        "short labels"
+      ],
+      "animationRules": [],
+      "colorRules": [
+        "base or raised surface"
+      ],
+      "eyeFlow": "logo → links → CTA",
+      "compositionRules": [
+        "one primary nav CTA max"
+      ],
+      "commonMistakes": [
+        "too many top-level items"
+      ],
+      "bestPractices": [
+        "5–7 primary links"
+      ]
+    }
+  },
+  {
+    "id": "velin-modal",
+    "kind": "web-component",
+    "tag": "velin-modal",
+    "category": "overlays",
+    "subcategory": "modal",
+    "purpose": "Blocking dialog overlay for focused tasks.",
+    "family": "overlays",
+    "maturity": "core",
+    "recommendedPages": [
+      "saas",
+      "dashboard",
+      "shop"
+    ],
+    "recommendedSections": [],
+    "compatibleWith": [
+      "css-button",
+      "velin-form-summary"
+    ],
+    "incompatibleWith": [
+      "velin-drawer",
+      "velin-sheet"
+    ],
+    "accessibility": {
+      "focusTrap": true,
+      "escapeCloses": true,
+      "inertBackground": true
+    },
+    "seo": {
+      "impact": "none",
+      "notes": "Do not put primary SEO content only in modal"
+    },
+    "performance": {
+      "cost": "lazy-ok"
+    },
+    "variants": [
+      "open"
+    ],
+    "density": [
+      "default"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {
+      "reducedMotionSafe": true
+    },
+    "examples": [
+      "<velin-modal><h2 slot=\"title\">…</h2></velin-modal>"
+    ],
+    "promptKeywords": [
+      "modal",
+      "dialog overlay",
+      "popup"
+    ],
+    "designIntelligence": {
+      "visualWeight": 5,
+      "importance": "primary",
+      "hierarchy": "overlay",
+      "spacingRules": [
+        "comfortable body padding"
+      ],
+      "typographyRules": [
+        "clear title"
+      ],
+      "animationRules": [
+        "short open/close; respect reduced motion"
+      ],
+      "colorRules": [
+        "overlay surface + dimmed backdrop"
+      ],
+      "eyeFlow": "title → body → actions",
+      "compositionRules": [
+        "prefer modal for blocking confirmations"
+      ],
+      "commonMistakes": [
+        "stacking multiple modals",
+        "missing close affordance"
+      ],
+      "bestPractices": [
+        "use focus-manager lifecycle"
+      ]
+    },
+    "api": {
+      "events": [
+        "velin-close"
+      ],
+      "methods": [
+        "open",
+        "close"
+      ]
+    }
+  },
+  {
+    "id": "velin-dialog",
+    "kind": "web-component",
+    "tag": "velin-dialog",
+    "category": "overlays",
+    "subcategory": "dialog",
+    "purpose": "Native dialog-based prompts and confirms.",
+    "family": "overlays",
+    "maturity": "core",
+    "recommendedPages": [
+      "saas",
+      "dashboard"
+    ],
+    "recommendedSections": [],
+    "compatibleWith": [
+      "css-button"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "nativeDialog": true
+    },
+    "seo": {
+      "impact": "none"
+    },
+    "performance": {
+      "cost": "lazy-ok"
+    },
+    "variants": [],
+    "density": [
+      "default"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {},
+    "examples": [
+      "<velin-dialog></velin-dialog>"
+    ],
+    "promptKeywords": [
+      "confirm dialog",
+      "prompt dialog"
+    ],
+    "designIntelligence": {
+      "visualWeight": 5,
+      "importance": "primary",
+      "hierarchy": "overlay",
+      "spacingRules": [],
+      "typographyRules": [],
+      "animationRules": [],
+      "colorRules": [],
+      "eyeFlow": "message → actions",
+      "compositionRules": [
+        "use for confirm/prompt; modal for richer layouts"
+      ],
+      "commonMistakes": [
+        "listening only to deprecated velin-dialog-close"
+      ],
+      "bestPractices": [
+        "listen to velin-close"
+      ]
+    },
+    "api": {
+      "events": [
+        "velin-close",
+        "velin-dialog-close"
+      ]
+    }
+  },
+  {
+    "id": "velin-accordion",
+    "kind": "web-component",
+    "tag": "velin-accordion",
+    "category": "disclosure",
+    "subcategory": "accordion",
+    "purpose": "FAQ and progressive disclosure of related panels.",
+    "family": "disclosure",
+    "maturity": "core",
+    "recommendedPages": [
+      "landing",
+      "docs",
+      "saas",
+      "lawyer",
+      "healthcare"
+    ],
+    "recommendedSections": [
+      "faq"
+    ],
+    "compatibleWith": [
+      "css-card"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "keyboard": "arrow keys / enter within pattern"
+    },
+    "seo": {
+      "impact": "medium",
+      "notes": "Keep question text in light DOM when possible"
+    },
+    "performance": {
+      "cost": "lazy-ok"
+    },
+    "variants": [],
+    "density": [
+      "comfortable",
+      "default"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {
+      "reducedMotionSafe": true
+    },
+    "examples": [
+      "<velin-accordion>…</velin-accordion>"
+    ],
+    "promptKeywords": [
+      "faq",
+      "accordion",
+      "disclosure"
+    ],
+    "designIntelligence": {
+      "visualWeight": 2,
+      "importance": "secondary",
+      "hierarchy": "section-body",
+      "spacingRules": [
+        "stack items tightly"
+      ],
+      "typographyRules": [
+        "questions as clear interrogatives"
+      ],
+      "animationRules": [
+        "expand/collapse brief"
+      ],
+      "colorRules": [
+        "base/raised"
+      ],
+      "eyeFlow": "scan questions vertically",
+      "compositionRules": [
+        "use in FAQ section after social proof"
+      ],
+      "commonMistakes": [
+        "marketing paragraphs as 'questions'"
+      ],
+      "bestPractices": [
+        "5–8 high-intent FAQs"
+      ]
+    }
+  },
+  {
+    "id": "velin-form-summary",
+    "kind": "web-component",
+    "tag": "velin-form-summary",
+    "category": "forms",
+    "subcategory": "validation",
+    "purpose": "Accessible error summary for forms.",
+    "family": "forms",
+    "maturity": "core",
+    "recommendedPages": [
+      "landing",
+      "saas",
+      "shop"
+    ],
+    "recommendedSections": [
+      "contact"
+    ],
+    "compatibleWith": [
+      "css-input",
+      "css-button"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "role": "alert",
+      "wcag": [
+        "3.3.1",
+        "3.3.3"
+      ]
+    },
+    "seo": {
+      "impact": "none"
+    },
+    "performance": {
+      "cost": "lazy-ok"
+    },
+    "variants": [],
+    "density": [
+      "default"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {},
+    "examples": [
+      "<velin-form-summary></velin-form-summary>"
+    ],
+    "promptKeywords": [
+      "form errors",
+      "validation summary",
+      "contact form"
+    ],
+    "designIntelligence": {
+      "visualWeight": 4,
+      "importance": "primary",
+      "hierarchy": "form-feedback",
+      "spacingRules": [
+        "place before fields or at top of form"
+      ],
+      "typographyRules": [
+        "list each invalid field"
+      ],
+      "animationRules": [],
+      "colorRules": [
+        "danger tokens"
+      ],
+      "eyeFlow": "summary → first invalid field",
+      "compositionRules": [
+        "required on contact/checkout forms"
+      ],
+      "commonMistakes": [
+        "native-only bubbles without summary"
+      ],
+      "bestPractices": [
+        "wire aria-invalid via component"
+      ]
+    }
+  },
+  {
+    "id": "velin-theme-toggle",
+    "kind": "web-component",
+    "tag": "velin-theme-toggle",
+    "category": "theming",
+    "subcategory": "toggle",
+    "purpose": "Switch light/dark theme via data-velin-theme.",
+    "family": "theming",
+    "maturity": "core",
+    "recommendedPages": [
+      "docs",
+      "saas",
+      "dashboard"
+    ],
+    "recommendedSections": [
+      "navbar"
+    ],
+    "compatibleWith": [
+      "css-nav"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "notes": "Accessible name for toggle"
+    },
+    "seo": {
+      "impact": "none"
+    },
+    "performance": {
+      "cost": "lazy-ok"
+    },
+    "variants": [],
+    "density": [
+      "default",
+      "compact"
+    ],
+    "themeSupport": [
+      "light",
+      "dark",
+      "system"
+    ],
+    "motion": {},
+    "examples": [
+      "<velin-theme-toggle></velin-theme-toggle>"
+    ],
+    "promptKeywords": [
+      "dark mode",
+      "theme toggle"
+    ],
+    "designIntelligence": {
+      "visualWeight": 1,
+      "importance": "tertiary",
+      "hierarchy": "chrome",
+      "spacingRules": [],
+      "typographyRules": [],
+      "animationRules": [],
+      "colorRules": [],
+      "eyeFlow": "corner of header",
+      "compositionRules": [
+        "header actions cluster"
+      ],
+      "commonMistakes": [
+        "forcing dark without attribute contract"
+      ],
+      "bestPractices": [
+        "follow ADR 0011 precedence"
+      ]
+    }
+  },
+  {
+    "id": "velin-data-table",
+    "kind": "web-component",
+    "tag": "velin-data-table",
+    "category": "data",
+    "subcategory": "table",
+    "purpose": "Progressive enhancement for sortable, filterable, paginated tables.",
+    "family": "data-display",
+    "maturity": "core",
+    "recommendedPages": [
+      "dashboard",
+      "crm",
+      "erp",
+      "docs"
+    ],
+    "recommendedSections": [
+      "navbar"
+    ],
+    "compatibleWith": [
+      "css-input",
+      "css-badge",
+      "velin-form-summary"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "notes": "Requires caption/aria-label; aria-sort on headers"
+    },
+    "seo": {
+      "impact": "low",
+      "notes": "Often noindex app surfaces"
+    },
+    "performance": {
+      "cost": "dom-rows"
+    },
+    "variants": [
+      "sortable",
+      "filterable",
+      "paginated"
+    ],
+    "density": [
+      "default",
+      "compact",
+      "data-dense"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {
+      "reducedMotionSafe": true
+    },
+    "examples": [
+      "<velin-data-table><table>…</table></velin-data-table>"
+    ],
+    "promptKeywords": [
+      "data table",
+      "sortable table",
+      "filter table"
+    ],
+    "designIntelligence": {
+      "visualWeight": 4,
+      "importance": "primary",
+      "hierarchy": "main",
+      "spacingRules": [
+        "full-bleed in content column"
+      ],
+      "typographyRules": [
+        "tabular nums for numeric columns"
+      ],
+      "animationRules": [],
+      "colorRules": [
+        "zebra optional via tokens"
+      ],
+      "eyeFlow": "toolbar → headers → rows",
+      "compositionRules": [
+        "pair filter input above table"
+      ],
+      "commonMistakes": [
+        "missing caption",
+        "icon-only sort without name"
+      ],
+      "bestPractices": [
+        "announce sort/filter changes"
+      ]
+    }
+  },
+  {
+    "id": "velin-search",
+    "kind": "web-component",
+    "tag": "velin-search",
+    "category": "navigation",
+    "subcategory": "search",
+    "purpose": "Documentation and site search against a JSON index.",
+    "family": "navigation",
+    "maturity": "core",
+    "recommendedPages": [
+      "docs",
+      "saas",
+      "corporate"
+    ],
+    "recommendedSections": [
+      "navbar"
+    ],
+    "compatibleWith": [
+      "css-nav",
+      "velin-theme-toggle"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "notes": "Combobox pattern; keyboard results"
+    },
+    "seo": {
+      "impact": "low"
+    },
+    "performance": {
+      "cost": "index-load"
+    },
+    "variants": [],
+    "density": [
+      "default",
+      "compact"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {},
+    "examples": [
+      "<velin-search index-url=\"/dist/search-index.json\"></velin-search>"
+    ],
+    "promptKeywords": [
+      "search",
+      "docs search",
+      "site search"
+    ],
+    "designIntelligence": {
+      "visualWeight": 2,
+      "importance": "secondary",
+      "hierarchy": "chrome",
+      "spacingRules": [
+        "header cluster"
+      ],
+      "typographyRules": [],
+      "animationRules": [],
+      "colorRules": [
+        "surface raised for results"
+      ],
+      "eyeFlow": "header center/right",
+      "compositionRules": [
+        "one search per chrome"
+      ],
+      "commonMistakes": [
+        "blocking main thread with huge index"
+      ],
+      "bestPractices": [
+        "relative URLs in index"
+      ]
+    }
+  },
+  {
+    "id": "css-badge",
+    "kind": "css-component",
+    "classPrefix": "velin-badge",
+    "category": "feedback",
+    "subcategory": "badge",
+    "purpose": "Compact status and count labels.",
+    "family": "feedback",
+    "maturity": "core",
+    "recommendedPages": [
+      "dashboard",
+      "saas",
+      "shop"
+    ],
+    "recommendedSections": [
+      "services",
+      "pricing",
+      "navbar"
+    ],
+    "compatibleWith": [
+      "css-card",
+      "css-nav",
+      "css-button"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "notes": "Do not rely on color alone"
+    },
+    "seo": {
+      "impact": "none"
+    },
+    "performance": {
+      "cost": "css-only"
+    },
+    "variants": [
+      "success",
+      "warning",
+      "danger",
+      "info"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {},
+    "examples": [
+      "<span class=\"velin-badge\">New</span>"
+    ],
+    "promptKeywords": [
+      "badge",
+      "status label",
+      "pill"
+    ],
+    "designIntelligence": {
+      "visualWeight": 1,
+      "importance": "tertiary",
+      "hierarchy": "meta",
+      "spacingRules": [
+        "inline with title"
+      ],
+      "typographyRules": [
+        "short labels"
+      ],
+      "animationRules": [],
+      "colorRules": [
+        "semantic tokens"
+      ],
+      "eyeFlow": "adjacent to title",
+      "compositionRules": [
+        "one badge cluster per card"
+      ],
+      "commonMistakes": [
+        "color-only meaning"
+      ],
+      "bestPractices": [
+        "pair with text"
+      ]
+    }
+  },
+  {
+    "id": "velin-drawer",
+    "kind": "web-component",
+    "tag": "velin-drawer",
+    "category": "overlays",
+    "subcategory": "drawer",
+    "purpose": "Side panel overlay for navigation or secondary tasks without blocking the whole viewport like a modal.",
+    "family": "overlays",
+    "maturity": "core",
+    "recommendedPages": [
+      "dashboard",
+      "saas",
+      "docs",
+      "shop"
+    ],
+    "recommendedSections": [
+      "navbar"
+    ],
+    "compatibleWith": [
+      "css-nav",
+      "css-button",
+      "velin-form-summary"
+    ],
+    "incompatibleWith": [
+      "velin-modal",
+      "velin-sheet"
+    ],
+    "accessibility": {
+      "focusTrap": true,
+      "escapeCloses": true,
+      "inertBackground": true
+    },
+    "seo": {
+      "impact": "none"
+    },
+    "performance": {
+      "cost": "lazy-ok"
+    },
+    "variants": [
+      "start",
+      "end"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {
+      "reducedMotionSafe": true
+    },
+    "examples": [
+      "<velin-drawer></velin-drawer>"
+    ],
+    "promptKeywords": [
+      "drawer",
+      "side panel",
+      "sidebar overlay"
+    ],
+    "designIntelligence": {
+      "visualWeight": 4,
+      "importance": "secondary",
+      "hierarchy": "overlay",
+      "spacingRules": [
+        "comfortable body padding"
+      ],
+      "typographyRules": [
+        "clear title"
+      ],
+      "animationRules": [
+        "slide in/out; respect reduced motion"
+      ],
+      "colorRules": [
+        "overlay surface + dimmed backdrop"
+      ],
+      "eyeFlow": "title → body → actions",
+      "compositionRules": [
+        "prefer drawer for filters/nav; modal for blocking confirms"
+      ],
+      "commonMistakes": [
+        "using drawer and modal interchangeably"
+      ],
+      "bestPractices": [
+        "use focus-manager lifecycle"
+      ]
+    },
+    "api": {
+      "events": [
+        "velin-close"
+      ],
+      "methods": [
+        "open",
+        "close"
+      ]
+    }
+  },
+  {
+    "id": "velin-sheet",
+    "kind": "web-component",
+    "tag": "velin-sheet",
+    "category": "overlays",
+    "subcategory": "sheet",
+    "purpose": "Bottom or edge sheet for mobile-first actions and pickers.",
+    "family": "overlays",
+    "maturity": "core",
+    "recommendedPages": [
+      "shop",
+      "saas",
+      "dashboard",
+      "event"
+    ],
+    "recommendedSections": [],
+    "compatibleWith": [
+      "css-button",
+      "velin-form-summary"
+    ],
+    "incompatibleWith": [
+      "velin-modal",
+      "velin-drawer"
+    ],
+    "accessibility": {
+      "focusTrap": true,
+      "escapeCloses": true,
+      "inertBackground": true
+    },
+    "seo": {
+      "impact": "none"
+    },
+    "performance": {
+      "cost": "lazy-ok"
+    },
+    "variants": [
+      "bottom"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {
+      "reducedMotionSafe": true
+    },
+    "examples": [
+      "<velin-sheet></velin-sheet>"
+    ],
+    "promptKeywords": [
+      "sheet",
+      "bottom sheet",
+      "action sheet"
+    ],
+    "designIntelligence": {
+      "visualWeight": 4,
+      "importance": "secondary",
+      "hierarchy": "overlay",
+      "spacingRules": [
+        "thumb-friendly action spacing"
+      ],
+      "typographyRules": [
+        "short action labels"
+      ],
+      "animationRules": [
+        "slide from edge; reduced-motion safe"
+      ],
+      "colorRules": [
+        "raised overlay surface"
+      ],
+      "eyeFlow": "handle/title → actions",
+      "compositionRules": [
+        "prefer sheet on small viewports for actions"
+      ],
+      "commonMistakes": [
+        "tiny hit targets",
+        "missing dismiss control"
+      ],
+      "bestPractices": [
+        "use focus-manager lifecycle"
+      ]
+    },
+    "api": {
+      "events": [
+        "velin-close"
+      ],
+      "methods": [
+        "open",
+        "close"
+      ]
+    }
+  },
+  {
+    "id": "velin-lightbox",
+    "kind": "web-component",
+    "tag": "velin-lightbox",
+    "category": "overlays",
+    "subcategory": "lightbox",
+    "purpose": "Media-focused overlay for images and galleries.",
+    "family": "overlays",
+    "maturity": "advanced",
+    "recommendedPages": [
+      "portfolio",
+      "shop",
+      "agency",
+      "event"
+    ],
+    "recommendedSections": [
+      "services",
+      "gallery"
+    ],
+    "compatibleWith": [
+      "css-card",
+      "css-button"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "focusTrap": true,
+      "escapeCloses": true,
+      "inertBackground": true
+    },
+    "seo": {
+      "impact": "low",
+      "notes": "Keep meaningful alt text in light DOM when possible"
+    },
+    "performance": {
+      "cost": "lazy-ok"
+    },
+    "variants": [],
+    "density": [
+      "default"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {
+      "reducedMotionSafe": true
+    },
+    "examples": [
+      "<velin-lightbox></velin-lightbox>"
+    ],
+    "promptKeywords": [
+      "lightbox",
+      "image gallery overlay",
+      "media viewer"
+    ],
+    "designIntelligence": {
+      "visualWeight": 5,
+      "importance": "primary",
+      "hierarchy": "overlay",
+      "spacingRules": [],
+      "typographyRules": [
+        "captions concise"
+      ],
+      "animationRules": [
+        "fade/zoom brief"
+      ],
+      "colorRules": [
+        "dark dim backdrop"
+      ],
+      "eyeFlow": "media → caption → close",
+      "compositionRules": [
+        "use for media, not forms"
+      ],
+      "commonMistakes": [
+        "forms inside lightbox",
+        "missing close"
+      ],
+      "bestPractices": [
+        "use focus-manager lifecycle"
+      ]
+    },
+    "api": {
+      "events": [
+        "velin-close"
+      ],
+      "methods": [
+        "open",
+        "close"
+      ]
+    }
+  },
+  {
+    "id": "velin-toast",
+    "kind": "web-component",
+    "tag": "velin-toast",
+    "category": "feedback",
+    "subcategory": "toast",
+    "purpose": "Transient status messages that do not block the page.",
+    "family": "feedback",
+    "maturity": "core",
+    "recommendedPages": [
+      "saas",
+      "dashboard",
+      "shop"
+    ],
+    "recommendedSections": [],
+    "compatibleWith": [
+      "css-button",
+      "css-alert"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "role": "status",
+      "notes": "Prefer polite live region; do not replace form-summary"
+    },
+    "seo": {
+      "impact": "none"
+    },
+    "performance": {
+      "cost": "lazy-ok"
+    },
+    "variants": [
+      "success",
+      "warning",
+      "danger",
+      "info"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {
+      "reducedMotionSafe": true
+    },
+    "examples": [
+      "<velin-toast></velin-toast>"
+    ],
+    "promptKeywords": [
+      "toast",
+      "snackbar",
+      "notification"
+    ],
+    "designIntelligence": {
+      "visualWeight": 3,
+      "importance": "secondary",
+      "hierarchy": "feedback",
+      "spacingRules": [
+        "stack toasts with gap-2"
+      ],
+      "typographyRules": [
+        "one short sentence"
+      ],
+      "animationRules": [
+        "brief enter/exit"
+      ],
+      "colorRules": [
+        "semantic status tokens"
+      ],
+      "eyeFlow": "corner/edge of viewport",
+      "compositionRules": [
+        "use for transient status; form errors use form-summary"
+      ],
+      "commonMistakes": [
+        "toasts for persistent form errors"
+      ],
+      "bestPractices": [
+        "auto-dismiss with pause on focus/hover"
+      ]
+    }
+  }
+]

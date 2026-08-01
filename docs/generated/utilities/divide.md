@@ -4,4 +4,12 @@
 
 Source: `src/utilities/divide.css`
 
-_No `.velin-*` utility classes found._
+| Class | CSS output |
+| --- | --- |
+| `.velin-divide-none` | `border: none;` |
+| `.velin-divide-primary` | `border-color: var(--velin-color-primary);` |
+| `.velin-divide-strong` | `border-color: var(--velin-color-border-strong);` |
+| `.velin-divide-x` | `border-inline-start: 1px solid var(--velin-color-border);` |
+| `.velin-divide-x-2` | `border-inline-start: 2px solid var(--velin-color-border);` |
+| `.velin-divide-y` | `border-block-start: 1px solid var(--velin-color-border);` |
+| `.velin-divide-y-2` | `border-block-start: 2px solid var(--velin-color-border);` |

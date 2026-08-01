@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/skill-project.schema.json",
+  "title": "VelinStyle Project Skill Chain",
+  "type": "object",
+  "required": ["id", "name", "workflowGraph", "packs"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "priority": { "type": "string" },
+    "workflowGraph": { "type": "string" },
+    "packs": { "type": "array", "items": { "type": "string" } },
+    "skills": { "type": "array", "items": { "type": "string" } },
+    "optimizedFor": { "type": "array", "items": { "type": "string" } }
+  }
+}

@@ -1,30 +1,47 @@
-# VelinStyle 1.1.0
+# VelinStyle 1.2.0
 
-> VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.
+> VelinStyle is a CSS framework with WCAG 2.2 AAA-oriented defaults, native JavaScript runtime, and Web Components.
 > Full machine context: https://velinstyle.info/dist/velin-agent.json
 > MIME: application/vnd.velinstyle.meta+json
 
 ## Framework
 - npm: @birdapi/velinstyle
-- VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components.
-- Components: 38 canonical Web Components (`velin-*`); 40 lazy-loader entries
+- VelinStyle is a CSS framework with WCAG 2.2 AAA-oriented defaults, native JavaScript runtime, and Web Components.
+- Pipeline: Core Foundation → Design System → Knowledge Graph → Prompt Engine → Review Engine → AI Metadata
+- Maturity: CSS/Web Components/runtime = stable; plan/review, knowledge graph, page/section registry, agent metadata = beta/foundation (seed, expanding); Studio + Utility Engine generator = planned
+- Components: 40 canonical Web Components (`velin-*`); 42 lazy-loader entries
+- Knowledge graph: 17 component nodes, 17 page types, 12 sections, 3 design constraint packs
 - HTML attributes: 27 `velin-*` bridges
-- CLI: velinstyle (scan, scaffold, docs generate, search index, meta)
+- CLI: velinstyle (scan, scaffold, plan, review, docs generate, search index, meta)
+
+## Agent briefing
+- Treat plan/review/knowledge graph as beta foundation — usable, not a finished AI design system.
+- Build pages with plan-first flow: analyze prompt → page registry → sections → design constraints → HTML → review.
+- Prefer tokens (`--velin-color-*`, `--velin-space-*`) over raw hex.
+- One H1 per page; form fields need labels + `velin-form-summary` when validating.
+- Hero: max 2 CTAs; FAQ uses disclosure (`velin-accordion` / details).
+- Do not invent non-`velin-*` utility classes.
+- Prefer registry-backed skills/workflows (`velinstyle skills ...`, `velinstyle workflow ...`) before ad-hoc orchestration.
 
 ## Conventions
-- Positioning: VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components — not a JS-only library or a utility-only CSS kit.
+- Positioning: VelinStyle is a CSS framework with WCAG 2.2 AAA-oriented defaults, native JavaScript runtime, and Web Components — not a JS-only library or a utility-only CSS kit.
 - Use only velin-* utility classes and documented Web Components.
 - Prefer data-velin-theme on <html> for theme switching.
 - Run velinstyle scan on generated HTML before shipping.
+- Prefer registry-first skills (`velinstyle skills`) and workflow graphs (`velinstyle workflow`) before inventing custom pipelines.
+- Honor skill status, confidence, compatibility, and onlyIf predicates when automating.
 - Do not put secrets, API keys, or raw emails in velin-meta or page meta.
 - Resolve doc links against docs root (/docs/), not the current page folder.
 
 ## Key guides
 - [Velin-Meta](https://velinstyle.info/docs/guides/velin-meta.html)
+- [AI Skills](https://velinstyle.info/docs/guides/ai-skills.html)
 - [VelinSearch](https://velinstyle.info/docs/guides/velin-search.html)
 - [Syntax highlighting](https://velinstyle.info/docs/guides/syntax-highlight.html)
 - [Prompt scaffolding](https://velinstyle.info/docs/guides/prompt-scaffolding.html)
 - [API reference (generated)](https://velinstyle.info/docs/guides/api-reference.html)
+- North star: VELINSTYLE_2030.md
+- Architecture: ARCHITECTURE.md
 
 ## Generated reference
 - [Components index](https://velinstyle.info/docs/generated/components/)
@@ -34,7 +51,12 @@
 
 ## Usage for agents
 ```
+npx velinstyle plan "Steuerberater Landingpage mit Kontaktformular"
+npx velinstyle scaffold "Steuerberater Landingpage mit Kontaktformular" -o out.html --json
+npx velinstyle review out.html --json
 npx velinstyle meta
 npx velinstyle docs generate
-npx velinstyle search index
+npx velinstyle skills list --capability review
+npx velinstyle skills install frontend
+npx velinstyle workflow landingpage --json
 ```

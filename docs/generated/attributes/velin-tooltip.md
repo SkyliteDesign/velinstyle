@@ -4,6 +4,11 @@
 
 Tooltip on hover/focus (bridges to `<velin-tooltip>`).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty) | Use host `title` / text as tooltip | `<velin-tooltip>` |
+| `text` | Explicit tooltip label | `<velin-tooltip>` |
 ## Example
 
 ```html

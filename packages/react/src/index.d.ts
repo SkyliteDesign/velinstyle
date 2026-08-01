@@ -49,6 +49,7 @@ export declare function bindVelinListeners(
 export declare const VelinAccordion: VelinComponent;
 export declare const VelinAnnouncer: VelinComponent;
 export declare const VelinBottomNav: VelinComponent;
+export declare const VelinCalendar: VelinComponent;
 export declare const VelinCarousel: VelinComponent;
 export declare const VelinCodeBlock: VelinComponent;
 export declare const VelinCollapse: VelinComponent;
@@ -62,6 +63,7 @@ export declare const VelinDialog: VelinComponent;
 export declare const VelinDrawer: VelinComponent;
 export declare const VelinDropdown: VelinComponent;
 export declare const VelinEmail: VelinComponent;
+export declare const VelinFileDropzone: VelinComponent;
 export declare const VelinFormSummary: VelinComponent;
 export declare const VelinIcon: VelinComponent;
 export declare const VelinLightbox: VelinComponent;

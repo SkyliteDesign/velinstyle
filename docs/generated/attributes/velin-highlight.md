@@ -4,6 +4,10 @@
 
 Inline text mark (not syntax highlighting — use `velin-code` or `velinSyntax`).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty / present) | Inline mark emphasis | Mark CSS |
 ## Example
 
 ```html

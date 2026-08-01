@@ -32,7 +32,12 @@ tests/a11y/.axe-summary.json
 .vscode/
 
 # Local docs / release drafts (not for the repo)
+# Strategy/ADRs live in monorepo interne_docs/strategy — never commit here
+docs/strategy/**
+!docs/strategy/README.md
 RELEASING.md
+# Local CSS dump / experiment — not a package source of truth
+velinstyle-custom.css
 gen_funcs.py
 gen-common.ps1
 generate-all.py

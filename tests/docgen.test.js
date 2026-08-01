@@ -69,6 +69,23 @@ describe('docgen extractors', () => {
     expect(classes[0].output).toContain('margin');
   });
 
+  it('parses utility classes with combinators (divide pattern)', () => {
+    const css = `@layer utilities {
+      .velin-divide-y > * + * { border-block-start: 1px solid red; }
+      .velin-divide-none > * + * { border: none; }
+    }`;
+    const classes = parseUtilityCss(css);
+    expect(classes.map((c) => c.selector)).toEqual(['velin-divide-y', 'velin-divide-none']);
+    expect(classes[0].output).toContain('border-block-start');
+  });
+
+  it('parses divide.css from source', () => {
+    const css = readFileSync(join(process.cwd(), 'src', 'utilities', 'divide.css'), 'utf-8');
+    const classes = parseUtilityCss(css);
+    expect(classes.length).toBe(7);
+    expect(classes.some((c) => c.selector === 'velin-divide-x')).toBe(true);
+  });
+
   it('cli manifest matches registered commands', () => {
     const manifest = loadCliManifest();
     const errors = validateManifest(manifest);

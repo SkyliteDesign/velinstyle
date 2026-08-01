@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/design-intelligence.schema.json",
+  "title": "VelinStyle Design Intelligence Block",
+  "type": "object",
+  "properties": {
+    "visualWeight": { "type": "integer", "minimum": 1, "maximum": 5 },
+    "importance": { "type": "string", "enum": ["primary", "secondary", "tertiary"] },
+    "hierarchy": { "type": "string" },
+    "spacingRules": { "type": "array", "items": { "type": "string" } },
+    "typographyRules": { "type": "array", "items": { "type": "string" } },
+    "animationRules": { "type": "array", "items": { "type": "string" } },
+    "colorRules": { "type": "array", "items": { "type": "string" } },
+    "eyeFlow": { "type": "string" },
+    "compositionRules": { "type": "array", "items": { "type": "string" } },
+    "commonMistakes": { "type": "array", "items": { "type": "string" } },
+    "bestPractices": { "type": "array", "items": { "type": "string" } }
+  }
+}

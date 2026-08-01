@@ -1,0 +1,9 @@
+id: review
+name: Review Pack
+version: 1.0.0
+priority: core
+skills:
+  - velin-review-page-gate
+  - velin-review-conversion-hero
+  - velin-review-seo-meta
+  - velin-security-scan-pii

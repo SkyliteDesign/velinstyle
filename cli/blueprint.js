@@ -1,12 +1,18 @@
-import { readFileSync, existsSync, writeFileSync } from 'fs';
-import { join, dirname } from 'path';
+import { readFileSync, existsSync, writeFileSync, readdirSync } from 'fs';
+import { join, dirname, extname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const PKG_ROOT = join(__dirname, '..');
+const BLUEPRINT_DIR = join(__dirname, 'blueprints');
+
 const BLUEPRINTS = {
   'alert-stack': 'alert-stack.html',
+  'benefits-grid': 'benefits-grid.html',
   'breadcrumb-bar': 'breadcrumb-bar.html',
   'card-grid': 'card-grid.html',
+  'cta-band': 'cta-band.html',
+  'faq-section': 'faq-section.html',
   'footer-simple': 'footer-simple.html',
   'form-contact': 'form-contact.html',
   'form-login': 'form-login.html',
@@ -15,9 +21,13 @@ const BLUEPRINTS = {
   modal: 'modal.html',
   'navbar-header': 'navbar-header.html',
   'pagination-bar': 'pagination-bar.html',
+  'process-steps': 'process-steps.html',
   'search-field': 'search-field.html',
+  'services-grid': 'services-grid.html',
   'sidebar-layout': 'sidebar-layout.html',
   'table-responsive': 'table-responsive.html',
+  testimonials: 'testimonials.html',
+  'trust-bar': 'trust-bar.html',
   'bottom-nav-mobile': 'bottom-nav-mobile.html',
   'empty-state': 'empty-state.html',
   'cookie-consent': 'cookie-consent.html',
@@ -26,18 +36,101 @@ const BLUEPRINTS = {
   'settings-panel': 'settings-panel.html',
   onboarding: 'onboarding.html',
   'pricing-table': 'pricing-table.html',
+  'split-hero': 'split-hero.html',
+  'pricing-band': 'pricing-band.html',
+  'app-chrome': 'app-chrome.html',
+  'ops-console': 'ops-console.html',
 };
 
-export function listBlueprints() {
-  return Object.keys(BLUEPRINTS);
+const CLASS_RE = /class\s*=\s*["']([^"']+)["']/gi;
+const CSS_CLASS_RE = /\.((?:velin|expo)-[a-z0-9_-]+)/gi;
+
+let _cssClassCache = null;
+
+function walkCssFiles(dir, out = []) {
+  if (!existsSync(dir)) return out;
+  for (const name of readdirSync(dir, { withFileTypes: true })) {
+    const full = join(dir, name.name);
+    if (name.isDirectory()) walkCssFiles(full, out);
+    else if (extname(name.name) === '.css') out.push(full);
+  }
+  return out;
 }
 
-export function emitBlueprint(id, { output } = {}) {
+/** Collect known CSS class names from framework source (+ optional dist). */
+export function loadKnownCssClasses({ includeDist = true } = {}) {
+  if (_cssClassCache) return _cssClassCache;
+  const files = walkCssFiles(join(PKG_ROOT, 'src'));
+  if (includeDist) {
+    const distCss = join(PKG_ROOT, 'dist', 'velinstyle.css');
+    if (existsSync(distCss)) files.push(distCss);
+  }
+  const set = new Set();
+  for (const file of files) {
+    const css = readFileSync(file, 'utf-8');
+    for (const m of css.matchAll(CSS_CLASS_RE)) set.add(m[1]);
+  }
+  _cssClassCache = set;
+  return set;
+}
+
+export function extractVelinClasses(html) {
+  const classes = new Set();
+  for (const m of String(html || '').matchAll(CLASS_RE)) {
+    for (const token of m[1].split(/\s+/)) {
+      if (token.startsWith('velin-')) classes.add(token);
+    }
+  }
+  return [...classes];
+}
+
+/**
+ * @returns {{ ok: boolean, missing: string[], classes: string[] }}
+ */
+export function validateBlueprintHtml(html, known = loadKnownCssClasses()) {
+  const classes = extractVelinClasses(html);
+  const missing = classes.filter((c) => !known.has(c));
+  return { ok: missing.length === 0, missing, classes };
+}
+
+export function validateBlueprintId(id, known = loadKnownCssClasses()) {
+  const file = BLUEPRINTS[id];
+  if (!file) return { ok: false, error: `Unknown blueprint "${id}"`, missing: [], classes: [] };
+  const path = join(BLUEPRINT_DIR, file);
+  if (!existsSync(path)) return { ok: false, error: `Missing template: ${path}`, missing: [], classes: [] };
+  const body = readFileSync(path, 'utf-8');
+  const result = validateBlueprintHtml(body, known);
+  return { ...result, id, path };
+}
+
+export function validateAllBlueprints(known = loadKnownCssClasses()) {
+  const results = [];
+  for (const id of listBlueprints()) {
+    results.push(validateBlueprintId(id, known));
+  }
+  return results;
+}
+
+export function listBlueprints() {
+  return Object.keys(BLUEPRINTS).sort();
+}
+
+export function emitBlueprint(id, { output, strict = false } = {}) {
   const file = BLUEPRINTS[id];
   if (!file) return { ok: false, error: `Unknown blueprint "${id}". Try: ${listBlueprints().join(', ')}` };
-  const path = join(__dirname, 'blueprints', file);
+  const path = join(BLUEPRINT_DIR, file);
   if (!existsSync(path)) return { ok: false, error: `Missing template: ${path}` };
   const body = readFileSync(path, 'utf-8');
+  if (strict) {
+    const v = validateBlueprintHtml(body);
+    if (!v.ok) {
+      return {
+        ok: false,
+        error: `Blueprint "${id}" emits unknown CSS classes: ${v.missing.join(', ')}. Fix templates or add utilities.`,
+        missing: v.missing,
+      };
+    }
+  }
   const banner = `<!-- Generated by velinstyle blueprint ${id} — VelinStyle tokens: --velin-color-*, --velin-space-*, --velin-radius-* -->\n`;
   const out = banner + body;
   if (output) {

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" data-velin-reveal-auto>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing in 15 minutes — VelinStyle</title>
+  <meta name="description" content="Ship a validated VelinStyle landing page with create, serve, blueprints, and review.">
+  <link rel="stylesheet" href="../dist/velinstyle.css">
+</head>
+<body>
+  <a href="#main" class="velin-skip-link">Skip to main content</a>
+  <main id="main" class="velin-container velin-py-8">
+    <h1 class="velin-text-3xl velin-font-bold">Landing in 15 minutes</h1>
+    <p class="velin-text-muted velin-mbe-6">Scaffold a runnable page with only CSS classes that exist — then preview and review.</p>
+
+    <ol class="velin-stack" style="list-style:decimal;padding-inline-start:1.25rem;line-height:1.7">
+      <li><strong>Install / vendor</strong> — <code>npm i @birdapi/velinstyle</code> or copy <code>dist/</code> into <code>vendor/velinstyle</code>. On Windows, prefer the published CLI (<code>pathToFileURL</code> for config imports).</li>
+      <li><strong>Create</strong> — <code>npx velinstyle create landing ./my-landing --theme earth</code></li>
+      <li><strong>Serve</strong> — <code>npx velinstyle serve ./my-landing</code> (default port 4173)</li>
+      <li><strong>Compose</strong> — <code>velinstyle blueprint split-hero --strict</code>, <code>pricing-band</code>, <code>cookie-consent</code>, <code>empty-state</code></li>
+      <li><strong>Doctor</strong> — <code>velinstyle doctor</code> (icons sprite, themes, config import)</li>
+      <li><strong>Review</strong> — <code>velinstyle review ./my-landing/index.html --prompt "Marketing landing"</code></li>
+    </ol>
+
+    <h2 class="velin-text-2xl velin-font-bold velin-mbs-8">Recipes (no new WCs)</h2>
+    <ul style="line-height:1.8">
+      <li>Cookie bar → <code>blueprint cookie-consent</code></li>
+      <li>Empty state → <code>blueprint empty-state</code></li>
+      <li>Pricing columns → <code>blueprint pricing-band</code> / <code>pricing-table</code></li>
+      <li>App chrome → <code>blueprint app-chrome</code></li>
+    </ul>
+
+    <p class="velin-mbs-6">Agents: emit only classes present in CSS; gate with <code>velinstyle blueprint --strict</code> or <code>npm run check:blueprints</code>.</p>
+    <p>Lite CSS: see <a href="marketing-lite-css.html">Marketing lite CSS</a>.</p>
+  </main>
+</body>
+</html>

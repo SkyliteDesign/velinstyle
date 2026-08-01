@@ -23,7 +23,7 @@ npx velinstyle meta page path/to/page.html
 ```html
 <script type="application/vnd.velinstyle.meta+json" id="velin-meta">
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "page": { "intent": "component-doc" },
   "allowed": { "classesPrefix": ["velin-"] }
 }
@@ -32,19 +32,21 @@ npx velinstyle meta page path/to/page.html
 
 ## Snapshot
 
-- Framework: @birdapi/velinstyle@1.1.0
-- Components: 38
+- Framework: @birdapi/velinstyle@1.2.0
+- Components: 40
 - Attributes: 27
-- CLI commands: 14
-- Scanner rules: 37
-- Search index entries: 139
+- CLI commands: 24
+- Scanner rules: 44
+- Search index entries: 151
 
 ## Conventions
 
-- Positioning: VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components — not a JS-only library or a utility-only CSS kit.
+- Positioning: VelinStyle is a CSS framework with WCAG 2.2 AAA-oriented defaults, native JavaScript runtime, and Web Components — not a JS-only library or a utility-only CSS kit.
 - Use only velin-* utility classes and documented Web Components.
 - Prefer data-velin-theme on <html> for theme switching.
 - Run velinstyle scan on generated HTML before shipping.
+- Prefer registry-first skills (`velinstyle skills`) and workflow graphs (`velinstyle workflow`) before inventing custom pipelines.
+- Honor skill status, confidence, compatibility, and onlyIf predicates when automating.
 - Do not put secrets, API keys, or raw emails in velin-meta or page meta.
 - Resolve doc links against docs root (/docs/), not the current page folder.
 

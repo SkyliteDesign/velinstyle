@@ -7,6 +7,8 @@
   .velin-border-inline { border-inline: 1px solid var(--velin-color-border); }
   .velin-border-block-start { border-block-start: 1px solid var(--velin-color-border); }
   .velin-border-block-end { border-block-end: 1px solid var(--velin-color-border); }
+  .velin-border-inline-end { border-inline-end: 1px solid var(--velin-color-border); }
+  .velin-border-inline-start { border-inline-start: 1px solid var(--velin-color-border); }
 
   /* Border color */
   .velin-border-primary { border-color: var(--velin-color-primary); }

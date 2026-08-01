@@ -4,8 +4,16 @@
 
 Opens a modal dialog (bridges to `<velin-modal>`).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty / present) | Upgrade host to modal trigger / content bridge | `<velin-modal>` |
 ## Example
 
 ```html
 <div velin-modal>…</div>
 ```
+
+## Accessibility
+
+Prefer the web component for focus trap / `velin-close`; attribute is a bridge.

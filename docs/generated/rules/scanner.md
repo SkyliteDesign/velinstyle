@@ -15,6 +15,8 @@ velinstyle perf audit samples/
 | --- | --- | --- | --- |
 | `a11y/autocomplete-auth` | warning | Auth field missing autocomplete (WCAG 2.2). | Add autocomplete="username" or "current-password". |
 | `a11y/button-label` | warning | <button> without visible text or aria-label. | Add text or aria-label. |
+| `a11y/contrast-inline` | error | Inline or authored color pair fails WCAG AA contrast. | Raise contrast to ≥4.5:1 (or ≥3:1 large text). |
+| `a11y/duplicate-id` | error | Duplicate id attribute in the document. | Make every id unique. |
 | `a11y/heading-order` | warning | Heading levels skip (e.g. h2 → h4). | Use sequential heading levels. |
 | `a11y/html-lang` | error | <html> missing lang attribute. | Add lang="de" or appropriate locale — --fix. |
 | `a11y/iframe-title` | error | <iframe> without title. | Add descriptive title attribute. |
@@ -24,14 +26,18 @@ velinstyle perf audit samples/
 | `a11y/interactive-aria-hidden` | error | Interactive element with aria-hidden="true". | Remove aria-hidden or use inert. |
 | `a11y/invalid-describedby` | warning | aria-invalid without aria-describedby. | Link to error message element id. |
 | `a11y/landmark-main` | warning | No <main> landmark. | Wrap primary content in <main>. |
+| `a11y/nested-interactive` | error | Nested interactive elements (button/a/role). | Use a single control; do not nest button/a/role=button. |
+| `a11y/role-button-contract` | warning | role=button without tabindex and/or Enter/Space handling. | Prefer native <button>, or tabindex="0" + keydown for Enter/Space. |
 | `a11y/skeleton-text` | warning | velin-skeleton on non-empty element. | Use skeleton only on empty placeholders. |
 | `a11y/skip-link` | warning | No skip link for keyboard users. | Add .velin-skip-link to #main — --fix when id="main" exists. |
 | `a11y/sparkline-label` | warning | velin-sparkline without accessible name. | Add label attribute or wrap in <figure><figcaption>. |
+| `a11y/target-size-min` | warning | Interactive control appears smaller than ~24px (WCAG 2.5.8 heuristic). | Increase hit target to at least 24×24 CSS px. |
 | `a11y/velin-icon-label` | warning | velin-icon in icon-only button without label. | Add label="…" on <velin-icon>. |
 ## css
 | Rule ID | Severity | Message | Fix hint |
 | --- | --- | --- | --- |
 | `css/no-important` | info | !important usage. | Prefer @layer and specificity. |
+| `css/unknown-velin-class` | warning | Unknown velin-* utility/component class. | Use classes from the CSS bundle or blueprint --strict. |
 | `css/var-fallback` | info | CSS variable without fallback in var(). | Use var(--velin-*, fallback). |
 | `css/vendor-prefix` | info | Unnecessary vendor prefix. | Lightning CSS handles autoprefixing. |
 | `css/z-index-token` | warning | Raw z-index instead of --velin-z-* token. | Use tokens from z-index.css — --fix suggests token. |
@@ -68,3 +74,7 @@ velinstyle perf audit samples/
 | `security/no-raw-innerhtml` | warning | Direct innerHTML without sanitization. | Use escapeHTML() from @birdapi/velinstyle/sanitize. |
 | `security/postmessage-wildcard` | warning | postMessage with targetOrigin "*". | Specify exact target origin. |
 | `security/safe-external-link` | warning | target="_blank" without rel="noopener noreferrer". | Add rel="noopener noreferrer" — auto-fix with --fix. |
+## wc
+| Rule ID | Severity | Message | Fix hint |
+| --- | --- | --- | --- |
+| `wc/invalid-attribute` | warning | Attribute is not part of this Web Component API. | Use observed / documented attributes only. |

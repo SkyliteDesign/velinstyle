@@ -4,6 +4,19 @@
 
 Source: `components/velin-menubar.js`
 
+## Minimal working example
+Copy-paste starter (load CSS + `velinstyle-components` / `bootFromDOM` as needed):
+
+```html
+<velin-menubar>
+  <button type="button" data-velin-menubar-trigger>File</button>
+  <div data-velin-menubar-panel hidden>
+    <button type="button" role="menuitem">New</button>
+    <button type="button" role="menuitem">Open</button>
+  </div>
+</velin-menubar>
+```
+
 ## Accessibility
 WCAG contract status: **pass** (framework target: AAA).
 

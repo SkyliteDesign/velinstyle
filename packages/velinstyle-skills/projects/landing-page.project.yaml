@@ -1,0 +1,12 @@
+id: landing-page
+name: Landing Page
+priority: core
+workflowGraph: landingpage
+packs:
+  - frontend
+  - design
+skills:
+  - velin-review-conversion-hero
+optimizedFor:
+  - cursor
+  - windsurf

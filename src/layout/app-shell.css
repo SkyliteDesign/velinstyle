@@ -1,0 +1,33 @@
+@layer layout {
+  .velin-app-shell {
+    display: flex;
+    min-block-size: 100dvh;
+  }
+  .velin-app-shell__nav {
+    inline-size: 16rem;
+    flex-shrink: 0;
+    min-inline-size: 0;
+    overflow-x: auto;
+  }
+  .velin-app-shell__body {
+    flex: 1;
+    min-inline-size: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .velin-app-shell__content {
+    flex: 1;
+  }
+  .velin-toc {
+    inline-size: 10rem;
+    flex-shrink: 0;
+  }
+  .velin-docs-nav {
+    inline-size: 12rem;
+    flex-shrink: 0;
+  }
+  .velin-docs-main {
+    flex: 1;
+    min-inline-size: 16rem;
+  }
+}

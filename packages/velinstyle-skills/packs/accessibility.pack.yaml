@@ -1,0 +1,9 @@
+id: accessibility
+name: Accessibility Pack
+version: 1.0.0
+priority: core
+skills:
+  - velin-a11y-page-checklist
+  - velin-a11y-scan-fix
+  - velin-a11y-focus-keyboard
+  - velin-testing-a11y-suite

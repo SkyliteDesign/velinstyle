@@ -4,6 +4,10 @@
 
 Styled blockquote.
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty / present) | Style host as blockquote | Quote CSS |
 ## Example
 
 ```html

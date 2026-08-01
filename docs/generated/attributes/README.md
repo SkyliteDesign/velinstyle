@@ -4,32 +4,32 @@
 
 Declarative extensions interpreted by `bootAttributes()` / `bootFromDOM({ attributes: true })`.
 
-| Attribute | Description |
-| --- | --- |
-| [`velin-modal`](./velin-modal.md) | Opens a modal dialog (bridges to `<velin-modal>`). |
-| [`velin-tabs`](./velin-tabs.md) | Tab navigation (bridges to `<velin-tabs>`). |
-| [`velin-accordion`](./velin-accordion.md) | Accordion sections (bridges to `<velin-accordion>`). |
-| [`velin-tooltip`](./velin-tooltip.md) | Tooltip on hover/focus (bridges to `<velin-tooltip>`). |
-| [`velin-copy`](./velin-copy.md) | Copy text to clipboard (bridges to `<velin-copy>`). |
-| [`velin-counter`](./velin-counter.md) | Animated number counter (bridges to `<velin-counter>`). |
-| [`velin-notify`](./velin-notify.md) | Show a toast notification (bridges to `<velin-toast>`). |
-| [`velin-theme`](./velin-theme.md) | Theme toggle or set `data-velin-theme`. |
-| [`velin-scroll-top`](./velin-scroll-top.md) | Velin HTML attribute extension. |
-| [`velin-progress`](./velin-progress.md) | Progress bar or ring (`ring` for `<velin-progress-ring>`). |
-| [`velin-search`](./velin-search.md) | Attach VelinSearch to an element. |
-| [`velin-lazy`](./velin-lazy.md) | Lazy-load images with optional skeleton. |
-| [`velin-skeleton`](./velin-skeleton.md) | Skeleton placeholder (`text`, `avatar`, `image`, …). |
-| [`velin-loading`](./velin-loading.md) | Loading spinner state. |
-| [`velin-grid`](./velin-grid.md) | Auto grid layout (column count). |
-| [`velin-anchor`](./velin-anchor.md) | Scroll-margin for anchor targets. |
-| [`velin-code`](./velin-code.md) | Code block with copy button and VelinHighlight syntax colors (use `language` or `velin-code="js"`). |
-| [`velin-quote`](./velin-quote.md) | Styled blockquote. |
-| [`velin-highlight`](./velin-highlight.md) | Inline text mark (not syntax highlighting — use `velin-code` or `velinSyntax`). |
-| [`velin-reveal`](./velin-reveal.md) | Reveal element when scrolled into view. |
-| [`velin-fade`](./velin-fade.md) | Fade-in on scroll. |
-| [`velin-slide`](./velin-slide.md) | Slide-in on scroll (`up`, `down`, …). |
-| [`velin-scale`](./velin-scale.md) | Scale-in on scroll. |
-| [`velin-parallax`](./velin-parallax.md) | Parallax background (`slow` optional). |
-| [`velin-hover`](./velin-hover.md) | Hover lift/glow animation. |
-| [`velin-stagger`](./velin-stagger.md) | Stagger child animations (delay in ms). |
-| [`velin-scroll`](./velin-scroll.md) | Smooth scroll to anchor (`href="#id"`). |
+| Attribute | Description | Values |
+| --- | --- | --- |
+| [`velin-modal`](./velin-modal.md) | Opens a modal dialog (bridges to `<velin-modal>`). | 1 |
+| [`velin-tabs`](./velin-tabs.md) | Tab navigation (bridges to `<velin-tabs>`). | 1 |
+| [`velin-accordion`](./velin-accordion.md) | Accordion sections (bridges to `<velin-accordion>`). | 1 |
+| [`velin-tooltip`](./velin-tooltip.md) | Tooltip on hover/focus (bridges to `<velin-tooltip>`). | 2 |
+| [`velin-copy`](./velin-copy.md) | Copy text to clipboard (bridges to `<velin-copy>`). | 2 |
+| [`velin-counter`](./velin-counter.md) | Animated number counter (bridges to `<velin-counter>`). | 1 |
+| [`velin-notify`](./velin-notify.md) | Show a toast notification (bridges to `<velin-toast>`). | 1 |
+| [`velin-theme`](./velin-theme.md) | Theme toggle or set `data-velin-theme`. | 2 |
+| [`velin-scroll-top`](./velin-scroll-top.md) | Inject / configure `<velin-scroll-top>` (empty or `threshold` px). | 2 |
+| [`velin-progress`](./velin-progress.md) | Progress bar or ring (`ring` for `<velin-progress-ring>`). | 2 |
+| [`velin-search`](./velin-search.md) | Attach VelinSearch to an element. | 1 |
+| [`velin-lazy`](./velin-lazy.md) | Lazy-load images with optional skeleton. | 1 |
+| [`velin-skeleton`](./velin-skeleton.md) | Skeleton placeholder (`text`, `avatar`, `image`, …). | 4 |
+| [`velin-loading`](./velin-loading.md) | Loading spinner state. | 1 |
+| [`velin-grid`](./velin-grid.md) | Auto grid layout (column count). | 1 |
+| [`velin-anchor`](./velin-anchor.md) | Scroll-margin for anchor targets. | 1 |
+| [`velin-code`](./velin-code.md) | Code block with copy button and VelinHighlight syntax colors (use `language` or `velin-code="js"`). | 1 |
+| [`velin-quote`](./velin-quote.md) | Styled blockquote. | 1 |
+| [`velin-highlight`](./velin-highlight.md) | Inline text mark (not syntax highlighting — use `velin-code` or `velinSyntax`). | 1 |
+| [`velin-reveal`](./velin-reveal.md) | Reveal element when scrolled into view. | 1 |
+| [`velin-fade`](./velin-fade.md) | Fade-in on scroll. | 1 |
+| [`velin-slide`](./velin-slide.md) | Slide-in on scroll (`up`, `down`, …). | 3 |
+| [`velin-scale`](./velin-scale.md) | Scale-in on scroll. | 1 |
+| [`velin-parallax`](./velin-parallax.md) | Parallax background (`slow` optional). | 2 |
+| [`velin-hover`](./velin-hover.md) | Hover lift/glow animation. | 1 |
+| [`velin-stagger`](./velin-stagger.md) | Stagger child animations (delay in ms). | 1 |
+| [`velin-scroll`](./velin-scroll.md) | Smooth scroll to anchor (`href="#id"`). | 1 |

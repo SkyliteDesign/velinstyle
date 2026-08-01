@@ -4,6 +4,10 @@
 
 Accordion sections (bridges to `<velin-accordion>`).
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty / present) | Bridge host to accordion | `<velin-accordion>` |
 ## Example
 
 ```html

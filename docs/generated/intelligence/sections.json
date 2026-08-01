@@ -1,0 +1,424 @@
+[
+  {
+    "id": "hero",
+    "role": "hero",
+    "blueprintFile": "hero-section.html",
+    "inputs": [
+      "title",
+      "subtitle",
+      "cta",
+      "brand"
+    ],
+    "requiredContent": [
+      "headline",
+      "primaryCta"
+    ],
+    "optionalContent": [
+      "image",
+      "secondaryCta"
+    ],
+    "designRules": [
+      "hero-headline-lines",
+      "hero-cta-max",
+      "hero-contrast"
+    ],
+    "a11yRules": [
+      "one h1",
+      "cta is real button/link"
+    ],
+    "seoRules": [
+      "h1 matches primary intent"
+    ],
+    "compatiblePrev": [],
+    "compatibleNext": [
+      "trust-bar",
+      "benefits",
+      "services"
+    ],
+    "examplePrompts": [
+      "modern hero with two CTAs"
+    ],
+    "commonMistakes": [
+      "three CTAs",
+      "headline longer than two lines"
+    ]
+  },
+  {
+    "id": "trust-bar",
+    "role": "trust-bar",
+    "blueprintFile": "trust-bar.html",
+    "inputs": [
+      "logos",
+      "claim"
+    ],
+    "requiredContent": [
+      "trustItems"
+    ],
+    "optionalContent": [
+      "claim"
+    ],
+    "designRules": [],
+    "a11yRules": [
+      "alt text for logos"
+    ],
+    "seoRules": [],
+    "compatiblePrev": [
+      "hero"
+    ],
+    "compatibleNext": [
+      "benefits",
+      "services"
+    ],
+    "examplePrompts": [
+      "trusted by brands bar"
+    ],
+    "commonMistakes": [
+      "low-contrast logos"
+    ]
+  },
+  {
+    "id": "benefits",
+    "role": "benefits",
+    "blueprintFile": "benefits-grid.html",
+    "inputs": [
+      "items"
+    ],
+    "requiredContent": [
+      "benefitItems"
+    ],
+    "optionalContent": [],
+    "designRules": [],
+    "a11yRules": [
+      "headings per benefit"
+    ],
+    "seoRules": [],
+    "compatiblePrev": [
+      "hero",
+      "trust-bar"
+    ],
+    "compatibleNext": [
+      "services",
+      "process"
+    ],
+    "examplePrompts": [
+      "three benefits"
+    ],
+    "commonMistakes": [
+      "walls of text"
+    ]
+  },
+  {
+    "id": "services",
+    "role": "services",
+    "blueprintFile": "services-grid.html",
+    "inputs": [
+      "items"
+    ],
+    "requiredContent": [
+      "serviceItems"
+    ],
+    "optionalContent": [],
+    "designRules": [],
+    "a11yRules": [
+      "card titles as headings"
+    ],
+    "seoRules": [
+      "service names as keywords"
+    ],
+    "compatiblePrev": [
+      "benefits",
+      "trust-bar",
+      "hero"
+    ],
+    "compatibleNext": [
+      "process",
+      "testimonials",
+      "pricing"
+    ],
+    "examplePrompts": [
+      "services grid for tax advisor"
+    ],
+    "commonMistakes": [
+      "vague service titles"
+    ]
+  },
+  {
+    "id": "process",
+    "role": "process",
+    "blueprintFile": "process-steps.html",
+    "inputs": [
+      "steps"
+    ],
+    "requiredContent": [
+      "steps"
+    ],
+    "optionalContent": [],
+    "designRules": [],
+    "a11yRules": [
+      "ordered list semantics"
+    ],
+    "seoRules": [],
+    "compatiblePrev": [
+      "services",
+      "benefits"
+    ],
+    "compatibleNext": [
+      "testimonials",
+      "pricing",
+      "faq"
+    ],
+    "examplePrompts": [
+      "how it works in 4 steps"
+    ],
+    "commonMistakes": [
+      "more than 6 steps"
+    ]
+  },
+  {
+    "id": "testimonials",
+    "role": "testimonials",
+    "blueprintFile": "testimonials.html",
+    "inputs": [
+      "quotes"
+    ],
+    "requiredContent": [
+      "quotes"
+    ],
+    "optionalContent": [
+      "avatars"
+    ],
+    "designRules": [],
+    "a11yRules": [
+      "cite attribution"
+    ],
+    "seoRules": [],
+    "compatiblePrev": [
+      "services",
+      "process"
+    ],
+    "compatibleNext": [
+      "pricing",
+      "faq",
+      "contact"
+    ],
+    "examplePrompts": [
+      "client testimonials"
+    ],
+    "commonMistakes": [
+      "anonymous quotes only"
+    ]
+  },
+  {
+    "id": "pricing",
+    "role": "pricing",
+    "blueprintFile": "pricing-table.html",
+    "inputs": [
+      "plans"
+    ],
+    "requiredContent": [
+      "plans"
+    ],
+    "optionalContent": [],
+    "designRules": [],
+    "a11yRules": [
+      "table or card semantics clear"
+    ],
+    "seoRules": [],
+    "compatiblePrev": [
+      "services",
+      "testimonials"
+    ],
+    "compatibleNext": [
+      "faq",
+      "cta"
+    ],
+    "examplePrompts": [
+      "three pricing tiers"
+    ],
+    "commonMistakes": [
+      "unclear currency"
+    ]
+  },
+  {
+    "id": "faq",
+    "role": "faq",
+    "blueprintFile": "faq-section.html",
+    "inputs": [
+      "items"
+    ],
+    "requiredContent": [
+      "questions"
+    ],
+    "optionalContent": [],
+    "designRules": [
+      "faq-questions",
+      "faq-pattern"
+    ],
+    "a11yRules": [
+      "accordion keyboard support"
+    ],
+    "seoRules": [
+      "FAQPage-ready question text"
+    ],
+    "compatiblePrev": [
+      "testimonials",
+      "pricing",
+      "process"
+    ],
+    "compatibleNext": [
+      "contact",
+      "cta",
+      "footer"
+    ],
+    "examplePrompts": [
+      "FAQ with accordion"
+    ],
+    "commonMistakes": [
+      "non-questions as titles"
+    ]
+  },
+  {
+    "id": "contact",
+    "role": "contact",
+    "blueprintFile": "form-contact.html",
+    "inputs": [
+      "fields"
+    ],
+    "requiredContent": [
+      "name",
+      "email",
+      "message"
+    ],
+    "optionalContent": [
+      "phone"
+    ],
+    "designRules": [
+      "contact-labels",
+      "contact-summary"
+    ],
+    "a11yRules": [
+      "labels",
+      "form-summary"
+    ],
+    "seoRules": [],
+    "compatiblePrev": [
+      "faq",
+      "testimonials"
+    ],
+    "compatibleNext": [
+      "footer",
+      "cta"
+    ],
+    "examplePrompts": [
+      "contact form with validation summary"
+    ],
+    "commonMistakes": [
+      "placeholder-only labels"
+    ]
+  },
+  {
+    "id": "cta",
+    "role": "cta",
+    "blueprintFile": "cta-band.html",
+    "inputs": [
+      "title",
+      "cta"
+    ],
+    "requiredContent": [
+      "headline",
+      "primaryCta"
+    ],
+    "optionalContent": [
+      "secondaryCta"
+    ],
+    "designRules": [
+      "hero-cta-max"
+    ],
+    "a11yRules": [
+      "button semantics"
+    ],
+    "seoRules": [],
+    "compatiblePrev": [
+      "faq",
+      "pricing",
+      "testimonials"
+    ],
+    "compatibleNext": [
+      "footer"
+    ],
+    "examplePrompts": [
+      "final CTA band"
+    ],
+    "commonMistakes": [
+      "competing CTAs"
+    ]
+  },
+  {
+    "id": "footer",
+    "role": "footer",
+    "blueprintFile": "footer-simple.html",
+    "inputs": [
+      "brand",
+      "links"
+    ],
+    "requiredContent": [
+      "brand"
+    ],
+    "optionalContent": [
+      "legal",
+      "social"
+    ],
+    "designRules": [],
+    "a11yRules": [
+      "contentinfo landmark"
+    ],
+    "seoRules": [
+      "legal links"
+    ],
+    "compatiblePrev": [
+      "cta",
+      "contact",
+      "faq"
+    ],
+    "compatibleNext": [],
+    "examplePrompts": [
+      "site footer"
+    ],
+    "commonMistakes": [
+      "missing legal links on regulated niches"
+    ]
+  },
+  {
+    "id": "navbar",
+    "role": "navbar",
+    "blueprintFile": "navbar-header.html",
+    "inputs": [
+      "brand",
+      "links"
+    ],
+    "requiredContent": [
+      "brand"
+    ],
+    "optionalContent": [
+      "cta",
+      "search"
+    ],
+    "designRules": [],
+    "a11yRules": [
+      "nav landmark"
+    ],
+    "seoRules": [
+      "internal links"
+    ],
+    "compatiblePrev": [],
+    "compatibleNext": [
+      "hero"
+    ],
+    "examplePrompts": [
+      "marketing navbar"
+    ],
+    "commonMistakes": [
+      "too many links"
+    ]
+  }
+]

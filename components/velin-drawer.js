@@ -88,7 +88,6 @@ class VelinDrawer extends HTMLElement {
     this._prev = saveFocus();
     setBackgroundInert(this);
     document.addEventListener('keydown', this._onKey);
-    document.body.style.overflow = 'hidden';
     requestAnimationFrame(() => {
       const f = getFocusableElements(this.shadowRoot);
       if (f.length) f[0].focus();
@@ -97,8 +96,7 @@ class VelinDrawer extends HTMLElement {
 
   _close() {
     document.removeEventListener('keydown', this._onKey);
-    document.body.style.overflow = '';
-    clearBackgroundInert();
+    clearBackgroundInert(this);
     restoreFocus(this._prev);
   }
 
@@ -109,7 +107,7 @@ class VelinDrawer extends HTMLElement {
 
   disconnectedCallback() {
     document.removeEventListener('keydown', this._onKey);
-    document.body.style.overflow = '';
+    clearBackgroundInert(this);
   }
 }
 

@@ -4,6 +4,10 @@
 
 Lazy-load images with optional skeleton.
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty / present) | Lazy-load `<img>` (`loading="lazy"`) | Native lazy + optional skeleton |
 ## Example
 
 ```html

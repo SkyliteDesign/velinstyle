@@ -2,21 +2,31 @@
 
 # CLI commands
 
-VelinStyle CLI v1.1.0. Run `velinstyle --help` for full usage.
+VelinStyle CLI v1.2.0. Run `velinstyle --help` for full usage.
 
 | Command | Summary | Subcommands | Flags | Example |
 | --- | --- | --- | --- | --- |
-| `init` | Create velinstyle.config.js | — | — | `velinstyle init` |
-| `build` | Build custom CSS with selected layers from config | — | — | `velinstyle build` |
+| `init` | Create velinstyle.config.js, optional vendor copy, and starter HTML with reveal/sprite defaults | — | — | `velinstyle init` |
+| `build` | Build custom CSS with selected layers from config | — | --output, -o, --minify, --preset | `velinstyle build --preset lite -o ./lite.css` |
 | `themes` | List available built-in themes | — | — | `velinstyle themes` |
 | `add` | Add a single component CSS file to your project | — | — | `velinstyle add button` |
 | `icons` | Manage icon providers (list, add, remove, build) | list, add, remove, build | --icons, --variant | `velinstyle icons add lucide --icons menu,search` |
-| `scan` | Security, accessibility, CSS, and PII scanner | — | --format, --severity, --only, --fix, --fix-dry-run, --fix-lang | `velinstyle scan . --only pii --fix-dry-run` |
+| `scan` | Security, accessibility, CSS, and PII scanner (directory or single file) | — | --format, --severity, --only, --fix, --fix-dry-run, --fix-lang | `velinstyle scan index.html` |
 | `prefix` | Add missing velin- prefix to classes (dry-run; use --write) | — | --write, --map, --bootstrap-display | `velinstyle prefix src/ --write` |
-| `blueprint` | Print HTML blueprint snippets | list | --output, -o | `velinstyle blueprint modal -o snippet.html` |
-| `scaffold` | Generate layout HTML from natural language prompt | list-intents | --output, -o, --json | `velinstyle scaffold "dashboard with sidebar"` |
+| `blueprint` | Print HTML blueprint snippets; --strict fails on classes missing from CSS | list | --output, -o, --strict | `velinstyle blueprint modal -o snippet.html --strict` |
+| `create` | Scaffold a runnable project: landing \| dashboard \| docs \| auth | landing, dashboard, docs, auth | --theme, --no-copy | `velinstyle create landing ./my-site --theme earth` |
+| `serve` | Serve a directory over HTTP (default port 4173) | — | --port | `velinstyle serve . --port 4173` |
+| `doctor` | Check dist assets, themes, config, icons, and Windows ESM import hints | — | — | `velinstyle doctor` |
+| `check` | Aggregate gate: doctor + blueprint --strict + scan + review (alias: validate) | — | --json, --sarif, --profile | `velinstyle check . --profile marketing` |
+| `scaffold` | Plan-first page HTML or recipe fragment from natural language | list-intents | --output, -o, --json | `velinstyle scaffold "Steuerberater Landingpage mit Kontakt"` |
+| `plan` | Emit page plan JSON from a prompt (no HTML) | — | --output, -o, --json | `velinstyle plan "SaaS landing with pricing"` |
+| `review` | Design / a11y / SEO / performance / conversion review gate | — | --json, --prompt, --profile | `velinstyle review out.html --profile marketing` |
+| `wc` | Inspect Web Component APIs from source | api | — | `velinstyle wc api velin-toast` |
 | `layout` | Responsive layout audit (flex, grid, viewport) | audit, suggest, fix | --json, --write, --dry-run | `velinstyle layout suggest index.html` |
-| `perf` | Performance audit for images and scripts | audit, suggest, fix | --json, --write, --dry-run | `velinstyle perf audit samples/` |
+| `perf` | Performance audit for images and scripts (directory or .html file) | audit, suggest, fix | --json, --write, --dry-run | `velinstyle perf audit index.html` |
 | `tokens` | Build or validate design tokens JSON | build, validate | --input, --output, -o | `velinstyle tokens validate --input examples/tokens.full.json` |
-| `docs` | Generate developer reference Markdown | generate | --scope, --out | `velinstyle docs generate --scope all` |
-| `meta` | Build Velin-Meta agent bundle (velin-agent.json, llms.txt) | page | --out, --llms-out, --base-url, --no-llms | `velinstyle meta` |
+| `docs` | Generate developer reference Markdown (alias: documentation) | generate | --scope, --out | `velinstyle docs generate --scope all` |
+| `meta` | Build Velin-Meta agent bundle; page --write merges curated goals/intent | page | --out, --llms-out, --base-url, --no-llms, --write | `velinstyle meta page index.html --write` |
+| `search` | Build JSON search index for VelinSearch | index | --out, --extra-html | `velinstyle search index --out dist/search-index.json` |
+| `skills` | Registry-first AI skill catalog and install runner | list, show, install, run, validate, doctor, packs, bundles, templates, projects, graphs | --capability, --status, --priority, --origin, --category, --target, --no-deps, --json, --human | `velinstyle skills show scaffold.landing --human` |
+| `workflow` | Resolve workflow graph or project workflow steps | — | --json, --dry-run, --step | `velinstyle workflow landingpage --json` |

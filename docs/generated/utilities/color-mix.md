@@ -8,17 +8,11 @@ Source: `src/utilities/color-mix.css`
 | --- | --- |
 | `.velin-auto-text` | `color: light-dark(oklch(15% 0 0), oklch(95% 0 0));` |
 | `.velin-auto-text--danger` | `color: color-contrast(var(--velin-color-danger) vs oklch(98% 0 0), oklch(15% 0 0));` |
-| `.velin-auto-text--danger` | `color: #fff;` |
 | `.velin-auto-text--info` | `color: color-contrast(var(--velin-color-info) vs oklch(98% 0 0), oklch(15% 0 0));` |
-| `.velin-auto-text--info` | `color: #fff;` |
 | `.velin-auto-text--primary` | `color: color-contrast(var(--velin-color-primary) vs oklch(98% 0 0), oklch(15% 0 0));` |
-| `.velin-auto-text--primary` | `color: var(--velin-color-on-primary, #fff);` |
 | `.velin-auto-text--secondary` | `color: color-contrast(var(--velin-color-secondary) vs oklch(98% 0 0), oklch(15% 0 0));` |
-| `.velin-auto-text--secondary` | `color: var(--velin-color-on-secondary, #fff);` |
 | `.velin-auto-text--success` | `color: color-contrast(var(--velin-color-success) vs oklch(98% 0 0), oklch(15% 0 0));` |
-| `.velin-auto-text--success` | `color: #fff;` |
 | `.velin-auto-text--warning` | `color: color-contrast(var(--velin-color-warning) vs oklch(98% 0 0), oklch(15% 0 0));` |
-| `.velin-auto-text--warning` | `color: oklch(15% 0 0);` |
 | `.velin-bg-danger\/10` | `background: color-mix(in oklch, var(--velin-color-danger) 10%, transparent);` |
 | `.velin-bg-danger\/20` | `background: color-mix(in oklch, var(--velin-color-danger) 20%, transparent);` |
 | `.velin-bg-danger\/50` | `background: color-mix(in oklch, var(--velin-color-danger) 50%, transparent);` |

@@ -35,16 +35,20 @@ For **local docs** or to mirror the GitHub Pages layout, run `npm run docs:prepa
 
 ```
 velinstyle/
+├── VELINSTYLE_2030.md    # Product identity (Phase 0 architecture north star)
 ├── src/                  # Source CSS (tokens, base, a11y, layout, components, utilities)
 ├── components/           # Web Components (JS source)
 ├── cli/                  # VelinStyle CLI (init, build, icons, scan, prefix, …)
 ├── icons/                # SVG icon source files + sprite builder
 ├── dist/                 # Built output (generated; do not edit directly)
 ├── docs/                 # Documentation pages (in-repo quick reference)
+├── docs/strategy/        # Pointer only — full strategy lives in monorepo interne_docs/strategy (not git)
 ├── samples/              # Example pages
 ├── scripts/              # Build scripts
 └── tests/                # Test files (`tests/setup.js` — Vitest/jsdom helpers)
 ```
+
+Before proposing large features, read [VELINSTYLE_2030.md](VELINSTYLE_2030.md) and the local strategy index (`interne_docs/strategy/` in the monorepo; see [docs/strategy/README.md](docs/strategy/README.md)). Contributions that contradict the product identity (for example native adapter sprawl before WC integration guides, or unlimited Tailwind-style utility expansion) should be discussed as an RFC first.
 
 The marketing site and extended docs at [velinstyle.info](https://velinstyle.info) live in a **separate repository** (`velinstyle-site`). Issues and PRs for that site belong there, not in this repo.
 

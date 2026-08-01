@@ -29,7 +29,7 @@ function sortValue(cell, type) {
 
 class VelinDataTable extends HTMLElement {
   static get observedAttributes() {
-    return ['page-size', 'filter-input', 'empty-text', 'label'];
+    return ['page-size', 'filter-input', 'empty-text', 'label', 'editable'];
   }
 
   constructor() {
@@ -180,6 +180,7 @@ class VelinDataTable extends HTMLElement {
 
     this._ensureAccessibleName();
     this._setupSorting();
+    this._setupEditable();
     this._bindFilterInput();
     this._render();
   }
@@ -244,6 +245,82 @@ class VelinDataTable extends HTMLElement {
       header.textContent = '';
       header.appendChild(button);
     });
+  }
+
+  /**
+   * Inline edit: double-click or Enter on focused cell with data-editable / host editable.
+   * Enter saves, Escape cancels. Dispatches velin-data-table-edit.
+   */
+  _setupEditable() {
+    if (!this.hasAttribute('editable') && !this.querySelector('[data-editable]')) return;
+    const body = this._table.tBodies[0];
+    if (!body || body.dataset.velinEditBound) return;
+    body.dataset.velinEditBound = 'true';
+
+    body.addEventListener('dblclick', (e) => {
+      const cell = e.target.closest('td');
+      if (!cell || !body.contains(cell)) return;
+      if (!this.hasAttribute('editable') && !cell.hasAttribute('data-editable')) return;
+      this._beginEdit(cell);
+    });
+
+    body.addEventListener('keydown', (e) => {
+      const cell = e.target.closest('td');
+      if (!cell || e.target !== cell) return;
+      if (e.key === 'Enter' || e.key === 'F2') {
+        if (!this.hasAttribute('editable') && !cell.hasAttribute('data-editable')) return;
+        e.preventDefault();
+        this._beginEdit(cell);
+      }
+    });
+
+    for (const cell of body.querySelectorAll('td[data-editable], td')) {
+      if (!this.hasAttribute('editable') && !cell.hasAttribute('data-editable')) continue;
+      if (!cell.hasAttribute('tabindex')) cell.setAttribute('tabindex', '0');
+    }
+  }
+
+  /** @param {HTMLTableCellElement} cell */
+  _beginEdit(cell) {
+    if (cell.querySelector('input')) return;
+    const previous = cell.textContent.trim();
+    const input = document.createElement('input');
+    input.className = 'velin-input velin-data-table__edit';
+    input.value = previous;
+    input.setAttribute('aria-label', 'Edit cell');
+    cell.textContent = '';
+    cell.appendChild(input);
+    input.focus();
+    input.select();
+
+    const commit = (save) => {
+      const next = save ? input.value.trim() : previous;
+      cell.textContent = next;
+      if (save && next !== previous) {
+        this.dispatchEvent(new CustomEvent('velin-data-table-edit', {
+          bubbles: true,
+          detail: {
+            cell,
+            row: cell.parentElement,
+            previous,
+            value: next,
+            columnIndex: cell.cellIndex,
+          },
+        }));
+        announce('Cell updated');
+      }
+    };
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        commit(true);
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        commit(false);
+      }
+    });
+    input.addEventListener('blur', () => commit(true));
   }
 
   _syncSortState() {

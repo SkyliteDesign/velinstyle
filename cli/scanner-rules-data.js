@@ -44,6 +44,13 @@ export const SCANNER_RULES = [
   { id: 'a11y/iframe-title', category: 'a11y', severity: 'error', message: '<iframe> without title.', fixHint: 'Add descriptive title attribute.' },
   { id: 'a11y/autocomplete-auth', category: 'a11y', severity: 'warning', message: 'Auth field missing autocomplete (WCAG 2.2).', fixHint: 'Add autocomplete="username" or "current-password".' },
   { id: 'a11y/invalid-describedby', category: 'a11y', severity: 'warning', message: 'aria-invalid without aria-describedby.', fixHint: 'Link to error message element id.' },
+  { id: 'a11y/duplicate-id', category: 'a11y', severity: 'error', message: 'Duplicate id attribute in the document.', fixHint: 'Make every id unique.' },
+  { id: 'a11y/target-size-min', category: 'a11y', severity: 'warning', message: 'Interactive control appears smaller than ~24px (WCAG 2.5.8 heuristic).', fixHint: 'Increase hit target to at least 24×24 CSS px.' },
+  { id: 'a11y/nested-interactive', category: 'a11y', severity: 'error', message: 'Nested interactive elements (button/a/role).', fixHint: 'Use a single control; do not nest button/a/role=button.' },
+  { id: 'a11y/contrast-inline', category: 'a11y', severity: 'error', message: 'Inline or authored color pair fails WCAG AA contrast.', fixHint: 'Raise contrast to ≥4.5:1 (or ≥3:1 large text).' },
+  { id: 'a11y/role-button-contract', category: 'a11y', severity: 'warning', message: 'role=button without tabindex and/or Enter/Space handling.', fixHint: 'Prefer native <button>, or tabindex="0" + keydown for Enter/Space.' },
+  { id: 'css/unknown-velin-class', category: 'css', severity: 'warning', message: 'Unknown velin-* utility/component class.', fixHint: 'Use classes from the CSS bundle or blueprint --strict.' },
+  { id: 'wc/invalid-attribute', category: 'wc', severity: 'warning', message: 'Attribute is not part of this Web Component API.', fixHint: 'Use observed / documented attributes only.' },
   // CSS
   { id: 'css/var-fallback', category: 'css', severity: 'info', message: 'CSS variable without fallback in var().', fixHint: 'Use var(--velin-*, fallback).' },
   { id: 'css/z-index-token', category: 'css', severity: 'warning', message: 'Raw z-index instead of --velin-z-* token.', fixHint: 'Use tokens from z-index.css — --fix suggests token.' },

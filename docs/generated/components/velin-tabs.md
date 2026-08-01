@@ -11,8 +11,12 @@ WCAG contract status: **pass** (framework target: AAA).
 - **Keyboard:** Roving, auto-select arrows
 
 ## Attributes
-_No `observedAttributes` declared._
+_No `observedAttributes` declared._ Author-facing configuration may still use slots, properties, or child markup — see **Slots** / **Public API** below.
 
+| Author surface | Notes |
+| --- | --- |
+| slot `panel` | Content projection (not an observed attribute) |
+| slot `tab` | Content projection (not an observed attribute) |
 ## Events
 - `velin-tab-change` (bubbles)
 ## CSS parts

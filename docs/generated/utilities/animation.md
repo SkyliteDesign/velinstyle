@@ -23,7 +23,6 @@ Source: `src/utilities/animation.css`
 | `.velin-animate-fade-in` | `animation: velin-fade-in var(--velin-duration-normal) var(--velin-ease-out) both;` |
 | `.velin-animate-fade-out` | `animation: velin-fade-out var(--velin-duration-normal) var(--velin-ease-in) both;` |
 | `.velin-animate-flash` | `animation: velin-flash 0.6s var(--velin-ease-default) both;` |
-| `.velin-animate-flash` | `animation: none;` |
 | `.velin-animate-flip` | `animation: velin-flip var(--velin-duration-normal) var(--velin-ease-out) both;` |
 | `.velin-animate-float` | `animation: velin-float 3s var(--velin-ease-in-out) infinite;` |
 | `.velin-animate-glow` | `animation: velin-glow 2s var(--velin-ease-in-out) infinite;` |
@@ -43,11 +42,12 @@ Source: `src/utilities/animation.css`
 | `.velin-animate-slide-down` | `animation: velin-slide-down var(--velin-duration-normal) var(--velin-ease-out) both;` |
 | `.velin-animate-slide-fade-left` | `animation: velin-slide-fade-left var(--velin-duration-normal) var(--velin-ease-out) both;` |
 | `.velin-animate-slide-fade-right` | `animation: velin-slide-fade-right var(--velin-duration-normal) var(--velin-ease-out) both;` |
-| `.velin-animate-slide-fade-right` | `animation: none; opacity: 1; filter: none; transform: none; clip-path: none;` |
 | `.velin-animate-slide-left` | `animation: velin-slide-left var(--velin-duration-normal) var(--velin-ease-out) both;` |
 | `.velin-animate-slide-right` | `animation: velin-slide-right var(--velin-duration-normal) var(--velin-ease-out) both;` |
 | `.velin-animate-slide-up` | `animation: velin-slide-up var(--velin-duration-normal) var(--velin-ease-out) both;` |
 | `.velin-animate-spin` | `animation: velin-spin 1s linear infinite;` |
+| `.velin-animate-stagger-1` | `animation-delay: 0ms;` |
+| `.velin-animate-stagger-2` | `animation-delay: 0ms;` |
 | `.velin-animate-swing` | `animation: velin-swing 1s var(--velin-ease-default) both; transform-origin: top center;` |
 | `.velin-animate-tada` | `animation: velin-tada 1s var(--velin-ease-default) both;` |
 | `.velin-animate-wiggle` | `animation: velin-wiggle 1s var(--velin-ease-default) infinite;` |

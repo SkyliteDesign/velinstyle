@@ -1,13 +1,14 @@
 {
   "schemaVersion": 1,
   "mime": "application/vnd.velinstyle.meta+json",
-  "generatedAt": "2026-07-27T10:44:37.810Z",
+  "generatedAt": "2026-08-01T07:08:36.191Z",
   "framework": {
     "name": "@birdapi/velinstyle",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "homepage": "https://velinstyle.info",
     "repository": "https://github.com/SkyliteDesign/velinstyle.git",
-    "tagline": "VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components."
+    "tagline": "VelinStyle is a CSS framework with WCAG 2.2 AAA-oriented defaults, native JavaScript runtime, and Web Components.",
+    "pipeline": "Core Foundation → Design System → Knowledge Graph → Prompt Engine → Review Engine → AI Metadata"
   },
   "packageExports": [
     ".",
@@ -22,7 +23,8 @@
     "./attributes",
     "./highlight",
     "./meta",
-    "./a11y"
+    "./a11y",
+    "./skills-registry"
   ],
   "release": {
     "breaking": [
@@ -31,7 +33,8 @@
     ],
     "migration": [
       "Replace velin-tooltip-wc / velin-stepper-wc with velin-tooltip / velin-stepper.",
-      "Point AI tools at velin-agent.json or docs/llms.txt for framework context."
+      "Point AI tools at velin-agent.json or docs/llms.txt for framework context.",
+      "Prefer velinstyle scaffold / plan for page generation (plan → render → review)."
     ]
   },
   "components": {
@@ -39,6 +42,7 @@
       "velin-accordion",
       "velin-announcer",
       "velin-bottom-nav",
+      "velin-calendar",
       "velin-carousel",
       "velin-code-block",
       "velin-collapse",
@@ -52,6 +56,7 @@
       "velin-drawer",
       "velin-dropdown",
       "velin-email",
+      "velin-file-dropzone",
       "velin-form-summary",
       "velin-icon",
       "velin-lightbox",
@@ -75,11 +80,12 @@
       "velin-toast",
       "velin-tooltip"
     ],
-    "count": 38,
+    "count": 40,
     "loaderTags": [
       "velin-accordion",
       "velin-announcer",
       "velin-bottom-nav",
+      "velin-calendar",
       "velin-carousel",
       "velin-code-block",
       "velin-collapse",
@@ -93,6 +99,7 @@
       "velin-drawer",
       "velin-dropdown",
       "velin-email",
+      "velin-file-dropzone",
       "velin-form-summary",
       "velin-icon",
       "velin-lightbox",
@@ -118,7 +125,7 @@
       "velin-tooltip",
       "velin-tooltip-wc"
     ],
-    "loaderCount": 40,
+    "loaderCount": 42,
     "legacyAliases": [
       "velin-stepper-wc",
       "velin-tooltip-wc"
@@ -129,6 +136,3785 @@
       "velin-reveal"
     ]
   },
+  "knowledgeGraph": {
+    "components": [
+      {
+        "id": "css-button",
+        "kind": "css-component",
+        "classPrefix": "velin-btn",
+        "category": "actions",
+        "subcategory": "button",
+        "purpose": "Primary interactive control for actions and form submit.",
+        "family": "actions",
+        "maturity": "core",
+        "recommendedPages": [
+          "landing",
+          "saas",
+          "dashboard",
+          "shop"
+        ],
+        "recommendedSections": [
+          "hero",
+          "cta",
+          "contact",
+          "pricing"
+        ],
+        "compatibleWith": [
+          "css-card",
+          "css-input",
+          "velin-form-summary"
+        ],
+        "incompatibleWith": [],
+        "accessibility": {
+          "role": "native button/link",
+          "keyboard": "Enter/Space on button"
+        },
+        "seo": {
+          "impact": "low",
+          "notes": "CTA copy affects conversion, not crawl structure"
+        },
+        "performance": {
+          "cost": "css-only"
+        },
+        "variants": [
+          "primary",
+          "secondary",
+          "ghost",
+          "danger",
+          "sm",
+          "lg"
+        ],
+        "density": [
+          "comfortable",
+          "default",
+          "compact"
+        ],
+        "themeSupport": [
+          "light",
+          "dark",
+          "system"
+        ],
+        "motion": {
+          "hover": true,
+          "reducedMotionSafe": true
+        },
+        "examples": [
+          "<button class=\"velin-btn velin-btn--primary\">Save</button>"
+        ],
+        "promptKeywords": [
+          "button",
+          "cta",
+          "call to action",
+          "submit"
+        ],
+        "designIntelligence": {
+          "visualWeight": 4,
+          "importance": "primary",
+          "hierarchy": "action",
+          "spacingRules": [
+            "pair with gap-3 or gap-4 in CTA groups"
+          ],
+          "typographyRules": [
+            "label ≤ 3 words preferred"
+          ],
+          "animationRules": [
+            "no infinite pulse on primary CTA"
+          ],
+          "colorRules": [
+            "primary uses --velin-color-primary + on-primary text"
+          ],
+          "eyeFlow": "place primary CTA after supporting copy",
+          "compositionRules": [
+            "max 2 CTAs in hero"
+          ],
+          "commonMistakes": [
+            "three equal CTAs",
+            "low contrast ghost on muted"
+          ],
+          "bestPractices": [
+            "one primary + optional secondary"
+          ]
+        }
+      },
+      {
+        "id": "css-card",
+        "kind": "css-component",
+        "classPrefix": "velin-card",
+        "category": "content",
+        "subcategory": "card",
+        "purpose": "Grouped content surface for features, services, pricing tiers.",
+        "family": "surfaces",
+        "maturity": "core",
+        "recommendedPages": [
+          "landing",
+          "saas",
+          "agency",
+          "portfolio"
+        ],
+        "recommendedSections": [
+          "services",
+          "benefits",
+          "pricing"
+        ],
+        "compatibleWith": [
+          "css-button",
+          "css-badge",
+          "velin-icon"
+        ],
+        "incompatibleWith": [],
+        "accessibility": {
+          "notes": "Heading inside card; don't nest interactive without care"
+        },
+        "seo": {
+          "impact": "medium",
+          "notes": "Card headings help section semantics"
+        },
+        "performance": {
+          "cost": "css-only"
+        },
+        "variants": [
+          "raised",
+          "bordered"
+        ],
+        "density": [
+          "comfortable",
+          "default",
+          "compact"
+        ],
+        "themeSupport": [
+          "light",
+          "dark"
+        ],
+        "motion": {
+          "reducedMotionSafe": true
+        },
+        "examples": [
+          "<article class=\"velin-card\">…</article>"
+        ],
+        "promptKeywords": [
+          "card",
+          "feature",
+          "service",
+          "tile"
+        ],
+        "designIntelligence": {
+          "visualWeight": 3,
+          "importance": "secondary",
+          "hierarchy": "section-item",
+          "spacingRules": [
+            "grid gap-4 or gap-6"
+          ],
+          "typographyRules": [
+            "H3 title + short body"
+          ],
+          "animationRules": [
+            "optional entrance; respect reduced motion"
+          ],
+          "colorRules": [
+            "raised surface + text tokens"
+          ],
+          "eyeFlow": "scan titles across grid first",
+          "compositionRules": [
+            "2–4 columns desktop; 1 mobile"
+          ],
+          "commonMistakes": [
+            "uneven card heights with sparse content",
+            "too many cards above fold"
+          ],
+          "bestPractices": [
+            "equal structure: icon, title, text, optional link"
+          ]
+        }
+      },
+      {
+        "id": "css-input",
+        "kind": "css-component",
+        "classPrefix": "velin-input",
+        "category": "forms",
+        "subcategory": "field",
+        "purpose": "Text entry fields with labels for forms.",
+        "family": "forms",
+        "maturity": "core",
+        "recommendedPages": [
+          "landing",
+          "saas",
+          "dashboard",
+          "shop"
+        ],
+        "recommendedSections": [
+          "contact",
+          "login"
+        ],
+        "compatibleWith": [
+          "velin-form-summary",
+          "css-button"
+        ],
+        "incompatibleWith": [],
+        "accessibility": {
+          "notes": "Visible label required; wire aria-invalid via form-summary"
+        },
+        "seo": {
+          "impact": "low"
+        },
+        "performance": {
+          "cost": "css-only"
+        },
+        "variants": [
+          "default",
+          "invalid"
+        ],
+        "density": [
+          "default",
+          "compact",
+          "data-dense"
+        ],
+        "themeSupport": [
+          "light",
+          "dark"
+        ],
+        "motion": {},
+        "examples": [
+          "<label>Name<input class=\"velin-input\"></label>"
+        ],
+        "promptKeywords": [
+          "input",
+          "form field",
+          "text field"
+        ],
+        "designIntelligence": {
+          "visualWeight": 2,
+          "importance": "primary",
+          "hierarchy": "form-control",
+          "spacingRules": [
+            "stack fields with gap-4"
+          ],
+          "typographyRules": [
+            "label above field"
+          ],
+          "animationRules": [],
+          "colorRules": [
+            "invalid uses danger tokens"
+          ],
+          "eyeFlow": "label → field → help → errors summary",
+          "compositionRules": [
+            "group related fields"
+          ],
+          "commonMistakes": [
+            "placeholder-only labels"
+          ],
+          "bestPractices": [
+            "pair with velin-form-summary"
+          ]
+        }
+      },
+      {
+        "id": "css-alert",
+        "kind": "css-component",
+        "classPrefix": "velin-alert",
+        "category": "feedback",
+        "subcategory": "alert",
+        "purpose": "Inline status messages.",
+        "family": "feedback",
+        "maturity": "core",
+        "recommendedPages": [
+          "dashboard",
+          "saas",
+          "docs"
+        ],
+        "recommendedSections": [
+          "contact",
+          "onboarding"
+        ],
+        "compatibleWith": [
+          "velin-form-summary"
+        ],
+        "incompatibleWith": [],
+        "accessibility": {
+          "role": "status/alert depending on urgency"
+        },
+        "seo": {
+          "impact": "none"
+        },
+        "performance": {
+          "cost": "css-only"
+        },
+        "variants": [
+          "info",
+          "success",
+          "warning",
+          "danger"
+        ],
+        "density": [
+          "default",
+          "compact"
+        ],
+        "themeSupport": [
+          "light",
+          "dark"
+        ],
+        "motion": {},
+        "examples": [
+          "<div class=\"velin-alert velin-alert--info\">…</div>"
+        ],
+        "promptKeywords": [
+          "alert",
+          "banner",
+          "notice"
+        ],
+        "designIntelligence": {
+          "visualWeight": 3,
+          "importance": "secondary",
+          "hierarchy": "feedback",
+          "spacingRules": [
+            "margin-block before forms"
+          ],
+          "typographyRules": [
+            "concise message"
+          ],
+          "animationRules": [],
+          "colorRules": [
+            "semantic status tokens"
+          ],
+          "eyeFlow": "near the related control",
+          "compositionRules": [
+            "one alert per concern"
+          ],
+          "commonMistakes": [
+            "using alert for marketing hero"
+          ],
+          "bestPractices": [
+            "pair with actionable next step"
+          ]
+        }
+      },
+      {
+        "id": "css-nav",
+        "kind": "css-component",
+        "classPrefix": "velin-nav",
+        "category": "navigation",
+        "subcategory": "nav",
+        "purpose": "Site or app navigation chrome.",
+        "family": "navigation",
+        "maturity": "core",
+        "recommendedPages": [
+          "landing",
+          "corporate",
+          "docs",
+          "dashboard"
+        ],
+        "recommendedSections": [
+          "navbar"
+        ],
+        "compatibleWith": [
+          "velin-theme-toggle",
+          "velin-search"
+        ],
+        "incompatibleWith": [],
+        "accessibility": {
+          "notes": "Landmark nav; skip link on pages"
+        },
+        "seo": {
+          "impact": "high",
+          "notes": "Primary internal links"
+        },
+        "performance": {
+          "cost": "css-only"
+        },
+        "variants": [
+          "header",
+          "pills"
+        ],
+        "density": [
+          "comfortable",
+          "default",
+          "compact"
+        ],
+        "themeSupport": [
+          "light",
+          "dark"
+        ],
+        "motion": {},
+        "examples": [
+          "<nav class=\"velin-nav\">…</nav>"
+        ],
+        "promptKeywords": [
+          "navbar",
+          "navigation",
+          "header menu"
+        ],
+        "designIntelligence": {
+          "visualWeight": 3,
+          "importance": "primary",
+          "hierarchy": "chrome",
+          "spacingRules": [
+            "sticky optional; padding-inline token"
+          ],
+          "typographyRules": [
+            "short labels"
+          ],
+          "animationRules": [],
+          "colorRules": [
+            "base or raised surface"
+          ],
+          "eyeFlow": "logo → links → CTA",
+          "compositionRules": [
+            "one primary nav CTA max"
+          ],
+          "commonMistakes": [
+            "too many top-level items"
+          ],
+          "bestPractices": [
+            "5–7 primary links"
+          ]
+        }
+      },
+      {
+        "id": "velin-modal",
+        "kind": "web-component",
+        "tag": "velin-modal",
+        "category": "overlays",
+        "subcategory": "modal",
+        "purpose": "Blocking dialog overlay for focused tasks.",
+        "family": "overlays",
+        "maturity": "core",
+        "recommendedPages": [
+          "saas",
+          "dashboard",
+          "shop"
+        ],
+        "recommendedSections": [],
+        "compatibleWith": [
+          "css-button",
+          "velin-form-summary"
+        ],
+        "incompatibleWith": [
+          "velin-drawer",
+          "velin-sheet"
+        ],
+        "accessibility": {
+          "focusTrap": true,
+          "escapeCloses": true,
+          "inertBackground": true
+        },
+        "seo": {
+          "impact": "none",
+          "notes": "Do not put primary SEO content only in modal"
+        },
+        "performance": {
+          "cost": "lazy-ok"
+        },
+        "variants": [
+          "open"
+        ],
+        "density": [
+          "default"
+        ],
+        "themeSupport": [
+          "light",
+          "dark"
+        ],
+        "motion": {
+          "reducedMotionSafe": true
+        },
+        "examples": [
+          "<velin-modal><h2 slot=\"title\">…</h2></velin-modal>"
+        ],
+        "promptKeywords": [
+          "modal",
+          "dialog overlay",
+          "popup"
+        ],
+        "designIntelligence": {
+          "visualWeight": 5,
+          "importance": "primary",
+          "hierarchy": "overlay",
+          "spacingRules": [
+            "comfortable body padding"
+          ],
+          "typographyRules": [
+            "clear title"
+          ],
+          "animationRules": [
+            "short open/close; respect reduced motion"
+          ],
+          "colorRules": [
+            "overlay surface + dimmed backdrop"
+          ],
+          "eyeFlow": "title → body → actions",
+          "compositionRules": [
+            "prefer modal for blocking confirmations"
+          ],
+          "commonMistakes": [
+            "stacking multiple modals",
+            "missing close affordance"
+          ],
+          "bestPractices": [
+            "use focus-manager lifecycle"
+          ]
+        },
+        "api": {
+          "events": [
+            "velin-close"
+          ],
+          "methods": [
+            "open",
+            "close"
+          ]
+        }
+      },
+      {
+        "id": "velin-dialog",
+        "kind": "web-component",
+        "tag": "velin-dialog",
+        "category": "overlays",
+        "subcategory": "dialog",
+        "purpose": "Native dialog-based prompts and confirms.",
+        "family": "overlays",
+        "maturity": "core",
+        "recommendedPages": [
+          "saas",
+          "dashboard"
+        ],
+        "recommendedSections": [],
+        "compatibleWith": [
+          "css-button"
+        ],
+        "incompatibleWith": [],
+        "accessibility": {
+          "nativeDialog": true
+        },
+        "seo": {
+          "impact": "none"
+        },
+        "performance": {
+          "cost": "lazy-ok"
+        },
+        "variants": [],
+        "density": [
+          "default"
+        ],
+        "themeSupport": [
+          "light",
+          "dark"
+        ],
+        "motion": {},
+        "examples": [
+          "<velin-dialog></velin-dialog>"
+        ],
+        "promptKeywords": [
+          "confirm dialog",
+          "prompt dialog"
+        ],
+        "designIntelligence": {
+          "visualWeight": 5,
+          "importance": "primary",
+          "hierarchy": "overlay",
+          "spacingRules": [],
+          "typographyRules": [],
+          "animationRules": [],
+          "colorRules": [],
+          "eyeFlow": "message → actions",
+          "compositionRules": [
+            "use for confirm/prompt; modal for richer layouts"
+          ],
+          "commonMistakes": [
+            "listening only to deprecated velin-dialog-close"
+          ],
+          "bestPractices": [
+            "listen to velin-close"
+          ]
+        },
+        "api": {
+          "events": [
+            "velin-close",
+            "velin-dialog-close"
+          ]
+        }
+      },
+      {
+        "id": "velin-accordion",
+        "kind": "web-component",
+        "tag": "velin-accordion",
+        "category": "disclosure",
+        "subcategory": "accordion",
+        "purpose": "FAQ and progressive disclosure of related panels.",
+        "family": "disclosure",
+        "maturity": "core",
+        "recommendedPages": [
+          "landing",
+          "docs",
+          "saas",
+          "lawyer",
+          "healthcare"
+        ],
+        "recommendedSections": [
+          "faq"
+        ],
+        "compatibleWith": [
+          "css-card"
+        ],
+        "incompatibleWith": [],
+        "accessibility": {
+          "keyboard": "arrow keys / enter within pattern"
+        },
+        "seo": {
+          "impact": "medium",
+          "notes": "Keep question text in light DOM when possible"
+        },
+        "performance": {
+          "cost": "lazy-ok"
+        },
+        "variants": [],
+        "density": [
+          "comfortable",
+          "default"
+        ],
+        "themeSupport": [
+          "light",
+          "dark"
+        ],
+        "motion": {
+          "reducedMotionSafe": true
+        },
+        "examples": [
+          "<velin-accordion>…</velin-accordion>"
+        ],
+        "promptKeywords": [
+          "faq",
+          "accordion",
+          "disclosure"
+        ],
+        "designIntelligence": {
+          "visualWeight": 2,
+          "importance": "secondary",
+          "hierarchy": "section-body",
+          "spacingRules": [
+            "stack items tightly"
+          ],
+          "typographyRules": [
+            "questions as clear interrogatives"
+          ],
+          "animationRules": [
+            "expand/collapse brief"
+          ],
+          "colorRules": [
+            "base/raised"
+          ],
+          "eyeFlow": "scan questions vertically",
+          "compositionRules": [
+            "use in FAQ section after social proof"
+          ],
+          "commonMistakes": [
+            "marketing paragraphs as 'questions'"
+          ],
+          "bestPractices": [
+            "5–8 high-intent FAQs"
+          ]
+        }
+      },
+      {
+        "id": "velin-form-summary",
+        "kind": "web-component",
+        "tag": "velin-form-summary",
+        "category": "forms",
+        "subcategory": "validation",
+        "purpose": "Accessible error summary for forms.",
+        "family": "forms",
+        "maturity": "core",
+        "recommendedPages": [
+          "landing",
+          "saas",
+          "shop"
+        ],
+        "recommendedSections": [
+          "contact"
+        ],
+        "compatibleWith": [
+          "css-input",
+          "css-button"
+        ],
+        "incompatibleWith": [],
+        "accessibility": {
+          "role": "alert",
+          "wcag": [
+            "3.3.1",
+            "3.3.3"
+          ]
+        },
+        "seo": {
+          "impact": "none"
+        },
+        "performance": {
+          "cost": "lazy-ok"
+        },
+        "variants": [],
+        "density": [
+          "default"
+        ],
+        "themeSupport": [
+          "light",
+          "dark"
+        ],
+        "motion": {},
+        "examples": [
+          "<velin-form-summary></velin-form-summary>"
+        ],
+        "promptKeywords": [
+          "form errors",
+          "validation summary",
+          "contact form"
+        ],
+        "designIntelligence": {
+          "visualWeight": 4,
+          "importance": "primary",
+          "hierarchy": "form-feedback",
+          "spacingRules": [
+            "place before fields or at top of form"
+          ],
+          "typographyRules": [
+            "list each invalid field"
+          ],
+          "animationRules": [],
+          "colorRules": [
+            "danger tokens"
+          ],
+          "eyeFlow": "summary → first invalid field",
+          "compositionRules": [
+            "required on contact/checkout forms"
+          ],
+          "commonMistakes": [
+            "native-only bubbles without summary"
+          ],
+          "bestPractices": [
+            "wire aria-invalid via component"
+          ]
+        }
+      },
+      {
+        "id": "velin-theme-toggle",
+        "kind": "web-component",
+        "tag": "velin-theme-toggle",
+        "category": "theming",
+        "subcategory": "toggle",
+        "purpose": "Switch light/dark theme via data-velin-theme.",
+        "family": "theming",
+        "maturity": "core",
+        "recommendedPages": [
+          "docs",
+          "saas",
+          "dashboard"
+        ],
+        "recommendedSections": [
+          "navbar"
+        ],
+        "compatibleWith": [
+          "css-nav"
+        ],
+        "incompatibleWith": [],
+        "accessibility": {
+          "notes": "Accessible name for toggle"
+        },
+        "seo": {
+          "impact": "none"
+        },
+        "performance": {
+          "cost": "lazy-ok"
+        },
+        "variants": [],
+        "density": [
+          "default",
+          "compact"
+        ],
+        "themeSupport": [
+          "light",
+          "dark",
+          "system"
+        ],
+        "motion": {},
+        "examples": [
+          "<velin-theme-toggle></velin-theme-toggle>"
+        ],
+        "promptKeywords": [
+          "dark mode",
+          "theme toggle"
+        ],
+        "designIntelligence": {
+          "visualWeight": 1,
+          "importance": "tertiary",
+          "hierarchy": "chrome",
+          "spacingRules": [],
+          "typographyRules": [],
+          "animationRules": [],
+          "colorRules": [],
+          "eyeFlow": "corner of header",
+          "compositionRules": [
+            "header actions cluster"
+          ],
+          "commonMistakes": [
+            "forcing dark without attribute contract"
+          ],
+          "bestPractices": [
+            "follow ADR 0011 precedence"
+          ]
+        }
+      },
+      {
+        "id": "velin-data-table",
+        "kind": "web-component",
+        "tag": "velin-data-table",
+        "category": "data",
+        "subcategory": "table",
+        "purpose": "Progressive enhancement for sortable, filterable, paginated tables.",
+        "family": "data-display",
+        "maturity": "core",
+        "recommendedPages": [
+          "dashboard",
+          "crm",
+          "erp",
+          "docs"
+        ],
+        "recommendedSections": [
+          "navbar"
+        ],
+        "compatibleWith": [
+          "css-input",
+          "css-badge",
+          "velin-form-summary"
+        ],
+        "incompatibleWith": [],
+        "accessibility": {
+          "notes": "Requires caption/aria-label; aria-sort on headers"
+        },
+        "seo": {
+          "impact": "low",
+          "notes": "Often noindex app surfaces"
+        },
+        "performance": {
+          "cost": "dom-rows"
+        },
+        "variants": [
+          "sortable",
+          "filterable",
+          "paginated"
+        ],
+        "density": [
+          "default",
+          "compact",
+          "data-dense"
+        ],
+        "themeSupport": [
+          "light",
+          "dark"
+        ],
+        "motion": {
+          "reducedMotionSafe": true
+        },
+        "examples": [
+          "<velin-data-table><table>…</table></velin-data-table>"
+        ],
+        "promptKeywords": [
+          "data table",
+          "sortable table",
+          "filter table"
+        ],
+        "designIntelligence": {
+          "visualWeight": 4,
+          "importance": "primary",
+          "hierarchy": "main",
+          "spacingRules": [
+            "full-bleed in content column"
+          ],
+          "typographyRules": [
+            "tabular nums for numeric columns"
+          ],
+          "animationRules": [],
+          "colorRules": [
+            "zebra optional via tokens"
+          ],
+          "eyeFlow": "toolbar → headers → rows",
+          "compositionRules": [
+            "pair filter input above table"
+          ],
+          "commonMistakes": [
+            "missing caption",
+            "icon-only sort without name"
+          ],
+          "bestPractices": [
+            "announce sort/filter changes"
+          ]
+        }
+      },
+      {
+        "id": "velin-search",
+        "kind": "web-component",
+        "tag": "velin-search",
+        "category": "navigation",
+        "subcategory": "search",
+        "purpose": "Documentation and site search against a JSON index.",
+        "family": "navigation",
+        "maturity": "core",
+        "recommendedPages": [
+          "docs",
+          "saas",
+          "corporate"
+        ],
+        "recommendedSections": [
+          "navbar"
+        ],
+        "compatibleWith": [
+          "css-nav",
+          "velin-theme-toggle"
+        ],
+        "incompatibleWith": [],
+        "accessibility": {
+          "notes": "Combobox pattern; keyboard results"
+        },
+        "seo": {
+          "impact": "low"
+        },
+        "performance": {
+          "cost": "index-load"
+        },
+        "variants": [],
+        "density": [
+          "default",
+          "compact"
+        ],
+        "themeSupport": [
+          "light",
+          "dark"
+        ],
+        "motion": {},
+        "examples": [
+          "<velin-search index-url=\"/dist/search-index.json\"></velin-search>"
+        ],
+        "promptKeywords": [
+          "search",
+          "docs search",
+          "site search"
+        ],
+        "designIntelligence": {
+          "visualWeight": 2,
+          "importance": "secondary",
+          "hierarchy": "chrome",
+          "spacingRules": [
+            "header cluster"
+          ],
+          "typographyRules": [],
+          "animationRules": [],
+          "colorRules": [
+            "surface raised for results"
+          ],
+          "eyeFlow": "header center/right",
+          "compositionRules": [
+            "one search per chrome"
+          ],
+          "commonMistakes": [
+            "blocking main thread with huge index"
+          ],
+          "bestPractices": [
+            "relative URLs in index"
+          ]
+        }
+      },
+      {
+        "id": "css-badge",
+        "kind": "css-component",
+        "classPrefix": "velin-badge",
+        "category": "feedback",
+        "subcategory": "badge",
+        "purpose": "Compact status and count labels.",
+        "family": "feedback",
+        "maturity": "core",
+        "recommendedPages": [
+          "dashboard",
+          "saas",
+          "shop"
+        ],
+        "recommendedSections": [
+          "services",
+          "pricing",
+          "navbar"
+        ],
+        "compatibleWith": [
+          "css-card",
+          "css-nav",
+          "css-button"
+        ],
+        "incompatibleWith": [],
+        "accessibility": {
+          "notes": "Do not rely on color alone"
+        },
+        "seo": {
+          "impact": "none"
+        },
+        "performance": {
+          "cost": "css-only"
+        },
+        "variants": [
+          "success",
+          "warning",
+          "danger",
+          "info"
+        ],
+        "density": [
+          "default",
+          "compact"
+        ],
+        "themeSupport": [
+          "light",
+          "dark"
+        ],
+        "motion": {},
+        "examples": [
+          "<span class=\"velin-badge\">New</span>"
+        ],
+        "promptKeywords": [
+          "badge",
+          "status label",
+          "pill"
+        ],
+        "designIntelligence": {
+          "visualWeight": 1,
+          "importance": "tertiary",
+          "hierarchy": "meta",
+          "spacingRules": [
+            "inline with title"
+          ],
+          "typographyRules": [
+            "short labels"
+          ],
+          "animationRules": [],
+          "colorRules": [
+            "semantic tokens"
+          ],
+          "eyeFlow": "adjacent to title",
+          "compositionRules": [
+            "one badge cluster per card"
+          ],
+          "commonMistakes": [
+            "color-only meaning"
+          ],
+          "bestPractices": [
+            "pair with text"
+          ]
+        }
+      },
+      {
+        "id": "velin-drawer",
+        "kind": "web-component",
+        "tag": "velin-drawer",
+        "category": "overlays",
+        "subcategory": "drawer",
+        "purpose": "Side panel overlay for navigation or secondary tasks without blocking the whole viewport like a modal.",
+        "family": "overlays",
+        "maturity": "core",
+        "recommendedPages": [
+          "dashboard",
+          "saas",
+          "docs",
+          "shop"
+        ],
+        "recommendedSections": [
+          "navbar"
+        ],
+        "compatibleWith": [
+          "css-nav",
+          "css-button",
+          "velin-form-summary"
+        ],
+        "incompatibleWith": [
+          "velin-modal",
+          "velin-sheet"
+        ],
+        "accessibility": {
+          "focusTrap": true,
+          "escapeCloses": true,
+          "inertBackground": true
+        },
+        "seo": {
+          "impact": "none"
+        },
+        "performance": {
+          "cost": "lazy-ok"
+        },
+        "variants": [
+          "start",
+          "end"
+        ],
+        "density": [
+          "default",
+          "compact"
+        ],
+        "themeSupport": [
+          "light",
+          "dark"
+        ],
+        "motion": {
+          "reducedMotionSafe": true
+        },
+        "examples": [
+          "<velin-drawer></velin-drawer>"
+        ],
+        "promptKeywords": [
+          "drawer",
+          "side panel",
+          "sidebar overlay"
+        ],
+        "designIntelligence": {
+          "visualWeight": 4,
+          "importance": "secondary",
+          "hierarchy": "overlay",
+          "spacingRules": [
+            "comfortable body padding"
+          ],
+          "typographyRules": [
+            "clear title"
+          ],
+          "animationRules": [
+            "slide in/out; respect reduced motion"
+          ],
+          "colorRules": [
+            "overlay surface + dimmed backdrop"
+          ],
+          "eyeFlow": "title → body → actions",
+          "compositionRules": [
+            "prefer drawer for filters/nav; modal for blocking confirms"
+          ],
+          "commonMistakes": [
+            "using drawer and modal interchangeably"
+          ],
+          "bestPractices": [
+            "use focus-manager lifecycle"
+          ]
+        },
+        "api": {
+          "events": [
+            "velin-close"
+          ],
+          "methods": [
+            "open",
+            "close"
+          ]
+        }
+      },
+      {
+        "id": "velin-sheet",
+        "kind": "web-component",
+        "tag": "velin-sheet",
+        "category": "overlays",
+        "subcategory": "sheet",
+        "purpose": "Bottom or edge sheet for mobile-first actions and pickers.",
+        "family": "overlays",
+        "maturity": "core",
+        "recommendedPages": [
+          "shop",
+          "saas",
+          "dashboard",
+          "event"
+        ],
+        "recommendedSections": [],
+        "compatibleWith": [
+          "css-button",
+          "velin-form-summary"
+        ],
+        "incompatibleWith": [
+          "velin-modal",
+          "velin-drawer"
+        ],
+        "accessibility": {
+          "focusTrap": true,
+          "escapeCloses": true,
+          "inertBackground": true
+        },
+        "seo": {
+          "impact": "none"
+        },
+        "performance": {
+          "cost": "lazy-ok"
+        },
+        "variants": [
+          "bottom"
+        ],
+        "density": [
+          "default",
+          "compact"
+        ],
+        "themeSupport": [
+          "light",
+          "dark"
+        ],
+        "motion": {
+          "reducedMotionSafe": true
+        },
+        "examples": [
+          "<velin-sheet></velin-sheet>"
+        ],
+        "promptKeywords": [
+          "sheet",
+          "bottom sheet",
+          "action sheet"
+        ],
+        "designIntelligence": {
+          "visualWeight": 4,
+          "importance": "secondary",
+          "hierarchy": "overlay",
+          "spacingRules": [
+            "thumb-friendly action spacing"
+          ],
+          "typographyRules": [
+            "short action labels"
+          ],
+          "animationRules": [
+            "slide from edge; reduced-motion safe"
+          ],
+          "colorRules": [
+            "raised overlay surface"
+          ],
+          "eyeFlow": "handle/title → actions",
+          "compositionRules": [
+            "prefer sheet on small viewports for actions"
+          ],
+          "commonMistakes": [
+            "tiny hit targets",
+            "missing dismiss control"
+          ],
+          "bestPractices": [
+            "use focus-manager lifecycle"
+          ]
+        },
+        "api": {
+          "events": [
+            "velin-close"
+          ],
+          "methods": [
+            "open",
+            "close"
+          ]
+        }
+      },
+      {
+        "id": "velin-lightbox",
+        "kind": "web-component",
+        "tag": "velin-lightbox",
+        "category": "overlays",
+        "subcategory": "lightbox",
+        "purpose": "Media-focused overlay for images and galleries.",
+        "family": "overlays",
+        "maturity": "advanced",
+        "recommendedPages": [
+          "portfolio",
+          "shop",
+          "agency",
+          "event"
+        ],
+        "recommendedSections": [
+          "services",
+          "gallery"
+        ],
+        "compatibleWith": [
+          "css-card",
+          "css-button"
+        ],
+        "incompatibleWith": [],
+        "accessibility": {
+          "focusTrap": true,
+          "escapeCloses": true,
+          "inertBackground": true
+        },
+        "seo": {
+          "impact": "low",
+          "notes": "Keep meaningful alt text in light DOM when possible"
+        },
+        "performance": {
+          "cost": "lazy-ok"
+        },
+        "variants": [],
+        "density": [
+          "default"
+        ],
+        "themeSupport": [
+          "light",
+          "dark"
+        ],
+        "motion": {
+          "reducedMotionSafe": true
+        },
+        "examples": [
+          "<velin-lightbox></velin-lightbox>"
+        ],
+        "promptKeywords": [
+          "lightbox",
+          "image gallery overlay",
+          "media viewer"
+        ],
+        "designIntelligence": {
+          "visualWeight": 5,
+          "importance": "primary",
+          "hierarchy": "overlay",
+          "spacingRules": [],
+          "typographyRules": [
+            "captions concise"
+          ],
+          "animationRules": [
+            "fade/zoom brief"
+          ],
+          "colorRules": [
+            "dark dim backdrop"
+          ],
+          "eyeFlow": "media → caption → close",
+          "compositionRules": [
+            "use for media, not forms"
+          ],
+          "commonMistakes": [
+            "forms inside lightbox",
+            "missing close"
+          ],
+          "bestPractices": [
+            "use focus-manager lifecycle"
+          ]
+        },
+        "api": {
+          "events": [
+            "velin-close"
+          ],
+          "methods": [
+            "open",
+            "close"
+          ]
+        }
+      },
+      {
+        "id": "velin-toast",
+        "kind": "web-component",
+        "tag": "velin-toast",
+        "category": "feedback",
+        "subcategory": "toast",
+        "purpose": "Transient status messages that do not block the page.",
+        "family": "feedback",
+        "maturity": "core",
+        "recommendedPages": [
+          "saas",
+          "dashboard",
+          "shop"
+        ],
+        "recommendedSections": [],
+        "compatibleWith": [
+          "css-button",
+          "css-alert"
+        ],
+        "incompatibleWith": [],
+        "accessibility": {
+          "role": "status",
+          "notes": "Prefer polite live region; do not replace form-summary"
+        },
+        "seo": {
+          "impact": "none"
+        },
+        "performance": {
+          "cost": "lazy-ok"
+        },
+        "variants": [
+          "success",
+          "warning",
+          "danger",
+          "info"
+        ],
+        "density": [
+          "default",
+          "compact"
+        ],
+        "themeSupport": [
+          "light",
+          "dark"
+        ],
+        "motion": {
+          "reducedMotionSafe": true
+        },
+        "examples": [
+          "<velin-toast></velin-toast>"
+        ],
+        "promptKeywords": [
+          "toast",
+          "snackbar",
+          "notification"
+        ],
+        "designIntelligence": {
+          "visualWeight": 3,
+          "importance": "secondary",
+          "hierarchy": "feedback",
+          "spacingRules": [
+            "stack toasts with gap-2"
+          ],
+          "typographyRules": [
+            "one short sentence"
+          ],
+          "animationRules": [
+            "brief enter/exit"
+          ],
+          "colorRules": [
+            "semantic status tokens"
+          ],
+          "eyeFlow": "corner/edge of viewport",
+          "compositionRules": [
+            "use for transient status; form errors use form-summary"
+          ],
+          "commonMistakes": [
+            "toasts for persistent form errors"
+          ],
+          "bestPractices": [
+            "auto-dismiss with pause on focus/hover"
+          ]
+        }
+      }
+    ],
+    "componentCount": 17,
+    "tokens": {
+      "version": 1,
+      "tokens": [
+        {
+          "name": "color-text",
+          "layer": "semantic",
+          "usage": "text",
+          "cssVariable": "--velin-color-text",
+          "pairsWith": [
+            "color-surface",
+            "color-surface-dim"
+          ],
+          "contrastTarget": "aaa",
+          "surfaceRole": "base",
+          "description": "Primary body text on base/raised surfaces."
+        },
+        {
+          "name": "color-text-muted",
+          "layer": "semantic",
+          "usage": "text-muted",
+          "cssVariable": "--velin-color-text-muted",
+          "pairsWith": [
+            "color-surface",
+            "color-surface-dim"
+          ],
+          "contrastTarget": "aa",
+          "surfaceRole": "muted",
+          "description": "Secondary text; verify contrast on muted surfaces."
+        },
+        {
+          "name": "color-surface",
+          "layer": "semantic",
+          "usage": "background",
+          "cssVariable": "--velin-color-surface",
+          "pairsWith": [
+            "color-text"
+          ],
+          "contrastTarget": "aaa",
+          "surfaceRole": "raised",
+          "description": "Raised panel background."
+        },
+        {
+          "name": "color-surface-dim",
+          "layer": "semantic",
+          "usage": "background",
+          "cssVariable": "--velin-color-surface-dim",
+          "pairsWith": [
+            "color-text"
+          ],
+          "contrastTarget": "aaa",
+          "surfaceRole": "base",
+          "description": "Dimmer page/canvas background behind raised surfaces."
+        },
+        {
+          "name": "color-primary",
+          "layer": "semantic",
+          "usage": "accent",
+          "cssVariable": "--velin-color-primary",
+          "pairsWith": [
+            "color-on-primary"
+          ],
+          "contrastTarget": "aaa",
+          "surfaceRole": "accent",
+          "description": "Brand accent for primary CTAs."
+        },
+        {
+          "name": "color-on-primary",
+          "layer": "semantic",
+          "usage": "text-on-accent",
+          "cssVariable": "--velin-color-on-primary",
+          "pairsWith": [
+            "color-primary"
+          ],
+          "contrastTarget": "aaa",
+          "surfaceRole": "accent",
+          "description": "Text/icon color on primary accent."
+        },
+        {
+          "name": "color-border",
+          "layer": "semantic",
+          "usage": "border",
+          "cssVariable": "--velin-color-border",
+          "pairsWith": [
+            "color-surface"
+          ],
+          "contrastTarget": "aa",
+          "surfaceRole": "base",
+          "description": "Default border on cards, inputs, and dividers."
+        },
+        {
+          "name": "color-danger",
+          "layer": "semantic",
+          "usage": "status-danger",
+          "cssVariable": "--velin-color-danger",
+          "pairsWith": [
+            "color-on-danger"
+          ],
+          "contrastTarget": "aaa",
+          "surfaceRole": "accent",
+          "description": "Danger/error accent for validation and destructive actions."
+        },
+        {
+          "name": "color-on-danger",
+          "layer": "semantic",
+          "usage": "text-on-danger",
+          "cssVariable": "--velin-color-on-danger",
+          "pairsWith": [
+            "color-danger"
+          ],
+          "contrastTarget": "aaa",
+          "surfaceRole": "accent",
+          "description": "Text/icon on danger accent."
+        },
+        {
+          "name": "space-4",
+          "layer": "core",
+          "usage": "spacing",
+          "cssVariable": "--velin-space-4",
+          "pairsWith": [],
+          "contrastTarget": "none",
+          "description": "Default control/stack gap."
+        },
+        {
+          "name": "space-8",
+          "layer": "core",
+          "usage": "spacing",
+          "cssVariable": "--velin-space-8",
+          "pairsWith": [],
+          "contrastTarget": "none",
+          "description": "Mobile section padding band."
+        },
+        {
+          "name": "space-10",
+          "layer": "core",
+          "usage": "spacing",
+          "cssVariable": "--velin-space-10",
+          "pairsWith": [],
+          "contrastTarget": "none",
+          "description": "Tablet section padding band (hero constraint)."
+        },
+        {
+          "name": "space-12",
+          "layer": "core",
+          "usage": "spacing",
+          "cssVariable": "--velin-space-12",
+          "pairsWith": [],
+          "contrastTarget": "none",
+          "description": "Desktop section padding band."
+        },
+        {
+          "name": "shadow-md",
+          "layer": "semantic",
+          "usage": "elevation",
+          "cssVariable": "--velin-shadow-md",
+          "pairsWith": [
+            "color-surface"
+          ],
+          "contrastTarget": "none",
+          "surfaceRole": "raised",
+          "description": "Medium elevation; dark parity via ADR 0011."
+        }
+      ]
+    },
+    "pages": [
+      {
+        "id": "landing",
+        "name": "Landing",
+        "audience": "prospects",
+        "businessType": "general",
+        "pageGoal": "explain offer and convert",
+        "conversionGoal": "lead or signup",
+        "requiredSections": [
+          "hero",
+          "benefits",
+          "services",
+          "testimonials",
+          "faq",
+          "cta",
+          "footer"
+        ],
+        "optionalSections": [
+          "trust-bar",
+          "process",
+          "pricing"
+        ],
+        "forbiddenSections": [],
+        "seoIntent": "brand + primary offer",
+        "accessibilityRisks": [
+          "hero contrast",
+          "form labels"
+        ],
+        "defaultTone": "clear-confident",
+        "recommendedComponents": [
+          "css-button",
+          "css-card",
+          "velin-accordion",
+          "velin-form-summary"
+        ],
+        "designConstraintIds": [
+          "hero",
+          "faq",
+          "contact"
+        ],
+        "promptKeywords": [
+          "landing page",
+          "homepage",
+          "marketing site"
+        ]
+      },
+      {
+        "id": "corporate",
+        "name": "Corporate",
+        "audience": "stakeholders",
+        "businessType": "corporate",
+        "pageGoal": "trust and company overview",
+        "conversionGoal": "contact",
+        "requiredSections": [
+          "hero",
+          "benefits",
+          "process",
+          "testimonials",
+          "cta",
+          "footer"
+        ],
+        "optionalSections": [
+          "services",
+          "faq"
+        ],
+        "forbiddenSections": [],
+        "seoIntent": "company entity",
+        "accessibilityRisks": [
+          "long pages without landmarks"
+        ],
+        "defaultTone": "formal",
+        "recommendedComponents": [
+          "css-nav",
+          "css-card",
+          "css-button"
+        ],
+        "designConstraintIds": [
+          "hero"
+        ],
+        "promptKeywords": [
+          "corporate",
+          "company",
+          "about"
+        ]
+      },
+      {
+        "id": "lawyer",
+        "name": "Lawyer / Professional services",
+        "audience": "clients seeking counsel",
+        "businessType": "professional-services",
+        "pageGoal": "credibility + consultation booking",
+        "conversionGoal": "contact form",
+        "requiredSections": [
+          "hero",
+          "trust-bar",
+          "services",
+          "process",
+          "testimonials",
+          "faq",
+          "contact",
+          "footer"
+        ],
+        "optionalSections": [
+          "benefits",
+          "pricing",
+          "cta"
+        ],
+        "forbiddenSections": [],
+        "seoIntent": "local professional services",
+        "accessibilityRisks": [
+          "form validation",
+          "contrast on dark heroes"
+        ],
+        "defaultTone": "trustworthy-calm",
+        "recommendedComponents": [
+          "css-card",
+          "css-button",
+          "velin-accordion",
+          "velin-form-summary",
+          "css-input"
+        ],
+        "designConstraintIds": [
+          "hero",
+          "faq",
+          "contact"
+        ],
+        "promptKeywords": [
+          "steuerberater",
+          "lawyer",
+          "attorney",
+          "kanzlei",
+          "tax advisor",
+          "professional services"
+        ]
+      },
+      {
+        "id": "healthcare",
+        "name": "Healthcare",
+        "audience": "patients",
+        "businessType": "healthcare",
+        "pageGoal": "services + appointment",
+        "conversionGoal": "book / contact",
+        "requiredSections": [
+          "hero",
+          "services",
+          "process",
+          "testimonials",
+          "faq",
+          "contact",
+          "footer"
+        ],
+        "optionalSections": [
+          "trust-bar",
+          "benefits"
+        ],
+        "forbiddenSections": [],
+        "seoIntent": "clinic / practice",
+        "accessibilityRisks": [
+          "reading level",
+          "form a11y"
+        ],
+        "defaultTone": "reassuring",
+        "recommendedComponents": [
+          "css-card",
+          "velin-accordion",
+          "velin-form-summary"
+        ],
+        "designConstraintIds": [
+          "hero",
+          "faq",
+          "contact"
+        ],
+        "promptKeywords": [
+          "clinic",
+          "doctor",
+          "healthcare",
+          "praxis"
+        ]
+      },
+      {
+        "id": "restaurant",
+        "name": "Restaurant",
+        "audience": "diners",
+        "businessType": "hospitality",
+        "pageGoal": "menu interest + reservation",
+        "conversionGoal": "reserve",
+        "requiredSections": [
+          "hero",
+          "services",
+          "testimonials",
+          "cta",
+          "footer"
+        ],
+        "optionalSections": [
+          "process",
+          "faq",
+          "trust-bar"
+        ],
+        "forbiddenSections": [],
+        "seoIntent": "local restaurant",
+        "accessibilityRisks": [
+          "image-heavy pages"
+        ],
+        "defaultTone": "inviting",
+        "recommendedComponents": [
+          "css-card",
+          "css-button"
+        ],
+        "designConstraintIds": [
+          "hero"
+        ],
+        "promptKeywords": [
+          "restaurant",
+          "cafe",
+          "menu"
+        ]
+      },
+      {
+        "id": "portfolio",
+        "name": "Portfolio",
+        "audience": "clients/hiring",
+        "businessType": "creative",
+        "pageGoal": "showcase work",
+        "conversionGoal": "contact",
+        "requiredSections": [
+          "hero",
+          "services",
+          "testimonials",
+          "cta",
+          "footer"
+        ],
+        "optionalSections": [
+          "process",
+          "faq"
+        ],
+        "forbiddenSections": [],
+        "seoIntent": "personal brand",
+        "accessibilityRisks": [
+          "image alts"
+        ],
+        "defaultTone": "expressive",
+        "recommendedComponents": [
+          "css-card",
+          "css-button"
+        ],
+        "designConstraintIds": [
+          "hero"
+        ],
+        "promptKeywords": [
+          "portfolio",
+          "designer",
+          "photographer"
+        ]
+      },
+      {
+        "id": "agency",
+        "name": "Agency",
+        "audience": "business buyers",
+        "businessType": "agency",
+        "pageGoal": "capabilities + leads",
+        "conversionGoal": "contact",
+        "requiredSections": [
+          "hero",
+          "benefits",
+          "services",
+          "process",
+          "testimonials",
+          "cta",
+          "footer"
+        ],
+        "optionalSections": [
+          "pricing",
+          "faq"
+        ],
+        "forbiddenSections": [],
+        "seoIntent": "agency services",
+        "accessibilityRisks": [
+          "busy layouts"
+        ],
+        "defaultTone": "confident",
+        "recommendedComponents": [
+          "css-card",
+          "css-button",
+          "velin-accordion"
+        ],
+        "designConstraintIds": [
+          "hero",
+          "faq"
+        ],
+        "promptKeywords": [
+          "agency",
+          "marketing agency",
+          "studio"
+        ]
+      },
+      {
+        "id": "saas",
+        "name": "SaaS",
+        "audience": "buyers/users",
+        "businessType": "saas",
+        "pageGoal": "product value + signup",
+        "conversionGoal": "trial/signup",
+        "requiredSections": [
+          "hero",
+          "benefits",
+          "services",
+          "pricing",
+          "testimonials",
+          "faq",
+          "cta",
+          "footer"
+        ],
+        "optionalSections": [
+          "trust-bar",
+          "process"
+        ],
+        "forbiddenSections": [],
+        "seoIntent": "product category",
+        "accessibilityRisks": [
+          "pricing tables",
+          "modals"
+        ],
+        "defaultTone": "product-led",
+        "recommendedComponents": [
+          "css-card",
+          "css-button",
+          "velin-accordion",
+          "velin-modal"
+        ],
+        "designConstraintIds": [
+          "hero",
+          "faq"
+        ],
+        "promptKeywords": [
+          "saas",
+          "software",
+          "app landing"
+        ]
+      },
+      {
+        "id": "docs",
+        "name": "Docs",
+        "audience": "developers",
+        "businessType": "documentation",
+        "pageGoal": "teach and reference",
+        "conversionGoal": "task completion",
+        "requiredSections": [
+          "navbar",
+          "hero",
+          "footer"
+        ],
+        "optionalSections": [
+          "faq"
+        ],
+        "forbiddenSections": [
+          "pricing"
+        ],
+        "seoIntent": "technical documentation",
+        "accessibilityRisks": [
+          "skip links",
+          "code contrast"
+        ],
+        "defaultTone": "technical",
+        "recommendedComponents": [
+          "css-nav",
+          "velin-theme-toggle",
+          "velin-search"
+        ],
+        "designConstraintIds": [],
+        "promptKeywords": [
+          "documentation",
+          "docs site",
+          "api docs"
+        ]
+      },
+      {
+        "id": "dashboard",
+        "name": "Dashboard",
+        "audience": "operators",
+        "businessType": "app-shell",
+        "pageGoal": "monitor and act",
+        "conversionGoal": "task completion",
+        "requiredSections": [
+          "navbar",
+          "footer"
+        ],
+        "optionalSections": [],
+        "forbiddenSections": [
+          "pricing",
+          "testimonials"
+        ],
+        "seoIntent": "often noindex",
+        "accessibilityRisks": [
+          "dense tables",
+          "live regions"
+        ],
+        "defaultTone": "utilitarian",
+        "recommendedComponents": [
+          "css-nav",
+          "velin-data-table",
+          "css-alert"
+        ],
+        "designConstraintIds": [],
+        "promptKeywords": [
+          "dashboard",
+          "admin",
+          "app shell"
+        ]
+      },
+      {
+        "id": "crm",
+        "name": "CRM",
+        "audience": "sales ops",
+        "businessType": "crm",
+        "pageGoal": "manage relationships",
+        "conversionGoal": "task completion",
+        "requiredSections": [
+          "navbar"
+        ],
+        "optionalSections": [],
+        "forbiddenSections": [
+          "testimonials"
+        ],
+        "seoIntent": "app",
+        "accessibilityRisks": [
+          "data-dense UI"
+        ],
+        "defaultTone": "utilitarian",
+        "recommendedComponents": [
+          "velin-data-table",
+          "css-input",
+          "velin-form-summary"
+        ],
+        "designConstraintIds": [],
+        "promptKeywords": [
+          "crm",
+          "contacts",
+          "pipeline"
+        ]
+      },
+      {
+        "id": "erp",
+        "name": "ERP",
+        "audience": "internal ops",
+        "businessType": "erp",
+        "pageGoal": "operational workflows",
+        "conversionGoal": "task completion",
+        "requiredSections": [
+          "navbar"
+        ],
+        "optionalSections": [],
+        "forbiddenSections": [
+          "pricing",
+          "testimonials"
+        ],
+        "seoIntent": "app",
+        "accessibilityRisks": [
+          "complex forms"
+        ],
+        "defaultTone": "utilitarian",
+        "recommendedComponents": [
+          "velin-data-table",
+          "css-input",
+          "velin-dialog"
+        ],
+        "designConstraintIds": [],
+        "promptKeywords": [
+          "erp",
+          "inventory",
+          "operations"
+        ]
+      },
+      {
+        "id": "blog",
+        "name": "Blog",
+        "audience": "readers",
+        "businessType": "content",
+        "pageGoal": "inform and retain",
+        "conversionGoal": "newsletter/contact",
+        "requiredSections": [
+          "navbar",
+          "hero",
+          "footer"
+        ],
+        "optionalSections": [
+          "cta",
+          "faq"
+        ],
+        "forbiddenSections": [],
+        "seoIntent": "articles",
+        "accessibilityRisks": [
+          "reading length"
+        ],
+        "defaultTone": "editorial",
+        "recommendedComponents": [
+          "css-nav",
+          "css-card"
+        ],
+        "designConstraintIds": [
+          "hero"
+        ],
+        "promptKeywords": [
+          "blog",
+          "articles",
+          "magazine"
+        ]
+      },
+      {
+        "id": "shop",
+        "name": "Shop",
+        "audience": "buyers",
+        "businessType": "ecommerce",
+        "pageGoal": "browse and purchase",
+        "conversionGoal": "checkout",
+        "requiredSections": [
+          "navbar",
+          "hero",
+          "services",
+          "cta",
+          "footer"
+        ],
+        "optionalSections": [
+          "testimonials",
+          "faq",
+          "trust-bar"
+        ],
+        "forbiddenSections": [],
+        "seoIntent": "products",
+        "accessibilityRisks": [
+          "product cards",
+          "filters"
+        ],
+        "defaultTone": "commercial",
+        "recommendedComponents": [
+          "css-card",
+          "css-button",
+          "velin-form-summary"
+        ],
+        "designConstraintIds": [
+          "hero"
+        ],
+        "promptKeywords": [
+          "shop",
+          "store",
+          "ecommerce"
+        ]
+      },
+      {
+        "id": "event",
+        "name": "Event",
+        "audience": "attendees",
+        "businessType": "event",
+        "pageGoal": "inform and register",
+        "conversionGoal": "registration",
+        "requiredSections": [
+          "hero",
+          "benefits",
+          "process",
+          "faq",
+          "cta",
+          "footer"
+        ],
+        "optionalSections": [
+          "testimonials",
+          "pricing"
+        ],
+        "forbiddenSections": [],
+        "seoIntent": "event entity",
+        "accessibilityRisks": [
+          "countdown motion"
+        ],
+        "defaultTone": "exciting-clear",
+        "recommendedComponents": [
+          "css-button",
+          "css-card",
+          "velin-accordion"
+        ],
+        "designConstraintIds": [
+          "hero",
+          "faq"
+        ],
+        "promptKeywords": [
+          "event",
+          "conference",
+          "meetup"
+        ]
+      },
+      {
+        "id": "course",
+        "name": "Course",
+        "audience": "learners",
+        "businessType": "education",
+        "pageGoal": "curriculum + enroll",
+        "conversionGoal": "enroll",
+        "requiredSections": [
+          "hero",
+          "benefits",
+          "process",
+          "pricing",
+          "faq",
+          "cta",
+          "footer"
+        ],
+        "optionalSections": [
+          "testimonials"
+        ],
+        "forbiddenSections": [],
+        "seoIntent": "course offering",
+        "accessibilityRisks": [
+          "long outlines"
+        ],
+        "defaultTone": "instructive",
+        "recommendedComponents": [
+          "css-card",
+          "velin-accordion",
+          "css-button"
+        ],
+        "designConstraintIds": [
+          "hero",
+          "faq"
+        ],
+        "promptKeywords": [
+          "course",
+          "training",
+          "workshop"
+        ]
+      },
+      {
+        "id": "community",
+        "name": "Community",
+        "audience": "members",
+        "businessType": "community",
+        "pageGoal": "belonging + join",
+        "conversionGoal": "join",
+        "requiredSections": [
+          "hero",
+          "benefits",
+          "testimonials",
+          "faq",
+          "cta",
+          "footer"
+        ],
+        "optionalSections": [
+          "services",
+          "process"
+        ],
+        "forbiddenSections": [],
+        "seoIntent": "community brand",
+        "accessibilityRisks": [
+          "user content"
+        ],
+        "defaultTone": "welcoming",
+        "recommendedComponents": [
+          "css-card",
+          "css-button",
+          "velin-accordion"
+        ],
+        "designConstraintIds": [
+          "hero",
+          "faq"
+        ],
+        "promptKeywords": [
+          "community",
+          "forum",
+          "membership"
+        ]
+      }
+    ],
+    "pageCount": 17,
+    "sections": [
+      {
+        "id": "hero",
+        "role": "hero",
+        "blueprintFile": "hero-section.html",
+        "inputs": [
+          "title",
+          "subtitle",
+          "cta",
+          "brand"
+        ],
+        "requiredContent": [
+          "headline",
+          "primaryCta"
+        ],
+        "optionalContent": [
+          "image",
+          "secondaryCta"
+        ],
+        "designRules": [
+          "hero-headline-lines",
+          "hero-cta-max",
+          "hero-contrast"
+        ],
+        "a11yRules": [
+          "one h1",
+          "cta is real button/link"
+        ],
+        "seoRules": [
+          "h1 matches primary intent"
+        ],
+        "compatiblePrev": [],
+        "compatibleNext": [
+          "trust-bar",
+          "benefits",
+          "services"
+        ],
+        "examplePrompts": [
+          "modern hero with two CTAs"
+        ],
+        "commonMistakes": [
+          "three CTAs",
+          "headline longer than two lines"
+        ]
+      },
+      {
+        "id": "trust-bar",
+        "role": "trust-bar",
+        "blueprintFile": "trust-bar.html",
+        "inputs": [
+          "logos",
+          "claim"
+        ],
+        "requiredContent": [
+          "trustItems"
+        ],
+        "optionalContent": [
+          "claim"
+        ],
+        "designRules": [],
+        "a11yRules": [
+          "alt text for logos"
+        ],
+        "seoRules": [],
+        "compatiblePrev": [
+          "hero"
+        ],
+        "compatibleNext": [
+          "benefits",
+          "services"
+        ],
+        "examplePrompts": [
+          "trusted by brands bar"
+        ],
+        "commonMistakes": [
+          "low-contrast logos"
+        ]
+      },
+      {
+        "id": "benefits",
+        "role": "benefits",
+        "blueprintFile": "benefits-grid.html",
+        "inputs": [
+          "items"
+        ],
+        "requiredContent": [
+          "benefitItems"
+        ],
+        "optionalContent": [],
+        "designRules": [],
+        "a11yRules": [
+          "headings per benefit"
+        ],
+        "seoRules": [],
+        "compatiblePrev": [
+          "hero",
+          "trust-bar"
+        ],
+        "compatibleNext": [
+          "services",
+          "process"
+        ],
+        "examplePrompts": [
+          "three benefits"
+        ],
+        "commonMistakes": [
+          "walls of text"
+        ]
+      },
+      {
+        "id": "services",
+        "role": "services",
+        "blueprintFile": "services-grid.html",
+        "inputs": [
+          "items"
+        ],
+        "requiredContent": [
+          "serviceItems"
+        ],
+        "optionalContent": [],
+        "designRules": [],
+        "a11yRules": [
+          "card titles as headings"
+        ],
+        "seoRules": [
+          "service names as keywords"
+        ],
+        "compatiblePrev": [
+          "benefits",
+          "trust-bar",
+          "hero"
+        ],
+        "compatibleNext": [
+          "process",
+          "testimonials",
+          "pricing"
+        ],
+        "examplePrompts": [
+          "services grid for tax advisor"
+        ],
+        "commonMistakes": [
+          "vague service titles"
+        ]
+      },
+      {
+        "id": "process",
+        "role": "process",
+        "blueprintFile": "process-steps.html",
+        "inputs": [
+          "steps"
+        ],
+        "requiredContent": [
+          "steps"
+        ],
+        "optionalContent": [],
+        "designRules": [],
+        "a11yRules": [
+          "ordered list semantics"
+        ],
+        "seoRules": [],
+        "compatiblePrev": [
+          "services",
+          "benefits"
+        ],
+        "compatibleNext": [
+          "testimonials",
+          "pricing",
+          "faq"
+        ],
+        "examplePrompts": [
+          "how it works in 4 steps"
+        ],
+        "commonMistakes": [
+          "more than 6 steps"
+        ]
+      },
+      {
+        "id": "testimonials",
+        "role": "testimonials",
+        "blueprintFile": "testimonials.html",
+        "inputs": [
+          "quotes"
+        ],
+        "requiredContent": [
+          "quotes"
+        ],
+        "optionalContent": [
+          "avatars"
+        ],
+        "designRules": [],
+        "a11yRules": [
+          "cite attribution"
+        ],
+        "seoRules": [],
+        "compatiblePrev": [
+          "services",
+          "process"
+        ],
+        "compatibleNext": [
+          "pricing",
+          "faq",
+          "contact"
+        ],
+        "examplePrompts": [
+          "client testimonials"
+        ],
+        "commonMistakes": [
+          "anonymous quotes only"
+        ]
+      },
+      {
+        "id": "pricing",
+        "role": "pricing",
+        "blueprintFile": "pricing-table.html",
+        "inputs": [
+          "plans"
+        ],
+        "requiredContent": [
+          "plans"
+        ],
+        "optionalContent": [],
+        "designRules": [],
+        "a11yRules": [
+          "table or card semantics clear"
+        ],
+        "seoRules": [],
+        "compatiblePrev": [
+          "services",
+          "testimonials"
+        ],
+        "compatibleNext": [
+          "faq",
+          "cta"
+        ],
+        "examplePrompts": [
+          "three pricing tiers"
+        ],
+        "commonMistakes": [
+          "unclear currency"
+        ]
+      },
+      {
+        "id": "faq",
+        "role": "faq",
+        "blueprintFile": "faq-section.html",
+        "inputs": [
+          "items"
+        ],
+        "requiredContent": [
+          "questions"
+        ],
+        "optionalContent": [],
+        "designRules": [
+          "faq-questions",
+          "faq-pattern"
+        ],
+        "a11yRules": [
+          "accordion keyboard support"
+        ],
+        "seoRules": [
+          "FAQPage-ready question text"
+        ],
+        "compatiblePrev": [
+          "testimonials",
+          "pricing",
+          "process"
+        ],
+        "compatibleNext": [
+          "contact",
+          "cta",
+          "footer"
+        ],
+        "examplePrompts": [
+          "FAQ with accordion"
+        ],
+        "commonMistakes": [
+          "non-questions as titles"
+        ]
+      },
+      {
+        "id": "contact",
+        "role": "contact",
+        "blueprintFile": "form-contact.html",
+        "inputs": [
+          "fields"
+        ],
+        "requiredContent": [
+          "name",
+          "email",
+          "message"
+        ],
+        "optionalContent": [
+          "phone"
+        ],
+        "designRules": [
+          "contact-labels",
+          "contact-summary"
+        ],
+        "a11yRules": [
+          "labels",
+          "form-summary"
+        ],
+        "seoRules": [],
+        "compatiblePrev": [
+          "faq",
+          "testimonials"
+        ],
+        "compatibleNext": [
+          "footer",
+          "cta"
+        ],
+        "examplePrompts": [
+          "contact form with validation summary"
+        ],
+        "commonMistakes": [
+          "placeholder-only labels"
+        ]
+      },
+      {
+        "id": "cta",
+        "role": "cta",
+        "blueprintFile": "cta-band.html",
+        "inputs": [
+          "title",
+          "cta"
+        ],
+        "requiredContent": [
+          "headline",
+          "primaryCta"
+        ],
+        "optionalContent": [
+          "secondaryCta"
+        ],
+        "designRules": [
+          "hero-cta-max"
+        ],
+        "a11yRules": [
+          "button semantics"
+        ],
+        "seoRules": [],
+        "compatiblePrev": [
+          "faq",
+          "pricing",
+          "testimonials"
+        ],
+        "compatibleNext": [
+          "footer"
+        ],
+        "examplePrompts": [
+          "final CTA band"
+        ],
+        "commonMistakes": [
+          "competing CTAs"
+        ]
+      },
+      {
+        "id": "footer",
+        "role": "footer",
+        "blueprintFile": "footer-simple.html",
+        "inputs": [
+          "brand",
+          "links"
+        ],
+        "requiredContent": [
+          "brand"
+        ],
+        "optionalContent": [
+          "legal",
+          "social"
+        ],
+        "designRules": [],
+        "a11yRules": [
+          "contentinfo landmark"
+        ],
+        "seoRules": [
+          "legal links"
+        ],
+        "compatiblePrev": [
+          "cta",
+          "contact",
+          "faq"
+        ],
+        "compatibleNext": [],
+        "examplePrompts": [
+          "site footer"
+        ],
+        "commonMistakes": [
+          "missing legal links on regulated niches"
+        ]
+      },
+      {
+        "id": "navbar",
+        "role": "navbar",
+        "blueprintFile": "navbar-header.html",
+        "inputs": [
+          "brand",
+          "links"
+        ],
+        "requiredContent": [
+          "brand"
+        ],
+        "optionalContent": [
+          "cta",
+          "search"
+        ],
+        "designRules": [],
+        "a11yRules": [
+          "nav landmark"
+        ],
+        "seoRules": [
+          "internal links"
+        ],
+        "compatiblePrev": [],
+        "compatibleNext": [
+          "hero"
+        ],
+        "examplePrompts": [
+          "marketing navbar"
+        ],
+        "commonMistakes": [
+          "too many links"
+        ]
+      }
+    ],
+    "sectionCount": 12,
+    "designConstraints": [
+      {
+        "id": "contact",
+        "target": "section:contact",
+        "rules": [
+          {
+            "id": "contact-labels",
+            "scope": "section",
+            "section": "contact",
+            "rule": "Visible labels on all fields",
+            "severity": "error"
+          },
+          {
+            "id": "contact-summary",
+            "scope": "section",
+            "section": "contact",
+            "rule": "Include velin-form-summary for errors",
+            "severity": "error"
+          },
+          {
+            "id": "contact-submit",
+            "scope": "section",
+            "section": "contact",
+            "rule": "Single primary submit button",
+            "severity": "warning"
+          }
+        ]
+      },
+      {
+        "id": "faq",
+        "target": "section:faq",
+        "rules": [
+          {
+            "id": "faq-questions",
+            "scope": "section",
+            "section": "faq",
+            "rule": "Entries must be clear interrogatives",
+            "severity": "error"
+          },
+          {
+            "id": "faq-pattern",
+            "scope": "section",
+            "section": "faq",
+            "rule": "Use accordion/disclosure, not long marketing paragraphs",
+            "severity": "error"
+          },
+          {
+            "id": "faq-count",
+            "scope": "section",
+            "section": "faq",
+            "rule": "Prefer 5–8 high-intent FAQs",
+            "severity": "info"
+          }
+        ]
+      },
+      {
+        "id": "hero",
+        "target": "section:hero",
+        "rules": [
+          {
+            "id": "hero-headline-lines",
+            "scope": "section",
+            "section": "hero",
+            "rule": "Headline max 2 lines on desktop",
+            "severity": "error"
+          },
+          {
+            "id": "hero-cta-max",
+            "scope": "section",
+            "section": "hero",
+            "rule": "Maximum 2 CTAs",
+            "severity": "error"
+          },
+          {
+            "id": "hero-image-side",
+            "scope": "section",
+            "section": "hero",
+            "rule": "Image left OR right, not competing dual heroes",
+            "severity": "warning"
+          },
+          {
+            "id": "hero-padding",
+            "scope": "section",
+            "section": "hero",
+            "rule": "Section padding by breakpoint",
+            "breakpoints": {
+              "mobile": "var(--velin-space-8)",
+              "tablet": "var(--velin-space-10)",
+              "desktop": "var(--velin-space-12)"
+            },
+            "severity": "warning"
+          },
+          {
+            "id": "hero-contrast",
+            "scope": "section",
+            "section": "hero",
+            "rule": "Text/surface pairs must meet contrast contract",
+            "severity": "error"
+          },
+          {
+            "id": "hero-motion",
+            "scope": "section",
+            "section": "hero",
+            "rule": "Animation only when motion-safe",
+            "severity": "warning"
+          },
+          {
+            "id": "hero-container",
+            "scope": "section",
+            "section": "hero",
+            "rule": "Content inside documented container width",
+            "severity": "warning"
+          }
+        ]
+      }
+    ],
+    "schemas": [
+      "schemas/component-knowledge.schema.json",
+      "schemas/design-intelligence.schema.json",
+      "schemas/design-constraint.schema.json",
+      "schemas/page-template.schema.json",
+      "schemas/section.schema.json",
+      "schemas/review-report.schema.json",
+      "schemas/token-graph.schema.json",
+      "schemas/design-rule.schema.json",
+      "schemas/skill-record.schema.json",
+      "schemas/skill-registry.schema.json",
+      "schemas/skill-pack.schema.json",
+      "schemas/skill-graph.schema.json",
+      "schemas/skill-bundle.schema.json",
+      "schemas/skill-template.schema.json",
+      "schemas/skill-project.schema.json"
+    ]
+  },
+  "skills": {
+    "count": 40,
+    "categories": [
+      "accessibility",
+      "ai-workflows",
+      "components",
+      "design",
+      "developer-experience",
+      "development",
+      "documentation",
+      "migration",
+      "motion",
+      "performance",
+      "release",
+      "review",
+      "security",
+      "testing",
+      "themes",
+      "utilities"
+    ],
+    "capabilities": [
+      "accessibility",
+      "ai-orchestration",
+      "build",
+      "documentation",
+      "dx",
+      "migrate",
+      "motion",
+      "performance",
+      "release",
+      "review",
+      "security",
+      "seo",
+      "test",
+      "theme"
+    ],
+    "items": [
+      {
+        "id": "velin-design-hero-compose",
+        "category": "design",
+        "priority": "core",
+        "status": "beta",
+        "confidence": "high",
+        "capabilities": [
+          "build",
+          "review"
+        ]
+      },
+      {
+        "id": "velin-design-section-rhythm",
+        "category": "design",
+        "priority": "recommended",
+        "status": "beta",
+        "confidence": "high",
+        "capabilities": [
+          "build"
+        ]
+      },
+      {
+        "id": "velin-design-surface-roles",
+        "category": "design",
+        "priority": "recommended",
+        "status": "beta",
+        "confidence": "medium",
+        "capabilities": [
+          "build",
+          "theme"
+        ]
+      },
+      {
+        "id": "velin-dev-plan-first",
+        "category": "development",
+        "priority": "core",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "ai-orchestration",
+          "build"
+        ]
+      },
+      {
+        "id": "velin-dev-page-scaffold",
+        "category": "development",
+        "priority": "core",
+        "status": "beta",
+        "confidence": "high",
+        "capabilities": [
+          "build"
+        ]
+      },
+      {
+        "id": "velin-dev-component-wire",
+        "category": "development",
+        "priority": "recommended",
+        "status": "beta",
+        "confidence": "medium",
+        "capabilities": [
+          "build"
+        ]
+      },
+      {
+        "id": "velin-components-select-compose",
+        "category": "components",
+        "priority": "core",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "build"
+        ]
+      },
+      {
+        "id": "velin-components-api-contract",
+        "category": "components",
+        "priority": "recommended",
+        "status": "beta",
+        "confidence": "high",
+        "capabilities": [
+          "documentation",
+          "review"
+        ]
+      },
+      {
+        "id": "velin-components-recipe",
+        "category": "components",
+        "priority": "recommended",
+        "status": "beta",
+        "confidence": "medium",
+        "capabilities": [
+          "build",
+          "documentation"
+        ]
+      },
+      {
+        "id": "velin-components-accessibility-map",
+        "category": "components",
+        "priority": "advanced",
+        "status": "beta",
+        "confidence": "medium",
+        "capabilities": [
+          "accessibility",
+          "documentation"
+        ]
+      },
+      {
+        "id": "velin-utilities-layout-apply",
+        "category": "utilities",
+        "priority": "core",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "build"
+        ]
+      },
+      {
+        "id": "velin-utilities-prefix-fix",
+        "category": "utilities",
+        "priority": "recommended",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "migrate"
+        ]
+      },
+      {
+        "id": "velin-utilities-token-map",
+        "category": "utilities",
+        "priority": "advanced",
+        "status": "beta",
+        "confidence": "medium",
+        "capabilities": [
+          "theme",
+          "documentation"
+        ]
+      },
+      {
+        "id": "velin-themes-apply-token",
+        "category": "themes",
+        "priority": "core",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "theme",
+          "build"
+        ]
+      },
+      {
+        "id": "velin-themes-contrast-check",
+        "category": "themes",
+        "priority": "recommended",
+        "status": "beta",
+        "confidence": "high",
+        "capabilities": [
+          "accessibility",
+          "theme",
+          "review"
+        ]
+      },
+      {
+        "id": "velin-motion-reduced-safe",
+        "category": "motion",
+        "priority": "core",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "motion",
+          "accessibility"
+        ]
+      },
+      {
+        "id": "velin-motion-reveal-feedback",
+        "category": "motion",
+        "priority": "recommended",
+        "status": "beta",
+        "confidence": "medium",
+        "capabilities": [
+          "motion",
+          "build"
+        ]
+      },
+      {
+        "id": "velin-a11y-page-checklist",
+        "category": "accessibility",
+        "priority": "core",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "accessibility",
+          "review"
+        ]
+      },
+      {
+        "id": "velin-a11y-scan-fix",
+        "category": "accessibility",
+        "priority": "core",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "accessibility",
+          "review"
+        ]
+      },
+      {
+        "id": "velin-a11y-focus-keyboard",
+        "category": "accessibility",
+        "priority": "recommended",
+        "status": "beta",
+        "confidence": "high",
+        "capabilities": [
+          "accessibility",
+          "test"
+        ]
+      },
+      {
+        "id": "velin-testing-a11y-suite",
+        "category": "testing",
+        "priority": "recommended",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "test",
+          "accessibility"
+        ]
+      },
+      {
+        "id": "velin-testing-visual-smoke",
+        "category": "testing",
+        "priority": "advanced",
+        "status": "beta",
+        "confidence": "medium",
+        "capabilities": [
+          "test",
+          "review"
+        ]
+      },
+      {
+        "id": "velin-review-page-gate",
+        "category": "review",
+        "priority": "core",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "review"
+        ]
+      },
+      {
+        "id": "velin-review-conversion-hero",
+        "category": "review",
+        "priority": "recommended",
+        "status": "beta",
+        "confidence": "medium",
+        "capabilities": [
+          "review",
+          "seo"
+        ]
+      },
+      {
+        "id": "velin-review-seo-meta",
+        "category": "review",
+        "priority": "recommended",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "review",
+          "seo"
+        ]
+      },
+      {
+        "id": "velin-docs-component-guide",
+        "category": "documentation",
+        "priority": "recommended",
+        "status": "beta",
+        "confidence": "high",
+        "capabilities": [
+          "documentation"
+        ]
+      },
+      {
+        "id": "velin-docs-generate-api",
+        "category": "documentation",
+        "priority": "core",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "documentation"
+        ]
+      },
+      {
+        "id": "velin-migration-prefix-classes",
+        "category": "migration",
+        "priority": "core",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "migrate"
+        ]
+      },
+      {
+        "id": "velin-migration-legacy-wc",
+        "category": "migration",
+        "priority": "recommended",
+        "status": "beta",
+        "confidence": "high",
+        "capabilities": [
+          "migrate",
+          "review"
+        ]
+      },
+      {
+        "id": "velin-release-changelog-sync",
+        "category": "release",
+        "priority": "recommended",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "release",
+          "documentation"
+        ]
+      },
+      {
+        "id": "velin-release-meta-rebuild",
+        "category": "release",
+        "priority": "core",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "release",
+          "ai-orchestration"
+        ]
+      },
+      {
+        "id": "velin-dx-project-init",
+        "category": "developer-experience",
+        "priority": "core",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "dx",
+          "build"
+        ]
+      },
+      {
+        "id": "velin-dx-doctor-setup",
+        "category": "developer-experience",
+        "priority": "advanced",
+        "status": "experimental",
+        "confidence": "medium",
+        "capabilities": [
+          "dx",
+          "review"
+        ]
+      },
+      {
+        "id": "velin-perf-audit-fix",
+        "category": "performance",
+        "priority": "recommended",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "performance",
+          "review"
+        ]
+      },
+      {
+        "id": "velin-perf-runtime-tree-shake",
+        "category": "performance",
+        "priority": "advanced",
+        "status": "beta",
+        "confidence": "medium",
+        "capabilities": [
+          "performance",
+          "build"
+        ]
+      },
+      {
+        "id": "velin-security-scan-pii",
+        "category": "security",
+        "priority": "core",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "security",
+          "review"
+        ]
+      },
+      {
+        "id": "velin-security-sanitize-html",
+        "category": "security",
+        "priority": "recommended",
+        "status": "stable",
+        "confidence": "high",
+        "capabilities": [
+          "security",
+          "build"
+        ]
+      },
+      {
+        "id": "velin-ai-agent-briefing",
+        "category": "ai-workflows",
+        "priority": "core",
+        "status": "beta",
+        "confidence": "high",
+        "capabilities": [
+          "ai-orchestration",
+          "documentation"
+        ]
+      },
+      {
+        "id": "velin-ai-plan-scaffold-review",
+        "category": "ai-workflows",
+        "priority": "core",
+        "status": "beta",
+        "confidence": "high",
+        "capabilities": [
+          "ai-orchestration",
+          "build",
+          "review"
+        ]
+      },
+      {
+        "id": "velin-ai-skill-authoring",
+        "category": "ai-workflows",
+        "priority": "advanced",
+        "status": "beta",
+        "confidence": "medium",
+        "capabilities": [
+          "ai-orchestration",
+          "documentation"
+        ]
+      }
+    ]
+  },
+  "skillPacks": [
+    {
+      "id": "frontend",
+      "name": "Frontend Pack",
+      "version": "1.0.0",
+      "priority": "core",
+      "skills": [
+        "velin-dx-project-init",
+        "velin-dev-plan-first",
+        "velin-dev-page-scaffold",
+        "velin-components-select-compose",
+        "velin-utilities-layout-apply"
+      ]
+    },
+    {
+      "id": "design",
+      "name": "Design Pack",
+      "version": "1.0.0",
+      "priority": "recommended",
+      "skills": [
+        "velin-design-hero-compose",
+        "velin-design-section-rhythm",
+        "velin-design-surface-roles",
+        "velin-themes-apply-token",
+        "velin-motion-reduced-safe"
+      ]
+    },
+    {
+      "id": "accessibility",
+      "name": "Accessibility Pack",
+      "version": "1.0.0",
+      "priority": "core",
+      "skills": [
+        "velin-a11y-page-checklist",
+        "velin-a11y-scan-fix",
+        "velin-a11y-focus-keyboard",
+        "velin-testing-a11y-suite"
+      ]
+    },
+    {
+      "id": "documentation",
+      "name": "Documentation Pack",
+      "version": "1.0.0",
+      "priority": "recommended",
+      "skills": [
+        "velin-docs-component-guide",
+        "velin-docs-generate-api",
+        "velin-release-changelog-sync"
+      ]
+    },
+    {
+      "id": "review",
+      "name": "Review Pack",
+      "version": "1.0.0",
+      "priority": "core",
+      "skills": [
+        "velin-review-page-gate",
+        "velin-review-conversion-hero",
+        "velin-review-seo-meta",
+        "velin-security-scan-pii"
+      ]
+    },
+    {
+      "id": "enterprise",
+      "name": "Enterprise Pack",
+      "version": "1.0.0",
+      "priority": "advanced",
+      "skills": [
+        "velin-security-scan-pii",
+        "velin-security-sanitize-html",
+        "velin-perf-audit-fix",
+        "velin-migration-prefix-classes",
+        "velin-release-meta-rebuild"
+      ]
+    }
+  ],
+  "workflowGraphs": [
+    {
+      "id": "landingpage",
+      "name": "Landing Page Workflow",
+      "entry": "plan",
+      "nodeCount": 8,
+      "edgeCount": 8
+    },
+    {
+      "id": "component-ship",
+      "name": "Component Ship Workflow",
+      "entry": "select",
+      "nodeCount": 5,
+      "edgeCount": 4
+    },
+    {
+      "id": "release-gate",
+      "name": "Release Gate Workflow",
+      "entry": "review",
+      "nodeCount": 5,
+      "edgeCount": 5
+    }
+  ],
+  "bundles": [
+    {
+      "id": "landing-starter",
+      "origin": "official",
+      "packs": [
+        "frontend",
+        "design",
+        "review"
+      ],
+      "graphs": [
+        "landingpage"
+      ],
+      "templates": [
+        "landing-page"
+      ],
+      "docs": [
+        "docs/guides/ai-skills.html"
+      ]
+    },
+    {
+      "id": "review-suite",
+      "origin": "official",
+      "packs": [
+        "accessibility",
+        "review"
+      ],
+      "graphs": [
+        "release-gate"
+      ],
+      "templates": [],
+      "docs": [
+        "docs/guides/ai-skills.html"
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "id": "landing-page",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "frontend",
+        "design"
+      ],
+      "theme": "default",
+      "demo": "samples/landing.html",
+      "docs": [
+        "docs/guides/prompt-scaffolding.html",
+        "docs/guides/landing-15-min.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "marketing-landing",
+        "sections": [
+          "hero",
+          "features",
+          "faq",
+          "contact"
+        ]
+      }
+    },
+    {
+      "id": "marketing-website",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "frontend",
+        "design",
+        "review"
+      ],
+      "theme": "default",
+      "demo": "samples/landing.html",
+      "docs": [
+        "docs/guides/prompt-scaffolding.html",
+        "docs/guides/landing-15-min.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "marketing-site",
+        "sections": [
+          "hero",
+          "benefits",
+          "proof",
+          "faq",
+          "contact"
+        ]
+      }
+    },
+    {
+      "id": "documentation-portal",
+      "workflowGraph": "component-ship",
+      "packs": [
+        "documentation",
+        "review"
+      ],
+      "theme": "default",
+      "demo": "docs/index.html",
+      "docs": [
+        "docs/guides/ai-skills.html",
+        "docs/guides/prompt-scaffolding.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "docs-portal",
+        "sections": [
+          "hero",
+          "toc",
+          "examples",
+          "faq"
+        ]
+      }
+    },
+    {
+      "id": "admin-panel",
+      "workflowGraph": "release-gate",
+      "packs": [
+        "enterprise",
+        "review"
+      ],
+      "theme": "midnight",
+      "demo": "samples/dashboard.html",
+      "docs": [
+        "docs/guides/ai-skills.html",
+        "docs/guides/prompt-scaffolding.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "admin-panel",
+        "sections": [
+          "kpis",
+          "table",
+          "forms"
+        ]
+      }
+    },
+    {
+      "id": "blog",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "frontend",
+        "review"
+      ],
+      "theme": "default",
+      "demo": "samples/blog.html",
+      "docs": [
+        "docs/guides/ai-skills.html",
+        "docs/guides/prompt-scaffolding.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "blog",
+        "sections": [
+          "hero",
+          "posts",
+          "faq",
+          "contact"
+        ]
+      }
+    },
+    {
+      "id": "ecommerce-shop",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "frontend",
+        "review",
+        "enterprise"
+      ],
+      "theme": "default",
+      "demo": "samples/ecommerce.html",
+      "docs": [
+        "docs/guides/ecommerce.html",
+        "docs/guides/prompt-scaffolding.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "shop",
+        "sections": [
+          "hero",
+          "products",
+          "proof",
+          "faq"
+        ]
+      }
+    },
+    {
+      "id": "portfolio",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "design",
+        "frontend"
+      ],
+      "theme": "soft",
+      "demo": "samples/portfolio.html",
+      "docs": [
+        "docs/guides/ai-skills.html",
+        "docs/guides/prompt-scaffolding.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "portfolio",
+        "sections": [
+          "hero",
+          "projects",
+          "about",
+          "contact"
+        ]
+      }
+    },
+    {
+      "id": "laravel-dashboard",
+      "workflowGraph": "release-gate",
+      "packs": [
+        "enterprise",
+        "frontend"
+      ],
+      "theme": "midnight",
+      "demo": "samples/dashboard.html",
+      "docs": [
+        "docs/guides/laravel.html"
+      ],
+      "starterFiles": [
+        "templates/vite-velinstyle/index.html"
+      ],
+      "defaults": {
+        "pageIntent": "dashboard",
+        "sections": [
+          "kpis",
+          "table",
+          "forms"
+        ]
+      }
+    }
+  ],
+  "projectSkills": [
+    {
+      "id": "marketing-website",
+      "name": "Marketing Website",
+      "priority": "recommended",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "frontend",
+        "design",
+        "review"
+      ],
+      "skills": [
+        "velin-ai-plan-scaffold-review",
+        "velin-review-conversion-hero"
+      ],
+      "optimizedFor": [
+        "cursor",
+        "claude-code"
+      ]
+    },
+    {
+      "id": "documentation-portal",
+      "name": "Documentation Portal",
+      "priority": "recommended",
+      "workflowGraph": "component-ship",
+      "packs": [
+        "documentation",
+        "review"
+      ],
+      "skills": [
+        "velin-docs-generate-api",
+        "velin-ai-agent-briefing"
+      ],
+      "optimizedFor": [
+        "cursor",
+        "vscode"
+      ]
+    },
+    {
+      "id": "admin-panel",
+      "name": "Admin Panel",
+      "priority": "recommended",
+      "workflowGraph": "release-gate",
+      "packs": [
+        "enterprise",
+        "review"
+      ],
+      "skills": [
+        "velin-perf-audit-fix",
+        "velin-security-scan-pii"
+      ],
+      "optimizedFor": [
+        "cursor"
+      ]
+    },
+    {
+      "id": "landing-page",
+      "name": "Landing Page",
+      "priority": "core",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "frontend",
+        "design"
+      ],
+      "skills": [
+        "velin-review-conversion-hero"
+      ],
+      "optimizedFor": [
+        "cursor",
+        "windsurf"
+      ]
+    },
+    {
+      "id": "blog",
+      "name": "Blog",
+      "priority": "recommended",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "frontend",
+        "review"
+      ],
+      "skills": [
+        "velin-review-seo-meta"
+      ],
+      "optimizedFor": [
+        "cursor"
+      ]
+    },
+    {
+      "id": "ecommerce-shop",
+      "name": "E-Commerce Shop",
+      "priority": "advanced",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "enterprise",
+        "review"
+      ],
+      "skills": [
+        "velin-security-sanitize-html",
+        "velin-review-conversion-hero"
+      ],
+      "optimizedFor": [
+        "cursor"
+      ]
+    },
+    {
+      "id": "portfolio",
+      "name": "Portfolio",
+      "priority": "recommended",
+      "workflowGraph": "landingpage",
+      "packs": [
+        "design",
+        "frontend"
+      ],
+      "skills": [
+        "velin-motion-reveal-feedback"
+      ],
+      "optimizedFor": [
+        "cursor",
+        "vscode"
+      ]
+    },
+    {
+      "id": "laravel-dashboard",
+      "name": "Laravel Dashboard",
+      "priority": "advanced",
+      "workflowGraph": "release-gate",
+      "packs": [
+        "enterprise",
+        "frontend"
+      ],
+      "skills": [
+        "velin-dx-project-init"
+      ],
+      "optimizedFor": [
+        "cursor",
+        "claude-code"
+      ]
+    }
+  ],
   "attributes": {
     "names": [
       "velin-accordion",
@@ -165,15 +3951,20 @@
     "commands": [
       {
         "name": "init",
-        "summary": "Create velinstyle.config.js",
+        "summary": "Create velinstyle.config.js, optional vendor copy, and starter HTML with reveal/sprite defaults",
         "flags": [],
         "example": "velinstyle init"
       },
       {
         "name": "build",
         "summary": "Build custom CSS with selected layers from config",
-        "flags": [],
-        "example": "velinstyle build"
+        "flags": [
+          "--output",
+          "-o",
+          "--minify",
+          "--preset"
+        ],
+        "example": "velinstyle build --preset lite -o ./lite.css"
       },
       {
         "name": "themes",
@@ -204,7 +3995,7 @@
       },
       {
         "name": "scan",
-        "summary": "Security, accessibility, CSS, and PII scanner",
+        "summary": "Security, accessibility, CSS, and PII scanner (directory or single file)",
         "flags": [
           "--format",
           "--severity",
@@ -213,7 +4004,7 @@
           "--fix-dry-run",
           "--fix-lang"
         ],
-        "example": "velinstyle scan . --only pii --fix-dry-run"
+        "example": "velinstyle scan index.html"
       },
       {
         "name": "prefix",
@@ -227,19 +4018,59 @@
       },
       {
         "name": "blueprint",
-        "summary": "Print HTML blueprint snippets",
+        "summary": "Print HTML blueprint snippets; --strict fails on classes missing from CSS",
         "flags": [
           "--output",
-          "-o"
+          "-o",
+          "--strict"
         ],
         "subcommands": [
           "list"
         ],
-        "example": "velinstyle blueprint modal -o snippet.html"
+        "example": "velinstyle blueprint modal -o snippet.html --strict"
+      },
+      {
+        "name": "create",
+        "summary": "Scaffold a runnable project: landing | dashboard | docs | auth",
+        "flags": [
+          "--theme",
+          "--no-copy"
+        ],
+        "subcommands": [
+          "landing",
+          "dashboard",
+          "docs",
+          "auth"
+        ],
+        "example": "velinstyle create landing ./my-site --theme earth"
+      },
+      {
+        "name": "serve",
+        "summary": "Serve a directory over HTTP (default port 4173)",
+        "flags": [
+          "--port"
+        ],
+        "example": "velinstyle serve . --port 4173"
+      },
+      {
+        "name": "doctor",
+        "summary": "Check dist assets, themes, config, icons, and Windows ESM import hints",
+        "flags": [],
+        "example": "velinstyle doctor"
+      },
+      {
+        "name": "check",
+        "summary": "Aggregate gate: doctor + blueprint --strict + scan + review (alias: validate)",
+        "flags": [
+          "--json",
+          "--sarif",
+          "--profile"
+        ],
+        "example": "velinstyle check . --profile marketing"
       },
       {
         "name": "scaffold",
-        "summary": "Generate layout HTML from natural language prompt",
+        "summary": "Plan-first page HTML or recipe fragment from natural language",
         "flags": [
           "--output",
           "-o",
@@ -248,7 +4079,36 @@
         "subcommands": [
           "list-intents"
         ],
-        "example": "velinstyle scaffold \"dashboard with sidebar\""
+        "example": "velinstyle scaffold \"Steuerberater Landingpage mit Kontakt\""
+      },
+      {
+        "name": "plan",
+        "summary": "Emit page plan JSON from a prompt (no HTML)",
+        "flags": [
+          "--output",
+          "-o",
+          "--json"
+        ],
+        "example": "velinstyle plan \"SaaS landing with pricing\""
+      },
+      {
+        "name": "review",
+        "summary": "Design / a11y / SEO / performance / conversion review gate",
+        "flags": [
+          "--json",
+          "--prompt",
+          "--profile"
+        ],
+        "example": "velinstyle review out.html --profile marketing"
+      },
+      {
+        "name": "wc",
+        "summary": "Inspect Web Component APIs from source",
+        "flags": [],
+        "subcommands": [
+          "api"
+        ],
+        "example": "velinstyle wc api velin-toast"
       },
       {
         "name": "layout",
@@ -267,7 +4127,7 @@
       },
       {
         "name": "perf",
-        "summary": "Performance audit for images and scripts",
+        "summary": "Performance audit for images and scripts (directory or .html file)",
         "flags": [
           "--json",
           "--write",
@@ -278,7 +4138,7 @@
           "suggest",
           "fix"
         ],
-        "example": "velinstyle perf audit samples/"
+        "example": "velinstyle perf audit index.html"
       },
       {
         "name": "tokens",
@@ -296,7 +4156,7 @@
       },
       {
         "name": "docs",
-        "summary": "Generate developer reference Markdown",
+        "summary": "Generate developer reference Markdown (alias: documentation)",
         "flags": [
           "--scope",
           "--out"
@@ -308,17 +4168,69 @@
       },
       {
         "name": "meta",
-        "summary": "Build Velin-Meta agent bundle (velin-agent.json, llms.txt)",
+        "summary": "Build Velin-Meta agent bundle; page --write merges curated goals/intent",
         "flags": [
           "--out",
           "--llms-out",
           "--base-url",
-          "--no-llms"
+          "--no-llms",
+          "--write"
         ],
         "subcommands": [
           "page"
         ],
-        "example": "velinstyle meta"
+        "example": "velinstyle meta page index.html --write"
+      },
+      {
+        "name": "search",
+        "summary": "Build JSON search index for VelinSearch",
+        "flags": [
+          "--out",
+          "--extra-html"
+        ],
+        "subcommands": [
+          "index"
+        ],
+        "example": "velinstyle search index --out dist/search-index.json"
+      },
+      {
+        "name": "skills",
+        "summary": "Registry-first AI skill catalog and install runner",
+        "flags": [
+          "--capability",
+          "--status",
+          "--priority",
+          "--origin",
+          "--category",
+          "--target",
+          "--no-deps",
+          "--json",
+          "--human"
+        ],
+        "subcommands": [
+          "list",
+          "show",
+          "install",
+          "run",
+          "validate",
+          "doctor",
+          "packs",
+          "bundles",
+          "templates",
+          "projects",
+          "graphs"
+        ],
+        "example": "velinstyle skills show scaffold.landing --human"
+      },
+      {
+        "name": "workflow",
+        "summary": "Resolve workflow graph or project workflow steps",
+        "flags": [
+          "--json",
+          "--dry-run",
+          "--step"
+        ],
+        "example": "velinstyle workflow landingpage --json"
       }
     ]
   },
@@ -327,6 +4239,8 @@
       "scan",
       "prefix",
       "scaffold",
+      "plan",
+      "review",
       "layout",
       "perf",
       "tokens",
@@ -334,7 +4248,7 @@
       "search",
       "meta"
     ],
-    "scannerRuleCount": 37
+    "scannerRuleCount": 44
   },
   "a11y": {
     "wcagLevel": "AAA",
@@ -448,11 +4362,34 @@
         "roles": [
           "button"
         ],
-        "keyboard": "Native buttons for column sort and pagination",
+        "keyboard": "Sort buttons; editable cells: Enter/F2 edit, Escape cancel; pagination",
         "liveRegion": "polite",
         "reducedMotion": true,
         "requiredAttributes": [],
-        "notes": "Enhances a light-DOM table. Sort state exposed via aria-sort; sort triggers are real buttons. Needs a caption, aria-label, or label attribute (warns otherwise). Filtered and off-page rows use hidden so they leave the a11y tree; sort, filter and page changes are announced."
+        "notes": "Enhances a light-DOM table. Optional editable attribute or data-editable cells for inline edit (velin-data-table-edit). No virtualization in v1."
+      },
+      "velin-calendar": {
+        "status": "pass",
+        "roles": [
+          "group",
+          "grid",
+          "button"
+        ],
+        "keyboard": "Arrows, Home/End, PageUp/Down, Enter/Space",
+        "reducedMotion": true,
+        "requiredAttributes": [],
+        "notes": "Month calendar. value ISO date; velin-change event. Optional min/max."
+      },
+      "velin-file-dropzone": {
+        "status": "pass",
+        "roles": [
+          "group"
+        ],
+        "keyboard": "Browse button + native file input",
+        "liveRegion": "polite",
+        "reducedMotion": true,
+        "requiredAttributes": [],
+        "notes": "Client-side dropzone. Events velin-files / velin-error. Does not upload to a server."
       },
       "velin-dialog": {
         "status": "pass",
@@ -683,16 +4620,22 @@
   },
   "searchIndex": {
     "path": "dist/search-index.json",
-    "entryCount": 139
+    "entryCount": 151
   },
   "documentation": {
     "generated": "docs/generated/",
     "guides": {
       "velinMeta": "docs/guides/velin-meta.html",
+      "aiSkills": "docs/guides/ai-skills.html",
       "velinSearch": "docs/guides/velin-search.html",
       "syntaxHighlight": "docs/guides/syntax-highlight.html",
       "promptScaffolding": "docs/guides/prompt-scaffolding.html",
       "apiReference": "docs/guides/api-reference.html"
+    },
+    "strategy": {
+      "note": "Maintainer strategy/ADR docs are not published (monorepo interne_docs/strategy).",
+      "northStar": "VELINSTYLE_2030.md",
+      "architecture": "ARCHITECTURE.md"
     },
     "agentFiles": {
       "json": "dist/velin-agent.json",
@@ -700,10 +4643,12 @@
     }
   },
   "conventions": [
-    "Positioning: VelinStyle is the WCAG 2.2 AAA CSS framework with native JavaScript runtime and Web Components — not a JS-only library or a utility-only CSS kit.",
+    "Positioning: VelinStyle is a CSS framework with WCAG 2.2 AAA-oriented defaults, native JavaScript runtime, and Web Components — not a JS-only library or a utility-only CSS kit.",
     "Use only velin-* utility classes and documented Web Components.",
     "Prefer data-velin-theme on <html> for theme switching.",
     "Run velinstyle scan on generated HTML before shipping.",
+    "Prefer registry-first skills (`velinstyle skills`) and workflow graphs (`velinstyle workflow`) before inventing custom pipelines.",
+    "Honor skill status, confidence, compatibility, and onlyIf predicates when automating.",
     "Do not put secrets, API keys, or raw emails in velin-meta or page meta.",
     "Resolve doc links against docs root (/docs/), not the current page folder."
   ]

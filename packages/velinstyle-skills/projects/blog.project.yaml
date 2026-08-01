@@ -1,0 +1,11 @@
+id: blog
+name: Blog
+priority: recommended
+workflowGraph: landingpage
+packs:
+  - frontend
+  - review
+skills:
+  - velin-review-seo-meta
+optimizedFor:
+  - cursor

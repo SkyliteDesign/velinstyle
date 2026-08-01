@@ -4,6 +4,10 @@
 
 Reveal element when scrolled into view.
 
+## Values
+| Value | Meaning | Bridges to |
+| --- | --- | --- |
+| (empty / present) | Reveal when in view | Motion runtime |
 ## Example
 
 ```html

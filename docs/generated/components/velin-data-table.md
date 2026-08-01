@@ -4,14 +4,32 @@
 
 Source: `components/velin-data-table.js`
 
+## Minimal working example
+Copy-paste starter (load CSS + `velinstyle-components` / `bootFromDOM` as needed):
+
+```html
+<velin-data-table filter-input="#filter" page-size="5" label="Team">
+  <label class="velin-label" for="filter">Filter</label>
+  <input id="filter" class="velin-input" type="search">
+  <table>
+    <caption>Team</caption>
+    <thead><tr><th data-sort="text">Name</th><th data-sort="number">Score</th></tr></thead>
+    <tbody>
+      <tr><td>Ada</td><td data-sort-value="98">98</td></tr>
+      <tr><td>Grace</td><td data-sort-value="95">95</td></tr>
+    </tbody>
+  </table>
+</velin-data-table>
+```
+
 ## Accessibility
 WCAG contract status: **pass** (framework target: AAA).
 
 - **Roles:** `button`
-- **Keyboard:** Native buttons for column sort and pagination
+- **Keyboard:** Sort buttons; editable cells: Enter/F2 edit, Escape cancel; pagination
 - **Live region:** `polite`
 - **Reduced motion:** honored
-- **Notes:** Enhances a light-DOM table. Sort state exposed via aria-sort; sort triggers are real buttons. Needs a caption, aria-label, or label attribute (warns otherwise). Filtered and off-page rows use hidden so they leave the a11y tree; sort, filter and page changes are announced.
+- **Notes:** Enhances a light-DOM table. Optional editable attribute or data-editable cells for inline edit (velin-data-table-edit). No virtualization in v1.
 
 ## Attributes
 | Attribute | Notes |
@@ -20,7 +38,9 @@ WCAG contract status: **pass** (framework target: AAA).
 | `filter-input` | Observed — triggers `attributeChangedCallback` when changed |
 | `empty-text` | Observed — triggers `attributeChangedCallback` when changed |
 | `label` | Observed — triggers `attributeChangedCallback` when changed |
+| `editable` | Observed — triggers `attributeChangedCallback` when changed |
 ## Events
+- `velin-data-table-edit` (bubbles)
 - `velin-data-table-filter` (bubbles)
 - `velin-data-table-page` (bubbles)
 - `velin-data-table-sort` (bubbles)

@@ -7,9 +7,7 @@ Source: `src/utilities/safe-area.css`
 | Class | CSS output |
 | --- | --- |
 | `.velin-desktop-only` | `display: none;` |
-| `.velin-desktop-only` | `display: block;` |
 | `.velin-mobile-only` | `display: block;` |
-| `.velin-mobile-only` | `display: none;` |
 | `.velin-p-safe` | `padding-block: max(var(--velin-space-4, 1rem), env(safe-area-inset-top, 0px)) max(var(--velin-space-4, 1rem), env(safe-…` |
 | `.velin-pb-safe` | `padding-block-end: max(var(--velin-space-4, 1rem), env(safe-area-inset-bottom, 0px));` |
 | `.velin-pt-safe` | `padding-block-start: max(var(--velin-space-4, 1rem), env(safe-area-inset-top, 0px));` |

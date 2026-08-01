@@ -15,7 +15,8 @@
   </section>
 </velin-stepper>
 <script type="module">
-  import '../../dist/velinstyle-components.min.js';
+  // Prefer package entry; for offline vendor installs use: import './vendor/velinstyle/velinstyle-components.min.js';
+  import '@birdapi/velinstyle/bundle';
   const stepper = document.getElementById('onboard');
   document.querySelectorAll('[data-next]').forEach((btn) => {
     btn.addEventListener('click', () => stepper?.next());

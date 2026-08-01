@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/component-knowledge.schema.json",
+  "title": "VelinStyle Component Knowledge Node",
+  "type": "object",
+  "required": ["id", "kind", "category", "purpose", "maturity"],
+  "properties": {
+    "id": { "type": "string" },
+    "kind": { "type": "string", "enum": ["web-component", "css-component", "pattern", "helper"] },
+    "tag": { "type": "string" },
+    "classPrefix": { "type": "string" },
+    "category": { "type": "string" },
+    "subcategory": { "type": "string" },
+    "purpose": { "type": "string" },
+    "family": { "type": "string" },
+    "maturity": { "type": "string", "enum": ["core", "advanced", "experimental"] },
+    "recommendedPages": { "type": "array", "items": { "type": "string" } },
+    "recommendedSections": { "type": "array", "items": { "type": "string" } },
+    "compatibleWith": { "type": "array", "items": { "type": "string" } },
+    "incompatibleWith": { "type": "array", "items": { "type": "string" } },
+    "accessibility": { "type": "object" },
+    "seo": { "type": "object" },
+    "performance": { "type": "object" },
+    "variants": { "type": "array", "items": { "type": "string" } },
+    "density": { "type": "array", "items": { "type": "string" } },
+    "themeSupport": { "type": "array", "items": { "type": "string" } },
+    "motion": { "type": "object" },
+    "examples": { "type": "array", "items": { "type": "string" } },
+    "promptKeywords": { "type": "array", "items": { "type": "string" } },
+    "designIntelligence": { "$ref": "https://velinstyle.info/schemas/design-intelligence.schema.json" },
+    "api": { "type": "object" }
+  }
+}

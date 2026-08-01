@@ -27,30 +27,7 @@
   .velin-opacity-75 { opacity: 0.75; }
   .velin-opacity-100 { opacity: 1; }
 
-  /* Responsive display via min-width */
-  @media (width >= 36rem) {
-    .velin-sm-block { display: block; }
-    .velin-sm-flex { display: flex; }
-    .velin-sm-grid { display: grid; }
-    .velin-sm-hidden { display: none; }
-    .velin-sm-inline { display: inline; }
-  }
-
-  @media (width >= 48rem) {
-    .velin-md-block { display: block; }
-    .velin-md-flex { display: flex; }
-    .velin-md-grid { display: grid; }
-    .velin-md-hidden { display: none; }
-    .velin-md-inline { display: inline; }
-  }
-
-  @media (width >= 62rem) {
-    .velin-lg-block { display: block; }
-    .velin-lg-flex { display: flex; }
-    .velin-lg-grid { display: grid; }
-    .velin-lg-hidden { display: none; }
-    .velin-lg-inline { display: inline; }
-  }
+  /* Responsive display variants live only in responsive.css (VS-037 / #14). */
 
   /* Columns (multi-column layout) */
   .velin-columns-1 { columns: 1; }

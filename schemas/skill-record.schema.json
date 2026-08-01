@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/skill-record.schema.json",
+  "title": "VelinStyle Skill Record",
+  "type": "object",
+  "required": ["id", "category", "priority", "status", "capabilities", "inputs", "outputs", "compatibility", "prosePath"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^velin-[a-z0-9-]+$" },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "category": { "type": "string", "enum": ["design", "development", "components", "utilities", "themes", "motion", "accessibility", "testing", "review", "documentation", "migration", "release", "developer-experience", "performance", "security", "ai-workflows"] },
+    "priority": { "type": "string", "enum": ["core", "recommended", "advanced", "experimental"] },
+    "status": { "type": "string", "enum": ["draft", "experimental", "beta", "stable", "deprecated", "legacy"] },
+    "confidence": { "type": "string", "enum": ["high", "medium", "low"] },
+    "capabilities": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "dependsOn": { "type": "array", "items": { "type": "string" } },
+    "requiresCli": { "type": "array", "items": { "type": "string" } },
+    "inputs": { "type": "array", "items": { "type": "string", "enum": ["prompt", "html", "css", "tokens", "docs", "screenshot", "figma", "markdown", "plan-json", "component-tag", "url", "meta-json"] } },
+    "outputs": { "type": "array", "items": { "type": "string", "enum": ["html", "css", "markdown", "plan-json", "review-json", "diff", "checklist", "report", "meta-json", "registry-json"] } },
+    "optimizedFor": { "type": "array", "items": { "type": "string", "enum": ["cursor", "vscode", "claude-code", "windsurf"] } },
+    "compatibility": { "type": "object" },
+    "onlyIf": { "type": "array", "items": { "type": "string" } },
+    "hooks": { "type": "object" },
+    "origin": { "type": "string", "enum": ["official", "community", "enterprise"] },
+    "prosePath": { "type": "string", "pattern": "^skills/.+/SKILL\\.md$" }
+  }
+}

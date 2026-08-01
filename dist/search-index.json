@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-27T10:44:37.850Z",
+  "generatedAt": "2026-08-01T07:08:34.281Z",
   "entries": [
     {
       "id": "examples:samples/a11y-patterns.html",
@@ -57,7 +57,7 @@
     {
       "id": "api:commands",
       "title": "CLI commands",
-      "excerpt": "VelinStyle CLI v1.1.0. Run velinstyle --help for full usage.",
+      "excerpt": "VelinStyle CLI v1.2.0. Run velinstyle --help for full usage.",
       "url": "docs/generated/cli/commands.html",
       "category": "api",
       "keywords": [
@@ -82,7 +82,7 @@
     {
       "id": "api:blueprint",
       "title": "CLI: blueprint",
-      "excerpt": "Print HTML blueprint snippets",
+      "excerpt": "Print HTML blueprint snippets; --strict fails on classes missing from CSS",
       "url": "docs/generated/cli/commands.html#blueprint",
       "category": "api",
       "keywords": [
@@ -104,14 +104,50 @@
       "weight": 1.1
     },
     {
+      "id": "api:check",
+      "title": "CLI: check",
+      "excerpt": "Aggregate gate: doctor + blueprint --strict + scan + review (alias: validate)",
+      "url": "docs/generated/cli/commands.html#check",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "check"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:create",
+      "title": "CLI: create",
+      "excerpt": "Scaffold a runnable project: landing | dashboard | docs | auth",
+      "url": "docs/generated/cli/commands.html#create",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "create"
+      ],
+      "weight": 1.1
+    },
+    {
       "id": "api:docs",
       "title": "CLI: docs",
-      "excerpt": "Generate developer reference Markdown",
+      "excerpt": "Generate developer reference Markdown (alias: documentation)",
       "url": "docs/generated/cli/commands.html#docs",
       "category": "api",
       "keywords": [
         "cli",
         "docs"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:doctor",
+      "title": "CLI: doctor",
+      "excerpt": "Check dist assets, themes, config, icons, and Windows ESM import hints",
+      "url": "docs/generated/cli/commands.html#doctor",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "doctor"
       ],
       "weight": 1.1
     },
@@ -130,7 +166,7 @@
     {
       "id": "api:init",
       "title": "CLI: init",
-      "excerpt": "Create velinstyle.config.js",
+      "excerpt": "Create velinstyle.config.js, optional vendor copy, and starter HTML with reveal/sprite defaults",
       "url": "docs/generated/cli/commands.html#init",
       "category": "api",
       "keywords": [
@@ -154,7 +190,7 @@
     {
       "id": "api:meta",
       "title": "CLI: meta",
-      "excerpt": "Build Velin-Meta agent bundle (velin-agent.json, llms.txt)",
+      "excerpt": "Build Velin-Meta agent bundle; page --write merges curated goals/intent",
       "url": "docs/generated/cli/commands.html#meta",
       "category": "api",
       "keywords": [
@@ -166,12 +202,24 @@
     {
       "id": "api:perf",
       "title": "CLI: perf",
-      "excerpt": "Performance audit for images and scripts",
+      "excerpt": "Performance audit for images and scripts (directory or .html file)",
       "url": "docs/generated/cli/commands.html#perf",
       "category": "api",
       "keywords": [
         "cli",
         "perf"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:plan",
+      "title": "CLI: plan",
+      "excerpt": "Emit page plan JSON from a prompt (no HTML)",
+      "url": "docs/generated/cli/commands.html#plan",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "plan"
       ],
       "weight": 1.1
     },
@@ -188,9 +236,21 @@
       "weight": 1.1
     },
     {
+      "id": "api:review",
+      "title": "CLI: review",
+      "excerpt": "Design / a11y / SEO / performance / conversion review gate",
+      "url": "docs/generated/cli/commands.html#review",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "review"
+      ],
+      "weight": 1.1
+    },
+    {
       "id": "api:scaffold",
       "title": "CLI: scaffold",
-      "excerpt": "Generate layout HTML from natural language prompt",
+      "excerpt": "Plan-first page HTML or recipe fragment from natural language",
       "url": "docs/generated/cli/commands.html#scaffold",
       "category": "api",
       "keywords": [
@@ -202,12 +262,48 @@
     {
       "id": "api:scan",
       "title": "CLI: scan",
-      "excerpt": "Security, accessibility, CSS, and PII scanner",
+      "excerpt": "Security, accessibility, CSS, and PII scanner (directory or single file)",
       "url": "docs/generated/cli/commands.html#scan",
       "category": "api",
       "keywords": [
         "cli",
         "scan"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:search",
+      "title": "CLI: search",
+      "excerpt": "Build JSON search index for VelinSearch",
+      "url": "docs/generated/cli/commands.html#search",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "search"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:serve",
+      "title": "CLI: serve",
+      "excerpt": "Serve a directory over HTTP (default port 4173)",
+      "url": "docs/generated/cli/commands.html#serve",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "serve"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:skills",
+      "title": "CLI: skills",
+      "excerpt": "Registry-first AI skill catalog and install runner",
+      "url": "docs/generated/cli/commands.html#skills",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "skills"
       ],
       "weight": 1.1
     },
@@ -232,6 +328,30 @@
       "keywords": [
         "cli",
         "tokens"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:wc",
+      "title": "CLI: wc",
+      "excerpt": "Inspect Web Component APIs from source",
+      "url": "docs/generated/cli/commands.html#wc",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "wc"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:workflow",
+      "title": "CLI: workflow",
+      "excerpt": "Resolve workflow graph or project workflow steps",
+      "url": "docs/generated/cli/commands.html#workflow",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "workflow"
       ],
       "weight": 1.1
     },
@@ -899,6 +1019,19 @@
       "weight": 1.3
     },
     {
+      "id": "components:velin-calendar",
+      "title": "velin-calendar",
+      "excerpt": "Source: components/velin-calendar.js",
+      "url": "docs/generated/components/velin-calendar.html",
+      "category": "components",
+      "keywords": [
+        "velin-calendar",
+        "components",
+        "velin-calendar"
+      ],
+      "weight": 1.3
+    },
+    {
       "id": "components:velin-carousel",
       "title": "velin-carousel",
       "excerpt": "Source: components/velin-carousel.js",
@@ -1118,6 +1251,19 @@
         "velin-fade"
       ],
       "weight": 1.2
+    },
+    {
+      "id": "components:velin-file-dropzone",
+      "title": "velin-file-dropzone",
+      "excerpt": "Source: components/velin-file-dropzone.js",
+      "url": "docs/generated/components/velin-file-dropzone.html",
+      "category": "components",
+      "keywords": [
+        "velin-file-dropzone",
+        "components",
+        "velin-file-dropzone"
+      ],
+      "weight": 1.3
     },
     {
       "id": "components:velin-flip",
@@ -1473,7 +1619,7 @@
     {
       "id": "docs:velin-scroll-top",
       "title": "velin-scroll-top",
-      "excerpt": "Velin HTML attribute extension.",
+      "excerpt": "Inject / configure <velin-scroll-top> (empty or threshold px).",
       "url": "docs/generated/attributes/velin-scroll-top.html",
       "category": "docs",
       "keywords": [

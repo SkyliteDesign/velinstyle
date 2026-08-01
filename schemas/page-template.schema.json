@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/page-template.schema.json",
+  "title": "VelinStyle Page Template",
+  "type": "object",
+  "required": ["id", "name", "requiredSections"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "audience": { "type": "string" },
+    "businessType": { "type": "string" },
+    "pageGoal": { "type": "string" },
+    "conversionGoal": { "type": "string" },
+    "requiredSections": { "type": "array", "items": { "type": "string" } },
+    "optionalSections": { "type": "array", "items": { "type": "string" } },
+    "forbiddenSections": { "type": "array", "items": { "type": "string" } },
+    "seoIntent": { "type": "string" },
+    "accessibilityRisks": { "type": "array", "items": { "type": "string" } },
+    "defaultTone": { "type": "string" },
+    "recommendedComponents": { "type": "array", "items": { "type": "string" } },
+    "designConstraintIds": { "type": "array", "items": { "type": "string" } },
+    "promptKeywords": { "type": "array", "items": { "type": "string" } }
+  }
+}

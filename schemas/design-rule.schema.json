@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velinstyle.info/schemas/design-rule.schema.json",
+  "title": "VelinStyle Design Rule",
+  "type": "object",
+  "required": ["id", "scope", "rule"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string" },
+    "scope": { "type": "string", "enum": ["global", "section", "component", "page"] },
+    "section": { "type": "string" },
+    "rule": { "type": "string" },
+    "breakpoints": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "severity": { "type": "string", "enum": ["error", "warning", "info"], "default": "warning" }
+  }
+}

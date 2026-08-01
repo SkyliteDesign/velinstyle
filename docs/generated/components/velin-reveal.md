@@ -8,7 +8,7 @@ Source: `components/velin-reveal.js`
 velin-reveal.js — scroll-into-view reveal (delegates to core/motion).
 
 ## Attributes
-_No `observedAttributes` declared._
+_No `observedAttributes` declared._ Author-facing configuration may still use slots, properties, or child markup — see **Slots** / **Public API** below.
 
 ## Events
 _None._
