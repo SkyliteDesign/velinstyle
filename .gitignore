@@ -50,3 +50,7 @@ strip-coauthor.py
 # Raw PNG screenshots only (committed demos use .webp)
 .github/assets/readme/*.png
 
+
+# npm pack artifacts
+*.tgz
+
