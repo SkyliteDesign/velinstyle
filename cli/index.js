@@ -45,6 +45,7 @@ const LAYER_FILES = {
     'components/timeline.css', 'components/stepper.css', 'components/stat.css',
     'components/drawer.css', 'components/input-group.css', 'components/form-validation.css', 'components/collapse.css',
     'components/calendar-dropzone.css',
+    'components/transparency.css',
   ],
   utilities: [
     'utilities/color.css', 'utilities/spacing.css', 'utilities/display.css',
@@ -101,7 +102,8 @@ function help() {
     velinstyle create <kind> [dir]  Scaffold: landing|dashboard|docs|auth
     velinstyle serve [dir]          Static preview server (default port 4173)
     velinstyle doctor               Check dist, icons, config, Windows ESM paths
-    velinstyle check [path]         doctor + blueprint --strict + scan + review
+    velinstyle transparency <sub>   Transparency Framework: doctor|validate|report|export|migrate
+    velinstyle check [path]         doctor + blueprint --strict + scan + review + transparency
     velinstyle scaffold "<prompt>"  Plan-first page HTML or recipe fragment
     velinstyle plan "<prompt>"      Emit page plan JSON (no HTML)
     velinstyle review [file|html]   Design / a11y / SEO / conversion review gate
@@ -146,9 +148,17 @@ function help() {
     velinstyle scaffold list-intents  Show recipe intent keywords
     velinstyle scaffold "<prompt>" -o out.html [--json]
 
-  ${C.bold('Plan / Review (1.2.0):')}
+  ${C.bold('Plan / Review (1.2.x):')}
     velinstyle plan "<prompt>" [--json] [-o plan.json]
     velinstyle review <file.html> [--json] [--prompt "..."]
+
+  ${C.bold('Transparency (1.2.1):')}
+    velinstyle transparency doctor [path|file] [--policy file] [--json]
+    velinstyle transparency validate [path|file] [--policy file] [--json]
+    velinstyle transparency report [path|file] [--out dir] [--policy file]
+    velinstyle transparency export [path|file] [--format json|json-ld|csv|html] [-o file]
+    velinstyle transparency migrate [path|file] [--apply] [--write] [--policy file]
+    Alias: transparency scan → doctor
 
   ${C.bold('Layout (0.8.0):')}
     velinstyle layout audit [path]    Report flex/grid/responsive issues
@@ -1123,6 +1133,20 @@ async function checkCmd() {
     steps.push({ step: 'review', ok: true, skipped: true });
   }
 
+  if (!quiet) console.log(C.bold('\n── transparency ──'));
+  try {
+    const { transparencyCheckStep } = await import('./transparency.js');
+    const tx = await transparencyCheckStep(htmlFile || target, { quiet, C });
+    if (!tx.ok && !tx.skipped) failed += 1;
+    if (!quiet && tx.scores) {
+      console.log(`Transparency ${tx.scores.transparency}% · AI ${tx.scores.ai}% · Trust ${tx.scores.trust}% · Provenance ${tx.scores.provenance}%`);
+    }
+    steps.push({ step: 'transparency', ok: tx.ok || !!tx.skipped, scores: tx.scores, skipped: tx.skipped });
+  } catch (err) {
+    if (!quiet) console.log(C.yellow(`transparency skipped: ${err.message}`));
+    steps.push({ step: 'transparency', ok: true, skipped: true, error: String(err.message || err) });
+  }
+
   const payload = {
     ok: failed === 0,
     failedSteps: failed,
@@ -1181,7 +1205,7 @@ async function checkCmd() {
 function suggestCommand(unknown) {
   const names = [
     'init', 'build', 'themes', 'add', 'icons', 'blueprint', 'create', 'serve', 'doctor', 'check',
-    'validate', 'tokens', 'scan', 'prefix', 'scaffold', 'plan', 'review', 'layout', 'perf',
+    'validate', 'tokens', 'scan', 'prefix', 'scaffold', 'plan', 'review', 'transparency', 'layout', 'perf',
     'docs', 'documentation', 'meta', 'search', 'skills', 'workflow', 'wc',
   ];
   const q = String(unknown || '').toLowerCase();
@@ -1244,6 +1268,11 @@ switch (resolvedCommand) {
   case 'scaffold': await scaffoldCmd(); break;
   case 'plan': await planCmd(); break;
   case 'review': await reviewCmd(); break;
+  case 'transparency': {
+    const { transparencyCmd } = await import('./transparency.js');
+    await transparencyCmd(args.slice(1), { C, getArg, hasFlag });
+    break;
+  }
   case 'layout': await layoutCmd(); break;
   case 'perf': await perfCmd(); break;
   case 'docs': await docsCmd(); break;

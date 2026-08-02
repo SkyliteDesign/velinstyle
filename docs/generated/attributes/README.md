@@ -25,6 +25,8 @@ Declarative extensions interpreted by `bootAttributes()` / `bootFromDOM({ attrib
 | [`velin-code`](./velin-code.md) | Code block with copy button and VelinHighlight syntax colors (use `language` or `velin-code="js"`). | 1 |
 | [`velin-quote`](./velin-quote.md) | Styled blockquote. | 1 |
 | [`velin-highlight`](./velin-highlight.md) | Inline text mark (not syntax highlighting — use `velin-code` or `velinSyntax`). | 1 |
+| [`velin-transparency`](./velin-transparency.md) | Velin Transparency Framework host — attaches disclosure + provenance mark (Renderer). | 1 |
+| [`velin-disclosure`](./velin-disclosure.md) | Alias for `velin-transparency`. | 1 |
 | [`velin-reveal`](./velin-reveal.md) | Reveal element when scrolled into view. | 1 |
 | [`velin-fade`](./velin-fade.md) | Fade-in on scroll. | 1 |
 | [`velin-slide`](./velin-slide.md) | Slide-in on scroll (`up`, `down`, …). | 3 |

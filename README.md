@@ -32,12 +32,12 @@ npm i @birdapi/velinstyle
 
 ---
 
-VelinStyle is a **production CSS + Web Components framework** with **WCAG 2.2 AAA-oriented defaults**, a real **CLI ship surface**, and the first **Design Intelligence / AI Foundation** systems (beta). No external UI framework in the core.
+VelinStyle is a **production CSS + Web Components framework** with **WCAG 2.2 AAA-oriented defaults**, a real **CLI ship surface**, the **Transparency Framework** (labeling + provenance, beta), and the first **Design Intelligence / AI Foundation** systems (beta). No external UI framework in the core.
 
 **Best fit today:** marketing landings, docs shells, simple admin starters.  
 **Not yet:** sole primary stack for large multipage shop + enterprise admin without custom work.
 
-> **Release:** **1.2.0** (Core + Design Intelligence Foundation + Trust/Ship). Using VelinStyle does **not** certify your app — see the [a11y matrix](https://velinstyle.info/docs/getting-started/accessibility.html).
+> **Release:** **1.2.1** (Transparency Framework + Core + Design Intelligence Foundation + Trust/Ship). Using VelinStyle does **not** certify your app — see the [a11y matrix](https://velinstyle.info/docs/getting-started/accessibility.html).
 
 ---
 
@@ -64,7 +64,8 @@ Compared to **Bootstrap**: modern tokens/layers, optional progressive WCs, CLI a
 | 🎨 | **CSS Framework** | OKLCH themes, utilities, components, lite preset for marketing budgets |
 | 🧩 | **Web Components** | 40 canonical custom elements; use CSS alone when you need no JS |
 | ⚡ | **Runtime** | Search, motion, highlight, attributes, `bootFromDOM` tree-shaking |
-| 🛠 | **CLI** | `create` · `serve` · `doctor` · `check` · `scan` · `review` · `skills` |
+| 🛠 | **CLI** | `create` · `serve` · `doctor` · `check` · `scan` · `review` · `skills` · `transparency` |
+| 🔎 | **Transparency** | Labeling + provenance (AI / trust / compliance / metadata) — beta foundation |
 | 🧠 | **Design Intelligence** | Plan → constraints → page/section registry → review (beta) |
 | 🤖 | **AI Skills** | 40 skills, packs, bundles, templates, workflow graphs (beta) |
 | 📦 | **Registry** | Skills + page/section registries as machine-readable contracts |
@@ -77,17 +78,12 @@ Compared to **Bootstrap**: modern tokens/layers, optional progressive WCs, CLI a
 
 ---
 
-## What's new in 1.2
+## What's new in 1.2.1
 
-Not a CSS bump — a **foundation release**.
+- **Transparency Framework (beta)** — `@birdapi/velinstyle/transparency`, `velin-transparency` bridge, claim taxonomy, CLI `transparency doctor|validate|report|export|migrate`
+- Builds on **1.2.0** foundation: ship surface, Design Intelligence, AI Skills, new WC primitives
 
-- **Ship surface** — `create landing|dashboard|docs|auth`, `serve`, `doctor`, `check` (`--json` / `--sarif`)
-- **Design Intelligence (beta)** — Prompt Engine (`plan`), Review Engine, knowledge graph seed, design constraints
-- **AI Foundation (beta)** — skill engine, workflows, richer agent metadata
-- **New primitives** — `<velin-calendar>`, `<velin-file-dropzone>`, editable `<velin-data-table>`
-- **Trust gates** — stricter scan/review so junk pages cannot fake green scores
-
-Details: [`RELEASE_NOTES_1.2.0.md`](RELEASE_NOTES_1.2.0.md) · full history: [`CHANGELOG.md`](CHANGELOG.md)
+Details: [`CHANGELOG.md`](CHANGELOG.md) · 1.2.0 overview: [`RELEASE_NOTES_1.2.0.md`](RELEASE_NOTES_1.2.0.md)
 
 ---
 
@@ -103,11 +99,11 @@ bun add @birdapi/velinstyle
 **CDN** (pin a version):
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.0/dist/velinstyle.min.css">
-<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.2.0/dist/velinstyle-components.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.1/dist/velinstyle.min.css">
+<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.2.1/dist/velinstyle-components.min.js"></script>
 ```
 
-> Pin **`@1.2.0`** (or `@latest` after publish). Examples above match this package version.
+> Pin **`@1.2.1`** (or `@latest` after publish). Examples above match this package version.
 
 | Export | Use |
 |--------|-----|
@@ -127,8 +123,8 @@ After clone: `npm install && npm run build` — `dist/` is generated, not commit
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.0/dist/velinstyle.min.css">
-  <script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.2.0/dist/velinstyle-components.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.1/dist/velinstyle.min.css">
+  <script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.2.1/dist/velinstyle-components.min.js"></script>
 </head>
 <body class="velin-p-6">
   <button type="button" class="velin-btn velin-btn--primary">Ship it</button>
@@ -157,9 +153,10 @@ More: [`GETTING_STARTED.md`](GETTING_STARTED.md)
 | `build` | CSS build (`--preset lite` for marketing) |
 | `serve` | Static preview |
 | `doctor` | Install / path health |
-| `check` | doctor + blueprints + scan + review |
+| `check` | doctor + blueprints + scan + review (+ Transparency scores) |
 | `scan` | A11y / security / CSS / PII |
 | `review` | Design-intelligence gate (beta) |
+| `transparency` | doctor · validate · report · export · migrate (beta) |
 | `plan` | Prompt → plan JSON → render (beta) |
 | `skills` / `workflow` | AI skill registry & graphs (beta) |
 | `meta` | Agent bundle + `llms.txt` |
@@ -167,6 +164,7 @@ More: [`GETTING_STARTED.md`](GETTING_STARTED.md)
 
 ```bash
 npx @birdapi/velinstyle check . --profile marketing
+npx @birdapi/velinstyle transparency doctor . --policy examples/transparency.policy.json
 npx @birdapi/velinstyle wc api velin-toast
 ```
 
@@ -222,7 +220,8 @@ Docs: [a11y matrix](https://velinstyle.info/docs/getting-started/accessibility.h
 | CLI ship surface | [`docs/guides/cli-ship-surface.md`](docs/guides/cli-ship-surface.md) | create / check / wc |
 | AI Skills | [`docs/guides/ai-skills.md`](docs/guides/ai-skills.md) | Skills / workflows |
 | Product site | [velinstyle.info/docs](https://velinstyle.info/docs/getting-started/introduction.html) | Guides, demos, reference |
-| Upgrade | [`UPGRADING.md`](UPGRADING.md) | 1.1 → 1.2 |
+| Transparency | [Site guide](https://velinstyle.info/docs/guides/transparency.html) · `@birdapi/velinstyle/transparency` | Labeling + provenance |
+| Upgrade | [`UPGRADING.md`](UPGRADING.md) | 1.2.0 → 1.2.1 · 1.1 → 1.2 |
 | North star | [`VELINSTYLE_2030.md`](VELINSTYLE_2030.md) | Long-term vision |
 
 ---
@@ -233,7 +232,7 @@ Docs: [a11y matrix](https://velinstyle.info/docs/getting-started/accessibility.h
 velinstyle/
 ├── src/                 # CSS source (tokens, base, components, utilities)
 ├── components/          # Web Components (JS)
-├── core/                # Runtime: search, motion, highlight, attributes, meta
+├── core/                # Runtime: search, motion, highlight, attributes, meta, transparency
 ├── cli/                 # velinstyle binary
 ├── packages/            # React wrappers, skill-engine, skills registry
 ├── schemas/             # Design Intelligence + skill contracts
@@ -259,8 +258,8 @@ Humans own product intent. The framework ships reliable CSS and components. Desi
 | Status | Surfaces |
 |--------|----------|
 | **Stable** | CSS · Utilities · Runtime · Web Components · CLI core · Blueprints |
-| **Beta** | Review Engine · Prompt Engine · Knowledge Graph · AI Metadata · Design Constraints |
-| **Foundation** | AI Skills · Workflow Graphs · Registries |
+| **Beta** | Transparency Framework · Review Engine · Prompt Engine · Knowledge Graph · AI Metadata · Design Constraints |
+| **Foundation** | AI Skills · Workflow Graphs · Registries · Transparency pillars |
 | **Planned** | Studio · Utility Engine Generator |
 
 ---
@@ -274,7 +273,7 @@ Humans own product intent. The framework ships reliable CSS and components. Desi
 | A11y defaults | Partial | DIY | **AAA-capable tokens** |
 | Dark mode | Manual | `dark:` everywhere | **Token swap** |
 | Build required | No | Usually | **CDN optional** |
-| Design / AI gates | — | — | **plan · review · skills** |
+| Design / AI gates | — | — | **plan · review · skills · transparency** |
 
 ---
 

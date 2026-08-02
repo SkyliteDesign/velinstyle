@@ -1,0 +1,138 @@
+@layer components {
+  .velin-transparency {
+    --velin-tx-bg: color-mix(in oklab, var(--velin-color-surface) 88%, transparent);
+    --velin-tx-fg: var(--velin-color-text);
+    --velin-tx-border: var(--velin-color-border);
+    --velin-tx-accent: var(--velin-color-info, var(--velin-color-primary));
+    box-sizing: border-box;
+    z-index: var(--velin-z-overlay, 1900);
+    font-family: var(--velin-font-sans, system-ui, sans-serif);
+    font-size: var(--velin-text-xs, 0.75rem);
+    line-height: 1.3;
+    color: var(--velin-tx-fg);
+  }
+
+  .velin-transparency--tone-information { --velin-tx-accent: var(--velin-color-info, var(--velin-color-primary)); }
+  .velin-transparency--tone-warning { --velin-tx-accent: var(--velin-color-warning); }
+  .velin-transparency--tone-neutral { --velin-tx-accent: var(--velin-color-text-muted); }
+  .velin-transparency--tone-verified { --velin-tx-accent: var(--velin-color-success); }
+  .velin-transparency--tone-generated { --velin-tx-accent: var(--velin-color-primary); }
+  .velin-transparency--tone-human { --velin-tx-accent: var(--velin-color-success); }
+  .velin-transparency--tone-mixed { --velin-tx-accent: var(--velin-color-secondary, var(--velin-color-primary)); }
+
+  .velin-transparency--badge,
+  .velin-transparency--icon,
+  .velin-transparency--overlay {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    max-width: min(16rem, 90%);
+    padding: 0.25rem 0.55rem;
+    border-radius: var(--velin-radius-full, 999px);
+    border: 1px solid color-mix(in oklab, var(--velin-tx-accent) 45%, var(--velin-tx-border));
+    background: var(--velin-tx-bg);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--velin-shadow-sm, 0 1px 2px rgb(0 0 0 / 0.15));
+  }
+
+  .velin-transparency--pos-top-right { top: 0.5rem; right: 0.5rem; left: auto; bottom: auto; }
+  .velin-transparency--pos-top-left { top: 0.5rem; left: 0.5rem; right: auto; bottom: auto; }
+  .velin-transparency--pos-bottom-right { bottom: 0.5rem; right: 0.5rem; top: auto; left: auto; }
+  .velin-transparency--pos-bottom-left { bottom: 0.5rem; left: 0.5rem; top: auto; right: auto; }
+
+  .velin-transparency--ribbon {
+    position: absolute;
+    top: 0.85rem;
+    right: -0.35rem;
+    padding: 0.3rem 0.85rem;
+    border-radius: var(--velin-radius-sm, 4px);
+    background: var(--velin-tx-accent);
+    color: var(--velin-color-on-primary, #fff);
+    transform: rotate(8deg);
+    box-shadow: var(--velin-shadow-sm, 0 1px 2px rgb(0 0 0 / 0.2));
+  }
+
+  .velin-transparency--inline {
+    position: static;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-inline: 0.25rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: var(--velin-radius-md, 6px);
+    border: 1px solid var(--velin-tx-border);
+    background: var(--velin-color-surface-dim, var(--velin-tx-bg));
+  }
+
+  .velin-transparency--footer,
+  .velin-transparency--banner {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.75rem;
+    width: 100%;
+    margin-block-start: 0.5rem;
+    padding: 0.55rem 0.75rem;
+    border-block-start: 2px solid var(--velin-tx-accent);
+    background: color-mix(in oklab, var(--velin-tx-accent) 8%, var(--velin-color-surface));
+    border-radius: 0 0 var(--velin-radius-md, 6px) var(--velin-radius-md, 6px);
+  }
+
+  .velin-transparency--panel,
+  .velin-transparency--tooltip {
+    position: absolute;
+    display: grid;
+    gap: 0.25rem;
+    min-width: 12rem;
+    max-width: min(20rem, 92%);
+    padding: 0.65rem 0.75rem;
+    border-radius: var(--velin-radius-md, 6px);
+    border: 1px solid var(--velin-tx-border);
+    background: var(--velin-color-surface);
+    box-shadow: var(--velin-shadow-md, 0 8px 24px rgb(0 0 0 / 0.18));
+  }
+
+  .velin-transparency--panel .velin-transparency__details,
+  .velin-transparency--tooltip .velin-transparency__details,
+  .velin-transparency--footer .velin-transparency__details,
+  .velin-transparency--ribbon .velin-transparency__details {
+    display: block;
+  }
+
+  .velin-transparency__label {
+    font-weight: var(--velin-weight-semibold, 600);
+    color: var(--velin-tx-accent);
+  }
+
+  .velin-transparency__details {
+    color: var(--velin-color-text-muted);
+    font-weight: var(--velin-weight-normal, 400);
+  }
+
+  .velin-transparency--icon {
+    min-width: 1.75rem;
+    min-height: 1.75rem;
+    padding: 0.25rem;
+    justify-content: center;
+  }
+
+  .velin-transparency--icon .velin-transparency__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .velin-transparency--icon::before {
+    content: "ⓘ";
+    color: var(--velin-tx-accent);
+    font-style: normal;
+  }
+
+  [velin-transparency],
+  [velin-disclosure] {
+    position: relative;
+  }
+}

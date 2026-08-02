@@ -17,11 +17,11 @@ npm i @birdapi/velinstyle
 **CDN-only** (no bundler):
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.0/dist/velinstyle.min.css">
-<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.2.0/dist/velinstyle-components.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.1/dist/velinstyle.min.css">
+<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.2.1/dist/velinstyle-components.min.js"></script>
 ```
 
-Until the public 1.2.0 cut, use `@1.1.0` on CDN or a local clone.
+Pin `@1.2.1` on CDN (or use a local clone of this repo).
 
 ---
 

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "mime": "application/vnd.velinstyle.meta+json",
-  "generatedAt": "2026-08-01T07:08:36.191Z",
+  "generatedAt": "2026-08-02T06:33:35.829Z",
   "framework": {
     "name": "@birdapi/velinstyle",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "homepage": "https://velinstyle.info",
     "repository": "https://github.com/SkyliteDesign/velinstyle.git",
     "tagline": "VelinStyle is a CSS framework with WCAG 2.2 AAA-oriented defaults, native JavaScript runtime, and Web Components.",
@@ -23,6 +23,7 @@
     "./attributes",
     "./highlight",
     "./meta",
+    "./transparency",
     "./a11y",
     "./skills-registry"
   ],
@@ -3922,6 +3923,7 @@
       "velin-code",
       "velin-copy",
       "velin-counter",
+      "velin-disclosure",
       "velin-fade",
       "velin-grid",
       "velin-highlight",
@@ -3943,9 +3945,10 @@
       "velin-stagger",
       "velin-tabs",
       "velin-theme",
-      "velin-tooltip"
+      "velin-tooltip",
+      "velin-transparency"
     ],
-    "count": 27
+    "count": 29
   },
   "cli": {
     "commands": [
@@ -4620,7 +4623,7 @@
   },
   "searchIndex": {
     "path": "dist/search-index.json",
-    "entryCount": 151
+    "entryCount": 153
   },
   "documentation": {
     "generated": "docs/generated/",
@@ -4650,6 +4653,7 @@
     "Prefer registry-first skills (`velinstyle skills`) and workflow graphs (`velinstyle workflow`) before inventing custom pipelines.",
     "Honor skill status, confidence, compatibility, and onlyIf predicates when automating.",
     "Do not put secrets, API keys, or raw emails in velin-meta or page meta.",
-    "Resolve doc links against docs root (/docs/), not the current page folder."
+    "Resolve doc links against docs root (/docs/), not the current page folder.",
+    "Prefer Velin Transparency Framework (velin-transparency + provenance) for AI/trust/compliance labeling; run `velinstyle transparency doctor`."
   ]
 }

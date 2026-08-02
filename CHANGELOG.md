@@ -4,7 +4,7 @@ All notable changes to this project are documented in this file.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-For a developer-friendly overview of **1.2.0**, see [`RELEASE_NOTES_1.2.0.md`](RELEASE_NOTES_1.2.0.md). Upgrade guidance: [`UPGRADING.md`](UPGRADING.md).
+Current line: **1.2.1** (Transparency Framework). Overview of **1.2.0**: [`RELEASE_NOTES_1.2.0.md`](RELEASE_NOTES_1.2.0.md). Upgrade guidance: [`UPGRADING.md`](UPGRADING.md).
 
 ---
 
@@ -15,6 +15,27 @@ For a developer-friendly overview of **1.2.0**, see [`RELEASE_NOTES_1.2.0.md`](R
 ### Changed
 
 ### Fixed
+
+---
+
+## [1.2.1](https://github.com/SkyliteDesign/velinstyle/releases/tag/v1.2.1) - 2026-08-02
+
+VelinStyle **1.2.1** ships the **Velin Transparency Framework** foundation: labeling **and** provenance as a subsystem (not an AI badge).
+
+### Added
+
+- Transparency subsystem at `@birdapi/velinstyle/transparency` — Engine, Registry, Policy, Providers, Validator, Doctor, Reporter, Export, Migrate, Renderer
+- HTML bridge `velin-transparency` / `velin-disclosure` + provenance attributes
+- Claim taxonomy (`ai.generated`, `review.human`, `license.*`, …)
+- CLI: `velinstyle transparency doctor|validate|report|export|migrate` (scan alias)
+- Integration into `velinstyle check` / review scores (Transparency + pillars)
+- CSS marks (badge, overlay, ribbon, inline, footer, panel, tooltip, icon)
+- Example policy `examples/transparency.policy.json`
+- Docs guides EN/DE: Transparency Framework
+
+### Changed
+
+- Soft default transparency policy so existing `check` runs stay non-breaking; strict media rules via policy file
 
 ---
 

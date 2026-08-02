@@ -1,6 +1,6 @@
 {
   "name": "@velinstyle/react",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Official React wrappers for VelinStyle web components",
   "type": "module",
   "main": "./dist/index.js",

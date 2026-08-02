@@ -23,7 +23,7 @@ npx velinstyle meta page path/to/page.html
 ```html
 <script type="application/vnd.velinstyle.meta+json" id="velin-meta">
 {
-  "version": "1.2.0",
+  "version": "1.2.1",
   "page": { "intent": "component-doc" },
   "allowed": { "classesPrefix": ["velin-"] }
 }
@@ -32,12 +32,12 @@ npx velinstyle meta page path/to/page.html
 
 ## Snapshot
 
-- Framework: @birdapi/velinstyle@1.2.0
+- Framework: @birdapi/velinstyle@1.2.1
 - Components: 40
-- Attributes: 27
+- Attributes: 29
 - CLI commands: 24
 - Scanner rules: 44
-- Search index entries: 151
+- Search index entries: 153
 
 ## Conventions
 
@@ -49,4 +49,5 @@ npx velinstyle meta page path/to/page.html
 - Honor skill status, confidence, compatibility, and onlyIf predicates when automating.
 - Do not put secrets, API keys, or raw emails in velin-meta or page meta.
 - Resolve doc links against docs root (/docs/), not the current page folder.
+- Prefer Velin Transparency Framework (velin-transparency + provenance) for AI/trust/compliance labeling; run `velinstyle transparency doctor`.
 

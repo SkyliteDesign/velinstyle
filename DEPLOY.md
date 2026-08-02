@@ -35,7 +35,7 @@ npx @birdapi/velinstyle check .
 **CDN pin** (production):
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.0/dist/velinstyle.min.css">
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.1/dist/velinstyle.min.css">
 ```
 
 Prefer a fixed version — never `@latest` in production.

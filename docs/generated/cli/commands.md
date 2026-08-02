@@ -2,7 +2,7 @@
 
 # CLI commands
 
-VelinStyle CLI v1.2.0. Run `velinstyle --help` for full usage.
+VelinStyle CLI v1.2.1. Run `velinstyle --help` for full usage.
 
 | Command | Summary | Subcommands | Flags | Example |
 | --- | --- | --- | --- | --- |

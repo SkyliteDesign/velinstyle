@@ -77,7 +77,7 @@ Product order stays **Mensch → Framework → KI**.
 ## Quick start (after publish)
 
 ```bash
-npm i @birdapi/velinstyle@1.2.0
+npm i @birdapi/velinstyle@1.2.1
 npx velinstyle create landing ./my-site
 cd my-site
 npx velinstyle serve .
@@ -90,7 +90,7 @@ Offline WC notes land under `vendor/velinstyle/docs/`. Prefer `velinstyle wc api
 
 ## Upgrade from 1.1.0
 
-1. Bump to `@birdapi/velinstyle@1.2.0` when published.  
+1. Bump to `@birdapi/velinstyle@1.2.1` when published.  
 2. Refresh vendor copies if you use offline `create` / `init` assets.  
 3. Run `doctor` + `check` (use `--profile app` for admin shells).  
 4. Expect stricter scan/review on previously soft pages — fix markup, don’t weaken gates.

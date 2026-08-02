@@ -32,12 +32,12 @@ npm i @birdapi/velinstyle
 
 ---
 
-VelinStyle ist ein **produktives CSS- + Web-Components-Framework** mit **WCAG-2.2-AAA-orientierten Defaults**, einer echten **CLI-Ship-Surface** und den ersten **Design-Intelligence- / AI-Foundation**-Systemen (Beta). Kein externes UI-Framework im Kern.
+VelinStyle ist ein **produktives CSS- + Web-Components-Framework** mit **WCAG-2.2-AAA-orientierten Defaults**, einer echten **CLI-Ship-Surface**, dem **Transparency Framework** (Kennzeichnung + Nachweis, Beta) und den ersten **Design-Intelligence- / AI-Foundation**-Systemen (Beta). Kein externes UI-Framework im Kern.
 
 **Passung heute:** Marketing-Landings, Docs-Shells, einfache Admin-Starter.  
 **Noch nicht:** alleiniger Primary-Stack für große Multipage-Shops + Enterprise-Admin ohne Custom-Arbeit.
 
-> **Release:** **1.2.0** (Core + Design Intelligence Foundation + Trust/Ship). VelinStyle **zertifiziert keine Anwendung** — siehe [A11y-Matrix](https://velinstyle.info/docs/getting-started/accessibility.html).
+> **Release:** **1.2.1** (Transparency Framework + Core + Design Intelligence Foundation + Trust/Ship). VelinStyle **zertifiziert keine Anwendung** — siehe [A11y-Matrix](https://velinstyle.info/docs/getting-started/accessibility.html).
 
 ---
 
@@ -64,7 +64,8 @@ Gegenüber **Bootstrap**: moderne Tokens/Layers, progressive WCs, CLI-Automation
 | 🎨 | **CSS-Framework** | OKLCH-Themes, Utilities, Komponenten, Lite-Preset |
 | 🧩 | **Web Components** | 40 kanonische Custom Elements; CSS allein reicht oft |
 | ⚡ | **Runtime** | Search, Motion, Highlight, Attributes, Tree-Shaking |
-| 🛠 | **CLI** | `create` · `serve` · `doctor` · `check` · `scan` · `review` · `skills` |
+| 🛠 | **CLI** | `create` · `serve` · `doctor` · `check` · `scan` · `review` · `skills` · `transparency` |
+| 🔎 | **Transparency** | Kennzeichnung + Nachweis (KI / Trust / Compliance / Metadaten) — Beta-Foundation |
 | 🧠 | **Design Intelligence** | Plan → Constraints → Registry → Review (Beta) |
 | 🤖 | **AI Skills** | 40 Skills, Packs, Bundles, Templates, Workflows (Beta) |
 | 📦 | **Registry** | Skills + Page/Section als maschinenlesbare Verträge |
@@ -77,17 +78,12 @@ Gegenüber **Bootstrap**: moderne Tokens/Layers, progressive WCs, CLI-Automation
 
 ---
 
-## Neu in 1.2
+## Neu in 1.2.1
 
-Kein reines CSS-Bump — ein **Foundation-Release**.
+- **Transparency Framework (Beta)** — `@birdapi/velinstyle/transparency`, Bridge `velin-transparency`, Claim-Taxonomie, CLI `transparency doctor|validate|report|export|migrate`
+- Baut auf der **1.2.0**-Foundation auf: Ship Surface, Design Intelligence, AI Skills, neue WC-Primitives
 
-- **Ship Surface** — `create`, `serve`, `doctor`, `check` (`--json` / `--sarif`)
-- **Design Intelligence (Beta)** — Prompt Engine, Review Engine, Knowledge-Graph-Seed, Constraints
-- **AI Foundation (Beta)** — Skill Engine, Workflows, reicheres Agent-Metadata
-- **Neue Primitives** — Calendar, File-Dropzone, editierbare Data-Table
-- **Trust Gates** — strengere Scan/Review-Regeln
-
-Details: [`RELEASE_NOTES_1.2.0.md`](RELEASE_NOTES_1.2.0.md) · Historie: [`CHANGELOG.md`](CHANGELOG.md)
+Details: [`CHANGELOG.md`](CHANGELOG.md) · 1.2.0-Überblick: [`RELEASE_NOTES_1.2.0.md`](RELEASE_NOTES_1.2.0.md)
 
 ---
 
@@ -100,8 +96,14 @@ yarn add @birdapi/velinstyle
 bun add @birdapi/velinstyle
 ```
 
-**CDN** (Version pinnen) — siehe [`README.md`](README.md#installation).  
-Nach Clone: `npm install && npm run build`.
+**CDN** (Version pinnen):
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.1/dist/velinstyle.min.css">
+<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.2.1/dist/velinstyle-components.min.js"></script>
+```
+
+> Pin **`@1.2.1`** (oder `@latest` nach Publish). Nach Clone: `npm install && npm run build`.
 
 ---
 
@@ -121,8 +123,9 @@ Minimal-HTML und Import-Pfade: [`GETTING_STARTED.md`](GETTING_STARTED.md) · Sys
 | Befehl | Rolle |
 |--------|------|
 | `create` | Scaffolds (`landing` · `dashboard` · `docs` · `auth`) |
-| `check` | doctor + blueprints + scan + review |
+| `check` | doctor + blueprints + scan + review (+ Transparency-Scores) |
 | `scan` / `review` | Statische bzw. Design-Intelligence-Gates |
+| `transparency` | doctor · validate · report · export · migrate (Beta) |
 | `skills` / `workflow` | AI-Registry & Graphen (Beta) |
 | `wc api <tag>` | WC-API aus dem Source |
 | `meta` | Agent-Bundle + `llms.txt` |
@@ -142,8 +145,8 @@ AAA-orientierte Token-Defaults, Fokus-Management, Reduced Motion, Scanner-Contra
 | Status | Surfaces |
 |--------|----------|
 | **Stable** | CSS · Runtime · WC · CLI-Kern · Blueprints |
-| **Beta** | Review · Prompt · Knowledge Graph · AI Metadata · Constraints |
-| **Foundation** | AI Skills · Workflow Graphs · Registries |
+| **Beta** | Transparency Framework · Review · Prompt · Knowledge Graph · AI Metadata · Constraints |
+| **Foundation** | AI Skills · Workflow Graphs · Registries · Transparency pillars |
 | **Planned** | Studio · Utility Engine Generator |
 
 ---

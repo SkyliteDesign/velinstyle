@@ -19,7 +19,7 @@ An accessibility-first **CSS + Web Components** framework with a **CLI**, plus *
 ### Which npm version should I install?
 
 - Registry **latest today:** often **1.1.0** until the 1.2 cut publishes  
-- This repo’s `package.json` may already say **1.2.0** (prep tree)  
+- This repo’s `package.json` says **1.2.1** (current line)  
 - Prefer the published tag for production; use a local clone for 1.2 ship-surface commands (`create`, `check`, …)
 
 ### Does AAA mean my app is certified?

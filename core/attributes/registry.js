@@ -226,6 +226,20 @@ function registerBuiltins() {
     },
   });
 
+  registerAttribute('velin-transparency', {
+    async enhance(el) {
+      const { attach } = await import('../transparency/attach.js');
+      attach(el);
+    },
+  });
+  registerAttribute('velin-disclosure', {
+    async enhance(el) {
+      const { attach } = await import('../transparency/attach.js');
+      if (!el.hasAttribute('velin-transparency')) el.setAttribute('velin-transparency', '');
+      attach(el);
+    },
+  });
+
   for (const motion of ['velin-reveal', 'velin-fade', 'velin-slide', 'velin-scale', 'velin-parallax', 'velin-hover', 'velin-stagger', 'velin-scroll']) {
     registerAttribute(motion, { enhance() {} });
   }

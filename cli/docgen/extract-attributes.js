@@ -30,6 +30,8 @@ const ATTRIBUTE_DOCS = {
   'velin-code': 'Code block with copy button and VelinHighlight syntax colors (use `language` or `velin-code="js"`).',
   'velin-quote': 'Styled blockquote.',
   'velin-highlight': 'Inline text mark (not syntax highlighting — use `velin-code` or `velinSyntax`).',
+  'velin-transparency': 'Velin Transparency Framework host — attaches disclosure + provenance mark (Renderer).',
+  'velin-disclosure': 'Alias for `velin-transparency`.',
 };
 
 /** Value | Meaning | Bridges to */

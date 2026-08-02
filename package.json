@@ -1,6 +1,6 @@
 {
   "name": "@birdapi/velinstyle",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
@@ -27,6 +27,7 @@
     "./attributes": "./core/attributes/index.js",
     "./highlight": "./core/highlight/index.js",
     "./meta": "./core/meta/index.js",
+    "./transparency": "./core/transparency/index.js",
     "./a11y": "./components/a11y-entry.js",
     "./skills-registry": "./packages/velinstyle-skills/registry.json"
   },

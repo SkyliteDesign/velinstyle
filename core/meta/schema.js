@@ -48,4 +48,14 @@ export const AGENT_CONVENTIONS = [
   'Honor skill status, confidence, compatibility, and onlyIf predicates when automating.',
   'Do not put secrets, API keys, or raw emails in velin-meta or page meta.',
   'Resolve doc links against docs root (/docs/), not the current page folder.',
+  'Prefer Velin Transparency Framework (velin-transparency + provenance) for AI/trust/compliance labeling; run `velinstyle transparency doctor`.',
 ];
+
+/**
+ * Optional page-level transparency block for Velin Meta.
+ * @typedef {Object} VelinPageTransparency
+ * @property {object} [policy]
+ * @property {object[]} [disclosures]
+ * @property {object[]} [items]
+ */
+
