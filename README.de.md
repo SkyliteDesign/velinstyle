@@ -26,7 +26,7 @@ Ein Framework. Eine CLI. Ein Design System. Ein AI-fähiges Ökosystem.
 npm i @birdapi/velinstyle
 ```
 
-**[Website](https://velinstyle.info)** · **[Doku](https://velinstyle.info/docs/getting-started/introduction.html)** · **[Demos](https://velinstyle.info/demos/)** · **[Getting Started](GETTING_STARTED.md)** · **[Architecture](ARCHITECTURE.md)** · **[English](README.md)**
+**[Website](https://velinstyle.info)** · **[Atelier](https://velinstyle.info/atelier/index.de.html)** · **[Doku](https://velinstyle.info/docs/getting-started/introduction.html)** · **[Demos](https://velinstyle.info/demos/)** · **[Getting Started](GETTING_STARTED.md)** · **[Architecture](ARCHITECTURE.md)** · **[English](README.md)**
 
 </div>
 
@@ -34,7 +34,9 @@ npm i @birdapi/velinstyle
 
 VelinStyle ist ein **produktives CSS- + Web-Components-Framework** mit **WCAG-2.2-AAA-orientierten Defaults**, einer echten **CLI-Ship-Surface**, dem **Transparency Framework** (Kennzeichnung + Nachweis, Beta) und den ersten **Design-Intelligence- / AI-Foundation**-Systemen (Beta). Kein externes UI-Framework im Kern.
 
-**Passung heute:** Marketing-Landings, Docs-Shells, einfache Admin-Starter.  
+**VelinStyle Atelier** ist die kuratierte Oberfläche darüber: **über 2.600 produktionsreife Interfaces**, vier komplette Produktwelten und eine durchsuchbare Bibliothek — fertige Oberflächen statt leerer Komponenten-Fragmente.
+
+**Passung heute:** Marketing-Landings, Docs-Shells, Admin-/SaaS-Starter, Shop- und Community-UIs über Atelier.  
 **Noch nicht:** alleiniger Primary-Stack für große Multipage-Shops + Enterprise-Admin ohne Custom-Arbeit.
 
 > **Release:** **1.2.1** (Transparency Framework + Core + Design Intelligence Foundation + Trust/Ship). VelinStyle **zertifiziert keine Anwendung** — siehe [A11y-Matrix](https://velinstyle.info/docs/getting-started/accessibility.html).
@@ -75,6 +77,25 @@ Gegenüber **Bootstrap**: moderne Tokens/Layers, progressive WCs, CLI-Automation
 | 🛡 | **Scan Engine** | A11y, Security, CSS-Honesty, PII |
 | 🚀 | **Performance** | Lite-CSS, Chunked Runtime, CLS-Platzhalter |
 | ♿ | **Accessibility** | Contracts, WCAG-2.2-Tooling, Keyboard + ARIA |
+| 🖼 | **Atelier** | Kuratierte Bibliothek kompletter Interfaces, Layouts & Studio-Bausteine |
+
+---
+
+## VelinStyle Atelier
+
+[Atelier](https://velinstyle.info/atelier/index.de.html) ist die Produkt-Showcase-Fläche für VelinStyle: **komplette Interfaces**, keine einzelnen Buttons und Karten. Nach Einsatzzweck browsen (Apps, Marketing, Commerce, Auth…), Live-Welten öffnen, Quellcode kopieren oder ZIPs laden.
+
+| Fläche | Was du bekommst | Link |
+|--------|-----------------|------|
+| **Atelier Home** | Brand-Hub — Warum Atelier, vier Welten, Bau-Pfade | [Öffnen](https://velinstyle.info/atelier/index.de.html) |
+| **Library** | 2.638 Templates — Filter nach Mode, Kategorie, Tags, Qualität | [Durchsuchen](https://velinstyle.info/atelier/library/) |
+| **Cascade Console** | Enterprise-/SaaS-Dashboard-Welt | [Live-Demo](https://velinstyle.info/showcase-reihe/01-enterprise-api-ai-dashboard/) |
+| **LUMEN** | Kompletter Shop — Katalog, Warenkorb, Checkout | [Live-Demo](https://velinstyle.info/showcase-reihe/02-enterprise-ecommerce-storefront/) |
+| **FORGE** | Community- & Forum-System | [Live-Demo](https://velinstyle.info/showcase-reihe/03-modern-community-forum/) |
+
+Library-Shortcuts: [Apps](https://velinstyle.info/atelier/library/?mode=apps) · [Studio-Bausteine](https://velinstyle.info/atelier/library/?mode=studio) · [Recipes](https://velinstyle.info/atelier/library/?mode=recipes) · [Marketing](https://velinstyle.info/atelier/library/?cat=marketing) · [Dashboards](https://velinstyle.info/atelier/library/?cat=dashboards) · [Auth](https://velinstyle.info/atelier/library/?cat=authentication)
+
+Englischer Hub: [atelier/](https://velinstyle.info/atelier/)
 
 ---
 
@@ -147,7 +168,7 @@ AAA-orientierte Token-Defaults, Fokus-Management, Reduced Motion, Scanner-Contra
 | **Stable** | CSS · Runtime · WC · CLI-Kern · Blueprints |
 | **Beta** | Transparency Framework · Review · Prompt · Knowledge Graph · AI Metadata · Constraints |
 | **Foundation** | AI Skills · Workflow Graphs · Registries · Transparency pillars |
-| **Planned** | Studio · Utility Engine Generator |
+| **Planned** | Velin Studio Builder · Utility Engine Generator |
 
 ---
 
@@ -156,3 +177,54 @@ AAA-orientierte Token-Defaults, Fokus-Management, Reduced Motion, Scanner-Contra
 Siehe [`CONTRIBUTING.de.md`](CONTRIBUTING.de.md). Lizenz: [MIT](LICENSE).
 
 Vollständige englische README: [`README.md`](README.md).
+
+---
+
+## Live-Demos & Module
+
+Fertige Oberflächen erkunden — Atelier-Welten, Template-Bibliothek und klassische Demo-Module.
+
+### Atelier-Produktwelten
+
+| Modul | Fokus | Demo |
+|-------|-------|------|
+| **Cascade Console** | Enterprise-API- / AI-Dashboard | [Öffnen](https://velinstyle.info/showcase-reihe/01-enterprise-api-ai-dashboard/) |
+| **LUMEN** | E-Commerce-Storefront | [Öffnen](https://velinstyle.info/showcase-reihe/02-enterprise-ecommerce-storefront/) |
+| **FORGE** | Community-Forum | [Öffnen](https://velinstyle.info/showcase-reihe/03-modern-community-forum/) |
+| **Atelier Library** | Vollständige Template-Hub (2.638) | [Öffnen](https://velinstyle.info/atelier/library/) |
+| **Atelier Home** | Marketing-Hub (DE) | [Öffnen](https://velinstyle.info/atelier/index.de.html) |
+| **Atelier Home** | Marketing-Hub (EN) | [Öffnen](https://velinstyle.info/atelier/) |
+
+### Klassische Demo-Module
+
+| Modul | Fokus | Demo |
+|-------|-------|------|
+| **Demo-Index** | Alle klassischen Showcases | [Öffnen](https://velinstyle.info/demos/) |
+| **Crypto-Dashboard** | Dichtes Admin / Charts | [Öffnen](https://velinstyle.info/demos/showcase-crypto.html) |
+| **Dashboard** | App-Shell & KPIs | [Öffnen](https://velinstyle.info/demos/showcase-dashboard.html) |
+| **SaaS** | Product Marketing | [Öffnen](https://velinstyle.info/demos/showcase-saas.html) |
+| **E-Commerce** | Shop-Patterns | [Öffnen](https://velinstyle.info/demos/showcase-ecommerce.html) |
+| **Forum** | Community-UI | [Öffnen](https://velinstyle.info/demos/showcase-forum.html) |
+| **UI Kit** | Komponenten-Galerie | [Öffnen](https://velinstyle.info/demos/showcase-ui-kit.html) |
+| **Interactive** | WC-Verhalten | [Öffnen](https://velinstyle.info/demos/showcase-interactive.html) |
+| **Runtime** | Search / Motion / Boot | [Öffnen](https://velinstyle.info/demos/showcase-runtime.html) |
+
+### Library nach Intent
+
+| Intent | Link |
+|--------|------|
+| Applications | [library/?mode=apps](https://velinstyle.info/atelier/library/?mode=apps) |
+| Studio-Bausteine | [library/?mode=studio](https://velinstyle.info/atelier/library/?mode=studio) |
+| Recipes | [library/?mode=recipes](https://velinstyle.info/atelier/library/?mode=recipes) |
+| Marketing | [library/?cat=marketing](https://velinstyle.info/atelier/library/?cat=marketing) |
+| Dashboards | [library/?cat=dashboards](https://velinstyle.info/atelier/library/?cat=dashboards) |
+| Commerce | [library/?cat=commerce](https://velinstyle.info/atelier/library/?cat=commerce) |
+| Authentication | [library/?cat=authentication](https://velinstyle.info/atelier/library/?cat=authentication) |
+| Community | [library/?cat=community](https://velinstyle.info/atelier/library/?cat=community) |
+| Admin | [library/?cat=admin](https://velinstyle.info/atelier/library/?cat=admin) |
+
+<p align="center">
+  <a href="https://velinstyle.info/atelier/index.de.html">
+    <img src=".github/assets/readme/hero-demo.webp" alt="VelinStyle Atelier und Demo-Oberflächen" width="720">
+  </a>
+</p>
