@@ -18,6 +18,8 @@ Tailwind/Bootstrap stop at styling. Teams still invent page structure ad hoc. Ve
 
 AI later consumes the same graphs — **Mensch → Framework → Design Intelligence → AI**.
 
+**Atelier Library compose (beta):** `velinstyle scaffold --atelier 04,07` builds a page from curated Library showcases (see [`atelier-cli.md`](atelier-cli.md)). This is **not** Velin Studio (planned). Blade/Vue/React `--format` outputs are **integration wrappers**, not native rewrites.
+
 ---
 
 ## Pieces
@@ -29,6 +31,7 @@ AI later consumes the same graphs — **Mensch → Framework → Design Intellig
 | Section Registry | Section / blueprint graphs | `…/sections.json` |
 | Design Constraints | Hero / FAQ / contact packs | `core/meta/design-constraints/` |
 | Prompt Engine | `velinstyle plan` / `scaffold` | `cli/prompt-engine.js` |
+| Atelier compose (beta) | `scaffold --atelier` / `plan --atelier` / `atelier` pull | [`atelier-cli.md`](atelier-cli.md) |
 | Review Engine | `velinstyle review` / `check` | `cli/review.js` |
 | Schemas | Contracts for CI | `schemas/` |
 

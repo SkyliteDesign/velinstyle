@@ -75,7 +75,7 @@ describe('release sync guard', () => {
     for (const file of ['README.md', 'README.de.md']) {
       const text = readFileSync(join(ROOT, file), 'utf-8');
       expect(text, file).toContain(`**${count} `);
-      expect(text, file).toContain(`(${loaderCount} `);
+      expect(text, file).toContain(`(**${loaderCount}**`);
     }
   });
 });

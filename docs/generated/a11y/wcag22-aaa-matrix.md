@@ -49,6 +49,7 @@ Framework target: **WCAG 2.2 Level AAA** (token defaults + component contracts).
 | `<velin-drawer>` | pass | Escape, Tab trap | — | — |
 | `<velin-dropdown>` | pass | Roving, typeahead, Escape | — | — |
 | `<velin-email>` | pass | — | — | `aria-label` |
+| `<velin-empty-state>` | pass | — | — | — |
 | `<velin-file-dropzone>` | pass | Browse button + native file input | polite | — |
 | `<velin-form-summary>` | pass | Summary links move focus to the offending field | assertive | — |
 | `<velin-icon>` | pass | — | — | `label` |
@@ -56,6 +57,8 @@ Framework target: **WCAG 2.2 Level AAA** (token defaults + component contracts).
 | `<velin-live-dot>` | pass | — | — | — |
 | `<velin-menubar>` | pass | Roving arrows | — | `aria-label` |
 | `<velin-modal>` | pass | Escape, Tab trap | — | — |
+| `<velin-otp-input>` | pass | Digits, arrows, backspace, paste | — | — |
+| `<velin-password-strength>` | pass | — | — | — |
 | `<velin-persist>` | pass | N/A | — | — |
 | `<velin-popover>` | pass | Escape, Enter/Space on trigger; focus opens hover mode | — | — |
 | `<velin-progress-ring>` | pass | — | — | — |

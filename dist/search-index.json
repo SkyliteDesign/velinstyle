@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-02T06:33:35.871Z",
+  "generatedAt": "2026-08-04T09:05:35.172Z",
   "entries": [
     {
       "id": "examples:samples/a11y-patterns.html",
@@ -57,7 +57,7 @@
     {
       "id": "api:commands",
       "title": "CLI commands",
-      "excerpt": "VelinStyle CLI v1.2.1. Run velinstyle --help for full usage.",
+      "excerpt": "VelinStyle CLI v1.2.2. Run velinstyle --help for full usage.",
       "url": "docs/generated/cli/commands.html",
       "category": "api",
       "keywords": [
@@ -94,7 +94,7 @@
     {
       "id": "api:build",
       "title": "CLI: build",
-      "excerpt": "Build custom CSS with selected layers from config",
+      "excerpt": "Build custom CSS with selected layers from config, or production output with --production",
       "url": "docs/generated/cli/commands.html#build",
       "category": "api",
       "keywords": [
@@ -232,6 +232,18 @@
       "keywords": [
         "cli",
         "prefix"
+      ],
+      "weight": 1.1
+    },
+    {
+      "id": "api:production",
+      "title": "CLI: production",
+      "excerpt": "Content-aware production builder (CSS/JS/themes/icons/fonts/motion + report)",
+      "url": "docs/generated/cli/commands.html#production",
+      "category": "api",
+      "keywords": [
+        "cli",
+        "production"
       ],
       "weight": 1.1
     },
@@ -1253,6 +1265,19 @@
       "weight": 1.3
     },
     {
+      "id": "components:velin-empty-state",
+      "title": "velin-empty-state",
+      "excerpt": "Source: components/velin-empty-state.js",
+      "url": "docs/generated/components/velin-empty-state.html",
+      "category": "components",
+      "keywords": [
+        "velin-empty-state",
+        "components",
+        "velin-empty-state"
+      ],
+      "weight": 1.3
+    },
+    {
       "id": "docs:velin-fade",
       "title": "velin-fade",
       "excerpt": "Fade-in on scroll.",
@@ -1474,6 +1499,19 @@
       "weight": 1.2
     },
     {
+      "id": "components:velin-otp-input",
+      "title": "velin-otp-input",
+      "excerpt": "Source: components/velin-otp-input.js",
+      "url": "docs/generated/components/velin-otp-input.html",
+      "category": "components",
+      "keywords": [
+        "velin-otp-input",
+        "components",
+        "velin-otp-input"
+      ],
+      "weight": 1.3
+    },
+    {
       "id": "docs:velin-parallax",
       "title": "velin-parallax",
       "excerpt": "Parallax background (slow optional).",
@@ -1485,6 +1523,19 @@
         "velin-parallax"
       ],
       "weight": 1.2
+    },
+    {
+      "id": "components:velin-password-strength",
+      "title": "velin-password-strength",
+      "excerpt": "Source: components/velin-password-strength.js",
+      "url": "docs/generated/components/velin-password-strength.html",
+      "category": "components",
+      "keywords": [
+        "velin-password-strength",
+        "components",
+        "velin-password-strength"
+      ],
+      "weight": 1.3
     },
     {
       "id": "components:velin-persist",

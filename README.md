@@ -39,7 +39,7 @@ VelinStyle is a **production CSS + Web Components framework** with **WCAG 2.2 AA
 **Best fit today:** marketing landings, docs shells, admin/SaaS starters, shop & community UIs via Atelier.  
 **Not yet:** sole primary stack for large multipage shop + enterprise admin without custom work.
 
-> **Release:** **1.2.1** (Transparency Framework + Core + Design Intelligence Foundation + Trust/Ship). Using VelinStyle does **not** certify your app — see the [a11y matrix](https://velinstyle.info/docs/getting-started/accessibility.html).
+> **Release:** **1.2.2** (Production Release — Production Builder + Atelier CLI). Using VelinStyle does **not** certify your app — see the [a11y matrix](https://velinstyle.info/docs/getting-started/accessibility.html).
 
 ---
 
@@ -54,7 +54,21 @@ VelinStyle is a **production CSS + Web Components framework** with **WCAG 2.2 AA
 | Quality gates | `scan`, `review`, `check` — catch real defects before merge |
 | AI that helps | Skills, workflows, and agent metadata — **Mensch → Framework → KI** |
 
-Compared to **Tailwind**: less class sprawl, stronger defaults for contrast and semantics.  
+### The Tailwind sprawl problem
+
+Heavy Tailwind use often turns HTML into a **class salad** — a simple button can need 10–15 utilities (`flex items-center … hover:bg-blue-700 … focus:ring-2 …`). VelinStyle still uses a `velin-` prefix, but ships **semantic, ready-made components** (plus utilities for one-off tweaks) instead of assembling every surface from atomic pieces. You get shorter markup, built-in a11y defaults, and optional blueprints / `plan` recipes — not a finished Studio product (Studio remains **planned**).
+
+```html
+<!-- Tailwind sprawl -->
+<button class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+  Save
+</button>
+
+<!-- VelinStyle -->
+<button class="velin-btn velin-btn--primary">Save</button>
+```
+
+Compared to **Tailwind**: less class sprawl, stronger defaults for contrast and semantics. See the [Migration Guide](https://velinstyle.info/docs/migration.html).  
 Compared to **Bootstrap**: modern tokens/layers, optional progressive WCs, CLI automation instead of jQuery-era chrome.
 
 ---
@@ -64,7 +78,7 @@ Compared to **Bootstrap**: modern tokens/layers, optional progressive WCs, CLI a
 | | Area | What it does |
 |---|------|----------------|
 | 🎨 | **CSS Framework** | OKLCH themes, utilities, components, lite preset for marketing budgets |
-| 🧩 | **Web Components** | 40 canonical custom elements; use CSS alone when you need no JS |
+| 🧩 | **Web Components** | 43 canonical custom elements; use CSS alone when you need no JS |
 | ⚡ | **Runtime** | Search, motion, highlight, attributes, `bootFromDOM` tree-shaking |
 | 🛠 | **CLI** | `create` · `serve` · `doctor` · `check` · `scan` · `review` · `skills` · `transparency` |
 | 🔎 | **Transparency** | Labeling + provenance (AI / trust / compliance / metadata) — beta foundation |
@@ -99,6 +113,39 @@ German Atelier hub: [atelier/index.de.html](https://velinstyle.info/atelier/inde
 
 ---
 
+## What's new in 1.2.2
+
+**Production Release** — **Build only what your project actually uses.**
+
+VelinStyle analyzes your project and creates an optimized production package instead of shipping the complete framework. This release also adds the first **Atelier CLI** (beta) and new production-ready components.
+
+### Production Builder
+
+```bash
+npx velinstyle build --production --explain
+# → ./dist/velin-production/ (CSS, JS stub, themes, icons, report)
+```
+
+- CSS only for used components · runtime only for needed Web Components
+- Themes / icons / motion only when used · size report
+
+### Atelier CLI (Beta)
+
+```bash
+npx velinstyle atelier list
+npx velinstyle atelier 24
+npx velinstyle scaffold --atelier 24
+```
+
+Atelier Library ≠ Velin Studio (Studio remains **planned**). See [`docs/guides/atelier-cli.md`](docs/guides/atelier-cli.md).
+
+### New components & improvements
+
+- `<velin-otp-input>`, `<velin-password-strength>`, `<velin-empty-state>`
+- Table severity states · dynamic overlay titles (modal / drawer / sheet)
+
+See [`RELEASE_NOTES_1.2.2.md`](RELEASE_NOTES_1.2.2.md) and [`docs/guides/production-build.md`](docs/guides/production-build.md).
+
 ## What's new in 1.2.1
 
 - **Transparency Framework (beta)** — `@birdapi/velinstyle/transparency`, `velin-transparency` bridge, claim taxonomy, CLI `transparency doctor|validate|report|export|migrate`
@@ -120,11 +167,11 @@ bun add @birdapi/velinstyle
 **CDN** (pin a version):
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.1/dist/velinstyle.min.css">
-<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.2.1/dist/velinstyle-components.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.2/dist/velinstyle.min.css">
+<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.2.2/dist/velinstyle-components.min.js"></script>
 ```
 
-> Pin **`@1.2.1`** (or `@latest` after publish). Examples above match this package version.
+> Pin **`@1.2.2`** (or `@latest` after publish). Examples above match this package version.
 
 | Export | Use |
 |--------|-----|
@@ -144,8 +191,8 @@ After clone: `npm install && npm run build` — `dist/` is generated, not commit
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.1/dist/velinstyle.min.css">
-  <script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.2.1/dist/velinstyle-components.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.2/dist/velinstyle.min.css">
+  <script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.2.2/dist/velinstyle-components.min.js"></script>
 </head>
 <body class="velin-p-6">
   <button type="button" class="velin-btn velin-btn--primary">Ship it</button>
@@ -178,7 +225,9 @@ More: [`GETTING_STARTED.md`](GETTING_STARTED.md)
 | `scan` | A11y / security / CSS / PII |
 | `review` | Design-intelligence gate (beta) |
 | `transparency` | doctor · validate · report · export · migrate (beta) |
-| `plan` | Prompt → plan JSON → render (beta) |
+| `plan` | Prompt → plan JSON → render (beta); `--atelier` Library plan (beta) |
+| `scaffold` | Prompt HTML or `--atelier` Library compose (beta) |
+| `atelier` | Pull curated Library showcase by number/id (`--format` wrappers) |
 | `skills` / `workflow` | AI skill registry & graphs (beta) |
 | `meta` | Agent bundle + `llms.txt` |
 | `wc api <tag>` | Human-readable WC API from source |
@@ -186,8 +235,12 @@ More: [`GETTING_STARTED.md`](GETTING_STARTED.md)
 ```bash
 npx @birdapi/velinstyle check . --profile marketing
 npx @birdapi/velinstyle transparency doctor . --policy examples/transparency.policy.json
+npx @birdapi/velinstyle atelier 36 -o ./velin-atelier/36-calendar
+npx @birdapi/velinstyle scaffold --atelier 04,07 -o compose.html
 npx @birdapi/velinstyle wc api velin-toast
 ```
+
+Atelier pull / compose details and **limitations** (wrappers ≠ native Blade/Vue/React; Studio planned): [`docs/guides/atelier-cli.md`](docs/guides/atelier-cli.md).
 
 ---
 
@@ -197,13 +250,15 @@ npx @birdapi/velinstyle wc api velin-toast
 
 **Design Intelligence** adds structure ordinary CSS frameworks lack: a knowledge graph seed, page/section registries, design constraints, and `plan` / `review` so pages are assembled from known patterns — then checked against profiles (`marketing` · `app` · `docs` · `ecommerce`).
 
+**Atelier compose (beta):** `scaffold --atelier` / `plan --atelier` can assemble pages from curated **Atelier Library** ids. This is Library compose — **not** Velin Studio (planned). Framework `--format` shells are wrappers only; native Blade/Vue/React blocks are planned later. See [`docs/guides/atelier-cli.md`](docs/guides/atelier-cli.md).
+
 Deep dive: [`ARCHITECTURE.md`](ARCHITECTURE.md) · [`VELINSTYLE_2030.md`](VELINSTYLE_2030.md) · Strategy (lokal, nicht im Git): [`docs/strategy/README.md`](docs/strategy/README.md)
 
 ---
 
 ## Components
 
-**40 canonical** custom elements (**42** lazy-loader entries including legacy `*-wc` aliases).
+**43 canonical** custom elements (**45** lazy-loader entries including legacy `*-wc` aliases).
 
 Philosophy: **progressive enhancement** — semantic HTML + CSS first; upgrade to a Web Component only when you need behavior (focus traps, sorting, offline search).
 
@@ -243,7 +298,7 @@ Docs: [a11y matrix](https://velinstyle.info/docs/getting-started/accessibility.h
 | Product site | [velinstyle.info/docs](https://velinstyle.info/docs/getting-started/introduction.html) | Guides, demos, reference |
 | Atelier | [velinstyle.info/atelier](https://velinstyle.info/atelier/) | Template library + product worlds |
 | Transparency | [Site guide](https://velinstyle.info/docs/guides/transparency.html) · `@birdapi/velinstyle/transparency` | Labeling + provenance |
-| Upgrade | [`UPGRADING.md`](UPGRADING.md) | 1.2.0 → 1.2.1 · 1.1 → 1.2 |
+| Upgrade | [`UPGRADING.md`](UPGRADING.md) | 1.2.1 → 1.2.2 · 1.2.0 → 1.2.1 · 1.1 → 1.2 |
 | North star | [`VELINSTYLE_2030.md`](VELINSTYLE_2030.md) | Long-term vision |
 
 ---
@@ -282,7 +337,7 @@ Humans own product intent. The framework ships reliable CSS and components. Desi
 | **Stable** | CSS · Utilities · Runtime · Web Components · CLI core · Blueprints |
 | **Beta** | Transparency Framework · Review Engine · Prompt Engine · Knowledge Graph · AI Metadata · Design Constraints |
 | **Foundation** | AI Skills · Workflow Graphs · Registries · Transparency pillars |
-| **Planned** | Velin Studio builder · Utility Engine Generator |
+| **Planned** | Velin Studio builder · Utility Engine Generator · native Blade/Vue/React blocks |
 
 ---
 
@@ -291,6 +346,7 @@ Humans own product intent. The framework ships reliable CSS and components. Desi
 | | Bootstrap | Tailwind | **VelinStyle** |
 |---|:---:|:---:|:---:|
 | HTML readability | Medium | Low | **High** |
+| Markup density | Low | High | **Controlled** |
 | Utility sprawl | Low | High | **Controlled** |
 | A11y defaults | Partial | DIY | **AAA-capable tokens** |
 | Dark mode | Manual | `dark:` everywhere | **Token swap** |

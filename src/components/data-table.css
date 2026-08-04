@@ -65,6 +65,25 @@
     text-align: center;
   }
 
+  /* Row severity (class + data-severity alias) */
+  .velin-data-table__row--danger,
+  .velin-data-table tr[data-severity="danger"] {
+    background-color: color-mix(in oklch, var(--velin-color-danger) 12%, transparent);
+    box-shadow: inset 3px 0 0 var(--velin-color-danger);
+  }
+
+  .velin-data-table__row--warning,
+  .velin-data-table tr[data-severity="warning"] {
+    background-color: color-mix(in oklch, var(--velin-color-warning) 12%, transparent);
+    box-shadow: inset 3px 0 0 var(--velin-color-warning);
+  }
+
+  .velin-data-table__row--selected,
+  .velin-data-table tr[data-severity="selected"] {
+    background-color: color-mix(in oklch, var(--velin-color-primary) 12%, transparent);
+    box-shadow: inset 3px 0 0 var(--velin-color-primary);
+  }
+
   .velin-data-table__pagination {
     display: flex;
     align-items: center;

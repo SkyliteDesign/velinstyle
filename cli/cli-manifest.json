@@ -1,5 +1,5 @@
 {
-  "version": "1.2.1",
+  "version": "1.2.2",
   "commands": [
     {
       "name": "init",
@@ -9,9 +9,15 @@
     },
     {
       "name": "build",
-      "summary": "Build custom CSS with selected layers from config",
-      "flags": ["--output", "-o", "--minify", "--preset"],
-      "example": "velinstyle build --preset lite -o ./lite.css"
+      "summary": "Build custom CSS with selected layers from config, or production output with --production",
+      "flags": ["--output", "-o", "--out", "--minify", "--preset", "--production", "--explain", "--watch", "--report", "--safelist"],
+      "example": "velinstyle build --production --explain -o ./dist/velin-production"
+    },
+    {
+      "name": "production",
+      "summary": "Content-aware production builder (CSS/JS/themes/icons/fonts/motion + report)",
+      "flags": ["--out", "-o", "--explain", "--watch", "--report", "--safelist", "--no-js", "--no-icons", "--no-themes", "--no-motion", "--no-minify"],
+      "example": "velinstyle production . --explain --report ./report.json"
     },
     {
       "name": "themes",
@@ -78,16 +84,23 @@
     },
     {
       "name": "scaffold",
-      "summary": "Plan-first page HTML or recipe fragment from natural language",
-      "flags": ["--output", "-o", "--json"],
+      "summary": "Plan-first page HTML, recipe fragment, or Atelier Library compose (--atelier, beta)",
+      "flags": ["--output", "-o", "--json", "--atelier", "--from", "--base-url"],
       "subcommands": ["list-intents"],
-      "example": "velinstyle scaffold \"Steuerberater Landingpage mit Kontakt\""
+      "example": "velinstyle scaffold --atelier 04,07 -o compose.html --from ./atelier/library"
     },
     {
       "name": "plan",
-      "summary": "Emit page plan JSON from a prompt (no HTML)",
-      "flags": ["--output", "-o", "--json"],
-      "example": "velinstyle plan \"SaaS landing with pricing\""
+      "summary": "Emit page plan JSON from a prompt or --atelier Library ids (beta)",
+      "flags": ["--output", "-o", "--json", "--atelier"],
+      "example": "velinstyle plan --atelier 04,07"
+    },
+    {
+      "name": "atelier",
+      "summary": "Pull curated Atelier Library showcase by number/id; blade/vue/react = wrappers only",
+      "flags": ["--output", "-o", "--format", "--from", "--base-url", "--rewrite-vendor"],
+      "subcommands": ["list"],
+      "example": "velinstyle atelier 36 -o ./velin-atelier/36-calendar --format html"
     },
     {
       "name": "review",

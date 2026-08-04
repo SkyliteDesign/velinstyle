@@ -1,6 +1,6 @@
 {
   "wcagLevel": "AAA",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "components": {
     "velin-accordion": {
       "status": "pass",
@@ -111,7 +111,8 @@
       "status": "pass",
       "roles": ["dialog"],
       "keyboard": "Escape, Tab trap",
-      "requiredAttributes": []
+      "requiredAttributes": [],
+      "notes": "Reactive title attribute + slot=title."
     },
     "velin-dropdown": {
       "status": "pass",
@@ -122,6 +123,11 @@
       "status": "pass",
       "roles": ["button"],
       "requiredAttributes": ["aria-label"]
+    },
+    "velin-empty-state": {
+      "status": "pass",
+      "roles": ["status"],
+      "notes": "heading/description attributes or slots; actions slot for CTAs."
     },
     "velin-form-summary": {
       "status": "pass",
@@ -159,7 +165,19 @@
       "status": "pass",
       "roles": ["dialog"],
       "keyboard": "Escape, Tab trap",
-      "requiredAttributes": []
+      "requiredAttributes": [],
+      "notes": "Reactive title attribute + slot=title; footer slot."
+    },
+    "velin-otp-input": {
+      "status": "pass",
+      "roles": ["group"],
+      "keyboard": "Digits, arrows, backspace, paste",
+      "notes": "autocomplete one-time-code on first digit."
+    },
+    "velin-password-strength": {
+      "status": "pass",
+      "roles": ["progressbar"],
+      "notes": "Heuristic meter; aria-live label; for= links to password input."
     },
     "velin-persist": {
       "status": "pass",
@@ -215,7 +233,8 @@
     "velin-sheet": {
       "status": "pass",
       "roles": ["dialog"],
-      "keyboard": "Escape, Tab trap"
+      "keyboard": "Escape, Tab trap",
+      "notes": "Reactive title/label + slot=title."
     },
     "velin-sparkline": {
       "status": "pass",

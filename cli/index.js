@@ -92,6 +92,8 @@ function help() {
   ${C.bold('Usage:')}
     velinstyle init                 Create velinstyle.config.js
     velinstyle build                Build custom CSS with selected layers
+    velinstyle build --production   Content-aware production output (CSS/JS/themes/icons)
+    velinstyle production [path]    Alias for build --production
     velinstyle themes               List available themes
     velinstyle add <name>           Add a single component CSS
     velinstyle icons <subcommand>   Manage icon providers
@@ -105,7 +107,11 @@ function help() {
     velinstyle transparency <sub>   Transparency Framework: doctor|validate|report|export|migrate
     velinstyle check [path]         doctor + blueprint --strict + scan + review + transparency
     velinstyle scaffold "<prompt>"  Plan-first page HTML or recipe fragment
+    velinstyle scaffold --atelier 04,07  Compose Atelier Library ids (beta)
     velinstyle plan "<prompt>"      Emit page plan JSON (no HTML)
+    velinstyle plan --atelier 04,07 Emit plan JSON for Atelier ids (beta)
+    velinstyle atelier <num|id>     Pull curated Atelier Library showcase
+    velinstyle atelier list         List curated Library numbers/ids
     velinstyle review [file|html]   Design / a11y / SEO / conversion review gate
     velinstyle wc api <tag>         Human-readable Web Component API from source
     velinstyle layout <sub>         Responsive layout audit and fixes
@@ -147,9 +153,17 @@ function help() {
     velinstyle scaffold "<prompt>"  Plan → render → review for pages; recipes for fragments
     velinstyle scaffold list-intents  Show recipe intent keywords
     velinstyle scaffold "<prompt>" -o out.html [--json]
+    velinstyle scaffold --atelier 04,07 [-o page.html] [--from <library>]  Compose Library showcases (beta)
+
+  ${C.bold('Atelier Library pull (1.2.x):')}
+    velinstyle atelier list
+    velinstyle atelier 36 [-o dir] [--format html|blade|vue|react] [--from <library>] [--base-url <url>]
+    Limitation: blade/vue/react = integration wrappers around vanilla assets (not native rewrites).
+    Native framework blocks / Velin Studio Builder = planned. Atelier ≠ Studio.
 
   ${C.bold('Plan / Review (1.2.x):')}
     velinstyle plan "<prompt>" [--json] [-o plan.json]
+    velinstyle plan --atelier 04,07 [-o plan.json]  Atelier compose plan (beta)
     velinstyle review <file.html> [--json] [--prompt "..."]
 
   ${C.bold('Transparency (1.2.1):')}
@@ -169,6 +183,16 @@ function help() {
     velinstyle perf audit [path|file] Report CLS, lazy-load, script defer issues
     velinstyle perf suggest [path|file] Same as audit with fix hints
     velinstyle perf fix [path|file]   Apply safe fixes (--write)
+
+  ${C.bold('Production Builder (1.2.2):')}
+    velinstyle build --production [path]
+    velinstyle production [path]
+      --out, -o <dir>          Default: ./dist/velin-production
+      --explain                Show removed CSS/themes/icons + reasons
+      --watch                  Rebuild on content change
+      --report <file>          Write JSON/Markdown report
+      --safelist <list|file>   Extra classes / themes / icons / CSS files
+      --no-js --no-icons --no-themes --no-motion --no-minify
 
   ${C.bold('Tokens:')}
     velinstyle tokens build [--input <path>] [--output, -o <file>]
@@ -310,6 +334,13 @@ export default {
 // ── Build ────────────────────────────────────────────────────────────────────
 
 async function build() {
+  if (hasFlag('--production')) {
+    const { runProduction } = await import('./production/run.js');
+    const rest = args.slice(1).filter((a) => a !== '--production');
+    await runProduction({ args: rest, helpers: { getArg, hasFlag, C } });
+    return;
+  }
+
   const configPath = resolve('velinstyle.config.js');
   let config;
 
@@ -787,6 +818,60 @@ async function prefixCmd() {
   }
 }
 
+async function atelierCmd() {
+  const sub = args[1];
+  const {
+    listAtelierEntries,
+    pullAtelier,
+  } = await import('./atelier.js');
+
+  if (!sub || sub === '--help' || sub === '-h') {
+    console.log(`Usage: velinstyle atelier list
+       velinstyle atelier <num|id> [-o dir] [--format html|blade|vue|react]
+         [--from <library-root>] [--base-url <url>] [--rewrite-vendor <path>]
+
+  Pull a curated Atelier Library showcase (e.g. 36 → 36-calendar).
+  Limitation: --format blade|vue|react writes integration shells only (not native rewrites).
+  Velin Studio Builder and native framework blocks are planned — not shipped.`);
+    return;
+  }
+
+  if (sub === 'list') {
+    const r = listAtelierEntries();
+    if (!r.ok) {
+      console.log(C.red(r.error));
+      process.exit(1);
+    }
+    console.log(`\n  ${C.bold('Atelier Library (curated)')} · ${r.items.length} templates\n`);
+    for (const it of r.items) {
+      console.log(`    ${C.cyan(it.num.padStart(3))}  ${it.id}  ${C.dim(it.title || '')}`);
+    }
+    console.log(`\n  ${C.dim('Example: velinstyle atelier 36 -o ./velin-atelier/36-calendar')}\n`);
+    return;
+  }
+
+  const out = getArg('--output', '-o');
+  const format = getArg('--format') || 'html';
+  const from = getArg('--from') || process.env.VELINSTYLE_ATELIER_ROOT || null;
+  const baseUrl = getArg('--base-url');
+  const rewriteVendor = getArg('--rewrite-vendor');
+
+  const r = await pullAtelier(sub, {
+    output: out || undefined,
+    format,
+    from: from || undefined,
+    baseUrl: baseUrl || undefined,
+    rewriteVendor: rewriteVendor || undefined,
+  });
+  if (!r.ok) {
+    console.log(C.red(r.error));
+    process.exit(1);
+  }
+  console.log(C.green(`Pulled ${r.entry.id} → ${r.path} (format: ${r.format})`));
+  console.log(C.dim(`  source: ${r.source}`));
+  console.log(C.dim('  Limitation: blade/vue/react = wrappers; Studio/native rewrites planned.'));
+}
+
 async function scaffoldCmd() {
   const sub = args[1];
   const { scaffoldFromPrompt, listIntents } = await import('./scaffold.js');
@@ -799,6 +884,38 @@ async function scaffoldCmd() {
     console.log('');
     return;
   }
+
+  const atelierList = getArg('--atelier');
+  if (atelierList) {
+    const { composeAtelierPage } = await import('./atelier.js');
+    const out = getArg('--output', '-o') || resolve('velin-atelier/compose.html');
+    const from = getArg('--from') || process.env.VELINSTYLE_ATELIER_ROOT || null;
+    const baseUrl = getArg('--base-url');
+    const r = await composeAtelierPage(atelierList, {
+      output: out,
+      from: from || undefined,
+      baseUrl: baseUrl || undefined,
+    });
+    if (!r.ok) {
+      console.log(C.red(r.error));
+      process.exit(1);
+    }
+    if (hasFlag('--json')) {
+      console.log(JSON.stringify({
+        ok: true,
+        mode: r.mode,
+        path: r.path,
+        entries: r.entries,
+        planSections: r.planSections,
+      }, null, 2));
+    } else {
+      console.log(C.green(`Wrote Atelier compose (beta) → ${r.path}`));
+      console.log(C.dim(`  ids: ${r.entries.map((e) => e.id).join(', ')}`));
+      console.log(C.dim('  Beta: Library compose — not Velin Studio. Wrappers ≠ native rewrites.'));
+    }
+    return;
+  }
+
   const promptParts = [];
   let i = 1;
   while (i < args.length) {
@@ -810,6 +927,7 @@ async function scaffoldCmd() {
   const prompt = promptParts.join(' ').trim() || sub;
   if (!prompt || prompt === 'list-intents') {
     console.log('Usage: velinstyle scaffold "<description>" [-o file.html] [--json]');
+    console.log('       velinstyle scaffold --atelier 04,07 [-o page.html] [--from <library>]');
     return;
   }
   const r = scaffoldFromPrompt(prompt);
@@ -836,6 +954,24 @@ async function scaffoldCmd() {
 }
 
 async function planCmd() {
+  const atelierList = getArg('--atelier');
+  if (atelierList) {
+    const { planFromAtelierList } = await import('./atelier.js');
+    const payload = planFromAtelierList(atelierList, { prompt: args.slice(1).filter((a) => !a.startsWith('-')).join(' ') });
+    if (!payload.ok) {
+      console.log(C.red(payload.error));
+      process.exit(1);
+    }
+    const out = getArg('--output', '-o');
+    if (out) {
+      writeFileSync(resolve(out), JSON.stringify(payload, null, 2), 'utf-8');
+      console.log(C.green(`Wrote Atelier plan (beta) ${resolve(out)} (${payload.plan.sections.length} sections)`));
+      return;
+    }
+    console.log(JSON.stringify(payload, null, 2));
+    return;
+  }
+
   const promptParts = [];
   let i = 1;
   while (i < args.length) {
@@ -847,6 +983,7 @@ async function planCmd() {
   const prompt = promptParts.join(' ').trim();
   if (!prompt) {
     console.log('Usage: velinstyle plan "<description>" [--json] [-o plan.json]');
+    console.log('       velinstyle plan --atelier 04,07 [-o plan.json]');
     return;
   }
   const { analyzePrompt, buildPlan } = await import('./prompt-engine.js');
@@ -887,7 +1024,10 @@ async function reviewCmd() {
     console.log(JSON.stringify(report, null, 2));
   } else {
     console.log(`\n  ${C.bold('Review gate:')} ${report.gate}  ${C.dim(`profile ${report.profile} · promptScore ${report.promptScore}`)}`);
-    console.log(C.dim(`  design ${report.scores.design} · a11y ${report.scores.accessibility} · seo ${report.scores.seo} · perf ${report.scores.performance} · conversion ${report.scores.conversion}`));
+    console.log(C.dim(`  design ${report.scores.design} · a11y ${report.scores.accessibility} · seo ${report.scores.seo} · perf ${report.scores.performance} · conversion ${report.scores.conversion} · opt ${report.scores.optimization ?? '—'}`));
+    if (report.optimization) {
+      console.log(C.dim(`  optimization · unused themes ${report.optimization.unusedThemes} · WC tags ${report.optimization.componentTags} · class tokens ${report.optimization.classTokens}`));
+    }
     if (report.issues.length) {
       console.log(`\n  ${C.bold('Issues:')}`);
       for (const issue of report.issues) {
@@ -1206,7 +1346,7 @@ function suggestCommand(unknown) {
   const names = [
     'init', 'build', 'themes', 'add', 'icons', 'blueprint', 'create', 'serve', 'doctor', 'check',
     'validate', 'tokens', 'scan', 'prefix', 'scaffold', 'plan', 'review', 'transparency', 'layout', 'perf',
-    'docs', 'documentation', 'meta', 'search', 'skills', 'workflow', 'wc',
+    'docs', 'documentation', 'meta', 'search', 'skills', 'workflow', 'wc', 'production', 'atelier',
   ];
   const q = String(unknown || '').toLowerCase();
   function editDistance(a, b) {
@@ -1253,7 +1393,12 @@ const resolvedCommand = ALIASES[command] || command;
 
 switch (resolvedCommand) {
   case 'init': init(); break;
-  case 'build': build(); break;
+  case 'build': await build(); break;
+  case 'production': {
+    const { runProduction } = await import('./production/run.js');
+    await runProduction({ args: args.slice(1), helpers: { getArg, hasFlag, C } });
+    break;
+  }
   case 'themes': themes(); break;
   case 'add': add(); break;
   case 'icons': icons(); break;
@@ -1267,6 +1412,7 @@ switch (resolvedCommand) {
   case 'prefix': await prefixCmd(); break;
   case 'scaffold': await scaffoldCmd(); break;
   case 'plan': await planCmd(); break;
+  case 'atelier': await atelierCmd(); break;
   case 'review': await reviewCmd(); break;
   case 'transparency': {
     const { transparencyCmd } = await import('./transparency.js');

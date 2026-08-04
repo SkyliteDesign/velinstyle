@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 
 const COMPONENTS = [
-  { tag: 'velin-modal', module: '../../components/velin-modal.js', observedAttrs: ['open'] },
-  { tag: 'velin-drawer', module: '../../components/velin-drawer.js', observedAttrs: ['open'] },
+  { tag: 'velin-modal', module: '../../components/velin-modal.js', observedAttrs: ['open', 'title'] },
+  { tag: 'velin-drawer', module: '../../components/velin-drawer.js', observedAttrs: ['open', 'title'] },
   { tag: 'velin-tabs', module: '../../components/velin-tabs.js', observedAttrs: [] },
   { tag: 'velin-accordion', module: '../../components/velin-accordion.js', observedAttrs: [] },
   { tag: 'velin-dropdown', module: '../../components/velin-dropdown.js', observedAttrs: ['open'] },
@@ -24,7 +24,7 @@ const COMPONENTS = [
   { tag: 'velin-persist', module: '../../components/velin-persist.js', observedAttrs: [] },
   { tag: 'velin-combobox', module: '../../components/velin-combobox.js', observedAttrs: ['open', 'aria-label'] },
   { tag: 'velin-bottom-nav', module: '../../components/velin-bottom-nav.js', observedAttrs: ['aria-label', 'current'] },
-  { tag: 'velin-sheet', module: '../../components/velin-sheet.js', observedAttrs: ['open'] },
+  { tag: 'velin-sheet', module: '../../components/velin-sheet.js', observedAttrs: ['open', 'title', 'label'] },
   { tag: 'velin-segmented-control', module: '../../components/velin-segmented-control.js', observedAttrs: ['aria-label'] },
   { tag: 'velin-rating', module: '../../components/velin-rating.js', observedAttrs: ['value'] },
   { tag: 'velin-menubar', module: '../../components/velin-menubar.js', observedAttrs: [] },
@@ -39,14 +39,17 @@ const COMPONENTS = [
   { tag: 'velin-secure-field', module: '../../components/velin-secure-field.js', observedAttrs: ['type', 'name', 'label', 'mode', 'autocomplete'] },
   { tag: 'velin-data-table', module: '../../components/velin-data-table.js', observedAttrs: ['page-size', 'filter-input', 'empty-text', 'label'] },
   { tag: 'velin-form-summary', module: '../../components/velin-form-summary.js', observedAttrs: ['for', 'heading'] },
+  { tag: 'velin-otp-input', module: '../../components/velin-otp-input.js', observedAttrs: ['length', 'value', 'disabled', 'name', 'autocomplete', 'label'] },
+  { tag: 'velin-password-strength', module: '../../components/velin-password-strength.js', observedAttrs: ['for', 'value', 'label'] },
+  { tag: 'velin-empty-state', module: '../../components/velin-empty-state.js', observedAttrs: ['heading', 'description'] },
 ];
 
 const CONTRACT_TAGS = [
   'velin-accordion', 'velin-announcer', 'velin-bottom-nav', 'velin-carousel', 'velin-code-block',
   'velin-collapse', 'velin-combobox', 'velin-command', 'velin-copy', 'velin-countdown', 'velin-counter',
-  'velin-data-table', 'velin-dialog', 'velin-drawer', 'velin-dropdown', 'velin-email', 'velin-form-summary',
+  'velin-data-table', 'velin-dialog', 'velin-drawer', 'velin-dropdown', 'velin-email', 'velin-empty-state', 'velin-form-summary',
   'velin-icon', 'velin-lightbox',
-  'velin-live-dot', 'velin-menubar', 'velin-modal', 'velin-persist', 'velin-popover', 'velin-progress-ring',
+  'velin-live-dot', 'velin-menubar', 'velin-modal', 'velin-otp-input', 'velin-password-strength', 'velin-persist', 'velin-popover', 'velin-progress-ring',
   'velin-rating', 'velin-scroll-top', 'velin-scrollspy', 'velin-search', 'velin-secure-field',
   'velin-segmented-control', 'velin-sheet', 'velin-sparkline', 'velin-stepper', 'velin-tabs',
   'velin-theme-toggle', 'velin-toast', 'velin-tooltip',
@@ -136,8 +139,29 @@ describe('velin-modal', () => {
     const el = document.createElement('velin-modal');
     el.setAttribute('title', 'My Title');
     document.body.appendChild(el);
-    const heading = el.shadowRoot.querySelector('.title');
-    expect(heading.textContent).toBe('My Title');
+    expect(el.shadowRoot.querySelector('.title-fallback').textContent).toBe('My Title');
+    el.remove();
+  });
+
+  it('updates the title after connect', () => {
+    const el = document.createElement('velin-modal');
+    el.setAttribute('title', 'First');
+    document.body.appendChild(el);
+    el.setAttribute('title', 'Second');
+    expect(el.shadowRoot.querySelector('.title-fallback').textContent).toBe('Second');
+    el.remove();
+  });
+
+  it('supports a title slot', async () => {
+    const el = document.createElement('velin-modal');
+    document.body.appendChild(el);
+    const title = document.createElement('span');
+    title.slot = 'title';
+    title.textContent = 'Slotted Title';
+    el.appendChild(title);
+    await Promise.resolve();
+    const dialog = el.shadowRoot.querySelector('[role="dialog"]');
+    expect(dialog.getAttribute('aria-label')).toBe('Slotted Title');
     el.remove();
   });
 
@@ -160,6 +184,15 @@ describe('velin-drawer', () => {
     expect(dialog).not.toBeNull();
     expect(dialog.getAttribute('aria-modal')).toBe('true');
     expect(dialog.getAttribute('aria-labelledby')).toBe('velin-drawer-title');
+    el.remove();
+  });
+
+  it('updates the title after connect', () => {
+    const el = document.createElement('velin-drawer');
+    el.setAttribute('title', 'A');
+    document.body.appendChild(el);
+    el.setAttribute('title', 'B');
+    expect(el.shadowRoot.querySelector('.title-fallback').textContent).toBe('B');
     el.remove();
   });
 

@@ -8,7 +8,7 @@ Primary integration path for VelinStyle: **no native Vue/Angular/Svelte adapter 
 ## 1. CSS + optional JS
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@birdapi/velinstyle@1.2.1/dist/velinstyle.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@birdapi/velinstyle@1.2.2/dist/velinstyle.min.css">
 ```
 
 ## 2. Register components
@@ -16,7 +16,7 @@ Primary integration path for VelinStyle: **no native Vue/Angular/Svelte adapter 
 ### Full bundle (demos / quick start)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@birdapi/velinstyle@1.2.1/dist/velinstyle-components.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@birdapi/velinstyle@1.2.2/dist/velinstyle-components.iife.js"></script>
 ```
 
 ### ESM tree-shake / selective register

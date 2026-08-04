@@ -225,6 +225,43 @@ export function reviewHtml(html, ctx = {}) {
   const errors = issues.filter((i) => i.severity === 'error').length;
   const warnings = issues.filter((i) => i.severity === 'warning').length;
 
+  // Optimization heuristics (soft) — full vendor without production output hints
+  const usesFullCss = /velinstyle\.min\.css|velinstyle\.css/i.test(text) && !/velin-production/i.test(text);
+  const usesFullIife = /velinstyle-components\.min\.js/i.test(text);
+  const unusedThemeLinks = [...text.matchAll(/themes\/([a-z0-9-]+)\.min\.css/gi)]
+    .map((m) => m[1].toLowerCase());
+  const themeAttrs = [...text.matchAll(/data-velin-theme\s*=\s*["']([^"']+)["']/gi)]
+    .flatMap((m) => m[1].toLowerCase().split(/[\s,|]+/));
+  const unusedThemes = unusedThemeLinks.filter((t) => themeAttrs.length && !themeAttrs.includes(t));
+
+  if (usesFullCss && usesFullIife) {
+    issues.push({
+      code: 'optimization.full-bundle',
+      severity: 'warning',
+      message: 'Full CSS + components IIFE without production output',
+      fix: 'Run `velinstyle build --production` and link dist/velin-production assets for publish.',
+    });
+  } else if (usesFullCss) {
+    issues.push({
+      code: 'optimization.full-css',
+      severity: 'warning',
+      message: 'Full VelinStyle CSS bundle linked',
+      fix: 'Prefer production CSS from `velinstyle production` for go-live.',
+    });
+  }
+  if (unusedThemes.length) {
+    issues.push({
+      code: 'optimization.unused-themes',
+      severity: 'warning',
+      message: `${unusedThemes.length} theme stylesheet(s) not referenced by data-velin-theme`,
+      fix: `Remove unused theme links (${unusedThemes.slice(0, 5).join(', ')}) or run production theme trim.`,
+    });
+  }
+
+  const optIssues = issues.filter((i) => i.code.startsWith('optimization'));
+  const unusedComponentHint = [...text.matchAll(/<(velin-[a-z0-9-]+)\b/gi)].length;
+  const classHits = [...text.matchAll(/\bvelin-[\w:-]+\b/g)].length;
+
   const score = (base, penalty) => Math.max(0, Math.round((base - penalty) * 10) / 10);
 
   let scores = {
@@ -234,6 +271,7 @@ export function reviewHtml(html, ctx = {}) {
     performance: score(10, issues.filter((i) => i.code.startsWith('perf')).length * 2),
     conversion: score(10, issues.filter((i) => i.code.startsWith('conversion')).length * 2),
     visual: score(9, issues.filter((i) => i.code.startsWith('design')).length * 1.2),
+    optimization: score(10, optIssues.length * 2 + (unusedThemes.length ? Math.min(3, unusedThemes.length * 0.5) : 0)),
   };
 
   if (thin) {
@@ -250,10 +288,13 @@ export function reviewHtml(html, ctx = {}) {
     if (profile === 'app') scores.seo = Math.min(scores.seo, 7);
   }
 
+  const finalErrors = issues.filter((i) => i.severity === 'error').length;
+  const finalWarnings = issues.filter((i) => i.severity === 'warning').length;
+
   const avg = Object.values(scores).reduce((a, b) => a + b, 0) / Object.values(scores).length;
   const promptScore = Math.max(0, Math.min(10, avg - (ctx.plan?.warnings?.length ? 1 : 0)));
 
-  const gate = errors > 0 ? 'fail' : warnings > 0 ? 'warn' : 'pass';
+  const gate = finalErrors > 0 ? 'fail' : finalWarnings > 0 ? 'warn' : 'pass';
 
   return {
     version: 1,
@@ -262,6 +303,12 @@ export function reviewHtml(html, ctx = {}) {
     scores,
     issues,
     gate,
+    optimization: {
+      fullBundle: Boolean(usesFullCss && usesFullIife),
+      unusedThemes: unusedThemes.length,
+      componentTags: unusedComponentHint,
+      classTokens: classHits,
+    },
   };
 }
 

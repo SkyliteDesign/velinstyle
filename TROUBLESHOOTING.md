@@ -22,7 +22,7 @@ node path/to/velinstyle/cli/index.js --help
 
 ### `create` / `check` / `skills` unknown on npm 1.1.0
 
-Those commands are part of the **1.2 ship surface**. Until publish, use this repo’s CLI. After publish, install `@birdapi/velinstyle@1.2.1` (or later).
+Those commands are part of the **1.2 ship surface**. Until publish, use this repo’s CLI. After publish, install `@birdapi/velinstyle@1.2.2` (or later).
 
 ### Windows: config import fails / weird path errors
 

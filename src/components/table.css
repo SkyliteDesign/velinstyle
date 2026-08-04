@@ -55,12 +55,22 @@
   }
 
   /* Row color variants */
-  .velin-table-primary { background-color: color-mix(in oklch, var(--velin-color-primary) 10%, transparent); }
-  .velin-table-secondary { background-color: color-mix(in oklch, var(--velin-color-secondary) 10%, transparent); }
-  .velin-table-success { background-color: color-mix(in oklch, var(--velin-color-success) 10%, transparent); }
-  .velin-table-warning { background-color: color-mix(in oklch, var(--velin-color-warning) 10%, transparent); }
-  .velin-table-danger { background-color: color-mix(in oklch, var(--velin-color-danger) 10%, transparent); }
-  .velin-table-info { background-color: color-mix(in oklch, var(--velin-color-info) 10%, transparent); }
+  .velin-table-primary,
+  .velin-table--primary { background-color: color-mix(in oklch, var(--velin-color-primary) 10%, transparent); }
+  .velin-table-secondary,
+  .velin-table--secondary { background-color: color-mix(in oklch, var(--velin-color-secondary) 10%, transparent); }
+  .velin-table-success,
+  .velin-table--success { background-color: color-mix(in oklch, var(--velin-color-success) 10%, transparent); }
+  .velin-table-warning,
+  .velin-table--warning { background-color: color-mix(in oklch, var(--velin-color-warning) 10%, transparent); }
+  .velin-table-danger,
+  .velin-table--danger { background-color: color-mix(in oklch, var(--velin-color-danger) 10%, transparent); }
+  .velin-table-info,
+  .velin-table--info { background-color: color-mix(in oklch, var(--velin-color-info) 10%, transparent); }
+  .velin-table--selected {
+    background-color: color-mix(in oklch, var(--velin-color-primary) 12%, transparent);
+    box-shadow: inset 3px 0 0 var(--velin-color-primary);
+  }
 
   /* Caption top */
   .velin-table .velin-caption-top {

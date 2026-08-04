@@ -2,12 +2,13 @@
 
 # CLI commands
 
-VelinStyle CLI v1.2.1. Run `velinstyle --help` for full usage.
+VelinStyle CLI v1.2.2. Run `velinstyle --help` for full usage.
 
 | Command | Summary | Subcommands | Flags | Example |
 | --- | --- | --- | --- | --- |
 | `init` | Create velinstyle.config.js, optional vendor copy, and starter HTML with reveal/sprite defaults | — | — | `velinstyle init` |
-| `build` | Build custom CSS with selected layers from config | — | --output, -o, --minify, --preset | `velinstyle build --preset lite -o ./lite.css` |
+| `build` | Build custom CSS with selected layers from config, or production output with --production | — | --output, -o, --out, --minify, --preset, --production, --explain, --watch, --report, --safelist | `velinstyle build --production --explain -o ./dist/velin-production` |
+| `production` | Content-aware production builder (CSS/JS/themes/icons/fonts/motion + report) | — | --out, -o, --explain, --watch, --report, --safelist, --no-js, --no-icons, --no-themes, --no-motion, --no-minify | `velinstyle production . --explain --report ./report.json` |
 | `themes` | List available built-in themes | — | — | `velinstyle themes` |
 | `add` | Add a single component CSS file to your project | — | — | `velinstyle add button` |
 | `icons` | Manage icon providers (list, add, remove, build) | list, add, remove, build | --icons, --variant | `velinstyle icons add lucide --icons menu,search` |
@@ -18,8 +19,9 @@ VelinStyle CLI v1.2.1. Run `velinstyle --help` for full usage.
 | `serve` | Serve a directory over HTTP (default port 4173) | — | --port | `velinstyle serve . --port 4173` |
 | `doctor` | Check dist assets, themes, config, icons, and Windows ESM import hints | — | — | `velinstyle doctor` |
 | `check` | Aggregate gate: doctor + blueprint --strict + scan + review (alias: validate) | — | --json, --sarif, --profile | `velinstyle check . --profile marketing` |
-| `scaffold` | Plan-first page HTML or recipe fragment from natural language | list-intents | --output, -o, --json | `velinstyle scaffold "Steuerberater Landingpage mit Kontakt"` |
-| `plan` | Emit page plan JSON from a prompt (no HTML) | — | --output, -o, --json | `velinstyle plan "SaaS landing with pricing"` |
+| `scaffold` | Plan-first page HTML, recipe fragment, or Atelier Library compose (--atelier, beta) | list-intents | --output, -o, --json, --atelier, --from, --base-url | `velinstyle scaffold --atelier 04,07 -o compose.html --from ./atelier/library` |
+| `plan` | Emit page plan JSON from a prompt or --atelier Library ids (beta) | — | --output, -o, --json, --atelier | `velinstyle plan --atelier 04,07` |
+| `atelier` | Pull curated Atelier Library showcase by number/id; blade/vue/react = wrappers only | list | --output, -o, --format, --from, --base-url, --rewrite-vendor | `velinstyle atelier 36 -o ./velin-atelier/36-calendar --format html` |
 | `review` | Design / a11y / SEO / performance / conversion review gate | — | --json, --prompt, --profile | `velinstyle review out.html --profile marketing` |
 | `wc` | Inspect Web Component APIs from source | api | — | `velinstyle wc api velin-toast` |
 | `layout` | Responsive layout audit (flex, grid, viewport) | audit, suggest, fix | --json, --write, --dry-run | `velinstyle layout suggest index.html` |

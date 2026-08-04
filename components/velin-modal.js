@@ -1,9 +1,19 @@
 import { trapFocus, saveFocus, restoreFocus, getFocusableElements, setBackgroundInert, clearBackgroundInert } from './focus-manager.js';
-import { escapeHTML } from './sanitize.js';
 
 const styles = `
   :host {
     display: contents;
+  }
+  .sr-only {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
   .overlay {
     position: fixed;
@@ -87,7 +97,7 @@ const styles = `
 
 class VelinModal extends HTMLElement {
   static get observedAttributes() {
-    return ['open'];
+    return ['open', 'title'];
   }
 
   constructor() {
@@ -95,20 +105,20 @@ class VelinModal extends HTMLElement {
     this.attachShadow({ mode: 'open', delegatesFocus: true });
     this._previouslyFocused = null;
     this._onKeydown = this._onKeydown.bind(this);
+    this._onTitleSlot = this._onTitleSlot.bind(this);
   }
 
   connectedCallback() {
-    const title = (this.getAttribute('title') || '').trim();
-    const safeTitle = escapeHTML(title);
-    const dialogLabel = title
-      ? 'aria-labelledby="velin-modal-title"'
-      : `aria-label="${escapeHTML(this.getAttribute('aria-label') || 'Dialog')}"`;
+    if (this.shadowRoot.querySelector('.dialog')) return;
     this.shadowRoot.innerHTML = `
       <style>${styles}</style>
       <div class="overlay" part="overlay">
-        <div class="dialog" role="dialog" aria-modal="true" ${dialogLabel} part="dialog">
+        <div class="dialog" role="dialog" aria-modal="true" part="dialog">
           <div class="header" part="header">
-            <h2 class="title" id="velin-modal-title"${title ? '' : ' class="velin-sr-only"'}>${safeTitle || 'Dialog'}</h2>
+            <h2 class="title" id="velin-modal-title" part="title">
+              <slot name="title"></slot>
+              <span class="title-fallback"></span>
+            </h2>
             <button class="close-btn" aria-label="Close" part="close">&#215;</button>
           </div>
           <div class="body" part="body"><slot></slot></div>
@@ -121,16 +131,16 @@ class VelinModal extends HTMLElement {
     this.shadowRoot.querySelector('.overlay').addEventListener('click', (e) => {
       if (e.target === e.currentTarget) this.close();
     });
+    this.shadowRoot.querySelector('slot[name="title"]').addEventListener('slotchange', this._onTitleSlot);
+    this._syncTitle();
   }
 
-  attributeChangedCallback(name, oldVal, newVal) {
+  attributeChangedCallback(name) {
     if (name === 'open') {
-      if (newVal !== null) {
-        this._open();
-      } else {
-        this._close();
-      }
+      if (this.hasAttribute('open')) this._open();
+      else this._close();
     }
+    if (name === 'title') this._syncTitle();
   }
 
   open() {
@@ -140,6 +150,57 @@ class VelinModal extends HTMLElement {
   close() {
     this.removeAttribute('open');
     this.dispatchEvent(new CustomEvent('velin-close', { bubbles: true }));
+  }
+
+  _syncTitle() {
+    const fallback = this.shadowRoot?.querySelector('.title-fallback');
+    const heading = this.shadowRoot?.querySelector('.title');
+    const dialog = this.shadowRoot?.querySelector('[role="dialog"]');
+    if (!fallback || !heading || !dialog) return;
+
+    if (this._hasTitleSlot()) {
+      fallback.hidden = true;
+      heading.classList.remove('sr-only');
+      return;
+    }
+
+    fallback.hidden = false;
+    const title = (this.getAttribute('title') || '').trim();
+    fallback.textContent = title || 'Dialog';
+    heading.classList.toggle('sr-only', !title);
+    if (title) {
+      dialog.setAttribute('aria-labelledby', 'velin-modal-title');
+      dialog.removeAttribute('aria-label');
+    } else {
+      dialog.removeAttribute('aria-labelledby');
+      dialog.setAttribute('aria-label', this.getAttribute('aria-label') || 'Dialog');
+    }
+  }
+
+  _hasTitleSlot() {
+    const slot = this.shadowRoot?.querySelector('slot[name="title"]');
+    if (!slot) return false;
+    return slot.assignedNodes({ flatten: true }).some((n) => {
+      if (n.nodeType === Node.TEXT_NODE) return Boolean(n.textContent.trim());
+      return n.nodeType === Node.ELEMENT_NODE;
+    });
+  }
+
+  _onTitleSlot() {
+    const slot = this.shadowRoot?.querySelector('slot[name="title"]');
+    const dialog = this.shadowRoot?.querySelector('[role="dialog"]');
+    const heading = this.shadowRoot?.querySelector('.title');
+    const fallback = this.shadowRoot?.querySelector('.title-fallback');
+    if (!slot || !dialog || !heading || !fallback) return;
+    if (this._hasTitleSlot()) {
+      fallback.hidden = true;
+      heading.classList.remove('sr-only');
+      dialog.removeAttribute('aria-labelledby');
+      const label = slot.assignedNodes({ flatten: true }).map((n) => n.textContent || '').join(' ').trim();
+      if (label) dialog.setAttribute('aria-label', label);
+    } else {
+      this._syncTitle();
+    }
   }
 
   _open() {

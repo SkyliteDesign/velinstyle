@@ -9,7 +9,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export const REGISTERED_COMMANDS = [
   'init', 'build', 'themes', 'add', 'icons', 'blueprint', 'create', 'serve', 'doctor', 'check', 'tokens',
   'scan', 'prefix', 'scaffold', 'plan', 'review', 'layout', 'perf', 'docs', 'meta',
-  'search', 'skills', 'workflow', 'wc',
+  'search', 'skills', 'workflow', 'wc', 'production', 'atelier',
 ];
 
 export function loadCliManifest() {

@@ -1,4 +1,4 @@
-# VelinStyle 1.2.1
+# VelinStyle 1.2.2
 
 > VelinStyle is a CSS framework with WCAG 2.2 AAA-oriented defaults, native JavaScript runtime, and Web Components.
 > Full machine context: https://velinstyle.info/dist/velin-agent.json
@@ -9,8 +9,8 @@
 - VelinStyle is a CSS framework with WCAG 2.2 AAA-oriented defaults, native JavaScript runtime, and Web Components.
 - Pipeline: Core Foundation → Design System → Knowledge Graph → Prompt Engine → Review Engine → AI Metadata
 - Maturity: CSS/Web Components/runtime = stable; plan/review, knowledge graph, page/section registry, agent metadata = beta/foundation (seed, expanding); Studio + Utility Engine generator = planned
-- Components: 40 canonical Web Components (`velin-*`); 42 lazy-loader entries
-- Knowledge graph: 17 component nodes, 17 page types, 12 sections, 3 design constraint packs
+- Components: 43 canonical Web Components (`velin-*`); 45 lazy-loader entries
+- Knowledge graph: 20 component nodes, 17 page types, 12 sections, 3 design constraint packs
 - HTML attributes: 29 `velin-*` bridges
 - CLI: velinstyle (scan, scaffold, plan, review, docs generate, search index, meta)
 

@@ -478,6 +478,7 @@
       "reducedMotionSafe": true
     },
     "examples": [
+      "<velin-modal title=\"Confirm\"></velin-modal>",
       "<velin-modal><h2 slot=\"title\">…</h2></velin-modal>"
     ],
     "promptKeywords": [
@@ -1115,7 +1116,8 @@
       "reducedMotionSafe": true
     },
     "examples": [
-      "<velin-drawer></velin-drawer>"
+      "<velin-drawer title=\"Filters\"></velin-drawer>",
+      "<velin-drawer><span slot=\"title\">Filters</span></velin-drawer>"
     ],
     "promptKeywords": [
       "drawer",
@@ -1209,7 +1211,8 @@
       "reducedMotionSafe": true
     },
     "examples": [
-      "<velin-sheet></velin-sheet>"
+      "<velin-sheet title=\"Actions\"></velin-sheet>",
+      "<velin-sheet><span slot=\"title\">Actions</span></velin-sheet>"
     ],
     "promptKeywords": [
       "sheet",
@@ -1425,6 +1428,191 @@
       ],
       "bestPractices": [
         "auto-dismiss with pause on focus/hover"
+      ]
+    }
+  },
+  {
+    "id": "velin-otp-input",
+    "kind": "web-component",
+    "tag": "velin-otp-input",
+    "category": "forms",
+    "subcategory": "otp",
+    "purpose": "Segmented one-time-password / PIN digit entry with paste and keyboard support.",
+    "family": "forms",
+    "maturity": "core",
+    "recommendedPages": [
+      "auth",
+      "saas"
+    ],
+    "recommendedSections": [],
+    "compatibleWith": [
+      "css-button",
+      "velin-form-summary",
+      "velin-secure-field"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "role": "group",
+      "notes": "Per-digit labels; autocomplete one-time-code"
+    },
+    "seo": {
+      "impact": "none"
+    },
+    "performance": {
+      "cost": "lazy-ok"
+    },
+    "variants": [],
+    "density": [
+      "default"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {
+      "reducedMotionSafe": true
+    },
+    "examples": [
+      "<velin-otp-input length=\"6\"></velin-otp-input>"
+    ],
+    "promptKeywords": [
+      "otp",
+      "2fa",
+      "pin",
+      "one-time password"
+    ],
+    "api": {
+      "events": [
+        "velin-change",
+        "velin-complete"
+      ],
+      "attributes": [
+        "length",
+        "value",
+        "disabled",
+        "name"
+      ]
+    }
+  },
+  {
+    "id": "velin-password-strength",
+    "kind": "web-component",
+    "tag": "velin-password-strength",
+    "category": "forms",
+    "subcategory": "password",
+    "purpose": "Heuristic password strength meter linked to an input via for= or value.",
+    "family": "forms",
+    "maturity": "core",
+    "recommendedPages": [
+      "auth",
+      "saas"
+    ],
+    "recommendedSections": [],
+    "compatibleWith": [
+      "css-input",
+      "velin-secure-field",
+      "velin-form-summary"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "role": "progressbar",
+      "notes": "aria-live polite label"
+    },
+    "seo": {
+      "impact": "none"
+    },
+    "performance": {
+      "cost": "lazy-ok"
+    },
+    "variants": [],
+    "density": [
+      "default"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {
+      "reducedMotionSafe": true
+    },
+    "examples": [
+      "<input id=\"pw\" type=\"password\"><velin-password-strength for=\"pw\"></velin-password-strength>"
+    ],
+    "promptKeywords": [
+      "password strength",
+      "meter",
+      "signup"
+    ],
+    "api": {
+      "events": [
+        "velin-strength"
+      ],
+      "attributes": [
+        "for",
+        "value",
+        "label"
+      ]
+    }
+  },
+  {
+    "id": "velin-empty-state",
+    "kind": "web-component",
+    "tag": "velin-empty-state",
+    "category": "feedback",
+    "subcategory": "empty",
+    "purpose": "Consistent empty / zero-data surface with illustration, title, description, and actions slots.",
+    "family": "feedback",
+    "maturity": "core",
+    "recommendedPages": [
+      "dashboard",
+      "saas",
+      "shop",
+      "docs"
+    ],
+    "recommendedSections": [],
+    "compatibleWith": [
+      "css-button",
+      "velin-icon"
+    ],
+    "incompatibleWith": [],
+    "accessibility": {
+      "role": "status"
+    },
+    "seo": {
+      "impact": "none"
+    },
+    "performance": {
+      "cost": "lazy-ok"
+    },
+    "variants": [],
+    "density": [
+      "default"
+    ],
+    "themeSupport": [
+      "light",
+      "dark"
+    ],
+    "motion": {
+      "reducedMotionSafe": true
+    },
+    "examples": [
+      "<velin-empty-state heading=\"No items yet\" description=\"Create your first entry.\"><button slot=\"actions\" class=\"velin-btn velin-btn--primary\">Create</button></velin-empty-state>"
+    ],
+    "promptKeywords": [
+      "empty state",
+      "no results",
+      "zero data"
+    ],
+    "api": {
+      "attributes": [
+        "heading",
+        "description"
+      ],
+      "slots": [
+        "illustration",
+        "title",
+        "description",
+        "actions"
       ]
     }
   }

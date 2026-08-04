@@ -20,9 +20,10 @@ Custom elements in `components/`. Import via `@birdapi/velinstyle` or lazy-load 
 | `<velin-counter>` | 9 | 0 | [velin-counter.md](./velin-counter.md) |
 | `<velin-data-table>` | 5 | 4 | [velin-data-table.md](./velin-data-table.md) |
 | `<velin-dialog>` | 0 | 2 | [velin-dialog.md](./velin-dialog.md) |
-| `<velin-drawer>` | 1 | 1 | [velin-drawer.md](./velin-drawer.md) |
+| `<velin-drawer>` | 2 | 1 | [velin-drawer.md](./velin-drawer.md) |
 | `<velin-dropdown>` | 1 | 1 | [velin-dropdown.md](./velin-dropdown.md) |
 | `<velin-email>` | 3 | 1 | [velin-email.md](./velin-email.md) |
+| `<velin-empty-state>` | 2 | 0 | [velin-empty-state.md](./velin-empty-state.md) |
 | `<velin-file-dropzone>` | 4 | 2 | [velin-file-dropzone.md](./velin-file-dropzone.md) |
 | `<velin-flip>` | 0 | 0 | [velin-flip.md](./velin-flip.md) |
 | `<velin-form-summary>` | 2 | 3 | [velin-form-summary.md](./velin-form-summary.md) |
@@ -31,7 +32,9 @@ Custom elements in `components/`. Import via `@birdapi/velinstyle` or lazy-load 
 | `<velin-lightbox>` | 0 | 1 | [velin-lightbox.md](./velin-lightbox.md) |
 | `<velin-live-dot>` | 2 | 0 | [velin-live-dot.md](./velin-live-dot.md) |
 | `<velin-menubar>` | 1 | 0 | [velin-menubar.md](./velin-menubar.md) |
-| `<velin-modal>` | 1 | 1 | [velin-modal.md](./velin-modal.md) |
+| `<velin-modal>` | 2 | 1 | [velin-modal.md](./velin-modal.md) |
+| `<velin-otp-input>` | 6 | 2 | [velin-otp-input.md](./velin-otp-input.md) |
+| `<velin-password-strength>` | 3 | 1 | [velin-password-strength.md](./velin-password-strength.md) |
 | `<velin-persist>` | 2 | 3 | [velin-persist.md](./velin-persist.md) |
 | `<velin-popover>` | 1 | 0 | [velin-popover.md](./velin-popover.md) |
 | `<velin-progress-ring>` | 4 | 0 | [velin-progress-ring.md](./velin-progress-ring.md) |
@@ -42,7 +45,7 @@ Custom elements in `components/`. Import via `@birdapi/velinstyle` or lazy-load 
 | `<velin-search>` | 6 | 0 | [velin-search.md](./velin-search.md) |
 | `<velin-secure-field>` | 5 | 1 | [velin-secure-field.md](./velin-secure-field.md) |
 | `<velin-segmented-control>` | 1 | 1 | [velin-segmented-control.md](./velin-segmented-control.md) |
-| `<velin-sheet>` | 1 | 1 | [velin-sheet.md](./velin-sheet.md) |
+| `<velin-sheet>` | 3 | 1 | [velin-sheet.md](./velin-sheet.md) |
 | `<velin-sparkline>` | 9 | 0 | [velin-sparkline.md](./velin-sparkline.md) |
 | `<velin-stepper>` | 3 | 1 | [velin-stepper.md](./velin-stepper.md) |
 | `<velin-tabs>` | 0 | 1 | [velin-tabs.md](./velin-tabs.md) |

@@ -1,0 +1,33 @@
+@layer components {
+  .velin-otp-input {
+    display: block;
+  }
+
+  .velin-password-strength {
+    display: block;
+  }
+
+  .velin-empty-state {
+    display: block;
+    text-align: center;
+    padding: var(--velin-space-8) var(--velin-space-4);
+  }
+
+  .velin-empty-state__title {
+    margin: 0 0 var(--velin-space-2);
+    font-size: var(--velin-text-xl);
+    font-weight: var(--velin-weight-bold);
+  }
+
+  .velin-empty-state__description {
+    margin: 0 0 var(--velin-space-4);
+    color: var(--velin-color-text-muted);
+  }
+
+  .velin-empty-state__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--velin-space-3);
+    justify-content: center;
+  }
+}

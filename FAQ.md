@@ -13,14 +13,15 @@ An accessibility-first **CSS + Web Components** framework with a **CLI**, plus *
 | Closest mental model | Difference |
 |----------------------|------------|
 | Bootstrap | Semantic BEM + tokens, optional WCs, no jQuery chrome |
-| Tailwind | Utilities exist, but readable component classes are preferred |
+| Tailwind | Utilities exist, but **component-first** classes are preferred — avoids 10–15-class “sprawl” buttons |
 | shadcn | Copy/scaffold patterns via CLI + blueprints, not a React-only kit |
+
+**Tailwind sprawl:** heavy utility composition turns markup into a class salad. VelinStyle ships ready semantic components (`velin-btn velin-btn--primary`) with a11y defaults; utilities stay for tweaks. See the [Migration Guide](https://velinstyle.info/docs/migration.html).
 
 ### Which npm version should I install?
 
-- Registry **latest today:** often **1.1.0** until the 1.2 cut publishes  
-- This repo’s `package.json` says **1.2.1** (current line)  
-- Prefer the published tag for production; use a local clone for 1.2 ship-surface commands (`create`, `check`, …)
+- Current line: **1.2.2** (`@birdapi/velinstyle@1.2.2`)  
+- Prefer a pinned published tag for production; use a local clone for the latest ship-surface commands (`create`, `check`, `production`, …)
 
 ### Does AAA mean my app is certified?
 

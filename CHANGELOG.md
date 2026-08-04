@@ -4,7 +4,7 @@ All notable changes to this project are documented in this file.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-Current line: **1.2.1** (Transparency Framework). Overview of **1.2.0**: [`RELEASE_NOTES_1.2.0.md`](RELEASE_NOTES_1.2.0.md). Upgrade guidance: [`UPGRADING.md`](UPGRADING.md).
+Current line: **1.2.2** (Production Release — Production Builder + Atelier CLI). Overview of **1.2.1**: Transparency Framework. Overview of **1.2.0**: [`RELEASE_NOTES_1.2.0.md`](RELEASE_NOTES_1.2.0.md). Upgrade guidance: [`UPGRADING.md`](UPGRADING.md).
 
 ---
 
@@ -15,6 +15,46 @@ Current line: **1.2.1** (Transparency Framework). Overview of **1.2.0**: [`RELEA
 ### Changed
 
 ### Fixed
+
+---
+
+## [1.2.2](https://github.com/SkyliteDesign/velinstyle/releases/tag/v1.2.2) - 2026-08-04
+
+**Production Release.** VelinStyle 1.2.2 focuses on production builds and developer workflow. The new Production Builder creates optimized output based on the actual project instead of shipping the complete framework. This release also introduces the first Atelier CLI integration and new production-ready components.
+
+**Build only what your project actually uses.**
+
+Details: [`RELEASE_NOTES_1.2.2.md`](RELEASE_NOTES_1.2.2.md).
+
+### Production Builder
+
+- Do not ship the full framework blindly — analyze the project and emit an optimized production package
+- CLI: `velinstyle build --production` and `velinstyle production [path]`
+- CSS only for used components (graph closure + utility filter); runtime only for needed Web Components
+- Themes / icons / motion / fonts only when used
+- Report with size comparison; `--explain` lists removals; `--watch`, `--report`, `--safelist`
+- Pipeline under `cli/production/`; `component-graph.json`; config `production: { out, safelist, themes }`
+- Review: `scores.optimization` + soft `optimization.*` issues
+- Guides: [`docs/guides/production-build.md`](docs/guides/production-build.md); Vitest `tests/production/production.test.js`
+
+### Atelier CLI (Beta)
+
+- `velinstyle atelier list` · `velinstyle atelier 24` · `velinstyle scaffold --atelier 24` (also `plan --atelier …`)
+- Pull curated Atelier Library showcases (local `--from` / `VELINSTYLE_ATELIER_ROOT` or HTTPS)
+- `--format html|blade|vue|react` — blade/vue/react are **integration wrappers**, not native rewrites
+- Separates **Atelier Library** from **Velin Studio** (Studio remains **planned**)
+- Guide: [`docs/guides/atelier-cli.md`](docs/guides/atelier-cli.md); Vitest `tests/atelier.test.js`
+
+### New components
+
+- `<velin-otp-input>`, `<velin-password-strength>`, `<velin-empty-state>` (Showcase P0 gaps)
+- Empty-state blueprint uses `<velin-empty-state>`
+
+### Improvements
+
+- Overlay title slot + reactive `title` on `<velin-modal>`, `<velin-drawer>`, `<velin-sheet>`
+- Data-table / table row severity modifiers (`velin-data-table__row--*`, `data-severity`, `.velin-table--*` aliases)
+- CLI help / `cli-manifest.json` document Production Builder and Atelier; prefer Production output over blind full-bundle for publish (documented)
 
 ---
 

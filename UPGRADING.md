@@ -1,8 +1,34 @@
 # Upgrading VelinStyle
 
+## 1.2.1 → 1.2.2
+
+**Status:** Current (`package.json` / Changelog = **1.2.2**).
+
+### What you get
+
+- **Production Builder:** `velinstyle build --production` / `velinstyle production [path]` — content-aware trim for CSS, JS stub, themes, icons, fonts, motion + report
+- **P0 primitives:** `<velin-otp-input>`, `<velin-password-strength>`, `<velin-empty-state>`
+- Overlay titles: reactive `title` + `slot="title"` on `<velin-modal>`, `<velin-drawer>`, `<velin-sheet>`
+- Table / data-table row severity modifiers (`--danger` / `--warning` / `--selected`, `data-severity`)
+
+### Suggested upgrade steps
+
+1. Bump to `@birdapi/velinstyle@1.2.2`.
+2. Prefer Production output for go-live:
+   ```bash
+   npx velinstyle production . --explain
+   # link ./dist/velin-production/velinstyle.css + velinstyle.js
+   ```
+3. Run `npx velinstyle doctor` and `npx velinstyle check .`.
+4. Optionally replace custom OTP / password-meter / empty markup with the new WCs.
+
+Full delta: [`CHANGELOG.md`](CHANGELOG.md) → `[1.2.2]` · [`RELEASE_NOTES_1.2.2.md`](RELEASE_NOTES_1.2.2.md) · [`docs/guides/production-build.md`](docs/guides/production-build.md).
+
+---
+
 ## 1.2.0 → 1.2.1
 
-**Status:** Current (`package.json` / Changelog = **1.2.1**).
+**Status:** Shipped. Current line is **1.2.2**.
 
 ### What you get
 
@@ -11,7 +37,7 @@
 
 ### Suggested upgrade steps
 
-1. Bump to `@birdapi/velinstyle@1.2.1`.
+1. Bump to `@birdapi/velinstyle@1.2.2` (or stay on 1.2.1 if you only need Transparency).
 2. Optionally label media with `velin-transparency` (or run `transparency migrate` dry-run first).
 3. Run `npx velinstyle transparency doctor .` and `npx velinstyle check .`.
 
@@ -21,7 +47,7 @@ Full delta: [`CHANGELOG.md`](CHANGELOG.md) → `[1.2.1]`.
 
 ## 1.1.0 → 1.2.0
 
-**Status:** Shipped. Current line is **1.2.1**.
+**Status:** Shipped. Current line is **1.2.2**.
 
 Friendly overview: [`RELEASE_NOTES_1.2.0.md`](RELEASE_NOTES_1.2.0.md) · first build: [`GETTING_STARTED.md`](GETTING_STARTED.md) · full delta: [`CHANGELOG.md`](CHANGELOG.md).
 
@@ -36,7 +62,7 @@ Friendly overview: [`RELEASE_NOTES_1.2.0.md`](RELEASE_NOTES_1.2.0.md) · first b
 
 ### Suggested upgrade steps
 
-1. Bump dependency to `@birdapi/velinstyle@1.2.1` when published.
+1. Bump dependency to `@birdapi/velinstyle@1.2.2` when published.
 2. Rebuild / re-copy vendor assets if you used `create` / `init` offline copies.
 3. Run `npx velinstyle doctor` and `npx velinstyle check .` (use `--profile app` for admin shells).
 4. Skim CHANGELOG `[1.2.0]` for scan rules that may newly fail CI.

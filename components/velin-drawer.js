@@ -49,25 +49,28 @@ const styles = `
 `;
 
 class VelinDrawer extends HTMLElement {
-  static get observedAttributes() { return ['open']; }
+  static get observedAttributes() { return ['open', 'title']; }
 
   constructor() {
     super();
     this.attachShadow({ mode: 'open', delegatesFocus: true });
     this._prev = null;
     this._onKey = this._onKey.bind(this);
+    this._onTitleSlot = this._onTitleSlot.bind(this);
   }
 
   connectedCallback() {
-    const title = this.getAttribute('title') || '';
-    const safeTitle = escapeHTML(title);
+    if (this.shadowRoot.querySelector('.drawer')) return;
     const titleId = 'velin-drawer-title';
     this.shadowRoot.innerHTML = `
       <style>${styles}</style>
       <div class="overlay" part="overlay"></div>
       <div class="drawer" role="dialog" aria-modal="true" aria-labelledby="${titleId}" part="drawer">
         <div class="header" part="header">
-          <h2 class="title" id="${titleId}">${safeTitle}</h2>
+          <h2 class="title" id="${titleId}" part="title">
+            <slot name="title"></slot>
+            <span class="title-fallback"></span>
+          </h2>
           <button class="close-btn" aria-label="Close" part="close">&#215;</button>
         </div>
         <div class="body" part="body"><slot></slot></div>
@@ -75,14 +78,50 @@ class VelinDrawer extends HTMLElement {
     `;
     this.shadowRoot.querySelector('.close-btn').addEventListener('click', () => this.close());
     this.shadowRoot.querySelector('.overlay').addEventListener('click', () => this.close());
+    this.shadowRoot.querySelector('slot[name="title"]').addEventListener('slotchange', this._onTitleSlot);
+    this._syncTitle();
   }
 
   attributeChangedCallback(name) {
     if (name === 'open') this.hasAttribute('open') ? this._open() : this._close();
+    if (name === 'title') this._syncTitle();
   }
 
   open() { this.setAttribute('open', ''); }
   close() { this.removeAttribute('open'); this.dispatchEvent(new CustomEvent('velin-close', { bubbles: true })); }
+
+  _syncTitle() {
+    const fallback = this.shadowRoot?.querySelector('.title-fallback');
+    if (!fallback) return;
+    fallback.textContent = this.getAttribute('title') || '';
+  }
+
+  _hasTitleSlot() {
+    const slot = this.shadowRoot?.querySelector('slot[name="title"]');
+    if (!slot) return false;
+    return slot.assignedNodes({ flatten: true }).some((n) => {
+      if (n.nodeType === Node.TEXT_NODE) return Boolean(n.textContent.trim());
+      return n.nodeType === Node.ELEMENT_NODE;
+    });
+  }
+
+  _onTitleSlot() {
+    const dialog = this.shadowRoot?.querySelector('[role="dialog"]');
+    const fallback = this.shadowRoot?.querySelector('.title-fallback');
+    if (!dialog || !fallback) return;
+    if (this._hasTitleSlot()) {
+      fallback.hidden = true;
+      dialog.removeAttribute('aria-labelledby');
+      const slot = this.shadowRoot.querySelector('slot[name="title"]');
+      const label = slot.assignedNodes({ flatten: true }).map((n) => n.textContent || '').join(' ').trim();
+      if (label) dialog.setAttribute('aria-label', label);
+    } else {
+      fallback.hidden = false;
+      dialog.removeAttribute('aria-label');
+      dialog.setAttribute('aria-labelledby', 'velin-drawer-title');
+      this._syncTitle();
+    }
+  }
 
   _open() {
     this._prev = saveFocus();

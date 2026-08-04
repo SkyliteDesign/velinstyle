@@ -1,5 +1,4 @@
 import { trapFocus, saveFocus, restoreFocus, getFocusableElements, setBackgroundInert, clearBackgroundInert } from './focus-manager.js';
-import { escapeHTML } from './sanitize.js';
 import { SHADOW_A11Y_STYLES } from './shadow-a11y-styles.js';
 
 const styles = `
@@ -31,29 +30,39 @@ const styles = `
     border-bottom: 1px solid var(--velin-color-border, #ddd);
   }
   .title { font-size: var(--velin-text-lg, 1.25rem); font-weight: 600; margin: 0; }
+  .close-btn {
+    min-width: 2.75rem; min-height: 2.75rem; display: inline-flex; align-items: center; justify-content: center;
+    background: none; border: none; border-radius: var(--velin-radius-md, 0.5rem); cursor: pointer;
+    color: var(--velin-color-text-muted, #666); font-size: 1.5rem; line-height: 1;
+  }
+  .close-btn:hover { background: var(--velin-color-surface-dim, #eee); color: var(--velin-color-text, #111); }
   .body { flex: 1; overflow-y: auto; padding: var(--velin-space-5, 1.25rem); }
   @media (prefers-reduced-motion: reduce) { .overlay, .sheet { transition: none; } }
 `;
 
 class VelinSheet extends HTMLElement {
-  static get observedAttributes() { return ['open']; }
+  static get observedAttributes() { return ['open', 'title', 'label']; }
 
   constructor() {
     super();
     this.attachShadow({ mode: 'open', delegatesFocus: true });
     this._prev = null;
     this._onKey = this._onKey.bind(this);
+    this._onTitleSlot = this._onTitleSlot.bind(this);
   }
 
   connectedCallback() {
-    const title = escapeHTML(this.getAttribute('title') || this.getAttribute('label') || '');
+    if (this.shadowRoot.querySelector('.sheet')) return;
     const titleId = 'velin-sheet-title';
     this.shadowRoot.innerHTML = `
       <style>${styles}</style>
       <div class="overlay" part="overlay"></div>
       <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="${titleId}" part="sheet">
         <div class="header" part="header">
-          <h2 class="title" id="${titleId}">${title}</h2>
+          <h2 class="title" id="${titleId}" part="title">
+            <slot name="title"></slot>
+            <span class="title-fallback"></span>
+          </h2>
           <button class="close-btn" aria-label="Close" part="close">&#215;</button>
         </div>
         <div class="body" part="body"><slot></slot></div>
@@ -61,17 +70,53 @@ class VelinSheet extends HTMLElement {
     `;
     this.shadowRoot.querySelector('.close-btn').addEventListener('click', () => this.close());
     this.shadowRoot.querySelector('.overlay').addEventListener('click', () => this.close());
+    this.shadowRoot.querySelector('slot[name="title"]').addEventListener('slotchange', this._onTitleSlot);
+    this._syncTitle();
     if (this.hasAttribute('open')) this._open();
   }
 
   attributeChangedCallback(name) {
     if (name === 'open') this.hasAttribute('open') ? this._open() : this._close();
+    if (name === 'title' || name === 'label') this._syncTitle();
   }
 
   open() { this.setAttribute('open', ''); }
   close() {
     this.removeAttribute('open');
     this.dispatchEvent(new CustomEvent('velin-close', { bubbles: true }));
+  }
+
+  _syncTitle() {
+    const fallback = this.shadowRoot?.querySelector('.title-fallback');
+    if (!fallback) return;
+    fallback.textContent = this.getAttribute('title') || this.getAttribute('label') || '';
+  }
+
+  _hasTitleSlot() {
+    const slot = this.shadowRoot?.querySelector('slot[name="title"]');
+    if (!slot) return false;
+    return slot.assignedNodes({ flatten: true }).some((n) => {
+      if (n.nodeType === Node.TEXT_NODE) return Boolean(n.textContent.trim());
+      return n.nodeType === Node.ELEMENT_NODE;
+    });
+  }
+
+  _onTitleSlot() {
+    const dialog = this.shadowRoot?.querySelector('[role="dialog"]');
+    const fallback = this.shadowRoot?.querySelector('.title-fallback');
+    if (!dialog || !fallback) return;
+    if (this._hasTitleSlot()) {
+      fallback.hidden = true;
+      dialog.removeAttribute('aria-labelledby');
+      const slot = this.shadowRoot.querySelector('slot[name="title"]');
+      const label = slot.assignedNodes({ flatten: true }).map((n) => n.textContent || '').join(' ').trim();
+      if (label) dialog.setAttribute('aria-label', label);
+    } else {
+      fallback.hidden = false;
+      dialog.removeAttribute('aria-label');
+      dialog.setAttribute('aria-labelledby', 'velin-sheet-title');
+      this._syncTitle();
+    }
   }
 
   _open() {

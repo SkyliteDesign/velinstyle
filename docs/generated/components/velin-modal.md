@@ -9,11 +9,13 @@ WCAG contract status: **pass** (framework target: AAA).
 
 - **Roles:** `dialog`
 - **Keyboard:** Escape, Tab trap
+- **Notes:** Reactive title attribute + slot=title; footer slot.
 
 ## Attributes
 | Attribute | Notes |
 | --- | --- |
 | `open` | Observed — triggers `attributeChangedCallback` when changed |
+| `title` | Observed — triggers `attributeChangedCallback` when changed |
 ## Events
 - `velin-close` (bubbles)
 ## CSS parts
@@ -23,9 +25,11 @@ WCAG contract status: **pass** (framework target: AAA).
 - `footer`
 - `header`
 - `overlay`
+- `title`
 ## Slots
 - `(default)`
 - `footer`
+- `title`
 ## Public API
 | Kind | Name |
 | --- | --- |

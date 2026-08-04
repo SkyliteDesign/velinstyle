@@ -39,7 +39,7 @@ VelinStyle ist ein **produktives CSS- + Web-Components-Framework** mit **WCAG-2.
 **Passung heute:** Marketing-Landings, Docs-Shells, Admin-/SaaS-Starter, Shop- und Community-UIs über Atelier.  
 **Noch nicht:** alleiniger Primary-Stack für große Multipage-Shops + Enterprise-Admin ohne Custom-Arbeit.
 
-> **Release:** **1.2.1** (Transparency Framework + Core + Design Intelligence Foundation + Trust/Ship). VelinStyle **zertifiziert keine Anwendung** — siehe [A11y-Matrix](https://velinstyle.info/docs/getting-started/accessibility.html).
+> **Release:** **1.2.2** (Production Release — Production Builder + Atelier CLI). VelinStyle **zertifiziert keine Anwendung** — siehe [A11y-Matrix](https://velinstyle.info/docs/getting-started/accessibility.html).
 
 ---
 
@@ -54,7 +54,21 @@ VelinStyle ist ein **produktives CSS- + Web-Components-Framework** mit **WCAG-2.
 | Quality Gates | `scan`, `review`, `check` — echte Defekte vor dem Merge |
 | KI, die hilft | Skills, Workflows, Agent-Metadata — **Mensch → Framework → KI** |
 
-Gegenüber **Tailwind**: weniger Class-Sprawl, stärkere Defaults für Kontrast und Semantik.  
+### Das Tailwind-Sprawl-Problem
+
+Intensive Tailwind-Nutzung wird im HTML oft zum **Klassensalat** — ein einfacher Button braucht dann 10–15 Utilities (`flex items-center … hover:bg-blue-700 … focus:ring-2 …`). VelinStyle nutzt zwar ein `velin-`-Präfix, liefert aber **semantische, fertige Komponenten** (Utilities nur für Feinschliff) statt jedes UI aus atomaren Einzelteilen zusammenzustecken. Ergebnis: kürzeres Markup, AAA-orientierte Defaults und optionale Blueprints / `plan`-Rezepte — kein fertiges Studio-Produkt (Studio bleibt **planned**).
+
+```html
+<!-- Tailwind-Sprawl -->
+<button class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+  Speichern
+</button>
+
+<!-- VelinStyle -->
+<button class="velin-btn velin-btn--primary">Speichern</button>
+```
+
+Gegenüber **Tailwind**: weniger Class-Sprawl, stärkere Defaults für Kontrast und Semantik. Siehe den [Migrationsleitfaden](https://velinstyle.info/docs/migration-de.html).  
 Gegenüber **Bootstrap**: moderne Tokens/Layers, progressive WCs, CLI-Automation statt Legacy-JS-Chrome.
 
 ---
@@ -64,7 +78,7 @@ Gegenüber **Bootstrap**: moderne Tokens/Layers, progressive WCs, CLI-Automation
 | | Bereich | Kurz |
 |---|--------|------|
 | 🎨 | **CSS-Framework** | OKLCH-Themes, Utilities, Komponenten, Lite-Preset |
-| 🧩 | **Web Components** | 40 kanonische Custom Elements; CSS allein reicht oft |
+| 🧩 | **Web Components** | 43 kanonische Custom Elements; CSS allein reicht oft |
 | ⚡ | **Runtime** | Search, Motion, Highlight, Attributes, Tree-Shaking |
 | 🛠 | **CLI** | `create` · `serve` · `doctor` · `check` · `scan` · `review` · `skills` · `transparency` |
 | 🔎 | **Transparency** | Kennzeichnung + Nachweis (KI / Trust / Compliance / Metadaten) — Beta-Foundation |
@@ -99,6 +113,39 @@ Englischer Hub: [atelier/](https://velinstyle.info/atelier/)
 
 ---
 
+## Neu in 1.2.2
+
+**Production Release** — **Build only what your project actually uses.** / Nur bauen, was das Projekt wirklich nutzt.
+
+VelinStyle analysiert das Projekt und erzeugt ein optimiertes Produktionspaket statt das komplette Framework auszuliefern. Dazu: erste **Atelier-CLI** (Beta) und neue produktionsreife Komponenten.
+
+### Production Builder
+
+```bash
+npx velinstyle build --production --explain
+# → ./dist/velin-production/
+```
+
+- CSS nur für verwendete Komponenten · Runtime nur für benötigte Web Components
+- Themes / Icons / Motion nur bei Nutzung · Größen-Report
+
+### Atelier CLI (Beta)
+
+```bash
+npx velinstyle atelier list
+npx velinstyle atelier 24
+npx velinstyle scaffold --atelier 24
+```
+
+Atelier Library ≠ Velin Studio (Studio bleibt **planned**). Siehe [`docs/guides/atelier-cli.md`](docs/guides/atelier-cli.md).
+
+### Neue Komponenten & Verbesserungen
+
+- `<velin-otp-input>`, `<velin-password-strength>`, `<velin-empty-state>`
+- Tabellen-Severity · dynamische Overlay-Titel (Modal / Drawer / Sheet)
+
+Siehe [`RELEASE_NOTES_1.2.2.md`](RELEASE_NOTES_1.2.2.md) und [`docs/guides/production-build.md`](docs/guides/production-build.md).
+
 ## Neu in 1.2.1
 
 - **Transparency Framework (Beta)** — `@birdapi/velinstyle/transparency`, Bridge `velin-transparency`, Claim-Taxonomie, CLI `transparency doctor|validate|report|export|migrate`
@@ -120,11 +167,11 @@ bun add @birdapi/velinstyle
 **CDN** (Version pinnen):
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.1/dist/velinstyle.min.css">
-<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.2.1/dist/velinstyle-components.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@birdapi/velinstyle@1.2.2/dist/velinstyle.min.css">
+<script type="module" src="https://unpkg.com/@birdapi/velinstyle@1.2.2/dist/velinstyle-components.min.js"></script>
 ```
 
-> Pin **`@1.2.1`** (oder `@latest` nach Publish). Nach Clone: `npm install && npm run build`.
+> Pin **`@1.2.2`** (oder `@latest` nach Publish). Nach Clone: `npm install && npm run build`.
 
 ---
 
@@ -147,15 +194,19 @@ Minimal-HTML und Import-Pfade: [`GETTING_STARTED.md`](GETTING_STARTED.md) · Sys
 | `check` | doctor + blueprints + scan + review (+ Transparency-Scores) |
 | `scan` / `review` | Statische bzw. Design-Intelligence-Gates |
 | `transparency` | doctor · validate · report · export · migrate (Beta) |
+| `atelier` | Library-Showcase per Nummer/ID pullen (`--format`-Wrapper) |
+| `scaffold` / `plan` | Prompt-HTML oder `--atelier`-Compose (Beta) |
 | `skills` / `workflow` | AI-Registry & Graphen (Beta) |
 | `wc api <tag>` | WC-API aus dem Source |
 | `meta` | Agent-Bundle + `llms.txt` |
+
+Atelier-Pull/Compose und **Einschränkungen** (Wrapper ≠ natives Blade/Vue/React; Studio geplant): [`docs/guides/atelier-cli.md`](docs/guides/atelier-cli.md).
 
 ---
 
 ## Komponenten & Accessibility
 
-**40 kanonische** Custom Elements (**42** Lazy-Loader inkl. Legacy-`*-wc`). Progressive Enhancement: HTML/CSS first, WC nur bei Verhalten.
+**43 kanonische** Custom Elements (**45** Lazy-Loader inkl. Legacy-`*-wc`). Progressive Enhancement: HTML/CSS first, WC nur bei Verhalten.
 
 AAA-orientierte Token-Defaults, Fokus-Management, Reduced Motion, Scanner-Contracts — siehe [A11y-Matrix](https://velinstyle.info/docs/getting-started/accessibility.html).
 
@@ -166,9 +217,9 @@ AAA-orientierte Token-Defaults, Fokus-Management, Reduced Motion, Scanner-Contra
 | Status | Surfaces |
 |--------|----------|
 | **Stable** | CSS · Runtime · WC · CLI-Kern · Blueprints |
-| **Beta** | Transparency Framework · Review · Prompt · Knowledge Graph · AI Metadata · Constraints |
+| **Beta** | Transparency Framework · Review · Prompt · Knowledge Graph · AI Metadata · Constraints · Atelier-Compose (`--atelier`) |
 | **Foundation** | AI Skills · Workflow Graphs · Registries · Transparency pillars |
-| **Planned** | Velin Studio Builder · Utility Engine Generator |
+| **Planned** | Velin Studio Builder · Utility Engine Generator · native Blade/Vue/React-Bausteine |
 
 ---
 

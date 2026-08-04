@@ -9,11 +9,14 @@ WCAG contract status: **pass** (framework target: AAA).
 
 - **Roles:** `dialog`
 - **Keyboard:** Escape, Tab trap
+- **Notes:** Reactive title/label + slot=title.
 
 ## Attributes
 | Attribute | Notes |
 | --- | --- |
 | `open` | Observed — triggers `attributeChangedCallback` when changed |
+| `title` | Observed — triggers `attributeChangedCallback` when changed |
+| `label` | Observed — triggers `attributeChangedCallback` when changed |
 ## Events
 - `velin-close` (bubbles)
 ## CSS parts
@@ -22,8 +25,10 @@ WCAG contract status: **pass** (framework target: AAA).
 - `header`
 - `overlay`
 - `sheet`
+- `title`
 ## Slots
 - `(default)`
+- `title`
 ## Public API
 | Kind | Name |
 | --- | --- |
